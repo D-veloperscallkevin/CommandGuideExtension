@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://devcommands/catalog/schema.json",
+  "title": "DevCommands category",
+  "description": "Una categoría del catálogo de DevCommands con sus comandos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "id", "title", "icon", "order", "commands"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": {
+      "description": "Versión del formato del catálogo.",
+      "const": 1
+    },
+    "id": {
+      "description": "Id de la categoría en kebab-case. Prefijo obligatorio de los ids de sus comandos.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": { "$ref": "#/definitions/LocalizedString" },
+    "icon": {
+      "description": "Nombre de un Codicon de VS Code (p. ej. git-branch).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "order": {
+      "description": "Posición de la categoría (ascendente). Empates por id.",
+      "type": "integer"
+    },
+    "commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/Command" }
+    }
+  },
+  "definitions": {
+    "LocalizedString": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "es"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "es": { "type": "string", "minLength": 1 }
+      }
+    },
+    "LocalizedTags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "es"],
+      "properties": {
+        "en": { "$ref": "#/definitions/TagList" },
+        "es": { "$ref": "#/definitions/TagList" }
+      }
+    },
+    "TagList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "ShellId": {
+      "type": "string",
+      "enum": ["bash", "zsh", "powershell", "cmd"]
+    },
+    "Param": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "label", "placeholder"],
+      "properties": {
+        "name": {
+          "description": "Nombre usado en la plantilla como ${name}.",
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "label": { "$ref": "#/definitions/LocalizedString" },
+        "placeholder": { "$ref": "#/definitions/LocalizedString" }
+      }
+    },
+    "Command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "description", "command", "tags", "risk"],
+      "properties": {
+        "id": {
+          "description": "<id-de-categoría>.<nombre-kebab>, único en todo el catálogo.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": { "$ref": "#/definitions/LocalizedString" },
+        "description": { "$ref": "#/definitions/LocalizedString" },
+        "command": {
+          "description": "Plantilla POSIX (bash/zsh) con placeholders ${param}.",
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Param" }
+        },
+        "tags": { "$ref": "#/definitions/LocalizedTags" },
+        "risk": {
+          "type": "string",
+          "enum": ["safe", "caution", "destructive"]
+        },
+        "shells": {
+          "description": "Variantes por shell cuando difieren de command.",
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "bash": { "type": "string", "minLength": 1 },
+            "zsh": { "type": "string", "minLength": 1 },
+            "powershell": { "type": "string", "minLength": 1 },
+            "cmd": { "type": "string", "minLength": 1 }
+          }
+        },
+        "docs": {
+          "description": "Enlace https a la documentación oficial.",
+          "type": "string",
+          "pattern": "^https://"
+        }
+      }
+    }
+  }
+}

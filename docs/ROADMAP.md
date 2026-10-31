@@ -34,7 +34,7 @@ El MVP cubre exactamente lo que pediste: categorías, lista de comandos y clic q
 | Workflows (secuencias) | Un clic envía varios comandos en orden (ej. "nueva feature": checkout develop, pull, crear rama) | v2 |
 | Packs importables | Exportar/importar colecciones en JSON para compartir con un equipo | v2 |
 | Enlace a docs oficiales | Cada comando enlaza a su documentación | v2 |
-| i18n | Interfaz en español e inglés | v2 |
+| i18n | Interfaz en español e inglés (`vscode.l10n` + diccionario del webview). El catálogo ya es bilingüe desde `catalog-schema` | v1 |
 
 Fuera de alcance por ahora: ejecutar comandos automáticamente, sincronización en la nube y comandos generados por IA. Se pueden reconsiderar después de la v2.
 
@@ -110,18 +110,25 @@ devcommands/
 ```json
 {
   "id": "git.new-branch",
-  "title": "Crear rama y cambiarse",
+  "title": { "en": "Create and switch branch", "es": "Crear rama y cambiarse" },
+  "description": {
+    "en": "Creates a new branch from the current one",
+    "es": "Crea una rama nueva desde la actual"
+  },
   "command": "git checkout -b ${branch}",
-  "description": "Crea una rama nueva desde la actual",
-  "params": [{ "name": "branch", "placeholder": "feature/mi-cambio" }],
-  "tags": ["rama", "branch"],
+  "params": [{
+    "name": "branch",
+    "label": { "en": "Branch name", "es": "Nombre de la rama" },
+    "placeholder": { "en": "feature/my-change", "es": "feature/mi-cambio" }
+  }],
+  "tags": { "en": ["branch", "checkout"], "es": ["rama", "crear"] },
   "risk": "safe",
   "shells": { "powershell": "git checkout -b ${branch}" },
   "docs": "https://git-scm.com/docs/git-checkout"
 }
 ```
 
-`risk` acepta `safe`, `caution` o `destructive`. `shells` es opcional y solo se usa cuando la variante cambia según el shell.
+Todo texto visible es `{ en, es }` con ambos idiomas obligatorios (fallback a `en`). `risk` acepta `safe`, `caution` o `destructive` y es obligatorio. `command` es la variante POSIX; `shells` (`bash`, `zsh`, `powershell`, `cmd`) es opcional y solo se usa cuando la variante cambia según el shell. No hay campo de ejemplo: se calcula sustituyendo cada `${x}` por su `placeholder` en el idioma activo. El formato completo está en `catalog/schema.json` y la guía en `catalog/README.md`.
 
 **Flujo de un clic**
 
