@@ -1,0 +1,27 @@
+schema: spec-driven
+
+context: |
+  Language: Español
+  All artifacts must be written in Español.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  Proyecto: DevCommands, extensión de VS Code que muestra comandos
+  de desarrollo por categoría y los escribe en la terminal.
+  Stack: TypeScript strict, esbuild (extensión), React + Vite (webview),
+  Vitest y @vscode/test-electron. engines.vscode ^1.90.0, solo API estable.
+  Catálogo de comandos en catalog/*.json validado con catalog/schema.json.
+  Ramas: feature/* -> develop -> staging -> main. Conventional Commits.
+  Roadmap completo en docs/ROADMAP.md.
+
+rules:
+  proposal:
+    - Declarar en qué fase del roadmap (MVP, v1, v2) cae el cambio.
+  design:
+    - Justificar toda dependencia de runtime nueva.
+    - Describir los mensajes webview<->extensión afectados.
+  specs:
+    - Incluir escenarios para Windows/PowerShell y bash.
+  tasks:
+    - Incluir tareas de tests y de actualización del CHANGELOG.
+    - Nunca ejecutar comandos en la terminal automáticamente; usar sendText(cmd, false).
+    - Webview con CSP estricta y nonce; validar todo mensaje entrante.
