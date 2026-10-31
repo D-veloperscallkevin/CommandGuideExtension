@@ -234,7 +234,57 @@ Son ocho pasos, unos 30 minutos. Al terminar tendrás el repo con las tres ramas
 
 Son cuatro fases sin fechas fijas. Cada nombre dentro de una fase es un change de OpenSpec y una rama `feature/` con el mismo nombre, y se ejecutan en el orden de la lista.
 
-&#91;embedded content: roadmap · 4 fases, 3 puertas, changes de OpenSpec por fase\]
+El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las funcionalidades vienen de la tabla de [Funcionalidades](#funcionalidades).
+
+### Fase 0: Base lista
+
+| # | Change | Qué entrega | Estado |
+| --- | --- | --- | --- |
+| 0.1 | `catalog-schema` | Formato del catálogo bilingüe, JSON Schema, `CatalogService` y semilla Git | ✅ |
+| 0.2 | `ci-setup` | GitHub Actions: lint, tests unitarios y de integración, y build en cada PR. `.gitattributes` para los finales de línea. Check obligatorio en el ruleset | |
+| 0.3 | `webview-shell` | Vista propia en la Activity Bar con `WebviewViewProvider`, el webview de React cargado con CSP + `nonce`, protocolo de mensajes tipado y validado (`protocol.ts`) y activación perezosa por vista. Se elimina el Hello World | |
+
+### Fase 1: v0.1.0 pre-release (MVP)
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) para que todas las vistas nazcan bilingües |
+| 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA |
+| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` |
+| 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` |
+| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando |
+| 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías |
+| 1.7 | `catalog-content` | Al menos 5 categorías con 15 comandos cada una (Git, npm/pnpm, Node, Docker, Linux/Bash o PowerShell) |
+| 1.8 | `release-pipeline` | CI de `staging`: `vsce package`, control de menos de 2 MB y `.vsix` como artefacto. Pruebas manuales en PowerShell y en WSL/Linux |
+
+### Fase 2: v1.0.0 pública
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta |
+| 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell |
+| 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` |
+| 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio |
+| 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) |
+| 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo |
+| 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, `prisma/`) |
+| 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel |
+| 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación en el Marketplace y Open VSX al crear el tag `vX.Y.Z` |
+
+### Fase 3: v2.x
+
+Cada change sale en su propia versión menor y el orden puede cambiar según el feedback de la v1.
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 3.1 | `project-scripts` | Los `scripts` de `package.json` como categoría automática |
+| 3.2 | `docs-links` | Enlace a la documentación oficial de cada comando (el campo `docs` ya existe) |
+| 3.3 | `workflows` | Secuencias de varios comandos con un clic |
+| 3.4 | `importable-packs` | Exportar e importar colecciones en JSON |
+
+Decisiones que hay que tomar antes del change que las necesita:
+- **Antes de `custom-commands` (2.6):** guardar en `settings.json` o en `.devcommands.json` por proyecto.
+- **Antes de `marketplace-release` (2.9):** nombre definitivo, publisher y licencia.
 
 Una fase se cierra con un PR de release `develop → staging`. Pasa a `main` cuando cumple su puerta:
 
@@ -253,11 +303,12 @@ Una fase se cierra con un PR de release `develop → staging`. Pasa a `main` cua
 
 ## Siguientes pasos inmediatos
 
-- [ ] Completar los pasos 1 al 8 del setup
-- [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX
-- [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`)
-- [ ] Desde `develop`, crear `feature/catalog-schema` y ejecutar `/opsx:explore` para pensar el modelo del catálogo
-- [ ] Ejecutar `/opsx:propose catalog-schema`, revisar el proposal y luego `/opsx:apply`
+- [x] Completar los pasos 1 al 8 del setup
+- [x] `catalog-schema` (0.1) fusionado en `develop`
+- [ ] `ci-setup` (0.2): desde `develop`, crear `feature/ci-setup` y ejecutar `/opsx:explore`
+- [ ] `webview-shell` (0.3) y PR de release `develop → staging` para cerrar la Fase 0
+- [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
+- [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 
 Preguntas abiertas: la licencia (MIT o propietaria) y si los comandos personalizados se guardan en `settings.json` o en un archivo `.devcommands.json` por proyecto.
 
