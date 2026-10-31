@@ -41,6 +41,7 @@ Los dos idiomas son obligatorios. El fallback es `en` porque la v1 es global. Al
 ### D4. Catálogo empaquetado mediante un índice explícito
 `src/catalog/index.ts` importa cada `catalog/*.json` con imports estáticos y exporta la lista. esbuild los incluye en `dist/extension.js`.
 - *Por qué:* no hay lectura de disco ni latencia en la activación, y el `.vsix` no necesita incluir `catalog/` (se añade a `.vscodeignore`).
+- esbuild elimina los módulos sin importar: el catálogo solo aparece en `dist/extension.js` cuando un consumidor (la vista de categorías) importa `CatalogService`. Hasta entonces se verifica empaquetando el módulo por separado.
 - Un test compara `fs.readdirSync('catalog')` con el índice para que no se olvide registrar ninguna categoría.
 - *Alternativa descartada:* un plugin de esbuild con glob. Es más magia y depende del build, y en Vitest habría que replicarlo.
 
@@ -70,7 +71,7 @@ Los placeholders se extraen con `/\$\{([A-Za-z][A-Za-z0-9_]*)\}/g`.
 Todas reciben el catálogo por inyección (con el del bundle como valor por defecto), así los tests pueden usar fixtures. No importan `vscode`.
 
 ### D8. Vitest para los tests unitarios; Mocha se queda para la integración
-- Los tests unitarios viven en `test/unit/**/*.test.ts` con `vitest.config.ts` (entorno `node`). Script: `"test:unit": "vitest run"`.
+- Los tests unitarios viven en `test/unit/**/*.test.ts` con `vitest.config.mts` (entorno `node`). Script: `"test:unit": "vitest run"`.
 - Los fixtures inválidos (`test/unit/fixtures/*.json`) cubren cada escenario de fallo de la spec.
 - El test de Ajv carga `catalog/schema.json` y valida cada archivo con `allErrors: true`, mostrando `instancePath`.
 

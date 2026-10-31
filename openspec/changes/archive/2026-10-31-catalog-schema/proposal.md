@@ -27,7 +27,7 @@ Todas las funcionalidades del MVP (vista de categorías, lista de comandos, bús
 
 ## Impact
 
-- **Archivos nuevos:** `catalog/schema.json`, `catalog/git.json`, `src/catalog/*`, `test/unit/**`, `vitest.config.ts`.
+- **Archivos nuevos:** `catalog/schema.json`, `catalog/git.json`, `src/catalog/*`, `test/unit/**`, `vitest.config.mts`.
 - **Archivos modificados:** `package.json` (devDeps y script), `tsconfig.json` (`rootDir` y `resolveJsonModule`), `.vscode-test.mjs` (nueva ruta de los tests compilados), `.vscodeignore`, `CHANGELOG.md`, `docs/ROADMAP.md` (modelo de comando y fila de i18n).
 - **Dependencias:** solo de desarrollo (`vitest`, `ajv`). Cero dependencias de runtime.
 - **Mensajes webview ↔ extensión:** ninguno todavía. Este change prepara los datos que más adelante enviará el mensaje `catalog`.
