@@ -295,7 +295,7 @@ pnpm install --frozen-lockfile
 xvfb-run -a pnpm run verify
 ```
 
-Requisitos únicos en WSL: Node 24, pnpm y `xvfb` con las librerías de VS Code (ver `openspec/specs/continuous-integration/`). La release pasa a `main` cuando cumple su puerta:
+Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -g pnpm@11.21.0` y `sudo apt-get install -y xvfb libnss3 libgbm1 libgtk-3-0t64 libasound2t64 libatk-bridge2.0-0t64 libxkbfile1 libsecret-1-0 libxss1`. La release pasa a `main` cuando cumple su puerta:
 
 - **Fase 0 → Base lista:** verificación local obligatoria antes de cada push (`pnpm run verify`: lint, tests y build). El webview de React carga dentro de la vista lateral. El catálogo valida contra `schema.json`.
 - **Fase 1 → v0.1.0 pre-release:** de categoría a comando en la terminal en 3 clics o menos, probado en Windows (PowerShell) y en WSL o Linux (bash). Al menos 5 categorías con 15 comandos cada una. El `.vsix` pesa menos de 2 MB.

@@ -35,11 +35,11 @@
 
 ## 7. Verificación en Linux (WSL)
 
-- [ ] 7.1 Validar el procedimiento D5 una vez en el Ubuntu de WSL: clon en `~/`, Node 24, pnpm, `xvfb` y las librerías de sistema que hagan falta, y `pnpm install --frozen-lockfile && xvfb-run -a pnpm run verify` en verde sobre `feature/ci-setup`. Anotar en D5 los paquetes `apt` que finalmente hicieron falta
+- [x] 7.1 Validar el procedimiento D5 una vez en el Ubuntu de WSL: clon en `~/`, Node 24, pnpm, `xvfb` y las librerías de sistema que hagan falta, y `pnpm install --frozen-lockfile && xvfb-run -a pnpm run verify` en verde sobre `feature/ci-setup`. Anotar en D5 los paquetes `apt` que finalmente hicieron falta
 
 ## 8. Documentación
 
-- [ ] 8.1 Actualizar `docs/ROADMAP.md`:
+- [x] 8.1 Actualizar `docs/ROADMAP.md`:
   - el prerrequisito pasa a "Node 24 LTS (ver `.nvmrc`) y pnpm (`npm i -g pnpm`)";
   - "Proceso" y la tabla del flujo de ramas pasan de "CI" a "`pnpm run verify` (hook pre-push) y WSL en releases";
   - el paso 8 del setup protege las ramas sin check de CI;
@@ -55,4 +55,4 @@
 
 ## 9. Verificación final
 
-- [ ] 9.1 Hacer push de la rama (el propio hook ejecuta `verify` y debe pasar), actualizar el título y la descripción del PR #3 al nuevo alcance, y ejecutar `openspec validate ci-setup --strict` sin errores
+- [x] 9.1 Hacer push de la rama (el propio hook ejecuta `verify` y debe pasar), actualizar el título y la descripción del PR #3 al nuevo alcance, y ejecutar `openspec validate ci-setup --strict` sin errores

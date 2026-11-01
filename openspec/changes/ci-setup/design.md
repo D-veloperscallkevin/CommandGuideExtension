@@ -53,7 +53,7 @@ pnpm run verify
 ### D5. Linux con WSL antes de cada release
 Procedimiento (documentado en `docs/ROADMAP.md`, paso del PR de release):
 1. Clonar el repo **dentro del sistema de archivos de WSL** (`~/src/...`), no en `/mnt/c/...`. esbuild, rollup y oxlint instalan binarios distintos según el SO, y compartir `node_modules` entre Windows y Linux los rompe. Además, `/mnt/c` es mucho más lento.
-2. Node 24 en WSL (nvm lee `.nvmrc`), y `sudo apt install -y xvfb` más las librerías que VS Code necesite para arrancar.
+2. Node 24 en WSL con nvm (`nvm install 24`), `npm i -g pnpm@11.21.0`, y `sudo apt-get install -y xvfb libnss3 libgbm1 libgtk-3-0t64 libasound2t64 libatk-bridge2.0-0t64 libxkbfile1 libsecret-1-0 libxss1`. Validado en Ubuntu 26.04 (WSL 2, Windows 10) el 2026-11-01: con estos paquetes VS Code 1.144 arranca bajo `xvfb-run`. El aviso `GpuControl.CreateCommandBuffer` de Electron es inofensivo. Al ejecutar desde Git Bash hay que usar `wsl.exe --exec` y `MSYS_NO_PATHCONV=1` para que no se reescriban las rutas ni las variables.
 3. Instalar pnpm en WSL (`npm i -g pnpm`) y ejecutar `git checkout <rama> && pnpm install --frozen-lockfile && xvfb-run -a pnpm run verify`.
 4. Marcar la casilla correspondiente en la plantilla del PR.
 
