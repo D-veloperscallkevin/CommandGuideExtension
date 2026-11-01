@@ -1,13 +1,16 @@
 import { bundledCatalog } from './index';
-import type { Catalog, Category, Command, Locale, LocalizedString, ShellId } from './types';
+import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, ShellId } from './types';
 
-/** Idioma del catálogo a partir de `vscode.env.language`: español si empieza por "es", si no inglés. */
-export function resolveLocale(language: string): Locale {
-	return language.toLowerCase().startsWith('es') ? 'es' : 'en';
+export { resolveLocale } from '../i18n/locales';
+
+/** Texto en el idioma pedido o, si el catálogo no lo tiene, en inglés. */
+export function localize(text: LocalizedString, locale: Locale): string {
+	return text[locale] ?? text.en;
 }
 
-export function localize(text: LocalizedString, locale: Locale): string {
-	return text[locale];
+/** Tags en el idioma pedido o, si el catálogo no los tiene, en inglés. */
+export function localizeTags(tags: LocalizedTags, locale: Locale): readonly string[] {
+	return tags[locale] ?? tags.en;
 }
 
 /** Variante del comando para un shell: `shells[shell]` si existe, si no `command` (POSIX). */

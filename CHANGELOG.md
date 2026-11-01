@@ -11,6 +11,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Catálogo de comandos bilingüe (inglés/español) validado con JSON Schema (`catalog/schema.json`). Semilla: Git.
 - Verificación local obligatoria antes de cada push (`pnpm run verify` + hook pre-push); migración a pnpm; el build de producción incluye el webview.
 - Vista lateral de DevCommands en la Activity Bar con webview seguro (CSP + nonce) y handshake inicial.
+- Interfaz en 11 idiomas (en, es, pt-br, fr, de, it, ja, ko, zh-cn, zh-tw, ru) según el idioma de VS Code.
+
+### Changed
+
+- El catálogo admite 9 idiomas opcionales además de `en` y `es`, con fallback a inglés campo a campo.
 
 ### Removed
 

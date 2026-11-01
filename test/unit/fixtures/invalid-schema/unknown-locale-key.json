@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "demo",
+  "title": {
+    "en": "Demo",
+    "es": "Demo"
+  },
+  "icon": "beaker",
+  "order": 1,
+  "commands": [
+    {
+      "id": "demo.hello",
+      "title": {
+        "en": "Hello",
+        "es": "Hola",
+        "fr-fr": "Bonjour"
+      },
+      "description": {
+        "en": "Says hello",
+        "es": "Saluda"
+      },
+      "command": "echo hello",
+      "tags": {
+        "en": ["hello"],
+        "es": ["hola"]
+      },
+      "risk": "safe"
+    }
+  ]
+}

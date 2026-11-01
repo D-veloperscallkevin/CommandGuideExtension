@@ -1,71 +1,39 @@
-# devcommands README
+# DevCommands
 
-This is the README for your extension "devcommands". After writing up a brief description, we recommend including the following sections.
+Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click.
 
-## Features
+> Work in progress: the sidebar view is ready; categories, search and sending to the terminal are being built. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Languages
 
-For example if there is an image subfolder under your extension project workspace:
+The interface follows the VS Code display language and is available in:
 
-\!\[feature X\]\(images/feature-x.png\)
+English · Español · Português (Brasil) · Français · Deutsch · Italiano · 日本語 · 한국어 · 简体中文 · 繁體中文 · Русский
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Any other display language falls back to English. Command texts in the catalog are always available in English and Spanish; other languages are added over time and fall back to English when missing.
 
-## Requirements
+### Improve a translation
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Translations were generated and may contain mistakes. Corrections from native speakers are very welcome:
 
-## Extension Settings
+- Interface: `webview-ui/src/i18n/<language>.ts`
+- Extension description: `package.nls.<language>.json`
+- Extension messages: `l10n/bundle.l10n.<language>.json`
+- Command catalog: see [`catalog/README.md`](catalog/README.md#añadir-una-traducción)
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Run `pnpm run test:unit` before opening a pull request: the tests check that every language has all the texts and the same `{placeholders}`.
 
-For example:
+## Development
 
-This extension contributes the following settings:
+Requirements: Node 24 and pnpm 11.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```bash
+pnpm install
+pnpm run verify   # lint, unit tests, build and integration tests
+```
 
-## Known Issues
+Press F5 in VS Code to open an Extension Development Host with the extension loaded.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## License
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+See [LICENSE](LICENSE).
