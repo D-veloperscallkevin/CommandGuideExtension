@@ -19,3 +19,7 @@ docs/**
 catalog/**
 test/**
 vitest.config.mts
+.github/**
+.nvmrc
+.gitattributes
+scripts/**

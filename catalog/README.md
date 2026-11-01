@@ -24,7 +24,7 @@ Cada categoría es un archivo `catalog/<id>.json` que valida contra [`schema.jso
    }
    ```
 
-3. Ejecuta `npm run test:unit`.
+3. Ejecuta `pnpm run test:unit`.
 
 Reglas (las comprueban los tests):
 
@@ -53,4 +53,4 @@ Reglas (las comprueban los tests):
 
    `icon` es el nombre de un [Codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html). `order` define la posición (ascendente, empates por `id`).
 2. Regístrala en `src/catalog/index.ts` con un import estático y añádela al array.
-3. Añade al menos un comando y ejecuta `npm run test:unit`. Si olvidaste el paso 2, el test lo indica nombrando el archivo.
+3. Añade al menos un comando y ejecuta `pnpm run test:unit`. Si olvidaste el paso 2, el test lo indica nombrando el archivo.
