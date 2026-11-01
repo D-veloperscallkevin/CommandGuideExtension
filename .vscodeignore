@@ -16,3 +16,13 @@ webview-ui/**
 openspec/**
 docs/**
 .claude/**
+catalog/**
+test/**
+vitest.config.mts
+.github/**
+.nvmrc
+.gitattributes
+scripts/**
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.githooks/**

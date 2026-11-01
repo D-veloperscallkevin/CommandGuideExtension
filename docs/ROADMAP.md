@@ -34,7 +34,7 @@ El MVP cubre exactamente lo que pediste: categorías, lista de comandos y clic q
 | Workflows (secuencias) | Un clic envía varios comandos en orden (ej. "nueva feature": checkout develop, pull, crear rama) | v2 |
 | Packs importables | Exportar/importar colecciones en JSON para compartir con un equipo | v2 |
 | Enlace a docs oficiales | Cada comando enlaza a su documentación | v2 |
-| i18n | Interfaz en español e inglés | v2 |
+| i18n | Interfaz en español e inglés (`vscode.l10n` + diccionario del webview). El catálogo ya es bilingüe desde `catalog-schema` | v1 |
 
 Fuera de alcance por ahora: ejecutar comandos automáticamente, sincronización en la nube y comandos generados por IA. Se pueden reconsiderar después de la v2.
 
@@ -68,7 +68,7 @@ Estas reglas se copian al `context` y a las `rules` de `openspec/config.yaml` (p
 **Proceso**
 
 - Ningún código se escribe sin un change de OpenSpec aprobado (`/opsx:propose`).
-- Conventional Commits. Toda integración a `develop`, `staging` o `main` pasa por PR con CI en verde.
+- Conventional Commits. Toda integración a `develop`, `staging` o `main` pasa por PR con `pnpm run verify` en verde (hook pre-push) y, en los PR de release, también en WSL/Linux.
 - Licencia MIT (decisión abierta: cámbiala si piensas monetizar).
 
 ## Arquitectura
@@ -79,14 +79,15 @@ Son dos mitades que se comunican por mensajes. La **extensión** (Node, con acce
 
 - Extensión: TypeScript + esbuild. Registra un `WebviewViewProvider` en una vista propia de la Activity Bar.
 - Webview: React + Vite + TypeScript. El estado de navegación vive en React y se persiste con `vscode.setState()`.
-- Datos: JSON por categoría dentro de `catalog/`, validado con Ajv en tests y en CI.
+- Datos: JSON por categoría dentro de `catalog/`, validado con Ajv en los tests unitarios (`pnpm run verify`).
 - Tests: Vitest para la lógica pura y `@vscode/test-electron` para la integración.
 
 **Estructura de carpetas**
 
 ```
 devcommands/
-├── .github/workflows/        # CI: lint, test, build, package
+├── .githooks/pre-push        # ejecuta pnpm run verify antes de cada push
+├── scripts/verify.mjs        # verificación: typecheck, lint, tests, build
 ├── openspec/                 # specs, changes y config.yaml
 ├── catalog/
 │   ├── schema.json           # JSON Schema del catálogo
@@ -110,18 +111,25 @@ devcommands/
 ```json
 {
   "id": "git.new-branch",
-  "title": "Crear rama y cambiarse",
+  "title": { "en": "Create and switch branch", "es": "Crear rama y cambiarse" },
+  "description": {
+    "en": "Creates a new branch from the current one",
+    "es": "Crea una rama nueva desde la actual"
+  },
   "command": "git checkout -b ${branch}",
-  "description": "Crea una rama nueva desde la actual",
-  "params": [{ "name": "branch", "placeholder": "feature/mi-cambio" }],
-  "tags": ["rama", "branch"],
+  "params": [{
+    "name": "branch",
+    "label": { "en": "Branch name", "es": "Nombre de la rama" },
+    "placeholder": { "en": "feature/my-change", "es": "feature/mi-cambio" }
+  }],
+  "tags": { "en": ["branch", "checkout"], "es": ["rama", "crear"] },
   "risk": "safe",
   "shells": { "powershell": "git checkout -b ${branch}" },
   "docs": "https://git-scm.com/docs/git-checkout"
 }
 ```
 
-`risk` acepta `safe`, `caution` o `destructive`. `shells` es opcional y solo se usa cuando la variante cambia según el shell.
+Todo texto visible es `{ en, es }` con ambos idiomas obligatorios (fallback a `en`). `risk` acepta `safe`, `caution` o `destructive` y es obligatorio. `command` es la variante POSIX; `shells` (`bash`, `zsh`, `powershell`, `cmd`) es opcional y solo se usa cuando la variante cambia según el shell. No hay campo de ejemplo: se calcula sustituyendo cada `${x}` por su `placeholder` en el idioma activo. El formato completo está en `catalog/schema.json` y la guía en `catalog/README.md`.
 
 **Flujo de un clic**
 
@@ -140,13 +148,13 @@ Es un Git Flow simplificado: todo el trabajo nace en `develop`, se valida en `st
 
 Los hotfix son la única excepción: salen de `main` y después se fusionan de vuelta en `develop` para no perder el arreglo.
 
-| Rama | Sale de | Se fusiona en | CI |
+| Rama | Sale de | Se fusiona en | Verificación (local) |
 | --- | --- | --- | --- |
-| `feature/<change>` | `develop` | `develop` (PR, squash) | lint + tests |
-| `develop` | — | `staging` (PR de release al cerrar una fase) | lint + tests + build |
-| `staging` | — | `main` (PR) | + `vsce package`, sube el `.vsix` como artefacto; opcional `vsce publish --pre-release` |
-| `main` | — | — | al crear el tag `vX.Y.Z`: publica en Marketplace y Open VSX |
-| `hotfix/<bug>` | `main` | `main` y `develop` | lint + tests + build |
+| `feature/<change>` | `develop` | `develop` (PR, squash) | `pnpm run verify` (hook pre-push) |
+| `develop` | — | `staging` (PR de release al cerrar una fase) | `verify` en Windows + `verify` en WSL/Linux |
+| `staging` | — | `main` (PR) | + `vsce package --no-dependencies` en local y prueba manual del `.vsix`; opcional `vsce publish --pre-release` |
+| `main` | — | — | tras crear el tag `vX.Y.Z`: publicación manual con `vsce publish --no-dependencies` y `ovsx publish` |
+| `hotfix/<bug>` | `main` | `main` y `develop` | `verify` en Windows + `verify` en WSL/Linux |
 
 **Convenciones**
 
@@ -159,7 +167,7 @@ Los hotfix son la única excepción: salen de `main` y después se fusionan de v
 
 Son ocho pasos, unos 30 minutos. Al terminar tendrás el repo con las tres ramas, la extensión de ejemplo funcionando con F5 y OpenSpec listo para la primera propuesta.
 
-1. **Prerrequisitos.** Node 20 LTS o superior, Git y VS Code. Verifícalo con `node -v` y `git --version`.
+1. **Prerrequisitos.** Node 24 LTS (ver `.nvmrc`), pnpm 11+ (`npm i -g pnpm` o Volta), Git y VS Code. Verifícalo con `node -v`, `pnpm -v` y `git --version`. Tras clonar, `pnpm install` instala las dos mitades y activa el hook pre-push.
 2. **Generar la extensión** dentro de tu carpeta:
 
    ```bash
@@ -172,8 +180,8 @@ Son ocho pasos, unos 30 minutos. Al terminar tendrás el repo con las tres ramas
 4. **Crear el webview:**
 
    ```bash
-   npm create vite@latest webview-ui -- --template react-ts
-   cd webview-ui && npm install && cd ..
+   pnpm create vite webview-ui --template react-ts
+   pnpm install   # desde la raíz: webview-ui es parte del workspace (pnpm-workspace.yaml)
    ```
 
    Configura en `webview-ui/vite.config.ts` un `build.outDir` hacia `../dist/webview` con nombres de archivo fijos (sin hash) para poder referenciarlos desde la extensión.
@@ -221,17 +229,75 @@ Son ocho pasos, unos 30 minutos. Al terminar tendrás el repo con las tres ramas
    git push -u origin main staging develop
    git switch develop
    ```
-8. **Proteger las ramas en GitHub.** En *Settings → Branches* (o *Rulesets*) protege `main`, `staging` y `develop`: exige PR, CI en verde y bloquea el force push. Deja `main` como rama por defecto.
+8. **Proteger las ramas en GitHub.** En *Settings → Rulesets* protege `main`, `staging` y `develop`: exige PR y bloquea el borrado y el force push. Deja `main` como rama por defecto. No hay check de CI obligatorio: la verificación es local (`pnpm run verify` en el hook pre-push).
 
 ## Roadmap por fases
 
 Son cuatro fases sin fechas fijas. Cada nombre dentro de una fase es un change de OpenSpec y una rama `feature/` con el mismo nombre, y se ejecutan en el orden de la lista.
 
-&#91;embedded content: roadmap · 4 fases, 3 puertas, changes de OpenSpec por fase\]
+El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las funcionalidades vienen de la tabla de [Funcionalidades](#funcionalidades).
 
-Una fase se cierra con un PR de release `develop → staging`. Pasa a `main` cuando cumple su puerta:
+### Fase 0: Base lista
 
-- **Fase 0 → Base lista:** CI corre lint, tests y build en cada PR. El webview de React carga dentro de la vista lateral. El catálogo valida contra `schema.json`.
+| # | Change | Qué entrega | Estado |
+| --- | --- | --- | --- |
+| 0.1 | `catalog-schema` | Formato del catálogo bilingüe, JSON Schema, `CatalogService` y semilla Git | ✅ |
+| 0.2 | `ci-setup` | Verificación local obligatoria: `pnpm run verify` + hook pre-push, WSL antes de cada release. Migración a pnpm (workspace, `allowBuilds`), `.nvmrc`, `.gitattributes` y build completo con el webview | ✅ |
+| 0.3 | `webview-shell` | Vista propia en la Activity Bar con `WebviewViewProvider`, el webview de React cargado con CSP + `nonce`, protocolo de mensajes tipado y validado (`protocol.ts`) y activación perezosa por vista. Se elimina el Hello World | ✅ |
+
+### Fase 1: v0.1.0 pre-release (MVP)
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) para que todas las vistas nazcan bilingües |
+| 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA |
+| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` |
+| 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` |
+| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando |
+| 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías |
+| 1.7 | `catalog-content` | Al menos 5 categorías con 15 comandos cada una (Git, npm/pnpm, Node, Docker, Linux/Bash o PowerShell) |
+| 1.8 | `release-pipeline` | Script local `pnpm run release:package`: `vsce package --no-dependencies` y control de menos de 2 MB. Pruebas manuales del `.vsix` en PowerShell y en WSL/Linux |
+
+### Fase 2: v1.0.0 pública
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta |
+| 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell |
+| 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` |
+| 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio |
+| 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) |
+| 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo |
+| 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, `prisma/`) |
+| 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel |
+| 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --no-dependencies`) y Open VSX (`ovsx publish`) tras crear el tag `vX.Y.Z` |
+
+### Fase 3: v2.x
+
+Cada change sale en su propia versión menor y el orden puede cambiar según el feedback de la v1.
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 3.1 | `project-scripts` | Los `scripts` de `package.json` como categoría automática |
+| 3.2 | `docs-links` | Enlace a la documentación oficial de cada comando (el campo `docs` ya existe) |
+| 3.3 | `workflows` | Secuencias de varios comandos con un clic |
+| 3.4 | `importable-packs` | Exportar e importar colecciones en JSON |
+
+Decisiones que hay que tomar antes del change que las necesita:
+- **Antes de `custom-commands` (2.6):** guardar en `settings.json` o en `.devcommands.json` por proyecto.
+- **Antes de `marketplace-release` (2.9):** nombre definitivo, publisher y licencia.
+
+Una fase se cierra con un PR de release `develop → staging`. Antes de abrirlo, verifica en Linux desde WSL, con el repo clonado dentro de `~/` (no en `/mnt/c`, porque los binarios de esbuild, rollup y oxlint son distintos por SO):
+
+```bash
+git fetch && git checkout develop && git pull
+pnpm install --frozen-lockfile
+xvfb-run -a pnpm run verify
+```
+
+Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -g pnpm@11.21.0` y `sudo apt-get install -y xvfb libnss3 libgbm1 libgtk-3-0t64 libasound2t64 libatk-bridge2.0-0t64 libxkbfile1 libsecret-1-0 libxss1`. La release pasa a `main` cuando cumple su puerta:
+
+- **Fase 0 → Base lista:** verificación local obligatoria antes de cada push (`pnpm run verify`: lint, tests y build). El webview de React carga dentro de la vista lateral. El catálogo valida contra `schema.json`.
 - **Fase 1 → v0.1.0 pre-release:** de categoría a comando en la terminal en 3 clics o menos, probado en Windows (PowerShell) y en WSL o Linux (bash). Al menos 5 categorías con 15 comandos cada una. El `.vsix` pesa menos de 2 MB.
 - **Fase 2 → v1.0.0 pública:** parámetros, favoritos y comandos propios funcionan. Los comandos destructivos piden confirmación. Publicada en el Marketplace y en Open VSX con README, capturas y CHANGELOG.
 - **Fase 3 → v2.x:** se publica por features, sin una puerta grande. Cada change sale en su propia versión menor.
@@ -242,15 +308,17 @@ Una fase se cierra con un PR de release `develop → staging`. Pasa a `main` cua
 2. `/opsx:explore` (opcional) y después `/opsx:propose <change>`. Revisa a mano `proposal.md`, `specs/`, `design.md` y `tasks.md` antes de seguir.
 3. `/opsx:apply`: la IA implementa y marca las tareas. Tú revisas el diff y pruebas con F5.
 4. `/opsx:archive`: las specs delta se fusionan en `openspec/specs/`.
-5. PR a `develop` con CI en verde y squash merge.
+5. `git push` (el hook ejecuta `pnpm run verify`; si falla, el push no sale) y PR a `develop` con squash merge.
 
 ## Siguientes pasos inmediatos
 
-- [ ] Completar los pasos 1 al 8 del setup
-- [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX
-- [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`)
-- [ ] Desde `develop`, crear `feature/catalog-schema` y ejecutar `/opsx:explore` para pensar el modelo del catálogo
-- [ ] Ejecutar `/opsx:propose catalog-schema`, revisar el proposal y luego `/opsx:apply`
+- [x] Completar los pasos 1 al 8 del setup
+- [x] `catalog-schema` (0.1) fusionado en `develop`
+- [x] `ci-setup` (0.2): verificación local con hook pre-push y migración a pnpm
+- [x] `webview-shell` (0.3): vista lateral con webview seguro y handshake
+- [ ] PR de release `develop → staging` para cerrar la Fase 0
+- [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
+- [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 
 Preguntas abiertas: la licencia (MIT o propietaria) y si los comandos personalizados se guardan en `settings.json` o en un archivo `.devcommands.json` por proyecto.
 

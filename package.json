@@ -12,26 +12,44 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "devcommands.helloWorld",
-        "title": "Hello World"
-      }
-    ]
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devcommands",
+          "title": "DevCommands",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "devcommands": [
+        {
+          "type": "webview",
+          "id": "devcommands.commands",
+          "name": "DevCommands"
+        }
+      ]
+    }
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js && pnpm run build:webview",
     "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "watch:webview": "pnpm --filter webview-ui exec vite build --watch",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production && pnpm run build:webview",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "test:unit": "vitest run",
+    "build:webview": "pnpm --filter webview-ui run build",
+    "lint:webview": "pnpm --filter webview-ui run lint",
+    "verify": "node scripts/verify.mjs",
+    "prepare": "node scripts/install-hooks.mjs"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -39,15 +57,18 @@
     "@types/vscode": "~1.90.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
+    "ajv": "^8.20.0",
     "esbuild": "^0.28.1",
     "eslint": "^10.5.0",
     "npm-run-all": "^4.1.5",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.61.1"
+    "typescript-eslint": "^8.61.1",
+    "vitest": "^5.0.5"
   },
   "overrides": {
     "diff": "^8.0.4",
     "serialize-javascript": "^7.0.6"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@11.21.0"
 }

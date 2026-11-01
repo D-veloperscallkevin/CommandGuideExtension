@@ -1,0 +1,53 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "git",
+  "title": { "en": "Git", "es": "Git" },
+  "icon": "git-branch",
+  "order": 10,
+  "commands": [
+    {
+      "id": "git.status",
+      "title": { "en": "Show status", "es": "Ver estado" },
+      "description": {
+        "en": "Shows modified, staged and untracked files",
+        "es": "Muestra los archivos modificados, preparados y sin seguimiento"
+      },
+      "command": "git status",
+      "tags": { "en": ["status", "changes"], "es": ["estado", "cambios"] },
+      "risk": "safe",
+      "docs": "https://git-scm.com/docs/git-status"
+    },
+    {
+      "id": "git.new-branch",
+      "title": { "en": "Create and switch branch", "es": "Crear rama y cambiarse" },
+      "description": {
+        "en": "Creates a new branch from the current one and switches to it",
+        "es": "Crea una rama nueva desde la actual y se cambia a ella"
+      },
+      "command": "git checkout -b ${branch}",
+      "params": [
+        {
+          "name": "branch",
+          "label": { "en": "Branch name", "es": "Nombre de la rama" },
+          "placeholder": { "en": "feature/my-change", "es": "feature/mi-cambio" }
+        }
+      ],
+      "tags": { "en": ["branch", "checkout", "create"], "es": ["rama", "crear"] },
+      "risk": "safe",
+      "docs": "https://git-scm.com/docs/git-checkout"
+    },
+    {
+      "id": "git.reset-hard",
+      "title": { "en": "Discard all local changes", "es": "Descartar todos los cambios locales" },
+      "description": {
+        "en": "Resets the working tree and index to the last commit. Uncommitted work is lost",
+        "es": "Devuelve el árbol de trabajo y el índice al último commit. Se pierde lo no confirmado"
+      },
+      "command": "git reset --hard",
+      "tags": { "en": ["reset", "discard", "undo"], "es": ["descartar", "deshacer"] },
+      "risk": "destructive",
+      "docs": "https://git-scm.com/docs/git-reset"
+    }
+  ]
+}

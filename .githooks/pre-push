@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "pre-push: pnpm run verify (salta con git push --no-verify)"
+pnpm run verify

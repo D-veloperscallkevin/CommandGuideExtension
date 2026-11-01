@@ -1,0 +1,11 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
+		"rootDir": "../..",
+		"types": ["node"],
+		"noEmit": true
+	},
+	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../src/messaging/**/*.ts", "../../src/views/webviewHtml.ts", "../../catalog/*.json"]
+}
