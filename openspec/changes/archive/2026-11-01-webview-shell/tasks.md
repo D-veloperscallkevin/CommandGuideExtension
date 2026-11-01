@@ -34,4 +34,4 @@
 
 ## 8. Verificación final
 
-- [ ] 8.1 `pnpm run verify` en verde en Windows y `xvfb-run -a pnpm run verify` en WSL (cierre de la Fase 0). `openspec validate webview-shell --strict` sin errores. `/opsx:archive` antes de abrir el PR
+- [x] 8.1 `pnpm run verify` en verde en Windows y `xvfb-run -a pnpm run verify` en WSL (cierre de la Fase 0). `openspec validate webview-shell --strict` sin errores. `/opsx:archive` antes de abrir el PR
