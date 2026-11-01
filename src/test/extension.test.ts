@@ -1,15 +1,38 @@
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+import type { DevCommandsApi } from '../extension';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+// Por nombre de paquete: el publisher aún no está decidido (change 2.9).
+const packageName = 'devcommands';
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
+/** Espera al siguiente evento o falla tras `ms` milisegundos. */
+function nextEvent(event: vscode.Event<void>, ms: number): Promise<void> {
+	return new Promise((resolve, reject) => {
+		const timer = setTimeout(() => {
+			listener.dispose();
+			reject(new Error(`sin evento tras ${ms} ms`));
+		}, ms);
+		const listener = event(() => {
+			clearTimeout(timer);
+			listener.dispose();
+			resolve();
+		});
+	});
+}
+
+suite('Vista lateral', () => {
+	test('al abrir la vista, la extensión se activa y el webview completa el handshake', async function () {
+		this.timeout(20_000);
+		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
+			| vscode.Extension<DevCommandsApi>
+			| undefined;
+		assert.ok(extension, `no se encuentra la extensión ${packageName}`);
+		assert.strictEqual(extension.isActive, false, 'no debe activarse antes de abrir la vista');
+
+		await vscode.commands.executeCommand('workbench.view.extension.devcommands');
+		const api = await extension.activate();
+		await nextEvent(api.onDidReceiveReady, 10_000);
+
+		assert.strictEqual(extension.isActive, true);
 	});
 });

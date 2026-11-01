@@ -7,5 +7,5 @@
 		"types": ["node"],
 		"noEmit": true
 	},
-	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../catalog/*.json"]
+	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../src/messaging/**/*.ts", "../../src/views/webviewHtml.ts", "../../catalog/*.json"]
 }
