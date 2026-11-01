@@ -243,7 +243,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | --- | --- | --- | --- |
 | 0.1 | `catalog-schema` | Formato del catálogo bilingüe, JSON Schema, `CatalogService` y semilla Git | ✅ |
 | 0.2 | `ci-setup` | Verificación local obligatoria: `pnpm run verify` + hook pre-push, WSL antes de cada release. Migración a pnpm (workspace, `allowBuilds`), `.nvmrc`, `.gitattributes` y build completo con el webview | ✅ |
-| 0.3 | `webview-shell` | Vista propia en la Activity Bar con `WebviewViewProvider`, el webview de React cargado con CSP + `nonce`, protocolo de mensajes tipado y validado (`protocol.ts`) y activación perezosa por vista. Se elimina el Hello World | |
+| 0.3 | `webview-shell` | Vista propia en la Activity Bar con `WebviewViewProvider`, el webview de React cargado con CSP + `nonce`, protocolo de mensajes tipado y validado (`protocol.ts`) y activación perezosa por vista. Se elimina el Hello World | ✅ |
 
 ### Fase 1: v0.1.0 pre-release (MVP)
 
@@ -315,7 +315,8 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] Completar los pasos 1 al 8 del setup
 - [x] `catalog-schema` (0.1) fusionado en `develop`
 - [x] `ci-setup` (0.2): verificación local con hook pre-push y migración a pnpm
-- [ ] `webview-shell` (0.3) y PR de release `develop → staging` para cerrar la Fase 0
+- [x] `webview-shell` (0.3): vista lateral con webview seguro y handshake
+- [ ] PR de release `develop → staging` para cerrar la Fase 0
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 

@@ -7,7 +7,8 @@
             "label": "watch",
             "dependsOn": [
                 "npm: watch:tsc",
-                "npm: watch:esbuild"
+                "npm: watch:esbuild",
+                "npm: watch:webview"
             ],
             "presentation": {
                 "reveal": "never"
@@ -24,6 +25,26 @@
             "problemMatcher": "$esbuild-watch",
             "isBackground": true,
             "label": "npm: watch:esbuild",
+            "presentation": {
+                "group": "watch",
+                "reveal": "never"
+            }
+        },
+		{
+            "type": "npm",
+            "script": "watch:webview",
+            "group": "build",
+            "isBackground": true,
+            "label": "npm: watch:webview",
+            "problemMatcher": {
+                "owner": "vite",
+                "pattern": { "regexp": "^(error) (.*)$", "severity": 1, "message": 2 },
+                "background": {
+                    "activeBegins": true,
+                    "beginsPattern": "build started",
+                    "endsPattern": "built in"
+                }
+            },
             "presentation": {
                 "group": "watch",
                 "reveal": "never"

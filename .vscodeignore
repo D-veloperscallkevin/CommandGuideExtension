@@ -23,3 +23,6 @@ vitest.config.mts
 .nvmrc
 .gitattributes
 scripts/**
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.githooks/**
