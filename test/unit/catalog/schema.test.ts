@@ -2,6 +2,7 @@ import Ajv from 'ajv';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { REQUIRED_CATALOG_LOCALES, SUPPORTED_LOCALES } from '../../../src/i18n/locales';
 
 const catalogDir = resolve('catalog');
 const invalidDir = resolve('test/unit/fixtures/invalid-schema');
@@ -36,6 +37,7 @@ describe('catalog/schema.json', () => {
 		['title-without-en.json', '/commands/0/title'],
 		['invalid-risk.json', '/commands/0/risk'],
 		['unsupported-shell.json', '/commands/0/shells'],
+		['unknown-locale-key.json', '/commands/0/title'],
 	];
 
 	it.each(invalid)('rechaza %s señalando %s', (file, instancePath) => {
@@ -46,5 +48,37 @@ describe('catalog/schema.json', () => {
 
 	it('todos los fixtures inválidos están cubiertos por un caso', () => {
 		expect(readdirSync(invalidDir).sort()).toEqual(invalid.map(([f]) => f).sort());
+	});
+
+	it('acepta un idioma opcional además de en y es', () => {
+		const category = {
+			version: 1,
+			id: 'demo',
+			title: { en: 'Demo', es: 'Demo' },
+			icon: 'beaker',
+			order: 1,
+			commands: [
+				{
+					id: 'demo.hello',
+					title: { en: 'Hello', es: 'Hola', fr: 'Bonjour' },
+					description: { en: 'Says hello', es: 'Saluda', ja: 'あいさつ' },
+					command: 'echo hello',
+					tags: { en: ['hello'], es: ['hola'], 'zh-tw': ['你好'] },
+					risk: 'safe',
+				},
+			],
+		};
+		expect(validate(category), JSON.stringify(validate.errors)).toBe(true);
+	});
+});
+
+describe('idiomas del schema', () => {
+	const definitions = (readJson(join(catalogDir, 'schema.json')) as {
+		definitions: Record<string, { required: string[]; properties: Record<string, unknown> }>;
+	}).definitions;
+
+	it.each(['LocalizedString', 'LocalizedTags'])('%s declara exactamente SUPPORTED_LOCALES', (name) => {
+		expect(Object.keys(definitions[name].properties).sort()).toEqual([...SUPPORTED_LOCALES].sort());
+		expect(definitions[name].required).toEqual([...REQUIRED_CATALOG_LOCALES]);
 	});
 });

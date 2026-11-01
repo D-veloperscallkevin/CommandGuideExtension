@@ -34,7 +34,7 @@ El MVP cubre exactamente lo que pediste: categorías, lista de comandos y clic q
 | Workflows (secuencias) | Un clic envía varios comandos en orden (ej. "nueva feature": checkout develop, pull, crear rama) | v2 |
 | Packs importables | Exportar/importar colecciones en JSON para compartir con un equipo | v2 |
 | Enlace a docs oficiales | Cada comando enlaza a su documentación | v2 |
-| i18n | Interfaz en español e inglés (`vscode.l10n` + diccionario del webview). El catálogo ya es bilingüe desde `catalog-schema` | v1 |
+| i18n | Interfaz en 11 idiomas: en, es, pt-br, fr, de, it, ja, ko, zh-cn, zh-tw y ru (`vscode.l10n` + diccionario del webview). Catálogo con `en` y `es` obligatorios y el resto opcionales con fallback a inglés | v1 |
 
 Fuera de alcance por ahora: ejecutar comandos automáticamente, sincronización en la nube y comandos generados por IA. Se pueden reconsiderar después de la v2.
 
@@ -151,10 +151,12 @@ Los hotfix son la única excepción: salen de `main` y después se fusionan de v
 | Rama | Sale de | Se fusiona en | Verificación (local) |
 | --- | --- | --- | --- |
 | `feature/<change>` | `develop` | `develop` (PR, squash) | `pnpm run verify` (hook pre-push) |
-| `develop` | — | `staging` (PR de release al cerrar una fase) | `verify` en Windows + `verify` en WSL/Linux |
-| `staging` | — | `main` (PR) | + `vsce package --no-dependencies` en local y prueba manual del `.vsix`; opcional `vsce publish --pre-release` |
+| `develop` | — | `staging` (PR de release al cerrar una fase, **merge commit**) | `verify` en Windows + `verify` en WSL/Linux |
+| `staging` | — | `main` (PR, **merge commit**) | + `vsce package --no-dependencies` en local y prueba manual del `.vsix`; opcional `vsce publish --pre-release` |
 | `main` | — | — | tras crear el tag `vX.Y.Z`: publicación manual con `vsce publish --no-dependencies` y `ovsx publish` |
 | `hotfix/<bug>` | `main` | `main` y `develop` | `verify` en Windows + `verify` en WSL/Linux |
+
+**Método de merge:** squash solo en los PR de features hacia `develop`. Las releases (`develop → staging`, `staging → main`) y las sincronizaciones de vuelta a `develop` usan **"Create a merge commit"**: con squash, la rama destino recibe un commit que no existe en la de origen y el historial se separa.
 
 **Convenciones**
 
@@ -249,7 +251,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 
 | # | Change | Qué entrega |
 | --- | --- | --- |
-| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) para que todas las vistas nazcan bilingües |
+| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) en 11 idiomas, para que todas las vistas nazcan traducidas. Catálogo con idiomas opcionales ✅ |
 | 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA |
 | 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` |
 | 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` |
@@ -316,7 +318,8 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `catalog-schema` (0.1) fusionado en `develop`
 - [x] `ci-setup` (0.2): verificación local con hook pre-push y migración a pnpm
 - [x] `webview-shell` (0.3): vista lateral con webview seguro y handshake
-- [ ] PR de release `develop → staging` para cerrar la Fase 0
+- [x] PR de release `develop → staging` para cerrar la Fase 0
+- [x] `ui-i18n` (1.1): interfaz en 11 idiomas
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 

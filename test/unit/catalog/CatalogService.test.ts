@@ -4,7 +4,7 @@ import {
 	CatalogService,
 	effectiveCommand,
 	localize,
-	resolveLocale,
+	localizeTags,
 } from '../../../src/catalog/CatalogService';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 
@@ -12,24 +12,29 @@ const newBranch = makeCommand({ id: 'git.new-branch', command: 'git checkout -b 
 const status = makeCommand({ id: 'git.status', command: 'git status' });
 const remove = makeCommand({ id: 'fs.remove', command: 'rm -rf dist', shells: { powershell: 'Remove-Item -Recurse dist' } });
 
-describe('resolveLocale', () => {
-	it.each([
-		['es', 'es'],
-		['es-ES', 'es'],
-		['es-419', 'es'],
-		['en', 'en'],
-		['en-US', 'en'],
-		['de', 'en'],
-		['ja', 'en'],
-	])('%s -> %s', (language, expected) => {
-		expect(resolveLocale(language)).toBe(expected);
+describe('localize', () => {
+	const title = { en: 'Branch', es: 'Rama', fr: 'Branche' };
+
+	it('devuelve el texto del idioma pedido', () => {
+		expect(localize(title, 'es')).toBe('Rama');
+		expect(localize(title, 'en')).toBe('Branch');
+	});
+
+	it('usa un idioma opcional cuando existe', () => {
+		expect(localize(title, 'fr')).toBe('Branche');
+	});
+
+	it('cae a en cuando falta el idioma opcional', () => {
+		expect(localize(title, 'de')).toBe('Branch');
 	});
 });
 
-describe('localize', () => {
-	it('devuelve el texto del idioma pedido', () => {
-		expect(localize({ en: 'Branch', es: 'Rama' }, 'es')).toBe('Rama');
-		expect(localize({ en: 'Branch', es: 'Rama' }, 'en')).toBe('Branch');
+describe('localizeTags', () => {
+	const tags = { en: ['branch'], es: ['rama'], ja: ['ブランチ'] };
+
+	it('usa los tags del idioma pedido o, si faltan, los de en', () => {
+		expect(localizeTags(tags, 'ja')).toEqual(['ブランチ']);
+		expect(localizeTags(tags, 'ko')).toEqual(['branch']);
 	});
 });
 
@@ -50,6 +55,10 @@ describe('buildExample', () => {
 
 	it('ejemplo en inglés para PowerShell sin variante propia', () => {
 		expect(buildExample(newBranch, 'en', 'powershell')).toBe('git checkout -b feature/my-change');
+	});
+
+	it('usa el placeholder en cuando falta el del idioma activo', () => {
+		expect(buildExample(newBranch, 'ja', 'bash')).toBe('git checkout -b feature/my-change');
 	});
 
 	it('un comando sin parámetros usa su propio comando', () => {

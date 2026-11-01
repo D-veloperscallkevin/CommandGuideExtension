@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
 import type { ExtensionMessage } from '../../src/messaging/protocol'
+import { toLocale, useT } from './i18n'
 import { postMessage } from './vscode'
 
 type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
 
+// Antes del init, el idioma sale del <html lang> que pone la extensión al generar el HTML.
+const initialLocale = toLocale(document.documentElement.lang)
+
 function App() {
   const [init, setInit] = useState<InitData | null>(null)
+  const t = useT(init?.locale ?? initialLocale)
 
   useEffect(() => {
     // Los mensajes de la extensión son de confianza: basta con el tipo.
@@ -29,9 +34,9 @@ function App() {
   return (
     <main className="shell" aria-label="DevCommands">
       <h1>DevCommands</h1>
-      {init && <p className="version">v{init.version}</p>}
+      {init && <p className="version">{t('version', { version: init.version })}</p>}
       <p className="status" role="status" aria-live="polite">
-        {init ? 'Commands coming soon.' : 'Loading…'}
+        {init ? t('comingSoon') : t('loading')}
       </p>
     </main>
   )
