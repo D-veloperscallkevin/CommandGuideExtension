@@ -2,107 +2,101 @@
 
 ## Context
 
-- El repositorio tiene dos proyectos npm con sus propios lockfiles: la raíz (extensión: `check-types`, `lint`, `test:unit`, `test`, `package`) y `webview-ui/` (`build` = `tsc -b && vite build`, `lint` = `oxlint`, sin tests).
-- `npm run package` (y por tanto `vscode:prepublish`) solo ejecuta esbuild. El webview no se construye desde la raíz.
-- `npm test` usa `@vscode/test-cli`, que descarga VS Code (~100 MB) en `.vscode-test/` y necesita una pantalla. En Linux, `xvfb-run` viene preinstalado en `ubuntu-latest`.
-- El índice de git ya está entero en LF. Los avisos LF→CRLF vienen de `core.autocrlf` en la copia local de Windows.
-- Existe el ruleset `protect-main-staging-develop` (id 26278428): PR obligatorio, sin borrado ni force push, merges squash/merge.
-- El repo es público con plan gratuito, así que Actions y los rulesets salen gratis.
+- El repositorio tenía dos proyectos npm con sus propios lockfiles (D10 los une en un workspace pnpm): la raíz (extensión: `check-types`, `lint`, `test:unit`, `test`, `package`) y `webview-ui/` (`build` = `tsc -b && vite build`, `lint` = `oxlint`, sin tests).
+- `pnpm test` (antes `npm test`) usa `@vscode/test-cli`, que descarga VS Code en `.vscode-test/` y necesita una pantalla.
+- No se usa GitHub Actions (ver `proposal.md`, Why). GitHub no puede exigir un check, así que la verificación tiene que vivir en la máquina de quien hace el push.
+- Entorno del autor: Windows 10 con Git for Windows y WSL 2 (Ubuntu). En Windows 10 no hay WSLg, así que dentro de WSL no hay pantalla para VS Code.
+- El índice de git ya está entero en LF.
+- El `~/.npmrc` del autor tiene `ignore-scripts=true`, así que npm nunca ejecuta `prepare` en `npm install` ni en `npm ci`. Comprobado: `core.hooksPath` quedaba vacío.
+- El ruleset `protect-main-staging-develop` exige PR y bloquea el borrado y el force push. No se modifica.
 
 ## Goals / Non-Goals
 
 **Goals:**
-- Un único workflow con los mismos checks en los tres SO, legible y fácil de ampliar en `release-pipeline`.
-- Que cambiar la matriz no rompa nunca la protección de ramas.
+- Un único comando de verificación, idéntico en Windows y en Linux.
+- Que sea imposible olvidarse de verificar: se ejecuta solo antes de cada push.
+- Cero dependencias nuevas.
 - Que un clon limpio genere un paquete completo.
 
 **Non-Goals:**
-- Empaquetado `.vsix`, control de tamaño, artefactos y publicación (change 1.8 y 2.9).
-- Workflows diferenciados por rama de destino.
+- Bloqueo del merge en GitHub (requeriría CI en la nube).
+- Cobertura en macOS.
+- Empaquetado `.vsix`, control de tamaño y publicación (changes 1.8 y 2.9).
 - Tests contra la versión mínima de VS Code (1.90).
-- Dependabot y CodeQL (se pueden añadir después sin cambiar este diseño).
 
 ## Decisions
 
-### D1. Un workflow, un job matriz y un job agregador
-`.github/workflows/ci.yml`:
+### D1. `scripts/verify.mjs`: orquestador sin dependencias
+Script Node (ESM) que `pnpm run verify` invoca:
+1. Lee `.nvmrc` y compara su versión mayor con `process.versions.node`. Si no coinciden, falla con "Node X esperado, encontrado Y".
+2. Ejecuta en orden `check-types`, `lint`, `lint:webview`, `test:unit`, `package` y `test` con `spawnSync('pnpm', ['run', step], { stdio: 'inherit', shell: true })`.
+3. Antes de cada paso imprime `▶ <paso>`. Si un paso falla, imprime `✖ verify falló en: <paso>` y sale con el código del paso. Al final imprime `✔ verify OK`.
+- *Por qué un script y no `a && b && c` en `package.json`:* da el mismo comportamiento en cmd, PowerShell y sh, nombra el paso que falla y permite la comprobación de Node.
+- `package` ya incluye `check-types` y `lint`. Se acepta repetirlos para que cada fallo se atribuya a un paso con nombre claro. Coste: unos segundos.
 
+### D2. Hook `.githooks/pre-push`
+```sh
+#!/bin/sh
+echo "pre-push: pnpm run verify (salta con git push --no-verify)"
+pnpm run verify
 ```
-on: pull_request -> branches [develop, staging, main]
-concurrency: ci-${{ github.workflow }}-${{ github.event.pull_request.number }}, cancel-in-progress: true
-permissions: contents: read
+- Git for Windows ejecuta los hooks con su `sh` incluido, así que funciona aunque el push se lance desde PowerShell o desde VS Code.
+- Se marca como ejecutable en el índice (`git update-index --chmod=+x`) para Linux y WSL.
+- *Alternativa descartada:* Husky o simple-git-hooks. Añaden una dependencia para algo que git ya hace con `core.hooksPath`.
 
-jobs:
-  checks:  matrix.os [ubuntu-latest, windows-latest, macos-latest], fail-fast: false
-  ci-ok:   needs: checks, if: always()
-           falla salvo que needs.checks.result == 'success'
-```
+### D3. Activación con `prepare` → `scripts/install-hooks.mjs`
+`"prepare": "node scripts/install-hooks.mjs"`. Si existe `.git` en la raíz, ejecuta `git config core.hooksPath .githooks`. Si no existe, no hace nada y sale con 0. pnpm ejecuta el `prepare` del proyecto raíz en `pnpm install`. Además, pnpm 11+ solo lee del `.npmrc` los ajustes de autenticación y de registry, así que el `ignore-scripts=true` del usuario no lo desactiva (D10).
 
-- *Por qué el agregador:* un ruleset que exige `checks (ubuntu-latest)` se queda bloqueado para siempre si la matriz cambia de nombre. `ci-ok` es estable. Con `if: always()`, `ci-ok` también se ejecuta (y falla) cuando `checks` falla o se cancela. Sin eso, quedaría como "skipped", y un check skipped cuenta como superado.
-- *Alternativa descartada:* exigir cada job de la matriz por separado. Es frágil, por lo que acabamos de ver.
-- `permissions: contents: read` sigue el principio de mínimo privilegio, porque el workflow no escribe nada.
+### D4. Coste del push
+`verify` incluye los tests de integración, que abren una ventana de VS Code unos segundos. Un push tarda alrededor de un minuto más. Se acepta: el push es poco frecuente comparado con los commits, y el hook es `pre-push`, no `pre-commit`.
 
-### D2. Pasos del job `checks`
-1. `actions/checkout`
-2. `actions/setup-node` con `node-version-file: .nvmrc` y `cache: npm`, con `cache-dependency-path` apuntando a los dos lockfiles
-3. `npm ci` y `npm ci --prefix webview-ui`
-4. `npm run check-types`, `npm run lint` y `npm run lint:webview`
-5. `npm run test:unit`
-6. `npm run package`: build de producción de la extensión y del webview (D3), que incluye el `tsc -b` del webview
-7. `actions/cache` de `.vscode-test/` (clave: SO + hash de `.vscode-test.mjs` y `package-lock.json`, con `restore-keys` por SO)
-8. Tests de integración: `xvfb-run -a npm test` en Linux y `npm test` en Windows y macOS
+### D5. Linux con WSL antes de cada release
+Procedimiento (documentado en `docs/ROADMAP.md`, paso del PR de release):
+1. Clonar el repo **dentro del sistema de archivos de WSL** (`~/src/...`), no en `/mnt/c/...`. esbuild, rollup y oxlint instalan binarios distintos según el SO, y compartir `node_modules` entre Windows y Linux los rompe. Además, `/mnt/c` es mucho más lento.
+2. Node 24 en WSL (nvm lee `.nvmrc`), y `sudo apt install -y xvfb` más las librerías que VS Code necesite para arrancar.
+3. Instalar pnpm en WSL (`npm i -g pnpm`) y ejecutar `git checkout <rama> && pnpm install --frozen-lockfile && xvfb-run -a pnpm run verify`.
+4. Marcar la casilla correspondiente en la plantilla del PR.
 
-Las versiones de las actions se fijan a la última major estable al implementar.
+### D6. Plantilla de PR `.github/pull_request_template.md`
+Es una función gratuita de GitHub, sin Actions. Contiene un checklist:
+- `pnpm run verify` en verde en local (el hook lo garantiza salvo `--no-verify`);
+- `/opsx:archive` ejecutado;
+- **solo en PR de release:** `pnpm run verify` en verde en WSL o Linux.
 
-### D3. Build completo desde la raíz
-Scripts nuevos en `package.json` de la raíz:
-- `"build:webview": "npm --prefix webview-ui run build"`
-- `"lint:webview": "npm --prefix webview-ui run lint"`
-- `package` añade `&& npm run build:webview` al final. `vscode:prepublish` ya llama a `package`, así que el `.vsix` siempre incluye el webview.
+### D7. Retirada de GitHub Actions
+Se borra `.github/workflows/ci.yml`. El ruleset no cambia: nunca se le añadió un check. `.github/` sigue ignorado en `.vscodeignore`.
 
-`compile` (que usa `pretest` y F5) no cambia: los tests de integración aún no cargan el webview y así el ciclo local sigue rápido. Cuando `webview-shell` lo necesite, ese change decidirá si `compile` también construye el webview.
-- *Alternativa descartada:* npm workspaces. Cambiaría la instalación de los dos proyectos y el layout de `node_modules` para ganar poco. Se puede reconsiderar más adelante.
+### D8. Sin cambios en lo ya decidido
+- `.nvmrc` = `24`.
+- `.gitattributes` con `* text=auto eol=lf`.
+- Scripts `build:webview` y `lint:webview`.
+- `package` encadena `build:webview`, así que `vscode:prepublish` produce un paquete completo.
+- `compile`, que usan F5 y `pretest`, sigue construyendo solo la extensión.
 
-### D4. Node 24 vía `.nvmrc`
-`.nvmrc` = `24`. Solo afecta a las herramientas: la extensión corre en el Node de Electron de VS Code. Fijar una sola versión evita una matriz de Node sin valor. Node 20, el prerrequisito que daba el roadmap, ya no tiene soporte.
+### D9. Dependencias y mensajes
+- Dependencias nuevas: ninguna.
+- Mensajes webview ↔ extensión: ninguno.
 
-### D5. Finales de línea
-`.gitattributes`:
-```
-* text=auto eol=lf
-*.png binary
-*.ico binary
-*.vsix binary
-```
-Como el índice ya está en LF, `git add --renormalize .` no debería producir cambios. Se ejecuta para confirmarlo.
-
-### D6. Activar el check obligatorio después de la primera ejecución
-El ruleset se actualiza con `gh api` (PUT de `rulesets/26278428`, conservando las reglas actuales) añadiendo:
-```
-{ "type": "required_status_checks", "parameters": {
-    "strict_required_status_checks_policy": false,
-    "required_status_checks": [{ "context": "ci-ok", "integration_id": 15368 }] } }
-```
-- Se hace **después** de que `ci-ok` haya corrido en el PR de este change. Así GitHub ya conoce el check y no hay riesgo de bloquear un PR esperando un check que nunca llega.
-- `integration_id: 15368` (GitHub Actions) impide que otra app publique un `ci-ok` falso.
-- `strict: false` evita tener que actualizar la rama con `develop` antes de cada merge. Con un solo desarrollador y squash merge, el coste supera al beneficio.
-
-### D7. Mensajes webview ↔ extensión
-No se añade ni modifica ningún mensaje.
-
-### D8. Dependencias
-Ninguna nueva. Las actions oficiales de GitHub (`checkout`, `setup-node`, `cache`) no son dependencias del paquete.
+### D10. Migración a pnpm
+- **Workspace:** `pnpm-workspace.yaml` con `packages: [webview-ui]`. Un único `pnpm-lock.yaml` y un único `pnpm install` para las dos mitades. Los scripts de la raíz pasan a `"build:webview": "pnpm --filter webview-ui run build"` y `"lint:webview": "pnpm --filter webview-ui run lint"`.
+- **Lockfile:** `pnpm import` convierte los `package-lock.json` existentes sin cambiar versiones. Después se borran.
+- **Versión fijada:** `"packageManager": "pnpm@11.21.0"` en el `package.json` de la raíz: la versión que el autor ya tiene instalada con Volta (cumple el mínimo v11 que hace falta para D3). Subir a la 12.x es un cambio aparte. En una máquina nueva se instala con `npm i -g pnpm` o con Volta; no se usa Corepack porque está en retirada.
+- **Scripts de dependencias:** `allowBuilds` en `pnpm-workspace.yaml`, con `esbuild: false`. esbuild trae su binario como dependencia opcional por plataforma y su `postinstall` solo lo comprueba. Cualquier otra dependencia con scripts hará fallar la instalación (`strictDepBuilds`) hasta que se revise.
+- **Defaults de pnpm 11 que se mantienen:** `minimumReleaseAge` (no instala versiones publicadas hace menos de un día) y `node_modules` estricto, sin dependencias fantasma.
+- *Alternativa descartada:* mantener npm y pedir un `npm run hooks:install` manual en cada clon. Funciona, pero rompe la activación automática con `ignore-scripts` y no aporta la lista de builds autorizados.
+- **Para el change 1.8:** `vsce package` usa `npm list` internamente. Con pnpm hay que usar `vsce package --no-dependencies`, que es válido porque el bundle no tiene dependencias de runtime.
 
 ## Risks / Trade-offs
 
-- [Tests de integración inestables en los runners (GPU o pantalla)] → `xvfb-run -a` en Linux. Si falla de forma intermitente en algún SO, se documenta y se investiga en un change aparte. No se desactiva en silencio.
-- [macOS hace más lento cada PR] → Los jobs corren en paralelo y `concurrency` cancela ejecuciones obsoletas. Se acepta, por decisión de producto.
-- [La versión de VS Code "stable" cambia y la caché queda obsoleta] → `@vscode/test-cli` comprueba la versión y descarga la nueva si hace falta. La caché solo acelera.
-- [Error al editar el ruleset por API y perder reglas existentes] → Leer el ruleset completo con GET antes del PUT y verificar después que siguen las reglas `deletion`, `non_fast_forward` y `pull_request`.
-- [El build del webview en Windows usa rutas POSIX] → Vite y `npm --prefix` funcionan en los tres SO. La matriz lo verifica.
+- [Se puede saltar el hook con `--no-verify` o empujando desde un clon sin `pnpm install`] → Es una red de seguridad, no un candado. La plantilla de PR obliga a confirmarlo y con un solo desarrollador el riesgo es bajo. Si entra más gente, se reconsidera un CI en la nube.
+- [Sin cobertura en macOS] → Riesgo aceptado. Los bugs típicos de rutas y de shell ya los cubren Windows y Linux. Se puede añadir cuando haya un usuario o tester con Mac.
+- [Los tests de integración en WSL no arrancan por falta de librerías de sistema] → El procedimiento D5 documenta los paquetes necesarios. La tarea de WSL lo valida una vez.
+- [Push más lento] → Ver D4.
+- [El `node_modules` estricto de pnpm destapa dependencias no declaradas, por ejemplo en `@vscode/test-cli` o en mocha] → `verify` lo detecta. Se declara la dependencia que falte. No se usa `shamefullyHoist`.
+- [pnpm no está instalado en una máquina nueva] → El roadmap documenta `npm i -g pnpm` en los prerrequisitos. `packageManager` avisa si la versión no coincide.
 
 ## Migration Plan
 
-1. Se fusiona el workflow con el PR de este change, que ya ejecuta la verificación sobre sí mismo.
-2. Con `ci-ok` en verde en ese PR, se activa el check obligatorio (D6) antes del merge.
-3. Rollback: quitar la regla `required_status_checks` del ruleset y revertir el squash merge.
+1. Implementar en la misma rama `feature/ci-setup` y actualizar el PR #3.
+2. El propio push de la implementación ya pasa por el hook.
+3. Rollback: `git config --unset core.hooksPath` y revertir el squash merge.

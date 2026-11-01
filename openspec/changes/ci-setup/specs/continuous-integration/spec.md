@@ -2,68 +2,90 @@
 
 ## Purpose
 
-Garantiza que todo cambio que llega a las ramas protegidas compila, pasa lint y tests y produce un build completo en Windows, Linux y macOS antes de poder fusionarse.
+Garantiza que todo cambio que se sube al repositorio compila, pasa lint y tests y produce un build completo, verificándolo en local antes de cada push y en Linux antes de cada release.
 
 ## ADDED Requirements
 
-### Requirement: Verificación automática de cada pull request
-Todo pull request cuyo destino sea `develop`, `staging` o `main` SHALL disparar automáticamente la verificación del proyecto, y cada push nuevo al PR SHALL volver a dispararla. Una verificación en curso del mismo PR MUST cancelarse cuando empieza una más reciente.
+### Requirement: Verificación antes de cada push
+Todo `git push` desde un clon con dependencias instaladas SHALL ejecutar la verificación del proyecto antes de enviar nada al remoto. Si la verificación falla, el push MUST abortarse sin enviar commits. Saltarse la verificación MUST requerir una acción explícita (`git push --no-verify`).
 
-#### Scenario: PR de una feature a develop
-- **WHEN** se abre un PR de `feature/x` hacia `develop`
-- **THEN** la verificación se ejecuta sin intervención manual
+#### Scenario: Push con todo en verde
+- **WHEN** se hace `git push` y la verificación pasa
+- **THEN** el push se envía al remoto
 
-#### Scenario: Push nuevo sobre un PR con verificación en curso
-- **WHEN** se hace push a un PR cuya verificación anterior no ha terminado
-- **THEN** la verificación anterior se cancela y se ejecuta una nueva sobre el último commit
+#### Scenario: Push con un test roto
+- **WHEN** se hace `git push` y un test unitario falla
+- **THEN** el push se aborta, no se envía ningún commit y la salida nombra el paso que falló
 
-#### Scenario: PR hacia una rama no protegida
-- **WHEN** se abre un PR hacia una rama distinta de `develop`, `staging` o `main`
-- **THEN** la verificación no se dispara
+#### Scenario: Salto explícito
+- **WHEN** se hace `git push --no-verify`
+- **THEN** el push se envía sin ejecutar la verificación
 
-### Requirement: Verificación en Windows, Linux y macOS
-La verificación SHALL ejecutarse en Windows, Linux y macOS. En cada sistema MUST incluir: typecheck y lint de la extensión y del webview, los tests unitarios, el build completo y los tests de integración dentro de VS Code. El fallo en un sistema MUST NOT cancelar la verificación en los demás.
+### Requirement: Contenido de la verificación
+`pnpm run verify` SHALL ejecutar, en este orden: comprobación de la versión de Node, typecheck, lint de la extensión y del webview, tests unitarios, build de producción completo y tests de integración dentro de VS Code. MUST detenerse en el primer paso que falle, nombrar ese paso y terminar con un código de salida distinto de cero. El mismo comando MUST funcionar en Windows y en Linux.
 
 #### Scenario: Verificación en Windows (PowerShell)
-- **WHEN** se ejecuta la verificación de un PR
-- **THEN** todos los pasos se ejecutan en un runner Windows y su resultado se informa por separado
+- **WHEN** se ejecuta `pnpm run verify` desde PowerShell en Windows
+- **THEN** se ejecutan todos los pasos en orden y termina con código 0 si todos pasan
 
 #### Scenario: Verificación en Linux (bash)
-- **WHEN** se ejecuta la verificación de un PR
-- **THEN** todos los pasos se ejecutan en un runner Linux, y los tests de integración corren con una pantalla virtual
+- **WHEN** se ejecuta `pnpm run verify` desde bash en Linux o WSL, con una pantalla disponible para los tests de integración
+- **THEN** se ejecutan los mismos pasos en el mismo orden con el mismo resultado
 
-#### Scenario: Fallo solo en un sistema
-- **WHEN** un test falla en Windows pero pasa en Linux y macOS
-- **THEN** las verificaciones de Linux y macOS terminan, y el resultado global del PR es fallido
+#### Scenario: Fallo en un paso intermedio
+- **WHEN** el lint falla
+- **THEN** no se ejecutan los tests ni el build, la salida nombra el lint y el código de salida es distinto de cero
 
-### Requirement: Un único check obligatorio para fusionar
-La verificación SHALL publicar un único check agregado llamado `ci-ok`, que solo tiene éxito si la verificación ha tenido éxito en todos los sistemas. Las ramas `develop`, `staging` y `main` MUST exigir `ci-ok` en verde para permitir el merge de un PR.
+### Requirement: Activación automática del hook
+Instalar las dependencias en un clon del repositorio (`pnpm install`) SHALL activar el hook de verificación sin pasos manuales, incluso si la configuración de npm del usuario desactiva los scripts de ciclo de vida. Instalar fuera de un repositorio git MUST NOT fallar por este motivo.
 
-#### Scenario: Todo en verde
-- **WHEN** la verificación pasa en los tres sistemas
-- **THEN** `ci-ok` está en verde y el PR se puede fusionar
+#### Scenario: Clon nuevo
+- **WHEN** se clona el repositorio y se ejecuta `pnpm install`
+- **THEN** el siguiente `git push` ejecuta la verificación
 
-#### Scenario: Algún sistema falla
-- **WHEN** la verificación falla o se cancela en cualquiera de los sistemas
-- **THEN** `ci-ok` falla y GitHub bloquea el merge del PR
+#### Scenario: Usuario con ignore-scripts en npm
+- **WHEN** el `~/.npmrc` del usuario contiene `ignore-scripts=true` y se ejecuta `pnpm install` en un clon nuevo
+- **THEN** el hook queda activo igualmente
+
+#### Scenario: Instalación fuera de git
+- **WHEN** se instalan las dependencias en una copia sin carpeta `.git`
+- **THEN** la instalación termina con éxito y no configura ningún hook
+
+### Requirement: Verificación en Linux antes de cada release
+Todo PR de release de `develop` a `staging` SHALL ir precedido de una verificación completa en verde en Linux (WSL o nativo), y la descripción del PR MUST dejar constancia de ello.
+
+#### Scenario: PR de release con verificación en Linux
+- **WHEN** se abre un PR de `develop` a `staging`
+- **THEN** su descripción indica que `pnpm run verify` pasó en Linux sobre el commit del PR
+
+### Requirement: Instalación segura de dependencias
+Instalar las dependencias MUST NOT ejecutar scripts de ciclo de vida de paquetes de terceros salvo los autorizados explícitamente en la configuración del repositorio. Una dependencia con scripts de instalación que no se haya revisado (ni autorizada ni denegada) MUST hacer fallar la instalación. La instalación de referencia SHALL usar el lockfile sin modificarlo.
+
+#### Scenario: Dependencia con scripts sin revisar
+- **WHEN** una dependencia con script `postinstall` no figura en la lista de builds revisados y se ejecuta la instalación
+- **THEN** la instalación falla nombrando esa dependencia y no ejecuta su script
+
+#### Scenario: Lockfile desactualizado
+- **WHEN** `package.json` declara una dependencia que no está en `pnpm-lock.yaml` y se ejecuta `pnpm install --frozen-lockfile`
+- **THEN** la instalación falla sin modificar el lockfile
 
 ### Requirement: Build completo de la extensión
 El build de producción del proyecto SHALL generar tanto el bundle de la extensión como el webview compilado, y el paso de prepublicación del paquete MUST ejecutar ese build completo.
 
 #### Scenario: Build en una copia limpia
-- **WHEN** se clona el repositorio, se instalan dependencias y se ejecuta el build de producción
+- **WHEN** se clona el repositorio, se instalan las dependencias y se ejecuta el build de producción
 - **THEN** existen `dist/extension.js` y `dist/webview/index.html` con sus assets
 
 #### Scenario: Fallo de compilación del webview
 - **WHEN** el webview tiene un error de TypeScript
-- **THEN** el build de producción falla y la verificación del PR también
+- **THEN** el build de producción falla y la verificación también
 
 ### Requirement: Entorno reproducible
-La versión de Node usada por la verificación SHALL ser la declarada en `.nvmrc` del repositorio. Los archivos de texto SHALL guardarse en el repositorio con finales de línea LF, independientemente del sistema operativo de quien hace el commit.
+La versión de Node del proyecto SHALL declararse en `.nvmrc`, y la verificación MUST fallar si la versión mayor de Node en uso no coincide con la declarada. Los archivos de texto SHALL guardarse en el repositorio con finales de línea LF, independientemente del sistema operativo de quien hace el commit.
 
-#### Scenario: Cambio de versión de Node
-- **WHEN** se cambia la versión en `.nvmrc`
-- **THEN** la siguiente verificación usa esa versión sin modificar el workflow
+#### Scenario: Node distinto del declarado
+- **WHEN** `.nvmrc` declara `24` y se ejecuta la verificación con Node 22
+- **THEN** la verificación falla indicando la versión esperada y la encontrada
 
 #### Scenario: Commit desde Windows
 - **WHEN** se hace commit desde Windows de un archivo editado con finales CRLF

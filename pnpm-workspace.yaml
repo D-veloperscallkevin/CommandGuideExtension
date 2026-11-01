@@ -1,0 +1,6 @@
+packages:
+  - webview-ui
+
+allowBuilds:
+  # El binario llega como dependencia opcional por plataforma; su postinstall solo lo comprueba.
+  esbuild: false
