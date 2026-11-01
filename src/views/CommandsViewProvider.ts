@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import * as vscode from 'vscode';
-import { resolveLocale } from '../catalog/CatalogService';
+import { buildCategorySummaries, CatalogService, resolveLocale, type CategorySummary } from '../catalog/CatalogService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
 import { buildWebviewHtml } from './webviewHtml';
 
@@ -8,14 +8,15 @@ import { buildWebviewHtml } from './webviewHtml';
 export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
 	static readonly viewId = 'devcommands.commands';
 
-	private readonly readyEmitter = new vscode.EventEmitter<void>();
-	/** Se dispara cada vez que el webview completa el handshake (`ready`). */
-	readonly onDidReceiveReady = this.readyEmitter.event;
+	private readonly catalogEmitter = new vscode.EventEmitter<readonly CategorySummary[]>();
+	/** Se dispara tras enviar `catalog` al webview (es decir, tras cada `ready` atendido). */
+	readonly onDidSendCatalog = this.catalogEmitter.event;
 
 	constructor(
 		private readonly extensionUri: vscode.Uri,
 		private readonly version: string,
 		private readonly log: vscode.LogOutputChannel,
+		private readonly catalog = new CatalogService(),
 	) {}
 
 	resolveWebviewView(webviewView: vscode.WebviewView): void {
@@ -36,20 +37,21 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				return;
 			}
 			switch (message.type) {
-				case 'ready':
-					void webview.postMessage({
-						type: 'init',
-						locale: resolveLocale(vscode.env.language),
-						version: this.version,
-					} satisfies ExtensionMessage);
-					this.readyEmitter.fire();
+				case 'ready': {
+					const locale = resolveLocale(vscode.env.language);
+					const categories = buildCategorySummaries(this.catalog.getCategories(), locale);
+					// postMessage conserva el orden: el webview recibe init antes que catalog.
+					void webview.postMessage({ type: 'init', locale, version: this.version } satisfies ExtensionMessage);
+					void webview.postMessage({ type: 'catalog', categories } satisfies ExtensionMessage);
+					this.catalogEmitter.fire(categories);
 					break;
+				}
 			}
 		});
 		webviewView.onDidDispose(() => subscription.dispose());
 	}
 
 	dispose(): void {
-		this.readyEmitter.dispose();
+		this.catalogEmitter.dispose();
 	}
 }

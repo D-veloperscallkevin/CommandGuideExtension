@@ -1,13 +1,18 @@
 // Protocolo de mensajes entre el webview y la extensión. El webview importa solo los
 // tipos (`import type`); la validación se ejecuta en la extensión, que no confía en
 // nada de lo que llega del webview.
+import type { CategorySummary } from '../catalog/CatalogService';
 import type { Locale } from '../catalog/types';
+
+export type { CategorySummary };
 
 /** Mensajes que envía el webview a la extensión. */
 export type WebviewMessage = { readonly type: 'ready' };
 
 /** Mensajes que envía la extensión al webview. */
-export type ExtensionMessage = { readonly type: 'init'; readonly locale: Locale; readonly version: string };
+export type ExtensionMessage =
+	| { readonly type: 'init'; readonly locale: Locale; readonly version: string }
+	| { readonly type: 'catalog'; readonly categories: readonly CategorySummary[] };
 
 /** Claves exactas que admite cada tipo de mensaje del webview. */
 const webviewMessageKeys: Readonly<Record<WebviewMessage['type'], readonly string[]>> = {

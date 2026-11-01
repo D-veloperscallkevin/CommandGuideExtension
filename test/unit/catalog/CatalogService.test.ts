@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	buildCategorySummaries,
 	buildExample,
 	CatalogService,
 	effectiveCommand,
@@ -63,6 +64,30 @@ describe('buildExample', () => {
 
 	it('un comando sin parámetros usa su propio comando', () => {
 		expect(buildExample(status, 'es', 'bash')).toBe('git status');
+	});
+});
+
+describe('buildCategorySummaries', () => {
+	const ordered = new CatalogService([
+		makeCategory('npm', [makeCommand({ id: 'npm.install' })], 20),
+		{ ...makeCategory('git', [newBranch, status], 10), title: { en: 'Git', es: 'Git (es)', fr: 'Git (fr)' } },
+	]).getCategories();
+
+	it('conserva el orden y cuenta los comandos', () => {
+		expect(buildCategorySummaries(ordered, 'en')).toEqual([
+			{ id: 'git', title: 'Git', icon: 'beaker', commandCount: 2 },
+			{ id: 'npm', title: 'npm', icon: 'beaker', commandCount: 1 },
+		]);
+	});
+
+	it('traduce el título y cae a en si falta el idioma', () => {
+		expect(buildCategorySummaries(ordered, 'es')[0].title).toBe('Git (es)');
+		expect(buildCategorySummaries(ordered, 'fr')[0].title).toBe('Git (fr)');
+		expect(buildCategorySummaries(ordered, 'ja')[0].title).toBe('Git');
+	});
+
+	it('el resumen solo lleva id, title, icon y commandCount', () => {
+		expect(Object.keys(buildCategorySummaries(ordered, 'en')[0]).sort()).toEqual(['commandCount', 'icon', 'id', 'title']);
 	});
 });
 

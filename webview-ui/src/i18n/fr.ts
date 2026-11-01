@@ -2,6 +2,9 @@ import type { Messages } from './en'
 
 export const fr: Messages = {
   loading: 'Chargement…',
-  comingSoon: 'Les commandes arrivent bientôt.',
-  version: 'v{version}',
+  categoriesLabel: 'Catégories de commandes',
+  commandCount: { one: '{count} commande', many: '{count} de commandes', other: '{count} commandes' },
+  emptyCatalog: 'Aucune catégorie disponible.',
+  back: 'Retour',
+  categoryPlaceholder: 'La liste des commandes de cette catégorie arrive bientôt.',
 }

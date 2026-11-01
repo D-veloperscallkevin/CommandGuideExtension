@@ -27,17 +27,92 @@ body {
 }
 
 .shell {
-  padding: 12px 20px;
+  padding: 4px 0;
 }
 
-.shell h1 {
-  margin: 0 0 4px;
+.muted {
+  margin: 0;
+  padding: 4px 20px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.codicon {
+  flex: none;
+}
+
+/* Lista de categorías con los colores de lista del tema (como el explorador). */
+.category-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category,
+.back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 26px;
+  padding: 2px 20px;
+  border: 0;
+  border-radius: 0;
+  color: var(--vscode-foreground);
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+/* En alto contraste, VS Code define contrastActiveBorder (contorno discontinuo al pasar el ratón). */
+.category:hover,
+.back:hover {
+  outline: 1px dashed var(--vscode-contrastActiveBorder, transparent);
+  outline-offset: -1px;
+  color: var(--vscode-list-hoverForeground, var(--vscode-foreground));
+  background: var(--vscode-list-hoverBackground);
+}
+
+.category:focus-visible,
+.back:focus-visible {
+  outline: 1px solid var(--vscode-list-focusOutline, var(--vscode-focusBorder));
+  outline-offset: -1px;
+  color: var(--vscode-list-focusForeground, var(--vscode-foreground));
+  background: var(--vscode-list-focusBackground, transparent);
+}
+
+.category:active {
+  color: var(--vscode-list-activeSelectionForeground, var(--vscode-foreground));
+  background: var(--vscode-list-activeSelectionBackground);
+}
+
+.category-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-count {
+  flex: none;
+  color: var(--vscode-descriptionForeground);
+}
+
+.category-screen h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 2px;
+  padding: 0 20px;
   font-size: 1.1em;
   font-weight: 600;
 }
 
-.shell .version,
-.shell .status {
-  margin: 0;
-  color: var(--vscode-descriptionForeground);
+.category-screen h2:focus {
+  outline: none;
+}
+
+.category-screen h2:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
 }
