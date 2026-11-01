@@ -26,7 +26,7 @@
 
 ## 6. Verificación manual (F5)
 
-- [ ] 6.1 Con F5: el icono aparece en la Activity Bar; al abrir la vista se muestra "DevCommands" con la versión; al cambiar a tema claro, oscuro y alto contraste los colores cambian sin recargar; y en la paleta no hay "Hello World". El autor confirma la verificación visual
+- [x] 6.1 Con F5: el icono aparece en la Activity Bar; al abrir la vista se muestra "DevCommands" con la versión; al cambiar a tema claro, oscuro y alto contraste los colores cambian sin recargar; y en la paleta no hay "Hello World". El autor confirma la verificación visual
 
 ## 7. Documentación
 

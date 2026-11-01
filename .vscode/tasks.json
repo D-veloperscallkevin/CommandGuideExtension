@@ -22,7 +22,21 @@
             "type": "npm",
             "script": "watch:esbuild",
             "group": "build",
-            "problemMatcher": "$esbuild-watch",
+            // Formato que imprime el plugin de esbuild.js; sin depender de extensiones de terceros
+            "problemMatcher": {
+                "owner": "esbuild",
+                "severity": "error",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    { "regexp": "^✘ \\[ERROR\\] (.*)$", "message": 1 },
+                    { "regexp": "^\\s+(.*):(\\d+):(\\d+):$", "file": 1, "line": 2, "column": 3 }
+                ],
+                "background": {
+                    "activeBegins": true,
+                    "beginsPattern": "^\\[watch\\] build started",
+                    "endsPattern": "^\\[watch\\] build finished"
+                }
+            },
             "isBackground": true,
             "label": "npm: watch:esbuild",
             "presentation": {
@@ -36,13 +50,20 @@
             "group": "build",
             "isBackground": true,
             "label": "npm: watch:webview",
+            // Errores de Vite: "[plugin] mensaje" y en la línea siguiente "╭─[ archivo:línea:col ]".
+            // El build termina con "built in" si va bien o con "Build failed" si falla.
             "problemMatcher": {
                 "owner": "vite",
-                "pattern": { "regexp": "^(error) (.*)$", "severity": 1, "message": 2 },
+                "severity": "error",
+                "fileLocation": ["relative", "${workspaceFolder}/webview-ui"],
+                "pattern": [
+                    { "regexp": "^\\[([^\\]]+)\\] (.*)$", "code": 1, "message": 2 },
+                    { "regexp": "^\\s*╭─\\[ (.+):(\\d+):(\\d+) \\]$", "file": 1, "line": 2, "column": 3 }
+                ],
                 "background": {
                     "activeBegins": true,
                     "beginsPattern": "build started",
-                    "endsPattern": "built in"
+                    "endsPattern": "built in|Build failed"
                 }
             },
             "presentation": {
