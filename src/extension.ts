@@ -1,9 +1,11 @@
 import * as vscode from 'vscode';
+import type { CategorySummary } from './catalog/CatalogService';
 import { CommandsViewProvider } from './views/CommandsViewProvider';
 
 /** API pública de la extensión (`extension.exports`); la usan los tests de integración. */
 export interface DevCommandsApi {
-	readonly onDidReceiveReady: vscode.Event<void>;
+	/** Categorías enviadas al webview tras cada handshake. */
+	readonly onDidSendCatalog: vscode.Event<readonly CategorySummary[]>;
 }
 
 // Se activa solo al abrir la vista (evento implícito onView:devcommands.commands).
@@ -18,7 +20,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewId, provider),
 	);
 
-	return { onDidReceiveReady: provider.onDidReceiveReady };
+	return { onDidSendCatalog: provider.onDidSendCatalog };
 }
 
 export function deactivate() {}

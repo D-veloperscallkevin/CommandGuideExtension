@@ -47,6 +47,9 @@ importers:
 
   webview-ui:
     dependencies:
+      '@vscode/codicons':
+        specifier: 0.0.46-24
+        version: 0.0.46-24
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -798,6 +801,9 @@ packages:
 
   '@vitest/spy@5.0.5':
     resolution: {integrity: sha512-lwJRExuH417257Q5wv9QYugN9IMJkoxcrKrYxGPQkBzl7wlNpTUxD/5yNX4ESKVUIShKPgkGchYPFMWOOk0wzw==}
+
+  '@vscode/codicons@0.0.46-24':
+    resolution: {integrity: sha512-KIDWUYxG6eh+DHRg+3G4bS487T+g1ZkLfB4HylOBbCcHsvLdfLMRM/m92DS1Ljhi8nglLr9ucwwWhHTEAC+DpA==}
 
   '@vscode/test-cli@0.0.15':
     resolution: {integrity: sha512-nAxk2X79wuXS7aOhyFFhFcCqd7EBUoMesu7ZgsYE/4eFjyBMuyIweVE94BxdKH1RieN8eOz2SIrljrZt6Lk9fQ==}
@@ -2778,6 +2784,8 @@ snapshots:
       vite: 8.3.5(@types/node@24.19.2)(esbuild@0.28.2)
 
   '@vitest/spy@5.0.5': {}
+
+  '@vscode/codicons@0.0.46-24': {}
 
   '@vscode/test-cli@0.0.15':
     dependencies:

@@ -2,6 +2,9 @@ import type { Messages } from './en'
 
 export const es: Messages = {
   loading: 'Cargando…',
-  comingSoon: 'Los comandos llegarán pronto.',
-  version: 'v{version}',
+  categoriesLabel: 'Categorías de comandos',
+  commandCount: { one: '{count} comando', many: '{count} de comandos', other: '{count} comandos' },
+  emptyCatalog: 'No hay categorías disponibles.',
+  back: 'Atrás',
+  categoryPlaceholder: 'La lista de comandos de esta categoría llegará pronto.',
 }

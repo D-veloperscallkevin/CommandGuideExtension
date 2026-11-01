@@ -27,6 +27,24 @@ export function buildExample(cmd: Command, locale: Locale, shell: ShellId): stri
 	);
 }
 
+/** Lo que el webview necesita para pintar una categoría en la lista (ya traducido). */
+export interface CategorySummary {
+	readonly id: string;
+	readonly title: string;
+	readonly icon: string;
+	readonly commandCount: number;
+}
+
+/** Resumen de las categorías en el orden recibido, con el título en `locale` (fallback a `en`). */
+export function buildCategorySummaries(categories: readonly Category[], locale: Locale): CategorySummary[] {
+	return categories.map((c) => ({
+		id: c.id,
+		title: localize(c.title, locale),
+		icon: c.icon,
+		commandCount: c.commands.length,
+	}));
+}
+
 /** Consulta del catálogo. Sin acceso a disco, red ni a la API de VS Code. */
 export class CatalogService {
 	private readonly categories: readonly Category[];

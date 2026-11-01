@@ -2,6 +2,9 @@ import type { Messages } from './en'
 
 export const ptbr: Messages = {
   loading: 'Carregando…',
-  comingSoon: 'Os comandos chegarão em breve.',
-  version: 'v{version}',
+  categoriesLabel: 'Categorias de comandos',
+  commandCount: { one: '{count} comando', many: '{count} de comandos', other: '{count} comandos' },
+  emptyCatalog: 'Nenhuma categoria disponível.',
+  back: 'Voltar',
+  categoryPlaceholder: 'A lista de comandos desta categoria chegará em breve.',
 }
