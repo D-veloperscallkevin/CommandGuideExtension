@@ -9,4 +9,5 @@ export const zhcn: Messages = {
   commandsLabel: '{category} 命令',
   riskCaution: '注意',
   riskDestructive: '破坏性',
+  sendToTerminalHint: '将命令写入终端但不执行',
 }

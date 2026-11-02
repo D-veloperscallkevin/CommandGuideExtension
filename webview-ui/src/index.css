@@ -124,7 +124,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  width: 100%;
   padding: 6px 20px;
+  border: 0;
+  border-radius: 0;
+  color: var(--vscode-foreground);
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.command:active {
+  color: var(--vscode-list-activeSelectionForeground, var(--vscode-foreground));
+  background: var(--vscode-list-activeSelectionBackground);
 }
 
 .command-header {
@@ -134,11 +147,24 @@ body {
   gap: 6px;
 }
 
+/* Icono de "enviar a la terminal": solo visible al pasar el ratón o con el foco. */
+.command-send {
+  display: inline-flex;
+  margin-inline-start: auto;
+  visibility: hidden;
+}
+
+.command:hover .command-send,
+.command:focus-visible .command-send {
+  visibility: visible;
+}
+
 .command-title {
   font-weight: 600;
 }
 
 .command-description {
+  display: block;
   margin: 0;
   color: var(--vscode-descriptionForeground);
 }

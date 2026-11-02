@@ -47,3 +47,46 @@ suite('Vista lateral', () => {
 		}
 	});
 });
+
+suite('Terminal', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
+			| vscode.Extension<DevCommandsApi>
+			| undefined;
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	async function closeAllTerminals(): Promise<void> {
+		const closing = vscode.window.terminals.map(
+			(t) => new Promise<void>((resolve) => {
+				const listener = vscode.window.onDidCloseTerminal((closed) => {
+					if (closed === t) {
+						listener.dispose();
+						resolve();
+					}
+				});
+				t.dispose();
+			}),
+		);
+		await Promise.all(closing);
+	}
+
+	setup(closeAllTerminals);
+	teardown(closeAllTerminals);
+
+	test('un id inexistente no crea ni escribe en ninguna terminal', async () => {
+		(await api()).sendToTerminal('git.nope');
+		await new Promise((resolve) => setTimeout(resolve, 300));
+		assert.strictEqual(vscode.window.terminals.length, 0);
+	});
+
+	test('sin terminales, enviar un comando crea la terminal "DevCommands"', async function () {
+		this.timeout(15_000);
+		const opened = nextEvent(vscode.window.onDidOpenTerminal, 10_000);
+		(await api()).sendToTerminal('git.status');
+		const terminal = await opened;
+		assert.strictEqual(terminal.name, 'DevCommands');
+		assert.strictEqual(vscode.window.terminals.length, 1);
+	});
+});

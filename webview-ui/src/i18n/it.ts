@@ -9,4 +9,5 @@ export const it: Messages = {
   commandsLabel: 'Comandi di {category}',
   riskCaution: 'Attenzione',
   riskDestructive: 'Distruttivo',
+  sendToTerminalHint: 'Scrive il comando nel terminale senza eseguirlo',
 }

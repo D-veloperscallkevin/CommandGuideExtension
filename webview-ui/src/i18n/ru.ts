@@ -9,4 +9,5 @@ export const ru: Messages = {
   commandsLabel: 'Команды: {category}',
   riskCaution: 'Осторожно',
   riskDestructive: 'Опасно',
+  sendToTerminalHint: 'Вставляет команду в терминал, не выполняя её',
 }

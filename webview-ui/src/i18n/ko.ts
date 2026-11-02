@@ -9,4 +9,5 @@ export const ko: Messages = {
   commandsLabel: '{category} 명령어',
   riskCaution: '주의',
   riskDestructive: '파괴적',
+  sendToTerminalHint: '명령어를 실행하지 않고 터미널에 입력합니다',
 }
