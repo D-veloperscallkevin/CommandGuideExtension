@@ -1,13 +1,17 @@
 import { bundledCatalog } from './index';
-import type { Catalog, Category, Command, Locale, LocalizedString, ShellId } from './types';
+import { buildSearchText } from './search';
+import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, Risk, ShellId } from './types';
 
-/** Idioma del catálogo a partir de `vscode.env.language`: español si empieza por "es", si no inglés. */
-export function resolveLocale(language: string): Locale {
-	return language.toLowerCase().startsWith('es') ? 'es' : 'en';
+export { resolveLocale } from '../i18n/locales';
+
+/** Texto en el idioma pedido o, si el catálogo no lo tiene, en inglés. */
+export function localize(text: LocalizedString, locale: Locale): string {
+	return text[locale] ?? text.en;
 }
 
-export function localize(text: LocalizedString, locale: Locale): string {
-	return text[locale];
+/** Tags en el idioma pedido o, si el catálogo no los tiene, en inglés. */
+export function localizeTags(tags: LocalizedTags, locale: Locale): readonly string[] {
+	return tags[locale] ?? tags.en;
 }
 
 /** Variante del comando para un shell: `shells[shell]` si existe, si no `command` (POSIX). */
@@ -22,6 +26,73 @@ export function buildExample(cmd: Command, locale: Locale, shell: ShellId): stri
 		/\$\{([A-Za-z][A-Za-z0-9_]*)\}/g,
 		(match, name: string) => placeholders.get(name) ?? match,
 	);
+}
+
+/** Lo que el webview necesita para mostrar un comando (ya traducido y con el ejemplo resuelto). */
+export interface CommandSummary {
+	readonly id: string;
+	readonly title: string;
+	readonly description: string;
+	readonly example: string;
+	readonly risk: Risk;
+	/** Texto normalizado para buscar: textos en en, es y el idioma activo, categoría y ejemplo. */
+	readonly searchText: string;
+}
+
+/** Lo que el webview necesita para mostrar una categoría y sus comandos (ya traducido). */
+export interface CategorySummary {
+	readonly id: string;
+	readonly title: string;
+	readonly icon: string;
+	readonly commands: readonly CommandSummary[];
+}
+
+/**
+ * Shell provisional para los ejemplos hasta que exista la detección real (change 2.1):
+ * PowerShell en Windows (el terminal por defecto de VS Code allí) y bash en el resto.
+ */
+export function defaultShellFor(platform: string): ShellId {
+	return platform === 'win32' ? 'powershell' : 'bash';
+}
+
+/**
+ * Resumen de las categorías en el orden recibido: textos en `locale` (fallback a `en`) y
+ * ejemplos construidos para `shell`. No incluye plantillas, parámetros ni tags.
+ */
+export function buildCategorySummaries(
+	categories: readonly Category[],
+	locale: Locale,
+	shell: ShellId,
+): CategorySummary[] {
+	// Se busca en los dos idiomas obligatorios del catálogo y en el activo (si es otro).
+	const searchLocales: readonly Locale[] = [...new Set<Locale>(['en', 'es', locale])];
+	return categories.map((c) => {
+		const categoryTitles = searchLocales.map((l) => localize(c.title, l));
+		return {
+			id: c.id,
+			title: localize(c.title, locale),
+			icon: c.icon,
+			commands: c.commands.map((cmd) => {
+				const example = buildExample(cmd, locale, shell);
+				return {
+					id: cmd.id,
+					title: localize(cmd.title, locale),
+					description: localize(cmd.description, locale),
+					example,
+					risk: cmd.risk,
+					searchText: buildSearchText([
+						...searchLocales.flatMap((l) => [
+							localize(cmd.title, l),
+							localize(cmd.description, l),
+							...localizeTags(cmd.tags, l),
+						]),
+						...categoryTitles,
+						example,
+					]),
+				};
+			}),
+		};
+	});
 }
 
 /** Consulta del catálogo. Sin acceso a disco, red ni a la API de VS Code. */

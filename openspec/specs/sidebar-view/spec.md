@@ -44,14 +44,14 @@ El contenido de la vista SHALL cargarse con una Content Security Policy que deni
 - **THEN** VS Code bloquea la carga
 
 ### Requirement: Interfaz inicial integrada con el tema y accesible
-Mientras no haya contenido funcional, la vista SHALL mostrar el nombre de la extensión, su versión y un indicador de carga, usando los colores y la tipografía del tema activo de VS Code (claro, oscuro y alto contraste). La interfaz MUST exponer su contenido a lectores de pantalla y ser navegable con teclado.
+Mientras carga su contenido, la vista SHALL mostrar un indicador de carga en el idioma activo. Toda la interfaz SHALL usar los colores y la tipografía del tema activo de VS Code (claro, oscuro y alto contraste). La interfaz MUST exponer su contenido a lectores de pantalla y ser navegable con teclado.
 
 #### Scenario: Tema oscuro y alto contraste
 - **WHEN** el usuario cambia entre un tema oscuro, uno claro y uno de alto contraste con la vista abierta
 - **THEN** la vista adopta los colores de cada tema sin recargarla
 
 #### Scenario: Lector de pantalla
-- **WHEN** un lector de pantalla recorre la vista
+- **WHEN** un lector de pantalla recorre la vista mientras carga
 - **THEN** anuncia una región con nombre "DevCommands" y el estado de carga
 
 ### Requirement: Funcionamiento en Windows y Linux
@@ -59,7 +59,7 @@ La vista SHALL cargarse y completar el handshake inicial tanto en Windows como e
 
 #### Scenario: Windows con PowerShell
 - **WHEN** se abre la vista en VS Code sobre Windows, con PowerShell como terminal por defecto
-- **THEN** la interfaz carga y muestra la versión de la extensión
+- **THEN** la interfaz carga y muestra las categorías del catálogo
 
 #### Scenario: Linux con bash
 - **WHEN** se ejecutan los tests de integración en Linux o WSL con bash y pantalla virtual

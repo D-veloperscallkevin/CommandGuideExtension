@@ -35,21 +35,41 @@
   },
   "definitions": {
     "LocalizedString": {
+      "description": "Texto visible: en y es obligatorios; el resto de idiomas, opcionales (se muestra en si faltan).",
       "type": "object",
       "additionalProperties": false,
       "required": ["en", "es"],
       "properties": {
         "en": { "type": "string", "minLength": 1 },
-        "es": { "type": "string", "minLength": 1 }
+        "es": { "type": "string", "minLength": 1 },
+        "pt-br": { "type": "string", "minLength": 1 },
+        "fr": { "type": "string", "minLength": 1 },
+        "de": { "type": "string", "minLength": 1 },
+        "it": { "type": "string", "minLength": 1 },
+        "ja": { "type": "string", "minLength": 1 },
+        "ko": { "type": "string", "minLength": 1 },
+        "zh-cn": { "type": "string", "minLength": 1 },
+        "zh-tw": { "type": "string", "minLength": 1 },
+        "ru": { "type": "string", "minLength": 1 }
       }
     },
     "LocalizedTags": {
+      "description": "Tags por idioma: en y es obligatorios; el resto, opcionales (se usan los de en si faltan).",
       "type": "object",
       "additionalProperties": false,
       "required": ["en", "es"],
       "properties": {
         "en": { "$ref": "#/definitions/TagList" },
-        "es": { "$ref": "#/definitions/TagList" }
+        "es": { "$ref": "#/definitions/TagList" },
+        "pt-br": { "$ref": "#/definitions/TagList" },
+        "fr": { "$ref": "#/definitions/TagList" },
+        "de": { "$ref": "#/definitions/TagList" },
+        "it": { "$ref": "#/definitions/TagList" },
+        "ja": { "$ref": "#/definitions/TagList" },
+        "ko": { "$ref": "#/definitions/TagList" },
+        "zh-cn": { "$ref": "#/definitions/TagList" },
+        "zh-tw": { "$ref": "#/definitions/TagList" },
+        "ru": { "$ref": "#/definitions/TagList" }
       }
     },
     "TagList": {

@@ -4,3 +4,5 @@ packages:
 allowBuilds:
   # El binario llega como dependencia opcional por plataforma; su postinstall solo lo comprueba.
   esbuild: false
+  # Dependencia de @vscode/vsce para firmar paquetes; empaquetar en local no la necesita.
+  '@vscode/vsce-sign': false

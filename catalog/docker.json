@@ -1,0 +1,1169 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "docker",
+  "title": {
+    "en": "Docker",
+    "es": "Docker",
+    "pt-br": "Docker",
+    "fr": "Docker",
+    "de": "Docker",
+    "it": "Docker",
+    "ja": "Docker",
+    "ko": "Docker",
+    "zh-cn": "Docker",
+    "zh-tw": "Docker",
+    "ru": "Docker"
+  },
+  "icon": "server-environment",
+  "order": 40,
+  "commands": [
+    {
+      "id": "docker.ps",
+      "title": {
+        "en": "List running containers",
+        "es": "Ver contenedores en ejecución",
+        "pt-br": "Listar contêineres em execução",
+        "fr": "Lister les conteneurs en cours",
+        "de": "Laufende Container anzeigen",
+        "it": "Elenca i container in esecuzione",
+        "ja": "実行中のコンテナーを一覧表示",
+        "ko": "실행 중인 컨테이너 목록",
+        "zh-cn": "列出运行中的容器",
+        "zh-tw": "列出執行中的容器",
+        "ru": "Запущенные контейнеры"
+      },
+      "description": {
+        "en": "Shows the running containers with their ports and status",
+        "es": "Muestra los contenedores en ejecución con sus puertos y estado",
+        "pt-br": "Mostra os contêineres em execução com suas portas e status",
+        "fr": "Affiche les conteneurs en cours avec leurs ports et leur état",
+        "de": "Zeigt die laufenden Container mit Ports und Status",
+        "it": "Mostra i container in esecuzione con porte e stato",
+        "ja": "実行中のコンテナーをポートと状態とともに表示します",
+        "ko": "실행 중인 컨테이너를 포트와 상태와 함께 표시합니다",
+        "zh-cn": "显示运行中的容器及其端口和状态",
+        "zh-tw": "顯示執行中的容器及其連接埠和狀態",
+        "ru": "Показывает запущенные контейнеры с портами и статусом"
+      },
+      "command": "docker ps",
+      "tags": {
+        "en": ["ps", "containers", "running"],
+        "es": ["ps", "contenedores", "ejecución"],
+        "pt-br": ["ps", "contêineres", "execução"],
+        "fr": ["ps", "conteneurs", "en cours"],
+        "de": ["ps", "Container", "laufend"],
+        "it": ["ps", "container", "esecuzione"],
+        "ja": ["ps", "コンテナー", "実行中"],
+        "ko": ["ps", "컨테이너", "실행 중"],
+        "zh-cn": ["ps", "容器", "运行"],
+        "zh-tw": ["ps", "容器", "執行"],
+        "ru": ["ps", "контейнеры", "запущенные"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/ls/"
+    },
+    {
+      "id": "docker.ps-all",
+      "title": {
+        "en": "List all containers",
+        "es": "Ver todos los contenedores",
+        "pt-br": "Listar todos os contêineres",
+        "fr": "Lister tous les conteneurs",
+        "de": "Alle Container anzeigen",
+        "it": "Elenca tutti i container",
+        "ja": "すべてのコンテナーを一覧表示",
+        "ko": "모든 컨테이너 목록",
+        "zh-cn": "列出所有容器",
+        "zh-tw": "列出所有容器",
+        "ru": "Все контейнеры"
+      },
+      "description": {
+        "en": "Shows all containers, including stopped ones",
+        "es": "Muestra todos los contenedores, también los detenidos",
+        "pt-br": "Mostra todos os contêineres, inclusive os parados",
+        "fr": "Affiche tous les conteneurs, y compris ceux arrêtés",
+        "de": "Zeigt alle Container, auch gestoppte",
+        "it": "Mostra tutti i container, anche quelli fermi",
+        "ja": "停止中を含むすべてのコンテナーを表示します",
+        "ko": "중지된 것을 포함한 모든 컨테이너를 표시합니다",
+        "zh-cn": "显示所有容器，包括已停止的",
+        "zh-tw": "顯示所有容器，包括已停止的",
+        "ru": "Показывает все контейнеры, включая остановленные"
+      },
+      "command": "docker ps -a",
+      "tags": {
+        "en": ["ps", "containers", "stopped"],
+        "es": ["ps", "contenedores", "detenidos"],
+        "pt-br": ["ps", "contêineres", "parados"],
+        "fr": ["ps", "conteneurs", "arrêtés"],
+        "de": ["ps", "Container", "gestoppt"],
+        "it": ["ps", "container", "fermi"],
+        "ja": ["ps", "コンテナー", "停止"],
+        "ko": ["ps", "컨테이너", "중지됨"],
+        "zh-cn": ["ps", "容器", "已停止"],
+        "zh-tw": ["ps", "容器", "已停止"],
+        "ru": ["ps", "контейнеры", "остановленные"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/ls/"
+    },
+    {
+      "id": "docker.images",
+      "title": {
+        "en": "List images",
+        "es": "Ver imágenes",
+        "pt-br": "Listar imagens",
+        "fr": "Lister les images",
+        "de": "Images anzeigen",
+        "it": "Elenca le immagini",
+        "ja": "イメージを一覧表示",
+        "ko": "이미지 목록",
+        "zh-cn": "列出镜像",
+        "zh-tw": "列出映像檔",
+        "ru": "Список образов"
+      },
+      "description": {
+        "en": "Shows the local images with their tag and size",
+        "es": "Muestra las imágenes locales con su tag y tamaño",
+        "pt-br": "Mostra as imagens locais com tag e tamanho",
+        "fr": "Affiche les images locales avec leur tag et leur taille",
+        "de": "Zeigt die lokalen Images mit Tag und Größe",
+        "it": "Mostra le immagini locali con tag e dimensione",
+        "ja": "ローカルのイメージをタグとサイズとともに表示します",
+        "ko": "로컬 이미지를 태그와 크기와 함께 표시합니다",
+        "zh-cn": "显示本地镜像及其标签和大小",
+        "zh-tw": "顯示本機映像檔及其標籤和大小",
+        "ru": "Показывает локальные образы с тегом и размером"
+      },
+      "command": "docker images",
+      "tags": {
+        "en": ["images", "list"],
+        "es": ["imágenes", "listar"],
+        "pt-br": ["imagens", "listar"],
+        "fr": ["images", "lister"],
+        "de": ["Images", "auflisten"],
+        "it": ["immagini", "elencare"],
+        "ja": ["イメージ", "一覧"],
+        "ko": ["이미지", "목록"],
+        "zh-cn": ["镜像", "列表"],
+        "zh-tw": ["映像檔", "清單"],
+        "ru": ["образы", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/image/ls/"
+    },
+    {
+      "id": "docker.pull",
+      "title": {
+        "en": "Pull an image",
+        "es": "Descargar una imagen",
+        "pt-br": "Baixar uma imagem",
+        "fr": "Télécharger une image",
+        "de": "Image herunterladen",
+        "it": "Scarica un'immagine",
+        "ja": "イメージをプル",
+        "ko": "이미지 가져오기",
+        "zh-cn": "拉取镜像",
+        "zh-tw": "拉取映像檔",
+        "ru": "Скачать образ"
+      },
+      "description": {
+        "en": "Downloads an image from Docker Hub or another registry",
+        "es": "Descarga una imagen de Docker Hub u otro registro",
+        "pt-br": "Baixa uma imagem do Docker Hub ou de outro registro",
+        "fr": "Télécharge une image depuis Docker Hub ou un autre registre",
+        "de": "Lädt ein Image von Docker Hub oder einer anderen Registry herunter",
+        "it": "Scarica un'immagine da Docker Hub o da un altro registry",
+        "ja": "Docker Hub などのレジストリからイメージをダウンロードします",
+        "ko": "Docker Hub나 다른 레지스트리에서 이미지를 내려받습니다",
+        "zh-cn": "从 Docker Hub 或其他镜像仓库下载镜像",
+        "zh-tw": "從 Docker Hub 或其他登錄檔下載映像檔",
+        "ru": "Скачивает образ из Docker Hub или другого реестра"
+      },
+      "command": "docker pull ${image}",
+      "params": [
+        {
+          "name": "image",
+          "label": {
+            "en": "Image",
+            "es": "Imagen",
+            "pt-br": "Imagem",
+            "fr": "Image",
+            "de": "Image",
+            "it": "Immagine",
+            "ja": "イメージ",
+            "ko": "이미지",
+            "zh-cn": "镜像",
+            "zh-tw": "映像檔",
+            "ru": "Образ"
+          },
+          "placeholder": {
+            "en": "node:22-alpine",
+            "es": "node:22-alpine",
+            "pt-br": "node:22-alpine",
+            "fr": "node:22-alpine",
+            "de": "node:22-alpine",
+            "it": "node:22-alpine",
+            "ja": "node:22-alpine",
+            "ko": "node:22-alpine",
+            "zh-cn": "node:22-alpine",
+            "zh-tw": "node:22-alpine",
+            "ru": "node:22-alpine"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pull", "download", "image"],
+        "es": ["pull", "descargar", "imagen"],
+        "pt-br": ["pull", "baixar", "imagem"],
+        "fr": ["pull", "télécharger", "image"],
+        "de": ["pull", "herunterladen", "Image"],
+        "it": ["pull", "scaricare", "immagine"],
+        "ja": ["プル", "ダウンロード", "イメージ"],
+        "ko": ["풀", "다운로드", "이미지"],
+        "zh-cn": ["拉取", "下载", "镜像"],
+        "zh-tw": ["拉取", "下載", "映像檔"],
+        "ru": ["pull", "скачать", "образ"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/image/pull/"
+    },
+    {
+      "id": "docker.build",
+      "title": {
+        "en": "Build an image",
+        "es": "Construir una imagen",
+        "pt-br": "Construir uma imagem",
+        "fr": "Construire une image",
+        "de": "Image bauen",
+        "it": "Crea un'immagine",
+        "ja": "イメージをビルド",
+        "ko": "이미지 빌드",
+        "zh-cn": "构建镜像",
+        "zh-tw": "建置映像檔",
+        "ru": "Собрать образ"
+      },
+      "description": {
+        "en": "Builds an image from the Dockerfile in the current folder and gives it a name",
+        "es": "Construye una imagen desde el Dockerfile de la carpeta actual y le pone nombre",
+        "pt-br": "Constrói uma imagem a partir do Dockerfile da pasta atual e dá um nome a ela",
+        "fr": "Construit une image à partir du Dockerfile du dossier courant et lui donne un nom",
+        "de": "Baut ein Image aus dem Dockerfile im aktuellen Ordner und benennt es",
+        "it": "Crea un'immagine dal Dockerfile della cartella corrente e le assegna un nome",
+        "ja": "現在のフォルダーの Dockerfile からイメージをビルドし、名前を付けます",
+        "ko": "현재 폴더의 Dockerfile로 이미지를 빌드하고 이름을 붙입니다",
+        "zh-cn": "根据当前文件夹的 Dockerfile 构建镜像并命名",
+        "zh-tw": "根據目前資料夾的 Dockerfile 建置映像檔並命名",
+        "ru": "Собирает образ из Dockerfile в текущей папке и даёт ему имя"
+      },
+      "command": "docker build -t ${image} .",
+      "params": [
+        {
+          "name": "image",
+          "label": {
+            "en": "Image",
+            "es": "Imagen",
+            "pt-br": "Imagem",
+            "fr": "Image",
+            "de": "Image",
+            "it": "Immagine",
+            "ja": "イメージ",
+            "ko": "이미지",
+            "zh-cn": "镜像",
+            "zh-tw": "映像檔",
+            "ru": "Образ"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["build", "image", "dockerfile"],
+        "es": ["construir", "imagen", "dockerfile"],
+        "pt-br": ["construir", "imagem", "dockerfile"],
+        "fr": ["construire", "image", "dockerfile"],
+        "de": ["bauen", "Image", "Dockerfile"],
+        "it": ["build", "immagine", "dockerfile"],
+        "ja": ["ビルド", "イメージ", "Dockerfile"],
+        "ko": ["빌드", "이미지", "Dockerfile"],
+        "zh-cn": ["构建", "镜像", "Dockerfile"],
+        "zh-tw": ["建置", "映像檔", "Dockerfile"],
+        "ru": ["сборка", "образ", "Dockerfile"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/buildx/build/"
+    },
+    {
+      "id": "docker.run-interactive",
+      "title": {
+        "en": "Run a temporary container",
+        "es": "Ejecutar un contenedor temporal",
+        "pt-br": "Executar um contêiner temporário",
+        "fr": "Lancer un conteneur temporaire",
+        "de": "Temporären Container starten",
+        "it": "Esegui un container temporaneo",
+        "ja": "一時的なコンテナーを実行",
+        "ko": "임시 컨테이너 실행",
+        "zh-cn": "运行临时容器",
+        "zh-tw": "執行暫時容器",
+        "ru": "Запустить временный контейнер"
+      },
+      "description": {
+        "en": "Starts an interactive container that is deleted when you exit",
+        "es": "Arranca un contenedor interactivo que se borra al salir",
+        "pt-br": "Inicia um contêiner interativo que é excluído ao sair",
+        "fr": "Démarre un conteneur interactif supprimé à la sortie",
+        "de": "Startet einen interaktiven Container, der beim Beenden gelöscht wird",
+        "it": "Avvia un container interattivo che viene eliminato all'uscita",
+        "ja": "終了すると削除される対話型コンテナーを起動します",
+        "ko": "종료하면 삭제되는 대화형 컨테이너를 시작합니다",
+        "zh-cn": "启动一个交互式容器，退出时自动删除",
+        "zh-tw": "啟動一個互動式容器，離開時自動刪除",
+        "ru": "Запускает интерактивный контейнер, который удаляется при выходе"
+      },
+      "command": "docker run -it --rm ${image}",
+      "params": [
+        {
+          "name": "image",
+          "label": {
+            "en": "Image",
+            "es": "Imagen",
+            "pt-br": "Imagem",
+            "fr": "Image",
+            "de": "Image",
+            "it": "Immagine",
+            "ja": "イメージ",
+            "ko": "이미지",
+            "zh-cn": "镜像",
+            "zh-tw": "映像檔",
+            "ru": "Образ"
+          },
+          "placeholder": {
+            "en": "node:22-alpine",
+            "es": "node:22-alpine",
+            "pt-br": "node:22-alpine",
+            "fr": "node:22-alpine",
+            "de": "node:22-alpine",
+            "it": "node:22-alpine",
+            "ja": "node:22-alpine",
+            "ko": "node:22-alpine",
+            "zh-cn": "node:22-alpine",
+            "zh-tw": "node:22-alpine",
+            "ru": "node:22-alpine"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["run", "interactive", "temporary"],
+        "es": ["ejecutar", "interactivo", "temporal"],
+        "pt-br": ["executar", "interativo", "temporário"],
+        "fr": ["lancer", "interactif", "temporaire"],
+        "de": ["starten", "interaktiv", "temporär"],
+        "it": ["eseguire", "interattivo", "temporaneo"],
+        "ja": ["実行", "対話", "一時"],
+        "ko": ["실행", "대화형", "임시"],
+        "zh-cn": ["运行", "交互", "临时"],
+        "zh-tw": ["執行", "互動", "暫時"],
+        "ru": ["запустить", "интерактивный", "временный"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/run/"
+    },
+    {
+      "id": "docker.run-detached",
+      "title": {
+        "en": "Run a container in the background",
+        "es": "Ejecutar un contenedor en segundo plano",
+        "pt-br": "Executar um contêiner em segundo plano",
+        "fr": "Lancer un conteneur en arrière-plan",
+        "de": "Container im Hintergrund starten",
+        "it": "Esegui un container in background",
+        "ja": "バックグラウンドでコンテナーを実行",
+        "ko": "백그라운드에서 컨테이너 실행",
+        "zh-cn": "在后台运行容器",
+        "zh-tw": "在背景執行容器",
+        "ru": "Запустить контейнер в фоне"
+      },
+      "description": {
+        "en": "Starts a named container in the background and publishes a port (host:container)",
+        "es": "Arranca un contenedor con nombre en segundo plano y publica un puerto (host:contenedor)",
+        "pt-br": "Inicia um contêiner com nome em segundo plano e publica uma porta (host:contêiner)",
+        "fr": "Démarre un conteneur nommé en arrière-plan et publie un port (hôte:conteneur)",
+        "de": "Startet einen benannten Container im Hintergrund und veröffentlicht einen Port (Host:Container)",
+        "it": "Avvia un container con nome in background e pubblica una porta (host:container)",
+        "ja": "名前付きコンテナーをバックグラウンドで起動し、ポートを公開します（ホスト:コンテナー）",
+        "ko": "이름 있는 컨테이너를 백그라운드에서 시작하고 포트를 게시합니다(호스트:컨테이너)",
+        "zh-cn": "在后台启动一个命名容器并发布端口（主机:容器）",
+        "zh-tw": "在背景啟動一個具名容器並發布連接埠（主機:容器）",
+        "ru": "Запускает именованный контейнер в фоне и публикует порт (хост:контейнер)"
+      },
+      "command": "docker run -d -p ${ports} --name ${name} ${image}",
+      "params": [
+        {
+          "name": "ports",
+          "label": {
+            "en": "Ports (host:container)",
+            "es": "Puertos (host:contenedor)",
+            "pt-br": "Portas (host:contêiner)",
+            "fr": "Ports (hôte:conteneur)",
+            "de": "Ports (Host:Container)",
+            "it": "Porte (host:container)",
+            "ja": "ポート（ホスト:コンテナー）",
+            "ko": "포트(호스트:컨테이너)",
+            "zh-cn": "端口（主机:容器）",
+            "zh-tw": "連接埠（主機:容器）",
+            "ru": "Порты (хост:контейнер)"
+          },
+          "placeholder": {
+            "en": "8080:80",
+            "es": "8080:80",
+            "pt-br": "8080:80",
+            "fr": "8080:80",
+            "de": "8080:80",
+            "it": "8080:80",
+            "ja": "8080:80",
+            "ko": "8080:80",
+            "zh-cn": "8080:80",
+            "zh-tw": "8080:80",
+            "ru": "8080:80"
+          }
+        },
+        {
+          "name": "name",
+          "label": {
+            "en": "Container name",
+            "es": "Nombre del contenedor",
+            "pt-br": "Nome do contêiner",
+            "fr": "Nom du conteneur",
+            "de": "Container-Name",
+            "it": "Nome del container",
+            "ja": "コンテナー名",
+            "ko": "컨테이너 이름",
+            "zh-cn": "容器名称",
+            "zh-tw": "容器名稱",
+            "ru": "Имя контейнера"
+          },
+          "placeholder": {
+            "en": "web",
+            "es": "web",
+            "pt-br": "web",
+            "fr": "web",
+            "de": "web",
+            "it": "web",
+            "ja": "web",
+            "ko": "web",
+            "zh-cn": "web",
+            "zh-tw": "web",
+            "ru": "web"
+          }
+        },
+        {
+          "name": "image",
+          "label": {
+            "en": "Image",
+            "es": "Imagen",
+            "pt-br": "Imagem",
+            "fr": "Image",
+            "de": "Image",
+            "it": "Immagine",
+            "ja": "イメージ",
+            "ko": "이미지",
+            "zh-cn": "镜像",
+            "zh-tw": "映像檔",
+            "ru": "Образ"
+          },
+          "placeholder": {
+            "en": "nginx:alpine",
+            "es": "nginx:alpine",
+            "pt-br": "nginx:alpine",
+            "fr": "nginx:alpine",
+            "de": "nginx:alpine",
+            "it": "nginx:alpine",
+            "ja": "nginx:alpine",
+            "ko": "nginx:alpine",
+            "zh-cn": "nginx:alpine",
+            "zh-tw": "nginx:alpine",
+            "ru": "nginx:alpine"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["run", "detached", "port"],
+        "es": ["ejecutar", "segundo plano", "puerto"],
+        "pt-br": ["executar", "segundo plano", "porta"],
+        "fr": ["lancer", "arrière-plan", "port"],
+        "de": ["starten", "Hintergrund", "Port"],
+        "it": ["eseguire", "background", "porta"],
+        "ja": ["実行", "バックグラウンド", "ポート"],
+        "ko": ["실행", "백그라운드", "포트"],
+        "zh-cn": ["运行", "后台", "端口"],
+        "zh-tw": ["執行", "背景", "連接埠"],
+        "ru": ["запустить", "фон", "порт"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/run/"
+    },
+    {
+      "id": "docker.logs",
+      "title": {
+        "en": "Follow container logs",
+        "es": "Seguir los logs de un contenedor",
+        "pt-br": "Acompanhar os logs de um contêiner",
+        "fr": "Suivre les logs d'un conteneur",
+        "de": "Container-Logs verfolgen",
+        "it": "Segui i log di un container",
+        "ja": "コンテナーのログを追跡",
+        "ko": "컨테이너 로그 따라가기",
+        "zh-cn": "跟踪容器日志",
+        "zh-tw": "追蹤容器記錄",
+        "ru": "Следить за логами контейнера"
+      },
+      "description": {
+        "en": "Shows the logs of a container and keeps printing new lines. Ctrl+C stops following",
+        "es": "Muestra los logs de un contenedor y sigue mostrando las líneas nuevas. Ctrl+C deja de seguirlos",
+        "pt-br": "Mostra os logs de um contêiner e continua mostrando as novas linhas. Ctrl+C para de acompanhar",
+        "fr": "Affiche les logs d'un conteneur et continue d'afficher les nouvelles lignes. Ctrl+C arrête le suivi",
+        "de": "Zeigt die Logs eines Containers und gibt neue Zeilen fortlaufend aus. Strg+C beendet das Verfolgen",
+        "it": "Mostra i log di un container e continua a stampare le nuove righe. Ctrl+C interrompe",
+        "ja": "コンテナーのログを表示し、新しい行を表示し続けます。Ctrl+C で追跡をやめます",
+        "ko": "컨테이너 로그를 보여 주고 새 줄을 계속 출력합니다. Ctrl+C로 중지합니다",
+        "zh-cn": "显示容器日志并持续输出新内容。按 Ctrl+C 停止跟踪",
+        "zh-tw": "顯示容器記錄並持續輸出新內容。按 Ctrl+C 停止追蹤",
+        "ru": "Показывает логи контейнера и продолжает выводить новые строки. Ctrl+C прекращает"
+      },
+      "command": "docker logs -f ${container}",
+      "params": [
+        {
+          "name": "container",
+          "label": {
+            "en": "Container",
+            "es": "Contenedor",
+            "pt-br": "Contêiner",
+            "fr": "Conteneur",
+            "de": "Container",
+            "it": "Container",
+            "ja": "コンテナー",
+            "ko": "컨테이너",
+            "zh-cn": "容器",
+            "zh-tw": "容器",
+            "ru": "Контейнер"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["logs", "follow"],
+        "es": ["logs", "seguir", "registros"],
+        "pt-br": ["logs", "acompanhar"],
+        "fr": ["logs", "suivre", "journaux"],
+        "de": ["Logs", "verfolgen"],
+        "it": ["log", "seguire"],
+        "ja": ["ログ", "追跡"],
+        "ko": ["로그", "따라가기"],
+        "zh-cn": ["日志", "跟踪"],
+        "zh-tw": ["記錄", "追蹤"],
+        "ru": ["логи", "следить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/logs/"
+    },
+    {
+      "id": "docker.exec-shell",
+      "title": {
+        "en": "Open a shell in a container",
+        "es": "Abrir una shell en un contenedor",
+        "pt-br": "Abrir um shell em um contêiner",
+        "fr": "Ouvrir un shell dans un conteneur",
+        "de": "Shell in einem Container öffnen",
+        "it": "Apri una shell in un container",
+        "ja": "コンテナーでシェルを開く",
+        "ko": "컨테이너에서 셸 열기",
+        "zh-cn": "在容器中打开 shell",
+        "zh-tw": "在容器中開啟 shell",
+        "ru": "Открыть shell в контейнере"
+      },
+      "description": {
+        "en": "Opens an interactive shell inside a running container",
+        "es": "Abre una shell interactiva dentro de un contenedor en ejecución",
+        "pt-br": "Abre um shell interativo dentro de um contêiner em execução",
+        "fr": "Ouvre un shell interactif à l'intérieur d'un conteneur en cours",
+        "de": "Öffnet eine interaktive Shell in einem laufenden Container",
+        "it": "Apre una shell interattiva all'interno di un container in esecuzione",
+        "ja": "実行中のコンテナー内で対話型シェルを開きます",
+        "ko": "실행 중인 컨테이너 안에서 대화형 셸을 엽니다",
+        "zh-cn": "在运行中的容器内打开交互式 shell",
+        "zh-tw": "在執行中的容器內開啟互動式 shell",
+        "ru": "Открывает интерактивный shell внутри запущенного контейнера"
+      },
+      "command": "docker exec -it ${container} sh",
+      "params": [
+        {
+          "name": "container",
+          "label": {
+            "en": "Container",
+            "es": "Contenedor",
+            "pt-br": "Contêiner",
+            "fr": "Conteneur",
+            "de": "Container",
+            "it": "Container",
+            "ja": "コンテナー",
+            "ko": "컨테이너",
+            "zh-cn": "容器",
+            "zh-tw": "容器",
+            "ru": "Контейнер"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["exec", "shell", "enter"],
+        "es": ["exec", "shell", "entrar"],
+        "pt-br": ["exec", "shell", "entrar"],
+        "fr": ["exec", "shell", "entrer"],
+        "de": ["exec", "Shell", "betreten"],
+        "it": ["exec", "shell", "entrare"],
+        "ja": ["exec", "シェル"],
+        "ko": ["exec", "셸"],
+        "zh-cn": ["exec", "shell", "进入"],
+        "zh-tw": ["exec", "shell", "進入"],
+        "ru": ["exec", "shell", "войти"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/exec/"
+    },
+    {
+      "id": "docker.stop",
+      "title": {
+        "en": "Stop a container",
+        "es": "Detener un contenedor",
+        "pt-br": "Parar um contêiner",
+        "fr": "Arrêter un conteneur",
+        "de": "Container stoppen",
+        "it": "Ferma un container",
+        "ja": "コンテナーを停止",
+        "ko": "컨테이너 중지",
+        "zh-cn": "停止容器",
+        "zh-tw": "停止容器",
+        "ru": "Остановить контейнер"
+      },
+      "description": {
+        "en": "Stops a running container. It can be started again with docker start",
+        "es": "Detiene un contenedor en ejecución. Se puede volver a arrancar con docker start",
+        "pt-br": "Para um contêiner em execução. Pode ser iniciado de novo com docker start",
+        "fr": "Arrête un conteneur en cours. Il peut être relancé avec docker start",
+        "de": "Stoppt einen laufenden Container. Mit docker start lässt er sich wieder starten",
+        "it": "Ferma un container in esecuzione. Si può riavviare con docker start",
+        "ja": "実行中のコンテナーを停止します。docker start で再開できます",
+        "ko": "실행 중인 컨테이너를 중지합니다. docker start로 다시 시작할 수 있습니다",
+        "zh-cn": "停止运行中的容器。可用 docker start 再次启动",
+        "zh-tw": "停止執行中的容器。可用 docker start 再次啟動",
+        "ru": "Останавливает запущенный контейнер. Его можно снова запустить через docker start"
+      },
+      "command": "docker stop ${container}",
+      "params": [
+        {
+          "name": "container",
+          "label": {
+            "en": "Container",
+            "es": "Contenedor",
+            "pt-br": "Contêiner",
+            "fr": "Conteneur",
+            "de": "Container",
+            "it": "Container",
+            "ja": "コンテナー",
+            "ko": "컨테이너",
+            "zh-cn": "容器",
+            "zh-tw": "容器",
+            "ru": "Контейнер"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["stop"],
+        "es": ["detener", "parar"],
+        "pt-br": ["parar"],
+        "fr": ["arrêter"],
+        "de": ["stoppen", "anhalten"],
+        "it": ["fermare"],
+        "ja": ["停止"],
+        "ko": ["중지"],
+        "zh-cn": ["停止"],
+        "zh-tw": ["停止"],
+        "ru": ["остановить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/stop/"
+    },
+    {
+      "id": "docker.rm",
+      "title": {
+        "en": "Remove a container",
+        "es": "Borrar un contenedor",
+        "pt-br": "Remover um contêiner",
+        "fr": "Supprimer un conteneur",
+        "de": "Container entfernen",
+        "it": "Rimuovi un container",
+        "ja": "コンテナーを削除",
+        "ko": "컨테이너 삭제",
+        "zh-cn": "删除容器",
+        "zh-tw": "刪除容器",
+        "ru": "Удалить контейнер"
+      },
+      "description": {
+        "en": "Deletes a stopped container and the changes made inside it",
+        "es": "Borra un contenedor detenido y los cambios hechos dentro de él",
+        "pt-br": "Exclui um contêiner parado e as alterações feitas dentro dele",
+        "fr": "Supprime un conteneur arrêté et les modifications faites à l’intérieur",
+        "de": "Löscht einen gestoppten Container und die darin gemachten Änderungen",
+        "it": "Elimina un container fermo e le modifiche fatte al suo interno",
+        "ja": "停止中のコンテナーと、その中で行った変更を削除します",
+        "ko": "중지된 컨테이너와 그 안에서 한 변경 사항을 삭제합니다",
+        "zh-cn": "删除已停止的容器及其内部所做的更改",
+        "zh-tw": "刪除已停止的容器及其內部所做的變更",
+        "ru": "Удаляет остановленный контейнер и изменения, сделанные внутри него"
+      },
+      "command": "docker rm ${container}",
+      "params": [
+        {
+          "name": "container",
+          "label": {
+            "en": "Container",
+            "es": "Contenedor",
+            "pt-br": "Contêiner",
+            "fr": "Conteneur",
+            "de": "Container",
+            "it": "Container",
+            "ja": "コンテナー",
+            "ko": "컨테이너",
+            "zh-cn": "容器",
+            "zh-tw": "容器",
+            "ru": "Контейнер"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rm", "remove", "container"],
+        "es": ["rm", "borrar", "contenedor"],
+        "pt-br": ["rm", "remover", "contêiner"],
+        "fr": ["rm", "supprimer", "conteneur"],
+        "de": ["rm", "entfernen", "Container"],
+        "it": ["rm", "rimuovere", "container"],
+        "ja": ["rm", "削除", "コンテナー"],
+        "ko": ["rm", "삭제", "컨테이너"],
+        "zh-cn": ["rm", "删除", "容器"],
+        "zh-tw": ["rm", "刪除", "容器"],
+        "ru": ["rm", "удалить", "контейнер"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.docker.com/reference/cli/docker/container/rm/"
+    },
+    {
+      "id": "docker.rmi",
+      "title": {
+        "en": "Remove an image",
+        "es": "Borrar una imagen",
+        "pt-br": "Remover uma imagem",
+        "fr": "Supprimer une image",
+        "de": "Image entfernen",
+        "it": "Rimuovi un'immagine",
+        "ja": "イメージを削除",
+        "ko": "이미지 삭제",
+        "zh-cn": "删除镜像",
+        "zh-tw": "刪除映像檔",
+        "ru": "Удалить образ"
+      },
+      "description": {
+        "en": "Deletes a local image. It can be pulled or built again",
+        "es": "Borra una imagen local. Se puede volver a descargar o construir",
+        "pt-br": "Exclui uma imagem local. Pode ser baixada ou construída de novo",
+        "fr": "Supprime une image locale. Elle peut être retéléchargée ou reconstruite",
+        "de": "Löscht ein lokales Image. Es lässt sich erneut herunterladen oder bauen",
+        "it": "Elimina un'immagine locale. Si può riscaricare o ricreare",
+        "ja": "ローカルのイメージを削除します。再度プルまたはビルドできます",
+        "ko": "로컬 이미지를 삭제합니다. 다시 내려받거나 빌드할 수 있습니다",
+        "zh-cn": "删除本地镜像。之后可重新拉取或构建",
+        "zh-tw": "刪除本機映像檔。之後可重新拉取或建置",
+        "ru": "Удаляет локальный образ. Его можно снова скачать или собрать"
+      },
+      "command": "docker rmi ${image}",
+      "params": [
+        {
+          "name": "image",
+          "label": {
+            "en": "Image",
+            "es": "Imagen",
+            "pt-br": "Imagem",
+            "fr": "Image",
+            "de": "Image",
+            "it": "Immagine",
+            "ja": "イメージ",
+            "ko": "이미지",
+            "zh-cn": "镜像",
+            "zh-tw": "映像檔",
+            "ru": "Образ"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rmi", "remove", "image"],
+        "es": ["rmi", "borrar", "imagen"],
+        "pt-br": ["rmi", "remover", "imagem"],
+        "fr": ["rmi", "supprimer", "image"],
+        "de": ["rmi", "entfernen", "Image"],
+        "it": ["rmi", "rimuovere", "immagine"],
+        "ja": ["rmi", "削除", "イメージ"],
+        "ko": ["rmi", "삭제", "이미지"],
+        "zh-cn": ["rmi", "删除", "镜像"],
+        "zh-tw": ["rmi", "刪除", "映像檔"],
+        "ru": ["rmi", "удалить", "образ"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.docker.com/reference/cli/docker/image/rm/"
+    },
+    {
+      "id": "docker.compose-up",
+      "title": {
+        "en": "Start Compose services",
+        "es": "Levantar los servicios de Compose",
+        "pt-br": "Subir os serviços do Compose",
+        "fr": "Démarrer les services Compose",
+        "de": "Compose-Dienste starten",
+        "it": "Avvia i servizi di Compose",
+        "ja": "Compose のサービスを起動",
+        "ko": "Compose 서비스 시작",
+        "zh-cn": "启动 Compose 服务",
+        "zh-tw": "啟動 Compose 服務",
+        "ru": "Запустить сервисы Compose"
+      },
+      "description": {
+        "en": "Creates and starts in the background the services of compose.yaml",
+        "es": "Crea y arranca en segundo plano los servicios de compose.yaml",
+        "pt-br": "Cria e inicia em segundo plano os serviços do compose.yaml",
+        "fr": "Crée et démarre en arrière-plan les services de compose.yaml",
+        "de": "Erstellt und startet die Dienste aus compose.yaml im Hintergrund",
+        "it": "Crea e avvia in background i servizi di compose.yaml",
+        "ja": "compose.yaml のサービスを作成し、バックグラウンドで起動します",
+        "ko": "compose.yaml의 서비스를 만들고 백그라운드에서 시작합니다",
+        "zh-cn": "创建并在后台启动 compose.yaml 中的服务",
+        "zh-tw": "建立並在背景啟動 compose.yaml 中的服務",
+        "ru": "Создаёт и запускает в фоне сервисы из compose.yaml"
+      },
+      "command": "docker compose up -d",
+      "tags": {
+        "en": ["compose", "up", "start"],
+        "es": ["compose", "levantar", "arrancar"],
+        "pt-br": ["compose", "subir", "iniciar"],
+        "fr": ["compose", "démarrer"],
+        "de": ["compose", "starten"],
+        "it": ["compose", "avviare"],
+        "ja": ["compose", "起動"],
+        "ko": ["compose", "시작"],
+        "zh-cn": ["compose", "启动"],
+        "zh-tw": ["compose", "啟動"],
+        "ru": ["compose", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/compose/up/"
+    },
+    {
+      "id": "docker.compose-down",
+      "title": {
+        "en": "Stop Compose services",
+        "es": "Bajar los servicios de Compose",
+        "pt-br": "Derrubar os serviços do Compose",
+        "fr": "Arrêter les services Compose",
+        "de": "Compose-Dienste beenden",
+        "it": "Arresta i servizi di Compose",
+        "ja": "Compose のサービスを停止",
+        "ko": "Compose 서비스 중지",
+        "zh-cn": "停止 Compose 服务",
+        "zh-tw": "停止 Compose 服務",
+        "ru": "Остановить сервисы Compose"
+      },
+      "description": {
+        "en": "Stops and removes the containers and networks of compose.yaml. Volumes are kept",
+        "es": "Detiene y borra los contenedores y redes de compose.yaml. Los volúmenes se conservan",
+        "pt-br": "Para e remove os contêineres e redes do compose.yaml. Os volumes são mantidos",
+        "fr": "Arrête et supprime les conteneurs et réseaux de compose.yaml. Les volumes sont conservés",
+        "de": "Stoppt und entfernt die Container und Netzwerke aus compose.yaml. Volumes bleiben erhalten",
+        "it": "Ferma e rimuove i container e le reti di compose.yaml. I volumi restano",
+        "ja": "compose.yaml のコンテナーとネットワークを停止して削除します。ボリュームは残ります",
+        "ko": "compose.yaml의 컨테이너와 네트워크를 중지하고 삭제합니다. 볼륨은 유지됩니다",
+        "zh-cn": "停止并删除 compose.yaml 中的容器和网络。卷会保留",
+        "zh-tw": "停止並刪除 compose.yaml 中的容器和網路。磁碟區會保留",
+        "ru": "Останавливает и удаляет контейнеры и сети из compose.yaml. Тома сохраняются"
+      },
+      "command": "docker compose down",
+      "tags": {
+        "en": ["compose", "down", "stop"],
+        "es": ["compose", "bajar", "detener"],
+        "pt-br": ["compose", "derrubar", "parar"],
+        "fr": ["compose", "arrêter"],
+        "de": ["compose", "beenden"],
+        "it": ["compose", "arrestare"],
+        "ja": ["compose", "停止"],
+        "ko": ["compose", "중지"],
+        "zh-cn": ["compose", "停止"],
+        "zh-tw": ["compose", "停止"],
+        "ru": ["compose", "остановить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/compose/down/"
+    },
+    {
+      "id": "docker.compose-down-volumes",
+      "title": {
+        "en": "Stop Compose and delete volumes",
+        "es": "Bajar Compose y borrar volúmenes",
+        "pt-br": "Derrubar o Compose e excluir volumes",
+        "fr": "Arrêter Compose et supprimer les volumes",
+        "de": "Compose beenden und Volumes löschen",
+        "it": "Arresta Compose ed elimina i volumi",
+        "ja": "Compose を停止してボリュームを削除",
+        "ko": "Compose 중지 및 볼륨 삭제",
+        "zh-cn": "停止 Compose 并删除卷",
+        "zh-tw": "停止 Compose 並刪除磁碟區",
+        "ru": "Остановить Compose и удалить тома"
+      },
+      "description": {
+        "en": "Like docker compose down, but also deletes the volumes. Their data (such as databases) is lost",
+        "es": "Como docker compose down, pero también borra los volúmenes. Se pierden sus datos (como bases de datos)",
+        "pt-br": "Como docker compose down, mas também exclui os volumes. Os dados (como bancos de dados) são perdidos",
+        "fr": "Comme docker compose down, mais supprime aussi les volumes. Leurs données (bases de données…) sont perdues",
+        "de": "Wie docker compose down, löscht aber auch die Volumes. Ihre Daten (etwa Datenbanken) gehen verloren",
+        "it": "Come docker compose down, ma elimina anche i volumi. I loro dati (come i database) vanno persi",
+        "ja": "docker compose down と同じですが、ボリュームも削除します。データベースなどのデータは失われます",
+        "ko": "docker compose down과 같지만 볼륨도 삭제합니다. 데이터베이스 같은 데이터가 사라집니다",
+        "zh-cn": "与 docker compose down 相同，但也会删除卷。其中的数据（如数据库）会丢失",
+        "zh-tw": "與 docker compose down 相同，但也會刪除磁碟區。其中的資料（如資料庫）會遺失",
+        "ru": "Как docker compose down, но ещё и удаляет тома. Их данные (например, базы данных) теряются"
+      },
+      "command": "docker compose down -v",
+      "tags": {
+        "en": ["compose", "volumes", "delete"],
+        "es": ["compose", "volúmenes", "borrar"],
+        "pt-br": ["compose", "volumes", "excluir"],
+        "fr": ["compose", "volumes", "supprimer"],
+        "de": ["compose", "Volumes", "löschen"],
+        "it": ["compose", "volumi", "eliminare"],
+        "ja": ["compose", "ボリューム", "削除"],
+        "ko": ["compose", "볼륨", "삭제"],
+        "zh-cn": ["compose", "卷", "删除"],
+        "zh-tw": ["compose", "磁碟區", "刪除"],
+        "ru": ["compose", "тома", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://docs.docker.com/reference/cli/docker/compose/down/"
+    },
+    {
+      "id": "docker.compose-logs",
+      "title": {
+        "en": "Follow Compose logs",
+        "es": "Seguir los logs de Compose",
+        "pt-br": "Acompanhar os logs do Compose",
+        "fr": "Suivre les logs Compose",
+        "de": "Compose-Logs verfolgen",
+        "it": "Segui i log di Compose",
+        "ja": "Compose のログを追跡",
+        "ko": "Compose 로그 따라가기",
+        "zh-cn": "跟踪 Compose 日志",
+        "zh-tw": "追蹤 Compose 記錄",
+        "ru": "Следить за логами Compose"
+      },
+      "description": {
+        "en": "Shows the logs of all Compose services and keeps printing new lines",
+        "es": "Muestra los logs de todos los servicios de Compose y sigue mostrando las líneas nuevas",
+        "pt-br": "Mostra os logs de todos os serviços do Compose e continua mostrando as novas linhas",
+        "fr": "Affiche les logs de tous les services Compose et continue d'afficher les nouvelles lignes",
+        "de": "Zeigt die Logs aller Compose-Dienste und gibt neue Zeilen fortlaufend aus",
+        "it": "Mostra i log di tutti i servizi di Compose e continua a stampare le nuove righe",
+        "ja": "すべての Compose サービスのログを表示し、新しい行を表示し続けます",
+        "ko": "모든 Compose 서비스의 로그를 보여 주고 새 줄을 계속 출력합니다",
+        "zh-cn": "显示所有 Compose 服务的日志并持续输出新内容",
+        "zh-tw": "顯示所有 Compose 服務的記錄並持續輸出新內容",
+        "ru": "Показывает логи всех сервисов Compose и продолжает выводить новые строки"
+      },
+      "command": "docker compose logs -f",
+      "tags": {
+        "en": ["compose", "logs", "follow"],
+        "es": ["compose", "logs", "seguir"],
+        "pt-br": ["compose", "logs", "acompanhar"],
+        "fr": ["compose", "logs", "suivre"],
+        "de": ["compose", "Logs", "verfolgen"],
+        "it": ["compose", "log", "seguire"],
+        "ja": ["compose", "ログ", "追跡"],
+        "ko": ["compose", "로그", "따라가기"],
+        "zh-cn": ["compose", "日志", "跟踪"],
+        "zh-tw": ["compose", "記錄", "追蹤"],
+        "ru": ["compose", "логи", "следить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/compose/logs/"
+    },
+    {
+      "id": "docker.compose-build",
+      "title": {
+        "en": "Build Compose services",
+        "es": "Construir los servicios de Compose",
+        "pt-br": "Construir os serviços do Compose",
+        "fr": "Construire les services Compose",
+        "de": "Compose-Dienste bauen",
+        "it": "Crea i servizi di Compose",
+        "ja": "Compose のサービスをビルド",
+        "ko": "Compose 서비스 빌드",
+        "zh-cn": "构建 Compose 服务",
+        "zh-tw": "建置 Compose 服務",
+        "ru": "Собрать сервисы Compose"
+      },
+      "description": {
+        "en": "Builds or rebuilds the images of the services that have a build section",
+        "es": "Construye o reconstruye las imágenes de los servicios que tienen sección build",
+        "pt-br": "Constrói ou reconstrói as imagens dos serviços que têm seção build",
+        "fr": "Construit ou reconstruit les images des services qui ont une section build",
+        "de": "Baut die Images der Dienste mit build-Abschnitt (neu)",
+        "it": "Crea o ricrea le immagini dei servizi che hanno una sezione build",
+        "ja": "build セクションを持つサービスのイメージをビルドまたは再ビルドします",
+        "ko": "build 섹션이 있는 서비스의 이미지를 빌드하거나 다시 빌드합니다",
+        "zh-cn": "构建或重新构建带有 build 配置的服务镜像",
+        "zh-tw": "建置或重新建置具有 build 設定的服務映像檔",
+        "ru": "Собирает или пересобирает образы сервисов с секцией build"
+      },
+      "command": "docker compose build",
+      "tags": {
+        "en": ["compose", "build", "rebuild"],
+        "es": ["compose", "construir", "reconstruir"],
+        "pt-br": ["compose", "construir", "reconstruir"],
+        "fr": ["compose", "construire", "reconstruire"],
+        "de": ["compose", "bauen", "neu bauen"],
+        "it": ["compose", "build", "ricreare"],
+        "ja": ["compose", "ビルド", "再ビルド"],
+        "ko": ["compose", "빌드", "재빌드"],
+        "zh-cn": ["compose", "构建", "重建"],
+        "zh-tw": ["compose", "建置", "重建"],
+        "ru": ["compose", "сборка", "пересборка"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.docker.com/reference/cli/docker/compose/build/"
+    },
+    {
+      "id": "docker.system-prune",
+      "title": {
+        "en": "Clean up everything unused",
+        "es": "Limpiar todo lo que no se usa",
+        "pt-br": "Limpar tudo o que não é usado",
+        "fr": "Nettoyer tout ce qui est inutilisé",
+        "de": "Alles Ungenutzte aufräumen",
+        "it": "Pulisci tutto ciò che non è usato",
+        "ja": "未使用のものをすべて削除",
+        "ko": "사용하지 않는 항목 모두 정리",
+        "zh-cn": "清理所有未使用的资源",
+        "zh-tw": "清理所有未使用的資源",
+        "ru": "Удалить всё неиспользуемое"
+      },
+      "description": {
+        "en": "Deletes stopped containers, unused networks, all unused images and the build cache",
+        "es": "Borra los contenedores detenidos, las redes sin uso, todas las imágenes sin uso y la caché de build",
+        "pt-br": "Exclui contêineres parados, redes sem uso, todas as imagens sem uso e o cache de build",
+        "fr": "Supprime les conteneurs arrêtés, les réseaux inutilisés, toutes les images inutilisées et le cache de build",
+        "de": "Löscht gestoppte Container, ungenutzte Netzwerke, alle ungenutzten Images und den Build-Cache",
+        "it": "Elimina i container fermi, le reti inutilizzate, tutte le immagini inutilizzate e la cache di build",
+        "ja": "停止中のコンテナー、未使用のネットワーク、未使用のすべてのイメージ、ビルドキャッシュを削除します",
+        "ko": "중지된 컨테이너, 사용하지 않는 네트워크, 사용하지 않는 모든 이미지와 빌드 캐시를 삭제합니다",
+        "zh-cn": "删除已停止的容器、未使用的网络、所有未使用的镜像和构建缓存",
+        "zh-tw": "刪除已停止的容器、未使用的網路、所有未使用的映像檔和建置快取",
+        "ru": "Удаляет остановленные контейнеры, неиспользуемые сети, все неиспользуемые образы и кэш сборки"
+      },
+      "command": "docker system prune -a",
+      "tags": {
+        "en": ["prune", "clean", "disk space"],
+        "es": ["prune", "limpiar", "espacio en disco"],
+        "pt-br": ["prune", "limpar", "espaço em disco"],
+        "fr": ["prune", "nettoyer", "espace disque"],
+        "de": ["prune", "aufräumen", "Speicherplatz"],
+        "it": ["prune", "pulire", "spazio su disco"],
+        "ja": ["prune", "削除", "ディスク容量"],
+        "ko": ["prune", "정리", "디스크 공간"],
+        "zh-cn": ["prune", "清理", "磁盘空间"],
+        "zh-tw": ["prune", "清理", "磁碟空間"],
+        "ru": ["prune", "очистить", "место на диске"]
+      },
+      "risk": "destructive",
+      "docs": "https://docs.docker.com/reference/cli/docker/system/prune/"
+    }
+  ]
+}

@@ -34,7 +34,7 @@ El MVP cubre exactamente lo que pediste: categorías, lista de comandos y clic q
 | Workflows (secuencias) | Un clic envía varios comandos en orden (ej. "nueva feature": checkout develop, pull, crear rama) | v2 |
 | Packs importables | Exportar/importar colecciones en JSON para compartir con un equipo | v2 |
 | Enlace a docs oficiales | Cada comando enlaza a su documentación | v2 |
-| i18n | Interfaz en español e inglés (`vscode.l10n` + diccionario del webview). El catálogo ya es bilingüe desde `catalog-schema` | v1 |
+| i18n | Interfaz en 11 idiomas: en, es, pt-br, fr, de, it, ja, ko, zh-cn, zh-tw y ru (`vscode.l10n` + diccionario del webview). Catálogo con `en` y `es` obligatorios y el resto opcionales con fallback a inglés | v1 |
 
 Fuera de alcance por ahora: ejecutar comandos automáticamente, sincronización en la nube y comandos generados por IA. Se pueden reconsiderar después de la v2.
 
@@ -151,10 +151,12 @@ Los hotfix son la única excepción: salen de `main` y después se fusionan de v
 | Rama | Sale de | Se fusiona en | Verificación (local) |
 | --- | --- | --- | --- |
 | `feature/<change>` | `develop` | `develop` (PR, squash) | `pnpm run verify` (hook pre-push) |
-| `develop` | — | `staging` (PR de release al cerrar una fase) | `verify` en Windows + `verify` en WSL/Linux |
-| `staging` | — | `main` (PR) | + `vsce package --no-dependencies` en local y prueba manual del `.vsix`; opcional `vsce publish --pre-release` |
+| `develop` | — | `staging` (PR de release al cerrar una fase, **merge commit**) | `verify` en Windows + `verify` en WSL/Linux |
+| `staging` | — | `main` (PR, **merge commit**) | + `vsce package --no-dependencies` en local y prueba manual del `.vsix`; opcional `vsce publish --pre-release` |
 | `main` | — | — | tras crear el tag `vX.Y.Z`: publicación manual con `vsce publish --no-dependencies` y `ovsx publish` |
 | `hotfix/<bug>` | `main` | `main` y `develop` | `verify` en Windows + `verify` en WSL/Linux |
+
+**Método de merge:** squash solo en los PR de features hacia `develop`. Las releases (`develop → staging`, `staging → main`) y las sincronizaciones de vuelta a `develop` usan **"Create a merge commit"**: con squash, la rama destino recibe un commit que no existe en la de origen y el historial se separa.
 
 **Convenciones**
 
@@ -249,14 +251,14 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 
 | # | Change | Qué entrega |
 | --- | --- | --- |
-| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) para que todas las vistas nazcan bilingües |
-| 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA |
-| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` |
-| 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` |
-| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando |
-| 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías |
-| 1.7 | `catalog-content` | Al menos 5 categorías con 15 comandos cada una (Git, npm/pnpm, Node, Docker, Linux/Bash o PowerShell) |
-| 1.8 | `release-pipeline` | Script local `pnpm run release:package`: `vsce package --no-dependencies` y control de menos de 2 MB. Pruebas manuales del `.vsix` en PowerShell y en WSL/Linux |
+| 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) en 11 idiomas, para que todas las vistas nazcan traducidas. Catálogo con idiomas opcionales ✅ |
+| 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA ✅ |
+| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` ✅ |
+| 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` ✅ |
+| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando ✅ |
+| 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías ✅ |
+| 1.7 | `catalog-content` | Al menos 5 categorías con 15 comandos cada una (Git, npm/pnpm, Node, Docker, Linux/Bash o PowerShell) ✅ |
+| 1.8 | `release-pipeline` | Script local `pnpm run release:package`: `vsce package --no-dependencies` y control de menos de 2 MB. Pruebas manuales del `.vsix` en PowerShell y en WSL/Linux ✅ |
 
 ### Fase 2: v1.0.0 pública
 
@@ -285,7 +287,7 @@ Cada change sale en su propia versión menor y el orden puede cambiar según el 
 
 Decisiones que hay que tomar antes del change que las necesita:
 - **Antes de `custom-commands` (2.6):** guardar en `settings.json` o en `.devcommands.json` por proyecto.
-- **Antes de `marketplace-release` (2.9):** nombre definitivo, publisher y licencia.
+- **Antes de `marketplace-release` (2.9):** nombre visible definitivo y licencia. El publisher ya está decidido: `aguilardigital` (id `aguilardigital.devcommands`).
 
 Una fase se cierra con un PR de release `develop → staging`. Antes de abrirlo, verifica en Linux desde WSL, con el repo clonado dentro de `~/` (no en `/mnt/c`, porque los binarios de esbuild, rollup y oxlint son distintos por SO):
 
@@ -302,6 +304,13 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - **Fase 2 → v1.0.0 pública:** parámetros, favoritos y comandos propios funcionan. Los comandos destructivos piden confirmación. Publicada en el Marketplace y en Open VSX con README, capturas y CHANGELOG.
 - **Fase 3 → v2.x:** se publica por features, sin una puerta grande. Cada change sale en su propia versión menor.
 
+**Empaquetado y prueba del `.vsix`** (antes del PR `staging → main`):
+
+1. `pnpm run release:package`. Genera `devcommands-<versión>.vsix` en la raíz (pre-release mientras la versión sea `0.x`) y falla si pesa 2 MB o más o si incluye archivos no permitidos.
+2. Windows: `code --install-extension devcommands-<versión>.vsix --force`. En una ventana normal de VS Code (no F5), comprueba la vista, la búsqueda, copiar y enviar un comando a una terminal PowerShell.
+3. WSL: abre una carpeta con Remote-WSL y, en Extensions › "…" › "Install from VSIX…", instala el mismo `.vsix` en WSL. Comprueba que los ejemplos salen en bash y que enviar un comando a una terminal bash funciona.
+4. Anota en el PR el tamaño del `.vsix` y ambas pruebas. Para quitar la versión de prueba: `code --uninstall-extension aguilardigital.devcommands`.
+
 **Ciclo de cada change**
 
 1. `git switch develop && git pull && git switch -c feature/<change>`
@@ -316,9 +325,17 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `catalog-schema` (0.1) fusionado en `develop`
 - [x] `ci-setup` (0.2): verificación local con hook pre-push y migración a pnpm
 - [x] `webview-shell` (0.3): vista lateral con webview seguro y handshake
-- [ ] PR de release `develop → staging` para cerrar la Fase 0
+- [x] PR de release `develop → staging` para cerrar la Fase 0
+- [x] `ui-i18n` (1.1): interfaz en 11 idiomas
+- [x] `category-view` (1.2): lista de categorías con navegación, teclado y ARIA
+- [x] `command-list` (1.3): lista de comandos con ejemplo, riesgo y estado persistido
+- [x] `send-to-terminal` (1.4): clic en un comando lo escribe en la terminal sin ejecutarlo
+- [x] `copy-to-clipboard` (1.5): botón de copiar y `Ctrl+C`/`Cmd+C` sobre un comando
+- [x] `global-search` (1.6): búsqueda en todas las categorías, en inglés y español, sin distinguir tildes
+- [x] `catalog-content` (1.7): 6 categorías (Git, npm, pnpm, Node.js, Docker y Terminal) con 108 comandos en 11 idiomas
+- [x] `release-pipeline` (1.8): `pnpm run release:package` genera el `.vsix` pre-release (`aguilardigital.devcommands` 0.1.0) y controla su tamaño y contenido
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
-- [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
+- [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 
 Preguntas abiertas: la licencia (MIT o propietaria) y si los comandos personalizados se guardan en `settings.json` o en un archivo `.devcommands.json` por proyecto.
 

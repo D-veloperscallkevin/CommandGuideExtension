@@ -1,14 +1,19 @@
 // Tipos del catálogo. Reflejan catalog/schema.json: si cambias uno, cambia el otro.
 
-export type Locale = 'en' | 'es';
+import type { Locale, RequiredCatalogLocale } from '../i18n/locales';
+
+export type { Locale };
 
 export type ShellId = 'bash' | 'zsh' | 'powershell' | 'cmd';
 
 export type Risk = 'safe' | 'caution' | 'destructive';
 
-export type LocalizedString = Readonly<Record<Locale, string>>;
+/** `en` y `es` obligatorios; el resto de idiomas, opcionales (se muestra `en` si faltan). */
+export type LocalizedString = Readonly<Record<RequiredCatalogLocale, string> & Partial<Record<Locale, string>>>;
 
-export type LocalizedTags = Readonly<Record<Locale, readonly string[]>>;
+export type LocalizedTags = Readonly<
+	Record<RequiredCatalogLocale, readonly string[]> & Partial<Record<Locale, readonly string[]>>
+>;
 
 export interface Param {
 	readonly name: string;
