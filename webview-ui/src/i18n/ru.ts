@@ -12,4 +12,9 @@ export const ru: Messages = {
   sendToTerminalHint: 'Вставляет команду в терминал, не выполняя её',
   copyCommand: 'Копировать команду',
   copied: 'Скопировано',
+  searchLabel: 'Поиск команд',
+  searchPlaceholder: 'Искать во всех категориях',
+  searchResultsLabel: 'Результаты поиска',
+  resultCount: { one: '{count} результат', few: '{count} результата', many: '{count} результатов', other: '{count} результата' },
+  noResults: 'Нет команд, соответствующих запросу.',
 }

@@ -1,4 +1,4 @@
-import { useEffect, type KeyboardEvent } from 'react'
+import { useEffect, useImperativeHandle, type KeyboardEvent, type Ref } from 'react'
 import type { CommandSummary } from '../../src/messaging/protocol'
 import Icon from './Icon'
 import type { MessageKey, MessageParams } from './i18n'
@@ -12,9 +12,22 @@ export interface Copied {
   seq: number
 }
 
+/** Comando de la lista; en los resultados de búsqueda lleva el título de su categoría. */
+export type ListCommand = CommandSummary & { readonly categoryTitle?: string }
+
+/** Lo que la lista ofrece a quien la contiene (p. ej. el campo de búsqueda). */
+export interface CommandListHandle {
+  /** Lleva el foco al primer comando. */
+  focusFirst: () => void
+}
+
 interface Props {
-  commands: readonly CommandSummary[]
-  categoryTitle: string
+  commands: readonly ListCommand[]
+  /** Nombre accesible de la lista. */
+  listLabel: string
+  /** id del elemento <ul> (para `aria-controls` del campo de búsqueda). */
+  listId?: string
+  ref?: Ref<CommandListHandle>
   /** Comando con foco guardado; si `autoFocus`, lo enfoca al montarse. */
   focusCommandId?: string
   autoFocus: boolean
@@ -53,12 +66,14 @@ const copy = (commandId: string) => postMessage({ type: 'copyToClipboard', comma
  * terminal sin ejecutarlo; a su lado, un botón secundario (fuera del orden de Tab) lo copia,
  * igual que Ctrl+C. Solo viaja el id: la extensión construye el texto.
  */
-function CommandList({ commands, categoryTitle, focusCommandId, autoFocus, copied, onFocusCommand, t }: Props) {
+function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFocus, copied, onFocusCommand, t }: Props) {
   const initial = Math.max(
     0,
     commands.findIndex((c) => c.id === focusCommandId),
   )
   const { current, setActive, itemRef, focusItem, onKeyDown } = useRovingFocus(commands.length, initial)
+
+  useImperativeHandle(ref, () => ({ focusFirst: () => focusItem(0) }), [focusItem])
 
   useEffect(() => {
     if (autoFocus) {
@@ -76,13 +91,20 @@ function CommandList({ commands, categoryTitle, focusCommandId, autoFocus, copie
     <>
       <ul
         className="item-list"
+        id={listId}
         role="list"
-        aria-label={t('commandsLabel', { category: categoryTitle })}
+        aria-label={listLabel}
         onKeyDown={onKeyDown}
       >
         {commands.map((command, index) => {
           const id = domId(command.id)
-          const labelledBy = [`${id}-title`, command.risk === 'safe' ? '' : `${id}-risk`, `${id}-desc`, `${id}-example`]
+          const labelledBy = [
+            `${id}-title`,
+            command.categoryTitle === undefined ? '' : `${id}-category`,
+            command.risk === 'safe' ? '' : `${id}-risk`,
+            `${id}-desc`,
+            `${id}-example`,
+          ]
             .filter(Boolean)
             .join(' ')
           const isCopied = command.id === copied?.commandId
@@ -113,6 +135,11 @@ function CommandList({ commands, categoryTitle, focusCommandId, autoFocus, copie
                   <span id={`${id}-title`} className="command-title">
                     {command.title}
                   </span>
+                  {command.categoryTitle !== undefined && (
+                    <span id={`${id}-category`} className="command-category">
+                      {command.categoryTitle}
+                    </span>
+                  )}
                   <RiskBadge risk={command.risk} id={`${id}-risk`} t={t} />
                   <span className="command-send">
                     <Icon name="terminal" />

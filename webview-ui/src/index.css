@@ -40,6 +40,30 @@ body {
   flex: none;
 }
 
+/* Campo de búsqueda con los colores de input del tema (como el filtro del explorador). */
+.search-box {
+  padding: 4px 20px 6px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 3px 6px;
+  border: 1px solid var(--vscode-input-border, transparent);
+  border-radius: 2px;
+  color: var(--vscode-input-foreground);
+  background: var(--vscode-input-background);
+  font: inherit;
+}
+
+.search-input::placeholder {
+  color: var(--vscode-input-placeholderForeground);
+}
+
+.search-input:focus {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+
 /* Listas de categorías y de comandos con los colores de lista del tema (como el explorador). */
 .item-list {
   margin: 0;
@@ -215,6 +239,12 @@ body {
 
 .command-title {
   font-weight: 600;
+}
+
+/* Categoría del comando en los resultados de búsqueda. */
+.command-category {
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.9em;
 }
 
 .command-description {

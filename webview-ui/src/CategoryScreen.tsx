@@ -52,7 +52,7 @@ function CategoryScreen({ category, focusCommandId, copied, onBack, onFocusComma
       <p className="muted">{t('commandCount', { count: category.commands.length })}</p>
       <CommandList
         commands={category.commands}
-        categoryTitle={category.title}
+        listLabel={t('commandsLabel', { category: category.title })}
         focusCommandId={focusCommandId}
         autoFocus={restoring}
         copied={copied}

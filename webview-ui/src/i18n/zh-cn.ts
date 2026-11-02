@@ -12,4 +12,9 @@ export const zhcn: Messages = {
   sendToTerminalHint: '将命令写入终端但不执行',
   copyCommand: '复制命令',
   copied: '已复制',
+  searchLabel: '搜索命令',
+  searchPlaceholder: '在所有类别中搜索',
+  searchResultsLabel: '搜索结果',
+  resultCount: { other: '{count} 个结果' },
+  noResults: '没有与搜索匹配的命令。',
 }

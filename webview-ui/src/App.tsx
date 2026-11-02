@@ -1,10 +1,13 @@
-import { useCallback, useEffect, useReducer, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import { queryWords } from '../../src/catalog/search'
 import type { CategorySummary, ExtensionMessage } from '../../src/messaging/protocol'
 import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
-import type { Copied } from './CommandList'
+import type { CommandListHandle, Copied } from './CommandList'
 import { toLocale, useT } from './i18n'
 import { initialView, navigate, parseSavedView } from './navigation'
+import SearchBox from './SearchBox'
+import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
 import { getState, postMessage, setState } from './vscode'
 
 type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
@@ -72,8 +75,31 @@ function App() {
   const back = useCallback(() => dispatch({ type: 'back' }), [])
   const focusCategory = useCallback((categoryId: string) => dispatch({ type: 'focusCategory', categoryId }), [])
   const focusCommand = useCallback((commandId: string) => dispatch({ type: 'focusCommand', commandId }), [])
+  const searchFor = useCallback((query: string) => dispatch({ type: 'search', query }), [])
+  const results = useRef<CommandListHandle>(null)
+  const searchInput = useRef<HTMLInputElement>(null)
 
   const openCategory = view.screen === 'category' ? categories?.find((c) => c.id === view.categoryId) : undefined
+  // Hay texto que borrar en el campo de la pantalla inicial (aunque sean solo espacios).
+  const clearable = view.screen === 'categories' && (view.query ?? '') !== '' && !!categories?.length
+
+  useEffect(() => {
+    if (!clearable) {
+      return
+    }
+    // En window y en captura: Escape vacía la búsqueda con el foco en el campo, en un resultado o
+    // en <body>, antes de que nada más lo procese. El foco vuelve al campo (los resultados se
+    // desmontan y, si lo tenían, se perdería).
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape' && !event.isComposing) {
+        event.preventDefault()
+        searchFor('')
+        searchInput.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown, true)
+    return () => window.removeEventListener('keydown', onKeyDown, true)
+  }, [clearable, searchFor])
 
   let content
   if (!categories) {
@@ -101,14 +127,40 @@ function App() {
       />
     )
   } else {
+    const query = view.screen === 'categories' ? (view.query ?? '') : ''
+    const searching = queryWords(query).length > 0
     content = (
-      <CategoryList
-        categories={categories}
-        focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
-        onOpen={open}
-        onFocusCategory={focusCategory}
-        t={t}
-      />
+      <>
+        <SearchBox
+          ref={searchInput}
+          value={query}
+          onChange={searchFor}
+          onArrowDown={() => results.current?.focusFirst()}
+          controlsId={searching ? SEARCH_RESULTS_ID : undefined}
+          t={t}
+        />
+        {searching && (
+          <SearchResults
+            ref={results}
+            categories={categories}
+            query={query}
+            focusCommandId={view.screen === 'categories' ? view.focusCommandId : undefined}
+            copied={copied}
+            onFocusCommand={focusCommand}
+            t={t}
+          />
+        )}
+        {/* Oculta (no desmontada) mientras se busca: al vaciar el campo no roba el foco. */}
+        <div hidden={searching}>
+          <CategoryList
+            categories={categories}
+            focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
+            onOpen={open}
+            onFocusCategory={focusCategory}
+            t={t}
+          />
+        </div>
+      </>
     )
   }
 

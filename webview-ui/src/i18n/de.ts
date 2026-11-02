@@ -12,4 +12,9 @@ export const de: Messages = {
   sendToTerminalHint: 'Schreibt den Befehl ins Terminal, ohne ihn auszuführen',
   copyCommand: 'Befehl kopieren',
   copied: 'Kopiert',
+  searchLabel: 'Befehle suchen',
+  searchPlaceholder: 'In allen Kategorien suchen',
+  searchResultsLabel: 'Suchergebnisse',
+  resultCount: { one: '{count} Ergebnis', other: '{count} Ergebnisse' },
+  noResults: 'Kein Befehl entspricht der Suche.',
 }
