@@ -1,4 +1,5 @@
 import { bundledCatalog } from './index';
+import { buildSearchText } from './search';
 import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, Risk, ShellId } from './types';
 
 export { resolveLocale } from '../i18n/locales';
@@ -34,6 +35,8 @@ export interface CommandSummary {
 	readonly description: string;
 	readonly example: string;
 	readonly risk: Risk;
+	/** Texto normalizado para buscar: textos en en, es y el idioma activo, categoría y ejemplo. */
+	readonly searchText: string;
 }
 
 /** Lo que el webview necesita para mostrar una categoría y sus comandos (ya traducido). */
@@ -61,18 +64,35 @@ export function buildCategorySummaries(
 	locale: Locale,
 	shell: ShellId,
 ): CategorySummary[] {
-	return categories.map((c) => ({
-		id: c.id,
-		title: localize(c.title, locale),
-		icon: c.icon,
-		commands: c.commands.map((cmd) => ({
-			id: cmd.id,
-			title: localize(cmd.title, locale),
-			description: localize(cmd.description, locale),
-			example: buildExample(cmd, locale, shell),
-			risk: cmd.risk,
-		})),
-	}));
+	// Se busca en los dos idiomas obligatorios del catálogo y en el activo (si es otro).
+	const searchLocales: readonly Locale[] = [...new Set<Locale>(['en', 'es', locale])];
+	return categories.map((c) => {
+		const categoryTitles = searchLocales.map((l) => localize(c.title, l));
+		return {
+			id: c.id,
+			title: localize(c.title, locale),
+			icon: c.icon,
+			commands: c.commands.map((cmd) => {
+				const example = buildExample(cmd, locale, shell);
+				return {
+					id: cmd.id,
+					title: localize(cmd.title, locale),
+					description: localize(cmd.description, locale),
+					example,
+					risk: cmd.risk,
+					searchText: buildSearchText([
+						...searchLocales.flatMap((l) => [
+							localize(cmd.title, l),
+							localize(cmd.description, l),
+							...localizeTags(cmd.tags, l),
+						]),
+						...categoryTitles,
+						example,
+					]),
+				};
+			}),
+		};
+	});
 }
 
 /** Consulta del catálogo. Sin acceso a disco, red ni a la API de VS Code. */

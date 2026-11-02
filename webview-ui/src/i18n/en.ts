@@ -14,6 +14,11 @@ export const en = {
   sendToTerminalHint: 'Writes the command in the terminal without running it',
   copyCommand: 'Copy command',
   copied: 'Copied',
+  searchLabel: 'Search commands',
+  searchPlaceholder: 'Search in all categories',
+  searchResultsLabel: 'Search results',
+  resultCount: { one: '{count} result', other: '{count} results' },
+  noResults: 'No commands match your search.',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

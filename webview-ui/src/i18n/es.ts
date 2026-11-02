@@ -12,4 +12,9 @@ export const es: Messages = {
   sendToTerminalHint: 'Escribe el comando en la terminal sin ejecutarlo',
   copyCommand: 'Copiar comando',
   copied: 'Copiado',
+  searchLabel: 'Buscar comandos',
+  searchPlaceholder: 'Buscar en todas las categorías',
+  searchResultsLabel: 'Resultados de la búsqueda',
+  resultCount: { one: '{count} resultado', many: '{count} de resultados', other: '{count} resultados' },
+  noResults: 'Ningún comando coincide con la búsqueda.',
 }

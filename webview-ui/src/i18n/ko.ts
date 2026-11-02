@@ -12,4 +12,9 @@ export const ko: Messages = {
   sendToTerminalHint: '명령어를 실행하지 않고 터미널에 입력합니다',
   copyCommand: '명령어 복사',
   copied: '복사됨',
+  searchLabel: '명령어 검색',
+  searchPlaceholder: '모든 카테고리에서 검색',
+  searchResultsLabel: '검색 결과',
+  resultCount: { other: '결과 {count}개' },
+  noResults: '검색과 일치하는 명령어가 없습니다.',
 }

@@ -86,13 +86,14 @@ describe('buildCategorySummaries', () => {
 		expect(buildCategorySummaries(ordered, 'ja', 'bash')[0].title).toBe('Git');
 	});
 
-	it('cada comando lleva textos traducidos, ejemplo resuelto y riesgo', () => {
+	it('cada comando lleva textos traducidos, ejemplo resuelto, riesgo y texto de búsqueda', () => {
 		expect(buildCategorySummaries(ordered, 'es', 'bash')[0].commands[0]).toEqual({
 			id: 'git.new-branch',
 			title: 'Título',
 			description: 'Descripción',
 			example: 'git checkout -b feature/mi-cambio',
 			risk: 'safe',
+			searchText: 'title · description · titulo · descripcion · git · git (es) · git checkout -b feature/mi-cambio',
 		});
 		expect(buildCategorySummaries(ordered, 'ko', 'bash')[0].commands[0].title).toBe('Title');
 	});
@@ -109,7 +110,33 @@ describe('buildCategorySummaries', () => {
 	it('el resumen solo lleva los campos que necesita el webview', () => {
 		const [git] = buildCategorySummaries(ordered, 'en', 'bash');
 		expect(Object.keys(git).sort()).toEqual(['commands', 'icon', 'id', 'title']);
-		expect(Object.keys(git.commands[0]).sort()).toEqual(['description', 'example', 'id', 'risk', 'title']);
+		expect(Object.keys(git.commands[0]).sort()).toEqual(['description', 'example', 'id', 'risk', 'searchText', 'title']);
+	});
+
+	describe('searchText con el catálogo empaquetado', () => {
+		const command = (locale: 'en' | 'es' | 'fr', id: string) =>
+			buildCategorySummaries(new CatalogService().getCategories(), locale, 'bash')
+				.flatMap((c) => c.commands)
+				.find((c) => c.id === id);
+
+		it('reúne los dos idiomas del catálogo aunque la interfaz esté en inglés', () => {
+			const text = command('en', 'git.status')?.searchText ?? '';
+			for (const part of ['show status', 'ver estado', 'estado', 'changes', 'git status']) {
+				expect(text).toContain(part);
+			}
+		});
+
+		it('no tiene tildes ni mayúsculas', () => {
+			const text = command('es', 'git.reset-hard')?.searchText ?? '';
+			expect(text).toContain('indice');
+			expect(text).not.toContain('í');
+			expect(text).toBe(text.toLowerCase());
+		});
+
+		it('con un idioma opcional sin traducción no repite textos', () => {
+			const text = command('fr', 'git.status')?.searchText ?? '';
+			expect(text.split(' · ').length).toBe(new Set(text.split(' · ')).size);
+		});
 	});
 });
 

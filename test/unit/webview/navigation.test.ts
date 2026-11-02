@@ -111,6 +111,68 @@ describe('resolveView', () => {
 	});
 });
 
+describe('búsqueda', () => {
+	const catalog = [
+		{ id: 'git', commands: [{ id: 'git.status' }, { id: 'git.new-branch' }] },
+		{ id: 'npm', commands: [] },
+	];
+
+	it('search guarda la consulta y quita el foco del resultado anterior', () => {
+		const view = { screen: 'categories', focusCategoryId: 'git', query: 'ra', focusCommandId: 'git.status' } as const;
+		expect(navigate(view, { type: 'search', query: 'rama' })).toEqual({
+			screen: 'categories',
+			focusCategoryId: 'git',
+			query: 'rama',
+		});
+	});
+
+	it('una consulta vacía quita la búsqueda; con solo espacios se conserva el texto escrito', () => {
+		const view = { screen: 'categories', query: 'git', focusCommandId: 'git.status' } as const;
+		expect(navigate(view, { type: 'search', query: '' })).toEqual(initialView);
+		expect(navigate(initialView, { type: 'search', query: '  ' })).toEqual({ screen: 'categories', query: '  ' });
+	});
+
+	it('focusCommand guarda el resultado con foco solo si hay búsqueda', () => {
+		const searching = { screen: 'categories', query: 'git' } as const;
+		expect(navigate(searching, { type: 'focusCommand', commandId: 'git.status' })).toEqual({
+			...searching,
+			focusCommandId: 'git.status',
+		});
+		const blank = { screen: 'categories', query: '  ' } as const;
+		expect(navigate(blank, { type: 'focusCommand', commandId: 'git.status' })).toBe(blank);
+	});
+
+	it('search no afecta a la pantalla de una categoría', () => {
+		const view = { screen: 'category', categoryId: 'git' } as const;
+		expect(navigate(view, { type: 'search', query: 'git' })).toBe(view);
+	});
+
+	it.each([
+		[{ screen: 'categories', query: 'rama' }],
+		[{ screen: 'categories', query: 'rama', focusCommandId: 'git.new-branch' }],
+		[{ screen: 'categories', focusCategoryId: 'git', query: 'rama' }],
+	])('parseSavedView acepta %j', (value) => {
+		expect(parseSavedView(value)).toEqual(value);
+	});
+
+	it.each([
+		[{ screen: 'categories', query: 42 }],
+		[{ screen: 'categories', query: 'rama', focusCommandId: null }],
+		[{ screen: 'category', categoryId: 'git', query: 'rama' }],
+	])('parseSavedView rechaza %j', (value) => {
+		expect(parseSavedView(value)).toBeUndefined();
+	});
+
+	it('resolveView quita el foco de un resultado que ya no existe y conserva la búsqueda', () => {
+		expect(resolveView({ screen: 'categories', query: 'rama', focusCommandId: 'git.gone' }, catalog)).toEqual({
+			screen: 'categories',
+			query: 'rama',
+		});
+		const kept = { screen: 'categories', query: 'rama', focusCommandId: 'git.new-branch' } as const;
+		expect(resolveView(kept, catalog)).toBe(kept);
+	});
+});
+
 describe('nextIndex', () => {
 	it.each([
 		[0, 'ArrowDown', 3, 1],

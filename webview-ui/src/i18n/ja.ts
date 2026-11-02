@@ -12,4 +12,9 @@ export const ja: Messages = {
   sendToTerminalHint: 'コマンドを実行せずにターミナルに入力します',
   copyCommand: 'コマンドをコピー',
   copied: 'コピーしました',
+  searchLabel: 'コマンドを検索',
+  searchPlaceholder: 'すべてのカテゴリで検索',
+  searchResultsLabel: '検索結果',
+  resultCount: { other: '{count} 件の結果' },
+  noResults: '検索に一致するコマンドはありません。',
 }

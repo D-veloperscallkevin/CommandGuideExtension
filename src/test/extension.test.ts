@@ -44,6 +44,8 @@ suite('Vista lateral', () => {
 		assert.strictEqual(git.commands.find((c) => c.id === 'git.reset-hard')?.risk, 'destructive');
 		for (const command of categories.flatMap((c) => c.commands)) {
 			assert.ok(!command.example.includes('${'), `${command.id}: ejemplo sin resolver "${command.example}"`);
+			assert.ok(!command.searchText.includes('${'), `${command.id}: searchText sin resolver`);
+			assert.strictEqual(command.searchText, command.searchText.toLowerCase(), `${command.id}: searchText con mayúsculas`);
 		}
 	});
 });

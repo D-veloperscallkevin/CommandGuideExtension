@@ -5,7 +5,14 @@
  * todos sus campos son JSON simple.
  */
 export type View =
-  | { readonly screen: 'categories'; readonly focusCategoryId?: string }
+  | {
+      readonly screen: 'categories'
+      readonly focusCategoryId?: string
+      /** Búsqueda escrita; sin ella (o solo con espacios) se ve la lista de categorías. */
+      readonly query?: string
+      /** Resultado de la búsqueda con foco. */
+      readonly focusCommandId?: string
+    }
   | { readonly screen: 'category'; readonly categoryId: string; readonly focusCommandId?: string }
 
 export type NavigationAction =
@@ -13,6 +20,7 @@ export type NavigationAction =
   | { readonly type: 'back' }
   | { readonly type: 'focusCategory'; readonly categoryId: string }
   | { readonly type: 'focusCommand'; readonly commandId: string }
+  | { readonly type: 'search'; readonly query: string }
   /** Ajusta la vista al catálogo recién recibido (ver `resolveView`). */
   | { readonly type: 'resolve'; readonly categories: readonly CatalogIds[] }
 
@@ -26,15 +34,32 @@ export function navigate(view: View, action: NavigationAction): View {
       return view.screen === 'category' ? { screen: 'categories', focusCategoryId: view.categoryId } : view
     case 'focusCategory':
       return view.screen === 'categories' && view.focusCategoryId !== action.categoryId
-        ? { screen: 'categories', focusCategoryId: action.categoryId }
+        ? { ...view, focusCategoryId: action.categoryId }
         : view
     case 'focusCommand':
-      return view.screen === 'category' && view.focusCommandId !== action.commandId
-        ? { ...view, focusCommandId: action.commandId }
-        : view
+      if (view.focusCommandId === action.commandId) {
+        return view
+      }
+      if (view.screen === 'category' || hasQuery(view.query)) {
+        return { ...view, focusCommandId: action.commandId }
+      }
+      return view
+    case 'search':
+      return search(view, action.query)
     case 'resolve':
       return resolveView(view, action.categories)
   }
+}
+
+const hasQuery = (query: string | undefined): query is string => query !== undefined && query.trim() !== ''
+
+/** Guarda la búsqueda en la pantalla inicial; una búsqueda vacía la quita junto con su foco. */
+function search(view: View, query: string): View {
+  if (view.screen !== 'categories') {
+    return view
+  }
+  const { query: _query, focusCommandId: _focus, ...rest } = view
+  return query === '' ? rest : { ...rest, query }
 }
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
@@ -57,7 +82,7 @@ export function parseSavedView(value: unknown): View | undefined {
   if (!isPlainObject(value)) {
     return undefined
   }
-  if (value.screen === 'categories' && hasStringFields(value, ['screen'], ['focusCategoryId'])) {
+  if (value.screen === 'categories' && hasStringFields(value, ['screen'], ['focusCategoryId', 'query', 'focusCommandId'])) {
     return value as View
   }
   if (value.screen === 'category' && hasStringFields(value, ['screen', 'categoryId'], ['focusCommandId'])) {
@@ -74,13 +99,21 @@ export interface CatalogIds {
 
 /**
  * Ajusta la vista al catálogo recibido: si la categoría abierta ya no existe, vuelve a la
- * lista; si el elemento con foco ya no existe, quita ese foco.
+ * lista; si el elemento con foco ya no existe, quita ese foco (la búsqueda se conserva).
  */
 export function resolveView(view: View, categories: readonly CatalogIds[]): View {
   if (view.screen === 'categories') {
-    return view.focusCategoryId !== undefined && !categories.some((c) => c.id === view.focusCategoryId)
-      ? initialView
-      : view
+    let resolved: View = view
+    if (view.focusCategoryId !== undefined && !categories.some((c) => c.id === view.focusCategoryId)) {
+      const { focusCategoryId: _gone, ...rest } = resolved
+      resolved = rest
+    }
+    const focusCommandId = view.focusCommandId
+    if (focusCommandId !== undefined && !categories.some((c) => c.commands.some((cmd) => cmd.id === focusCommandId))) {
+      const { focusCommandId: _gone, ...rest } = resolved as Extract<View, { screen: 'categories' }>
+      resolved = rest
+    }
+    return resolved
   }
   const category = categories.find((c) => c.id === view.categoryId)
   if (!category) {
