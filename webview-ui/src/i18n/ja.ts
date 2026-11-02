@@ -10,4 +10,6 @@ export const ja: Messages = {
   riskCaution: '注意',
   riskDestructive: '破壊的',
   sendToTerminalHint: 'コマンドを実行せずにターミナルに入力します',
+  copyCommand: 'コマンドをコピー',
+  copied: 'コピーしました',
 }

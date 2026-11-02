@@ -12,6 +12,8 @@ export const en = {
   riskCaution: 'Caution',
   riskDestructive: 'Destructive',
   sendToTerminalHint: 'Writes the command in the terminal without running it',
+  copyCommand: 'Copy command',
+  copied: 'Copied',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

@@ -10,4 +10,6 @@ export const zhcn: Messages = {
   riskCaution: '注意',
   riskDestructive: '破坏性',
   sendToTerminalHint: '将命令写入终端但不执行',
+  copyCommand: '复制命令',
+  copied: '已复制',
 }

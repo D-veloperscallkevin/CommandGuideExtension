@@ -22,22 +22,25 @@ describe('isWebviewMessage', () => {
 		expect(isWebviewMessage(value)).toBe(false);
 	});
 
-	describe('sendToTerminal', () => {
+	describe.each(['sendToTerminal', 'copyToClipboard'] as const)('%s', (type) => {
 		it('acepta un commandId válido', () => {
-			expect(isWebviewMessage({ type: 'sendToTerminal', commandId: 'git.status' })).toBe(true);
-			expect(isWebviewMessage({ type: 'sendToTerminal', commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH) })).toBe(true);
+			expect(isWebviewMessage({ type, commandId: 'git.status' })).toBe(true);
+			expect(isWebviewMessage({ type, commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH) })).toBe(true);
 		});
 
 		it.each([
-			['sin commandId', { type: 'sendToTerminal' }],
-			['commandId numérico', { type: 'sendToTerminal', commandId: 42 }],
-			['commandId nulo', { type: 'sendToTerminal', commandId: null }],
-			['commandId vacío', { type: 'sendToTerminal', commandId: '' }],
-			['commandId demasiado largo', { type: 'sendToTerminal', commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH + 1) }],
-			['texto arbitrario extra', { type: 'sendToTerminal', commandId: 'git.status', text: 'rm -rf /' }],
-			['commandId en ready', { type: 'ready', commandId: 'git.status' }],
-		])('rechaza %s', (_name, value) => {
-			expect(isWebviewMessage(value)).toBe(false);
+			['sin commandId', {}],
+			['commandId numérico', { commandId: 42 }],
+			['commandId nulo', { commandId: null }],
+			['commandId vacío', { commandId: '' }],
+			['commandId demasiado largo', { commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH + 1) }],
+			['texto arbitrario extra', { commandId: 'git.status', text: 'rm -rf /' }],
+		])('rechaza %s', (_name, fields) => {
+			expect(isWebviewMessage({ type, ...fields })).toBe(false);
 		});
+	});
+
+	it('rechaza commandId en ready', () => {
+		expect(isWebviewMessage({ type: 'ready', commandId: 'git.status' })).toBe(false);
 	});
 });

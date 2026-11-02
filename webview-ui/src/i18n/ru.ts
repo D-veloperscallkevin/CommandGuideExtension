@@ -10,4 +10,6 @@ export const ru: Messages = {
   riskCaution: 'Осторожно',
   riskDestructive: 'Опасно',
   sendToTerminalHint: 'Вставляет команду в терминал, не выполняя её',
+  copyCommand: 'Копировать команду',
+  copied: 'Скопировано',
 }

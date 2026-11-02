@@ -10,4 +10,6 @@ export const ptbr: Messages = {
   riskCaution: 'Cuidado',
   riskDestructive: 'Destrutivo',
   sendToTerminalHint: 'Escreve o comando no terminal sem executá-lo',
+  copyCommand: 'Copiar comando',
+  copied: 'Copiado',
 }
