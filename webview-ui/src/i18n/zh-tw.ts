@@ -9,4 +9,5 @@ export const zhtw: Messages = {
   commandsLabel: '{category} 命令',
   riskCaution: '注意',
   riskDestructive: '破壞性',
+  sendToTerminalHint: '將命令寫入終端機但不執行',
 }

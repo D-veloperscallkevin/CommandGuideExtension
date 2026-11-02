@@ -7,14 +7,18 @@ Define cómo se comunican la interfaz web y la extensión: un protocolo de mensa
 ## Requirements
 
 ### Requirement: Protocolo de mensajes tipado
-Todos los mensajes entre el webview y la extensión SHALL ser objetos con un campo `type` que identifica el mensaje, definidos en un único protocolo compartido por ambos lados. El protocolo SHALL definir al menos `ready` (webview → extensión), e `init` y `catalog` (extensión → webview).
+Todos los mensajes entre el webview y la extensión SHALL ser objetos con un campo `type` que identifica el mensaje, definidos en un único protocolo compartido por ambos lados. El protocolo SHALL definir al menos `ready` y `sendToTerminal` (webview → extensión), e `init` y `catalog` (extensión → webview). `sendToTerminal` SHALL llevar solo `commandId`, el id de un comando del catálogo.
 
 #### Scenario: Mensaje conocido
 - **WHEN** el webview envía `{ "type": "ready" }`
 - **THEN** la extensión lo reconoce como un mensaje del protocolo
 
+#### Scenario: Envío a la terminal
+- **WHEN** el webview envía `{ "type": "sendToTerminal", "commandId": "git.status" }`
+- **THEN** la extensión lo reconoce como un mensaje del protocolo
+
 ### Requirement: Validación de todo mensaje entrante
-La extensión SHALL validar el tipo y la forma de cada mensaje recibido del webview antes de actuar. Un mensaje que no sea un objeto, que tenga un `type` desconocido o que no tenga la forma declarada MUST descartarse sin ejecutar ninguna acción y sin provocar errores no controlados, y MUST registrarse como advertencia en el registro de la extensión. El webview MUST NOT poder hacer que la extensión ejecute texto arbitrario.
+La extensión SHALL validar el tipo y la forma de cada mensaje recibido del webview antes de actuar: el `type`, que tenga exactamente las claves declaradas y que cada campo tenga el tipo declarado. Un mensaje que no sea un objeto, que tenga un `type` desconocido o que no tenga la forma declarada MUST descartarse sin ejecutar ninguna acción y sin provocar errores no controlados, y MUST registrarse como advertencia en el registro de la extensión. El webview MUST NOT poder hacer que la extensión ejecute texto arbitrario ni escriba en la terminal un texto que no provenga del catálogo.
 
 #### Scenario: Tipo desconocido
 - **WHEN** el webview envía `{ "type": "runShell", "cmd": "rm -rf /" }`
@@ -27,6 +31,14 @@ La extensión SHALL validar el tipo y la forma de cada mensaje recibido del webv
 #### Scenario: Propiedades extra en un mensaje conocido
 - **WHEN** el webview envía `{ "type": "ready", "extra": 1 }`
 - **THEN** la extensión descarta el mensaje porque no tiene la forma declarada
+
+#### Scenario: Texto arbitrario hacia la terminal
+- **WHEN** el webview envía `{ "type": "sendToTerminal", "commandId": "git.status", "text": "rm -rf /" }`
+- **THEN** la extensión descarta el mensaje y no escribe nada en la terminal
+
+#### Scenario: Campo con tipo incorrecto
+- **WHEN** el webview envía `sendToTerminal` con `commandId` que no es un string, es un string vacío o tiene más de 200 caracteres
+- **THEN** la extensión descarta el mensaje y registra una advertencia
 
 ### Requirement: Handshake inicial
 Al cargar, el webview SHALL enviar `ready`. Cada vez que la extensión reciba un `ready` válido SHALL responder con `init`, que contiene el idioma activo de la interfaz (uno de los 11 idiomas soportados, resuelto a partir del idioma de VS Code según `ui-localization`) y la versión de la extensión.

@@ -9,4 +9,5 @@ export const ptbr: Messages = {
   commandsLabel: 'Comandos de {category}',
   riskCaution: 'Cuidado',
   riskDestructive: 'Destrutivo',
+  sendToTerminalHint: 'Escreve o comando no terminal sem executá-lo',
 }

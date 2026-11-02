@@ -9,4 +9,5 @@ export const ja: Messages = {
   commandsLabel: '{category} のコマンド',
   riskCaution: '注意',
   riskDestructive: '破壊的',
+  sendToTerminalHint: 'コマンドを実行せずにターミナルに入力します',
 }

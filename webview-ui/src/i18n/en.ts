@@ -11,6 +11,7 @@ export const en = {
   commandsLabel: 'Commands in {category}',
   riskCaution: 'Caution',
   riskDestructive: 'Destructive',
+  sendToTerminalHint: 'Writes the command in the terminal without running it',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

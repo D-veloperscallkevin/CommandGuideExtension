@@ -40,7 +40,7 @@ Los comandos con `risk` `caution` o `destructive` SHALL mostrar una etiqueta con
 - **THEN** el comando no muestra ninguna etiqueta de riesgo
 
 ### Requirement: Teclado y lector de pantalla en la lista de comandos
-La lista de comandos SHALL ser una lista con nombre accesible que ocupa una sola parada de Tab. Flecha abajo, Flecha arriba, Inicio y Fin SHALL mover el foco entre los comandos, sin dar la vuelta en los extremos. El nombre accesible de cada comando SHALL incluir su título, su riesgo si no es `safe`, su descripción y su ejemplo.
+La lista de comandos SHALL ser una lista con nombre accesible que ocupa una sola parada de Tab. Flecha abajo, Flecha arriba, Inicio y Fin SHALL mover el foco entre los comandos, sin dar la vuelta en los extremos. Cada comando SHALL ser un botón: activarlo con clic, Enter o Espacio SHALL enviarlo a la terminal. El nombre accesible de cada comando SHALL incluir su título, su riesgo si no es `safe`, su descripción y su ejemplo, y su descripción accesible SHALL indicar en el idioma activo que el comando se escribe en la terminal sin ejecutarse.
 
 #### Scenario: Recorrer los comandos
 - **WHEN** el foco está en el primer comando de Git y el usuario pulsa Fin
@@ -48,7 +48,15 @@ La lista de comandos SHALL ser una lista con nombre accesible que ocupa una sola
 
 #### Scenario: Anuncio de un comando con riesgo
 - **WHEN** un lector de pantalla llega a `git.reset-hard` con el idioma activo `en`
-- **THEN** anuncia su título, "Destructive", su descripción y `git reset --hard`
+- **THEN** anuncia un botón con su título, "Destructive", su descripción y `git reset --hard`, y que el comando se escribe en la terminal sin ejecutarse
+
+#### Scenario: Enviar con el teclado
+- **WHEN** el foco está en `git.status` y el usuario pulsa Enter
+- **THEN** `git status` queda escrito en la terminal, que recibe el foco
+
+#### Scenario: Enviar con el ratón
+- **WHEN** el usuario hace clic en un comando
+- **THEN** su ejemplo queda escrito en la terminal sin ejecutarse
 
 ### Requirement: Navegación persistida
 La vista SHALL guardar con el estado del webview la pantalla visible, la categoría abierta y el comando con foco. Al volver a crearse el webview (al ocultar y mostrar la vista o al recargar la ventana), SHALL restaurar esa pantalla y ese foco. Si la categoría o el comando guardados no existen en el catálogo recibido, SHALL mostrar la lista de categorías o enfocar el primer comando, respectivamente. Un estado guardado con forma desconocida MUST ignorarse.
