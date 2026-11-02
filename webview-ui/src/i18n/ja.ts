@@ -6,5 +6,7 @@ export const ja: Messages = {
   commandCount: { other: '{count} 個のコマンド' },
   emptyCatalog: '利用できるカテゴリはありません。',
   back: '戻る',
-  categoryPlaceholder: 'このカテゴリのコマンド一覧は近日公開予定です。',
+  commandsLabel: '{category} のコマンド',
+  riskCaution: '注意',
+  riskDestructive: '破壊的',
 }

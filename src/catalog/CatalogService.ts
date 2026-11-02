@@ -1,5 +1,5 @@
 import { bundledCatalog } from './index';
-import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, ShellId } from './types';
+import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, Risk, ShellId } from './types';
 
 export { resolveLocale } from '../i18n/locales';
 
@@ -27,21 +27,51 @@ export function buildExample(cmd: Command, locale: Locale, shell: ShellId): stri
 	);
 }
 
-/** Lo que el webview necesita para pintar una categoría en la lista (ya traducido). */
+/** Lo que el webview necesita para mostrar un comando (ya traducido y con el ejemplo resuelto). */
+export interface CommandSummary {
+	readonly id: string;
+	readonly title: string;
+	readonly description: string;
+	readonly example: string;
+	readonly risk: Risk;
+}
+
+/** Lo que el webview necesita para mostrar una categoría y sus comandos (ya traducido). */
 export interface CategorySummary {
 	readonly id: string;
 	readonly title: string;
 	readonly icon: string;
-	readonly commandCount: number;
+	readonly commands: readonly CommandSummary[];
 }
 
-/** Resumen de las categorías en el orden recibido, con el título en `locale` (fallback a `en`). */
-export function buildCategorySummaries(categories: readonly Category[], locale: Locale): CategorySummary[] {
+/**
+ * Shell provisional para los ejemplos hasta que exista la detección real (change 2.1):
+ * PowerShell en Windows (el terminal por defecto de VS Code allí) y bash en el resto.
+ */
+export function defaultShellFor(platform: string): ShellId {
+	return platform === 'win32' ? 'powershell' : 'bash';
+}
+
+/**
+ * Resumen de las categorías en el orden recibido: textos en `locale` (fallback a `en`) y
+ * ejemplos construidos para `shell`. No incluye plantillas, parámetros ni tags.
+ */
+export function buildCategorySummaries(
+	categories: readonly Category[],
+	locale: Locale,
+	shell: ShellId,
+): CategorySummary[] {
 	return categories.map((c) => ({
 		id: c.id,
 		title: localize(c.title, locale),
 		icon: c.icon,
-		commandCount: c.commands.length,
+		commands: c.commands.map((cmd) => ({
+			id: cmd.id,
+			title: localize(cmd.title, locale),
+			description: localize(cmd.description, locale),
+			example: buildExample(cmd, locale, shell),
+			risk: cmd.risk,
+		})),
 	}));
 }
 

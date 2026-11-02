@@ -1,6 +1,12 @@
 import { randomBytes } from 'node:crypto';
 import * as vscode from 'vscode';
-import { buildCategorySummaries, CatalogService, resolveLocale, type CategorySummary } from '../catalog/CatalogService';
+import {
+	buildCategorySummaries,
+	CatalogService,
+	defaultShellFor,
+	resolveLocale,
+	type CategorySummary,
+} from '../catalog/CatalogService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
 import { buildWebviewHtml } from './webviewHtml';
 
@@ -39,7 +45,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			switch (message.type) {
 				case 'ready': {
 					const locale = resolveLocale(vscode.env.language);
-					const categories = buildCategorySummaries(this.catalog.getCategories(), locale);
+					const categories = buildCategorySummaries(
+						this.catalog.getCategories(),
+						locale,
+						defaultShellFor(process.platform),
+					);
 					// postMessage conserva el orden: el webview recibe init antes que catalog.
 					void webview.postMessage({ type: 'init', locale, version: this.version } satisfies ExtensionMessage);
 					void webview.postMessage({ type: 'catalog', categories } satisfies ExtensionMessage);

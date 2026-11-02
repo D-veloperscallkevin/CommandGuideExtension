@@ -40,8 +40,8 @@ body {
   flex: none;
 }
 
-/* Lista de categorías con los colores de lista del tema (como el explorador). */
-.category-list {
+/* Listas de categorías y de comandos con los colores de lista del tema (como el explorador). */
+.item-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -66,6 +66,7 @@ body {
 
 /* En alto contraste, VS Code define contrastActiveBorder (contorno discontinuo al pasar el ratón). */
 .category:hover,
+.command:hover,
 .back:hover {
   outline: 1px dashed var(--vscode-contrastActiveBorder, transparent);
   outline-offset: -1px;
@@ -74,6 +75,7 @@ body {
 }
 
 .category:focus-visible,
+.command:focus-visible,
 .back:focus-visible {
   outline: 1px solid var(--vscode-list-focusOutline, var(--vscode-focusBorder));
   outline-offset: -1px;
@@ -115,4 +117,73 @@ body {
 
 .category-screen h2:focus-visible {
   outline: 1px solid var(--vscode-focusBorder);
+}
+
+/* Fila de comando: título y riesgo, descripción y ejemplo. */
+.command {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 20px;
+}
+
+.command-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.command-title {
+  font-weight: 600;
+}
+
+.command-description {
+  margin: 0;
+  color: var(--vscode-descriptionForeground);
+}
+
+/* Completo aunque la barra sea estrecha: se parte en varias líneas, sin scroll horizontal. */
+.command-example {
+  display: block;
+  margin-top: 2px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--vscode-textPreformat-foreground, var(--vscode-foreground));
+  background: var(--vscode-textCodeBlock-background);
+  font-family: var(--vscode-editor-font-family);
+  font-size: var(--vscode-editor-font-size);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Riesgo: icono + texto + borde (no depende solo del color, también en alto contraste). */
+.risk {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 4px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.risk-caution {
+  color: var(--vscode-editorWarning-foreground);
+}
+
+.risk-destructive {
+  color: var(--vscode-errorForeground);
+}
+
+/* En temas claros (p. ej. Quiet Light) esos colores son poco intensos sobre fondo claro:
+   se oscurecen mezclándolos con el color del texto. Oscuros y alto contraste no cambian. */
+body.vscode-light .risk-caution {
+  color: color-mix(in srgb, var(--vscode-editorWarning-foreground) 55%, var(--vscode-foreground));
+}
+
+body.vscode-light .risk-destructive {
+  color: color-mix(in srgb, var(--vscode-errorForeground) 70%, var(--vscode-foreground));
 }

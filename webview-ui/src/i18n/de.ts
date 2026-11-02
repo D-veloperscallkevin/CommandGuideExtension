@@ -6,5 +6,7 @@ export const de: Messages = {
   commandCount: { one: '{count} Befehl', other: '{count} Befehle' },
   emptyCatalog: 'Keine Kategorien verfügbar.',
   back: 'Zurück',
-  categoryPlaceholder: 'Die Befehlsliste dieser Kategorie folgt in Kürze.',
+  commandsLabel: 'Befehle in {category}',
+  riskCaution: 'Vorsicht',
+  riskDestructive: 'Destruktiv',
 }

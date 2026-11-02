@@ -6,5 +6,7 @@ export const ru: Messages = {
   commandCount: { one: '{count} команда', few: '{count} команды', many: '{count} команд', other: '{count} команды' },
   emptyCatalog: 'Нет доступных категорий.',
   back: 'Назад',
-  categoryPlaceholder: 'Список команд этой категории скоро появится.',
+  commandsLabel: 'Команды: {category}',
+  riskCaution: 'Осторожно',
+  riskDestructive: 'Опасно',
 }

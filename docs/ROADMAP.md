@@ -253,7 +253,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | --- | --- | --- |
 | 1.1 | `ui-i18n` | Infraestructura de traducción de la interfaz (`vscode.l10n` + diccionario del webview) en 11 idiomas, para que todas las vistas nazcan traducidas. Catálogo con idiomas opcionales ✅ |
 | 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA ✅ |
-| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` |
+| 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` ✅ |
 | 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` |
 | 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando |
 | 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías |
@@ -321,6 +321,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] PR de release `develop → staging` para cerrar la Fase 0
 - [x] `ui-i18n` (1.1): interfaz en 11 idiomas
 - [x] `category-view` (1.2): lista de categorías con navegación, teclado y ARIA
+- [x] `command-list` (1.3): lista de comandos con ejemplo, riesgo y estado persistido
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 

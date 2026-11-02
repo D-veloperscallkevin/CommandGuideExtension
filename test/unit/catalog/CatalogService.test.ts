@@ -3,6 +3,7 @@ import {
 	buildCategorySummaries,
 	buildExample,
 	CatalogService,
+	defaultShellFor,
 	effectiveCommand,
 	localize,
 	localizeTags,
@@ -73,21 +74,50 @@ describe('buildCategorySummaries', () => {
 		{ ...makeCategory('git', [newBranch, status], 10), title: { en: 'Git', es: 'Git (es)', fr: 'Git (fr)' } },
 	]).getCategories();
 
-	it('conserva el orden y cuenta los comandos', () => {
-		expect(buildCategorySummaries(ordered, 'en')).toEqual([
-			{ id: 'git', title: 'Git', icon: 'beaker', commandCount: 2 },
-			{ id: 'npm', title: 'npm', icon: 'beaker', commandCount: 1 },
+	it('conserva el orden de categorías y de comandos', () => {
+		const summaries = buildCategorySummaries(ordered, 'en', 'bash');
+		expect(summaries.map((c) => c.id)).toEqual(['git', 'npm']);
+		expect(summaries[0].commands.map((c) => c.id)).toEqual(['git.new-branch', 'git.status']);
+	});
+
+	it('traduce los títulos y cae a en si falta el idioma', () => {
+		expect(buildCategorySummaries(ordered, 'es', 'bash')[0].title).toBe('Git (es)');
+		expect(buildCategorySummaries(ordered, 'fr', 'bash')[0].title).toBe('Git (fr)');
+		expect(buildCategorySummaries(ordered, 'ja', 'bash')[0].title).toBe('Git');
+	});
+
+	it('cada comando lleva textos traducidos, ejemplo resuelto y riesgo', () => {
+		expect(buildCategorySummaries(ordered, 'es', 'bash')[0].commands[0]).toEqual({
+			id: 'git.new-branch',
+			title: 'Título',
+			description: 'Descripción',
+			example: 'git checkout -b feature/mi-cambio',
+			risk: 'safe',
+		});
+		expect(buildCategorySummaries(ordered, 'ko', 'bash')[0].commands[0].title).toBe('Title');
+	});
+
+	it('el ejemplo usa la variante del shell pedido, o command si no la hay', () => {
+		const category = [makeCategory('fs', [remove, status])];
+		expect(buildCategorySummaries(category, 'en', 'powershell')[0].commands.map((c) => c.example)).toEqual([
+			'Remove-Item -Recurse dist',
+			'git status',
 		]);
+		expect(buildCategorySummaries(category, 'en', 'bash')[0].commands[0].example).toBe('rm -rf dist');
 	});
 
-	it('traduce el título y cae a en si falta el idioma', () => {
-		expect(buildCategorySummaries(ordered, 'es')[0].title).toBe('Git (es)');
-		expect(buildCategorySummaries(ordered, 'fr')[0].title).toBe('Git (fr)');
-		expect(buildCategorySummaries(ordered, 'ja')[0].title).toBe('Git');
+	it('el resumen solo lleva los campos que necesita el webview', () => {
+		const [git] = buildCategorySummaries(ordered, 'en', 'bash');
+		expect(Object.keys(git).sort()).toEqual(['commands', 'icon', 'id', 'title']);
+		expect(Object.keys(git.commands[0]).sort()).toEqual(['description', 'example', 'id', 'risk', 'title']);
 	});
+});
 
-	it('el resumen solo lleva id, title, icon y commandCount', () => {
-		expect(Object.keys(buildCategorySummaries(ordered, 'en')[0]).sort()).toEqual(['commandCount', 'icon', 'id', 'title']);
+describe('defaultShellFor', () => {
+	it('PowerShell en Windows y bash en Linux y macOS', () => {
+		expect(defaultShellFor('win32')).toBe('powershell');
+		expect(defaultShellFor('linux')).toBe('bash');
+		expect(defaultShellFor('darwin')).toBe('bash');
 	});
 });
 

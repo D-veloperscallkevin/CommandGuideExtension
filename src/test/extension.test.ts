@@ -36,7 +36,14 @@ suite('Vista lateral', () => {
 		assert.strictEqual(extension.isActive, true);
 		const git = categories.find((c) => c.id === 'git');
 		assert.ok(git, 'el catálogo enviado no incluye git');
-		assert.strictEqual(git.commandCount, 3);
 		assert.strictEqual(git.icon, 'git-branch');
+		assert.deepStrictEqual(
+			git.commands.map((c) => c.id),
+			['git.status', 'git.new-branch', 'git.reset-hard'],
+		);
+		assert.strictEqual(git.commands.find((c) => c.id === 'git.reset-hard')?.risk, 'destructive');
+		for (const command of categories.flatMap((c) => c.commands)) {
+			assert.ok(!command.example.includes('${'), `${command.id}: ejemplo sin resolver "${command.example}"`);
+		}
 	});
 });
