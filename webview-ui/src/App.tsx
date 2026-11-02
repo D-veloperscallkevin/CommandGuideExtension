@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { queryWords } from '../../src/catalog/search'
-import type { CategorySummary, ExtensionMessage } from '../../src/messaging/protocol'
+import type { CategorySummary, ExtensionMessage, ShellId } from '../../src/messaging/protocol'
 import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
 import type { CommandListHandle, Copied } from './CommandList'
@@ -8,6 +8,7 @@ import { toLocale, useT } from './i18n'
 import { initialView, navigate, parseSavedView } from './navigation'
 import SearchBox from './SearchBox'
 import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
+import { shellLabel } from './shellLabel'
 import { getState, postMessage, setState } from './vscode'
 
 type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
@@ -21,6 +22,8 @@ const COPIED_MS = 2000
 function App() {
   const [init, setInit] = useState<InitData | null>(null)
   const [categories, setCategories] = useState<readonly CategorySummary[] | null>(null)
+  // Shell para el que la extensión ha construido los ejemplos; cambia con la terminal activa.
+  const [shell, setShell] = useState<ShellId | null>(null)
   // Arranca en la vista guardada (si es válida); al llegar el catálogo se ajusta con 'resolve'.
   const [view, dispatch] = useReducer(navigate, undefined, () => parseSavedView(getState()) ?? initialView)
   const t = useT(init?.locale ?? initialLocale)
@@ -45,6 +48,9 @@ function App() {
           setInit({ locale: message.locale, version: message.version })
           break
         case 'catalog':
+          // Cada catalog (también el que llega al cambiar de shell) conserva la vista: los ids no
+          // cambian, así que 'resolve' deja pantalla, búsqueda y foco como estaban.
+          setShell(message.shell)
           setCategories(message.categories)
           dispatch({ type: 'resolve', categories: message.categories })
           break
@@ -166,6 +172,10 @@ function App() {
 
   return (
     <main className="shell" aria-label="DevCommands">
+      {/* Siempre montado: así el lector de pantalla anuncia cada cambio de shell sin mover el foco. */}
+      <p className="muted shell-indicator" role="status" aria-live="polite">
+        {shell ? t('examplesFor', { shell: shellLabel(shell) }) : ''}
+      </p>
       {content}
     </main>
   )

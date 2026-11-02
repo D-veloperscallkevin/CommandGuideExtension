@@ -1,6 +1,7 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import type { DevCommandsApi } from '../extension';
+import { resolveTargetShell } from '../terminal/shell';
 
 // <publisher>.<name> de package.json.
 const extensionId = 'aguilardigital.devcommands';
@@ -29,7 +30,7 @@ suite('Vista lateral', () => {
 
 		await vscode.commands.executeCommand('workbench.view.extension.devcommands');
 		const api = await extension.activate();
-		const categories = await nextEvent(api.onDidSendCatalog, 10_000);
+		const { shell, categories } = await nextEvent(api.onDidSendCatalog, 10_000);
 
 		assert.strictEqual(extension.isActive, true);
 		assert.deepStrictEqual(
@@ -44,6 +45,15 @@ suite('Vista lateral', () => {
 			assert.ok(gitIds.includes(id), `git no incluye ${id}`);
 		}
 		assert.strictEqual(git.commands.find((c) => c.id === 'git.reset-hard')?.risk, 'destructive');
+
+		// Sin terminales abiertas, el shell de destino es el del perfil por defecto del entorno.
+		assert.strictEqual(vscode.window.terminals.length, 0);
+		assert.strictEqual(shell, resolveTargetShell({ defaultShell: vscode.env.shell }, process.platform));
+		const removeDirectory = categories
+			.find((c) => c.id === 'terminal')
+			?.commands.find((c) => c.id === 'terminal.remove-directory')?.example;
+		const expectedStart = { powershell: 'Remove-Item -Recurse -Force ', cmd: 'rmdir /s /q ', bash: 'rm -rf ', zsh: 'rm -rf ' }[shell];
+		assert.ok(removeDirectory?.startsWith(expectedStart), `ejemplo para ${shell}: "${removeDirectory}"`);
 		for (const command of categories.flatMap((c) => c.commands)) {
 			assert.ok(!command.example.includes('${'), `${command.id}: ejemplo sin resolver "${command.example}"`);
 			assert.ok(!command.searchText.includes('${'), `${command.id}: searchText sin resolver`);

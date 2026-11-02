@@ -16,11 +16,8 @@ function fakeTerminal(name: string, shellIntegration?: unknown) {
 
 type FakeTerminal = ReturnType<typeof fakeTerminal>;
 
-/**
- * Ventana falsa. Con `withShellIntegration`, expone el evento de integración del shell y
- * `fireShellReady` lo dispara para una terminal.
- */
-function fakeHost(active?: FakeTerminal, { withShellIntegration = true } = {}) {
+/** Ventana falsa. `fireShellReady` dispara el evento de integración del shell para una terminal. */
+function fakeHost(active?: FakeTerminal) {
 	const created: FakeTerminal[] = [];
 	const listeners = new Set<(event: { terminal: TerminalLike }) => unknown>();
 	const host: TerminalHost = {
@@ -30,12 +27,10 @@ function fakeHost(active?: FakeTerminal, { withShellIntegration = true } = {}) {
 			created.push(terminal);
 			return terminal;
 		},
-		onDidChangeTerminalShellIntegration: withShellIntegration
-			? (listener) => {
-					listeners.add(listener);
-					return { dispose: () => listeners.delete(listener) };
-				}
-			: undefined,
+		onDidChangeTerminalShellIntegration: (listener) => {
+			listeners.add(listener);
+			return { dispose: () => listeners.delete(listener) };
+		},
 	};
 	const fireShellReady = (terminal: TerminalLike) => {
 		for (const listener of [...listeners]) listener({ terminal });
@@ -85,7 +80,7 @@ describe('TerminalService', () => {
 		expect(listeners.size).toBe(0);
 	});
 
-	it('si el shell no avisa, escribe al agotar la espera', async () => {
+	it('con la integración del shell desactivada (sin aviso), escribe al agotar la espera', async () => {
 		vi.useFakeTimers();
 		const { host, created, listeners } = fakeHost();
 		const writing = new TerminalService(host, 1000).write('git status');
@@ -95,15 +90,6 @@ describe('TerminalService', () => {
 		await writing;
 		expect(created[0].calls).toEqual(['show(false)', 'sendText(git status, false)']);
 		expect(listeners.size).toBe(0);
-	});
-
-	it('sin la API de integración del shell (VS Code < 1.93), escribe al agotar la espera', async () => {
-		vi.useFakeTimers();
-		const { host, created } = fakeHost(undefined, { withShellIntegration: false });
-		const writing = new TerminalService(host, 1000).write('git status');
-		await vi.advanceTimersByTimeAsync(1000);
-		await writing;
-		expect(created[0].calls).toEqual(['show(false)', 'sendText(git status, false)']);
 	});
 
 	it('muestra la terminal con el foco antes de escribir, y nunca ejecuta', async () => {

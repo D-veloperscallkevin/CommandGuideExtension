@@ -17,4 +17,5 @@ export const ru: Messages = {
   searchResultsLabel: 'Результаты поиска',
   resultCount: { one: '{count} результат', few: '{count} результата', many: '{count} результатов', other: '{count} результата' },
   noResults: 'Нет команд, соответствующих запросу.',
+  examplesFor: 'Примеры для: {shell}',
 }

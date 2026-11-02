@@ -36,6 +36,16 @@ body {
   color: var(--vscode-descriptionForeground);
 }
 
+/* Indicador discreto del shell de los ejemplos, en la parte superior de todas las pantallas. */
+.shell-indicator {
+  padding-top: 0;
+  font-size: 0.9em;
+}
+
+.shell-indicator:empty {
+  display: none;
+}
+
 .codicon {
   flex: none;
 }

@@ -17,4 +17,5 @@ export const zhcn: Messages = {
   searchResultsLabel: '搜索结果',
   resultCount: { other: '{count} 个结果' },
   noResults: '没有与搜索匹配的命令。',
+  examplesFor: '{shell} 示例',
 }

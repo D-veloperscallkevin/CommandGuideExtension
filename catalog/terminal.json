@@ -61,6 +61,9 @@
         "ru": ["pwd", "путь", "где"]
       },
       "risk": "safe",
+      "shells": {
+        "cmd": "cd"
+      },
       "docs": "https://man7.org/linux/man-pages/man1/pwd.1.html"
     },
     {
@@ -107,7 +110,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-ChildItem -Force"
+        "powershell": "Get-ChildItem -Force",
+        "cmd": "dir /a"
       },
       "docs": "https://man7.org/linux/man-pages/man1/ls.1.html"
     },
@@ -185,6 +189,9 @@
         "ru": ["cd", "перейти"]
       },
       "risk": "safe",
+      "shells": {
+        "cmd": "cd /d ${directory}"
+      },
       "docs": "https://www.gnu.org/software/bash/manual/bash.html#index-cd"
     },
     {
@@ -262,7 +269,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "New-Item -ItemType Directory -Force ${directory}"
+        "powershell": "New-Item -ItemType Directory -Force ${directory}",
+        "cmd": "mkdir ${directory}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/mkdir.1.html"
     },
@@ -341,7 +349,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "New-Item -ItemType File ${file}"
+        "powershell": "New-Item -ItemType File ${file}",
+        "cmd": "type nul > ${file}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/touch.1.html"
     },
@@ -420,7 +429,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-Content ${file}"
+        "powershell": "Get-Content ${file}",
+        "cmd": "type ${file}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/cat.1.html"
     },
@@ -499,7 +509,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-Content ${file} -Tail 50 -Wait"
+        "powershell": "Get-Content ${file} -Tail 50 -Wait",
+        "cmd": "powershell -NoProfile -Command \"Get-Content ${file} -Tail 50 -Wait\""
       },
       "docs": "https://man7.org/linux/man-pages/man1/tail.1.html"
     },
@@ -607,7 +618,8 @@
       },
       "risk": "caution",
       "shells": {
-        "powershell": "Copy-Item -Recurse ${source} ${destination}"
+        "powershell": "Copy-Item -Recurse ${source} ${destination}",
+        "cmd": "xcopy /e /i ${source} ${destination}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/cp.1.html"
     },
@@ -715,7 +727,8 @@
       },
       "risk": "caution",
       "shells": {
-        "powershell": "Move-Item ${source} ${destination}"
+        "powershell": "Move-Item ${source} ${destination}",
+        "cmd": "move ${source} ${destination}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/mv.1.html"
     },
@@ -794,7 +807,8 @@
       },
       "risk": "destructive",
       "shells": {
-        "powershell": "Remove-Item ${file}"
+        "powershell": "Remove-Item ${file}",
+        "cmd": "del ${file}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/rm.1.html"
     },
@@ -873,7 +887,8 @@
       },
       "risk": "destructive",
       "shells": {
-        "powershell": "Remove-Item -Recurse -Force ${directory}"
+        "powershell": "Remove-Item -Recurse -Force ${directory}",
+        "cmd": "rmdir /s /q ${directory}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/rm.1.html"
     },
@@ -952,7 +967,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-ChildItem -Recurse -Filter \"${pattern}\""
+        "powershell": "Get-ChildItem -Recurse -Filter \"${pattern}\"",
+        "cmd": "dir /s /b \"${pattern}\""
       },
       "docs": "https://man7.org/linux/man-pages/man1/find.1.html"
     },
@@ -1031,7 +1047,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-ChildItem -Recurse -File | Select-String -Pattern \"${text}\""
+        "powershell": "Get-ChildItem -Recurse -File | Select-String -Pattern \"${text}\"",
+        "cmd": "findstr /s /n /c:\"${text}\" *"
       },
       "docs": "https://man7.org/linux/man-pages/man1/grep.1.html"
     },
@@ -1110,7 +1127,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-Command ${program}"
+        "powershell": "Get-Command ${program}",
+        "cmd": "where ${program}"
       },
       "docs": "https://manpages.debian.org/which"
     },
@@ -1158,7 +1176,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "$env:PATH -split ';'"
+        "powershell": "$env:PATH -split ';'",
+        "cmd": "echo %PATH:;=&echo.%"
       },
       "docs": "https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Variables"
     },
@@ -1237,7 +1256,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "\"{0:N1} MB\" -f ((Get-ChildItem ${directory} -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)"
+        "powershell": "\"{0:N1} MB\" -f ((Get-ChildItem ${directory} -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)",
+        "cmd": "dir /s ${directory}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/du.1.html"
     },
@@ -1316,7 +1336,8 @@
       },
       "risk": "safe",
       "shells": {
-        "powershell": "Get-NetTCPConnection -LocalPort ${port}"
+        "powershell": "Get-NetTCPConnection -LocalPort ${port}",
+        "cmd": "netstat -ano | findstr :${port}"
       },
       "docs": "https://man7.org/linux/man-pages/man8/lsof.8.html"
     },
@@ -1395,7 +1416,8 @@
       },
       "risk": "caution",
       "shells": {
-        "powershell": "Stop-Process -Id ${pid}"
+        "powershell": "Stop-Process -Id ${pid}",
+        "cmd": "taskkill /PID ${pid}"
       },
       "docs": "https://man7.org/linux/man-pages/man1/kill.1.html"
     }

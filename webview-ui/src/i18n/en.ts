@@ -19,6 +19,7 @@ export const en = {
   searchResultsLabel: 'Search results',
   resultCount: { one: '{count} result', other: '{count} results' },
   noResults: 'No commands match your search.',
+  examplesFor: 'Examples for: {shell}',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

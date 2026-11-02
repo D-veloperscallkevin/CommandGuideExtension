@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
-import type { CategorySummary } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
+import { TargetShell } from './terminal/TargetShell';
 import { TerminalService } from './terminal/TerminalService';
-import { CommandsViewProvider } from './views/CommandsViewProvider';
+import { CommandsViewProvider, type SentCatalog } from './views/CommandsViewProvider';
 
 /** API pública de la extensión (`extension.exports`); la usan los tests de integración. */
 export interface DevCommandsApi {
-	/** Categorías enviadas al webview tras cada handshake. */
-	readonly onDidSendCatalog: vscode.Event<readonly CategorySummary[]>;
+	/** Catálogo enviado al webview: tras cada handshake y al cambiar el shell de destino. */
+	readonly onDidSendCatalog: vscode.Event<SentCatalog>;
 	/** Lo mismo que pulsar un comando en la vista: lo escribe en la terminal sin ejecutarlo. */
 	sendToTerminal(commandId: string): void;
 	/** Lo mismo que el botón de copiar: copia el comando y devuelve si funcionó. */
@@ -20,10 +20,12 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 	const version = String(context.extension.packageJSON.version);
 	const terminal = new TerminalService(vscode.window);
 	const clipboard = new ClipboardService(vscode.env.clipboard);
-	const provider = new CommandsViewProvider(context.extensionUri, version, log, terminal, clipboard);
+	const targetShell = new TargetShell(vscode.window, vscode.env, process.platform);
+	const provider = new CommandsViewProvider(context.extensionUri, version, log, terminal, clipboard, targetShell);
 
 	context.subscriptions.push(
 		log,
+		targetShell,
 		provider,
 		vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewId, provider),
 	);

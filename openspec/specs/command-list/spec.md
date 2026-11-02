@@ -17,16 +17,20 @@ La pantalla de una categoría SHALL mostrar todos sus comandos en el orden del c
 - **WHEN** la pantalla muestra el comando `git.new-branch` con el idioma activo `es`
 - **THEN** su ejemplo es `git checkout -b feature/mi-cambio`
 
-### Requirement: Ejemplo según el sistema operativo
-Hasta que exista la detección del shell, el ejemplo SHALL usar la variante de PowerShell en Windows y la variante POSIX (bash) en Linux y macOS. Si el comando no define una variante para ese shell, SHALL usar `command`.
+### Requirement: Ejemplo según el shell de destino
+El ejemplo de cada comando SHALL construirse para el shell de destino (la terminal en la que se escribiría el comando): su variante en `shells` si existe y, si no, `command`.
 
 #### Scenario: Windows con PowerShell
-- **WHEN** la extensión se ejecuta en Windows y un comando define `shells.powershell`
+- **WHEN** el shell de destino es `powershell` y un comando define `shells.powershell`
 - **THEN** su ejemplo se construye a partir de `shells.powershell`
 
 #### Scenario: Linux con bash
-- **WHEN** la extensión se ejecuta en Linux
-- **THEN** el ejemplo de cada comando se construye a partir de `command`
+- **WHEN** el shell de destino es `bash`
+- **THEN** el ejemplo de cada comando se construye a partir de su variante `shells.bash` si existe, y si no a partir de `command`
+
+#### Scenario: Windows con cmd
+- **WHEN** el shell de destino es `cmd` y un comando define `shells.cmd`
+- **THEN** su ejemplo se construye a partir de `shells.cmd`
 
 ### Requirement: Aviso de riesgo
 Los comandos con `risk` `caution` o `destructive` SHALL mostrar una etiqueta con icono y texto en el idioma activo ("Precaución" o "Destructivo" en español), con los colores de aviso y de error del tema respectivamente. Los comandos `safe` MUST NOT mostrar etiqueta. El riesgo MUST NOT comunicarse solo con color.
@@ -100,3 +104,14 @@ Copiar MUST NOT enviar nada a la terminal.
 #### Scenario: Botón de copiar fuera del orden de Tab
 - **WHEN** el foco está en un comando y el usuario pulsa Tab
 - **THEN** el foco sale de la lista sin pasar por el botón de copiar
+
+### Requirement: Indicador del shell de los ejemplos
+La vista SHALL mostrar, de forma discreta en la parte superior y en todas sus pantallas (inicio, búsqueda y categoría), para qué shell son los ejemplos, con el texto en el idioma activo (en español, "Ejemplos para: PowerShell") y el nombre del shell legible: `PowerShell`, `bash`, `zsh` o `cmd`. Cuando el shell cambie con la vista abierta, el nuevo texto SHALL anunciarse a los lectores de pantalla sin mover el foco. El texto del indicador SHALL existir en los 11 idiomas de la interfaz.
+
+#### Scenario: Windows con PowerShell
+- **WHEN** el idioma activo es `es` y el shell de destino es `powershell`
+- **THEN** la vista muestra "Ejemplos para: PowerShell"
+
+#### Scenario: Cambio con lector de pantalla
+- **WHEN** el foco está en un comando de la lista, el idioma activo es `en` y el shell de destino cambia de `powershell` a `bash`
+- **THEN** el indicador pasa a "Examples for: bash", el lector de pantalla lo anuncia y el foco sigue en el mismo comando

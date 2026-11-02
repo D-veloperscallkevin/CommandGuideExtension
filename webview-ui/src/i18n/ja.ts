@@ -17,4 +17,5 @@ export const ja: Messages = {
   searchResultsLabel: '検索結果',
   resultCount: { other: '{count} 件の結果' },
   noResults: '検索に一致するコマンドはありません。',
+  examplesFor: '{shell} 用の例',
 }

@@ -157,7 +157,7 @@ El catálogo SHALL viajar dentro del bundle de la extensión. Consultarlo MUST N
 - **THEN** los tests del catálogo fallan nombrando `npm.json`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `node`, `docker` y `terminal`. Los comandos de `terminal` SHALL declarar `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `node`, `docker` y `terminal`. Los comandos de `terminal` SHALL declarar `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX, y `shells.cmd` siempre que su sintaxis en cmd difiera de la variante POSIX.
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
@@ -170,6 +170,14 @@ El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL
 #### Scenario: Ejemplo de Terminal en Windows
 - **WHEN** el shell es `powershell` y se muestra el comando de Terminal que borra una carpeta
 - **THEN** el ejemplo usa la sintaxis de PowerShell (`Remove-Item -Recurse -Force …`) y no `rm -rf`
+
+#### Scenario: Ejemplo de Terminal en cmd
+- **WHEN** el shell es `cmd` y se muestra el comando de Terminal que borra una carpeta
+- **THEN** el ejemplo usa la sintaxis de cmd (`rmdir /s /q …`) y no `rm -rf` ni `Remove-Item`
+
+#### Scenario: Ejemplo de Terminal en bash
+- **WHEN** el shell es `bash` y se muestra el comando de Terminal que borra una carpeta
+- **THEN** el ejemplo es la variante POSIX (`rm -rf …`)
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.

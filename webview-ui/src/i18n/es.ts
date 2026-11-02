@@ -17,4 +17,5 @@ export const es: Messages = {
   searchResultsLabel: 'Resultados de la búsqueda',
   resultCount: { one: '{count} resultado', many: '{count} de resultados', other: '{count} resultados' },
   noResults: 'Ningún comando coincide con la búsqueda.',
+  examplesFor: 'Ejemplos para: {shell}',
 }

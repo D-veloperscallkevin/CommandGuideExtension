@@ -48,8 +48,8 @@ export interface CategorySummary {
 }
 
 /**
- * Shell provisional para los ejemplos hasta que exista la detección real (change 2.1):
- * PowerShell en Windows (el terminal por defecto de VS Code allí) y bash en el resto.
+ * Shell por sistema operativo: PowerShell en Windows (el terminal por defecto de VS Code allí)
+ * y bash en el resto. Es el último recurso de la detección del shell (`src/terminal/shell.ts`).
  */
 export function defaultShellFor(platform: string): ShellId {
 	return platform === 'win32' ? 'powershell' : 'bash';
