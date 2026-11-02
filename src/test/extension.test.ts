@@ -2,8 +2,8 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import type { DevCommandsApi } from '../extension';
 
-// Por nombre de paquete: el publisher aún no está decidido (change 2.9).
-const packageName = 'devcommands';
+// <publisher>.<name> de package.json.
+const extensionId = 'aguilardigital.devcommands';
 
 /** Espera al siguiente evento y devuelve su valor, o falla tras `ms` milisegundos. */
 function nextEvent<T>(event: vscode.Event<T>, ms: number): Promise<T> {
@@ -23,10 +23,8 @@ function nextEvent<T>(event: vscode.Event<T>, ms: number): Promise<T> {
 suite('Vista lateral', () => {
 	test('al abrir la vista, la extensión se activa, completa el handshake y envía el catálogo', async function () {
 		this.timeout(20_000);
-		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
-			| vscode.Extension<DevCommandsApi>
-			| undefined;
-		assert.ok(extension, `no se encuentra la extensión ${packageName}`);
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension, `no se encuentra la extensión ${extensionId}`);
 		assert.strictEqual(extension.isActive, false, 'no debe activarse antes de abrir la vista');
 
 		await vscode.commands.executeCommand('workbench.view.extension.devcommands');
@@ -56,9 +54,7 @@ suite('Vista lateral', () => {
 
 suite('Terminal', () => {
 	async function api(): Promise<DevCommandsApi> {
-		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
-			| vscode.Extension<DevCommandsApi>
-			| undefined;
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
 		assert.ok(extension);
 		return extension.activate();
 	}
@@ -101,9 +97,7 @@ suite('Portapapeles', () => {
 	const sentinel = 'centinela-devcommands';
 
 	async function api(): Promise<DevCommandsApi> {
-		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
-			| vscode.Extension<DevCommandsApi>
-			| undefined;
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
 		assert.ok(extension);
 		return extension.activate();
 	}

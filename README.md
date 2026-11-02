@@ -49,6 +49,15 @@ pnpm run verify   # lint, unit tests, build and integration tests
 
 Press F5 in VS Code to open an Extension Development Host with the extension loaded.
 
+### Packaging
+
+```bash
+pnpm run release:package   # builds devcommands-<version>.vsix and checks its size (< 2 MB) and contents
+code --install-extension devcommands-0.1.0.vsix
+```
+
+In WSL, open a folder with Remote-WSL and use Extensions › "…" › "Install from VSIX…" to install it there.
+
 ## License
 
 See [LICENSE](LICENSE).
