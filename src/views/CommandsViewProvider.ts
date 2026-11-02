@@ -49,8 +49,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
 			return;
 		}
-		this.terminal.write(text);
-		this.log.info('Comando escrito en la terminal:', commandId);
+		// Puede esperar a que el shell de una terminal nueva esté listo; no bloquea la vista.
+		void this.terminal.write(text).then(
+			() => this.log.info('Comando escrito en la terminal:', commandId),
+			(error: unknown) => this.log.error('No se pudo escribir en la terminal:', String(error)),
+		);
 	}
 
 	/**
