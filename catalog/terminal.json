@@ -1,0 +1,1403 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "terminal",
+  "title": {
+    "en": "Terminal",
+    "es": "Terminal",
+    "pt-br": "Terminal",
+    "fr": "Terminal",
+    "de": "Terminal",
+    "it": "Terminale",
+    "ja": "ターミナル",
+    "ko": "터미널",
+    "zh-cn": "终端",
+    "zh-tw": "終端機",
+    "ru": "Терминал"
+  },
+  "icon": "terminal",
+  "order": 50,
+  "commands": [
+    {
+      "id": "terminal.current-directory",
+      "title": {
+        "en": "Show current folder",
+        "es": "Ver la carpeta actual",
+        "pt-br": "Ver a pasta atual",
+        "fr": "Afficher le dossier courant",
+        "de": "Aktuellen Ordner anzeigen",
+        "it": "Mostra la cartella corrente",
+        "ja": "現在のフォルダーを表示",
+        "ko": "현재 폴더 보기",
+        "zh-cn": "查看当前文件夹",
+        "zh-tw": "檢視目前資料夾",
+        "ru": "Показать текущую папку"
+      },
+      "description": {
+        "en": "Prints the full path of the folder you are in",
+        "es": "Muestra la ruta completa de la carpeta en la que estás",
+        "pt-br": "Mostra o caminho completo da pasta em que você está",
+        "fr": "Affiche le chemin complet du dossier où vous êtes",
+        "de": "Gibt den vollständigen Pfad des aktuellen Ordners aus",
+        "it": "Mostra il percorso completo della cartella in cui ti trovi",
+        "ja": "今いるフォルダーのフルパスを表示します",
+        "ko": "현재 있는 폴더의 전체 경로를 표시합니다",
+        "zh-cn": "显示当前所在文件夹的完整路径",
+        "zh-tw": "顯示目前所在資料夾的完整路徑",
+        "ru": "Выводит полный путь к текущей папке"
+      },
+      "command": "pwd",
+      "tags": {
+        "en": ["pwd", "path", "where"],
+        "es": ["pwd", "ruta", "dónde"],
+        "pt-br": ["pwd", "caminho", "onde"],
+        "fr": ["pwd", "chemin", "où"],
+        "de": ["pwd", "Pfad", "wo"],
+        "it": ["pwd", "percorso", "dove"],
+        "ja": ["pwd", "パス", "場所"],
+        "ko": ["pwd", "경로", "위치"],
+        "zh-cn": ["pwd", "路径", "位置"],
+        "zh-tw": ["pwd", "路徑", "位置"],
+        "ru": ["pwd", "путь", "где"]
+      },
+      "risk": "safe",
+      "docs": "https://man7.org/linux/man-pages/man1/pwd.1.html"
+    },
+    {
+      "id": "terminal.list",
+      "title": {
+        "en": "List files",
+        "es": "Listar archivos",
+        "pt-br": "Listar arquivos",
+        "fr": "Lister les fichiers",
+        "de": "Dateien auflisten",
+        "it": "Elenca i file",
+        "ja": "ファイルを一覧表示",
+        "ko": "파일 목록",
+        "zh-cn": "列出文件",
+        "zh-tw": "列出檔案",
+        "ru": "Список файлов"
+      },
+      "description": {
+        "en": "Lists the files of the current folder, including hidden ones, with details",
+        "es": "Lista los archivos de la carpeta actual, también los ocultos, con detalles",
+        "pt-br": "Lista os arquivos da pasta atual, inclusive os ocultos, com detalhes",
+        "fr": "Liste les fichiers du dossier courant, y compris les fichiers cachés, avec leurs détails",
+        "de": "Listet die Dateien des aktuellen Ordners mit Details auf, auch versteckte",
+        "it": "Elenca i file della cartella corrente, anche quelli nascosti, con i dettagli",
+        "ja": "隠しファイルを含む現在のフォルダーのファイルを詳細付きで一覧表示します",
+        "ko": "숨김 파일을 포함해 현재 폴더의 파일을 자세히 나열합니다",
+        "zh-cn": "列出当前文件夹中的文件（包括隐藏文件）及详细信息",
+        "zh-tw": "列出目前資料夾中的檔案（包括隱藏檔案）及詳細資訊",
+        "ru": "Показывает файлы текущей папки, включая скрытые, с подробностями"
+      },
+      "command": "ls -la",
+      "tags": {
+        "en": ["ls", "dir", "list", "hidden"],
+        "es": ["ls", "dir", "listar", "ocultos"],
+        "pt-br": ["ls", "dir", "listar", "ocultos"],
+        "fr": ["ls", "dir", "lister", "cachés"],
+        "de": ["ls", "dir", "auflisten", "versteckt"],
+        "it": ["ls", "dir", "elencare", "nascosti"],
+        "ja": ["ls", "dir", "一覧", "隠し"],
+        "ko": ["ls", "dir", "목록", "숨김"],
+        "zh-cn": ["ls", "dir", "列出", "隐藏"],
+        "zh-tw": ["ls", "dir", "列出", "隱藏"],
+        "ru": ["ls", "dir", "список", "скрытые"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-ChildItem -Force"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/ls.1.html"
+    },
+    {
+      "id": "terminal.change-directory",
+      "title": {
+        "en": "Change folder",
+        "es": "Cambiar de carpeta",
+        "pt-br": "Mudar de pasta",
+        "fr": "Changer de dossier",
+        "de": "Ordner wechseln",
+        "it": "Cambia cartella",
+        "ja": "フォルダーを移動",
+        "ko": "폴더 이동",
+        "zh-cn": "切换文件夹",
+        "zh-tw": "切換資料夾",
+        "ru": "Перейти в папку"
+      },
+      "description": {
+        "en": "Moves to another folder. Use .. to go up one level",
+        "es": "Se mueve a otra carpeta. Usa .. para subir un nivel",
+        "pt-br": "Vai para outra pasta. Use .. para subir um nível",
+        "fr": "Va dans un autre dossier. Utilisez .. pour remonter d'un niveau",
+        "de": "Wechselt in einen anderen Ordner. Mit .. geht es eine Ebene nach oben",
+        "it": "Passa a un’altra cartella. Usa .. per salire di un livello",
+        "ja": "別のフォルダーに移動します。.. で 1 つ上に戻ります",
+        "ko": "다른 폴더로 이동합니다. ..를 쓰면 한 단계 위로 갑니다",
+        "zh-cn": "进入另一个文件夹。用 .. 返回上一级",
+        "zh-tw": "進入另一個資料夾。用 .. 回到上一層",
+        "ru": "Переходит в другую папку. .. — на уровень выше"
+      },
+      "command": "cd ${directory}",
+      "params": [
+        {
+          "name": "directory",
+          "label": {
+            "en": "Folder",
+            "es": "Carpeta",
+            "pt-br": "Pasta",
+            "fr": "Dossier",
+            "de": "Ordner",
+            "it": "Cartella",
+            "ja": "フォルダー",
+            "ko": "폴더",
+            "zh-cn": "文件夹",
+            "zh-tw": "資料夾",
+            "ru": "Папка"
+          },
+          "placeholder": {
+            "en": "src",
+            "es": "src",
+            "pt-br": "src",
+            "fr": "src",
+            "de": "src",
+            "it": "src",
+            "ja": "src",
+            "ko": "src",
+            "zh-cn": "src",
+            "zh-tw": "src",
+            "ru": "src"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["cd", "navigate"],
+        "es": ["cd", "navegar", "ir"],
+        "pt-br": ["cd", "navegar", "ir"],
+        "fr": ["cd", "naviguer", "aller"],
+        "de": ["cd", "navigieren", "wechseln"],
+        "it": ["cd", "navigare", "andare"],
+        "ja": ["cd", "移動"],
+        "ko": ["cd", "이동"],
+        "zh-cn": ["cd", "导航", "进入"],
+        "zh-tw": ["cd", "瀏覽", "進入"],
+        "ru": ["cd", "перейти"]
+      },
+      "risk": "safe",
+      "docs": "https://www.gnu.org/software/bash/manual/bash.html#index-cd"
+    },
+    {
+      "id": "terminal.make-directory",
+      "title": {
+        "en": "Create a folder",
+        "es": "Crear una carpeta",
+        "pt-br": "Criar uma pasta",
+        "fr": "Créer un dossier",
+        "de": "Ordner erstellen",
+        "it": "Crea una cartella",
+        "ja": "フォルダーを作成",
+        "ko": "폴더 만들기",
+        "zh-cn": "创建文件夹",
+        "zh-tw": "建立資料夾",
+        "ru": "Создать папку"
+      },
+      "description": {
+        "en": "Creates a folder, including any missing parent folders",
+        "es": "Crea una carpeta, junto con las carpetas intermedias que falten",
+        "pt-br": "Cria uma pasta, junto com as pastas intermediárias que faltarem",
+        "fr": "Crée un dossier, ainsi que les dossiers parents manquants",
+        "de": "Erstellt einen Ordner samt fehlender übergeordneter Ordner",
+        "it": "Crea una cartella, insieme alle cartelle intermedie mancanti",
+        "ja": "足りない親フォルダーも含めてフォルダーを作成します",
+        "ko": "없는 상위 폴더까지 포함해 폴더를 만듭니다",
+        "zh-cn": "创建文件夹，并一并创建缺少的上级文件夹",
+        "zh-tw": "建立資料夾，並一併建立缺少的上層資料夾",
+        "ru": "Создаёт папку вместе с недостающими родительскими папками"
+      },
+      "command": "mkdir -p ${directory}",
+      "params": [
+        {
+          "name": "directory",
+          "label": {
+            "en": "Folder",
+            "es": "Carpeta",
+            "pt-br": "Pasta",
+            "fr": "Dossier",
+            "de": "Ordner",
+            "it": "Cartella",
+            "ja": "フォルダー",
+            "ko": "폴더",
+            "zh-cn": "文件夹",
+            "zh-tw": "資料夾",
+            "ru": "Папка"
+          },
+          "placeholder": {
+            "en": "src/components",
+            "es": "src/components",
+            "pt-br": "src/components",
+            "fr": "src/components",
+            "de": "src/components",
+            "it": "src/components",
+            "ja": "src/components",
+            "ko": "src/components",
+            "zh-cn": "src/components",
+            "zh-tw": "src/components",
+            "ru": "src/components"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["mkdir", "create", "folder"],
+        "es": ["mkdir", "crear", "carpeta"],
+        "pt-br": ["mkdir", "criar", "pasta"],
+        "fr": ["mkdir", "créer", "dossier"],
+        "de": ["mkdir", "erstellen", "Ordner"],
+        "it": ["mkdir", "creare", "cartella"],
+        "ja": ["mkdir", "作成", "フォルダー"],
+        "ko": ["mkdir", "만들기", "폴더"],
+        "zh-cn": ["mkdir", "创建", "文件夹"],
+        "zh-tw": ["mkdir", "建立", "資料夾"],
+        "ru": ["mkdir", "создать", "папка"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "New-Item -ItemType Directory -Force ${directory}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/mkdir.1.html"
+    },
+    {
+      "id": "terminal.create-file",
+      "title": {
+        "en": "Create an empty file",
+        "es": "Crear un archivo vacío",
+        "pt-br": "Criar um arquivo vazio",
+        "fr": "Créer un fichier vide",
+        "de": "Leere Datei erstellen",
+        "it": "Crea un file vuoto",
+        "ja": "空のファイルを作成",
+        "ko": "빈 파일 만들기",
+        "zh-cn": "创建空文件",
+        "zh-tw": "建立空白檔案",
+        "ru": "Создать пустой файл"
+      },
+      "description": {
+        "en": "Creates an empty file in the current folder",
+        "es": "Crea un archivo vacío en la carpeta actual",
+        "pt-br": "Cria um arquivo vazio na pasta atual",
+        "fr": "Crée un fichier vide dans le dossier courant",
+        "de": "Erstellt eine leere Datei im aktuellen Ordner",
+        "it": "Crea un file vuoto nella cartella corrente",
+        "ja": "現在のフォルダーに空のファイルを作成します",
+        "ko": "현재 폴더에 빈 파일을 만듭니다",
+        "zh-cn": "在当前文件夹中创建空文件",
+        "zh-tw": "在目前資料夾中建立空白檔案",
+        "ru": "Создаёт пустой файл в текущей папке"
+      },
+      "command": "touch ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": ".env",
+            "es": ".env",
+            "pt-br": ".env",
+            "fr": ".env",
+            "de": ".env",
+            "it": ".env",
+            "ja": ".env",
+            "ko": ".env",
+            "zh-cn": ".env",
+            "zh-tw": ".env",
+            "ru": ".env"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["touch", "create", "file"],
+        "es": ["touch", "crear", "archivo"],
+        "pt-br": ["touch", "criar", "arquivo"],
+        "fr": ["touch", "créer", "fichier"],
+        "de": ["touch", "erstellen", "Datei"],
+        "it": ["touch", "creare", "file"],
+        "ja": ["touch", "作成", "ファイル"],
+        "ko": ["touch", "만들기", "파일"],
+        "zh-cn": ["touch", "创建", "文件"],
+        "zh-tw": ["touch", "建立", "檔案"],
+        "ru": ["touch", "создать", "файл"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "New-Item -ItemType File ${file}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/touch.1.html"
+    },
+    {
+      "id": "terminal.show-file",
+      "title": {
+        "en": "Show a file",
+        "es": "Ver un archivo",
+        "pt-br": "Ver um arquivo",
+        "fr": "Afficher un fichier",
+        "de": "Datei anzeigen",
+        "it": "Mostra un file",
+        "ja": "ファイルの内容を表示",
+        "ko": "파일 내용 보기",
+        "zh-cn": "查看文件内容",
+        "zh-tw": "檢視檔案內容",
+        "ru": "Показать файл"
+      },
+      "description": {
+        "en": "Prints the content of a text file",
+        "es": "Muestra el contenido de un archivo de texto",
+        "pt-br": "Mostra o conteúdo de um arquivo de texto",
+        "fr": "Affiche le contenu d'un fichier texte",
+        "de": "Gibt den Inhalt einer Textdatei aus",
+        "it": "Mostra il contenuto di un file di testo",
+        "ja": "テキストファイルの内容を表示します",
+        "ko": "텍스트 파일의 내용을 출력합니다",
+        "zh-cn": "输出文本文件的内容",
+        "zh-tw": "輸出文字檔的內容",
+        "ru": "Выводит содержимое текстового файла"
+      },
+      "command": "cat ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "package.json",
+            "es": "package.json",
+            "pt-br": "package.json",
+            "fr": "package.json",
+            "de": "package.json",
+            "it": "package.json",
+            "ja": "package.json",
+            "ko": "package.json",
+            "zh-cn": "package.json",
+            "zh-tw": "package.json",
+            "ru": "package.json"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["cat", "read", "content"],
+        "es": ["cat", "leer", "contenido"],
+        "pt-br": ["cat", "ler", "conteúdo"],
+        "fr": ["cat", "lire", "contenu"],
+        "de": ["cat", "lesen", "Inhalt"],
+        "it": ["cat", "leggere", "contenuto"],
+        "ja": ["cat", "読む", "内容"],
+        "ko": ["cat", "읽기", "내용"],
+        "zh-cn": ["cat", "读取", "内容"],
+        "zh-tw": ["cat", "讀取", "內容"],
+        "ru": ["cat", "читать", "содержимое"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-Content ${file}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/cat.1.html"
+    },
+    {
+      "id": "terminal.follow-file",
+      "title": {
+        "en": "Follow the end of a file",
+        "es": "Seguir el final de un archivo",
+        "pt-br": "Acompanhar o fim de um arquivo",
+        "fr": "Suivre la fin d'un fichier",
+        "de": "Dateiende verfolgen",
+        "it": "Segui la fine di un file",
+        "ja": "ファイルの末尾を追跡",
+        "ko": "파일 끝부분 따라가기",
+        "zh-cn": "跟踪文件末尾",
+        "zh-tw": "追蹤檔案結尾",
+        "ru": "Следить за концом файла"
+      },
+      "description": {
+        "en": "Shows the last 50 lines of a file and keeps printing new ones, useful for logs. Ctrl+C stops it",
+        "es": "Muestra las últimas 50 líneas de un archivo y sigue mostrando las nuevas, útil para logs. Ctrl+C lo detiene",
+        "pt-br": "Mostra as últimas 50 linhas de um arquivo e continua mostrando as novas, útil para logs. Ctrl+C interrompe",
+        "fr": "Affiche les 50 dernières lignes d'un fichier et continue d'afficher les nouvelles, utile pour les logs. Ctrl+C l'arrête",
+        "de": "Zeigt die letzten 50 Zeilen einer Datei und gibt neue fortlaufend aus, praktisch für Logs. Strg+C beendet es",
+        "it": "Mostra le ultime 50 righe di un file e continua a stampare le nuove, utile per i log. Ctrl+C lo ferma",
+        "ja": "ファイルの最後の 50 行を表示し、新しい行を表示し続けます。ログに便利です。Ctrl+C で停止します",
+        "ko": "파일의 마지막 50줄을 보여 주고 새 줄을 계속 출력합니다. 로그에 유용합니다. Ctrl+C로 멈춥니다",
+        "zh-cn": "显示文件最后 50 行并持续输出新内容，适合查看日志。按 Ctrl+C 停止",
+        "zh-tw": "顯示檔案最後 50 行並持續輸出新內容，適合檢視記錄。按 Ctrl+C 停止",
+        "ru": "Показывает последние 50 строк файла и продолжает выводить новые — удобно для логов. Ctrl+C останавливает"
+      },
+      "command": "tail -n 50 -f ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "logs/app.log",
+            "es": "logs/app.log",
+            "pt-br": "logs/app.log",
+            "fr": "logs/app.log",
+            "de": "logs/app.log",
+            "it": "logs/app.log",
+            "ja": "logs/app.log",
+            "ko": "logs/app.log",
+            "zh-cn": "logs/app.log",
+            "zh-tw": "logs/app.log",
+            "ru": "logs/app.log"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["tail", "follow", "logs"],
+        "es": ["tail", "seguir", "logs"],
+        "pt-br": ["tail", "acompanhar", "logs"],
+        "fr": ["tail", "suivre", "logs"],
+        "de": ["tail", "verfolgen", "Logs"],
+        "it": ["tail", "seguire", "log"],
+        "ja": ["tail", "追跡", "ログ"],
+        "ko": ["tail", "따라가기", "로그"],
+        "zh-cn": ["tail", "跟踪", "日志"],
+        "zh-tw": ["tail", "追蹤", "記錄"],
+        "ru": ["tail", "следить", "логи"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-Content ${file} -Tail 50 -Wait"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/tail.1.html"
+    },
+    {
+      "id": "terminal.copy",
+      "title": {
+        "en": "Copy files or folders",
+        "es": "Copiar archivos o carpetas",
+        "pt-br": "Copiar arquivos ou pastas",
+        "fr": "Copier des fichiers ou dossiers",
+        "de": "Dateien oder Ordner kopieren",
+        "it": "Copia file o cartelle",
+        "ja": "ファイルやフォルダーをコピー",
+        "ko": "파일 또는 폴더 복사",
+        "zh-cn": "复制文件或文件夹",
+        "zh-tw": "複製檔案或資料夾",
+        "ru": "Копировать файлы или папки"
+      },
+      "description": {
+        "en": "Copies a file or a whole folder. Overwrites the destination if it exists",
+        "es": "Copia un archivo o una carpeta completa. Sobrescribe el destino si existe",
+        "pt-br": "Copia um arquivo ou uma pasta inteira. Sobrescreve o destino se ele existir",
+        "fr": "Copie un fichier ou un dossier entier. Écrase la destination si elle existe",
+        "de": "Kopiert eine Datei oder einen ganzen Ordner. Überschreibt das Ziel, falls vorhanden",
+        "it": "Copia un file o una cartella intera. Sovrascrive la destinazione se esiste",
+        "ja": "ファイルまたはフォルダー全体をコピーします。コピー先があれば上書きします",
+        "ko": "파일이나 폴더 전체를 복사합니다. 대상이 있으면 덮어씁니다",
+        "zh-cn": "复制文件或整个文件夹。目标已存在时会覆盖",
+        "zh-tw": "複製檔案或整個資料夾。目的地已存在時會覆寫",
+        "ru": "Копирует файл или папку целиком. Перезаписывает назначение, если оно существует"
+      },
+      "command": "cp -r ${source} ${destination}",
+      "params": [
+        {
+          "name": "source",
+          "label": {
+            "en": "Source",
+            "es": "Origen",
+            "pt-br": "Origem",
+            "fr": "Source",
+            "de": "Quelle",
+            "it": "Origine",
+            "ja": "コピー元",
+            "ko": "원본",
+            "zh-cn": "源",
+            "zh-tw": "來源",
+            "ru": "Источник"
+          },
+          "placeholder": {
+            "en": "config.json",
+            "es": "config.json",
+            "pt-br": "config.json",
+            "fr": "config.json",
+            "de": "config.json",
+            "it": "config.json",
+            "ja": "config.json",
+            "ko": "config.json",
+            "zh-cn": "config.json",
+            "zh-tw": "config.json",
+            "ru": "config.json"
+          }
+        },
+        {
+          "name": "destination",
+          "label": {
+            "en": "Destination",
+            "es": "Destino",
+            "pt-br": "Destino",
+            "fr": "Destination",
+            "de": "Ziel",
+            "it": "Destinazione",
+            "ja": "コピー先",
+            "ko": "대상",
+            "zh-cn": "目标",
+            "zh-tw": "目的地",
+            "ru": "Назначение"
+          },
+          "placeholder": {
+            "en": "config.backup.json",
+            "es": "config.backup.json",
+            "pt-br": "config.backup.json",
+            "fr": "config.backup.json",
+            "de": "config.backup.json",
+            "it": "config.backup.json",
+            "ja": "config.backup.json",
+            "ko": "config.backup.json",
+            "zh-cn": "config.backup.json",
+            "zh-tw": "config.backup.json",
+            "ru": "config.backup.json"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["cp", "copy", "duplicate"],
+        "es": ["cp", "copiar", "duplicar"],
+        "pt-br": ["cp", "copiar", "duplicar"],
+        "fr": ["cp", "copier", "dupliquer"],
+        "de": ["cp", "kopieren", "duplizieren"],
+        "it": ["cp", "copiare", "duplicare"],
+        "ja": ["cp", "コピー", "複製"],
+        "ko": ["cp", "복사", "복제"],
+        "zh-cn": ["cp", "复制"],
+        "zh-tw": ["cp", "複製"],
+        "ru": ["cp", "копировать"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "Copy-Item -Recurse ${source} ${destination}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/cp.1.html"
+    },
+    {
+      "id": "terminal.move",
+      "title": {
+        "en": "Move or rename",
+        "es": "Mover o renombrar",
+        "pt-br": "Mover ou renomear",
+        "fr": "Déplacer ou renommer",
+        "de": "Verschieben oder umbenennen",
+        "it": "Sposta o rinomina",
+        "ja": "移動または名前変更",
+        "ko": "이동 또는 이름 바꾸기",
+        "zh-cn": "移动或重命名",
+        "zh-tw": "移動或重新命名",
+        "ru": "Переместить или переименовать"
+      },
+      "description": {
+        "en": "Moves or renames a file or folder. Overwrites the destination if it exists",
+        "es": "Mueve o renombra un archivo o carpeta. Sobrescribe el destino si existe",
+        "pt-br": "Move ou renomeia um arquivo ou pasta. Sobrescreve o destino se ele existir",
+        "fr": "Déplace ou renomme un fichier ou un dossier. Écrase la destination si elle existe",
+        "de": "Verschiebt oder benennt eine Datei oder einen Ordner um. Überschreibt das Ziel, falls vorhanden",
+        "it": "Sposta o rinomina un file o una cartella. Sovrascrive la destinazione se esiste",
+        "ja": "ファイルやフォルダーを移動または名前変更します。移動先があれば上書きします",
+        "ko": "파일이나 폴더를 이동하거나 이름을 바꿉니다. 대상이 있으면 덮어씁니다",
+        "zh-cn": "移动或重命名文件或文件夹。目标已存在时会覆盖",
+        "zh-tw": "移動或重新命名檔案或資料夾。目的地已存在時會覆寫",
+        "ru": "Перемещает или переименовывает файл или папку. Перезаписывает назначение, если оно существует"
+      },
+      "command": "mv ${source} ${destination}",
+      "params": [
+        {
+          "name": "source",
+          "label": {
+            "en": "Source",
+            "es": "Origen",
+            "pt-br": "Origem",
+            "fr": "Source",
+            "de": "Quelle",
+            "it": "Origine",
+            "ja": "コピー元",
+            "ko": "원본",
+            "zh-cn": "源",
+            "zh-tw": "來源",
+            "ru": "Источник"
+          },
+          "placeholder": {
+            "en": "old-name.ts",
+            "es": "old-name.ts",
+            "pt-br": "old-name.ts",
+            "fr": "old-name.ts",
+            "de": "old-name.ts",
+            "it": "old-name.ts",
+            "ja": "old-name.ts",
+            "ko": "old-name.ts",
+            "zh-cn": "old-name.ts",
+            "zh-tw": "old-name.ts",
+            "ru": "old-name.ts"
+          }
+        },
+        {
+          "name": "destination",
+          "label": {
+            "en": "Destination",
+            "es": "Destino",
+            "pt-br": "Destino",
+            "fr": "Destination",
+            "de": "Ziel",
+            "it": "Destinazione",
+            "ja": "コピー先",
+            "ko": "대상",
+            "zh-cn": "目标",
+            "zh-tw": "目的地",
+            "ru": "Назначение"
+          },
+          "placeholder": {
+            "en": "new-name.ts",
+            "es": "new-name.ts",
+            "pt-br": "new-name.ts",
+            "fr": "new-name.ts",
+            "de": "new-name.ts",
+            "it": "new-name.ts",
+            "ja": "new-name.ts",
+            "ko": "new-name.ts",
+            "zh-cn": "new-name.ts",
+            "zh-tw": "new-name.ts",
+            "ru": "new-name.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["mv", "move", "rename"],
+        "es": ["mv", "mover", "renombrar"],
+        "pt-br": ["mv", "mover", "renomear"],
+        "fr": ["mv", "déplacer", "renommer"],
+        "de": ["mv", "verschieben", "umbenennen"],
+        "it": ["mv", "spostare", "rinominare"],
+        "ja": ["mv", "移動", "名前変更"],
+        "ko": ["mv", "이동", "이름 바꾸기"],
+        "zh-cn": ["mv", "移动", "重命名"],
+        "zh-tw": ["mv", "移動", "重新命名"],
+        "ru": ["mv", "переместить", "переименовать"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "Move-Item ${source} ${destination}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/mv.1.html"
+    },
+    {
+      "id": "terminal.remove-file",
+      "title": {
+        "en": "Delete a file",
+        "es": "Borrar un archivo",
+        "pt-br": "Excluir um arquivo",
+        "fr": "Supprimer un fichier",
+        "de": "Datei löschen",
+        "it": "Elimina un file",
+        "ja": "ファイルを削除",
+        "ko": "파일 삭제",
+        "zh-cn": "删除文件",
+        "zh-tw": "刪除檔案",
+        "ru": "Удалить файл"
+      },
+      "description": {
+        "en": "Deletes a file permanently, without going to the recycle bin",
+        "es": "Borra un archivo de forma permanente, sin pasar por la papelera",
+        "pt-br": "Exclui um arquivo permanentemente, sem passar pela lixeira",
+        "fr": "Supprime définitivement un fichier, sans passer par la corbeille",
+        "de": "Löscht eine Datei endgültig, ohne Papierkorb",
+        "it": "Elimina un file in modo permanente, senza passare dal cestino",
+        "ja": "ごみ箱を経由せずにファイルを完全に削除します",
+        "ko": "휴지통을 거치지 않고 파일을 영구 삭제합니다",
+        "zh-cn": "永久删除文件，不经过回收站",
+        "zh-tw": "永久刪除檔案，不經過資源回收筒",
+        "ru": "Удаляет файл безвозвратно, минуя корзину"
+      },
+      "command": "rm ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "debug.log",
+            "es": "debug.log",
+            "pt-br": "debug.log",
+            "fr": "debug.log",
+            "de": "debug.log",
+            "it": "debug.log",
+            "ja": "debug.log",
+            "ko": "debug.log",
+            "zh-cn": "debug.log",
+            "zh-tw": "debug.log",
+            "ru": "debug.log"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rm", "delete", "file"],
+        "es": ["rm", "borrar", "archivo"],
+        "pt-br": ["rm", "excluir", "arquivo"],
+        "fr": ["rm", "supprimer", "fichier"],
+        "de": ["rm", "löschen", "Datei"],
+        "it": ["rm", "eliminare", "file"],
+        "ja": ["rm", "削除", "ファイル"],
+        "ko": ["rm", "삭제", "파일"],
+        "zh-cn": ["rm", "删除", "文件"],
+        "zh-tw": ["rm", "刪除", "檔案"],
+        "ru": ["rm", "удалить", "файл"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "Remove-Item ${file}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/rm.1.html"
+    },
+    {
+      "id": "terminal.remove-directory",
+      "title": {
+        "en": "Delete a folder",
+        "es": "Borrar una carpeta",
+        "pt-br": "Excluir uma pasta",
+        "fr": "Supprimer un dossier",
+        "de": "Ordner löschen",
+        "it": "Elimina una cartella",
+        "ja": "フォルダーを削除",
+        "ko": "폴더 삭제",
+        "zh-cn": "删除文件夹",
+        "zh-tw": "刪除資料夾",
+        "ru": "Удалить папку"
+      },
+      "description": {
+        "en": "Deletes a folder and everything inside it permanently, without asking",
+        "es": "Borra una carpeta y todo su contenido de forma permanente, sin preguntar",
+        "pt-br": "Exclui uma pasta e todo o conteúdo permanentemente, sem perguntar",
+        "fr": "Supprime définitivement un dossier et tout son contenu, sans confirmation",
+        "de": "Löscht einen Ordner samt Inhalt endgültig und ohne Rückfrage",
+        "it": "Elimina in modo permanente una cartella e tutto il suo contenuto, senza chiedere",
+        "ja": "フォルダーとその中身を確認なしで完全に削除します",
+        "ko": "폴더와 그 안의 모든 내용을 묻지 않고 영구 삭제합니다",
+        "zh-cn": "不经确认永久删除文件夹及其全部内容",
+        "zh-tw": "不經確認永久刪除資料夾及其全部內容",
+        "ru": "Безвозвратно удаляет папку со всем содержимым без подтверждения"
+      },
+      "command": "rm -rf ${directory}",
+      "params": [
+        {
+          "name": "directory",
+          "label": {
+            "en": "Folder",
+            "es": "Carpeta",
+            "pt-br": "Pasta",
+            "fr": "Dossier",
+            "de": "Ordner",
+            "it": "Cartella",
+            "ja": "フォルダー",
+            "ko": "폴더",
+            "zh-cn": "文件夹",
+            "zh-tw": "資料夾",
+            "ru": "Папка"
+          },
+          "placeholder": {
+            "en": "node_modules",
+            "es": "node_modules",
+            "pt-br": "node_modules",
+            "fr": "node_modules",
+            "de": "node_modules",
+            "it": "node_modules",
+            "ja": "node_modules",
+            "ko": "node_modules",
+            "zh-cn": "node_modules",
+            "zh-tw": "node_modules",
+            "ru": "node_modules"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rm -rf", "delete", "folder"],
+        "es": ["rm -rf", "borrar", "carpeta"],
+        "pt-br": ["rm -rf", "excluir", "pasta"],
+        "fr": ["rm -rf", "supprimer", "dossier"],
+        "de": ["rm -rf", "löschen", "Ordner"],
+        "it": ["rm -rf", "eliminare", "cartella"],
+        "ja": ["rm -rf", "削除", "フォルダー"],
+        "ko": ["rm -rf", "삭제", "폴더"],
+        "zh-cn": ["rm -rf", "删除", "文件夹"],
+        "zh-tw": ["rm -rf", "刪除", "資料夾"],
+        "ru": ["rm -rf", "удалить", "папка"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "Remove-Item -Recurse -Force ${directory}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/rm.1.html"
+    },
+    {
+      "id": "terminal.find-files",
+      "title": {
+        "en": "Find files by name",
+        "es": "Buscar archivos por nombre",
+        "pt-br": "Procurar arquivos por nome",
+        "fr": "Rechercher des fichiers par nom",
+        "de": "Dateien nach Namen suchen",
+        "it": "Cerca file per nome",
+        "ja": "名前でファイルを検索",
+        "ko": "이름으로 파일 찾기",
+        "zh-cn": "按名称查找文件",
+        "zh-tw": "依名稱尋找檔案",
+        "ru": "Найти файлы по имени"
+      },
+      "description": {
+        "en": "Searches the current folder and its subfolders for files matching a pattern",
+        "es": "Busca en la carpeta actual y sus subcarpetas los archivos que coinciden con un patrón",
+        "pt-br": "Procura na pasta atual e nas subpastas os arquivos que correspondem a um padrão",
+        "fr": "Recherche dans le dossier courant et ses sous-dossiers les fichiers correspondant à un motif",
+        "de": "Sucht im aktuellen Ordner und seinen Unterordnern nach Dateien, die einem Muster entsprechen",
+        "it": "Cerca nella cartella corrente e nelle sottocartelle i file che corrispondono a un modello",
+        "ja": "現在のフォルダーとサブフォルダーからパターンに一致するファイルを探します",
+        "ko": "현재 폴더와 하위 폴더에서 패턴과 일치하는 파일을 찾습니다",
+        "zh-cn": "在当前文件夹及其子文件夹中查找匹配模式的文件",
+        "zh-tw": "在目前資料夾及其子資料夾中尋找符合模式的檔案",
+        "ru": "Ищет в текущей папке и подпапках файлы по шаблону"
+      },
+      "command": "find . -name \"${pattern}\"",
+      "params": [
+        {
+          "name": "pattern",
+          "label": {
+            "en": "Name pattern",
+            "es": "Patrón de nombre",
+            "pt-br": "Padrão de nome",
+            "fr": "Motif de nom",
+            "de": "Namensmuster",
+            "it": "Modello del nome",
+            "ja": "名前のパターン",
+            "ko": "이름 패턴",
+            "zh-cn": "名称模式",
+            "zh-tw": "名稱模式",
+            "ru": "Шаблон имени"
+          },
+          "placeholder": {
+            "en": "*.log",
+            "es": "*.log",
+            "pt-br": "*.log",
+            "fr": "*.log",
+            "de": "*.log",
+            "it": "*.log",
+            "ja": "*.log",
+            "ko": "*.log",
+            "zh-cn": "*.log",
+            "zh-tw": "*.log",
+            "ru": "*.log"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["find", "search", "files"],
+        "es": ["find", "buscar", "archivos"],
+        "pt-br": ["find", "procurar", "arquivos"],
+        "fr": ["find", "rechercher", "fichiers"],
+        "de": ["find", "suchen", "Dateien"],
+        "it": ["find", "cercare", "file"],
+        "ja": ["find", "検索", "ファイル"],
+        "ko": ["find", "찾기", "파일"],
+        "zh-cn": ["find", "查找", "文件"],
+        "zh-tw": ["find", "尋找", "檔案"],
+        "ru": ["find", "найти", "файлы"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-ChildItem -Recurse -Filter \"${pattern}\""
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/find.1.html"
+    },
+    {
+      "id": "terminal.search-text",
+      "title": {
+        "en": "Search text in files",
+        "es": "Buscar texto en archivos",
+        "pt-br": "Procurar texto em arquivos",
+        "fr": "Rechercher du texte dans les fichiers",
+        "de": "Text in Dateien suchen",
+        "it": "Cerca testo nei file",
+        "ja": "ファイル内のテキストを検索",
+        "ko": "파일에서 텍스트 찾기",
+        "zh-cn": "在文件中搜索文本",
+        "zh-tw": "在檔案中搜尋文字",
+        "ru": "Найти текст в файлах"
+      },
+      "description": {
+        "en": "Searches a text in every file under the current folder and shows file and line",
+        "es": "Busca un texto en todos los archivos bajo la carpeta actual y muestra archivo y línea",
+        "pt-br": "Procura um texto em todos os arquivos da pasta atual e mostra arquivo e linha",
+        "fr": "Recherche un texte dans tous les fichiers du dossier courant et affiche le fichier et la ligne",
+        "de": "Sucht einen Text in allen Dateien unterhalb des aktuellen Ordners und zeigt Datei und Zeile",
+        "it": "Cerca un testo in tutti i file della cartella corrente e mostra file e riga",
+        "ja": "現在のフォルダー以下のすべてのファイルでテキストを検索し、ファイルと行を表示します",
+        "ko": "현재 폴더 아래 모든 파일에서 텍스트를 찾고 파일과 줄을 보여 줍니다",
+        "zh-cn": "在当前文件夹下的所有文件中搜索文本，并显示文件和行号",
+        "zh-tw": "在目前資料夾下的所有檔案中搜尋文字，並顯示檔案和行號",
+        "ru": "Ищет текст во всех файлах текущей папки и показывает файл и строку"
+      },
+      "command": "grep -rn \"${text}\" .",
+      "params": [
+        {
+          "name": "text",
+          "label": {
+            "en": "Text to find",
+            "es": "Texto a buscar",
+            "pt-br": "Texto a procurar",
+            "fr": "Texte à rechercher",
+            "de": "Gesuchter Text",
+            "it": "Testo da cercare",
+            "ja": "検索するテキスト",
+            "ko": "찾을 텍스트",
+            "zh-cn": "要搜索的文本",
+            "zh-tw": "要搜尋的文字",
+            "ru": "Искомый текст"
+          },
+          "placeholder": {
+            "en": "TODO",
+            "es": "TODO",
+            "pt-br": "TODO",
+            "fr": "TODO",
+            "de": "TODO",
+            "it": "TODO",
+            "ja": "TODO",
+            "ko": "TODO",
+            "zh-cn": "TODO",
+            "zh-tw": "TODO",
+            "ru": "TODO"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["grep", "search", "text"],
+        "es": ["grep", "buscar", "texto"],
+        "pt-br": ["grep", "procurar", "texto"],
+        "fr": ["grep", "rechercher", "texte"],
+        "de": ["grep", "suchen", "Text"],
+        "it": ["grep", "cercare", "testo"],
+        "ja": ["grep", "検索", "テキスト"],
+        "ko": ["grep", "검색", "텍스트"],
+        "zh-cn": ["grep", "搜索", "文本"],
+        "zh-tw": ["grep", "搜尋", "文字"],
+        "ru": ["grep", "поиск", "текст"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-ChildItem -Recurse -File | Select-String -Pattern \"${text}\""
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/grep.1.html"
+    },
+    {
+      "id": "terminal.which",
+      "title": {
+        "en": "Locate a program",
+        "es": "Ubicar un programa",
+        "pt-br": "Localizar um programa",
+        "fr": "Localiser un programme",
+        "de": "Programm finden",
+        "it": "Trova un programma",
+        "ja": "プログラムの場所を調べる",
+        "ko": "프로그램 위치 찾기",
+        "zh-cn": "查找程序位置",
+        "zh-tw": "尋找程式位置",
+        "ru": "Найти программу"
+      },
+      "description": {
+        "en": "Shows where the program that runs with that name is installed",
+        "es": "Muestra dónde está instalado el programa que se ejecuta con ese nombre",
+        "pt-br": "Mostra onde está instalado o programa executado com esse nome",
+        "fr": "Affiche où est installé le programme lancé avec ce nom",
+        "de": "Zeigt, wo das Programm installiert ist, das unter diesem Namen ausgeführt wird",
+        "it": "Mostra dove è installato il programma eseguito con quel nome",
+        "ja": "その名前で実行されるプログラムのインストール場所を表示します",
+        "ko": "해당 이름으로 실행되는 프로그램이 설치된 위치를 보여 줍니다",
+        "zh-cn": "显示以该名称运行的程序安装在哪里",
+        "zh-tw": "顯示以該名稱執行的程式安裝在哪裡",
+        "ru": "Показывает, где установлена программа, запускаемая под этим именем"
+      },
+      "command": "which ${program}",
+      "params": [
+        {
+          "name": "program",
+          "label": {
+            "en": "Program",
+            "es": "Programa",
+            "pt-br": "Programa",
+            "fr": "Programme",
+            "de": "Programm",
+            "it": "Programma",
+            "ja": "プログラム",
+            "ko": "프로그램",
+            "zh-cn": "程序",
+            "zh-tw": "程式",
+            "ru": "Программа"
+          },
+          "placeholder": {
+            "en": "node",
+            "es": "node",
+            "pt-br": "node",
+            "fr": "node",
+            "de": "node",
+            "it": "node",
+            "ja": "node",
+            "ko": "node",
+            "zh-cn": "node",
+            "zh-tw": "node",
+            "ru": "node"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["which", "where", "path"],
+        "es": ["which", "dónde", "ruta"],
+        "pt-br": ["which", "onde", "caminho"],
+        "fr": ["which", "où", "chemin"],
+        "de": ["which", "wo", "Pfad"],
+        "it": ["which", "dove", "percorso"],
+        "ja": ["which", "場所", "パス"],
+        "ko": ["which", "위치", "경로"],
+        "zh-cn": ["which", "位置", "路径"],
+        "zh-tw": ["which", "位置", "路徑"],
+        "ru": ["which", "где", "путь"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-Command ${program}"
+      },
+      "docs": "https://manpages.debian.org/which"
+    },
+    {
+      "id": "terminal.path",
+      "title": {
+        "en": "Show PATH entries",
+        "es": "Ver las rutas del PATH",
+        "pt-br": "Ver os caminhos do PATH",
+        "fr": "Afficher les entrées du PATH",
+        "de": "PATH-Einträge anzeigen",
+        "it": "Mostra le voci del PATH",
+        "ja": "PATH の各パスを表示",
+        "ko": "PATH 항목 보기",
+        "zh-cn": "查看 PATH 条目",
+        "zh-tw": "檢視 PATH 項目",
+        "ru": "Показать пути PATH"
+      },
+      "description": {
+        "en": "Prints each folder of the PATH variable on its own line",
+        "es": "Muestra cada carpeta de la variable PATH en una línea",
+        "pt-br": "Mostra cada pasta da variável PATH em uma linha",
+        "fr": "Affiche chaque dossier de la variable PATH sur sa propre ligne",
+        "de": "Gibt jeden Ordner der PATH-Variable in einer eigenen Zeile aus",
+        "it": "Mostra ogni cartella della variabile PATH su una riga",
+        "ja": "PATH 変数のフォルダーを 1 行ずつ表示します",
+        "ko": "PATH 변수의 각 폴더를 한 줄씩 출력합니다",
+        "zh-cn": "将 PATH 变量中的每个文件夹逐行显示",
+        "zh-tw": "將 PATH 變數中的每個資料夾逐行顯示",
+        "ru": "Выводит каждую папку переменной PATH на отдельной строке"
+      },
+      "command": "echo \"$PATH\" | tr ':' '\\n'",
+      "tags": {
+        "en": ["path", "environment variable"],
+        "es": ["path", "variable de entorno"],
+        "pt-br": ["path", "variável de ambiente"],
+        "fr": ["path", "variable d'environnement"],
+        "de": ["path", "Umgebungsvariable"],
+        "it": ["path", "variabile d'ambiente"],
+        "ja": ["path", "環境変数"],
+        "ko": ["path", "환경 변수"],
+        "zh-cn": ["path", "环境变量"],
+        "zh-tw": ["path", "環境變數"],
+        "ru": ["path", "переменная окружения"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "$env:PATH -split ';'"
+      },
+      "docs": "https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Variables"
+    },
+    {
+      "id": "terminal.disk-usage",
+      "title": {
+        "en": "Folder size",
+        "es": "Tamaño de una carpeta",
+        "pt-br": "Tamanho de uma pasta",
+        "fr": "Taille d'un dossier",
+        "de": "Ordnergröße",
+        "it": "Dimensione di una cartella",
+        "ja": "フォルダーのサイズ",
+        "ko": "폴더 크기",
+        "zh-cn": "文件夹大小",
+        "zh-tw": "資料夾大小",
+        "ru": "Размер папки"
+      },
+      "description": {
+        "en": "Shows how much disk space a folder uses",
+        "es": "Muestra cuánto espacio en disco ocupa una carpeta",
+        "pt-br": "Mostra quanto espaço em disco uma pasta ocupa",
+        "fr": "Affiche l'espace disque occupé par un dossier",
+        "de": "Zeigt, wie viel Speicherplatz ein Ordner belegt",
+        "it": "Mostra quanto spazio su disco occupa una cartella",
+        "ja": "フォルダーが使用しているディスク容量を表示します",
+        "ko": "폴더가 차지하는 디스크 공간을 보여 줍니다",
+        "zh-cn": "显示文件夹占用的磁盘空间",
+        "zh-tw": "顯示資料夾佔用的磁碟空間",
+        "ru": "Показывает, сколько места на диске занимает папка"
+      },
+      "command": "du -sh ${directory}",
+      "params": [
+        {
+          "name": "directory",
+          "label": {
+            "en": "Folder",
+            "es": "Carpeta",
+            "pt-br": "Pasta",
+            "fr": "Dossier",
+            "de": "Ordner",
+            "it": "Cartella",
+            "ja": "フォルダー",
+            "ko": "폴더",
+            "zh-cn": "文件夹",
+            "zh-tw": "資料夾",
+            "ru": "Папка"
+          },
+          "placeholder": {
+            "en": "node_modules",
+            "es": "node_modules",
+            "pt-br": "node_modules",
+            "fr": "node_modules",
+            "de": "node_modules",
+            "it": "node_modules",
+            "ja": "node_modules",
+            "ko": "node_modules",
+            "zh-cn": "node_modules",
+            "zh-tw": "node_modules",
+            "ru": "node_modules"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["du", "size", "disk"],
+        "es": ["du", "tamaño", "disco"],
+        "pt-br": ["du", "tamanho", "disco"],
+        "fr": ["du", "taille", "disque"],
+        "de": ["du", "Größe", "Festplatte"],
+        "it": ["du", "dimensione", "disco"],
+        "ja": ["du", "サイズ", "ディスク"],
+        "ko": ["du", "크기", "디스크"],
+        "zh-cn": ["du", "大小", "磁盘"],
+        "zh-tw": ["du", "大小", "磁碟"],
+        "ru": ["du", "размер", "диск"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "\"{0:N1} MB\" -f ((Get-ChildItem ${directory} -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/du.1.html"
+    },
+    {
+      "id": "terminal.port-in-use",
+      "title": {
+        "en": "What is using a port",
+        "es": "Qué está usando un puerto",
+        "pt-br": "O que está usando uma porta",
+        "fr": "Ce qui utilise un port",
+        "de": "Was einen Port belegt",
+        "it": "Cosa sta usando una porta",
+        "ja": "ポートを使っているプロセス",
+        "ko": "포트를 사용하는 프로세스",
+        "zh-cn": "谁在占用端口",
+        "zh-tw": "誰在佔用連接埠",
+        "ru": "Что занимает порт"
+      },
+      "description": {
+        "en": "Shows the process listening on a port, for example when a dev server cannot start",
+        "es": "Muestra el proceso que escucha en un puerto, por ejemplo cuando un servidor de desarrollo no puede arrancar",
+        "pt-br": "Mostra o processo que escuta em uma porta, por exemplo quando um servidor de desenvolvimento não inicia",
+        "fr": "Affiche le processus qui écoute sur un port, par exemple quand un serveur de développement ne démarre pas",
+        "de": "Zeigt den Prozess, der auf einem Port lauscht, etwa wenn ein Entwicklungsserver nicht startet",
+        "it": "Mostra il processo in ascolto su una porta, per esempio quando un server di sviluppo non si avvia",
+        "ja": "ポートで待ち受けているプロセスを表示します。開発サーバーが起動できないときなどに使います",
+        "ko": "포트에서 대기 중인 프로세스를 보여 줍니다. 개발 서버가 시작되지 않을 때 유용합니다",
+        "zh-cn": "显示监听某个端口的进程，例如开发服务器无法启动时",
+        "zh-tw": "顯示監聽某個連接埠的處理程序，例如開發伺服器無法啟動時",
+        "ru": "Показывает процесс, слушающий порт, — например, когда не запускается сервер разработки"
+      },
+      "command": "lsof -i :${port}",
+      "params": [
+        {
+          "name": "port",
+          "label": {
+            "en": "Port",
+            "es": "Puerto",
+            "pt-br": "Porta",
+            "fr": "Port",
+            "de": "Port",
+            "it": "Porta",
+            "ja": "ポート",
+            "ko": "포트",
+            "zh-cn": "端口",
+            "zh-tw": "連接埠",
+            "ru": "Порт"
+          },
+          "placeholder": {
+            "en": "3000",
+            "es": "3000",
+            "pt-br": "3000",
+            "fr": "3000",
+            "de": "3000",
+            "it": "3000",
+            "ja": "3000",
+            "ko": "3000",
+            "zh-cn": "3000",
+            "zh-tw": "3000",
+            "ru": "3000"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["port", "process", "listen"],
+        "es": ["puerto", "proceso", "escuchar"],
+        "pt-br": ["porta", "processo", "escutar"],
+        "fr": ["port", "processus", "écoute"],
+        "de": ["Port", "Prozess", "lauschen"],
+        "it": ["porta", "processo", "ascolto"],
+        "ja": ["ポート", "プロセス"],
+        "ko": ["포트", "프로세스"],
+        "zh-cn": ["端口", "进程"],
+        "zh-tw": ["連接埠", "處理程序"],
+        "ru": ["порт", "процесс"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "Get-NetTCPConnection -LocalPort ${port}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man8/lsof.8.html"
+    },
+    {
+      "id": "terminal.kill-process",
+      "title": {
+        "en": "End a process",
+        "es": "Terminar un proceso",
+        "pt-br": "Encerrar um processo",
+        "fr": "Arrêter un processus",
+        "de": "Prozess beenden",
+        "it": "Termina un processo",
+        "ja": "プロセスを終了",
+        "ko": "프로세스 종료",
+        "zh-cn": "结束进程",
+        "zh-tw": "結束處理程序",
+        "ru": "Завершить процесс"
+      },
+      "description": {
+        "en": "Ends the process with the given id (PID). Unsaved work in that program is lost",
+        "es": "Termina el proceso con el id (PID) indicado. Se pierde lo no guardado en ese programa",
+        "pt-br": "Encerra o processo com o id (PID) indicado. O que não foi salvo nesse programa é perdido",
+        "fr": "Arrête le processus d'identifiant (PID) indiqué. Le travail non enregistré dans ce programme est perdu",
+        "de": "Beendet den Prozess mit der angegebenen ID (PID). Ungespeicherte Arbeit in diesem Programm geht verloren",
+        "it": "Termina il processo con l'id (PID) indicato. Il lavoro non salvato in quel programma va perso",
+        "ja": "指定した ID（PID）のプロセスを終了します。そのプログラムの未保存の作業は失われます",
+        "ko": "지정한 ID(PID)의 프로세스를 종료합니다. 그 프로그램에서 저장하지 않은 작업은 사라집니다",
+        "zh-cn": "结束指定 ID（PID）的进程。该程序中未保存的内容会丢失",
+        "zh-tw": "結束指定 ID（PID）的處理程序。該程式中未儲存的內容會遺失",
+        "ru": "Завершает процесс с указанным PID. Несохранённая работа в этой программе теряется"
+      },
+      "command": "kill ${pid}",
+      "params": [
+        {
+          "name": "pid",
+          "label": {
+            "en": "Process id (PID)",
+            "es": "Id del proceso (PID)",
+            "pt-br": "Id do processo (PID)",
+            "fr": "Identifiant du processus (PID)",
+            "de": "Prozess-ID (PID)",
+            "it": "Id del processo (PID)",
+            "ja": "プロセス ID（PID）",
+            "ko": "프로세스 ID(PID)",
+            "zh-cn": "进程 ID（PID）",
+            "zh-tw": "處理程序 ID（PID）",
+            "ru": "ID процесса (PID)"
+          },
+          "placeholder": {
+            "en": "12345",
+            "es": "12345",
+            "pt-br": "12345",
+            "fr": "12345",
+            "de": "12345",
+            "it": "12345",
+            "ja": "12345",
+            "ko": "12345",
+            "zh-cn": "12345",
+            "zh-tw": "12345",
+            "ru": "12345"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["kill", "process", "stop"],
+        "es": ["kill", "proceso", "terminar"],
+        "pt-br": ["kill", "processo", "encerrar"],
+        "fr": ["kill", "processus", "arrêter"],
+        "de": ["kill", "Prozess", "beenden"],
+        "it": ["kill", "processo", "terminare"],
+        "ja": ["kill", "プロセス", "終了"],
+        "ko": ["kill", "프로세스", "종료"],
+        "zh-cn": ["kill", "进程", "结束"],
+        "zh-tw": ["kill", "處理程序", "結束"],
+        "ru": ["kill", "процесс", "завершить"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "Stop-Process -Id ${pid}"
+      },
+      "docs": "https://man7.org/linux/man-pages/man1/kill.1.html"
+    }
+  ]
+}

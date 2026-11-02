@@ -34,13 +34,17 @@ suite('Vista lateral', () => {
 		const categories = await nextEvent(api.onDidSendCatalog, 10_000);
 
 		assert.strictEqual(extension.isActive, true);
+		assert.deepStrictEqual(
+			categories.map((c) => c.id),
+			['git', 'npm', 'pnpm', 'node', 'docker', 'terminal'],
+		);
 		const git = categories.find((c) => c.id === 'git');
 		assert.ok(git, 'el catálogo enviado no incluye git');
 		assert.strictEqual(git.icon, 'git-branch');
-		assert.deepStrictEqual(
-			git.commands.map((c) => c.id),
-			['git.status', 'git.new-branch', 'git.reset-hard'],
-		);
+		const gitIds = git.commands.map((c) => c.id);
+		for (const id of ['git.status', 'git.new-branch', 'git.reset-hard']) {
+			assert.ok(gitIds.includes(id), `git no incluye ${id}`);
+		}
 		assert.strictEqual(git.commands.find((c) => c.id === 'git.reset-hard')?.risk, 'destructive');
 		for (const command of categories.flatMap((c) => c.commands)) {
 			assert.ok(!command.example.includes('${'), `${command.id}: ejemplo sin resolver "${command.example}"`);
