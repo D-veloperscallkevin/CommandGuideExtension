@@ -10,4 +10,6 @@ export const zhtw: Messages = {
   riskCaution: '注意',
   riskDestructive: '破壞性',
   sendToTerminalHint: '將命令寫入終端機但不執行',
+  copyCommand: '複製命令',
+  copied: '已複製',
 }

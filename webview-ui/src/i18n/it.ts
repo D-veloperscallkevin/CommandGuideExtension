@@ -10,4 +10,6 @@ export const it: Messages = {
   riskCaution: 'Attenzione',
   riskDestructive: 'Distruttivo',
   sendToTerminalHint: 'Scrive il comando nel terminale senza eseguirlo',
+  copyCommand: 'Copia comando',
+  copied: 'Copiato',
 }

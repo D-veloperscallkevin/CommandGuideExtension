@@ -2,13 +2,14 @@
 
 Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click.
 
-> Work in progress: categories, commands and sending to the terminal work; search, copy and more categories are being built. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
+> Work in progress: categories, commands, sending to the terminal and copying work; search and more categories are being built. See [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Usage
 
 1. Open the **DevCommands** view in the Activity Bar.
 2. Pick a category to see its commands, with a description, an example and a warning on risky ones.
 3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
+4. To use it somewhere else, click the copy button next to it (or press `Ctrl+C`, `Cmd+C` on macOS, while the command has focus). It is copied to the clipboard and nothing is sent to the terminal.
 
 The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. Commands with parameters are written with their example value (for instance `feature/my-change`), so replace it before pressing Enter.
 

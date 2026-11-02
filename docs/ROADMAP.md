@@ -255,7 +255,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 1.2 | `category-view` | Tarjetas de categoría desde el catálogo (mensaje `catalog`), con Codicons, tema de VS Code, teclado y ARIA ✅ |
 | 1.3 | `command-list` | Lista de comandos de una categoría: título, descripción y ejemplo. Navegación atrás y estado persistido con `setState` ✅ |
 | 1.4 | `send-to-terminal` | `TerminalService`: terminal activa o "DevCommands", `sendText(cmd, false)`. El webview solo envía el `commandId` ✅ |
-| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando |
+| 1.5 | `copy-to-clipboard` | Botón secundario para copiar el comando ✅ |
 | 1.6 | `global-search` | Filtro por título, descripción y tags en los dos idiomas sobre todas las categorías |
 | 1.7 | `catalog-content` | Al menos 5 categorías con 15 comandos cada una (Git, npm/pnpm, Node, Docker, Linux/Bash o PowerShell) |
 | 1.8 | `release-pipeline` | Script local `pnpm run release:package`: `vsce package --no-dependencies` y control de menos de 2 MB. Pruebas manuales del `.vsix` en PowerShell y en WSL/Linux |
@@ -323,6 +323,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `category-view` (1.2): lista de categorías con navegación, teclado y ARIA
 - [x] `command-list` (1.3): lista de comandos con ejemplo, riesgo y estado persistido
 - [x] `send-to-terminal` (1.4): clic en un comando lo escribe en la terminal sin ejecutarlo
+- [x] `copy-to-clipboard` (1.5): botón de copiar y `Ctrl+C`/`Cmd+C` sobre un comando
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Crear el publisher en el Marketplace (puede ser `aguilar-digital`) (antes de 2.9)
 

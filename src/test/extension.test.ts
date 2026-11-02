@@ -90,3 +90,29 @@ suite('Terminal', () => {
 		assert.strictEqual(vscode.window.terminals.length, 1);
 	});
 });
+
+suite('Portapapeles', () => {
+	const sentinel = 'centinela-devcommands';
+
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.all.find((e) => e.packageJSON.name === packageName) as
+			| vscode.Extension<DevCommandsApi>
+			| undefined;
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	setup(() => vscode.env.clipboard.writeText(sentinel));
+
+	test('copiar un comando deja su texto en el portapapeles sin abrir ninguna terminal', async () => {
+		const terminalsBefore = vscode.window.terminals.length;
+		assert.strictEqual(await (await api()).copyToClipboard('git.status'), true);
+		assert.strictEqual(await vscode.env.clipboard.readText(), 'git status');
+		assert.strictEqual(vscode.window.terminals.length, terminalsBefore);
+	});
+
+	test('un id inexistente no modifica el portapapeles', async () => {
+		assert.strictEqual(await (await api()).copyToClipboard('git.nope'), false);
+		assert.strictEqual(await vscode.env.clipboard.readText(), sentinel);
+	});
+});

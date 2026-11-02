@@ -8,6 +8,7 @@ import {
 	resolveLocale,
 	type CategorySummary,
 } from '../catalog/CatalogService';
+import type { ClipboardService } from '../clipboard/ClipboardService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
 import type { TerminalService } from '../terminal/TerminalService';
 import { buildWebviewHtml } from './webviewHtml';
@@ -25,22 +26,49 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly version: string,
 		private readonly log: vscode.LogOutputChannel,
 		private readonly terminal: TerminalService,
+		private readonly clipboard: ClipboardService,
 		private readonly catalog = new CatalogService(),
 	) {}
 
 	/**
-	 * Escribe en la terminal, sin ejecutarlo, el comando del catálogo con ese id. El texto se
-	 * construye aquí con la misma regla que el ejemplo visible; si el id no existe, no escribe nada.
+	 * Texto del comando con ese id, con la misma regla que el ejemplo visible. Lo usan la terminal
+	 * y el portapapeles, para que lo enviado y lo copiado no puedan divergir.
+	 */
+	private commandText(commandId: string): string | undefined {
+		const command = this.catalog.getCommand(commandId);
+		return command && buildExample(command, resolveLocale(vscode.env.language), defaultShellFor(process.platform));
+	}
+
+	/**
+	 * Escribe en la terminal, sin ejecutarlo, el comando del catálogo con ese id. Si el id no
+	 * existe, no escribe nada.
 	 */
 	sendToTerminal(commandId: string): void {
-		const command = this.catalog.getCommand(commandId);
-		if (!command) {
+		const text = this.commandText(commandId);
+		if (text === undefined) {
 			this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
 			return;
 		}
-		const text = buildExample(command, resolveLocale(vscode.env.language), defaultShellFor(process.platform));
 		this.terminal.write(text);
 		this.log.info('Comando escrito en la terminal:', commandId);
+	}
+
+	/**
+	 * Copia al portapapeles el comando del catálogo con ese id. Devuelve `true` si se copió; con un
+	 * id desconocido o si el portapapeles falla, no lo modifica y devuelve `false`.
+	 */
+	async copyToClipboard(commandId: string): Promise<boolean> {
+		const text = this.commandText(commandId);
+		if (text === undefined) {
+			this.log.warn('Comando desconocido, no se copia al portapapeles:', commandId.slice(0, 200));
+			return false;
+		}
+		if (!(await this.clipboard.copy(text))) {
+			this.log.error('No se pudo copiar al portapapeles:', commandId);
+			return false;
+		}
+		this.log.info('Comando copiado al portapapeles:', commandId);
+		return true;
 	}
 
 	resolveWebviewView(webviewView: vscode.WebviewView): void {
@@ -77,6 +105,15 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				case 'sendToTerminal':
 					this.sendToTerminal(message.commandId);
 					break;
+				case 'copyToClipboard': {
+					const { commandId } = message;
+					void this.copyToClipboard(commandId).then((copied) => {
+						if (copied) {
+							void webview.postMessage({ type: 'copied', commandId } satisfies ExtensionMessage);
+						}
+					});
+					break;
+				}
 			}
 		});
 		webviewView.onDidDispose(() => subscription.dispose());

@@ -10,4 +10,6 @@ export const ko: Messages = {
   riskCaution: '주의',
   riskDestructive: '파괴적',
   sendToTerminalHint: '명령어를 실행하지 않고 터미널에 입력합니다',
+  copyCommand: '명령어 복사',
+  copied: '복사됨',
 }

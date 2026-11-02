@@ -10,4 +10,6 @@ export const es: Messages = {
   riskCaution: 'Precaución',
   riskDestructive: 'Destructivo',
   sendToTerminalHint: 'Escribe el comando en la terminal sin ejecutarlo',
+  copyCommand: 'Copiar comando',
+  copied: 'Copiado',
 }
