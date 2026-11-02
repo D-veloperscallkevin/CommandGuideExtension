@@ -45,7 +45,7 @@ Estas reglas se copian al `context` y a las `rules` de `openspec/config.yaml` (p
 **Técnicas**
 
 - TypeScript en modo `strict` tanto en la extensión como en el webview. Nada de `any` sin justificación.
-- `engines.vscode` mínimo `^1.90.0`. Solo API estable, sin proposed APIs.
+- `engines.vscode` mínimo `^1.99.0` (desde la 2.1, por la API del tipo de shell de la terminal). Solo API estable, sin proposed APIs.
 - Bundle con esbuild (extensión) y Vite (webview). El `.vsix` final debe pesar menos de 2 MB.
 - Cero dependencias de runtime en la extensión salvo que estén justificadas en el `design.md` del change.
 - El catálogo de comandos vive en JSON versionado, validado con un JSON Schema. No hay comandos escritos dentro del código.
@@ -204,7 +204,7 @@ Son ocho pasos, unos 30 minutos. Al terminar tendrás el repo con las tres ramas
      Proyecto: DevCommands, extensión de VS Code que muestra comandos
      de desarrollo por categoría y los escribe en la terminal.
      Stack: TypeScript strict, esbuild (extensión), React + Vite (webview),
-     Vitest y @vscode/test-electron. engines.vscode ^1.90.0, solo API estable.
+     Vitest y @vscode/test-electron. engines.vscode ^1.99.0, solo API estable.
      Catálogo de comandos en catalog/*.json validado con catalog/schema.json.
      Ramas: feature/* -> develop -> staging -> main. Conventional Commits.
    
@@ -264,7 +264,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 
 | # | Change | Qué entrega |
 | --- | --- | --- |
-| 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta |
+| 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta ✅ |
 | 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell |
 | 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` |
 | 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio |
@@ -334,6 +334,8 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `global-search` (1.6): búsqueda en todas las categorías, en inglés y español, sin distinguir tildes
 - [x] `catalog-content` (1.7): 6 categorías (Git, npm, pnpm, Node.js, Docker y Terminal) con 108 comandos en 11 idiomas
 - [x] `release-pipeline` (1.8): `pnpm run release:package` genera el `.vsix` pre-release (`aguilardigital.devcommands` 0.1.0) y controla su tamaño y contenido
+- [x] Release v0.1.0 pre-release: PR `develop → staging` (#16), `staging → main` (#17), sincronización (#18) y tag `v0.1.0`
+- [x] `shell-detection` (2.1): los ejemplos siguen el shell de la terminal activa (PowerShell, bash, zsh o cmd), con indicador y variantes de cmd en Terminal; requiere VS Code 1.99
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 

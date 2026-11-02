@@ -13,11 +13,14 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 
 The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. Commands with parameters are written with their example value (for instance `feature/my-change`), so replace it before pressing Enter.
 
+Examples follow the shell of that terminal: PowerShell, bash (also Git Bash and WSL), zsh or cmd. With no terminal open they follow your default terminal profile. The line "Examples for: …" at the top of the view shows which shell is in use, and the examples update as soon as you switch terminals. Other shells (fish, nu…) get the default profile's syntax.
+
+Requires VS Code 1.99 or later.
+
 Known limitations:
 
 - If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
 - If you had already typed something in the terminal, the command is appended after it.
-- Until shell detection lands, examples use PowerShell syntax on Windows and bash syntax on Linux and macOS (Terminal commands have a native PowerShell variant).
 
 ## Languages
 

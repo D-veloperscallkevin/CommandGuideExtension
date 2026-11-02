@@ -17,4 +17,5 @@ export const ko: Messages = {
   searchResultsLabel: '검색 결과',
   resultCount: { other: '결과 {count}개' },
   noResults: '검색과 일치하는 명령어가 없습니다.',
+  examplesFor: '{shell}용 예시',
 }

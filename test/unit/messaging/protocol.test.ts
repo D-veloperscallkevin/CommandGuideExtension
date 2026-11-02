@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { isWebviewMessage, MAX_COMMAND_ID_LENGTH } from '../../../src/messaging/protocol';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+import { isWebviewMessage, MAX_COMMAND_ID_LENGTH, type ExtensionMessage, type ShellId } from '../../../src/messaging/protocol';
 
 describe('isWebviewMessage', () => {
 	it('acepta ready', () => {
@@ -42,5 +42,11 @@ describe('isWebviewMessage', () => {
 
 	it('rechaza commandId en ready', () => {
 		expect(isWebviewMessage({ type: 'ready', commandId: 'git.status' })).toBe(false);
+	});
+});
+
+describe('ExtensionMessage', () => {
+	it('catalog lleva el shell de los ejemplos', () => {
+		expectTypeOf<Extract<ExtensionMessage, { type: 'catalog' }>['shell']>().toEqualTypeOf<ShellId>();
 	});
 });

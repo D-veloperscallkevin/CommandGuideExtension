@@ -17,4 +17,5 @@ export const ptbr: Messages = {
   searchResultsLabel: 'Resultados da pesquisa',
   resultCount: { one: '{count} resultado', many: '{count} de resultados', other: '{count} resultados' },
   noResults: 'Nenhum comando corresponde à pesquisa.',
+  examplesFor: 'Exemplos para: {shell}',
 }

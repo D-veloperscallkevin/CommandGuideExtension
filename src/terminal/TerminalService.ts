@@ -6,26 +6,26 @@
 export interface TerminalLike {
 	show(preserveFocus?: boolean): void;
 	sendText(text: string, shouldExecute?: boolean): void;
-	/** VS Code 1.93+: presente cuando el shell ya ha cargado su integración (prompt listo). */
-	readonly shellIntegration?: unknown;
+	/** Presente cuando el shell ya ha cargado su integración (prompt listo). */
+	readonly shellIntegration: unknown;
 }
 
 /** Lo que usamos de `vscode.window`. */
 export interface TerminalHost {
 	readonly activeTerminal: TerminalLike | undefined;
 	createTerminal(options: { name: string }): TerminalLike;
-	/**
-	 * VS Code 1.93+. Opcional porque el engine mínimo es 1.90: sin él, se espera el tiempo
-	 * máximo antes de escribir en una terminal nueva.
-	 */
-	readonly onDidChangeTerminalShellIntegration?: (
+	/** Avisa cuando una terminal activa la integración del shell. */
+	readonly onDidChangeTerminalShellIntegration: (
 		listener: (event: { readonly terminal: TerminalLike }) => unknown,
 	) => { dispose(): unknown };
 }
 
 export class TerminalService {
 	static readonly terminalName = 'DevCommands';
-	/** Espera máxima a que el shell de una terminal nueva esté listo (WSL puede tardar). */
+	/**
+	 * Espera máxima a que el shell de una terminal nueva esté listo (WSL puede tardar). Si la
+	 * integración del shell está desactivada, el aviso no llega y se escribe al agotarla.
+	 */
 	static readonly readyTimeoutMs = 3000;
 
 	constructor(
@@ -64,7 +64,7 @@ export class TerminalService {
 				resolve();
 			};
 			const timer = setTimeout(done, this.readyTimeoutMs);
-			subscription = this.host.onDidChangeTerminalShellIntegration?.((event) => {
+			subscription = this.host.onDidChangeTerminalShellIntegration((event) => {
 				if (event.terminal === terminal) {
 					done();
 				}

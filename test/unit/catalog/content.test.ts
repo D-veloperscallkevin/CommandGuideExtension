@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildCategorySummaries, CatalogService } from '../../../src/catalog/CatalogService';
 import { bundledCatalog } from '../../../src/catalog/index';
-import type { Catalog, LocalizedString, LocalizedTags } from '../../../src/catalog/types';
+import type { Catalog, LocalizedString, LocalizedTags, ShellId } from '../../../src/catalog/types';
 import { SUPPORTED_LOCALES } from '../../../src/i18n/locales';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 
@@ -84,11 +84,29 @@ describe('contenido mínimo', () => {
 		expect(withoutDocs.map((cmd) => cmd.id)).toEqual([]);
 	});
 
-	it('en PowerShell, borrar una carpeta de Terminal usa Remove-Item y no rm -rf', () => {
-		const command = buildCategorySummaries(new CatalogService().getCategories(), 'en', 'powershell')
+	/** Ejemplo de borrar una carpeta de Terminal para un shell. */
+	const removeDirectoryFor = (shell: ShellId) =>
+		buildCategorySummaries(new CatalogService().getCategories(), 'en', shell)
 			.flatMap((c) => c.commands)
-			.find((c) => c.id === 'terminal.remove-directory');
-		expect(command?.example).toMatch(/^Remove-Item -Recurse -Force /);
+			.find((c) => c.id === 'terminal.remove-directory')?.example;
+
+	it('en PowerShell, borrar una carpeta de Terminal usa Remove-Item y no rm -rf', () => {
+		expect(removeDirectoryFor('powershell')).toMatch(/^Remove-Item -Recurse -Force /);
+	});
+
+	it('en cmd, borrar una carpeta de Terminal usa rmdir /s /q', () => {
+		expect(removeDirectoryFor('cmd')).toMatch(/^rmdir \/s \/q /);
+	});
+
+	it('en bash y zsh, borrar una carpeta de Terminal usa rm -rf', () => {
+		expect(removeDirectoryFor('bash')).toMatch(/^rm -rf /);
+		expect(removeDirectoryFor('zsh')).toMatch(/^rm -rf /);
+	});
+
+	it('todos los comandos de Terminal tienen variante de cmd', () => {
+		const terminal = bundledCatalog.find((c) => c.id === 'terminal');
+		const withoutCmd = (terminal?.commands ?? []).filter((cmd) => !cmd.shells?.cmd);
+		expect(withoutCmd.map((cmd) => cmd.id)).toEqual([]);
 	});
 });
 

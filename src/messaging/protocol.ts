@@ -2,9 +2,9 @@
 // tipos (`import type`); la validación se ejecuta en la extensión, que no confía en
 // nada de lo que llega del webview.
 import type { CategorySummary, CommandSummary } from '../catalog/CatalogService';
-import type { Locale } from '../catalog/types';
+import type { Locale, ShellId } from '../catalog/types';
 
-export type { CategorySummary, CommandSummary };
+export type { CategorySummary, CommandSummary, ShellId };
 
 /**
  * Mensajes que envía el webview a la extensión. `sendToTerminal` y `copyToClipboard` llevan solo
@@ -18,10 +18,13 @@ export type WebviewMessage =
 /** Longitud máxima de un `commandId` recibido (acota también lo que se registra en el log). */
 export const MAX_COMMAND_ID_LENGTH = 200;
 
-/** Mensajes que envía la extensión al webview. `copied` solo se envía si la copia funcionó. */
+/**
+ * Mensajes que envía la extensión al webview. `catalog` lleva el shell para el que se han
+ * construido los ejemplos y se reenvía cuando cambia. `copied` solo se envía si la copia funcionó.
+ */
 export type ExtensionMessage =
 	| { readonly type: 'init'; readonly locale: Locale; readonly version: string }
-	| { readonly type: 'catalog'; readonly categories: readonly CategorySummary[] }
+	| { readonly type: 'catalog'; readonly shell: ShellId; readonly categories: readonly CategorySummary[] }
 	| { readonly type: 'copied'; readonly commandId: string };
 
 type FieldValidator = (value: unknown) => boolean;

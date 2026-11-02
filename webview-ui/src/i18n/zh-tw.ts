@@ -17,4 +17,5 @@ export const zhtw: Messages = {
   searchResultsLabel: '搜尋結果',
   resultCount: { other: '{count} 個結果' },
   noResults: '沒有符合搜尋的命令。',
+  examplesFor: '{shell} 範例',
 }

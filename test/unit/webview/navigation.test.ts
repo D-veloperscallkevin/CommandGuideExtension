@@ -109,6 +109,15 @@ describe('resolveView', () => {
 	it('quita el foco de una categoría que ya no existe', () => {
 		expect(resolveView({ screen: 'categories', focusCategoryId: 'docker' }, catalog)).toEqual(initialView);
 	});
+
+	it('un catalog reenviado al cambiar de shell (mismos ids) conserva pantalla, búsqueda y foco', () => {
+		// Los ejemplos cambian, pero resolve solo mira los ids.
+		const resent = catalog.map((c) => ({ ...c, commands: c.commands.map((cmd) => ({ ...cmd })) }));
+		const inCategory = { screen: 'category', categoryId: 'git', focusCommandId: 'git.status' } as const;
+		expect(navigate(inCategory, { type: 'resolve', categories: resent })).toBe(inCategory);
+		const searching = { screen: 'categories', query: 'rama', focusCommandId: 'git.new-branch' } as const;
+		expect(navigate(searching, { type: 'resolve', categories: resent })).toBe(searching);
+	});
 });
 
 describe('búsqueda', () => {

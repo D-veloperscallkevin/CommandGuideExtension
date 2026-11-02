@@ -8,7 +8,7 @@ context: |
   Proyecto: DevCommands, extensión de VS Code que muestra comandos
   de desarrollo por categoría y los escribe en la terminal.
   Stack: TypeScript strict, esbuild (extensión), React + Vite (webview),
-  Vitest y @vscode/test-electron. engines.vscode ^1.90.0, solo API estable.
+  Vitest y @vscode/test-electron. engines.vscode ^1.99.0, solo API estable.
   Catálogo de comandos en catalog/*.json validado con catalog/schema.json.
   Ramas: feature/* -> develop -> staging -> main. Conventional Commits.
   Roadmap completo en docs/ROADMAP.md.

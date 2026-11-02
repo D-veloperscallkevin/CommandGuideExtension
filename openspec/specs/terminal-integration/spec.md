@@ -18,11 +18,19 @@ Al recibir una petición válida de enviar un comando, la extensión SHALL escri
 - **THEN** la terminal muestra `git checkout -b feature/mi-cambio` sin ejecutarlo, para que el usuario cambie el nombre antes de pulsar Enter
 
 ### Requirement: Texto construido por la extensión
-El texto enviado SHALL construirse en la extensión a partir del comando del catálogo cuyo `id` se recibe, con la misma regla que el ejemplo visible: la variante del shell por defecto del sistema y los placeholders en el idioma activo. Si el `id` no existe en el catálogo, la extensión MUST NOT escribir nada en la terminal y SHALL registrar una advertencia.
+El texto enviado SHALL construirse en la extensión a partir del comando del catálogo cuyo `id` se recibe, con la misma regla que el ejemplo visible: la variante del shell de destino en el momento del envío y los placeholders en el idioma activo. Si el `id` no existe en el catálogo, la extensión MUST NOT escribir nada en la terminal y SHALL registrar una advertencia.
 
 #### Scenario: Mismo texto que el ejemplo
 - **WHEN** la vista muestra el ejemplo de un comando y el usuario lo envía a la terminal
 - **THEN** el texto escrito en la terminal es idéntico a ese ejemplo
+
+#### Scenario: Git Bash en Windows
+- **WHEN** la extensión se ejecuta en Windows, la terminal activa es Git Bash y el usuario envía el comando de Terminal que borra una carpeta
+- **THEN** la terminal recibe la variante POSIX (`rm -rf …`) y no la de PowerShell
+
+#### Scenario: PowerShell en Windows
+- **WHEN** la extensión se ejecuta en Windows, la terminal activa es PowerShell y el usuario envía el mismo comando
+- **THEN** la terminal recibe `Remove-Item -Recurse -Force …`
 
 #### Scenario: Id inexistente
 - **WHEN** llega `{ "type": "sendToTerminal", "commandId": "git.nope" }`
@@ -44,5 +52,5 @@ La extensión SHALL usar la terminal activa si existe. Si no hay ninguna, SHALL 
 - **THEN** el comando se escribe cuando bash ya ha mostrado su prompt, y la línea queda como `usuario@host:~/proyecto$ docker images`, sin el texto repetido delante del prompt
 
 #### Scenario: El shell no avisa de que está listo
-- **WHEN** la integración del shell está desactivada o VS Code es anterior a 1.93, y se crea una terminal nueva
+- **WHEN** la integración del shell está desactivada y se crea una terminal nueva
 - **THEN** el comando se escribe al cumplirse los 3 segundos de espera máxima

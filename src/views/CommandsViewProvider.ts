@@ -4,22 +4,32 @@ import {
 	buildCategorySummaries,
 	buildExample,
 	CatalogService,
-	defaultShellFor,
 	resolveLocale,
 	type CategorySummary,
 } from '../catalog/CatalogService';
+import type { ShellId } from '../catalog/types';
 import type { ClipboardService } from '../clipboard/ClipboardService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
+import type { TargetShell } from '../terminal/TargetShell';
 import type { TerminalService } from '../terminal/TerminalService';
 import { buildWebviewHtml } from './webviewHtml';
+
+/** Lo que se envía en cada `catalog`: el shell de los ejemplos y las categorías. */
+export interface SentCatalog {
+	readonly shell: ShellId;
+	readonly categories: readonly CategorySummary[];
+}
 
 /** Proveedor de la vista lateral: carga el webview de React y atiende sus mensajes. */
 export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
 	static readonly viewId = 'devcommands.commands';
 
-	private readonly catalogEmitter = new vscode.EventEmitter<readonly CategorySummary[]>();
-	/** Se dispara tras enviar `catalog` al webview (es decir, tras cada `ready` atendido). */
+	private readonly catalogEmitter = new vscode.EventEmitter<SentCatalog>();
+	/** Se dispara tras enviar `catalog` al webview: tras cada `ready` y al cambiar el shell de destino. */
 	readonly onDidSendCatalog = this.catalogEmitter.event;
+	/** Webview que ya ha completado el handshake; solo a él se reenvía el catálogo. */
+	private readyWebview: vscode.Webview | undefined;
+	private readonly shellSubscription: { dispose(): unknown };
 
 	constructor(
 		private readonly extensionUri: vscode.Uri,
@@ -27,16 +37,32 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly log: vscode.LogOutputChannel,
 		private readonly terminal: TerminalService,
 		private readonly clipboard: ClipboardService,
+		private readonly targetShell: TargetShell,
 		private readonly catalog = new CatalogService(),
-	) {}
+	) {
+		this.shellSubscription = targetShell.onDidChange((shell) => {
+			if (this.readyWebview) {
+				this.log.info('Shell de destino:', shell);
+				this.postCatalog(this.readyWebview, shell);
+			}
+		});
+	}
 
 	/**
-	 * Texto del comando con ese id, con la misma regla que el ejemplo visible. Lo usan la terminal
-	 * y el portapapeles, para que lo enviado y lo copiado no puedan divergir.
+	 * Texto del comando con ese id, con la misma regla que el ejemplo visible y el shell de destino
+	 * de este momento. Lo usan la terminal y el portapapeles, para que lo enviado y lo copiado no
+	 * puedan divergir.
 	 */
 	private commandText(commandId: string): string | undefined {
 		const command = this.catalog.getCommand(commandId);
-		return command && buildExample(command, resolveLocale(vscode.env.language), defaultShellFor(process.platform));
+		return command && buildExample(command, resolveLocale(vscode.env.language), this.targetShell.current());
+	}
+
+	/** Envía `catalog` con los ejemplos construidos para `shell`. */
+	private postCatalog(webview: vscode.Webview, shell: ShellId): void {
+		const categories = buildCategorySummaries(this.catalog.getCategories(), resolveLocale(vscode.env.language), shell);
+		void webview.postMessage({ type: 'catalog', shell, categories } satisfies ExtensionMessage);
+		this.catalogEmitter.fire({ shell, categories });
 	}
 
 	/**
@@ -94,15 +120,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			switch (message.type) {
 				case 'ready': {
 					const locale = resolveLocale(vscode.env.language);
-					const categories = buildCategorySummaries(
-						this.catalog.getCategories(),
-						locale,
-						defaultShellFor(process.platform),
-					);
 					// postMessage conserva el orden: el webview recibe init antes que catalog.
 					void webview.postMessage({ type: 'init', locale, version: this.version } satisfies ExtensionMessage);
-					void webview.postMessage({ type: 'catalog', categories } satisfies ExtensionMessage);
-					this.catalogEmitter.fire(categories);
+					this.postCatalog(webview, this.targetShell.current());
+					this.readyWebview = webview;
 					break;
 				}
 				case 'sendToTerminal':
@@ -119,10 +140,16 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				}
 			}
 		});
-		webviewView.onDidDispose(() => subscription.dispose());
+		webviewView.onDidDispose(() => {
+			subscription.dispose();
+			if (this.readyWebview === webview) {
+				this.readyWebview = undefined;
+			}
+		});
 	}
 
 	dispose(): void {
+		this.shellSubscription.dispose();
 		this.catalogEmitter.dispose();
 	}
 }
