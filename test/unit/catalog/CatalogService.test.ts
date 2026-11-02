@@ -133,8 +133,10 @@ describe('buildCategorySummaries', () => {
 			expect(text).toBe(text.toLowerCase());
 		});
 
-		it('con un idioma opcional sin traducción no repite textos', () => {
+		it('con un idioma opcional traducido no repite textos y lo incluye', () => {
 			const text = command('fr', 'git.status')?.searchText ?? '';
+			expect(text).toContain("afficher l'etat");
+			expect(text).toContain('show status');
 			expect(text.split(' · ').length).toBe(new Set(text.split(' · ')).size);
 		});
 	});

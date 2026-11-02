@@ -1,0 +1,1112 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "node",
+  "title": {
+    "en": "Node.js",
+    "es": "Node.js",
+    "pt-br": "Node.js",
+    "fr": "Node.js",
+    "de": "Node.js",
+    "it": "Node.js",
+    "ja": "Node.js",
+    "ko": "Node.js",
+    "zh-cn": "Node.js",
+    "zh-tw": "Node.js",
+    "ru": "Node.js"
+  },
+  "icon": "symbol-method",
+  "order": 30,
+  "commands": [
+    {
+      "id": "node.version",
+      "title": {
+        "en": "Show Node.js version",
+        "es": "Ver la versión de Node.js",
+        "pt-br": "Ver a versão do Node.js",
+        "fr": "Afficher la version de Node.js",
+        "de": "Node.js-Version anzeigen",
+        "it": "Mostra la versione di Node.js",
+        "ja": "Node.js のバージョンを表示",
+        "ko": "Node.js 버전 보기",
+        "zh-cn": "查看 Node.js 版本",
+        "zh-tw": "檢視 Node.js 版本",
+        "ru": "Показать версию Node.js"
+      },
+      "description": {
+        "en": "Prints the installed Node.js version",
+        "es": "Muestra la versión de Node.js instalada",
+        "pt-br": "Mostra a versão do Node.js instalada",
+        "fr": "Affiche la version de Node.js installée",
+        "de": "Gibt die installierte Node.js-Version aus",
+        "it": "Mostra la versione di Node.js installata",
+        "ja": "インストールされている Node.js のバージョンを表示します",
+        "ko": "설치된 Node.js 버전을 표시합니다",
+        "zh-cn": "显示已安装的 Node.js 版本",
+        "zh-tw": "顯示已安裝的 Node.js 版本",
+        "ru": "Выводит установленную версию Node.js"
+      },
+      "command": "node --version",
+      "tags": {
+        "en": ["version"],
+        "es": ["versión"],
+        "pt-br": ["versão"],
+        "fr": ["version"],
+        "de": ["Version"],
+        "it": ["versione"],
+        "ja": ["バージョン"],
+        "ko": ["버전"],
+        "zh-cn": ["版本"],
+        "zh-tw": ["版本"],
+        "ru": ["версия"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#-v---version"
+    },
+    {
+      "id": "node.run-file",
+      "title": {
+        "en": "Run a file",
+        "es": "Ejecutar un archivo",
+        "pt-br": "Executar um arquivo",
+        "fr": "Exécuter un fichier",
+        "de": "Datei ausführen",
+        "it": "Esegui un file",
+        "ja": "ファイルを実行",
+        "ko": "파일 실행",
+        "zh-cn": "运行文件",
+        "zh-tw": "執行檔案",
+        "ru": "Запустить файл"
+      },
+      "description": {
+        "en": "Runs a JavaScript file (recent Node.js versions also run TypeScript)",
+        "es": "Ejecuta un archivo JavaScript (las versiones recientes de Node.js también ejecutan TypeScript)",
+        "pt-br": "Executa um arquivo JavaScript (versões recentes do Node.js também executam TypeScript)",
+        "fr": "Exécute un fichier JavaScript (les versions récentes de Node.js exécutent aussi TypeScript)",
+        "de": "Führt eine JavaScript-Datei aus (neuere Node.js-Versionen führen auch TypeScript aus)",
+        "it": "Esegue un file JavaScript (le versioni recenti di Node.js eseguono anche TypeScript)",
+        "ja": "JavaScript ファイルを実行します（最近の Node.js は TypeScript も実行できます）",
+        "ko": "JavaScript 파일을 실행합니다(최신 Node.js는 TypeScript도 실행합니다)",
+        "zh-cn": "运行 JavaScript 文件（较新的 Node.js 也能运行 TypeScript）",
+        "zh-tw": "執行 JavaScript 檔案（較新的 Node.js 也能執行 TypeScript）",
+        "ru": "Запускает файл JavaScript (свежие версии Node.js запускают и TypeScript)"
+      },
+      "command": "node ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["run", "execute"],
+        "es": ["ejecutar", "correr"],
+        "pt-br": ["executar", "rodar"],
+        "fr": ["exécuter", "lancer"],
+        "de": ["ausführen", "starten"],
+        "it": ["eseguire", "avviare"],
+        "ja": ["実行"],
+        "ko": ["실행"],
+        "zh-cn": ["运行", "执行"],
+        "zh-tw": ["執行"],
+        "ru": ["запустить", "выполнить"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#program-entry-point"
+    },
+    {
+      "id": "node.watch",
+      "title": {
+        "en": "Run in watch mode",
+        "es": "Ejecutar en modo watch",
+        "pt-br": "Executar em modo watch",
+        "fr": "Exécuter en mode watch",
+        "de": "Im Watch-Modus ausführen",
+        "it": "Esegui in modalità watch",
+        "ja": "ウォッチモードで実行",
+        "ko": "감시 모드로 실행",
+        "zh-cn": "以监视模式运行",
+        "zh-tw": "以監看模式執行",
+        "ru": "Запустить в режиме наблюдения"
+      },
+      "description": {
+        "en": "Runs the file and restarts it whenever it or its imports change",
+        "es": "Ejecuta el archivo y lo reinicia cada vez que cambia él o lo que importa",
+        "pt-br": "Executa o arquivo e o reinicia sempre que ele ou seus imports mudam",
+        "fr": "Exécute le fichier et le relance dès que lui ou ses imports changent",
+        "de": "Führt die Datei aus und startet sie neu, sobald sie oder ihre Importe sich ändern",
+        "it": "Esegue il file e lo riavvia ogni volta che cambia esso o ciò che importa",
+        "ja": "ファイルを実行し、ファイルやインポート先が変わるたびに再起動します",
+        "ko": "파일을 실행하고 파일이나 가져온 모듈이 바뀔 때마다 다시 시작합니다",
+        "zh-cn": "运行文件，并在它或其导入的模块变化时自动重启",
+        "zh-tw": "執行檔案，並在它或其匯入的模組變更時自動重新啟動",
+        "ru": "Запускает файл и перезапускает его при изменении файла или его импортов"
+      },
+      "command": "node --watch ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["watch", "restart", "reload"],
+        "es": ["watch", "reiniciar", "recargar"],
+        "pt-br": ["watch", "reiniciar", "recarregar"],
+        "fr": ["watch", "relancer", "recharger"],
+        "de": ["watch", "Neustart", "neu laden"],
+        "it": ["watch", "riavviare", "ricaricare"],
+        "ja": ["ウォッチ", "再起動"],
+        "ko": ["감시", "재시작"],
+        "zh-cn": ["监视", "重启"],
+        "zh-tw": ["監看", "重新啟動"],
+        "ru": ["наблюдение", "перезапуск"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--watch"
+    },
+    {
+      "id": "node.inspect",
+      "title": {
+        "en": "Run with the debugger",
+        "es": "Ejecutar con el depurador",
+        "pt-br": "Executar com o depurador",
+        "fr": "Exécuter avec le débogueur",
+        "de": "Mit dem Debugger ausführen",
+        "it": "Esegui con il debugger",
+        "ja": "デバッガー付きで実行",
+        "ko": "디버거와 함께 실행",
+        "zh-cn": "带调试器运行",
+        "zh-tw": "搭配偵錯工具執行",
+        "ru": "Запустить с отладчиком"
+      },
+      "description": {
+        "en": "Runs the file with the inspector enabled so a debugger can attach (port 9229)",
+        "es": "Ejecuta el archivo con el inspector activado para conectar un depurador (puerto 9229)",
+        "pt-br": "Executa o arquivo com o inspector ativado para conectar um depurador (porta 9229)",
+        "fr": "Exécute le fichier avec l'inspecteur activé pour y attacher un débogueur (port 9229)",
+        "de": "Führt die Datei mit aktiviertem Inspector aus, damit sich ein Debugger verbinden kann (Port 9229)",
+        "it": "Esegue il file con l'inspector attivo per collegare un debugger (porta 9229)",
+        "ja": "インスペクターを有効にしてファイルを実行し、デバッガーを接続できるようにします（ポート 9229）",
+        "ko": "인스펙터를 켜고 파일을 실행해 디버거를 연결할 수 있게 합니다(포트 9229)",
+        "zh-cn": "启用 inspector 运行文件，以便调试器连接（端口 9229）",
+        "zh-tw": "啟用 inspector 執行檔案，以便偵錯工具連線（連接埠 9229）",
+        "ru": "Запускает файл с включённым инспектором, чтобы подключить отладчик (порт 9229)"
+      },
+      "command": "node --inspect ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["debug", "inspect"],
+        "es": ["depurar", "inspect"],
+        "pt-br": ["depurar", "inspect"],
+        "fr": ["déboguer", "inspect"],
+        "de": ["debuggen", "inspect"],
+        "it": ["debug", "inspect"],
+        "ja": ["デバッグ", "inspect"],
+        "ko": ["디버그", "inspect"],
+        "zh-cn": ["调试", "inspect"],
+        "zh-tw": ["偵錯", "inspect"],
+        "ru": ["отладка", "inspect"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--inspecthostport"
+    },
+    {
+      "id": "node.inspect-brk",
+      "title": {
+        "en": "Debug and pause on start",
+        "es": "Depurar y pausar al inicio",
+        "pt-br": "Depurar e pausar no início",
+        "fr": "Déboguer et faire une pause au démarrage",
+        "de": "Debuggen und beim Start anhalten",
+        "it": "Esegui il debug e metti in pausa all'avvio",
+        "ja": "デバッグして開始時に一時停止",
+        "ko": "디버그하고 시작 시 일시 중지",
+        "zh-cn": "调试并在启动时暂停",
+        "zh-tw": "偵錯並在啟動時暫停",
+        "ru": "Отладка с паузой при запуске"
+      },
+      "description": {
+        "en": "Like --inspect, but stops before the first line until a debugger attaches",
+        "es": "Como --inspect, pero se detiene antes de la primera línea hasta que se conecta un depurador",
+        "pt-br": "Como --inspect, mas para antes da primeira linha até um depurador se conectar",
+        "fr": "Comme --inspect, mais s'arrête avant la première ligne jusqu'à ce qu'un débogueur se connecte",
+        "de": "Wie --inspect, hält aber vor der ersten Zeile an, bis sich ein Debugger verbindet",
+        "it": "Come --inspect, ma si ferma prima della prima riga finché non si collega un debugger",
+        "ja": "--inspect と同じですが、デバッガーが接続するまで最初の行の前で停止します",
+        "ko": "--inspect와 같지만 디버거가 연결될 때까지 첫 줄 전에서 멈춥니다",
+        "zh-cn": "与 --inspect 相同，但在第一行之前暂停，直到调试器连接",
+        "zh-tw": "與 --inspect 相同，但在第一行之前暫停，直到偵錯工具連線",
+        "ru": "Как --inspect, но останавливается перед первой строкой, пока не подключится отладчик"
+      },
+      "command": "node --inspect-brk ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["debug", "breakpoint", "inspect"],
+        "es": ["depurar", "breakpoint", "inspect"],
+        "pt-br": ["depurar", "breakpoint", "inspect"],
+        "fr": ["déboguer", "point d’arrêt", "inspect"],
+        "de": ["debuggen", "Haltepunkt", "inspect"],
+        "it": ["debug", "breakpoint", "inspect"],
+        "ja": ["デバッグ", "ブレークポイント"],
+        "ko": ["디버그", "중단점"],
+        "zh-cn": ["调试", "断点"],
+        "zh-tw": ["偵錯", "中斷點"],
+        "ru": ["отладка", "точка останова"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--inspect-brkhostport"
+    },
+    {
+      "id": "node.test",
+      "title": {
+        "en": "Run tests with node:test",
+        "es": "Ejecutar tests con node:test",
+        "pt-br": "Executar testes com node:test",
+        "fr": "Lancer les tests avec node:test",
+        "de": "Tests mit node:test ausführen",
+        "it": "Esegui i test con node:test",
+        "ja": "node:test でテストを実行",
+        "ko": "node:test로 테스트 실행",
+        "zh-cn": "用 node:test 运行测试",
+        "zh-tw": "用 node:test 執行測試",
+        "ru": "Запустить тесты node:test"
+      },
+      "description": {
+        "en": "Runs the test files found in the project with the built-in test runner",
+        "es": "Ejecuta los archivos de test del proyecto con el test runner integrado",
+        "pt-br": "Executa os arquivos de teste do projeto com o test runner integrado",
+        "fr": "Exécute les fichiers de test du projet avec le lanceur de tests intégré",
+        "de": "Führt die Testdateien des Projekts mit dem eingebauten Test-Runner aus",
+        "it": "Esegue i file di test del progetto con il test runner integrato",
+        "ja": "組み込みのテストランナーでプロジェクトのテストファイルを実行します",
+        "ko": "내장 테스트 러너로 프로젝트의 테스트 파일을 실행합니다",
+        "zh-cn": "用内置测试运行器运行项目中的测试文件",
+        "zh-tw": "用內建測試執行器執行專案中的測試檔案",
+        "ru": "Запускает тестовые файлы проекта встроенным тест-раннером"
+      },
+      "command": "node --test",
+      "tags": {
+        "en": ["test", "tests"],
+        "es": ["test", "pruebas"],
+        "pt-br": ["teste", "testes"],
+        "fr": ["test", "tests"],
+        "de": ["Test", "Tests"],
+        "it": ["test", "prove"],
+        "ja": ["テスト"],
+        "ko": ["테스트"],
+        "zh-cn": ["测试"],
+        "zh-tw": ["測試"],
+        "ru": ["тест", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/test.html"
+    },
+    {
+      "id": "node.test-watch",
+      "title": {
+        "en": "Run tests in watch mode",
+        "es": "Ejecutar tests en modo watch",
+        "pt-br": "Executar testes em modo watch",
+        "fr": "Lancer les tests en mode watch",
+        "de": "Tests im Watch-Modus ausführen",
+        "it": "Esegui i test in modalità watch",
+        "ja": "ウォッチモードでテストを実行",
+        "ko": "감시 모드로 테스트 실행",
+        "zh-cn": "以监视模式运行测试",
+        "zh-tw": "以監看模式執行測試",
+        "ru": "Тесты в режиме наблюдения"
+      },
+      "description": {
+        "en": "Runs the tests again every time a file changes",
+        "es": "Vuelve a ejecutar los tests cada vez que cambia un archivo",
+        "pt-br": "Executa os testes de novo sempre que um arquivo muda",
+        "fr": "Relance les tests à chaque modification d'un fichier",
+        "de": "Führt die Tests bei jeder Dateiänderung erneut aus",
+        "it": "Riesegue i test ogni volta che cambia un file",
+        "ja": "ファイルが変わるたびにテストを再実行します",
+        "ko": "파일이 바뀔 때마다 테스트를 다시 실행합니다",
+        "zh-cn": "每当文件变化时重新运行测试",
+        "zh-tw": "每當檔案變更時重新執行測試",
+        "ru": "Перезапускает тесты при каждом изменении файла"
+      },
+      "command": "node --test --watch",
+      "tags": {
+        "en": ["test", "watch"],
+        "es": ["test", "watch", "pruebas"],
+        "pt-br": ["teste", "watch"],
+        "fr": ["test", "watch"],
+        "de": ["Test", "watch"],
+        "it": ["test", "watch"],
+        "ja": ["テスト", "ウォッチ"],
+        "ko": ["테스트", "감시"],
+        "zh-cn": ["测试", "监视"],
+        "zh-tw": ["測試", "監看"],
+        "ru": ["тест", "наблюдение"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/test.html#watch-mode"
+    },
+    {
+      "id": "node.env-file",
+      "title": {
+        "en": "Run with an .env file",
+        "es": "Ejecutar con un archivo .env",
+        "pt-br": "Executar com um arquivo .env",
+        "fr": "Exécuter avec un fichier .env",
+        "de": "Mit einer .env-Datei ausführen",
+        "it": "Esegui con un file .env",
+        "ja": ".env ファイル付きで実行",
+        "ko": ".env 파일과 함께 실행",
+        "zh-cn": "加载 .env 文件运行",
+        "zh-tw": "載入 .env 檔案執行",
+        "ru": "Запустить с файлом .env"
+      },
+      "description": {
+        "en": "Loads the environment variables of .env before running the file, without extra packages",
+        "es": "Carga las variables de entorno de .env antes de ejecutar el archivo, sin paquetes extra",
+        "pt-br": "Carrega as variáveis de ambiente do .env antes de executar o arquivo, sem pacotes extras",
+        "fr": "Charge les variables d'environnement de .env avant d'exécuter le fichier, sans paquet supplémentaire",
+        "de": "Lädt die Umgebungsvariablen aus .env, bevor die Datei ausgeführt wird, ohne zusätzliche Pakete",
+        "it": "Carica le variabili d'ambiente di .env prima di eseguire il file, senza pacchetti aggiuntivi",
+        "ja": "追加パッケージなしで、ファイル実行前に .env の環境変数を読み込みます",
+        "ko": "추가 패키지 없이 파일을 실행하기 전에 .env의 환경 변수를 불러옵니다",
+        "zh-cn": "运行文件前加载 .env 中的环境变量，无需额外的包",
+        "zh-tw": "執行檔案前載入 .env 中的環境變數，無需額外套件",
+        "ru": "Загружает переменные окружения из .env перед запуском файла, без дополнительных пакетов"
+      },
+      "command": "node --env-file=.env ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["env", "environment variables", "dotenv"],
+        "es": ["env", "variables de entorno", "dotenv"],
+        "pt-br": ["env", "variáveis de ambiente", "dotenv"],
+        "fr": ["env", "variables d'environnement", "dotenv"],
+        "de": ["env", "Umgebungsvariablen", "dotenv"],
+        "it": ["env", "variabili d'ambiente", "dotenv"],
+        "ja": ["env", "環境変数", "dotenv"],
+        "ko": ["env", "환경 변수", "dotenv"],
+        "zh-cn": ["env", "环境变量", "dotenv"],
+        "zh-tw": ["env", "環境變數", "dotenv"],
+        "ru": ["env", "переменные окружения", "dotenv"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--env-filefile"
+    },
+    {
+      "id": "node.run-script",
+      "title": {
+        "en": "Run a package.json script",
+        "es": "Ejecutar un script de package.json",
+        "pt-br": "Executar um script do package.json",
+        "fr": "Exécuter un script de package.json",
+        "de": "package.json-Skript ausführen",
+        "it": "Esegui uno script di package.json",
+        "ja": "package.json のスクリプトを実行",
+        "ko": "package.json 스크립트 실행",
+        "zh-cn": "运行 package.json 脚本",
+        "zh-tw": "執行 package.json 指令碼",
+        "ru": "Запустить скрипт из package.json"
+      },
+      "description": {
+        "en": "Runs a script of package.json directly with Node.js, faster than the package manager",
+        "es": "Ejecuta un script de package.json directamente con Node.js, más rápido que el gestor de paquetes",
+        "pt-br": "Executa um script do package.json diretamente com o Node.js, mais rápido que o gerenciador de pacotes",
+        "fr": "Exécute un script de package.json directement avec Node.js, plus vite que le gestionnaire de paquets",
+        "de": "Führt ein Skript aus package.json direkt mit Node.js aus, schneller als der Paketmanager",
+        "it": "Esegue uno script di package.json direttamente con Node.js, più veloce del gestore di pacchetti",
+        "ja": "package.json のスクリプトを Node.js で直接実行します。パッケージマネージャーより高速です",
+        "ko": "package.json의 스크립트를 Node.js로 직접 실행합니다. 패키지 관리자보다 빠릅니다",
+        "zh-cn": "直接用 Node.js 运行 package.json 中的脚本，比包管理器更快",
+        "zh-tw": "直接用 Node.js 執行 package.json 中的指令碼，比套件管理工具更快",
+        "ru": "Запускает скрипт из package.json напрямую через Node.js — быстрее, чем пакетный менеджер"
+      },
+      "command": "node --run ${script}",
+      "params": [
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "dev",
+            "es": "dev",
+            "pt-br": "dev",
+            "fr": "dev",
+            "de": "dev",
+            "it": "dev",
+            "ja": "dev",
+            "ko": "dev",
+            "zh-cn": "dev",
+            "zh-tw": "dev",
+            "ru": "dev"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["run", "script"],
+        "es": ["ejecutar", "script"],
+        "pt-br": ["executar", "script"],
+        "fr": ["exécuter", "script"],
+        "de": ["ausführen", "Skript"],
+        "it": ["eseguire", "script"],
+        "ja": ["実行", "スクリプト"],
+        "ko": ["실행", "스크립트"],
+        "zh-cn": ["运行", "脚本"],
+        "zh-tw": ["執行", "指令碼"],
+        "ru": ["запустить", "скрипт"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--run"
+    },
+    {
+      "id": "node.eval",
+      "title": {
+        "en": "Evaluate code",
+        "es": "Evaluar código",
+        "pt-br": "Avaliar código",
+        "fr": "Évaluer du code",
+        "de": "Code auswerten",
+        "it": "Valuta codice",
+        "ja": "コードを評価",
+        "ko": "코드 실행",
+        "zh-cn": "执行代码片段",
+        "zh-tw": "執行程式碼片段",
+        "ru": "Выполнить код"
+      },
+      "description": {
+        "en": "Runs a piece of JavaScript passed as text",
+        "es": "Ejecuta un fragmento de JavaScript pasado como texto",
+        "pt-br": "Executa um trecho de JavaScript passado como texto",
+        "fr": "Exécute un extrait de JavaScript passé sous forme de texte",
+        "de": "Führt ein als Text übergebenes JavaScript-Stück aus",
+        "it": "Esegue un frammento di JavaScript passato come testo",
+        "ja": "テキストとして渡した JavaScript を実行します",
+        "ko": "텍스트로 전달한 JavaScript 코드를 실행합니다",
+        "zh-cn": "运行以文本形式传入的 JavaScript 代码",
+        "zh-tw": "執行以文字傳入的 JavaScript 程式碼",
+        "ru": "Выполняет фрагмент JavaScript, переданный текстом"
+      },
+      "command": "node -e \"${code}\"",
+      "params": [
+        {
+          "name": "code",
+          "label": {
+            "en": "Code",
+            "es": "Código",
+            "pt-br": "Código",
+            "fr": "Code",
+            "de": "Code",
+            "it": "Codice",
+            "ja": "コード",
+            "ko": "코드",
+            "zh-cn": "代码",
+            "zh-tw": "程式碼",
+            "ru": "Код"
+          },
+          "placeholder": {
+            "en": "console.log(process.version)",
+            "es": "console.log(process.version)",
+            "pt-br": "console.log(process.version)",
+            "fr": "console.log(process.version)",
+            "de": "console.log(process.version)",
+            "it": "console.log(process.version)",
+            "ja": "console.log(process.version)",
+            "ko": "console.log(process.version)",
+            "zh-cn": "console.log(process.version)",
+            "zh-tw": "console.log(process.version)",
+            "ru": "console.log(process.version)"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["eval", "code", "script"],
+        "es": ["evaluar", "código"],
+        "pt-br": ["avaliar", "código"],
+        "fr": ["évaluer", "code"],
+        "de": ["auswerten", "Code"],
+        "it": ["valutare", "codice"],
+        "ja": ["評価", "コード"],
+        "ko": ["실행", "코드"],
+        "zh-cn": ["执行", "代码"],
+        "zh-tw": ["執行", "程式碼"],
+        "ru": ["выполнить", "код"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#-e---eval-script"
+    },
+    {
+      "id": "node.print",
+      "title": {
+        "en": "Print an expression",
+        "es": "Imprimir una expresión",
+        "pt-br": "Imprimir uma expressão",
+        "fr": "Afficher une expression",
+        "de": "Ausdruck ausgeben",
+        "it": "Stampa un'espressione",
+        "ja": "式の結果を表示",
+        "ko": "식 결과 출력",
+        "zh-cn": "打印表达式结果",
+        "zh-tw": "列印運算式結果",
+        "ru": "Вывести выражение"
+      },
+      "description": {
+        "en": "Evaluates a JavaScript expression and prints its result",
+        "es": "Evalúa una expresión de JavaScript y muestra su resultado",
+        "pt-br": "Avalia uma expressão JavaScript e mostra o resultado",
+        "fr": "Évalue une expression JavaScript et affiche son résultat",
+        "de": "Wertet einen JavaScript-Ausdruck aus und gibt das Ergebnis aus",
+        "it": "Valuta un'espressione JavaScript e ne stampa il risultato",
+        "ja": "JavaScript の式を評価して結果を表示します",
+        "ko": "JavaScript 식을 평가하고 결과를 출력합니다",
+        "zh-cn": "计算一个 JavaScript 表达式并打印结果",
+        "zh-tw": "計算一個 JavaScript 運算式並列印結果",
+        "ru": "Вычисляет выражение JavaScript и выводит результат"
+      },
+      "command": "node -p \"${expression}\"",
+      "params": [
+        {
+          "name": "expression",
+          "label": {
+            "en": "Expression",
+            "es": "Expresión",
+            "pt-br": "Expressão",
+            "fr": "Expression",
+            "de": "Ausdruck",
+            "it": "Espressione",
+            "ja": "式",
+            "ko": "식",
+            "zh-cn": "表达式",
+            "zh-tw": "運算式",
+            "ru": "Выражение"
+          },
+          "placeholder": {
+            "en": "process.versions",
+            "es": "process.versions",
+            "pt-br": "process.versions",
+            "fr": "process.versions",
+            "de": "process.versions",
+            "it": "process.versions",
+            "ja": "process.versions",
+            "ko": "process.versions",
+            "zh-cn": "process.versions",
+            "zh-tw": "process.versions",
+            "ru": "process.versions"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["print", "expression"],
+        "es": ["imprimir", "expresión"],
+        "pt-br": ["imprimir", "expressão"],
+        "fr": ["afficher", "expression"],
+        "de": ["ausgeben", "Ausdruck"],
+        "it": ["stampare", "espressione"],
+        "ja": ["表示", "式"],
+        "ko": ["출력", "식"],
+        "zh-cn": ["打印", "表达式"],
+        "zh-tw": ["列印", "運算式"],
+        "ru": ["вывести", "выражение"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#-p---print-script"
+    },
+    {
+      "id": "node.check",
+      "title": {
+        "en": "Check syntax",
+        "es": "Comprobar la sintaxis",
+        "pt-br": "Verificar a sintaxe",
+        "fr": "Vérifier la syntaxe",
+        "de": "Syntax prüfen",
+        "it": "Controlla la sintassi",
+        "ja": "構文をチェック",
+        "ko": "구문 검사",
+        "zh-cn": "检查语法",
+        "zh-tw": "檢查語法",
+        "ru": "Проверить синтаксис"
+      },
+      "description": {
+        "en": "Checks the syntax of a file without running it",
+        "es": "Comprueba la sintaxis de un archivo sin ejecutarlo",
+        "pt-br": "Verifica a sintaxe de um arquivo sem executá-lo",
+        "fr": "Vérifie la syntaxe d'un fichier sans l'exécuter",
+        "de": "Prüft die Syntax einer Datei, ohne sie auszuführen",
+        "it": "Controlla la sintassi di un file senza eseguirlo",
+        "ja": "ファイルを実行せずに構文をチェックします",
+        "ko": "파일을 실행하지 않고 구문을 검사합니다",
+        "zh-cn": "检查文件语法而不运行它",
+        "zh-tw": "檢查檔案語法而不執行它",
+        "ru": "Проверяет синтаксис файла без запуска"
+      },
+      "command": "node --check ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["check", "syntax", "lint"],
+        "es": ["comprobar", "sintaxis"],
+        "pt-br": ["verificar", "sintaxe"],
+        "fr": ["vérifier", "syntaxe"],
+        "de": ["prüfen", "Syntax"],
+        "it": ["controllare", "sintassi"],
+        "ja": ["チェック", "構文"],
+        "ko": ["검사", "구문"],
+        "zh-cn": ["检查", "语法"],
+        "zh-tw": ["檢查", "語法"],
+        "ru": ["проверить", "синтаксис"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#-c---check"
+    },
+    {
+      "id": "node.repl",
+      "title": {
+        "en": "Open the REPL",
+        "es": "Abrir la consola interactiva (REPL)",
+        "pt-br": "Abrir o console interativo (REPL)",
+        "fr": "Ouvrir la console interactive (REPL)",
+        "de": "Interaktive Konsole (REPL) öffnen",
+        "it": "Apri la console interattiva (REPL)",
+        "ja": "対話型コンソール（REPL）を開く",
+        "ko": "대화형 콘솔(REPL) 열기",
+        "zh-cn": "打开交互式控制台（REPL）",
+        "zh-tw": "開啟互動式主控台（REPL）",
+        "ru": "Открыть интерактивную консоль (REPL)"
+      },
+      "description": {
+        "en": "Starts an interactive Node.js console. Type .exit or press Ctrl+D to leave",
+        "es": "Abre una consola interactiva de Node.js. Escribe .exit o pulsa Ctrl+D para salir",
+        "pt-br": "Abre um console interativo do Node.js. Digite .exit ou pressione Ctrl+D para sair",
+        "fr": "Ouvre une console Node.js interactive. Tapez .exit ou appuyez sur Ctrl+D pour quitter",
+        "de": "Startet eine interaktive Node.js-Konsole. Zum Beenden .exit eingeben oder Strg+D drücken",
+        "it": "Avvia una console interattiva di Node.js. Digita .exit o premi Ctrl+D per uscire",
+        "ja": "対話型の Node.js コンソールを起動します。終了するには .exit と入力するか Ctrl+D を押します",
+        "ko": "대화형 Node.js 콘솔을 엽니다. 나가려면 .exit를 입력하거나 Ctrl+D를 누르세요",
+        "zh-cn": "启动交互式 Node.js 控制台。输入 .exit 或按 Ctrl+D 退出",
+        "zh-tw": "啟動互動式 Node.js 主控台。輸入 .exit 或按 Ctrl+D 離開",
+        "ru": "Запускает интерактивную консоль Node.js. Для выхода введите .exit или нажмите Ctrl+D"
+      },
+      "command": "node",
+      "tags": {
+        "en": ["repl", "console", "interactive"],
+        "es": ["repl", "consola", "interactiva"],
+        "pt-br": ["repl", "console", "interativo"],
+        "fr": ["repl", "console", "interactif"],
+        "de": ["REPL", "Konsole", "interaktiv"],
+        "it": ["repl", "console", "interattiva"],
+        "ja": ["REPL", "コンソール", "対話"],
+        "ko": ["REPL", "콘솔", "대화형"],
+        "zh-cn": ["REPL", "控制台", "交互"],
+        "zh-tw": ["REPL", "主控台", "互動"],
+        "ru": ["REPL", "консоль", "интерактивный"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/repl.html"
+    },
+    {
+      "id": "node.max-memory",
+      "title": {
+        "en": "Run with more memory",
+        "es": "Ejecutar con más memoria",
+        "pt-br": "Executar com mais memória",
+        "fr": "Exécuter avec plus de mémoire",
+        "de": "Mit mehr Speicher ausführen",
+        "it": "Esegui con più memoria",
+        "ja": "メモリを増やして実行",
+        "ko": "더 많은 메모리로 실행",
+        "zh-cn": "分配更多内存运行",
+        "zh-tw": "分配更多記憶體執行",
+        "ru": "Запустить с увеличенной памятью"
+      },
+      "description": {
+        "en": "Raises the JavaScript heap limit, useful for \"heap out of memory\" errors",
+        "es": "Sube el límite del heap de JavaScript, útil ante errores \"heap out of memory\"",
+        "pt-br": "Aumenta o limite do heap do JavaScript, útil para erros \"heap out of memory\"",
+        "fr": "Augmente la limite du tas JavaScript, utile en cas d’erreur « heap out of memory »",
+        "de": "Erhöht das Limit des JavaScript-Heaps, hilfreich bei „heap out of memory“-Fehlern",
+        "it": "Aumenta il limite dello heap JavaScript, utile con errori \"heap out of memory\"",
+        "ja": "JavaScript ヒープの上限を上げます。\"heap out of memory\" エラーのときに便利です",
+        "ko": "JavaScript 힙 한도를 늘립니다. \"heap out of memory\" 오류에 유용합니다",
+        "zh-cn": "提高 JavaScript 堆内存上限，适用于 \"heap out of memory\" 错误",
+        "zh-tw": "提高 JavaScript 堆積記憶體上限，適用於 \"heap out of memory\" 錯誤",
+        "ru": "Увеличивает лимит кучи JavaScript — помогает при ошибке «heap out of memory»"
+      },
+      "command": "node --max-old-space-size=${megabytes} ${file}",
+      "params": [
+        {
+          "name": "megabytes",
+          "label": {
+            "en": "Memory in MB",
+            "es": "Memoria en MB",
+            "pt-br": "Memória em MB",
+            "fr": "Mémoire en Mo",
+            "de": "Speicher in MB",
+            "it": "Memoria in MB",
+            "ja": "メモリ（MB）",
+            "ko": "메모리(MB)",
+            "zh-cn": "内存（MB）",
+            "zh-tw": "記憶體（MB）",
+            "ru": "Память в МБ"
+          },
+          "placeholder": {
+            "en": "4096",
+            "es": "4096",
+            "pt-br": "4096",
+            "fr": "4096",
+            "de": "4096",
+            "it": "4096",
+            "ja": "4096",
+            "ko": "4096",
+            "zh-cn": "4096",
+            "zh-tw": "4096",
+            "ru": "4096"
+          }
+        },
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "build.js",
+            "es": "build.js",
+            "pt-br": "build.js",
+            "fr": "build.js",
+            "de": "build.js",
+            "it": "build.js",
+            "ja": "build.js",
+            "ko": "build.js",
+            "zh-cn": "build.js",
+            "zh-tw": "build.js",
+            "ru": "build.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["memory", "heap", "out of memory"],
+        "es": ["memoria", "heap", "sin memoria"],
+        "pt-br": ["memória", "heap", "sem memória"],
+        "fr": ["mémoire", "tas", "heap"],
+        "de": ["Speicher", "Heap", "out of memory"],
+        "it": ["memoria", "heap", "out of memory"],
+        "ja": ["メモリ", "ヒープ"],
+        "ko": ["메모리", "힙"],
+        "zh-cn": ["内存", "堆"],
+        "zh-tw": ["記憶體", "堆積"],
+        "ru": ["память", "куча", "heap"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-mib"
+    },
+    {
+      "id": "node.trace-warnings",
+      "title": {
+        "en": "Trace warnings",
+        "es": "Rastrear advertencias",
+        "pt-br": "Rastrear avisos",
+        "fr": "Tracer les avertissements",
+        "de": "Warnungen zurückverfolgen",
+        "it": "Traccia gli avvisi",
+        "ja": "警告をトレース",
+        "ko": "경고 추적",
+        "zh-cn": "跟踪警告",
+        "zh-tw": "追蹤警告",
+        "ru": "Трассировка предупреждений"
+      },
+      "description": {
+        "en": "Runs the file and prints the stack trace of every warning, such as deprecations",
+        "es": "Ejecuta el archivo y muestra la traza de pila de cada advertencia, como las de obsolescencia",
+        "pt-br": "Executa o arquivo e mostra o stack trace de cada aviso, como os de descontinuação",
+        "fr": "Exécute le fichier et affiche la pile d'appels de chaque avertissement, comme les dépréciations",
+        "de": "Führt die Datei aus und gibt bei jeder Warnung, etwa zu veralteten APIs, den Stacktrace aus",
+        "it": "Esegue il file e mostra lo stack trace di ogni avviso, come quelli di deprecazione",
+        "ja": "ファイルを実行し、非推奨などの警告ごとにスタックトレースを表示します",
+        "ko": "파일을 실행하고 지원 중단 경고 등 모든 경고의 스택 추적을 출력합니다",
+        "zh-cn": "运行文件，并为每条警告（如弃用警告）打印堆栈跟踪",
+        "zh-tw": "執行檔案，並為每則警告（如淘汰警告）列印堆疊追蹤",
+        "ru": "Запускает файл и выводит стек для каждого предупреждения, например об устаревании"
+      },
+      "command": "node --trace-warnings ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/index.js",
+            "es": "src/index.js",
+            "pt-br": "src/index.js",
+            "fr": "src/index.js",
+            "de": "src/index.js",
+            "it": "src/index.js",
+            "ja": "src/index.js",
+            "ko": "src/index.js",
+            "zh-cn": "src/index.js",
+            "zh-tw": "src/index.js",
+            "ru": "src/index.js"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["warnings", "deprecation", "stack"],
+        "es": ["advertencias", "obsoleto", "pila"],
+        "pt-br": ["avisos", "descontinuado", "stack"],
+        "fr": ["avertissements", "dépréciation", "pile"],
+        "de": ["Warnungen", "veraltet", "Stack"],
+        "it": ["avvisi", "deprecato", "stack"],
+        "ja": ["警告", "非推奨", "スタック"],
+        "ko": ["경고", "지원 중단", "스택"],
+        "zh-cn": ["警告", "弃用", "堆栈"],
+        "zh-tw": ["警告", "淘汰", "堆疊"],
+        "ru": ["предупреждения", "устаревание", "стек"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/cli.html#--trace-warnings"
+    },
+    {
+      "id": "node.corepack-enable",
+      "title": {
+        "en": "Enable Corepack",
+        "es": "Activar Corepack",
+        "pt-br": "Ativar o Corepack",
+        "fr": "Activer Corepack",
+        "de": "Corepack aktivieren",
+        "it": "Attiva Corepack",
+        "ja": "Corepack を有効化",
+        "ko": "Corepack 활성화",
+        "zh-cn": "启用 Corepack",
+        "zh-tw": "啟用 Corepack",
+        "ru": "Включить Corepack"
+      },
+      "description": {
+        "en": "Makes pnpm and Yarn available in the version set by the packageManager field of package.json",
+        "es": "Deja disponibles pnpm y Yarn en la versión que fija el campo packageManager de package.json",
+        "pt-br": "Disponibiliza o pnpm e o Yarn na versão definida pelo campo packageManager do package.json",
+        "fr": "Rend pnpm et Yarn disponibles dans la version fixée par le champ packageManager de package.json",
+        "de": "Stellt pnpm und Yarn in der Version bereit, die das Feld packageManager in package.json festlegt",
+        "it": "Rende disponibili pnpm e Yarn nella versione fissata dal campo packageManager di package.json",
+        "ja": "package.json の packageManager で指定したバージョンの pnpm と Yarn を使えるようにします",
+        "ko": "package.json의 packageManager 필드에 지정된 버전의 pnpm과 Yarn을 사용할 수 있게 합니다",
+        "zh-cn": "按 package.json 中 packageManager 字段指定的版本提供 pnpm 和 Yarn",
+        "zh-tw": "依 package.json 中 packageManager 欄位指定的版本提供 pnpm 和 Yarn",
+        "ru": "Делает доступными pnpm и Yarn в версии из поля packageManager в package.json"
+      },
+      "command": "corepack enable",
+      "tags": {
+        "en": ["corepack", "pnpm", "yarn"],
+        "es": ["corepack", "pnpm", "yarn"],
+        "pt-br": ["corepack", "pnpm", "yarn"],
+        "fr": ["corepack", "pnpm", "yarn"],
+        "de": ["corepack", "pnpm", "yarn"],
+        "it": ["corepack", "pnpm", "yarn"],
+        "ja": ["corepack", "pnpm", "yarn"],
+        "ko": ["corepack", "pnpm", "yarn"],
+        "zh-cn": ["corepack", "pnpm", "yarn"],
+        "zh-tw": ["corepack", "pnpm", "yarn"],
+        "ru": ["corepack", "pnpm", "yarn"]
+      },
+      "risk": "safe",
+      "docs": "https://nodejs.org/api/corepack.html"
+    }
+  ]
+}
