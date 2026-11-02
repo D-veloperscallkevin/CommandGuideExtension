@@ -6,5 +6,7 @@ export const ptbr: Messages = {
   commandCount: { one: '{count} comando', many: '{count} de comandos', other: '{count} comandos' },
   emptyCatalog: 'Nenhuma categoria disponível.',
   back: 'Voltar',
-  categoryPlaceholder: 'A lista de comandos desta categoria chegará em breve.',
+  commandsLabel: 'Comandos de {category}',
+  riskCaution: 'Cuidado',
+  riskDestructive: 'Destrutivo',
 }

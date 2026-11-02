@@ -6,5 +6,7 @@ export const it: Messages = {
   commandCount: { one: '{count} comando', many: '{count} di comandi', other: '{count} comandi' },
   emptyCatalog: 'Nessuna categoria disponibile.',
   back: 'Indietro',
-  categoryPlaceholder: "L'elenco dei comandi di questa categoria arriverà presto.",
+  commandsLabel: 'Comandi di {category}',
+  riskCaution: 'Attenzione',
+  riskDestructive: 'Distruttivo',
 }

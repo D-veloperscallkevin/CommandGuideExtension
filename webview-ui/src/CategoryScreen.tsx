@@ -1,21 +1,29 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CategorySummary } from '../../src/messaging/protocol'
+import CommandList from './CommandList'
 import Icon from './Icon'
 import type { MessageKey, MessageParams } from './i18n'
 
 interface Props {
   category: CategorySummary
+  /** Comando con foco guardado. Si existe al montarse (restauración), recibe el foco. */
+  focusCommandId?: string
   onBack: () => void
+  onFocusCommand: (commandId: string) => void
   t: (key: MessageKey, params?: MessageParams) => string
 }
 
-/** Pantalla provisional de una categoría (la 1.3 añadirá su lista de comandos). */
-function CategoryScreen({ category, onBack, t }: Props) {
+/** Pantalla de una categoría: Atrás, título, número de comandos y la lista de comandos. */
+function CategoryScreen({ category, focusCommandId, onBack, onFocusCommand, t }: Props) {
   const title = useRef<HTMLHeadingElement>(null)
+  // Se decide al montarse: abrir la categoría enfoca el título; restaurarla, el comando guardado.
+  const [restoring] = useState(() => focusCommandId !== undefined)
 
   useEffect(() => {
-    title.current?.focus()
-  }, [])
+    if (!restoring) {
+      title.current?.focus()
+    }
+  }, [restoring])
 
   useEffect(() => {
     // En window y no en el contenedor: Escape funciona aunque el foco esté en <body>.
@@ -39,8 +47,15 @@ function CategoryScreen({ category, onBack, t }: Props) {
         <Icon name={category.icon} />
         <span>{category.title}</span>
       </h2>
-      <p className="muted">{t('commandCount', { count: category.commandCount })}</p>
-      <p className="muted">{t('categoryPlaceholder')}</p>
+      <p className="muted">{t('commandCount', { count: category.commands.length })}</p>
+      <CommandList
+        commands={category.commands}
+        categoryTitle={category.title}
+        focusCommandId={focusCommandId}
+        autoFocus={restoring}
+        onFocusCommand={onFocusCommand}
+        t={t}
+      />
     </section>
   )
 }

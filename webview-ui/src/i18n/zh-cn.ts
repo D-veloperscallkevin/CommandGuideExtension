@@ -6,5 +6,7 @@ export const zhcn: Messages = {
   commandCount: { other: '{count} 个命令' },
   emptyCatalog: '没有可用的类别。',
   back: '返回',
-  categoryPlaceholder: '此类别的命令列表即将推出。',
+  commandsLabel: '{category} 命令',
+  riskCaution: '注意',
+  riskDestructive: '破坏性',
 }

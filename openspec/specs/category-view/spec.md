@@ -33,7 +33,7 @@ Cada categoría SHALL mostrarse con el Codicon indicado en su campo `icon`. Si e
 - **THEN** la vista muestra el icono genérico y el test de iconos del catálogo falla nombrando la categoría
 
 ### Requirement: Navegación a una categoría y vuelta
-Activar una categoría SHALL mostrar su pantalla, con el título de la categoría, su número de comandos y un control para volver. Volver SHALL mostrar de nuevo la lista y devolver el foco a la categoría desde la que se entró.
+Activar una categoría SHALL mostrar su pantalla, con el título de la categoría, su número de comandos, un control para volver y la lista de sus comandos. Volver SHALL mostrar de nuevo la lista de categorías y devolver el foco a la categoría desde la que se entró.
 
 #### Scenario: Abrir y volver
 - **WHEN** el usuario abre la categoría Git y después pulsa "Atrás"
@@ -42,6 +42,10 @@ Activar una categoría SHALL mostrar su pantalla, con el título de la categorí
 #### Scenario: Volver con Escape
 - **WHEN** la pantalla de una categoría está abierta y el usuario pulsa Escape
 - **THEN** la vista vuelve a la lista
+
+#### Scenario: Pantalla con comandos
+- **WHEN** el usuario abre la categoría Git
+- **THEN** la pantalla muestra su título, "3 comandos" (en español), el control para volver y los 3 comandos de Git
 
 ### Requirement: Teclado
 La lista SHALL ocupar una sola parada de Tab. Dentro de ella, Flecha abajo y Flecha arriba SHALL mover el foco a la entrada siguiente y anterior, Inicio y Fin a la primera y la última, y Enter o Espacio SHALL abrir la categoría con el foco. Al abrir una categoría, el foco SHALL pasar al título de su pantalla.

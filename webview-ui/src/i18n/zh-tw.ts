@@ -6,5 +6,7 @@ export const zhtw: Messages = {
   commandCount: { other: '{count} 個命令' },
   emptyCatalog: '沒有可用的類別。',
   back: '返回',
-  categoryPlaceholder: '此類別的命令清單即將推出。',
+  commandsLabel: '{category} 命令',
+  riskCaution: '注意',
+  riskDestructive: '破壞性',
 }

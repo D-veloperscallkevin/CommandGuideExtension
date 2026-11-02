@@ -8,7 +8,9 @@ export const en = {
   commandCount: { one: '{count} command', other: '{count} commands' },
   emptyCatalog: 'No categories available.',
   back: 'Back',
-  categoryPlaceholder: 'The command list for this category is coming soon.',
+  commandsLabel: 'Commands in {category}',
+  riskCaution: 'Caution',
+  riskDestructive: 'Destructive',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

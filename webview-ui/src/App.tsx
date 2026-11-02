@@ -3,8 +3,8 @@ import type { CategorySummary, ExtensionMessage } from '../../src/messaging/prot
 import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
 import { toLocale, useT } from './i18n'
-import { initialView, navigate, resolveView } from './navigation'
-import { postMessage } from './vscode'
+import { initialView, navigate, parseSavedView } from './navigation'
+import { getState, postMessage, setState } from './vscode'
 
 type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
 
@@ -14,7 +14,8 @@ const initialLocale = toLocale(document.documentElement.lang)
 function App() {
   const [init, setInit] = useState<InitData | null>(null)
   const [categories, setCategories] = useState<readonly CategorySummary[] | null>(null)
-  const [storedView, dispatch] = useReducer(navigate, initialView)
+  // Arranca en la vista guardada (si es válida); al llegar el catálogo se ajusta con 'resolve'.
+  const [view, dispatch] = useReducer(navigate, undefined, () => parseSavedView(getState()) ?? initialView)
   const t = useT(init?.locale ?? initialLocale)
 
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
           break
         case 'catalog':
           setCategories(message.categories)
+          dispatch({ type: 'resolve', categories: message.categories })
           break
       }
     }
@@ -41,10 +43,18 @@ function App() {
     }
   }, [init])
 
+  useEffect(() => {
+    // Solo con catálogo: durante la carga no se sobrescribe la vista guardada.
+    if (categories) {
+      setState(view)
+    }
+  }, [categories, view])
+
   const open = useCallback((categoryId: string) => dispatch({ type: 'open', categoryId }), [])
   const back = useCallback(() => dispatch({ type: 'back' }), [])
+  const focusCategory = useCallback((categoryId: string) => dispatch({ type: 'focusCategory', categoryId }), [])
+  const focusCommand = useCallback((commandId: string) => dispatch({ type: 'focusCommand', commandId }), [])
 
-  const view = categories ? resolveView(storedView, categories.map((c) => c.id)) : storedView
   const openCategory = view.screen === 'category' ? categories?.find((c) => c.id === view.categoryId) : undefined
 
   let content
@@ -61,13 +71,23 @@ function App() {
       </p>
     )
   } else if (openCategory) {
-    content = <CategoryScreen key={openCategory.id} category={openCategory} onBack={back} t={t} />
+    content = (
+      <CategoryScreen
+        key={openCategory.id}
+        category={openCategory}
+        focusCommandId={view.screen === 'category' ? view.focusCommandId : undefined}
+        onBack={back}
+        onFocusCommand={focusCommand}
+        t={t}
+      />
+    )
   } else {
     content = (
       <CategoryList
         categories={categories}
         focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
         onOpen={open}
+        onFocusCategory={focusCategory}
         t={t}
       />
     )
