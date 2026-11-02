@@ -1,0 +1,12 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
+		"rootDir": "../..",
+		"types": ["node"],
+		"noEmit": true,
+		"allowJs": true
+	},
+	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../src/messaging/**/*.ts", "../../src/i18n/**/*.ts", "../../src/terminal/**/*.ts", "../../src/clipboard/**/*.ts", "../../src/views/webviewHtml.ts", "../../catalog/*.json", "../../scripts/release-check.mjs"]
+}

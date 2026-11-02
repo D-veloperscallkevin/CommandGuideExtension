@@ -1,71 +1,63 @@
-# devcommands README
+# DevCommands
 
-This is the README for your extension "devcommands". After writing up a brief description, we recommend including the following sections.
+Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click.
 
-## Features
+> Work in progress (pre-release): categories, commands, search, sending to the terminal and copying work. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what comes next.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Usage
 
-For example if there is an image subfolder under your extension project workspace:
+1. Open the **DevCommands** view in the Activity Bar. It includes more than 100 commands for Git, npm, pnpm, Node.js, Docker and the terminal (files, folders, processes).
+2. Pick a category to see its commands, with a description, an example and a warning on risky ones. Or type in the search box to find commands across all categories, in English or Spanish (accents and case don't matter); press Down to jump to the results and Escape to clear the search.
+3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
+4. To use it somewhere else, click the copy button next to it (or press `Ctrl+C`, `Cmd+C` on macOS, while the command has focus). It is copied to the clipboard and nothing is sent to the terminal.
 
-\!\[feature X\]\(images/feature-x.png\)
+The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. Commands with parameters are written with their example value (for instance `feature/my-change`), so replace it before pressing Enter.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Known limitations:
 
-## Requirements
+- If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
+- If you had already typed something in the terminal, the command is appended after it.
+- Until shell detection lands, examples use PowerShell syntax on Windows and bash syntax on Linux and macOS (Terminal commands have a native PowerShell variant).
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Languages
 
-## Extension Settings
+The interface follows the VS Code display language and is available in:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+English · Español · Português (Brasil) · Français · Deutsch · Italiano · 日本語 · 한국어 · 简体中文 · 繁體中文 · Русский
 
-For example:
+Any other display language falls back to English. The command catalog (titles, descriptions, parameters and search terms) is also available in all 11 languages; the commands themselves are not translated.
 
-This extension contributes the following settings:
+### Improve a translation
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Translations were generated and may contain mistakes. Corrections from native speakers are very welcome:
 
-## Known Issues
+- Interface: `webview-ui/src/i18n/<language>.ts`
+- Extension description: `package.nls.<language>.json`
+- Extension messages: `l10n/bundle.l10n.<language>.json`
+- Command catalog: see [`catalog/README.md`](catalog/README.md#corregir-o-añadir-una-traducción)
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Run `pnpm run test:unit` before opening a pull request: the tests check that every language has all the texts and the same `{placeholders}`.
 
-## Release Notes
+## Development
 
-Users appreciate release notes as you update your extension.
+Requirements: Node 24 and pnpm 11.
 
-### 1.0.0
+```bash
+pnpm install
+pnpm run verify   # lint, unit tests, build and integration tests
+```
 
-Initial release of ...
+Press F5 in VS Code to open an Extension Development Host with the extension loaded.
 
-### 1.0.1
+### Packaging
 
-Fixed issue #.
+```bash
+pnpm run release:package   # builds devcommands-<version>.vsix and checks its size (< 2 MB) and contents
+code --install-extension devcommands-0.1.0.vsix
+```
 
-### 1.1.0
+In WSL, open a folder with Remote-WSL and use Extensions › "…" › "Install from VSIX…" to install it there.
 
-Added features X, Y, and Z.
+## License
 
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+See [LICENSE](LICENSE).

@@ -1,121 +1,173 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import { queryWords } from '../../src/catalog/search'
+import type { CategorySummary, ExtensionMessage } from '../../src/messaging/protocol'
+import CategoryList from './CategoryList'
+import CategoryScreen from './CategoryScreen'
+import type { CommandListHandle, Copied } from './CommandList'
+import { toLocale, useT } from './i18n'
+import { initialView, navigate, parseSavedView } from './navigation'
+import SearchBox from './SearchBox'
+import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
+import { getState, postMessage, setState } from './vscode'
+
+type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
+
+// Antes del init, el idioma sale del <html lang> que pone la extensión al generar el HTML.
+const initialLocale = toLocale(document.documentElement.lang)
+
+/** Duración de la confirmación de copia (icono ✓ y anuncio). */
+const COPIED_MS = 2000
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [init, setInit] = useState<InitData | null>(null)
+  const [categories, setCategories] = useState<readonly CategorySummary[] | null>(null)
+  // Arranca en la vista guardada (si es válida); al llegar el catálogo se ajusta con 'resolve'.
+  const [view, dispatch] = useReducer(navigate, undefined, () => parseSavedView(getState()) ?? initialView)
+  const t = useT(init?.locale ?? initialLocale)
+  // Confirmación de copia: se muestra COPIED_MS. Cada `copied` lleva un `seq` nuevo, así que
+  // copiar otra vez (aunque sea el mismo comando) reinicia el tiempo y se vuelve a anunciar.
+  const [copied, setCopied] = useState<Copied | undefined>()
+
+  useEffect(() => {
+    if (!copied) {
+      return
+    }
+    const timer = setTimeout(() => setCopied(undefined), COPIED_MS)
+    return () => clearTimeout(timer)
+  }, [copied])
+
+  useEffect(() => {
+    // Los mensajes de la extensión son de confianza: basta con el tipo.
+    const onMessage = (event: MessageEvent<ExtensionMessage>) => {
+      const message = event.data
+      switch (message?.type) {
+        case 'init':
+          setInit({ locale: message.locale, version: message.version })
+          break
+        case 'catalog':
+          setCategories(message.categories)
+          dispatch({ type: 'resolve', categories: message.categories })
+          break
+        case 'copied':
+          setCopied((previous) => ({ commandId: message.commandId, seq: (previous?.seq ?? 0) + 1 }))
+          break
+      }
+    }
+    window.addEventListener('message', onMessage)
+    postMessage({ type: 'ready' })
+    return () => window.removeEventListener('message', onMessage)
+  }, [])
+
+  useEffect(() => {
+    if (init) {
+      document.documentElement.lang = init.locale
+    }
+  }, [init])
+
+  useEffect(() => {
+    // Solo con catálogo: durante la carga no se sobrescribe la vista guardada.
+    if (categories) {
+      setState(view)
+    }
+  }, [categories, view])
+
+  const open = useCallback((categoryId: string) => dispatch({ type: 'open', categoryId }), [])
+  const back = useCallback(() => dispatch({ type: 'back' }), [])
+  const focusCategory = useCallback((categoryId: string) => dispatch({ type: 'focusCategory', categoryId }), [])
+  const focusCommand = useCallback((commandId: string) => dispatch({ type: 'focusCommand', commandId }), [])
+  const searchFor = useCallback((query: string) => dispatch({ type: 'search', query }), [])
+  const results = useRef<CommandListHandle>(null)
+  const searchInput = useRef<HTMLInputElement>(null)
+
+  const openCategory = view.screen === 'category' ? categories?.find((c) => c.id === view.categoryId) : undefined
+  // Hay texto que borrar en el campo de la pantalla inicial (aunque sean solo espacios).
+  const clearable = view.screen === 'categories' && (view.query ?? '') !== '' && !!categories?.length
+
+  useEffect(() => {
+    if (!clearable) {
+      return
+    }
+    // En window y en captura: Escape vacía la búsqueda con el foco en el campo, en un resultado o
+    // en <body>, antes de que nada más lo procese. El foco vuelve al campo (los resultados se
+    // desmontan y, si lo tenían, se perdería).
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape' && !event.isComposing) {
+        event.preventDefault()
+        searchFor('')
+        searchInput.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown, true)
+    return () => window.removeEventListener('keydown', onKeyDown, true)
+  }, [clearable, searchFor])
+
+  let content
+  if (!categories) {
+    content = (
+      <p className="muted" role="status" aria-live="polite">
+        {t('loading')}
+      </p>
+    )
+  } else if (categories.length === 0) {
+    content = (
+      <p className="muted" role="status">
+        {t('emptyCatalog')}
+      </p>
+    )
+  } else if (openCategory) {
+    content = (
+      <CategoryScreen
+        key={openCategory.id}
+        category={openCategory}
+        focusCommandId={view.screen === 'category' ? view.focusCommandId : undefined}
+        copied={copied}
+        onBack={back}
+        onFocusCommand={focusCommand}
+        t={t}
+      />
+    )
+  } else {
+    const query = view.screen === 'categories' ? (view.query ?? '') : ''
+    const searching = queryWords(query).length > 0
+    content = (
+      <>
+        <SearchBox
+          ref={searchInput}
+          value={query}
+          onChange={searchFor}
+          onArrowDown={() => results.current?.focusFirst()}
+          controlsId={searching ? SEARCH_RESULTS_ID : undefined}
+          t={t}
+        />
+        {searching && (
+          <SearchResults
+            ref={results}
+            categories={categories}
+            query={query}
+            focusCommandId={view.screen === 'categories' ? view.focusCommandId : undefined}
+            copied={copied}
+            onFocusCommand={focusCommand}
+            t={t}
+          />
+        )}
+        {/* Oculta (no desmontada) mientras se busca: al vaciar el campo no roba el foco. */}
+        <div hidden={searching}>
+          <CategoryList
+            categories={categories}
+            focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
+            onOpen={open}
+            onFocusCategory={focusCategory}
+            t={t}
+          />
+        </div>
+      </>
+    )
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <main className="shell" aria-label="DevCommands">
+      {content}
+    </main>
   )
 }
 
