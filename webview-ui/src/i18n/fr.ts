@@ -18,4 +18,10 @@ export const fr: Messages = {
   resultCount: { one: '{count} résultat', many: '{count} de résultats', other: '{count} résultats' },
   noResults: 'Aucune commande ne correspond à la recherche.',
   examplesFor: 'Exemples pour : {shell}',
+  favorites: 'Favoris',
+  favorite: 'Favori',
+  addedToFavorites: 'Ajouté aux favoris',
+  removedFromFavorites: 'Retiré des favoris',
+  favoritesLabel: 'Commandes favorites',
+  noFavorites: "Aucun favori pour l'instant. Utilisez l'étoile à côté d'une commande pour l'ajouter.",
 }

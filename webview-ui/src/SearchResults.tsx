@@ -1,7 +1,7 @@
 import { useMemo, useState, type Ref } from 'react'
 import { search } from '../../src/catalog/search'
 import type { CategorySummary } from '../../src/messaging/protocol'
-import CommandList, { type CommandListHandle, type Copied, type ListCommand } from './CommandList'
+import CommandList, { type Starred, type CommandListHandle, type Copied, type ListCommand } from './CommandList'
 import type { MessageKey, MessageParams } from './i18n'
 
 export const SEARCH_RESULTS_ID = 'search-results'
@@ -12,6 +12,8 @@ interface Props {
   /** Resultado con foco guardado. Si existe al montarse (restauración), recibe el foco. */
   focusCommandId?: string
   copied?: Copied
+  favoriteIds: ReadonlySet<string>
+  starred?: Starred
   onFocusCommand: (commandId: string) => void
   ref?: Ref<CommandListHandle>
   t: (key: MessageKey, params?: MessageParams) => string
@@ -21,7 +23,7 @@ interface Props {
  * Resultados de la búsqueda en todas las categorías: el número de resultados (anunciado en una
  * región viva) y una lista de comandos que se comporta igual que la de una categoría.
  */
-function SearchResults({ categories, query, focusCommandId, copied, onFocusCommand, ref, t }: Props) {
+function SearchResults({ categories, query, focusCommandId, copied, favoriteIds, starred, onFocusCommand, ref, t }: Props) {
   // Se decide al montarse: restaurar la búsqueda enfoca el resultado guardado; escribir, no.
   const [restoring] = useState(() => focusCommandId !== undefined)
 
@@ -45,6 +47,8 @@ function SearchResults({ categories, query, focusCommandId, copied, onFocusComma
           focusCommandId={focusCommandId}
           autoFocus={restoring}
           copied={copied}
+          favoriteIds={favoriteIds}
+          starred={starred}
           onFocusCommand={onFocusCommand}
           t={t}
         />

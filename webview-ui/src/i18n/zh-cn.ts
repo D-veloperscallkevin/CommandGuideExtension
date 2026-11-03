@@ -18,4 +18,10 @@ export const zhcn: Messages = {
   resultCount: { other: '{count} 个结果' },
   noResults: '没有与搜索匹配的命令。',
   examplesFor: '{shell} 示例',
+  favorites: '收藏',
+  favorite: '收藏',
+  addedToFavorites: '已添加到收藏',
+  removedFromFavorites: '已从收藏中移除',
+  favoritesLabel: '收藏的命令',
+  noFavorites: '还没有收藏。使用命令旁边的星标来添加。',
 }

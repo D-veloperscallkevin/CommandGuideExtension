@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { queryWords } from '../../src/catalog/search'
 import type { CategorySummary, ExtensionMessage, ShellId } from '../../src/messaging/protocol'
 import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
-import type { CommandListHandle, Copied } from './CommandList'
+import type { CommandListHandle, Copied, Starred } from './CommandList'
+import FavoritesScreen from './FavoritesScreen'
 import { toLocale, useT } from './i18n'
 import { initialView, navigate, parseSavedView } from './navigation'
 import SearchBox from './SearchBox'
@@ -19,6 +20,27 @@ const initialLocale = toLocale(document.documentElement.lang)
 /** Duración de la confirmación de copia (icono ✓ y anuncio). */
 const COPIED_MS = 2000
 
+/**
+ * Retraso del anuncio de un favorito. El mismo `favorites` cambia el estado pulsado de la estrella
+ * y la tarjeta; si el texto de la región viva cambia en ese mismo render, los lectores de pantalla
+ * pueden descartar el anuncio. Publicarlo un instante después lo convierte en un cambio aparte.
+ */
+const STARRED_DELAY_MS = 150
+
+/** El único id que entra o sale entre dos listas de favoritos, o `undefined` si no es un solo cambio. */
+function favoriteChange(previous: readonly string[], next: readonly string[]): Omit<Starred, 'seq'> | undefined {
+  const added = next.filter((id) => !previous.includes(id))
+  const removed = previous.filter((id) => !next.includes(id))
+  if (added.length + removed.length !== 1) {
+    return undefined
+  }
+  return added.length === 1 ? { commandId: added[0], added: true } : { commandId: removed[0], added: false }
+}
+
+/** Favoritos que existen en el catálogo recibido. */
+const favoriteCount = (categories: readonly CategorySummary[], favorites: readonly string[]) =>
+  favorites.filter((id) => categories.some((c) => c.commands.some((cmd) => cmd.id === id))).length
+
 function App() {
   const [init, setInit] = useState<InitData | null>(null)
   const [categories, setCategories] = useState<readonly CategorySummary[] | null>(null)
@@ -30,6 +52,14 @@ function App() {
   // Confirmación de copia: se muestra COPIED_MS. Cada `copied` lleva un `seq` nuevo, así que
   // copiar otra vez (aunque sea el mismo comando) reinicia el tiempo y se vuelve a anunciar.
   const [copied, setCopied] = useState<Copied | undefined>()
+  // Favoritos en orden de marcado; null hasta el primer `favorites` de la extensión.
+  const [favorites, setFavorites] = useState<readonly string[] | null>(null)
+  // Último cambio de favorito, para anunciarlo. Solo se calcula al comparar con una lista ya
+  // recibida: el `favorites` del handshake no anuncia nada.
+  const [starred, setStarred] = useState<Starred | undefined>()
+  const favoriteIds = useMemo(() => new Set(favorites ?? []), [favorites])
+  // Lista anterior, para saber qué cambió al recibir `favorites` (fuera del estado de React).
+  const lastFavorites = useRef<readonly string[] | null>(null)
 
   useEffect(() => {
     if (!copied) {
@@ -38,6 +68,14 @@ function App() {
     const timer = setTimeout(() => setCopied(undefined), COPIED_MS)
     return () => clearTimeout(timer)
   }, [copied])
+
+  useEffect(() => {
+    if (!starred) {
+      return
+    }
+    const timer = setTimeout(() => setStarred(undefined), COPIED_MS)
+    return () => clearTimeout(timer)
+  }, [starred])
 
   useEffect(() => {
     // Los mensajes de la extensión son de confianza: basta con el tipo.
@@ -57,6 +95,16 @@ function App() {
         case 'copied':
           setCopied((previous) => ({ commandId: message.commandId, seq: (previous?.seq ?? 0) + 1 }))
           break
+        case 'favorites': {
+          const previous = lastFavorites.current
+          lastFavorites.current = message.commandIds
+          const change = previous && favoriteChange(previous, message.commandIds)
+          if (change) {
+            setTimeout(() => setStarred((last) => ({ ...change, seq: (last?.seq ?? 0) + 1 })), STARRED_DELAY_MS)
+          }
+          setFavorites(message.commandIds)
+          break
+        }
       }
     }
     window.addEventListener('message', onMessage)
@@ -78,6 +126,7 @@ function App() {
   }, [categories, view])
 
   const open = useCallback((categoryId: string) => dispatch({ type: 'open', categoryId }), [])
+  const openFavorites = useCallback(() => dispatch({ type: 'openFavorites' }), [])
   const back = useCallback(() => dispatch({ type: 'back' }), [])
   const focusCategory = useCallback((categoryId: string) => dispatch({ type: 'focusCategory', categoryId }), [])
   const focusCommand = useCallback((commandId: string) => dispatch({ type: 'focusCommand', commandId }), [])
@@ -108,7 +157,7 @@ function App() {
   }, [clearable, searchFor])
 
   let content
-  if (!categories) {
+  if (!categories || !favorites) {
     content = (
       <p className="muted" role="status" aria-live="polite">
         {t('loading')}
@@ -120,6 +169,20 @@ function App() {
         {t('emptyCatalog')}
       </p>
     )
+  } else if (view.screen === 'favorites') {
+    content = (
+      <FavoritesScreen
+        categories={categories}
+        favorites={favorites}
+        favoriteIds={favoriteIds}
+        focusCommandId={view.focusCommandId}
+        copied={copied}
+        starred={starred}
+        onBack={back}
+        onFocusCommand={focusCommand}
+        t={t}
+      />
+    )
   } else if (openCategory) {
     content = (
       <CategoryScreen
@@ -127,6 +190,8 @@ function App() {
         category={openCategory}
         focusCommandId={view.screen === 'category' ? view.focusCommandId : undefined}
         copied={copied}
+        favoriteIds={favoriteIds}
+        starred={starred}
         onBack={back}
         onFocusCommand={focusCommand}
         t={t}
@@ -152,6 +217,8 @@ function App() {
             query={query}
             focusCommandId={view.screen === 'categories' ? view.focusCommandId : undefined}
             copied={copied}
+            favoriteIds={favoriteIds}
+            starred={starred}
             onFocusCommand={focusCommand}
             t={t}
           />
@@ -160,8 +227,10 @@ function App() {
         <div hidden={searching}>
           <CategoryList
             categories={categories}
+            favoritesCount={favoriteCount(categories, favorites)}
             focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
             onOpen={open}
+            onOpenFavorites={openFavorites}
             onFocusCategory={focusCategory}
             t={t}
           />

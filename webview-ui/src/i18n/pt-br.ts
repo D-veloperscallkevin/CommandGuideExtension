@@ -18,4 +18,10 @@ export const ptbr: Messages = {
   resultCount: { one: '{count} resultado', many: '{count} de resultados', other: '{count} resultados' },
   noResults: 'Nenhum comando corresponde à pesquisa.',
   examplesFor: 'Exemplos para: {shell}',
+  favorites: 'Favoritos',
+  favorite: 'Favorito',
+  addedToFavorites: 'Adicionado aos favoritos',
+  removedFromFavorites: 'Removido dos favoritos',
+  favoritesLabel: 'Comandos favoritos',
+  noFavorites: 'Ainda não há favoritos. Use a estrela ao lado de um comando para adicioná-lo.',
 }

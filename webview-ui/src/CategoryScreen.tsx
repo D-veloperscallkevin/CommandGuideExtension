@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CategorySummary } from '../../src/messaging/protocol'
-import CommandList, { type Copied } from './CommandList'
+import CommandList, { type Starred, type Copied } from './CommandList'
 import Icon from './Icon'
 import type { MessageKey, MessageParams } from './i18n'
 
@@ -10,13 +10,15 @@ interface Props {
   focusCommandId?: string
   /** Comando cuya copia acaba de confirmarse. */
   copied?: Copied
+  favoriteIds: ReadonlySet<string>
+  starred?: Starred
   onBack: () => void
   onFocusCommand: (commandId: string) => void
   t: (key: MessageKey, params?: MessageParams) => string
 }
 
 /** Pantalla de una categoría: Atrás, título, número de comandos y la lista de comandos. */
-function CategoryScreen({ category, focusCommandId, copied, onBack, onFocusCommand, t }: Props) {
+function CategoryScreen({ category, focusCommandId, copied, favoriteIds, starred, onBack, onFocusCommand, t }: Props) {
   const title = useRef<HTMLHeadingElement>(null)
   // Se decide al montarse: abrir la categoría enfoca el título; restaurarla, el comando guardado.
   const [restoring] = useState(() => focusCommandId !== undefined)
@@ -56,6 +58,8 @@ function CategoryScreen({ category, focusCommandId, copied, onBack, onFocusComma
         focusCommandId={focusCommandId}
         autoFocus={restoring}
         copied={copied}
+        favoriteIds={favoriteIds}
+        starred={starred}
         onFocusCommand={onFocusCommand}
         t={t}
       />

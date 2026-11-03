@@ -22,7 +22,7 @@ describe('isWebviewMessage', () => {
 		expect(isWebviewMessage(value)).toBe(false);
 	});
 
-	describe.each(['sendToTerminal', 'copyToClipboard'] as const)('%s', (type) => {
+	describe.each(['sendToTerminal', 'copyToClipboard', 'toggleFavorite'] as const)('%s', (type) => {
 		it('acepta un commandId válido', () => {
 			expect(isWebviewMessage({ type, commandId: 'git.status' })).toBe(true);
 			expect(isWebviewMessage({ type, commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH) })).toBe(true);
@@ -35,6 +35,7 @@ describe('isWebviewMessage', () => {
 			['commandId vacío', { commandId: '' }],
 			['commandId demasiado largo', { commandId: 'x'.repeat(MAX_COMMAND_ID_LENGTH + 1) }],
 			['texto arbitrario extra', { commandId: 'git.status', text: 'rm -rf /' }],
+			['estado de favorito extra', { commandId: 'git.status', favorite: true }],
 		])('rechaza %s', (_name, fields) => {
 			expect(isWebviewMessage({ type, ...fields })).toBe(false);
 		});
@@ -48,5 +49,12 @@ describe('isWebviewMessage', () => {
 describe('ExtensionMessage', () => {
 	it('catalog lleva el shell de los ejemplos', () => {
 		expectTypeOf<Extract<ExtensionMessage, { type: 'catalog' }>['shell']>().toEqualTypeOf<ShellId>();
+	});
+
+	it('favorites lleva solo la lista de ids', () => {
+		expectTypeOf<Extract<ExtensionMessage, { type: 'favorites' }>>().toEqualTypeOf<{
+			readonly type: 'favorites';
+			readonly commandIds: readonly string[];
+		}>();
 	});
 });

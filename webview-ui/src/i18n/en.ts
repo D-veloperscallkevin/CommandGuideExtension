@@ -20,6 +20,12 @@ export const en = {
   resultCount: { one: '{count} result', other: '{count} results' },
   noResults: 'No commands match your search.',
   examplesFor: 'Examples for: {shell}',
+  favorites: 'Favorites',
+  favorite: 'Favorite',
+  addedToFavorites: 'Added to favorites',
+  removedFromFavorites: 'Removed from favorites',
+  favoritesLabel: 'Favorite commands',
+  noFavorites: 'No favorites yet. Use the star next to a command to add it.',
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

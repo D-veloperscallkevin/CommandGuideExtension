@@ -18,4 +18,10 @@ export const zhtw: Messages = {
   resultCount: { other: '{count} 個結果' },
   noResults: '沒有符合搜尋的命令。',
   examplesFor: '{shell} 範例',
+  favorites: '我的最愛',
+  favorite: '我的最愛',
+  addedToFavorites: '已加入我的最愛',
+  removedFromFavorites: '已從我的最愛移除',
+  favoritesLabel: '我的最愛命令',
+  noFavorites: '尚無我的最愛。使用命令旁的星號來加入。',
 }

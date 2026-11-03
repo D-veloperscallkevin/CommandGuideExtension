@@ -7,13 +7,14 @@ import type { Locale, ShellId } from '../catalog/types';
 export type { CategorySummary, CommandSummary, ShellId };
 
 /**
- * Mensajes que envía el webview a la extensión. `sendToTerminal` y `copyToClipboard` llevan solo
- * el id: el texto lo construye la extensión a partir del catálogo.
+ * Mensajes que envía el webview a la extensión. `sendToTerminal`, `copyToClipboard` y
+ * `toggleFavorite` llevan solo el id: el texto y la lista de favoritos los maneja la extensión.
  */
 export type WebviewMessage =
 	| { readonly type: 'ready' }
 	| { readonly type: 'sendToTerminal'; readonly commandId: string }
-	| { readonly type: 'copyToClipboard'; readonly commandId: string };
+	| { readonly type: 'copyToClipboard'; readonly commandId: string }
+	| { readonly type: 'toggleFavorite'; readonly commandId: string };
 
 /** Longitud máxima de un `commandId` recibido (acota también lo que se registra en el log). */
 export const MAX_COMMAND_ID_LENGTH = 200;
@@ -21,11 +22,13 @@ export const MAX_COMMAND_ID_LENGTH = 200;
 /**
  * Mensajes que envía la extensión al webview. `catalog` lleva el shell para el que se han
  * construido los ejemplos y se reenvía cuando cambia. `copied` solo se envía si la copia funcionó.
+ * `favorites` lleva los ids favoritos en orden de marcado, tras cada handshake y cada cambio.
  */
 export type ExtensionMessage =
 	| { readonly type: 'init'; readonly locale: Locale; readonly version: string }
 	| { readonly type: 'catalog'; readonly shell: ShellId; readonly categories: readonly CategorySummary[] }
-	| { readonly type: 'copied'; readonly commandId: string };
+	| { readonly type: 'copied'; readonly commandId: string }
+	| { readonly type: 'favorites'; readonly commandIds: readonly string[] };
 
 type FieldValidator = (value: unknown) => boolean;
 
@@ -40,6 +43,7 @@ const webviewMessageFields: Readonly<
 	ready: { type: isString },
 	sendToTerminal: { type: isString, commandId: isCommandId },
 	copyToClipboard: { type: isString, commandId: isCommandId },
+	toggleFavorite: { type: isString, commandId: isCommandId },
 };
 
 /**

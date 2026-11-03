@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
+import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
+import { FavoritesStore } from './favorites/FavoritesStore';
 import { MAX_VALUE_LENGTH } from './params/escape';
 import { ParamPrompter } from './params/ParamPrompter';
 import { RiskConfirmer } from './risk/RiskConfirmer';
@@ -18,6 +20,10 @@ export interface DevCommandsApi {
 	 * un valor o se rechaza el aviso de comando destructivo).
 	 */
 	copyToClipboard(commandId: string): Promise<boolean>;
+	/** Lo mismo que la estrella: alterna el favorito y envía la lista (si el id existe). */
+	toggleFavorite(commandId: string): Promise<void>;
+	/** Lista de favoritos enviada al webview: tras cada handshake y cada cambio. */
+	readonly onDidSendFavorites: vscode.Event<readonly string[]>;
 }
 
 // Se activa solo al abrir la vista (evento implícito onView:devcommands.commands).
@@ -46,6 +52,9 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 			copyButton: vscode.l10n.t('Copy'),
 		},
 	);
+	const catalog = new CatalogService();
+	context.globalState.setKeysForSync([FavoritesStore.key]);
+	const favorites = new FavoritesStore(context.globalState, (id) => catalog.getCommand(id) !== undefined);
 	const provider = new CommandsViewProvider(
 		context.extensionUri,
 		version,
@@ -55,6 +64,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		targetShell,
 		params,
 		risk,
+		favorites,
+		catalog,
 	);
 
 	context.subscriptions.push(
@@ -68,6 +79,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		onDidSendCatalog: provider.onDidSendCatalog,
 		sendToTerminal: (commandId) => provider.sendToTerminal(commandId),
 		copyToClipboard: (commandId) => provider.copyToClipboard(commandId),
+		toggleFavorite: (commandId) => provider.toggleFavorite(commandId),
+		onDidSendFavorites: provider.onDidSendFavorites,
 	};
 }
 

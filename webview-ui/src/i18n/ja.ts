@@ -18,4 +18,10 @@ export const ja: Messages = {
   resultCount: { other: '{count} 件の結果' },
   noResults: '検索に一致するコマンドはありません。',
   examplesFor: '{shell} 用の例',
+  favorites: 'お気に入り',
+  favorite: 'お気に入り',
+  addedToFavorites: 'お気に入りに追加しました',
+  removedFromFavorites: 'お気に入りから削除しました',
+  favoritesLabel: 'お気に入りのコマンド',
+  noFavorites: 'お気に入りはまだありません。コマンドの横の星で追加できます。',
 }
