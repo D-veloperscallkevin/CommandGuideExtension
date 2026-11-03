@@ -12,6 +12,13 @@ export interface Copied {
   seq: number
 }
 
+/** Favorito alternado y confirmado por la extensión. `seq` cambia en cada cambio. */
+export interface Starred {
+  commandId: string
+  added: boolean
+  seq: number
+}
+
 /** Comando de la lista; en los resultados de búsqueda lleva el título de su categoría. */
 export type ListCommand = CommandSummary & { readonly categoryTitle?: string }
 
@@ -33,6 +40,10 @@ interface Props {
   autoFocus: boolean
   /** Copia que acaba de confirmar la extensión (muestra ✓ y anuncia "Copiado"). */
   copied?: Copied
+  /** Ids de los comandos favoritos (estrella rellena y botón pulsado). */
+  favoriteIds: ReadonlySet<string>
+  /** Último cambio de favorito confirmado por la extensión (anuncio). */
+  starred?: Starred
   onFocusCommand: (commandId: string) => void
   t: (key: MessageKey, params?: MessageParams) => string
 }
@@ -46,27 +57,38 @@ const HINT_ID = 'send-to-terminal-hint'
 // Solo para el texto del atajo; Ctrl+C y Cmd+C funcionan en cualquier sistema.
 const isMac = navigator.userAgent.includes('Mac')
 const COPY_SHORTCUT_LABEL = isMac ? '⌘C' : 'Ctrl+C'
-const COPY_SHORTCUT_ARIA = isMac ? 'Meta+C' : 'Control+C'
+const FAVORITE_SHORTCUT_LABEL = isMac ? '⌘D' : 'Ctrl+D'
+const SHORTCUTS_ARIA = isMac ? 'Meta+C Meta+D' : 'Control+C Control+D'
+
+/** Ctrl/Cmd + `key` sin Alt ni Shift. */
+const isModKey = (event: KeyboardEvent, key: string) =>
+  (event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && event.key.toLowerCase() === key
 
 /** Ctrl+C / Cmd+C sin otros modificadores y sin texto seleccionado (si lo hay, se copia la selección). */
-function isCopyShortcut(event: KeyboardEvent): boolean {
-  return (
-    (event.ctrlKey || event.metaKey) &&
-    !event.altKey &&
-    !event.shiftKey &&
-    event.key.toLowerCase() === 'c' &&
-    window.getSelection()?.isCollapsed !== false
-  )
-}
+const isCopyShortcut = (event: KeyboardEvent) => isModKey(event, 'c') && window.getSelection()?.isCollapsed !== false
 
 const copy = (commandId: string) => postMessage({ type: 'copyToClipboard', commandId })
+const toggleFavorite = (commandId: string) => postMessage({ type: 'toggleFavorite', commandId })
 
 /**
  * Lista de comandos con foco itinerante. Cada comando es un botón que lo escribe en la
- * terminal sin ejecutarlo; a su lado, un botón secundario (fuera del orden de Tab) lo copia,
- * igual que Ctrl+C. Solo viaja el id: la extensión construye el texto.
+ * terminal sin ejecutarlo; a su lado, dos botones secundarios (fuera del orden de Tab) lo marcan
+ * como favorito (igual que Ctrl+D) y lo copian (igual que Ctrl+C). Solo viaja el id: la extensión
+ * construye el texto y guarda los favoritos.
  */
-function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFocus, copied, onFocusCommand, t }: Props) {
+function CommandList({
+  commands,
+  listLabel,
+  listId,
+  ref,
+  focusCommandId,
+  autoFocus,
+  copied,
+  favoriteIds,
+  starred,
+  onFocusCommand,
+  t,
+}: Props) {
   const initial = Math.max(
     0,
     commands.findIndex((c) => c.id === focusCommandId),
@@ -86,6 +108,7 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
   const hint = t('sendToTerminalHint')
   const copyLabel = t('copyCommand')
   const copiedLabel = t('copied')
+  const favoriteLabel = t('favorite')
 
   return (
     <>
@@ -108,6 +131,7 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
             .filter(Boolean)
             .join(' ')
           const isCopied = command.id === copied?.commandId
+          const isFavorite = favoriteIds.has(command.id)
           return (
             <li key={command.id} className="command-item">
               <button
@@ -117,7 +141,7 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
                 tabIndex={index === current ? 0 : -1}
                 aria-labelledby={labelledBy}
                 aria-describedby={HINT_ID}
-                aria-keyshortcuts={COPY_SHORTCUT_ARIA}
+                aria-keyshortcuts={SHORTCUTS_ARIA}
                 title={hint}
                 onFocus={() => {
                   setActive(index)
@@ -127,6 +151,9 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
                   if (isCopyShortcut(event)) {
                     event.preventDefault()
                     copy(command.id)
+                  } else if (isModKey(event, 'd')) {
+                    event.preventDefault()
+                    toggleFavorite(command.id)
                   }
                 }}
                 onClick={() => postMessage({ type: 'sendToTerminal', commandId: command.id })}
@@ -154,6 +181,19 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
               </button>
               <button
                 type="button"
+                className={isFavorite ? 'command-star favorite' : 'command-star'}
+                tabIndex={-1}
+                aria-label={favoriteLabel}
+                aria-pressed={isFavorite}
+                title={`${favoriteLabel} (${FAVORITE_SHORTCUT_LABEL})`}
+                // Como el de copiar: el clic no mueve el foco.
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => toggleFavorite(command.id)}
+              >
+                <Icon name={isFavorite ? 'star-full' : 'star-empty'} />
+              </button>
+              <button
+                type="button"
                 className={isCopied ? 'command-copy copied' : 'command-copy'}
                 tabIndex={-1}
                 aria-label={copyLabel}
@@ -175,6 +215,9 @@ function CommandList({ commands, listLabel, listId, ref, focusCommandId, autoFoc
       {/* Siempre en el DOM para que el cambio se anuncie; el key por copia hace que se repita. */}
       <span className="visually-hidden" role="status" aria-live="polite">
         {copied && <span key={copied.seq}>{copiedLabel}</span>}
+      </span>
+      <span className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+        {starred && <span key={starred.seq}>{t(starred.added ? 'addedToFavorites' : 'removedFromFavorites')}</span>}
       </span>
     </>
   )

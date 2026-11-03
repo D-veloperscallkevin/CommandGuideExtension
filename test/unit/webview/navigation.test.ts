@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { initialView, navigate, nextIndex, parseSavedView, resolveView } from '../../../webview-ui/src/navigation';
+import {
+	FAVORITES_CARD_ID,
+	initialView,
+	navigate,
+	nextIndex,
+	parseSavedView,
+	resolveView,
+} from '../../../webview-ui/src/navigation';
 
 describe('navigate', () => {
 	it('abre una categoría', () => {
@@ -179,6 +186,59 @@ describe('búsqueda', () => {
 		});
 		const kept = { screen: 'categories', query: 'rama', focusCommandId: 'git.new-branch' } as const;
 		expect(resolveView(kept, catalog)).toBe(kept);
+	});
+});
+
+describe('favoritos', () => {
+	const catalog = [{ id: 'git', commands: [{ id: 'git.status' }, { id: 'git.new-branch' }] }];
+
+	it('openFavorites abre la pantalla de favoritos sin foco', () => {
+		expect(navigate({ screen: 'categories', focusCategoryId: 'git' }, { type: 'openFavorites' })).toEqual({
+			screen: 'favorites',
+		});
+	});
+
+	it('al volver, el foco queda en la tarjeta de favoritos', () => {
+		expect(navigate({ screen: 'favorites', focusCommandId: 'git.status' }, { type: 'back' })).toEqual({
+			screen: 'categories',
+			focusCategoryId: FAVORITES_CARD_ID,
+		});
+	});
+
+	it('focusCommand guarda el comando con foco en la pantalla de favoritos', () => {
+		expect(navigate({ screen: 'favorites' }, { type: 'focusCommand', commandId: 'git.status' })).toEqual({
+			screen: 'favorites',
+			focusCommandId: 'git.status',
+		});
+	});
+
+	it('la tarjeta no puede coincidir con un id de categoría del catálogo', () => {
+		expect(FAVORITES_CARD_ID).not.toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+	});
+
+	it.each([
+		['sin foco', { screen: 'favorites' }],
+		['con foco', { screen: 'favorites', focusCommandId: 'git.status' }],
+	])('parseSavedView acepta la pantalla de favoritos %s', (_name, value) => {
+		expect(parseSavedView(value)).toEqual(value);
+	});
+
+	it.each([
+		['foco no string', { screen: 'favorites', focusCommandId: 3 }],
+		['campos de más', { screen: 'favorites', categoryId: 'git' }],
+	])('parseSavedView rechaza la pantalla de favoritos con %s', (_name, value) => {
+		expect(parseSavedView(value)).toBeUndefined();
+	});
+
+	it('resolveView conserva la pantalla y quita el foco de un comando desaparecido', () => {
+		const view = { screen: 'favorites', focusCommandId: 'git.status' } as const;
+		expect(resolveView(view, catalog)).toBe(view);
+		expect(resolveView({ screen: 'favorites', focusCommandId: 'git.gone' }, catalog)).toEqual({ screen: 'favorites' });
+	});
+
+	it('resolveView conserva el foco en la tarjeta aunque no sea una categoría', () => {
+		const view = { screen: 'categories', focusCategoryId: FAVORITES_CARD_ID } as const;
+		expect(resolveView(view, catalog)).toBe(view);
 	});
 });
 

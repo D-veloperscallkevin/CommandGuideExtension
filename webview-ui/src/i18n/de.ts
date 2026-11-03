@@ -18,4 +18,10 @@ export const de: Messages = {
   resultCount: { one: '{count} Ergebnis', other: '{count} Ergebnisse' },
   noResults: 'Kein Befehl entspricht der Suche.',
   examplesFor: 'Beispiele für: {shell}',
+  favorites: 'Favoriten',
+  favorite: 'Favorit',
+  addedToFavorites: 'Zu Favoriten hinzugefügt',
+  removedFromFavorites: 'Aus Favoriten entfernt',
+  favoritesLabel: 'Favorisierte Befehle',
+  noFavorites: 'Noch keine Favoriten. Verwenden Sie den Stern neben einem Befehl, um ihn hinzuzufügen.',
 }

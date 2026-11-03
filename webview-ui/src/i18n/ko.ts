@@ -18,4 +18,10 @@ export const ko: Messages = {
   resultCount: { other: '결과 {count}개' },
   noResults: '검색과 일치하는 명령어가 없습니다.',
   examplesFor: '{shell}용 예시',
+  favorites: '즐겨찾기',
+  favorite: '즐겨찾기',
+  addedToFavorites: '즐겨찾기에 추가됨',
+  removedFromFavorites: '즐겨찾기에서 제거됨',
+  favoritesLabel: '즐겨찾기 명령',
+  noFavorites: '아직 즐겨찾기가 없습니다. 명령 옆의 별표를 사용해 추가하세요.',
 }

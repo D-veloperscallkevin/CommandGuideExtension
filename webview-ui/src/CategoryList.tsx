@@ -2,24 +2,56 @@ import { useEffect } from 'react'
 import type { CategorySummary } from '../../src/messaging/protocol'
 import Icon from './Icon'
 import type { MessageKey, MessageParams } from './i18n'
+import { FAVORITES_CARD_ID } from './navigation'
 import { useRovingFocus } from './useRovingFocus'
 
 interface Props {
   categories: readonly CategorySummary[]
-  /** Categoría que recibe el foco al montarse (al volver de su pantalla o al restaurar). */
+  /** Número de favoritos; con 0 no se muestra la tarjeta "Favoritos". */
+  favoritesCount: number
+  /** Categoría (o FAVORITES_CARD_ID) que recibe el foco al montarse (al volver o al restaurar). */
   focusCategoryId?: string
   onOpen: (categoryId: string) => void
+  onOpenFavorites: () => void
   onFocusCategory: (categoryId: string) => void
   t: (key: MessageKey, params?: MessageParams) => string
 }
 
-/** Lista de categorías con foco itinerante: una sola parada de Tab, flechas, Inicio y Fin. */
-function CategoryList({ categories, focusCategoryId, onOpen, onFocusCategory, t }: Props) {
+/** Entrada de la lista: la tarjeta de favoritos o una categoría del catálogo. */
+interface Entry {
+  readonly id: string
+  readonly icon: string
+  readonly title: string
+  readonly count: number
+  readonly open: () => void
+}
+
+/**
+ * Lista de categorías con foco itinerante: una sola parada de Tab, flechas, Inicio y Fin. Si hay
+ * favoritos, la tarjeta "Favoritos" va primera y se comporta como una categoría más.
+ */
+function CategoryList({ categories, favoritesCount, focusCategoryId, onOpen, onOpenFavorites, onFocusCategory, t }: Props) {
+  const entries: Entry[] = categories.map((c) => ({
+    id: c.id,
+    icon: c.icon,
+    title: c.title,
+    count: c.commands.length,
+    open: () => onOpen(c.id),
+  }))
+  if (favoritesCount > 0) {
+    entries.unshift({
+      id: FAVORITES_CARD_ID,
+      icon: 'star-full',
+      title: t('favorites'),
+      count: favoritesCount,
+      open: onOpenFavorites,
+    })
+  }
   const initial = Math.max(
     0,
-    categories.findIndex((c) => c.id === focusCategoryId),
+    entries.findIndex((e) => e.id === focusCategoryId),
   )
-  const { current, setActive, itemRef, focusItem, onKeyDown } = useRovingFocus(categories.length, initial)
+  const { current, setActive, itemRef, focusItem, onKeyDown } = useRovingFocus(entries.length, initial)
 
   useEffect(() => {
     if (focusCategoryId) {
@@ -31,8 +63,8 @@ function CategoryList({ categories, focusCategoryId, onOpen, onFocusCategory, t 
 
   return (
     <ul className="item-list" role="list" aria-label={t('categoriesLabel')} onKeyDown={onKeyDown}>
-      {categories.map((category, index) => {
-        const count = t('commandCount', { count: category.commands.length })
+      {entries.map((category, index) => {
+        const count = t('commandCount', { count: category.count })
         return (
           <li key={category.id}>
             <button
@@ -45,7 +77,7 @@ function CategoryList({ categories, focusCategoryId, onOpen, onFocusCategory, t 
                 setActive(index)
                 onFocusCategory(category.id)
               }}
-              onClick={() => onOpen(category.id)}
+              onClick={category.open}
             >
               <Icon name={category.icon} />
               <span className="category-title">{category.title}</span>

@@ -8,5 +8,5 @@
 		"noEmit": true,
 		"allowJs": true
 	},
-	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../src/messaging/**/*.ts", "../../src/i18n/**/*.ts", "../../src/terminal/**/*.ts", "../../src/clipboard/**/*.ts", "../../src/params/**/*.ts", "../../src/risk/**/*.ts", "../../src/views/webviewHtml.ts", "../../catalog/*.json", "../../scripts/release-check.mjs"]
+	"include": ["**/*.ts", "../../src/catalog/**/*.ts", "../../src/messaging/**/*.ts", "../../src/i18n/**/*.ts", "../../src/terminal/**/*.ts", "../../src/clipboard/**/*.ts", "../../src/params/**/*.ts", "../../src/risk/**/*.ts", "../../src/favorites/**/*.ts", "../../src/views/webviewHtml.ts", "../../catalog/*.json", "../../scripts/release-check.mjs"]
 }

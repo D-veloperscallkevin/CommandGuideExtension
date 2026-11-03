@@ -9,6 +9,7 @@ import {
 } from '../catalog/CatalogService';
 import type { ShellId } from '../catalog/types';
 import type { ClipboardService } from '../clipboard/ClipboardService';
+import type { FavoritesStore } from '../favorites/FavoritesStore';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
 import { buildCommandText } from '../params/escape';
 import type { ParamPrompter } from '../params/ParamPrompter';
@@ -40,6 +41,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	private readonly catalogEmitter = new vscode.EventEmitter<SentCatalog>();
 	/** Se dispara tras enviar `catalog` al webview: tras cada `ready` y al cambiar el shell de destino. */
 	readonly onDidSendCatalog = this.catalogEmitter.event;
+	private readonly favoritesEmitter = new vscode.EventEmitter<readonly string[]>();
+	/** Se dispara tras enviar `favorites` al webview: tras cada `ready` y cada cambio. */
+	readonly onDidSendFavorites = this.favoritesEmitter.event;
 	/** Webview que ya ha completado el handshake; solo a él se reenvía el catálogo. */
 	private readyWebview: vscode.Webview | undefined;
 	private readonly shellSubscription: { dispose(): unknown };
@@ -53,6 +57,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly targetShell: TargetShell,
 		private readonly params: ParamPrompter,
 		private readonly risk: RiskConfirmer,
+		private readonly favorites: FavoritesStore,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
@@ -94,6 +99,28 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		const categories = buildCategorySummaries(this.catalog.getCategories(), resolveLocale(vscode.env.language), shell);
 		void webview.postMessage({ type: 'catalog', shell, categories } satisfies ExtensionMessage);
 		this.catalogEmitter.fire({ shell, categories });
+	}
+
+	/** Envía `favorites` con la lista dada (o la guardada) al webview listo, si lo hay. */
+	private postFavorites(webview: vscode.Webview | undefined, commandIds: readonly string[] = this.favorites.list()): void {
+		if (webview) {
+			void webview.postMessage({ type: 'favorites', commandIds } satisfies ExtensionMessage);
+		}
+		this.favoritesEmitter.fire(commandIds);
+	}
+
+	/**
+	 * Marca o desmarca como favorito el comando con ese id y envía la lista nueva. Con un id que no
+	 * es del catálogo no cambia nada y registra una advertencia.
+	 */
+	async toggleFavorite(commandId: string): Promise<void> {
+		const next = await this.favorites.toggle(commandId);
+		if (!next) {
+			this.log.warn('Comando desconocido, no se marca como favorito:', commandId.slice(0, 200));
+			return;
+		}
+		this.log.info('Favoritos:', next.length);
+		this.postFavorites(this.readyWebview, next);
 	}
 
 	/**
@@ -182,10 +209,16 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 					void webview.postMessage({ type: 'init', locale, version: this.version } satisfies ExtensionMessage);
 					this.postCatalog(webview, this.targetShell.current());
 					this.readyWebview = webview;
+					this.postFavorites(webview);
 					break;
 				}
 				case 'sendToTerminal':
 					this.sendToTerminal(message.commandId);
+					break;
+				case 'toggleFavorite':
+					this.toggleFavorite(message.commandId).catch((error: unknown) =>
+						this.log.error('No se pudieron guardar los favoritos:', String(error)),
+					);
 					break;
 				case 'copyToClipboard': {
 					const { commandId } = message;
@@ -209,5 +242,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	dispose(): void {
 		this.shellSubscription.dispose();
 		this.catalogEmitter.dispose();
+		this.favoritesEmitter.dispose();
 	}
 }

@@ -103,6 +103,31 @@ suite('Terminal', () => {
 	});
 });
 
+suite('Favoritos', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	test('alternar un favorito envía la lista nueva y deshacerlo la deja como estaba', async () => {
+		const devCommands = await api();
+		let sent = nextEvent(devCommands.onDidSendFavorites, 5_000);
+		await devCommands.toggleFavorite('git.status');
+		assert.deepStrictEqual(await sent, ['git.status']);
+		sent = nextEvent(devCommands.onDidSendFavorites, 5_000);
+		await devCommands.toggleFavorite('git.status');
+		assert.deepStrictEqual(await sent, []);
+	});
+
+	test('un id inexistente no envía nada', async () => {
+		const devCommands = await api();
+		const sent = nextEvent(devCommands.onDidSendFavorites, 500);
+		await devCommands.toggleFavorite('git.nope');
+		await assert.rejects(sent);
+	});
+});
+
 suite('Portapapeles', () => {
 	const sentinel = 'centinela-devcommands';
 

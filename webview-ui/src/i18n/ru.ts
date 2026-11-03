@@ -18,4 +18,10 @@ export const ru: Messages = {
   resultCount: { one: '{count} результат', few: '{count} результата', many: '{count} результатов', other: '{count} результата' },
   noResults: 'Нет команд, соответствующих запросу.',
   examplesFor: 'Примеры для: {shell}',
+  favorites: 'Избранное',
+  favorite: 'Избранное',
+  addedToFavorites: 'Добавлено в избранное',
+  removedFromFavorites: 'Удалено из избранного',
+  favoritesLabel: 'Избранные команды',
+  noFavorites: 'Избранного пока нет. Нажмите на звёздочку рядом с командой, чтобы добавить её.',
 }

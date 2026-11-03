@@ -179,16 +179,17 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  /* Hueco para el botón de copiar, que va encima en posición absoluta. */
-  padding-inline-end: 24px;
+  /* Hueco para los botones de favorito y copiar, que van encima en posición absoluta. */
+  padding-inline-end: 48px;
 }
 
-/* El botón de copiar es hermano del botón principal (un botón no puede contener otro). */
+/* Los botones de favorito y copiar son hermanos del botón principal (un botón no puede contener otro). */
 .command-item {
   position: relative;
 }
 
-.command-copy {
+.command-copy,
+.command-star {
   position: absolute;
   top: 5px;
   inset-inline-end: 14px;
@@ -206,13 +207,21 @@ body {
   visibility: hidden;
 }
 
+.command-star {
+  inset-inline-end: 38px;
+}
+
 .command-item:hover .command-copy,
 .command-item:focus-within .command-copy,
-.command-copy.copied {
+.command-copy.copied,
+.command-item:hover .command-star,
+.command-item:focus-within .command-star,
+.command-star.favorite {
   visibility: visible;
 }
 
-.command-copy:hover {
+.command-copy:hover,
+.command-star:hover {
   outline: 1px dashed var(--vscode-contrastActiveBorder, transparent);
   outline-offset: -1px;
   background: var(--vscode-toolbar-hoverBackground);

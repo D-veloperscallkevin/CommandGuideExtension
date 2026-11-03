@@ -14,9 +14,17 @@ export type View =
       readonly focusCommandId?: string
     }
   | { readonly screen: 'category'; readonly categoryId: string; readonly focusCommandId?: string }
+  | { readonly screen: 'favorites'; readonly focusCommandId?: string }
+
+/**
+ * Id de la tarjeta "Favoritos" en la lista de categorías (para el foco). Lleva `@`, que el
+ * patrón de ids del catálogo no admite, así que no puede coincidir con una categoría real.
+ */
+export const FAVORITES_CARD_ID = '@favorites'
 
 export type NavigationAction =
   | { readonly type: 'open'; readonly categoryId: string }
+  | { readonly type: 'openFavorites' }
   | { readonly type: 'back' }
   | { readonly type: 'focusCategory'; readonly categoryId: string }
   | { readonly type: 'focusCommand'; readonly commandId: string }
@@ -30,8 +38,13 @@ export function navigate(view: View, action: NavigationAction): View {
   switch (action.type) {
     case 'open':
       return { screen: 'category', categoryId: action.categoryId }
+    case 'openFavorites':
+      return { screen: 'favorites' }
     case 'back':
-      return view.screen === 'category' ? { screen: 'categories', focusCategoryId: view.categoryId } : view
+      if (view.screen === 'category') {
+        return { screen: 'categories', focusCategoryId: view.categoryId }
+      }
+      return view.screen === 'favorites' ? { screen: 'categories', focusCategoryId: FAVORITES_CARD_ID } : view
     case 'focusCategory':
       return view.screen === 'categories' && view.focusCategoryId !== action.categoryId
         ? { ...view, focusCategoryId: action.categoryId }
@@ -40,7 +53,7 @@ export function navigate(view: View, action: NavigationAction): View {
       if (view.focusCommandId === action.commandId) {
         return view
       }
-      if (view.screen === 'category' || hasQuery(view.query)) {
+      if (view.screen !== 'categories' || hasQuery(view.query)) {
         return { ...view, focusCommandId: action.commandId }
       }
       return view
@@ -88,6 +101,9 @@ export function parseSavedView(value: unknown): View | undefined {
   if (value.screen === 'category' && hasStringFields(value, ['screen', 'categoryId'], ['focusCommandId'])) {
     return value as View
   }
+  if (value.screen === 'favorites' && hasStringFields(value, ['screen'], ['focusCommandId'])) {
+    return value as View
+  }
   return undefined
 }
 
@@ -99,12 +115,17 @@ export interface CatalogIds {
 
 /**
  * Ajusta la vista al catálogo recibido: si la categoría abierta ya no existe, vuelve a la
- * lista; si el elemento con foco ya no existe, quita ese foco (la búsqueda se conserva).
+ * lista; si el elemento con foco ya no existe, quita ese foco (la búsqueda se conserva). El foco
+ * en la tarjeta de favoritos se conserva siempre: si la tarjeta no está, la lista enfoca la primera.
  */
 export function resolveView(view: View, categories: readonly CatalogIds[]): View {
   if (view.screen === 'categories') {
     let resolved: View = view
-    if (view.focusCategoryId !== undefined && !categories.some((c) => c.id === view.focusCategoryId)) {
+    if (
+      view.focusCategoryId !== undefined &&
+      view.focusCategoryId !== FAVORITES_CARD_ID &&
+      !categories.some((c) => c.id === view.focusCategoryId)
+    ) {
       const { focusCategoryId: _gone, ...rest } = resolved
       resolved = rest
     }
@@ -114,6 +135,13 @@ export function resolveView(view: View, categories: readonly CatalogIds[]): View
       resolved = rest
     }
     return resolved
+  }
+  if (view.screen === 'favorites') {
+    const focusCommandId = view.focusCommandId
+    if (focusCommandId !== undefined && !categories.some((c) => c.commands.some((cmd) => cmd.id === focusCommandId))) {
+      return { screen: 'favorites' }
+    }
+    return view
   }
   const category = categories.find((c) => c.id === view.categoryId)
   if (!category) {
