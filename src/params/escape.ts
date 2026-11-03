@@ -60,12 +60,23 @@ export type ValueError = 'empty' | 'control' | 'tooLong' | 'cmdUnsafe' | 'powers
 // Saltos de línea y caracteres de control: un salto de línea ejecutaría el comando.
 const controlChars = /[\u0000-\u001f\u007f-\u009f\u2028\u2029]/;
 
-/** Motivo por el que un valor tecleado no se acepta para ese shell, o `undefined` si es válido. */
-export function validateValue(value: string, shell: ShellId): ValueError | undefined {
+/**
+ * Motivo por el que un valor no se acepta en ningún shell (caracteres de control, vacío o
+ * demasiado largo), o `undefined` si puede valer en alguno.
+ */
+export function basicValueError(value: string): 'control' | 'empty' | 'tooLong' | undefined {
 	if (controlChars.test(value)) {return 'control';}
 	const trimmed = value.trim();
 	if (trimmed === '') {return 'empty';}
 	if (trimmed.length > MAX_VALUE_LENGTH) {return 'tooLong';}
+	return undefined;
+}
+
+/** Motivo por el que un valor tecleado no se acepta para ese shell, o `undefined` si es válido. */
+export function validateValue(value: string, shell: ShellId): ValueError | undefined {
+	const basic = basicValueError(value);
+	if (basic) {return basic;}
+	const trimmed = value.trim();
 	// cmd no puede escapar `"` dentro de comillas ni evitar la expansión de `%VAR%` en interactivo.
 	if (shell === 'cmd' && /["%]/.test(trimmed)) {return 'cmdUnsafe';}
 	// Windows PowerShell 5.1 borra las `"` de un argumento al pasarlo a un programa nativo (git, node…).

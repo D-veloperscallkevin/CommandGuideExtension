@@ -24,4 +24,9 @@ export const es: Messages = {
   removedFromFavorites: 'Quitado de favoritos',
   favoritesLabel: 'Comandos favoritos',
   noFavorites: 'Aún no hay favoritos. Usa la estrella junto a un comando para añadirlo.',
+  recent: 'Recientes',
+  recentLabel: 'Comandos recientes',
+  noRecent: 'Aún no hay comandos recientes. Aquí aparecen los comandos que escribes en la terminal.',
+  clearHistory: 'Borrar historial',
+  needsInput: 'No es válido en {shell}: se te pedirá el valor al enviarlo.',
 }

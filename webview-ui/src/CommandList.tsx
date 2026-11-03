@@ -6,9 +6,13 @@ import RiskBadge from './RiskBadge'
 import { useRovingFocus } from './useRovingFocus'
 import { postMessage } from './vscode'
 
-/** Copia confirmada por la extensión. `seq` cambia en cada copia, aunque sea el mismo comando. */
+/**
+ * Copia confirmada por la extensión. `seq` cambia en cada copia, aunque sea el mismo comando.
+ * `entryId` está si se copió una entrada del historial.
+ */
 export interface Copied {
   commandId: string
+  entryId?: string
   seq: number
 }
 
@@ -19,8 +23,20 @@ export interface Starred {
   seq: number
 }
 
-/** Comando de la lista; en los resultados de búsqueda lleva el título de su categoría. */
-export type ListCommand = CommandSummary & { readonly categoryTitle?: string }
+/**
+ * Comando de la lista; en los resultados de búsqueda, favoritos y recientes lleva el título de su
+ * categoría. En recientes lleva además la clave de su entrada del historial (`entryId`): el mismo
+ * comando puede aparecer varias veces, y enviar o copiar usa los valores guardados de esa entrada.
+ */
+export type ListCommand = CommandSummary & {
+  readonly categoryTitle?: string
+  readonly entryId?: string
+  /** Aviso bajo el comando (en recientes, que un valor guardado no vale en el shell actual). */
+  readonly notice?: string
+}
+
+/** Clave de un elemento de la lista: la de su entrada del historial o, si no, el id del comando. */
+const itemKey = (command: ListCommand) => command.entryId ?? command.id
 
 /** Lo que la lista ofrece a quien la contiene (p. ej. el campo de búsqueda). */
 export interface CommandListHandle {
@@ -67,7 +83,20 @@ const isModKey = (event: KeyboardEvent, key: string) =>
 /** Ctrl+C / Cmd+C sin otros modificadores y sin texto seleccionado (si lo hay, se copia la selección). */
 const isCopyShortcut = (event: KeyboardEvent) => isModKey(event, 'c') && window.getSelection()?.isCollapsed !== false
 
-const copy = (commandId: string) => postMessage({ type: 'copyToClipboard', commandId })
+/** Envía el comando a la terminal; una entrada del historial, con sus valores guardados. */
+const send = (command: ListCommand) =>
+  postMessage(
+    command.entryId === undefined
+      ? { type: 'sendToTerminal', commandId: command.id }
+      : { type: 'sendRecent', entryId: command.entryId },
+  )
+/** Copia el comando; una entrada del historial, con sus valores guardados. */
+const copy = (command: ListCommand) =>
+  postMessage(
+    command.entryId === undefined
+      ? { type: 'copyToClipboard', commandId: command.id }
+      : { type: 'copyRecent', entryId: command.entryId },
+  )
 const toggleFavorite = (commandId: string) => postMessage({ type: 'toggleFavorite', commandId })
 
 /**
@@ -91,7 +120,7 @@ function CommandList({
 }: Props) {
   const initial = Math.max(
     0,
-    commands.findIndex((c) => c.id === focusCommandId),
+    commands.findIndex((c) => itemKey(c) === focusCommandId),
   )
   const { current, setActive, itemRef, focusItem, onKeyDown } = useRovingFocus(commands.length, initial)
 
@@ -120,20 +149,22 @@ function CommandList({
         onKeyDown={onKeyDown}
       >
         {commands.map((command, index) => {
-          const id = domId(command.id)
+          const key = itemKey(command)
+          const id = domId(key)
           const labelledBy = [
             `${id}-title`,
             command.categoryTitle === undefined ? '' : `${id}-category`,
             command.risk === 'safe' ? '' : `${id}-risk`,
             `${id}-desc`,
             `${id}-example`,
+            command.notice === undefined ? '' : `${id}-notice`,
           ]
             .filter(Boolean)
             .join(' ')
-          const isCopied = command.id === copied?.commandId
+          const isCopied = copied !== undefined && (copied.entryId ?? copied.commandId) === key
           const isFavorite = favoriteIds.has(command.id)
           return (
-            <li key={command.id} className="command-item">
+            <li key={key} className="command-item">
               <button
                 type="button"
                 className="command"
@@ -145,18 +176,18 @@ function CommandList({
                 title={hint}
                 onFocus={() => {
                   setActive(index)
-                  onFocusCommand(command.id)
+                  onFocusCommand(key)
                 }}
                 onKeyDown={(event) => {
                   if (isCopyShortcut(event)) {
                     event.preventDefault()
-                    copy(command.id)
+                    copy(command)
                   } else if (isModKey(event, 'd')) {
                     event.preventDefault()
                     toggleFavorite(command.id)
                   }
                 }}
-                onClick={() => postMessage({ type: 'sendToTerminal', commandId: command.id })}
+                onClick={() => send(command)}
               >
                 <span className="command-header">
                   <span id={`${id}-title`} className="command-title">
@@ -178,6 +209,12 @@ function CommandList({
                 <code id={`${id}-example`} className="command-example">
                   {command.example}
                 </code>
+                {command.notice !== undefined && (
+                  <span id={`${id}-notice`} className="command-notice">
+                    <Icon name="warning" />
+                    <span>{command.notice}</span>
+                  </span>
+                )}
               </button>
               <button
                 type="button"
@@ -201,7 +238,7 @@ function CommandList({
                 // El clic no mueve el foco: este botón está fuera del orden de Tab, y un cambio de
                 // foco haría que el lector de pantalla leyera el comando entero en vez de "Copiado".
                 onMouseDown={(event) => event.preventDefault()}
-                onClick={() => copy(command.id)}
+                onClick={() => copy(command)}
               >
                 <Icon name={isCopied ? 'check' : 'copy'} />
               </button>

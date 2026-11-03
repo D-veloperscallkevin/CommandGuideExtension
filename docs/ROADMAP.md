@@ -268,7 +268,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell ✅ |
 | 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` ✅ |
 | 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio ✅ |
-| 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) |
+| 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) ✅ |
 | 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo |
 | 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, `prisma/`) |
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel |
@@ -339,6 +339,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `command-params` (2.2): enviar y copiar piden los valores de los parámetros con cuadros nativos y los escapan según el shell y las comillas de la plantilla
 - [x] `risk-confirmation` (2.3): enviar o copiar un comando destructivo pide confirmación en un aviso modal con el texto exacto; se desactiva con `devcommands.confirmDestructive`
 - [x] `favorites` (2.4): estrella por comando (también con `Ctrl+D`) y tarjeta "Favoritos" con su pantalla; se guardan en la extensión y se sincronizan con Settings Sync
+- [x] `recent-history` (2.5): tarjeta "Recientes" con los últimos 20 comandos enviados y sus valores; reenviar y copiar sin volver a escribirlos, y "Borrar historial"; solo en este equipo
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 

@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { queryWords } from '../../src/catalog/search'
-import type { CategorySummary, ExtensionMessage, ShellId } from '../../src/messaging/protocol'
+import type { CategorySummary, ExtensionMessage, HistoryItem, ShellId } from '../../src/messaging/protocol'
 import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
 import type { CommandListHandle, Copied, Starred } from './CommandList'
 import FavoritesScreen from './FavoritesScreen'
 import { toLocale, useT } from './i18n'
 import { initialView, navigate, parseSavedView } from './navigation'
+import RecentScreen from './RecentScreen'
 import SearchBox from './SearchBox'
 import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
 import { shellLabel } from './shellLabel'
@@ -60,6 +61,8 @@ function App() {
   const favoriteIds = useMemo(() => new Set(favorites ?? []), [favorites])
   // Lista anterior, para saber qué cambió al recibir `favorites` (fuera del estado de React).
   const lastFavorites = useRef<readonly string[] | null>(null)
+  // Historial, de lo más reciente a lo más antiguo; null hasta el primer `history`.
+  const [history, setHistory] = useState<readonly HistoryItem[] | null>(null)
 
   useEffect(() => {
     if (!copied) {
@@ -93,7 +96,11 @@ function App() {
           dispatch({ type: 'resolve', categories: message.categories })
           break
         case 'copied':
-          setCopied((previous) => ({ commandId: message.commandId, seq: (previous?.seq ?? 0) + 1 }))
+          setCopied((previous) => ({
+            commandId: message.commandId,
+            entryId: message.entryId,
+            seq: (previous?.seq ?? 0) + 1,
+          }))
           break
         case 'favorites': {
           const previous = lastFavorites.current
@@ -105,6 +112,9 @@ function App() {
           setFavorites(message.commandIds)
           break
         }
+        case 'history':
+          setHistory(message.entries)
+          break
       }
     }
     window.addEventListener('message', onMessage)
@@ -127,6 +137,7 @@ function App() {
 
   const open = useCallback((categoryId: string) => dispatch({ type: 'open', categoryId }), [])
   const openFavorites = useCallback(() => dispatch({ type: 'openFavorites' }), [])
+  const openRecent = useCallback(() => dispatch({ type: 'openRecent' }), [])
   const back = useCallback(() => dispatch({ type: 'back' }), [])
   const focusCategory = useCallback((categoryId: string) => dispatch({ type: 'focusCategory', categoryId }), [])
   const focusCommand = useCallback((commandId: string) => dispatch({ type: 'focusCommand', commandId }), [])
@@ -157,7 +168,7 @@ function App() {
   }, [clearable, searchFor])
 
   let content
-  if (!categories || !favorites) {
+  if (!categories || !favorites || !history) {
     content = (
       <p className="muted" role="status" aria-live="polite">
         {t('loading')}
@@ -175,6 +186,21 @@ function App() {
         categories={categories}
         favorites={favorites}
         favoriteIds={favoriteIds}
+        focusCommandId={view.focusCommandId}
+        copied={copied}
+        starred={starred}
+        onBack={back}
+        onFocusCommand={focusCommand}
+        t={t}
+      />
+    )
+  } else if (view.screen === 'recent') {
+    content = (
+      <RecentScreen
+        categories={categories}
+        entries={history}
+        favoriteIds={favoriteIds}
+        shellName={shell ? shellLabel(shell) : ''}
         focusCommandId={view.focusCommandId}
         copied={copied}
         starred={starred}
@@ -228,9 +254,11 @@ function App() {
           <CategoryList
             categories={categories}
             favoritesCount={favoriteCount(categories, favorites)}
+            recentCount={history.length}
             focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}
             onOpen={open}
             onOpenFavorites={openFavorites}
+            onOpenRecent={openRecent}
             onFocusCategory={focusCategory}
             t={t}
           />

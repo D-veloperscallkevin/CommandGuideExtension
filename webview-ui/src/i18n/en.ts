@@ -26,6 +26,11 @@ export const en = {
   removedFromFavorites: 'Removed from favorites',
   favoritesLabel: 'Favorite commands',
   noFavorites: 'No favorites yet. Use the star next to a command to add it.',
+  recent: 'Recent',
+  recentLabel: 'Recent commands',
+  noRecent: 'No recent commands yet. Commands you write to the terminal appear here.',
+  clearHistory: 'Clear history',
+  needsInput: "Not valid in {shell}: you'll be asked for the value when you send it.",
 } satisfies Record<string, string | PluralForms>
 
 export type MessageKey = keyof typeof en

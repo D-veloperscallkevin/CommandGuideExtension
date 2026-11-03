@@ -2,16 +2,18 @@ import { randomBytes } from 'node:crypto';
 import * as vscode from 'vscode';
 import {
 	buildCategorySummaries,
+	buildDisplayText,
 	buildExample,
 	CatalogService,
 	resolveLocale,
 	type CategorySummary,
 } from '../catalog/CatalogService';
-import type { ShellId } from '../catalog/types';
+import type { Locale, ShellId } from '../catalog/types';
 import type { ClipboardService } from '../clipboard/ClipboardService';
 import type { FavoritesStore } from '../favorites/FavoritesStore';
-import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
-import { buildCommandText } from '../params/escape';
+import type { HistoryEntry, HistoryStore } from '../history/HistoryStore';
+import { isWebviewMessage, type ExtensionMessage, type HistoryItem } from '../messaging/protocol';
+import { buildCommandText, validateValue } from '../params/escape';
 import type { ParamPrompter } from '../params/ParamPrompter';
 import type { RiskAction, RiskConfirmer } from '../risk/RiskConfirmer';
 import type { TargetShell } from '../terminal/TargetShell';
@@ -25,14 +27,19 @@ export interface SentCatalog {
 }
 
 /**
- * Texto de un comando listo para enviar o copiar, o por qué no lo hay: id desconocido, cuadro de
- * un valor cancelado o aviso de comando destructivo rechazado.
+ * Texto de un comando listo para enviar o copiar (con los valores usados, que se registran en el
+ * historial), o por qué no lo hay: id desconocido, cuadro de un valor cancelado o aviso de comando
+ * destructivo rechazado.
  */
 type CommandText =
-	| { readonly kind: 'text'; readonly text: string }
+	| { readonly kind: 'text'; readonly text: string; readonly values: ReadonlyMap<string, string> }
 	| { readonly kind: 'unknown' }
 	| { readonly kind: 'cancelled' }
 	| { readonly kind: 'declined' };
+
+/** Si todos los valores valen para ese shell (los del historial pueden venir de otro). */
+const allValid = (values: ReadonlyMap<string, string>, shell: ShellId): boolean =>
+	[...values.values()].every((value) => validateValue(value, shell) === undefined);
 
 /** Proveedor de la vista lateral: carga el webview de React y atiende sus mensajes. */
 export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
@@ -44,6 +51,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	private readonly favoritesEmitter = new vscode.EventEmitter<readonly string[]>();
 	/** Se dispara tras enviar `favorites` al webview: tras cada `ready` y cada cambio. */
 	readonly onDidSendFavorites = this.favoritesEmitter.event;
+	private readonly historyEmitter = new vscode.EventEmitter<readonly HistoryItem[]>();
+	/** Se dispara tras enviar `history` al webview: tras cada `ready`, cada cambio y cada cambio de shell. */
+	readonly onDidSendHistory = this.historyEmitter.event;
 	/** Webview que ya ha completado el handshake; solo a él se reenvía el catálogo. */
 	private readyWebview: vscode.Webview | undefined;
 	private readonly shellSubscription: { dispose(): unknown };
@@ -58,12 +68,15 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly params: ParamPrompter,
 		private readonly risk: RiskConfirmer,
 		private readonly favorites: FavoritesStore,
+		private readonly history: HistoryStore,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
 			if (this.readyWebview) {
 				this.log.info('Shell de destino:', shell);
 				this.postCatalog(this.readyWebview, shell);
+				// Los textos del historial dependen del shell.
+				this.postHistory(this.readyWebview);
 			}
 		});
 	}
@@ -73,8 +86,15 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	 * parámetros es el ejemplo visible; con parámetros, pide los valores y los escapa para ese shell.
 	 * Si el comando es `destructive`, pide después la confirmación con el texto ya construido.
 	 * Lo usan la terminal y el portapapeles, para que lo enviado y lo copiado no puedan divergir.
+	 *
+	 * Con `stored` (los valores de una entrada del historial), los usa sin preguntar si todos son
+	 * válidos para el shell de destino; si alguno no lo es, los pide con esos valores ya escritos.
 	 */
-	private async commandText(commandId: string, action: RiskAction): Promise<CommandText> {
+	private async commandText(
+		commandId: string,
+		action: RiskAction,
+		stored?: ReadonlyMap<string, string>,
+	): Promise<CommandText> {
 		const command = this.catalog.getCommand(commandId);
 		if (!command) {
 			return { kind: 'unknown' };
@@ -82,16 +102,21 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		const locale = resolveLocale(vscode.env.language);
 		const shell = this.targetShell.current();
 		let text: string;
+		let values: ReadonlyMap<string, string> = new Map();
 		if (command.params?.length) {
-			const values = await this.params.ask(command, locale, shell);
-			if (!values) {
+			const asked =
+				stored && allValid(stored, shell) ? stored : await this.params.ask(command, locale, shell, stored);
+			if (!asked) {
 				return { kind: 'cancelled' };
 			}
+			values = asked;
 			text = buildCommandText(command, shell, values);
 		} else {
 			text = buildExample(command, locale, shell);
 		}
-		return (await this.risk.confirm(command, locale, text, action)) ? { kind: 'text', text } : { kind: 'declined' };
+		return (await this.risk.confirm(command, locale, text, action))
+			? { kind: 'text', text, values }
+			: { kind: 'declined' };
 	}
 
 	/** Envía `catalog` con los ejemplos construidos para `shell`. */
@@ -107,6 +132,53 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			void webview.postMessage({ type: 'favorites', commandIds } satisfies ExtensionMessage);
 		}
 		this.favoritesEmitter.fire(commandIds);
+	}
+
+	/**
+	 * Entrada tal como la ve el webview con `shell`: con sus valores escapados si todos valen para
+	 * ese shell; si no, con los valores sin escapar y `needsInput` (al enviarla se piden de nuevo).
+	 * `undefined` si el comando ya no existe.
+	 */
+	private historyItem(entry: HistoryEntry, locale: Locale, shell: ShellId): HistoryItem | undefined {
+		const command = this.catalog.getCommand(entry.commandId);
+		if (!command) {
+			return undefined;
+		}
+		const base = { id: entry.id, commandId: entry.commandId };
+		if (!command.params?.length) {
+			return { ...base, text: buildExample(command, locale, shell), needsInput: false };
+		}
+		const values = new Map(Object.entries(entry.values));
+		return allValid(values, shell)
+			? { ...base, text: buildCommandText(command, shell, values), needsInput: false }
+			: { ...base, text: buildDisplayText(command, shell, values), needsInput: true };
+	}
+
+	/** Envía `history` con las entradas dadas (o las guardadas) al webview listo, si lo hay. */
+	private postHistory(webview: vscode.Webview | undefined, entries: readonly HistoryEntry[] = this.history.list()): void {
+		const locale = resolveLocale(vscode.env.language);
+		const shell = this.targetShell.current();
+		const items = entries.flatMap((entry) => this.historyItem(entry, locale, shell) ?? []);
+		if (webview) {
+			void webview.postMessage({ type: 'history', entries: items } satisfies ExtensionMessage);
+		}
+		this.historyEmitter.fire(items);
+	}
+
+	/** La entrada del historial con esa clave, o `undefined` (con una advertencia) si ya no está. */
+	private recentEntry(entryId: string): HistoryEntry | undefined {
+		const entry = this.history.get(entryId);
+		if (!entry) {
+			this.log.warn('Entrada del historial desconocida:', entryId);
+		}
+		return entry;
+	}
+
+	/** Vacía el historial y envía la lista vacía. */
+	async clearHistory(): Promise<void> {
+		await this.history.clear();
+		this.log.info('Historial borrado');
+		this.postHistory(this.readyWebview, []);
 	}
 
 	/**
@@ -131,7 +203,24 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	sendToTerminal(commandId: string): void {
 		// Puede esperar a los cuadros de los valores, al aviso y a que el shell de una terminal nueva
 		// esté listo; no bloquea la vista.
-		void this.commandText(commandId, 'send')
+		void this.send(commandId);
+	}
+
+	/**
+	 * Escribe en la terminal, sin ejecutarlo, el comando de esa entrada del historial con sus valores
+	 * guardados (ver `commandText`). Si la entrada ya no está, no escribe nada. Termina cuando el
+	 * comando se ha escrito y registrado, o se ha descartado.
+	 */
+	async sendRecent(entryId: string): Promise<void> {
+		const entry = this.recentEntry(entryId);
+		if (entry) {
+			await this.send(entry.commandId, new Map(Object.entries(entry.values)));
+		}
+	}
+
+	/** Escribe el comando en la terminal y, si se escribió, lo registra en el historial. */
+	private send(commandId: string, stored?: ReadonlyMap<string, string>): Promise<void> {
+		return this.commandText(commandId, 'send', stored)
 			.then(async (result) => {
 				if (result.kind === 'unknown') {
 					this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
@@ -147,8 +236,20 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				}
 				await this.terminal.write(result.text);
 				this.log.info('Comando escrito en la terminal:', commandId);
+				await this.record(commandId, result.values);
 			})
 			.catch((error: unknown) => this.log.error('No se pudo escribir en la terminal:', String(error)));
+	}
+
+	/** Registra un envío en el historial y envía la lista nueva. Un fallo al guardar no afecta al envío. */
+	private async record(commandId: string, values: ReadonlyMap<string, string>): Promise<void> {
+		try {
+			const entries = await this.history.record(commandId, values);
+			this.log.info('Historial:', entries.length);
+			this.postHistory(this.readyWebview, entries);
+		} catch (error) {
+			this.log.error('No se pudo guardar el historial:', String(error));
+		}
 	}
 
 	/**
@@ -157,10 +258,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	 * desconocido, si el usuario cancela un valor o rechaza el aviso, o si el portapapeles falla, no
 	 * lo modifica y devuelve `false`.
 	 */
-	async copyToClipboard(commandId: string): Promise<boolean> {
+	async copyToClipboard(commandId: string, stored?: ReadonlyMap<string, string>): Promise<boolean> {
 		let result: CommandText;
 		try {
-			result = await this.commandText(commandId, 'copy');
+			result = await this.commandText(commandId, 'copy', stored);
 		} catch (error) {
 			this.log.error('No se pudo construir el comando:', String(error));
 			return false;
@@ -183,6 +284,20 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		}
 		this.log.info('Comando copiado al portapapeles:', commandId);
 		return true;
+	}
+
+	/**
+	 * Copia al portapapeles el comando de esa entrada del historial con sus valores guardados, sin
+	 * registrarlo. Devuelve el id del comando si se copió; `undefined` si la entrada ya no está o la
+	 * copia no se hizo.
+	 */
+	async copyRecent(entryId: string): Promise<string | undefined> {
+		const entry = this.recentEntry(entryId);
+		if (!entry) {
+			return undefined;
+		}
+		const copied = await this.copyToClipboard(entry.commandId, new Map(Object.entries(entry.values)));
+		return copied ? entry.commandId : undefined;
 	}
 
 	resolveWebviewView(webviewView: vscode.WebviewView): void {
@@ -210,10 +325,28 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 					this.postCatalog(webview, this.targetShell.current());
 					this.readyWebview = webview;
 					this.postFavorites(webview);
+					this.postHistory(webview);
 					break;
 				}
 				case 'sendToTerminal':
 					this.sendToTerminal(message.commandId);
+					break;
+				case 'sendRecent':
+					void this.sendRecent(message.entryId);
+					break;
+				case 'copyRecent': {
+					const { entryId } = message;
+					void this.copyRecent(entryId).then((commandId) => {
+						if (commandId) {
+							void webview.postMessage({ type: 'copied', commandId, entryId } satisfies ExtensionMessage);
+						}
+					});
+					break;
+				}
+				case 'clearHistory':
+					this.clearHistory().catch((error: unknown) =>
+						this.log.error('No se pudo borrar el historial:', String(error)),
+					);
 					break;
 				case 'toggleFavorite':
 					this.toggleFavorite(message.commandId).catch((error: unknown) =>
@@ -243,5 +376,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		this.shellSubscription.dispose();
 		this.catalogEmitter.dispose();
 		this.favoritesEmitter.dispose();
+		this.historyEmitter.dispose();
 	}
 }

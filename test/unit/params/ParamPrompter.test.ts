@@ -39,6 +39,22 @@ const newBranch = makeCommand({
 });
 
 describe('ParamPrompter', () => {
+	it('con valores iniciales, cada cuadro se abre con el suyo', async () => {
+		const { window, shown } = fakeWindow(['a', 'b']);
+		const initial = new Map([
+			['source', 'mi "origen"'],
+			['destination', 'dst'],
+		]);
+		await new ParamPrompter(window, messages).ask(copy, 'en', 'powershell', initial);
+		expect(shown.map((o) => o.value)).toEqual(['mi "origen"', 'dst']);
+	});
+
+	it('sin valores iniciales, el cuadro no recibe value', async () => {
+		const { window, shown } = fakeWindow(['main']);
+		await new ParamPrompter(window, messages).ask(newBranch, 'en', 'bash');
+		expect(shown[0]).not.toHaveProperty('value');
+	});
+
 	it('un parámetro: título sin paso, etiqueta, placeholder e ignoreFocusOut', async () => {
 		const { window, shown } = fakeWindow(['feature/login']);
 		const values = await new ParamPrompter(window, messages).ask(newBranch, 'es', 'bash');

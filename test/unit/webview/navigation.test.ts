@@ -5,6 +5,7 @@ import {
 	navigate,
 	nextIndex,
 	parseSavedView,
+	RECENT_CARD_ID,
 	resolveView,
 } from '../../../webview-ui/src/navigation';
 
@@ -238,6 +239,60 @@ describe('favoritos', () => {
 
 	it('resolveView conserva el foco en la tarjeta aunque no sea una categoría', () => {
 		const view = { screen: 'categories', focusCategoryId: FAVORITES_CARD_ID } as const;
+		expect(resolveView(view, catalog)).toBe(view);
+	});
+});
+
+describe('recientes', () => {
+	const catalog = [{ id: 'git', commands: [{ id: 'git.status' }] }];
+	const entryId = '3f2a9c1e-0b7d-4e6a-9c51-2d8f7a1b4e60';
+
+	it('openRecent abre la pantalla de recientes sin foco', () => {
+		expect(navigate({ screen: 'categories', focusCategoryId: 'git' }, { type: 'openRecent' })).toEqual({
+			screen: 'recent',
+		});
+	});
+
+	it('al volver, el foco queda en la tarjeta de recientes', () => {
+		expect(navigate({ screen: 'recent', focusCommandId: entryId }, { type: 'back' })).toEqual({
+			screen: 'categories',
+			focusCategoryId: RECENT_CARD_ID,
+		});
+	});
+
+	it('focusCommand guarda la entrada con foco', () => {
+		expect(navigate({ screen: 'recent' }, { type: 'focusCommand', commandId: entryId })).toEqual({
+			screen: 'recent',
+			focusCommandId: entryId,
+		});
+	});
+
+	it('la tarjeta no puede coincidir con un id de categoría ni con la de favoritos', () => {
+		expect(RECENT_CARD_ID).not.toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+		expect(RECENT_CARD_ID).not.toBe(FAVORITES_CARD_ID);
+	});
+
+	it.each([
+		['sin foco', { screen: 'recent' }],
+		['con foco', { screen: 'recent', focusCommandId: entryId }],
+	])('parseSavedView acepta la pantalla de recientes %s', (_name, value) => {
+		expect(parseSavedView(value)).toEqual(value);
+	});
+
+	it.each([
+		['foco no string', { screen: 'recent', focusCommandId: 3 }],
+		['campos de más', { screen: 'recent', categoryId: 'git' }],
+	])('parseSavedView rechaza la pantalla de recientes con %s', (_name, value) => {
+		expect(parseSavedView(value)).toBeUndefined();
+	});
+
+	it('resolveView conserva la pantalla y la entrada con foco', () => {
+		const view = { screen: 'recent', focusCommandId: entryId } as const;
+		expect(resolveView(view, catalog)).toBe(view);
+	});
+
+	it('resolveView conserva el foco en la tarjeta aunque no sea una categoría', () => {
+		const view = { screen: 'categories', focusCategoryId: RECENT_CARD_ID } as const;
 		expect(resolveView(view, catalog)).toBe(view);
 	});
 });

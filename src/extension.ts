@@ -1,7 +1,10 @@
+import { randomUUID } from 'node:crypto';
 import * as vscode from 'vscode';
 import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { FavoritesStore } from './favorites/FavoritesStore';
+import { HistoryStore } from './history/HistoryStore';
+import type { HistoryItem } from './messaging/protocol';
 import { MAX_VALUE_LENGTH } from './params/escape';
 import { ParamPrompter } from './params/ParamPrompter';
 import { RiskConfirmer } from './risk/RiskConfirmer';
@@ -24,6 +27,12 @@ export interface DevCommandsApi {
 	toggleFavorite(commandId: string): Promise<void>;
 	/** Lista de favoritos enviada al webview: tras cada handshake y cada cambio. */
 	readonly onDidSendFavorites: vscode.Event<readonly string[]>;
+	/** Lo mismo que enviar una entrada de "Recientes": la escribe con sus valores guardados. */
+	sendRecent(entryId: string): Promise<void>;
+	/** Lo mismo que el botón "Borrar historial". */
+	clearHistory(): Promise<void>;
+	/** Historial enviado al webview: tras cada handshake, cada cambio y cada cambio de shell. */
+	readonly onDidSendHistory: vscode.Event<readonly HistoryItem[]>;
 }
 
 // Se activa solo al abrir la vista (evento implícito onView:devcommands.commands).
@@ -55,6 +64,15 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 	const catalog = new CatalogService();
 	context.globalState.setKeysForSync([FavoritesStore.key]);
 	const favorites = new FavoritesStore(context.globalState, (id) => catalog.getCommand(id) !== undefined);
+	// El historial no se sincroniza: guarda valores tecleados y depende de este equipo.
+	const history = new HistoryStore(
+		context.globalState,
+		(id) => {
+			const command = catalog.getCommand(id);
+			return command && (command.params ?? []).map((p) => p.name);
+		},
+		randomUUID,
+	);
 	const provider = new CommandsViewProvider(
 		context.extensionUri,
 		version,
@@ -65,6 +83,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		params,
 		risk,
 		favorites,
+		history,
 		catalog,
 	);
 
@@ -81,6 +100,9 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		copyToClipboard: (commandId) => provider.copyToClipboard(commandId),
 		toggleFavorite: (commandId) => provider.toggleFavorite(commandId),
 		onDidSendFavorites: provider.onDidSendFavorites,
+		sendRecent: (entryId) => provider.sendRecent(entryId),
+		clearHistory: () => provider.clearHistory(),
+		onDidSendHistory: provider.onDidSendHistory,
 	};
 }
 

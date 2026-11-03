@@ -128,6 +128,53 @@ suite('Favoritos', () => {
 	});
 });
 
+suite('Historial', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	teardown(async () => (await api()).clearHistory());
+
+	test('borrar el historial envía la lista vacía', async () => {
+		const devCommands = await api();
+		const sent = nextEvent(devCommands.onDidSendHistory, 5_000);
+		await devCommands.clearHistory();
+		assert.deepStrictEqual(await sent, []);
+	});
+
+	test('enviar un comando lo registra y reenviarlo mantiene una sola entrada con la misma clave', async function () {
+		this.timeout(20_000);
+		const devCommands = await api();
+		await devCommands.clearHistory();
+		let sent = nextEvent(devCommands.onDidSendHistory, 15_000);
+		devCommands.sendToTerminal('git.status');
+		const [first, ...rest] = await sent;
+		assert.deepStrictEqual(rest, []);
+		assert.strictEqual(first.commandId, 'git.status');
+		assert.strictEqual(first.text, 'git status');
+
+		sent = nextEvent(devCommands.onDidSendHistory, 15_000);
+		await devCommands.sendRecent(first.id);
+		assert.deepStrictEqual(await sent, [first]);
+	});
+
+	test('copiar un comando no lo registra', async () => {
+		const devCommands = await api();
+		const sent = nextEvent(devCommands.onDidSendHistory, 500);
+		assert.strictEqual(await devCommands.copyToClipboard('git.status'), true);
+		await assert.rejects(sent);
+	});
+
+	test('una entrada desconocida no escribe nada ni cambia el historial', async () => {
+		const devCommands = await api();
+		const sent = nextEvent(devCommands.onDidSendHistory, 500);
+		await devCommands.sendRecent('no-existe');
+		await assert.rejects(sent);
+	});
+});
+
 suite('Portapapeles', () => {
 	const sentinel = 'centinela-devcommands';
 

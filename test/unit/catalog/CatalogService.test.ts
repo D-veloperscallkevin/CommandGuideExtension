@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
 	buildCategorySummaries,
+	buildDisplayText,
 	buildExample,
 	CatalogService,
 	defaultShellFor,
@@ -47,6 +48,20 @@ describe('effectiveCommand', () => {
 
 	it('usa command en bash cuando no hay variante bash', () => {
 		expect(effectiveCommand(remove, 'bash')).toBe('rm -rf dist');
+	});
+});
+
+describe('buildDisplayText', () => {
+	const catalog = new CatalogService();
+
+	it('sustituye cada valor tal cual, sin escapar, en la variante del shell', () => {
+		const commit = catalog.getCommand('git.commit');
+		const mkdir = catalog.getCommand('terminal.make-directory');
+		if (!commit || !mkdir) throw new Error('faltan comandos del catálogo');
+		expect(buildDisplayText(commit, 'powershell', new Map([['message', 'say "hi"']]))).toBe('git commit -m "say "hi""');
+		expect(buildDisplayText(mkdir, 'powershell', new Map([['directory', 'mi carpeta']]))).toBe(
+			'New-Item -ItemType Directory -Force mi carpeta',
+		);
 	});
 });
 

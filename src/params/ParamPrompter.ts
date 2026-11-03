@@ -10,6 +10,8 @@ export interface ParamInputBoxOptions {
 	readonly title: string;
 	readonly prompt: string;
 	readonly placeHolder: string;
+	/** Valor ya escrito al abrir el cuadro (p. ej. el guardado en el historial). */
+	readonly value?: string;
 	readonly ignoreFocusOut: boolean;
 	readonly validateInput: (value: string) => string | undefined;
 }
@@ -30,14 +32,22 @@ export class ParamPrompter {
 
 	/**
 	 * Pide en orden un valor por cada parámetro del comando. Devuelve los valores recortados por
-	 * nombre, o `undefined` si el usuario cancela alguno (y entonces no pide los siguientes).
+	 * nombre, o `undefined` si el usuario cancela alguno (y entonces no pide los siguientes). Con
+	 * `initial`, cada cuadro se abre con el valor de su parámetro ya escrito.
 	 */
-	async ask(command: Command, locale: Locale, shell: ShellId): Promise<ReadonlyMap<string, string> | undefined> {
+	async ask(
+		command: Command,
+		locale: Locale,
+		shell: ShellId,
+		initial?: ReadonlyMap<string, string>,
+	): Promise<ReadonlyMap<string, string> | undefined> {
 		const params = command.params ?? [];
 		const title = localize(command.title, locale);
 		const values = new Map<string, string>();
 		for (const [index, param] of params.entries()) {
+			const initialValue = initial?.get(param.name);
 			const value = await this.window.showInputBox({
+				...(initialValue === undefined ? {} : { value: initialValue }),
 				title: params.length > 1 ? `${title} (${index + 1}/${params.length})` : title,
 				prompt: localize(param.label, locale),
 				placeHolder: localize(param.placeholder, locale),

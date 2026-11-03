@@ -2,22 +2,25 @@ import { useEffect } from 'react'
 import type { CategorySummary } from '../../src/messaging/protocol'
 import Icon from './Icon'
 import type { MessageKey, MessageParams } from './i18n'
-import { FAVORITES_CARD_ID } from './navigation'
+import { FAVORITES_CARD_ID, RECENT_CARD_ID } from './navigation'
 import { useRovingFocus } from './useRovingFocus'
 
 interface Props {
   categories: readonly CategorySummary[]
   /** Número de favoritos; con 0 no se muestra la tarjeta "Favoritos". */
   favoritesCount: number
-  /** Categoría (o FAVORITES_CARD_ID) que recibe el foco al montarse (al volver o al restaurar). */
+  /** Número de entradas del historial; con 0 no se muestra la tarjeta "Recientes". */
+  recentCount: number
+  /** Categoría (o el id de una tarjeta) que recibe el foco al montarse (al volver o al restaurar). */
   focusCategoryId?: string
   onOpen: (categoryId: string) => void
   onOpenFavorites: () => void
+  onOpenRecent: () => void
   onFocusCategory: (categoryId: string) => void
   t: (key: MessageKey, params?: MessageParams) => string
 }
 
-/** Entrada de la lista: la tarjeta de favoritos o una categoría del catálogo. */
+/** Entrada de la lista: la tarjeta de favoritos, la de recientes o una categoría del catálogo. */
 interface Entry {
   readonly id: string
   readonly icon: string
@@ -28,9 +31,20 @@ interface Entry {
 
 /**
  * Lista de categorías con foco itinerante: una sola parada de Tab, flechas, Inicio y Fin. Si hay
- * favoritos, la tarjeta "Favoritos" va primera y se comporta como una categoría más.
+ * favoritos, la tarjeta "Favoritos" va primera; si hay historial, la tarjeta "Recientes" va
+ * después. Las dos se comportan como una categoría más.
  */
-function CategoryList({ categories, favoritesCount, focusCategoryId, onOpen, onOpenFavorites, onFocusCategory, t }: Props) {
+function CategoryList({
+  categories,
+  favoritesCount,
+  recentCount,
+  focusCategoryId,
+  onOpen,
+  onOpenFavorites,
+  onOpenRecent,
+  onFocusCategory,
+  t,
+}: Props) {
   const entries: Entry[] = categories.map((c) => ({
     id: c.id,
     icon: c.icon,
@@ -38,6 +52,15 @@ function CategoryList({ categories, favoritesCount, focusCategoryId, onOpen, onO
     count: c.commands.length,
     open: () => onOpen(c.id),
   }))
+  if (recentCount > 0) {
+    entries.unshift({
+      id: RECENT_CARD_ID,
+      icon: 'history',
+      title: t('recent'),
+      count: recentCount,
+      open: onOpenRecent,
+    })
+  }
   if (favoritesCount > 0) {
     entries.unshift({
       id: FAVORITES_CARD_ID,

@@ -24,4 +24,9 @@ export const de: Messages = {
   removedFromFavorites: 'Aus Favoriten entfernt',
   favoritesLabel: 'Favorisierte Befehle',
   noFavorites: 'Noch keine Favoriten. Verwenden Sie den Stern neben einem Befehl, um ihn hinzuzufügen.',
+  recent: 'Zuletzt verwendet',
+  recentLabel: 'Zuletzt verwendete Befehle',
+  noRecent: 'Noch keine zuletzt verwendeten Befehle. Befehle, die Sie ins Terminal schreiben, erscheinen hier.',
+  clearHistory: 'Verlauf löschen',
+  needsInput: 'In {shell} nicht gültig: Der Wert wird beim Senden erneut abgefragt.',
 }

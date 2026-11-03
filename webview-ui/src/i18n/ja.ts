@@ -24,4 +24,9 @@ export const ja: Messages = {
   removedFromFavorites: 'お気に入りから削除しました',
   favoritesLabel: 'お気に入りのコマンド',
   noFavorites: 'お気に入りはまだありません。コマンドの横の星で追加できます。',
+  recent: '最近',
+  recentLabel: '最近のコマンド',
+  noRecent: '最近のコマンドはまだありません。ターミナルに書き込んだコマンドがここに表示されます。',
+  clearHistory: '履歴を消去',
+  needsInput: '{shell} では無効です。送信時に値の入力を求められます。',
 }

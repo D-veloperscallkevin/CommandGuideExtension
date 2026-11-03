@@ -24,4 +24,9 @@ export const zhcn: Messages = {
   removedFromFavorites: '已从收藏中移除',
   favoritesLabel: '收藏的命令',
   noFavorites: '还没有收藏。使用命令旁边的星标来添加。',
+  recent: '最近',
+  recentLabel: '最近的命令',
+  noRecent: '还没有最近的命令。写入终端的命令会显示在这里。',
+  clearHistory: '清除历史记录',
+  needsInput: '在 {shell} 中无效：发送时会要求你输入该值。',
 }

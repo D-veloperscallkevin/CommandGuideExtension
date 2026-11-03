@@ -316,3 +316,18 @@ body.vscode-light .risk-caution {
 body.vscode-light .risk-destructive {
   color: color-mix(in srgb, var(--vscode-errorForeground) 70%, var(--vscode-foreground));
 }
+
+/* Aviso bajo un comando reciente cuyo valor guardado no vale en el shell actual. */
+.command-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--vscode-editorWarning-foreground, var(--vscode-foreground));
+  font-size: 0.92em;
+}
+
+.command-notice .codicon {
+  flex: none;
+  margin-top: 1px;
+}

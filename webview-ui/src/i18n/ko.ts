@@ -24,4 +24,9 @@ export const ko: Messages = {
   removedFromFavorites: '즐겨찾기에서 제거됨',
   favoritesLabel: '즐겨찾기 명령',
   noFavorites: '아직 즐겨찾기가 없습니다. 명령 옆의 별표를 사용해 추가하세요.',
+  recent: '최근',
+  recentLabel: '최근 명령',
+  noRecent: '아직 최근 명령이 없습니다. 터미널에 작성한 명령이 여기에 표시됩니다.',
+  clearHistory: '기록 지우기',
+  needsInput: '{shell}에서는 유효하지 않습니다. 보낼 때 값을 다시 입력하라는 메시지가 표시됩니다.',
 }

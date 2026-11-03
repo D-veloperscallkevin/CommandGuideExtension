@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { isWebviewMessage, MAX_COMMAND_ID_LENGTH, type ExtensionMessage, type ShellId } from '../../../src/messaging/protocol';
+import { isWebviewMessage, MAX_COMMAND_ID_LENGTH, type ExtensionMessage, type HistoryItem, type ShellId } from '../../../src/messaging/protocol';
 
 describe('isWebviewMessage', () => {
 	it('acepta ready', () => {
@@ -41,6 +41,32 @@ describe('isWebviewMessage', () => {
 		});
 	});
 
+	describe.each(['sendRecent', 'copyRecent'] as const)('%s', (type) => {
+		const uuid = '3f2a9c1e-0b7d-4e6a-9c51-2d8f7a1b4e60';
+
+		it('acepta la clave de una entrada', () => {
+			expect(isWebviewMessage({ type, entryId: uuid })).toBe(true);
+			expect(isWebviewMessage({ type, entryId: 'a'.repeat(64) })).toBe(true);
+		});
+
+		it.each([
+			['sin entryId', {}],
+			['entryId numérico', { entryId: 7 }],
+			['entryId vacío', { entryId: '' }],
+			['entryId de 65 caracteres', { entryId: 'a'.repeat(65) }],
+			['entryId con /', { entryId: 'a/b' }],
+			['valores de más', { entryId: uuid, values: { branch: 'main' } }],
+			['commandId en lugar de entryId', { commandId: 'git.status' }],
+		])('rechaza %s', (_name, fields) => {
+			expect(isWebviewMessage({ type, ...fields })).toBe(false);
+		});
+	});
+
+	it('acepta clearHistory y rechaza sus campos de más', () => {
+		expect(isWebviewMessage({ type: 'clearHistory' })).toBe(true);
+		expect(isWebviewMessage({ type: 'clearHistory', entryId: 'a1' })).toBe(false);
+	});
+
 	it('rechaza commandId en ready', () => {
 		expect(isWebviewMessage({ type: 'ready', commandId: 'git.status' })).toBe(false);
 	});
@@ -56,5 +82,22 @@ describe('ExtensionMessage', () => {
 			readonly type: 'favorites';
 			readonly commandIds: readonly string[];
 		}>();
+	});
+
+	it('history lleva solo las entradas, con clave, comando y texto', () => {
+		expectTypeOf<Extract<ExtensionMessage, { type: 'history' }>>().toEqualTypeOf<{
+			readonly type: 'history';
+			readonly entries: readonly HistoryItem[];
+		}>();
+		expectTypeOf<HistoryItem>().toEqualTypeOf<{
+			readonly id: string;
+			readonly commandId: string;
+			readonly text: string;
+			readonly needsInput: boolean;
+		}>();
+	});
+
+	it('copied puede llevar la clave de la entrada copiada', () => {
+		expectTypeOf<Extract<ExtensionMessage, { type: 'copied' }>['entryId']>().toEqualTypeOf<string | undefined>();
 	});
 });
