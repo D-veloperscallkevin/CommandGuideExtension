@@ -10,6 +10,8 @@ import {
 import type { ShellId } from '../catalog/types';
 import type { ClipboardService } from '../clipboard/ClipboardService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
+import { buildCommandText } from '../params/escape';
+import type { ParamPrompter } from '../params/ParamPrompter';
 import type { TargetShell } from '../terminal/TargetShell';
 import type { TerminalService } from '../terminal/TerminalService';
 import { buildWebviewHtml } from './webviewHtml';
@@ -19,6 +21,12 @@ export interface SentCatalog {
 	readonly shell: ShellId;
 	readonly categories: readonly CategorySummary[];
 }
+
+/** Texto de un comando listo para enviar o copiar, o por qué no lo hay. */
+type CommandText =
+	| { readonly kind: 'text'; readonly text: string }
+	| { readonly kind: 'unknown' }
+	| { readonly kind: 'cancelled' };
 
 /** Proveedor de la vista lateral: carga el webview de React y atiende sus mensajes. */
 export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
@@ -38,6 +46,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly terminal: TerminalService,
 		private readonly clipboard: ClipboardService,
 		private readonly targetShell: TargetShell,
+		private readonly params: ParamPrompter,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
@@ -49,13 +58,22 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	}
 
 	/**
-	 * Texto del comando con ese id, con la misma regla que el ejemplo visible y el shell de destino
-	 * de este momento. Lo usan la terminal y el portapapeles, para que lo enviado y lo copiado no
-	 * puedan divergir.
+	 * Texto del comando con ese id para el shell de destino de este momento (el del clic). Sin
+	 * parámetros es el ejemplo visible; con parámetros, pide los valores y los escapa para ese shell.
+	 * Lo usan la terminal y el portapapeles, para que lo enviado y lo copiado no puedan divergir.
 	 */
-	private commandText(commandId: string): string | undefined {
+	private async commandText(commandId: string): Promise<CommandText> {
 		const command = this.catalog.getCommand(commandId);
-		return command && buildExample(command, resolveLocale(vscode.env.language), this.targetShell.current());
+		if (!command) {
+			return { kind: 'unknown' };
+		}
+		const locale = resolveLocale(vscode.env.language);
+		const shell = this.targetShell.current();
+		if (!command.params?.length) {
+			return { kind: 'text', text: buildExample(command, locale, shell) };
+		}
+		const values = await this.params.ask(command, locale, shell);
+		return values ? { kind: 'text', text: buildCommandText(command, shell, values) } : { kind: 'cancelled' };
 	}
 
 	/** Envía `catalog` con los ejemplos construidos para `shell`. */
@@ -66,33 +84,50 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	}
 
 	/**
-	 * Escribe en la terminal, sin ejecutarlo, el comando del catálogo con ese id. Si el id no
-	 * existe, no escribe nada.
+	 * Escribe en la terminal, sin ejecutarlo, el comando del catálogo con ese id (pidiendo antes los
+	 * valores de sus parámetros). Si el id no existe o el usuario cancela, no escribe nada.
 	 */
 	sendToTerminal(commandId: string): void {
-		const text = this.commandText(commandId);
-		if (text === undefined) {
-			this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
-			return;
-		}
-		// Puede esperar a que el shell de una terminal nueva esté listo; no bloquea la vista.
-		void this.terminal.write(text).then(
-			() => this.log.info('Comando escrito en la terminal:', commandId),
-			(error: unknown) => this.log.error('No se pudo escribir en la terminal:', String(error)),
-		);
+		// Puede esperar a los cuadros de los valores y a que el shell de una terminal nueva esté
+		// listo; no bloquea la vista.
+		void this.commandText(commandId)
+			.then(async (result) => {
+				if (result.kind === 'unknown') {
+					this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
+					return;
+				}
+				if (result.kind === 'cancelled') {
+					this.log.info('Envío cancelado:', commandId);
+					return;
+				}
+				await this.terminal.write(result.text);
+				this.log.info('Comando escrito en la terminal:', commandId);
+			})
+			.catch((error: unknown) => this.log.error('No se pudo escribir en la terminal:', String(error)));
 	}
 
 	/**
-	 * Copia al portapapeles el comando del catálogo con ese id. Devuelve `true` si se copió; con un
-	 * id desconocido o si el portapapeles falla, no lo modifica y devuelve `false`.
+	 * Copia al portapapeles el comando del catálogo con ese id (pidiendo antes los valores de sus
+	 * parámetros). Devuelve `true` si se copió; con un id desconocido, si el usuario cancela o si el
+	 * portapapeles falla, no lo modifica y devuelve `false`.
 	 */
 	async copyToClipboard(commandId: string): Promise<boolean> {
-		const text = this.commandText(commandId);
-		if (text === undefined) {
+		let result: CommandText;
+		try {
+			result = await this.commandText(commandId);
+		} catch (error) {
+			this.log.error('No se pudo construir el comando:', String(error));
+			return false;
+		}
+		if (result.kind === 'unknown') {
 			this.log.warn('Comando desconocido, no se copia al portapapeles:', commandId.slice(0, 200));
 			return false;
 		}
-		if (!(await this.clipboard.copy(text))) {
+		if (result.kind === 'cancelled') {
+			this.log.info('Copia cancelada:', commandId);
+			return false;
+		}
+		if (!(await this.clipboard.copy(result.text))) {
 			this.log.error('No se pudo copiar al portapapeles:', commandId);
 			return false;
 		}

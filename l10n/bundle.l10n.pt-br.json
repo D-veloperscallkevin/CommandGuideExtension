@@ -1,1 +1,7 @@
-{}
+{
+	"Enter a value.": "Digite um valor.",
+	"The value can't contain line breaks or control characters.": "O valor não pode conter quebras de linha nem caracteres de controle.",
+	"The value can't be longer than {0} characters.": "O valor não pode ter mais de {0} caracteres.",
+	"In cmd, the value can't contain \" or %.": "No cmd, o valor não pode conter \" nem %.",
+	"In PowerShell, the value can't contain \".": "No PowerShell, o valor não pode conter \"."
+}

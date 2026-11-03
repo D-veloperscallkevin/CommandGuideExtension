@@ -11,7 +11,7 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
 4. To use it somewhere else, click the copy button next to it (or press `Ctrl+C`, `Cmd+C` on macOS, while the command has focus). It is copied to the clipboard and nothing is sent to the terminal.
 
-The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. Commands with parameters are written with their example value (for instance `feature/my-change`), so replace it before pressing Enter.
+The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. For commands with parameters (for instance the branch name in `git checkout -b feature/my-change`), an input box asks for each value first; press Escape to cancel. Values are quoted for the target shell, so spaces, quotes or `$` can't change the command. Copying asks for the same values.
 
 Examples follow the shell of that terminal: PowerShell, bash (also Git Bash and WSL), zsh or cmd. With no terminal open they follow your default terminal profile. The line "Examples for: …" at the top of the view shows which shell is in use, and the examples update as soon as you switch terminals. Other shells (fish, nu…) get the default profile's syntax.
 
