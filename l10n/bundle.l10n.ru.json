@@ -3,5 +3,10 @@
 	"The value can't contain line breaks or control characters.": "Значение не может содержать переводы строки и управляющие символы.",
 	"The value can't be longer than {0} characters.": "Значение не может быть длиннее {0} символов.",
 	"In cmd, the value can't contain \" or %.": "В cmd значение не может содержать \" или %.",
-	"In PowerShell, the value can't contain \".": "В PowerShell значение не может содержать \"."
+	"In PowerShell, the value can't contain \".": "В PowerShell значение не может содержать \".",
+	"\"{0}\" is a destructive command.": "«{0}» — опасная команда.",
+	"It will be written to the terminal without running it. Review it before pressing Enter:\n\n{0}": "Она будет введена в терминал без выполнения. Проверьте её перед нажатием Enter:\n\n{0}",
+	"It will be copied to the clipboard:\n\n{0}": "Она будет скопирована в буфер обмена:\n\n{0}",
+	"Write to Terminal": "Ввести в терминал",
+	"Copy": "Копировать"
 }

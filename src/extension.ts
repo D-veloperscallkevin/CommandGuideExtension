@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { MAX_VALUE_LENGTH } from './params/escape';
 import { ParamPrompter } from './params/ParamPrompter';
+import { RiskConfirmer } from './risk/RiskConfirmer';
 import { TargetShell } from './terminal/TargetShell';
 import { TerminalService } from './terminal/TerminalService';
 import { CommandsViewProvider, type SentCatalog } from './views/CommandsViewProvider';
@@ -12,7 +13,10 @@ export interface DevCommandsApi {
 	readonly onDidSendCatalog: vscode.Event<SentCatalog>;
 	/** Lo mismo que pulsar un comando en la vista: lo escribe en la terminal sin ejecutarlo. */
 	sendToTerminal(commandId: string): void;
-	/** Lo mismo que el botón de copiar: copia el comando y devuelve si funcionó (`false` si se cancela). */
+	/**
+	 * Lo mismo que el botón de copiar: copia el comando y devuelve si funcionó (`false` si se cancela
+	 * un valor o se rechaza el aviso de comando destructivo).
+	 */
 	copyToClipboard(commandId: string): Promise<boolean>;
 }
 
@@ -30,6 +34,18 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		cmdUnsafe: vscode.l10n.t('In cmd, the value can\'t contain " or %.'),
 		powershellUnsafe: vscode.l10n.t('In PowerShell, the value can\'t contain ".'),
 	});
+	const risk = new RiskConfirmer(
+		vscode.window,
+		() => vscode.workspace.getConfiguration('devcommands').get<boolean>('confirmDestructive', true),
+		{
+			message: (title) => vscode.l10n.t('"{0}" is a destructive command.', title),
+			sendDetail: (text) =>
+				vscode.l10n.t('It will be written to the terminal without running it. Review it before pressing Enter:\n\n{0}', text),
+			copyDetail: (text) => vscode.l10n.t('It will be copied to the clipboard:\n\n{0}', text),
+			sendButton: vscode.l10n.t('Write to Terminal'),
+			copyButton: vscode.l10n.t('Copy'),
+		},
+	);
 	const provider = new CommandsViewProvider(
 		context.extensionUri,
 		version,
@@ -38,6 +54,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		clipboard,
 		targetShell,
 		params,
+		risk,
 	);
 
 	context.subscriptions.push(

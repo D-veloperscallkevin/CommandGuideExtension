@@ -1,3 +1,4 @@
 {
-	"description": "Guía rápida de comandos de desarrollo que se escriben en la terminal con un clic"
+	"description": "Guía rápida de comandos de desarrollo que se escriben en la terminal con un clic",
+	"config.confirmDestructive": "Pedir confirmación antes de escribir en la terminal o copiar un comando destructivo (por ejemplo `git reset --hard` o `rm -rf`)."
 }

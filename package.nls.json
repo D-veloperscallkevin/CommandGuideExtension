@@ -1,3 +1,4 @@
 {
-	"description": "Quick guide to development commands that you can send to the terminal in one click"
+	"description": "Quick guide to development commands that you can send to the terminal in one click",
+	"config.confirmDestructive": "Ask for confirmation before writing to the terminal or copying a destructive command (for example `git reset --hard` or `rm -rf`)."
 }

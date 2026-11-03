@@ -1,3 +1,4 @@
 {
-	"description": "클릭 한 번으로 터미널에 보낼 수 있는 개발 명령어 빠른 가이드"
+	"description": "클릭 한 번으로 터미널에 보낼 수 있는 개발 명령어 빠른 가이드",
+	"config.confirmDestructive": "파괴적인 명령(예: `git reset --hard` 또는 `rm -rf`)을 터미널에 쓰거나 복사하기 전에 확인을 요청합니다."
 }

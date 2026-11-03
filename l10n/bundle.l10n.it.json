@@ -3,5 +3,10 @@
 	"The value can't contain line breaks or control characters.": "Il valore non può contenere interruzioni di riga né caratteri di controllo.",
 	"The value can't be longer than {0} characters.": "Il valore non può superare {0} caratteri.",
 	"In cmd, the value can't contain \" or %.": "In cmd il valore non può contenere \" né %.",
-	"In PowerShell, the value can't contain \".": "In PowerShell il valore non può contenere \"."
+	"In PowerShell, the value can't contain \".": "In PowerShell il valore non può contenere \".",
+	"\"{0}\" is a destructive command.": "\"{0}\" è un comando distruttivo.",
+	"It will be written to the terminal without running it. Review it before pressing Enter:\n\n{0}": "Verrà scritto nel terminale senza essere eseguito. Controllalo prima di premere Invio:\n\n{0}",
+	"It will be copied to the clipboard:\n\n{0}": "Verrà copiato negli appunti:\n\n{0}",
+	"Write to Terminal": "Scrivi nel terminale",
+	"Copy": "Copia"
 }

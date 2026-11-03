@@ -35,6 +35,17 @@
           "name": "DevCommands"
         }
       ]
+    },
+    "configuration": {
+      "title": "DevCommands",
+      "properties": {
+        "devcommands.confirmDestructive": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "markdownDescription": "%config.confirmDestructive%"
+        }
+      }
     }
   },
   "scripts": {

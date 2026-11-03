@@ -12,6 +12,7 @@ import type { ClipboardService } from '../clipboard/ClipboardService';
 import { isWebviewMessage, type ExtensionMessage } from '../messaging/protocol';
 import { buildCommandText } from '../params/escape';
 import type { ParamPrompter } from '../params/ParamPrompter';
+import type { RiskAction, RiskConfirmer } from '../risk/RiskConfirmer';
 import type { TargetShell } from '../terminal/TargetShell';
 import type { TerminalService } from '../terminal/TerminalService';
 import { buildWebviewHtml } from './webviewHtml';
@@ -22,11 +23,15 @@ export interface SentCatalog {
 	readonly categories: readonly CategorySummary[];
 }
 
-/** Texto de un comando listo para enviar o copiar, o por qué no lo hay. */
+/**
+ * Texto de un comando listo para enviar o copiar, o por qué no lo hay: id desconocido, cuadro de
+ * un valor cancelado o aviso de comando destructivo rechazado.
+ */
 type CommandText =
 	| { readonly kind: 'text'; readonly text: string }
 	| { readonly kind: 'unknown' }
-	| { readonly kind: 'cancelled' };
+	| { readonly kind: 'cancelled' }
+	| { readonly kind: 'declined' };
 
 /** Proveedor de la vista lateral: carga el webview de React y atiende sus mensajes. */
 export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
@@ -47,6 +52,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly clipboard: ClipboardService,
 		private readonly targetShell: TargetShell,
 		private readonly params: ParamPrompter,
+		private readonly risk: RiskConfirmer,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
@@ -60,20 +66,27 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	/**
 	 * Texto del comando con ese id para el shell de destino de este momento (el del clic). Sin
 	 * parámetros es el ejemplo visible; con parámetros, pide los valores y los escapa para ese shell.
+	 * Si el comando es `destructive`, pide después la confirmación con el texto ya construido.
 	 * Lo usan la terminal y el portapapeles, para que lo enviado y lo copiado no puedan divergir.
 	 */
-	private async commandText(commandId: string): Promise<CommandText> {
+	private async commandText(commandId: string, action: RiskAction): Promise<CommandText> {
 		const command = this.catalog.getCommand(commandId);
 		if (!command) {
 			return { kind: 'unknown' };
 		}
 		const locale = resolveLocale(vscode.env.language);
 		const shell = this.targetShell.current();
-		if (!command.params?.length) {
-			return { kind: 'text', text: buildExample(command, locale, shell) };
+		let text: string;
+		if (command.params?.length) {
+			const values = await this.params.ask(command, locale, shell);
+			if (!values) {
+				return { kind: 'cancelled' };
+			}
+			text = buildCommandText(command, shell, values);
+		} else {
+			text = buildExample(command, locale, shell);
 		}
-		const values = await this.params.ask(command, locale, shell);
-		return values ? { kind: 'text', text: buildCommandText(command, shell, values) } : { kind: 'cancelled' };
+		return (await this.risk.confirm(command, locale, text, action)) ? { kind: 'text', text } : { kind: 'declined' };
 	}
 
 	/** Envía `catalog` con los ejemplos construidos para `shell`. */
@@ -85,12 +98,13 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 
 	/**
 	 * Escribe en la terminal, sin ejecutarlo, el comando del catálogo con ese id (pidiendo antes los
-	 * valores de sus parámetros). Si el id no existe o el usuario cancela, no escribe nada.
+	 * valores de sus parámetros y, si es destructivo, la confirmación). Si el id no existe, el
+	 * usuario cancela un valor o rechaza el aviso, no escribe nada.
 	 */
 	sendToTerminal(commandId: string): void {
-		// Puede esperar a los cuadros de los valores y a que el shell de una terminal nueva esté
-		// listo; no bloquea la vista.
-		void this.commandText(commandId)
+		// Puede esperar a los cuadros de los valores, al aviso y a que el shell de una terminal nueva
+		// esté listo; no bloquea la vista.
+		void this.commandText(commandId, 'send')
 			.then(async (result) => {
 				if (result.kind === 'unknown') {
 					this.log.warn('Comando desconocido, no se escribe en la terminal:', commandId.slice(0, 200));
@@ -98,6 +112,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				}
 				if (result.kind === 'cancelled') {
 					this.log.info('Envío cancelado:', commandId);
+					return;
+				}
+				if (result.kind === 'declined') {
+					this.log.info('Envío no confirmado:', commandId);
 					return;
 				}
 				await this.terminal.write(result.text);
@@ -108,13 +126,14 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 
 	/**
 	 * Copia al portapapeles el comando del catálogo con ese id (pidiendo antes los valores de sus
-	 * parámetros). Devuelve `true` si se copió; con un id desconocido, si el usuario cancela o si el
-	 * portapapeles falla, no lo modifica y devuelve `false`.
+	 * parámetros y, si es destructivo, la confirmación). Devuelve `true` si se copió; con un id
+	 * desconocido, si el usuario cancela un valor o rechaza el aviso, o si el portapapeles falla, no
+	 * lo modifica y devuelve `false`.
 	 */
 	async copyToClipboard(commandId: string): Promise<boolean> {
 		let result: CommandText;
 		try {
-			result = await this.commandText(commandId);
+			result = await this.commandText(commandId, 'copy');
 		} catch (error) {
 			this.log.error('No se pudo construir el comando:', String(error));
 			return false;
@@ -125,6 +144,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		}
 		if (result.kind === 'cancelled') {
 			this.log.info('Copia cancelada:', commandId);
+			return false;
+		}
+		if (result.kind === 'declined') {
+			this.log.info('Copia no confirmada:', commandId);
 			return false;
 		}
 		if (!(await this.clipboard.copy(result.text))) {
