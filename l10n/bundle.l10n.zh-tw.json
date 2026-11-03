@@ -1,1 +1,7 @@
-{}
+{
+	"Enter a value.": "請輸入一個值。",
+	"The value can't contain line breaks or control characters.": "值不能包含換行字元或控制字元。",
+	"The value can't be longer than {0} characters.": "值不能超過 {0} 個字元。",
+	"In cmd, the value can't contain \" or %.": "在 cmd 中，值不能包含 \" 或 %。",
+	"In PowerShell, the value can't contain \".": "在 PowerShell 中，值不能包含 \"。"
+}

@@ -1,1 +1,7 @@
-{}
+{
+	"Enter a value.": "Введите значение.",
+	"The value can't contain line breaks or control characters.": "Значение не может содержать переводы строки и управляющие символы.",
+	"The value can't be longer than {0} characters.": "Значение не может быть длиннее {0} символов.",
+	"In cmd, the value can't contain \" or %.": "В cmd значение не может содержать \" или %.",
+	"In PowerShell, the value can't contain \".": "В PowerShell значение не может содержать \"."
+}

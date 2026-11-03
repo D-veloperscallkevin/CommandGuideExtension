@@ -54,8 +54,8 @@ Estas reglas se copian al `context` y a las `rules` de `openspec/config.yaml` (p
 
 - `terminal.sendText(cmd, false)`: nunca se ejecuta automáticamente. Ejecutar exige una acción explícita y opcional del usuario.
 - Webview con Content Security Policy estricta, `nonce` en scripts y `localResourceRoots` limitado a `dist/webview`.
-- Todos los mensajes webview → extensión se validan (tipo y forma). El webview no puede mandar texto arbitrario a la terminal, solo el `id` de un comando del catálogo más los parámetros.
-- Los parámetros introducidos por el usuario se escapan según el shell detectado.
+- Todos los mensajes webview → extensión se validan (tipo y forma). El webview no puede mandar texto arbitrario a la terminal, solo el `id` de un comando del catálogo. Los valores de los parámetros los pide la propia extensión con cuadros de texto nativos.
+- Los parámetros introducidos por el usuario se validan (sin saltos de línea ni caracteres de control) y se escapan según el shell detectado y las comillas de la plantilla.
 - Sin telemetría ni llamadas de red en MVP y v1.
 
 **UX y rendimiento**
@@ -133,10 +133,10 @@ Todo texto visible es `{ en, es }` con ambos idiomas obligatorios (fallback a `e
 
 **Flujo de un clic**
 
-1. El webview envía `{ type: "sendToTerminal", commandId, params }`.
+1. El webview envía `{ type: "sendToTerminal", commandId }`.
 2. La extensión valida el mensaje y busca el comando por `id` en el catálogo.
 3. Si es `destructive`, muestra `showWarningMessage` con confirmación modal.
-4. Interpola y escapa los parámetros según el shell.
+4. Si el comando tiene parámetros, pide cada valor con `showInputBox`, lo valida y lo escapa según el shell.
 5. `TerminalService` toma la terminal activa (o crea "DevCommands"), llama a `show()` y luego a `sendText(cmd, false)`.
 6. Guarda el comando en el historial (`globalState`) y responde `{ type: "sent" }` al webview.
 
@@ -265,7 +265,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | # | Change | Qué entrega |
 | --- | --- | --- |
 | 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta ✅ |
-| 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell |
+| 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell ✅ |
 | 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` |
 | 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio |
 | 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) |
@@ -336,6 +336,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `release-pipeline` (1.8): `pnpm run release:package` genera el `.vsix` pre-release (`aguilardigital.devcommands` 0.1.0) y controla su tamaño y contenido
 - [x] Release v0.1.0 pre-release: PR `develop → staging` (#16), `staging → main` (#17), sincronización (#18) y tag `v0.1.0`
 - [x] `shell-detection` (2.1): los ejemplos siguen el shell de la terminal activa (PowerShell, bash, zsh o cmd), con indicador y variantes de cmd en Terminal; requiere VS Code 1.99
+- [x] `command-params` (2.2): enviar y copiar piden los valores de los parámetros con cuadros nativos y los escapan según el shell y las comillas de la plantilla
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 

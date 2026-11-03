@@ -510,7 +510,7 @@
       "risk": "safe",
       "shells": {
         "powershell": "Get-Content ${file} -Tail 50 -Wait",
-        "cmd": "powershell -NoProfile -Command \"Get-Content ${file} -Tail 50 -Wait\""
+        "cmd": "powershell -NoProfile -Command \"Get-Content -LiteralPath '${file}' -Tail 50 -Wait\""
       },
       "docs": "https://man7.org/linux/man-pages/man1/tail.1.html"
     },

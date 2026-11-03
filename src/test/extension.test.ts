@@ -125,4 +125,14 @@ suite('Portapapeles', () => {
 		assert.strictEqual(await (await api()).copyToClipboard('git.nope'), false);
 		assert.strictEqual(await vscode.env.clipboard.readText(), sentinel);
 	});
+
+	test('cancelar el cuadro del valor de un comando con parámetros no modifica el portapapeles', async function () {
+		this.timeout(10_000);
+		const copied = (await api()).copyToClipboard('git.new-branch');
+		// Deja que se abra el cuadro y lo cierra como lo haría Escape.
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		await vscode.commands.executeCommand('workbench.action.closeQuickOpen');
+		assert.strictEqual(await copied, false);
+		assert.strictEqual(await vscode.env.clipboard.readText(), sentinel);
+	});
 });
