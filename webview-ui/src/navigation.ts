@@ -15,6 +15,8 @@ export type View =
     }
   | { readonly screen: 'category'; readonly categoryId: string; readonly focusCommandId?: string }
   | { readonly screen: 'favorites'; readonly focusCommandId?: string }
+  /** `focusCommandId` guarda aquí la clave de la entrada del historial con foco. */
+  | { readonly screen: 'recent'; readonly focusCommandId?: string }
 
 /**
  * Id de la tarjeta "Favoritos" en la lista de categorías (para el foco). Lleva `@`, que el
@@ -22,9 +24,13 @@ export type View =
  */
 export const FAVORITES_CARD_ID = '@favorites'
 
+/** Id de la tarjeta "Recientes" en la lista de categorías, con `@` por lo mismo. */
+export const RECENT_CARD_ID = '@recent'
+
 export type NavigationAction =
   | { readonly type: 'open'; readonly categoryId: string }
   | { readonly type: 'openFavorites' }
+  | { readonly type: 'openRecent' }
   | { readonly type: 'back' }
   | { readonly type: 'focusCategory'; readonly categoryId: string }
   | { readonly type: 'focusCommand'; readonly commandId: string }
@@ -40,11 +46,16 @@ export function navigate(view: View, action: NavigationAction): View {
       return { screen: 'category', categoryId: action.categoryId }
     case 'openFavorites':
       return { screen: 'favorites' }
+    case 'openRecent':
+      return { screen: 'recent' }
     case 'back':
       if (view.screen === 'category') {
         return { screen: 'categories', focusCategoryId: view.categoryId }
       }
-      return view.screen === 'favorites' ? { screen: 'categories', focusCategoryId: FAVORITES_CARD_ID } : view
+      if (view.screen === 'favorites') {
+        return { screen: 'categories', focusCategoryId: FAVORITES_CARD_ID }
+      }
+      return view.screen === 'recent' ? { screen: 'categories', focusCategoryId: RECENT_CARD_ID } : view
     case 'focusCategory':
       return view.screen === 'categories' && view.focusCategoryId !== action.categoryId
         ? { ...view, focusCategoryId: action.categoryId }
@@ -101,7 +112,7 @@ export function parseSavedView(value: unknown): View | undefined {
   if (value.screen === 'category' && hasStringFields(value, ['screen', 'categoryId'], ['focusCommandId'])) {
     return value as View
   }
-  if (value.screen === 'favorites' && hasStringFields(value, ['screen'], ['focusCommandId'])) {
+  if ((value.screen === 'favorites' || value.screen === 'recent') && hasStringFields(value, ['screen'], ['focusCommandId'])) {
     return value as View
   }
   return undefined
@@ -116,7 +127,9 @@ export interface CatalogIds {
 /**
  * Ajusta la vista al catálogo recibido: si la categoría abierta ya no existe, vuelve a la
  * lista; si el elemento con foco ya no existe, quita ese foco (la búsqueda se conserva). El foco
- * en la tarjeta de favoritos se conserva siempre: si la tarjeta no está, la lista enfoca la primera.
+ * en las tarjetas de favoritos y recientes se conserva siempre: si la tarjeta no está, la lista
+ * enfoca la primera. La pantalla de recientes no depende del catálogo (sus entradas sí, pero las
+ * filtra la extensión), así que se conserva tal cual.
  */
 export function resolveView(view: View, categories: readonly CatalogIds[]): View {
   if (view.screen === 'categories') {
@@ -124,6 +137,7 @@ export function resolveView(view: View, categories: readonly CatalogIds[]): View
     if (
       view.focusCategoryId !== undefined &&
       view.focusCategoryId !== FAVORITES_CARD_ID &&
+      view.focusCategoryId !== RECENT_CARD_ID &&
       !categories.some((c) => c.id === view.focusCategoryId)
     ) {
       const { focusCategoryId: _gone, ...rest } = resolved
@@ -135,6 +149,9 @@ export function resolveView(view: View, categories: readonly CatalogIds[]): View
       resolved = rest
     }
     return resolved
+  }
+  if (view.screen === 'recent') {
+    return view
   }
   if (view.screen === 'favorites') {
     const focusCommandId = view.focusCommandId

@@ -24,4 +24,9 @@ export const fr: Messages = {
   removedFromFavorites: 'Retiré des favoris',
   favoritesLabel: 'Commandes favorites',
   noFavorites: "Aucun favori pour l'instant. Utilisez l'étoile à côté d'une commande pour l'ajouter.",
+  recent: 'Récents',
+  recentLabel: 'Commandes récentes',
+  noRecent: "Aucune commande récente pour l'instant. Les commandes que vous écrivez dans le terminal apparaissent ici.",
+  clearHistory: "Effacer l'historique",
+  needsInput: "Non valide dans {shell} : la valeur vous sera demandée à l'envoi.",
 }

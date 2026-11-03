@@ -24,4 +24,9 @@ export const zhtw: Messages = {
   removedFromFavorites: '已從我的最愛移除',
   favoritesLabel: '我的最愛命令',
   noFavorites: '尚無我的最愛。使用命令旁的星號來加入。',
+  recent: '最近',
+  recentLabel: '最近的命令',
+  noRecent: '尚無最近的命令。寫入終端機的命令會顯示在這裡。',
+  clearHistory: '清除歷程記錄',
+  needsInput: '在 {shell} 中無效：傳送時會要求你輸入該值。',
 }

@@ -24,4 +24,9 @@ export const ptbr: Messages = {
   removedFromFavorites: 'Removido dos favoritos',
   favoritesLabel: 'Comandos favoritos',
   noFavorites: 'Ainda não há favoritos. Use a estrela ao lado de um comando para adicioná-lo.',
+  recent: 'Recentes',
+  recentLabel: 'Comandos recentes',
+  noRecent: 'Ainda não há comandos recentes. Os comandos que você escreve no terminal aparecem aqui.',
+  clearHistory: 'Limpar histórico',
+  needsInput: 'Não é válido em {shell}: o valor será pedido ao enviá-lo.',
 }

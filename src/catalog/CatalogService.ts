@@ -28,6 +28,17 @@ export function buildExample(cmd: Command, locale: Locale, shell: ShellId): stri
 	);
 }
 
+/**
+ * La plantilla efectiva con cada `${x}` sustituido por su valor tal cual, sin escapar. Solo para
+ * mostrarlo: nunca se envía ni se copia.
+ */
+export function buildDisplayText(cmd: Command, shell: ShellId, values: ReadonlyMap<string, string>): string {
+	return effectiveCommand(cmd, shell).replace(
+		/\$\{([A-Za-z][A-Za-z0-9_]*)\}/g,
+		(match, name: string) => values.get(name) ?? match,
+	);
+}
+
 /** Lo que el webview necesita para mostrar un comando (ya traducido y con el ejemplo resuelto). */
 export interface CommandSummary {
 	readonly id: string;

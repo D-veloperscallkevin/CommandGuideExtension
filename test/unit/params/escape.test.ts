@@ -7,6 +7,7 @@ import {
 	MAX_VALUE_LENGTH,
 	quoteContexts,
 	validateValue,
+	basicValueError,
 } from '../../../src/params/escape';
 import { makeCommand } from '../catalog/fixtures';
 
@@ -47,6 +48,18 @@ describe('quoteContexts', () => {
 	it("en cmd, ' fuera de comillas dobles es literal y dentro abre nestedSingle", () => {
 		expect(contextsOf(`echo it's \${x}`, 'cmd')).toEqual(['bare']);
 		expect(contextsOf(`a "\${x} '\${y}' \${z}" \${w}`, 'cmd')).toEqual(['double', 'nestedSingle', 'double', 'bare']);
+	});
+});
+
+describe('basicValueError', () => {
+	it('rechaza en cualquier shell los vacíos, los de control y los demasiado largos', () => {
+		expect(basicValueError('  ')).toBe('empty');
+		expect(basicValueError('a\nb')).toBe('control');
+		expect(basicValueError('a'.repeat(MAX_VALUE_LENGTH + 1))).toBe('tooLong');
+	});
+
+	it('acepta lo que solo rechaza un shell concreto', () => {
+		expect(basicValueError('say "hi" 100%')).toBeUndefined();
 	});
 });
 
