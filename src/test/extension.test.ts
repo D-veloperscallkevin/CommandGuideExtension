@@ -135,4 +135,15 @@ suite('Portapapeles', () => {
 		assert.strictEqual(await copied, false);
 		assert.strictEqual(await vscode.env.clipboard.readText(), sentinel);
 	});
+
+	test('con la confirmación desactivada, un comando destructivo se copia sin aviso', async () => {
+		const config = vscode.workspace.getConfiguration('devcommands');
+		await config.update('confirmDestructive', false, vscode.ConfigurationTarget.Global);
+		try {
+			assert.strictEqual(await (await api()).copyToClipboard('git.reset-hard'), true);
+			assert.strictEqual(await vscode.env.clipboard.readText(), 'git reset --hard');
+		} finally {
+			await config.update('confirmDestructive', undefined, vscode.ConfigurationTarget.Global);
+		}
+	});
 });

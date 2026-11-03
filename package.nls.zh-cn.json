@@ -1,3 +1,4 @@
 {
-	"description": "开发命令速查指南，一键发送到终端"
+	"description": "开发命令速查指南，一键发送到终端",
+	"config.confirmDestructive": "在将破坏性命令（例如 `git reset --hard` 或 `rm -rf`）写入终端或复制之前请求确认。"
 }

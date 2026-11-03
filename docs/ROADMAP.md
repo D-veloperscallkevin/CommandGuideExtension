@@ -135,8 +135,8 @@ Todo texto visible es `{ en, es }` con ambos idiomas obligatorios (fallback a `e
 
 1. El webview envía `{ type: "sendToTerminal", commandId }`.
 2. La extensión valida el mensaje y busca el comando por `id` en el catálogo.
-3. Si es `destructive`, muestra `showWarningMessage` con confirmación modal.
-4. Si el comando tiene parámetros, pide cada valor con `showInputBox`, lo valida y lo escapa según el shell.
+3. Si el comando tiene parámetros, pide cada valor con `showInputBox`, lo valida y lo escapa según el shell.
+4. Si es `destructive` (y `devcommands.confirmDestructive` está activado), muestra `showWarningMessage` modal con el texto exacto. Copiar sigue los pasos 1 a 4 y después copia en lugar de escribir.
 5. `TerminalService` toma la terminal activa (o crea "DevCommands"), llama a `show()` y luego a `sendText(cmd, false)`.
 6. Guarda el comando en el historial (`globalState`) y responde `{ type: "sent" }` al webview.
 
@@ -266,7 +266,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | --- | --- | --- |
 | 2.1 | `shell-detection` | Detecta el shell y el SO de la terminal y usa la variante `shells.*` correcta ✅ |
 | 2.2 | `command-params` | Plantillas `${x}`: InputBox o formulario para los valores, con escapado según el shell ✅ |
-| 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` |
+| 2.3 | `risk-confirmation` | Etiqueta de riesgo visible y confirmación modal en los comandos `destructive` ✅ |
 | 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio |
 | 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) |
 | 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo |
@@ -337,6 +337,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] Release v0.1.0 pre-release: PR `develop → staging` (#16), `staging → main` (#17), sincronización (#18) y tag `v0.1.0`
 - [x] `shell-detection` (2.1): los ejemplos siguen el shell de la terminal activa (PowerShell, bash, zsh o cmd), con indicador y variantes de cmd en Terminal; requiere VS Code 1.99
 - [x] `command-params` (2.2): enviar y copiar piden los valores de los parámetros con cuadros nativos y los escapan según el shell y las comillas de la plantilla
+- [x] `risk-confirmation` (2.3): enviar o copiar un comando destructivo pide confirmación en un aviso modal con el texto exacto; se desactiva con `devcommands.confirmDestructive`
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 

@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Indicador "Ejemplos para: <shell>" en la parte superior de la vista, en los 11 idiomas y anunciado al lector de pantalla cuando cambia.
 - Variante de cmd en los 18 comandos de Terminal (`cd`, `dir /a`, `rmdir /s /q`, `del`, `type`, `findstr`…).
 - Al enviar o copiar un comando con parámetros (`${branch}`, `${file}`…), un cuadro de texto pide cada valor. Los valores se escriben escapados para el shell de destino, sin que espacios, comillas, `$` o `!` cambien el comando. Se rechazan los saltos de línea y los caracteres de control; en cmd, también `"` y `%`, y en PowerShell, `"`.
+- Al enviar o copiar un comando destructivo (`git reset --hard`, `git clean -fd`, `rm -rf`, `docker system prune -a`…), un aviso modal muestra el texto exacto y pide confirmación. Se desactiva con el ajuste `devcommands.confirmDestructive`, que solo se puede cambiar en la configuración de usuario.
 
 ### Changed
 

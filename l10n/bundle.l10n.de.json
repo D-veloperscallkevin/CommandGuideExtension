@@ -3,5 +3,10 @@
 	"The value can't contain line breaks or control characters.": "Der Wert darf keine Zeilenumbrüche oder Steuerzeichen enthalten.",
 	"The value can't be longer than {0} characters.": "Der Wert darf höchstens {0} Zeichen lang sein.",
 	"In cmd, the value can't contain \" or %.": "In cmd darf der Wert weder \" noch % enthalten.",
-	"In PowerShell, the value can't contain \".": "In PowerShell darf der Wert kein \" enthalten."
+	"In PowerShell, the value can't contain \".": "In PowerShell darf der Wert kein \" enthalten.",
+	"\"{0}\" is a destructive command.": "„{0}“ ist ein destruktiver Befehl.",
+	"It will be written to the terminal without running it. Review it before pressing Enter:\n\n{0}": "Er wird in das Terminal geschrieben, ohne ausgeführt zu werden. Prüfen Sie ihn, bevor Sie die Eingabetaste drücken:\n\n{0}",
+	"It will be copied to the clipboard:\n\n{0}": "Er wird in die Zwischenablage kopiert:\n\n{0}",
+	"Write to Terminal": "In das Terminal schreiben",
+	"Copy": "Kopieren"
 }

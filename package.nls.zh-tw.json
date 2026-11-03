@@ -1,3 +1,4 @@
 {
-	"description": "開發命令速查指南，一鍵傳送到終端機"
+	"description": "開發命令速查指南，一鍵傳送到終端機",
+	"config.confirmDestructive": "在將破壞性命令（例如 `git reset --hard` 或 `rm -rf`）寫入終端機或複製之前要求確認。"
 }

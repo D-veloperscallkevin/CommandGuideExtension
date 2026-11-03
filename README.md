@@ -13,6 +13,8 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 
 The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. For commands with parameters (for instance the branch name in `git checkout -b feature/my-change`), an input box asks for each value first; press Escape to cancel. Values are quoted for the target shell, so spaces, quotes or `$` can't change the command. Copying asks for the same values.
 
+Destructive commands (such as `git reset --hard` or `rm -rf`) show a confirmation dialog with the exact text before it is written or copied. To turn it off, uncheck **DevCommands: Confirm Destructive** (`devcommands.confirmDestructive`) in your user settings.
+
 Examples follow the shell of that terminal: PowerShell, bash (also Git Bash and WSL), zsh or cmd. With no terminal open they follow your default terminal profile. The line "Examples for: …" at the top of the view shows which shell is in use, and the examples update as soon as you switch terminals. Other shells (fish, nu…) get the default profile's syntax.
 
 Requires VS Code 1.99 or later.

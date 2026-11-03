@@ -18,7 +18,7 @@ Al recibir una petición válida de enviar un comando, la extensión SHALL escri
 - **THEN** la terminal muestra `git checkout -b feature/login` sin ejecutarlo
 
 ### Requirement: Texto construido por la extensión
-El texto enviado SHALL construirse en la extensión a partir del comando del catálogo cuyo `id` se recibe, con la variante del shell de destino en el momento del envío. Para un comando sin parámetros, el texto SHALL ser idéntico al ejemplo visible. Para un comando con parámetros, el texto SHALL ser esa variante con cada `${x}` sustituido por el valor que el usuario introduce, escapado para el shell de destino; si el usuario cancela, la extensión MUST NOT escribir nada y SHALL registrar la cancelación como información, no como error. Si el `id` no existe en el catálogo, la extensión MUST NOT escribir nada en la terminal y SHALL registrar una advertencia.
+El texto enviado SHALL construirse en la extensión a partir del comando del catálogo cuyo `id` se recibe, con la variante del shell de destino en el momento del envío. Para un comando sin parámetros, el texto SHALL ser idéntico al ejemplo visible. Para un comando con parámetros, el texto SHALL ser esa variante con cada `${x}` sustituido por el valor que el usuario introduce, escapado para el shell de destino; si el usuario cancela, la extensión MUST NOT escribir nada y SHALL registrar la cancelación como información, no como error. Si el comando es `destructive` y la confirmación está activada, la extensión SHALL escribir el texto solo después de que el usuario confirme el aviso; si lo rechaza, MUST NOT escribir nada y SHALL registrarlo como información, no como error. Si el `id` no existe en el catálogo, la extensión MUST NOT escribir nada en la terminal y SHALL registrar una advertencia.
 
 #### Scenario: Mismo texto que el ejemplo
 - **WHEN** la vista muestra el ejemplo de un comando sin parámetros y el usuario lo envía a la terminal
@@ -29,15 +29,19 @@ El texto enviado SHALL construirse en la extensión a partir del comando del cat
 - **THEN** la terminal recibe `git checkout -b fix/login`
 
 #### Scenario: Git Bash en Windows
-- **WHEN** la extensión se ejecuta en Windows, la terminal activa es Git Bash y el usuario envía el comando de Terminal que borra una carpeta con el valor `tmp`
+- **WHEN** la extensión se ejecuta en Windows, la terminal activa es Git Bash y el usuario envía el comando de Terminal que borra una carpeta con el valor `tmp` y confirma el aviso
 - **THEN** la terminal recibe la variante POSIX (`rm -rf tmp`) y no la de PowerShell
 
 #### Scenario: PowerShell en Windows
-- **WHEN** la extensión se ejecuta en Windows, la terminal activa es PowerShell y el usuario envía el mismo comando con el mismo valor
+- **WHEN** la extensión se ejecuta en Windows, la terminal activa es PowerShell y el usuario envía el mismo comando con el mismo valor y confirma el aviso
 - **THEN** la terminal recibe `Remove-Item -Recurse -Force tmp`
 
 #### Scenario: Envío cancelado
 - **WHEN** el usuario envía `git.new-branch` y pulsa Escape en el cuadro del nombre de la rama
+- **THEN** no se escribe nada en ninguna terminal, no se crea ninguna terminal y el registro no contiene errores
+
+#### Scenario: Confirmación rechazada
+- **WHEN** el usuario envía `git.reset-hard` y cancela el aviso de comando destructivo
 - **THEN** no se escribe nada en ninguna terminal, no se crea ninguna terminal y el registro no contiene errores
 
 #### Scenario: Id inexistente
