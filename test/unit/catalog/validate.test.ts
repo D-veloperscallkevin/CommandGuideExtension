@@ -1,11 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { bundledCatalog } from '../../../src/catalog/index';
-import { checkCatalogRules } from '../../../src/catalog/validate';
+import { checkCatalogRules, paramProblems } from '../../../src/catalog/validate';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 
 describe('checkCatalogRules', () => {
 	it('el catálogo real no tiene errores', () => {
 		expect(checkCatalogRules(bundledCatalog)).toEqual([]);
+	});
+
+	it('rechaza el prefijo reservado custom- en una categoría del catálogo', () => {
+		const errors = checkCatalogRules([makeCategory('custom-tools', [makeCommand({ id: 'custom-tools.run' })])]);
+		expect(errors).toEqual(['custom-tools: el prefijo "custom-" está reservado para los comandos propios']);
 	});
 
 	it('detecta un id duplicado entre categorías', () => {
@@ -71,5 +76,26 @@ describe('checkCatalogRules', () => {
 			]),
 		]);
 		expect(errors).toEqual([]);
+	});
+});
+
+describe('paramProblems', () => {
+	it('devuelve códigos en lugar de mensajes', () => {
+		const cmd = makeCommand({
+			id: 'x.y',
+			command: 'ssh ${host}',
+			params: [branchParam, branchParam],
+			shells: { cmd: 'echo ${other}' },
+		});
+		expect(paramProblems(cmd)).toEqual([
+			{ code: 'duplicateParam', names: ['branch'] },
+			{ code: 'undeclaredParam', name: 'host', variant: 'command' },
+			{ code: 'undeclaredParam', name: 'other', variant: 'shells.cmd' },
+			{ code: 'unusedParam', name: 'branch' },
+		]);
+	});
+
+	it('sin problemas en un comando coherente', () => {
+		expect(paramProblems(makeCommand({ id: 'x.y', command: 'git checkout -b ${branch}', params: [branchParam] }))).toEqual([]);
 	});
 });

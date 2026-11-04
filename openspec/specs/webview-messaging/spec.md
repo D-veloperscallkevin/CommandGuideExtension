@@ -106,7 +106,7 @@ Al cargar, el webview SHALL enviar `ready`. Cada vez que la extensión reciba un
 - **THEN** muestra el indicador de carga y no muestra datos inventados
 
 ### Requirement: Envío del catálogo
-Después de cada `init`, la extensión SHALL enviar `catalog` con el shell de destino y la lista de categorías del catálogo, ordenadas como el catálogo. También SHALL volver a enviar `catalog` cada vez que cambie el shell de destino. El campo `shell` SHALL ser uno de `bash`, `zsh`, `powershell` o `cmd`: el shell para el que se han construido los ejemplos. Cada categoría SHALL incluir `id`, `title` (ya resuelto al idioma activo, con fallback a inglés), `icon` y `commands`. Cada comando SHALL incluir:
+Después de cada `init`, la extensión SHALL enviar `catalog` con el shell de destino y la lista de categorías del catálogo, ordenadas como el catálogo. También SHALL volver a enviar `catalog` cada vez que cambie el shell de destino y cada vez que cambien los comandos propios del usuario; en este último caso, SHALL enviar después `favorites` e `history`. La lista de categorías incluye, tras las del catálogo, las categorías propias válidas. El campo `shell` SHALL ser uno de `bash`, `zsh`, `powershell` o `cmd`: el shell para el que se han construido los ejemplos. Cada categoría SHALL incluir `id`, `title` (ya resuelto al idioma activo, con fallback a inglés), `icon` y `commands`. Cada comando SHALL incluir:
 - `id`;
 - `title` y `description`, en el idioma activo;
 - `example`: la plantilla del shell de destino, con cada `${param}` sustituido por su placeholder en el idioma activo;
@@ -126,6 +126,10 @@ Salvo dentro de `searchText`, el mensaje MUST NOT incluir textos en otros idioma
 #### Scenario: Reenvío al cambiar de shell
 - **WHEN** el usuario está en la categoría Terminal con la búsqueda vacía y el shell de destino cambia de `powershell` a `bash`
 - **THEN** la extensión envía un nuevo `catalog` con `"shell": "bash"` y los ejemplos de bash, sin un nuevo `init`, y la vista sigue en la categoría Terminal
+
+#### Scenario: Reenvío al cambiar los comandos propios
+- **WHEN** el webview ya completó el handshake y el usuario guarda un cambio en `devcommands.customCommands`
+- **THEN** la extensión envía un nuevo `catalog` con las categorías propias actualizadas al final, seguido de `favorites` e `history`, sin un nuevo `init`
 
 #### Scenario: Idioma sin traducción en el catálogo
 - **WHEN** el idioma activo es `ja` y el título de una categoría solo tiene `en` y `es`

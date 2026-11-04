@@ -44,9 +44,675 @@
           "default": true,
           "scope": "application",
           "markdownDescription": "%config.confirmDestructive%"
+        },
+        "devcommands.customCommands": {
+          "type": "array",
+          "default": [],
+          "scope": "application",
+          "markdownDescription": "%config.customCommands%",
+          "maxItems": 50,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "commands"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "maxLength": 50
+              },
+              "title": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                  },
+                  {
+                    "type": "object",
+                    "minProperties": 1,
+                    "additionalProperties": false,
+                    "properties": {
+                      "en": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "es": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "pt-br": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "fr": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "de": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "it": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "ja": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "ko": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "zh-cn": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "zh-tw": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      },
+                      "ru": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                      }
+                    }
+                  }
+                ]
+              },
+              "icon": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "default": "terminal"
+              },
+              "commands": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "title",
+                    "command"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                      "maxLength": 50
+                    },
+                    "title": {
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        },
+                        {
+                          "type": "object",
+                          "minProperties": 1,
+                          "additionalProperties": false,
+                          "properties": {
+                            "en": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "es": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "pt-br": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "fr": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "de": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "it": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ja": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ko": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "zh-cn": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "zh-tw": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ru": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 200,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "description": {
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        },
+                        {
+                          "type": "object",
+                          "minProperties": 1,
+                          "additionalProperties": false,
+                          "properties": {
+                            "en": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "es": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "pt-br": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "fr": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "de": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "it": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ja": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ko": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "zh-cn": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "zh-tw": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            },
+                            "ru": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "command": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000,
+                      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                    },
+                    "params": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "name",
+                          "label",
+                          "placeholder"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                          },
+                          "label": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200,
+                                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                              },
+                              {
+                                "type": "object",
+                                "minProperties": 1,
+                                "additionalProperties": false,
+                                "properties": {
+                                  "en": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "es": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "pt-br": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "fr": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "de": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "it": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ja": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ko": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "zh-cn": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "zh-tw": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ru": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "placeholder": {
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200,
+                                "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                              },
+                              {
+                                "type": "object",
+                                "minProperties": 1,
+                                "additionalProperties": false,
+                                "properties": {
+                                  "en": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "es": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "pt-br": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "fr": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "de": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "it": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ja": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ko": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "zh-cn": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "zh-tw": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  },
+                                  "ru": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 200,
+                                    "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "risk": {
+                      "type": "string",
+                      "enum": [
+                        "safe",
+                        "caution",
+                        "destructive"
+                      ],
+                      "default": "safe"
+                    },
+                    "shells": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "bash": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        },
+                        "zsh": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        },
+                        "powershell": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        },
+                        "cmd": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000,
+                          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*\\S[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                        }
+                      }
+                    },
+                    "tags": {
+                      "oneOf": [
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "en": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "es": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "pt-br": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "fr": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "de": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "it": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "ja": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "ko": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "zh-cn": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "zh-tw": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            },
+                            "ru": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 200
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "defaultSnippets": [
+                    {
+                      "label": "command",
+                      "body": {
+                        "id": "${1:my-command}",
+                        "title": "${2:My command}",
+                        "command": "${3:echo hello}"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "defaultSnippets": [
+              {
+                "label": "category",
+                "body": {
+                  "id": "${1:my-project}",
+                  "title": "${2:My project}",
+                  "icon": "${3:rocket}",
+                  "commands": [
+                    {
+                      "id": "${4:my-command}",
+                      "title": "${5:My command}",
+                      "command": "${6:echo hello}"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
       }
-    }
+    },
+    "commands": [
+      {
+        "command": "devcommands.editCustomCommands",
+        "title": "%command.editCustomCommands%",
+        "category": "DevCommands"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",

@@ -1,4 +1,6 @@
 {
 	"description": "Guida rapida ai comandi di sviluppo da inviare al terminale con un clic",
-	"config.confirmDestructive": "Chiedere conferma prima di scrivere nel terminale o copiare un comando distruttivo (ad esempio `git reset --hard` o `rm -rf`)."
+	"config.confirmDestructive": "Chiedere conferma prima di scrivere nel terminale o copiare un comando distruttivo (ad esempio `git reset --hard` o `rm -rf`).",
+	"config.customCommands": "Le tue categorie di comandi, mostrate dopo quelle incluse. Ogni categoria ha `id`, `title`, `icon` facoltativo (un Codicon) e `commands`. Ogni comando ha `id`, `title` e `command` (il modello bash, con segnaposto `${nome}` dichiarati in `params`) e, facoltativamente, `description`, `params`, `risk` (`safe`, `caution` o `destructive`), `shells` (varianti per `bash`, `zsh`, `powershell` o `cmd`) e `tags`. I testi possono essere una stringa o un oggetto per lingua (`{ \"en\": \"…\", \"es\": \"…\" }`). Esegui **DevCommands: Modifica comandi personalizzati** per partire da un esempio. Le voci non valide vengono ignorate e indicate nel log di DevCommands.",
+	"command.editCustomCommands": "Modifica comandi personalizzati"
 }
