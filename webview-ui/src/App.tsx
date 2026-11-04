@@ -45,6 +45,7 @@ const favoriteCount = (categories: readonly CategorySummary[], favorites: readon
 function App() {
   const [init, setInit] = useState<InitData | null>(null)
   const [categories, setCategories] = useState<readonly CategorySummary[] | null>(null)
+  const [detected, setDetected] = useState<readonly string[]>([])
   // Shell para el que la extensión ha construido los ejemplos; cambia con la terminal activa.
   const [shell, setShell] = useState<ShellId | null>(null)
   // Arranca en la vista guardada (si es válida); al llegar el catálogo se ajusta con 'resolve'.
@@ -93,6 +94,7 @@ function App() {
           // cambian, así que 'resolve' deja pantalla, búsqueda y foco como estaban.
           setShell(message.shell)
           setCategories(message.categories)
+          setDetected(message.detected ?? [])
           dispatch({ type: 'resolve', categories: message.categories })
           break
         case 'copied':
@@ -253,6 +255,7 @@ function App() {
         <div hidden={searching}>
           <CategoryList
             categories={categories}
+            detected={detected}
             favoritesCount={favoriteCount(categories, favorites)}
             recentCount={history.length}
             focusCategoryId={view.screen === 'categories' ? view.focusCategoryId : undefined}

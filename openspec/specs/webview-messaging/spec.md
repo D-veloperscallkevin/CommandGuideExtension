@@ -106,7 +106,7 @@ Al cargar, el webview SHALL enviar `ready`. Cada vez que la extensión reciba un
 - **THEN** muestra el indicador de carga y no muestra datos inventados
 
 ### Requirement: Envío del catálogo
-Después de cada `init`, la extensión SHALL enviar `catalog` con el shell de destino y la lista de categorías del catálogo, ordenadas como el catálogo. También SHALL volver a enviar `catalog` cada vez que cambie el shell de destino y cada vez que cambien los comandos propios del usuario; en este último caso, SHALL enviar después `favorites` e `history`. La lista de categorías incluye, tras las del catálogo, las categorías propias válidas. El campo `shell` SHALL ser uno de `bash`, `zsh`, `powershell` o `cmd`: el shell para el que se han construido los ejemplos. Cada categoría SHALL incluir `id`, `title` (ya resuelto al idioma activo, con fallback a inglés), `icon` y `commands`. Cada comando SHALL incluir:
+Después de cada `init`, la extensión SHALL enviar `catalog` con el shell de destino y la lista de categorías del catálogo, ordenadas como el catálogo. También SHALL volver a enviar `catalog` cada vez que cambie el shell de destino y cada vez que cambien los comandos propios del usuario; en este último caso, SHALL enviar después `favorites` e `history`. También SHALL reenviar `catalog` cuando cambien las categorías detectadas del proyecto, incluido el cambio del ajuste `devcommands.detectProject`. La lista de categorías incluye, tras las del catálogo, las categorías propias válidas. El campo `shell` SHALL ser uno de `bash`, `zsh`, `powershell` o `cmd`: el shell para el que se han construido los ejemplos. El campo `detected` SHALL ser la lista de ids de las categorías detectadas en el proyecto que están en el mensaje, en el orden de la lista de categorías, o una lista vacía si no hay ninguna o la detección está desactivada. Cada categoría SHALL incluir `id`, `title` (ya resuelto al idioma activo, con fallback a inglés), `icon` y `commands`. Cada comando SHALL incluir:
 - `id`;
 - `title` y `description`, en el idioma activo;
 - `example`: la plantilla del shell de destino, con cada `${param}` sustituido por su placeholder en el idioma activo;
@@ -146,3 +146,15 @@ Salvo dentro de `searchText`, el mensaje MUST NOT incluir textos en otros idioma
 #### Scenario: Texto de búsqueda sin tildes
 - **WHEN** la extensión envía `catalog` y el título de un comando en `es` es "Descartar todos los cambios locales" con una descripción que contiene "índice"
 - **THEN** su `searchText` contiene "indice" y no contiene "í"
+
+#### Scenario: Categorías detectadas en el mensaje
+- **WHEN** el webview envía `ready` y la raíz del workspace contiene `package.json` y `pnpm-lock.yaml`
+- **THEN** `catalog` lleva `"detected": ["pnpm", "node"]`, en el orden de las categorías del mensaje
+
+#### Scenario: Reenvío al cambiar el proyecto
+- **WHEN** el webview ya completó el handshake y el usuario crea `Dockerfile` en la raíz
+- **THEN** la extensión envía un nuevo `catalog` cuyo `detected` incluye `docker`, sin un nuevo `init`, y la vista conserva la pantalla en la que estaba
+
+#### Scenario: Sin detección
+- **WHEN** `devcommands.detectProject` es `false` o no hay ninguna carpeta abierta
+- **THEN** `catalog` lleva `"detected": []`

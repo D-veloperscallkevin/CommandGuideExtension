@@ -20,10 +20,17 @@ import type { TargetShell } from '../terminal/TargetShell';
 import type { TerminalService } from '../terminal/TerminalService';
 import { buildWebviewHtml } from './webviewHtml';
 
-/** Lo que se envía en cada `catalog`: el shell de los ejemplos y las categorías. */
+/** Lo que se envía en cada `catalog`: el shell de los ejemplos, las categorías y las detectadas. */
 export interface SentCatalog {
 	readonly shell: ShellId;
 	readonly categories: readonly CategorySummary[];
+	readonly detected: readonly string[];
+}
+
+/** Lo que el proveedor usa de `ProjectDetector`. */
+export interface DetectedCategories {
+	current(): ReadonlySet<string>;
+	onDidChange(listener: (detected: ReadonlySet<string>) => unknown): { dispose(): unknown };
 }
 
 /**
@@ -58,6 +65,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	private readyWebview: vscode.Webview | undefined;
 	private readonly shellSubscription: { dispose(): unknown };
 	private readonly catalogSubscription: { dispose(): unknown };
+	private readonly projectSubscription: { dispose(): unknown };
 
 	constructor(
 		private readonly extensionUri: vscode.Uri,
@@ -70,6 +78,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly risk: RiskConfirmer,
 		private readonly favorites: FavoritesStore,
 		private readonly history: HistoryStore,
+		private readonly project: DetectedCategories,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
@@ -78,6 +87,12 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				this.postCatalog(this.readyWebview, shell);
 				// Los textos del historial dependen del shell.
 				this.postHistory(this.readyWebview);
+			}
+		});
+		// Cambiaron las categorías del proyecto: solo cambia `detected`.
+		this.projectSubscription = project.onDidChange(() => {
+			if (this.readyWebview) {
+				this.postCatalog(this.readyWebview, this.targetShell.current());
 			}
 		});
 		// Cambiaron los comandos propios: catálogo nuevo y, con él, favoritos e historial filtrados.
@@ -128,11 +143,13 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			: { kind: 'declined' };
 	}
 
-	/** Envía `catalog` con los ejemplos construidos para `shell`. */
+	/** Envía `catalog` con los ejemplos construidos para `shell` y las categorías detectadas. */
 	private postCatalog(webview: vscode.Webview, shell: ShellId): void {
 		const categories = buildCategorySummaries(this.catalog.getCategories(), resolveLocale(vscode.env.language), shell);
-		void webview.postMessage({ type: 'catalog', shell, categories } satisfies ExtensionMessage);
-		this.catalogEmitter.fire({ shell, categories });
+		const found = this.project.current();
+		const detected = categories.filter((c) => found.has(c.id)).map((c) => c.id);
+		void webview.postMessage({ type: 'catalog', shell, categories, detected } satisfies ExtensionMessage);
+		this.catalogEmitter.fire({ shell, categories, detected });
 	}
 
 	/** Envía `favorites` con la lista dada (o la guardada) al webview listo, si lo hay. */
@@ -384,6 +401,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	dispose(): void {
 		this.shellSubscription.dispose();
 		this.catalogSubscription.dispose();
+		this.projectSubscription.dispose();
 		this.catalogEmitter.dispose();
 		this.favoritesEmitter.dispose();
 		this.historyEmitter.dispose();

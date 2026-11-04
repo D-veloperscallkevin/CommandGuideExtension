@@ -1,4 +1,5 @@
 // Navegación del webview: lógica pura (sin React ni DOM) para poder testearla con Vitest.
+import type { CategorySummary } from '../../src/messaging/protocol'
 
 /**
  * Pantalla visible y elemento con foco. Es también lo que se guarda con `setState`, así que
@@ -189,5 +190,20 @@ export function nextIndex(current: number, key: string, length: number): number 
       return length - 1
     default:
       return undefined
+  }
+}
+
+/**
+ * Reparte las categorías de la portada: las detectadas en el proyecto y el resto, las dos en el
+ * orden de `categories`. Los ids detectados que no están en `categories` se ignoran.
+ */
+export function homeSections(
+  categories: readonly CategorySummary[],
+  detected: readonly string[],
+): { readonly detected: readonly CategorySummary[]; readonly rest: readonly CategorySummary[] } {
+  const ids = new Set(detected)
+  return {
+    detected: categories.filter((c) => ids.has(c.id)),
+    rest: categories.filter((c) => !ids.has(c.id)),
   }
 }

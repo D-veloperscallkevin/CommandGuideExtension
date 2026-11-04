@@ -28,6 +28,20 @@ Known limitations:
 - If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
 - If you had already typed something in the terminal, the command is appended after it.
 
+## Project detection
+
+When a folder is open, the categories that fit the project appear first, under **In this project**; the rest stay under **All**. DevCommands only checks whether these files or folders exist in the root of each workspace folder (it never reads them):
+
+| In the root | Category |
+| --- | --- |
+| `.git` | Git |
+| `package.json` | Node |
+| `pnpm-lock.yaml` | pnpm |
+| `package-lock.json` | npm |
+| `Dockerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml` | Docker |
+
+The sections update as you create or delete those files. Turn it off with the `devcommands.detectProject` setting.
+
 ## Custom commands
 
 Add your own categories and commands in your **user** settings, under `devcommands.customCommands`. They appear after the built-in categories and work like any other command: search, favorites, recent, parameters and the destructive-command confirmation. Run **DevCommands: Edit Custom Commands** from the Command Palette to open the setting (it adds an example if it is empty). VS Code completes and checks the fields as you type.

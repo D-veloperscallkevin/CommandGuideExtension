@@ -1,0 +1,55 @@
+## MODIFIED Requirements
+
+### Requirement: Envío del catálogo
+Después de cada `init`, la extensión SHALL enviar `catalog` con el shell de destino y la lista de categorías del catálogo, ordenadas como el catálogo. También SHALL volver a enviar `catalog` cada vez que cambie el shell de destino y cada vez que cambien los comandos propios del usuario; en este último caso, SHALL enviar después `favorites` e `history`. También SHALL reenviar `catalog` cuando cambien las categorías detectadas del proyecto, incluido el cambio del ajuste `devcommands.detectProject`. La lista de categorías incluye, tras las del catálogo, las categorías propias válidas. El campo `shell` SHALL ser uno de `bash`, `zsh`, `powershell` o `cmd`: el shell para el que se han construido los ejemplos. El campo `detected` SHALL ser la lista de ids de las categorías detectadas en el proyecto que están en el mensaje, en el orden de la lista de categorías, o una lista vacía si no hay ninguna o la detección está desactivada. Cada categoría SHALL incluir `id`, `title` (ya resuelto al idioma activo, con fallback a inglés), `icon` y `commands`. Cada comando SHALL incluir:
+- `id`;
+- `title` y `description`, en el idioma activo;
+- `example`: la plantilla del shell de destino, con cada `${param}` sustituido por su placeholder en el idioma activo;
+- `risk`;
+- `searchText`: un único texto normalizado (en minúsculas y sin diacríticos) que reúne el título, la descripción y los tags del comando en `en`, en `es` y en el idioma activo, el título de su categoría y el ejemplo.
+
+Salvo dentro de `searchText`, el mensaje MUST NOT incluir textos en otros idiomas. Tampoco MUST incluir plantillas sin resolver ni datos que el webview no necesite para mostrar la vista o buscar en ella. Al recibir un nuevo `catalog`, el webview SHALL conservar la pantalla, la búsqueda y el foco en los que estaba el usuario.
+
+#### Scenario: Catálogo tras el handshake
+- **WHEN** el webview envía `ready`, el idioma activo es `es` y el shell de destino es `powershell`
+- **THEN** la extensión responde con `init` y después con `catalog`, con `"shell": "powershell"`, y la categoría `git` incluye el comando `git.status` con `"title": "Ver estado"`, `"description": "Muestra los archivos modificados, preparados y sin seguimiento"`, `"example": "git status"`, `"risk": "safe"` y un `searchText`
+
+#### Scenario: Catálogo en Linux con bash
+- **WHEN** el webview envía `ready` y el shell de destino es `bash`
+- **THEN** `catalog` lleva `"shell": "bash"` y el ejemplo del comando de Terminal que borra una carpeta empieza por `rm -rf`
+
+#### Scenario: Reenvío al cambiar de shell
+- **WHEN** el usuario está en la categoría Terminal con la búsqueda vacía y el shell de destino cambia de `powershell` a `bash`
+- **THEN** la extensión envía un nuevo `catalog` con `"shell": "bash"` y los ejemplos de bash, sin un nuevo `init`, y la vista sigue en la categoría Terminal
+
+#### Scenario: Reenvío al cambiar los comandos propios
+- **WHEN** el webview ya completó el handshake y el usuario guarda un cambio en `devcommands.customCommands`
+- **THEN** la extensión envía un nuevo `catalog` con las categorías propias actualizadas al final, seguido de `favorites` e `history`, sin un nuevo `init`
+
+#### Scenario: Idioma sin traducción en el catálogo
+- **WHEN** el idioma activo es `ja` y el título de una categoría solo tiene `en` y `es`
+- **THEN** su `title` en `catalog` es el valor `en`
+
+#### Scenario: Sin plantillas en el mensaje
+- **WHEN** la extensión envía `catalog`
+- **THEN** ningún comando incluye los campos `command`, `shells`, `params` ni `tags`, y ningún `searchText` contiene `${`
+
+#### Scenario: Texto de búsqueda en los dos idiomas
+- **WHEN** el idioma activo es `en` y la extensión envía `catalog`
+- **THEN** el `searchText` de `git.status` contiene "show status", "ver estado", "estado" y "git status", todo en minúsculas
+
+#### Scenario: Texto de búsqueda sin tildes
+- **WHEN** la extensión envía `catalog` y el título de un comando en `es` es "Descartar todos los cambios locales" con una descripción que contiene "índice"
+- **THEN** su `searchText` contiene "indice" y no contiene "í"
+
+#### Scenario: Categorías detectadas en el mensaje
+- **WHEN** el webview envía `ready` y la raíz del workspace contiene `package.json` y `pnpm-lock.yaml`
+- **THEN** `catalog` lleva `"detected": ["pnpm", "node"]`, en el orden de las categorías del mensaje
+
+#### Scenario: Reenvío al cambiar el proyecto
+- **WHEN** el webview ya completó el handshake y el usuario crea `Dockerfile` en la raíz
+- **THEN** la extensión envía un nuevo `catalog` cuyo `detected` incluye `docker`, sin un nuevo `init`, y la vista conserva la pantalla en la que estaba
+
+#### Scenario: Sin detección
+- **WHEN** `devcommands.detectProject` es `false` o no hay ninguna carpeta abierta
+- **THEN** `catalog` lleva `"detected": []`

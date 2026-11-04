@@ -270,7 +270,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.4 | `favorites` | Estrella por comando y sección "Favoritos" al inicio ✅ |
 | 2.5 | `recent-history` | Últimos 20 comandos enviados (`globalState`) ✅ |
 | 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo ✅ |
-| 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, `prisma/`) |
+| 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, …) ✅ |
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel |
 | 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --no-dependencies`) y Open VSX (`ovsx publish`) tras crear el tag `vX.Y.Z` |
 
@@ -341,6 +341,7 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `favorites` (2.4): estrella por comando (también con `Ctrl+D`) y tarjeta "Favoritos" con su pantalla; se guardan en la extensión y se sincronizan con Settings Sync
 - [x] `recent-history` (2.5): tarjeta "Recientes" con los últimos 20 comandos enviados y sus valores; reenviar y copiar sin volver a escribirlos, y "Borrar historial"; solo en este equipo
 - [x] `custom-commands` (2.6): categorías y comandos propios en el ajuste de usuario `devcommands.customCommands`, validados con las reglas del catálogo, con recarga en vivo y el comando "Editar comandos propios"
+- [x] `project-detection` (2.7): secciones "En este proyecto" y "Todas" según los archivos de la raíz de cada carpeta (Git, Node, pnpm, npm y Docker), con recarga en vivo y el ajuste `devcommands.detectProject`. Prisma queda para un change de contenido, porque el catálogo aún no tiene esa categoría
 - [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
 
