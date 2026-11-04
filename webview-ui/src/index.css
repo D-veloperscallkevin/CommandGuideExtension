@@ -331,3 +331,8 @@ body.vscode-light .risk-destructive {
   flex: none;
   margin-top: 1px;
 }
+
+/* Comandos propios sin descripción. */
+.command-description:empty {
+  display: none;
+}

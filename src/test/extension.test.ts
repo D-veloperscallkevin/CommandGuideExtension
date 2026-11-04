@@ -175,6 +175,50 @@ suite('Historial', () => {
 	});
 });
 
+suite('Comandos propios', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	const demo = [
+		{
+			id: 'demo',
+			title: 'Demo',
+			commands: [
+				{ id: 'hola', title: 'Hola', command: 'echo hola-devcommands' },
+				{ id: 'roto', title: 'Roto', command: 'ssh ${host}' },
+			],
+		},
+	];
+
+	test('al guardar el ajuste, el catálogo incluye la categoría propia al final y se puede copiar', async function () {
+		this.timeout(15_000);
+		const devCommands = await api();
+		const config = vscode.workspace.getConfiguration('devcommands');
+		try {
+			const sent = nextEvent(devCommands.onDidSendCatalog, 10_000);
+			await config.update('customCommands', demo, vscode.ConfigurationTarget.Global);
+			const { categories } = await sent;
+			const last = categories[categories.length - 1];
+			assert.strictEqual(last.id, 'custom-demo');
+			// El comando con un placeholder sin declarar se omite; el válido se carga.
+			assert.deepStrictEqual(
+				last.commands.map((c) => [c.id, c.example]),
+				[['custom-demo.hola', 'echo hola-devcommands']],
+			);
+			assert.strictEqual(await devCommands.copyToClipboard('custom-demo.hola'), true);
+			assert.strictEqual(await vscode.env.clipboard.readText(), 'echo hola-devcommands');
+		} finally {
+			const restored = nextEvent(devCommands.onDidSendCatalog, 10_000);
+			await config.update('customCommands', undefined, vscode.ConfigurationTarget.Global);
+			const { categories } = await restored;
+			assert.ok(!categories.some((c) => c.id.startsWith('custom-')));
+		}
+	});
+});
+
 suite('Portapapeles', () => {
 	const sentinel = 'centinela-devcommands';
 

@@ -28,6 +28,35 @@ Known limitations:
 - If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
 - If you had already typed something in the terminal, the command is appended after it.
 
+## Custom commands
+
+Add your own categories and commands in your **user** settings, under `devcommands.customCommands`. They appear after the built-in categories and work like any other command: search, favorites, recent, parameters and the destructive-command confirmation. Run **DevCommands: Edit Custom Commands** from the Command Palette to open the setting (it adds an example if it is empty). VS Code completes and checks the fields as you type.
+
+```json
+"devcommands.customCommands": [
+  {
+    "id": "my-project",
+    "title": "My project",
+    "icon": "rocket",
+    "commands": [
+      {
+        "id": "deploy",
+        "title": "Deploy",
+        "description": "Deploys to the given environment",
+        "command": "pnpm run deploy --env ${env}",
+        "params": [{ "name": "env", "label": "Environment", "placeholder": "staging" }],
+        "risk": "caution"
+      }
+    ]
+  }
+]
+```
+
+- `id`, `title` and `command` are required; `icon` (a [Codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html), `terminal` by default), `description`, `params`, `risk` (`safe` by default), `shells` and `tags` are optional.
+- `command` is the bash template; `shells` holds variants for `zsh`, `powershell` or `cmd`. Every `${name}` must be declared in `params`, and templates can't contain line breaks.
+- Texts can be a plain string or an object per language, such as `{ "en": "Deploy", "es": "Desplegar" }`.
+- They are read only from your user settings (never from a project's `.vscode/settings.json`) and sync across machines with Settings Sync. Invalid entries are skipped; the **DevCommands** output channel says why.
+
 ## Languages
 
 The interface follows the VS Code display language and is available in:

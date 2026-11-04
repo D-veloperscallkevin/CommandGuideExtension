@@ -106,19 +106,50 @@ export function buildCategorySummaries(
 	});
 }
 
-/** Consulta del catálogo. Sin acceso a disco, red ni a la API de VS Code. */
+/**
+ * Consulta del catálogo: el incluido y, detrás, las categorías propias del usuario, que se pueden
+ * reemplazar. Sin acceso a disco, red ni a la API de VS Code.
+ */
 export class CatalogService {
-	private readonly categories: readonly Category[];
-	private readonly commandsById: ReadonlyMap<string, Command>;
+	private readonly bundled: readonly Category[];
+	private categories: readonly Category[];
+	private commandsById: ReadonlyMap<string, Command>;
+	private readonly listeners = new Set<() => void>();
 
 	constructor(catalog: Catalog = bundledCatalog) {
-		this.categories = [...catalog].sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
-		this.commandsById = new Map(catalog.flatMap((c) => c.commands.map((cmd) => [cmd.id, cmd] as const)));
+		this.bundled = [...catalog].sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
+		this.categories = this.bundled;
+		this.commandsById = CatalogService.index(this.bundled);
 	}
 
-	/** Categorías por `order` ascendente y, si empatan, por `id`. Los comandos conservan el orden del archivo. */
+	private static index(categories: readonly Category[]): ReadonlyMap<string, Command> {
+		return new Map(categories.flatMap((c) => c.commands.map((cmd) => [cmd.id, cmd] as const)));
+	}
+
+	/**
+	 * Categorías del catálogo por `order` ascendente y, si empatan, por `id`; después, las propias
+	 * en el orden recibido. Los comandos conservan el orden del archivo o del ajuste.
+	 */
 	getCategories(): readonly Category[] {
 		return this.categories;
+	}
+
+	/**
+	 * Reemplaza las categorías propias (ya validadas, con ids `custom-…`) y avisa a quien escuche
+	 * `onDidChange`. Las ids de las incluidas tienen prioridad si coincidieran.
+	 */
+	setCustomCategories(custom: readonly Category[]): void {
+		this.categories = [...this.bundled, ...custom];
+		this.commandsById = new Map([...CatalogService.index(custom), ...CatalogService.index(this.bundled)]);
+		for (const listener of this.listeners) {
+			listener();
+		}
+	}
+
+	/** Se llama tras cada `setCustomCategories`. Devuelve un objeto para dejar de escuchar. */
+	onDidChange(listener: () => void): { dispose(): void } {
+		this.listeners.add(listener);
+		return { dispose: () => this.listeners.delete(listener) };
 	}
 
 	getCommand(id: string): Command | undefined {

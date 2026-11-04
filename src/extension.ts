@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import * as vscode from 'vscode';
 import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
+import { registerCustomCommands } from './customCommands';
 import { FavoritesStore } from './favorites/FavoritesStore';
 import { HistoryStore } from './history/HistoryStore';
 import type { HistoryItem } from './messaging/protocol';
@@ -62,6 +63,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		},
 	);
 	const catalog = new CatalogService();
+	// Antes del proveedor: el primer catalog ya incluye los comandos propios.
+	const customCommands = registerCustomCommands(catalog, log);
 	context.globalState.setKeysForSync([FavoritesStore.key]);
 	const favorites = new FavoritesStore(context.globalState, (id) => catalog.getCommand(id) !== undefined);
 	// El historial no se sincroniza: guarda valores tecleados y depende de este equipo.
@@ -90,6 +93,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 	context.subscriptions.push(
 		log,
 		targetShell,
+		customCommands,
 		provider,
 		vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewId, provider),
 	);

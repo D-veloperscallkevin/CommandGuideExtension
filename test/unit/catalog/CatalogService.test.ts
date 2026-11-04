@@ -9,6 +9,7 @@ import {
 	localize,
 	localizeTags,
 } from '../../../src/catalog/CatalogService';
+import { parseCustomCommands } from '../../../src/catalog/custom';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 
 const newBranch = makeCommand({ id: 'git.new-branch', command: 'git checkout -b ${branch}', params: [branchParam] });
@@ -48,6 +49,45 @@ describe('effectiveCommand', () => {
 
 	it('usa command en bash cuando no hay variante bash', () => {
 		expect(effectiveCommand(remove, 'bash')).toBe('rm -rf dist');
+	});
+});
+
+describe('CatalogService con comandos propios', () => {
+	const custom = parseCustomCommands([
+		{ id: 'mi-proyecto', title: 'Mi proyecto', commands: [{ id: 'deploy', title: 'Desplegar', command: 'pnpm run deploy' }] },
+	]).categories;
+
+	it('pone las categorías propias detrás de las del catálogo', () => {
+		const catalog = new CatalogService();
+		const before = catalog.getCategories().map((c) => c.id);
+		catalog.setCustomCategories(custom);
+		expect(catalog.getCategories().map((c) => c.id)).toEqual([...before, 'custom-mi-proyecto']);
+	});
+
+	it('getCommand encuentra un comando propio y deja de encontrarlo al reemplazarlas', () => {
+		const catalog = new CatalogService();
+		catalog.setCustomCategories(custom);
+		expect(catalog.getCommand('custom-mi-proyecto.deploy')?.command).toBe('pnpm run deploy');
+		expect(catalog.getCommand('git.status')).toBeDefined();
+		catalog.setCustomCategories([]);
+		expect(catalog.getCommand('custom-mi-proyecto.deploy')).toBeUndefined();
+	});
+
+	it('avisa a quien escucha hasta que deja de hacerlo', () => {
+		const catalog = new CatalogService();
+		let calls = 0;
+		const subscription = catalog.onDidChange(() => calls++);
+		catalog.setCustomCategories(custom);
+		subscription.dispose();
+		catalog.setCustomCategories([]);
+		expect(calls).toBe(1);
+	});
+
+	it('el resumen incluye el ejemplo y el texto de búsqueda del comando propio', () => {
+		const [summary] = buildCategorySummaries(custom, 'es', 'powershell');
+		expect(summary).toMatchObject({ id: 'custom-mi-proyecto', title: 'Mi proyecto', icon: 'terminal' });
+		expect(summary.commands[0]).toMatchObject({ id: 'custom-mi-proyecto.deploy', example: 'pnpm run deploy', description: '' });
+		expect(summary.commands[0].searchText).toContain('desplegar');
 	});
 });
 

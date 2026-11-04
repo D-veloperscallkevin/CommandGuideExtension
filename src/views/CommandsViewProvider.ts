@@ -57,6 +57,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	/** Webview que ya ha completado el handshake; solo a él se reenvía el catálogo. */
 	private readyWebview: vscode.Webview | undefined;
 	private readonly shellSubscription: { dispose(): unknown };
+	private readonly catalogSubscription: { dispose(): unknown };
 
 	constructor(
 		private readonly extensionUri: vscode.Uri,
@@ -76,6 +77,14 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 				this.log.info('Shell de destino:', shell);
 				this.postCatalog(this.readyWebview, shell);
 				// Los textos del historial dependen del shell.
+				this.postHistory(this.readyWebview);
+			}
+		});
+		// Cambiaron los comandos propios: catálogo nuevo y, con él, favoritos e historial filtrados.
+		this.catalogSubscription = catalog.onDidChange(() => {
+			if (this.readyWebview) {
+				this.postCatalog(this.readyWebview, this.targetShell.current());
+				this.postFavorites(this.readyWebview);
 				this.postHistory(this.readyWebview);
 			}
 		});
@@ -374,6 +383,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 
 	dispose(): void {
 		this.shellSubscription.dispose();
+		this.catalogSubscription.dispose();
 		this.catalogEmitter.dispose();
 		this.favoritesEmitter.dispose();
 		this.historyEmitter.dispose();
