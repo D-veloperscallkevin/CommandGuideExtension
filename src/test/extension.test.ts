@@ -175,6 +175,68 @@ suite('Historial', () => {
 	});
 });
 
+suite('Detección del proyecto', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	/** Siguiente `catalog` cuyo `detected` cumple la condición. */
+	function catalogWhere(devCommands: DevCommandsApi, accept: (detected: readonly string[]) => boolean, ms: number) {
+		return new Promise<readonly string[]>((resolve, reject) => {
+			const timer = setTimeout(() => {
+				subscription.dispose();
+				reject(new Error(`no llegó el catalog esperado en ${ms} ms`));
+			}, ms);
+			const subscription = devCommands.onDidSendCatalog(({ detected }) => {
+				if (accept(detected)) {
+					clearTimeout(timer);
+					subscription.dispose();
+					resolve(detected);
+				}
+			});
+		});
+	}
+
+	test('detecta pnpm y Node en la carpeta de prueba', async () => {
+		const devCommands = await api();
+		assert.deepStrictEqual(await devCommands.detectProject(), ['node', 'pnpm']);
+	});
+
+	test('crear y borrar un Dockerfile actualiza detected en vivo, en el orden del catálogo', async function () {
+		this.timeout(20_000);
+		const devCommands = await api();
+		const folder = vscode.workspace.workspaceFolders?.[0];
+		assert.ok(folder, 'los tests deben abrir test/fixtures/workspace');
+		const dockerfile = vscode.Uri.joinPath(folder.uri, 'Dockerfile');
+		try {
+			const added = catalogWhere(devCommands, (d) => d.includes('docker'), 10_000);
+			await vscode.workspace.fs.writeFile(dockerfile, new Uint8Array());
+			assert.deepStrictEqual(await added, ['pnpm', 'node', 'docker']);
+		} finally {
+			const removed = catalogWhere(devCommands, (d) => !d.includes('docker'), 10_000);
+			await vscode.workspace.fs.delete(dockerfile);
+			assert.deepStrictEqual(await removed, ['pnpm', 'node']);
+		}
+	});
+
+	test('con detectProject en false no se detecta nada', async function () {
+		this.timeout(15_000);
+		const devCommands = await api();
+		const config = vscode.workspace.getConfiguration('devcommands');
+		try {
+			const off = catalogWhere(devCommands, (d) => d.length === 0, 10_000);
+			await config.update('detectProject', false, vscode.ConfigurationTarget.Global);
+			assert.deepStrictEqual(await off, []);
+		} finally {
+			const on = catalogWhere(devCommands, (d) => d.length > 0, 10_000);
+			await config.update('detectProject', undefined, vscode.ConfigurationTarget.Global);
+			assert.deepStrictEqual(await on, ['pnpm', 'node']);
+		}
+	});
+});
+
 suite('Comandos propios', () => {
 	async function api(): Promise<DevCommandsApi> {
 		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);

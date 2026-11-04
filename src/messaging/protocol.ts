@@ -38,14 +38,20 @@ export const MAX_COMMAND_ID_LENGTH = 200;
 
 /**
  * Mensajes que envía la extensión al webview. `catalog` lleva el shell para el que se han
- * construido los ejemplos y se reenvía cuando cambia. `copied` solo se envía si la copia funcionó.
+ * construido los ejemplos y se reenvía cuando cambia; `detected`, los ids de las categorías del
+ * proyecto abierto, en el orden de `categories`. `copied` solo se envía si la copia funcionó.
  * `favorites` lleva los ids favoritos en orden de marcado, tras cada handshake y cada cambio.
  * `copied` lleva `entryId` si se copió una entrada del historial. `history` lleva las entradas de
  * la más reciente a la más antigua, tras cada handshake, cada cambio y cada cambio de shell.
  */
 export type ExtensionMessage =
 	| { readonly type: 'init'; readonly locale: Locale; readonly version: string }
-	| { readonly type: 'catalog'; readonly shell: ShellId; readonly categories: readonly CategorySummary[] }
+	| {
+			readonly type: 'catalog';
+			readonly shell: ShellId;
+			readonly categories: readonly CategorySummary[];
+			readonly detected: readonly string[];
+	  }
 	| { readonly type: 'copied'; readonly commandId: string; readonly entryId?: string }
 	| { readonly type: 'favorites'; readonly commandIds: readonly string[] }
 	| { readonly type: 'history'; readonly entries: readonly HistoryItem[] };

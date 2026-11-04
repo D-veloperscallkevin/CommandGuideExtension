@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { registerCustomCommands } from './customCommands';
+import { createProjectDetector } from './project/vscodeProject';
 import { FavoritesStore } from './favorites/FavoritesStore';
 import { HistoryStore } from './history/HistoryStore';
 import type { HistoryItem } from './messaging/protocol';
@@ -15,7 +16,7 @@ import { CommandsViewProvider, type SentCatalog } from './views/CommandsViewProv
 
 /** API pública de la extensión (`extension.exports`); la usan los tests de integración. */
 export interface DevCommandsApi {
-	/** Catálogo enviado al webview: tras cada handshake y al cambiar el shell de destino. */
+	/** Catálogo enviado al webview: tras cada handshake, al cambiar el shell y al cambiar el proyecto. */
 	readonly onDidSendCatalog: vscode.Event<SentCatalog>;
 	/** Lo mismo que pulsar un comando en la vista: lo escribe en la terminal sin ejecutarlo. */
 	sendToTerminal(commandId: string): void;
@@ -34,6 +35,8 @@ export interface DevCommandsApi {
 	clearHistory(): Promise<void>;
 	/** Historial enviado al webview: tras cada handshake, cada cambio y cada cambio de shell. */
 	readonly onDidSendHistory: vscode.Event<readonly HistoryItem[]>;
+	/** Detecta ahora las categorías del proyecto y las devuelve ordenadas por id. */
+	detectProject(): Promise<readonly string[]>;
 }
 
 // Se activa solo al abrir la vista (evento implícito onView:devcommands.commands).
@@ -76,6 +79,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		},
 		randomUUID,
 	);
+	const project = createProjectDetector();
 	const provider = new CommandsViewProvider(
 		context.extensionUri,
 		version,
@@ -87,6 +91,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		risk,
 		favorites,
 		history,
+		project,
 		catalog,
 	);
 
@@ -94,12 +99,17 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		log,
 		targetShell,
 		customCommands,
+		project,
 		provider,
 		vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewId, provider),
 	);
 
 	return {
 		onDidSendCatalog: provider.onDidSendCatalog,
+		detectProject: async () => {
+			await project.refresh();
+			return [...project.current()].sort();
+		},
 		sendToTerminal: (commandId) => provider.sendToTerminal(commandId),
 		copyToClipboard: (commandId) => provider.copyToClipboard(commandId),
 		toggleFavorite: (commandId) => provider.toggleFavorite(commandId),

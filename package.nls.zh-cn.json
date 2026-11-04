@@ -1,6 +1,7 @@
 {
 	"description": "开发命令速查指南，一键发送到终端",
 	"config.confirmDestructive": "在将破坏性命令（例如 `git reset --hard` 或 `rm -rf`）写入终端或复制之前请求确认。",
+	"config.detectProject": "在“此项目”部分中优先显示所打开项目的类别。仅检查每个工作区文件夹的根目录中是否存在以下文件或文件夹：`.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`。",
 	"config.customCommands": "你自己的命令类别，显示在内置类别之后。每个类别包含 `id`、`title`、可选的 `icon`（一个 Codicon）和 `commands`。每个命令包含 `id`、`title` 和 `command`（bash 模板，其中的 `${name}` 占位符在 `params` 中声明），以及可选的 `description`、`params`、`risk`（`safe`、`caution` 或 `destructive`）、`shells`（`bash`、`zsh`、`powershell` 或 `cmd` 的变体）和 `tags`。文本可以是字符串，也可以是按语言划分的对象（`{ \"en\": \"…\", \"es\": \"…\" }`）。运行 **DevCommands: 编辑自定义命令** 可从示例开始。无效的条目会被跳过，并记录在 DevCommands 日志中。",
 	"command.editCustomCommands": "编辑自定义命令"
 }

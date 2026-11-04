@@ -45,6 +45,11 @@
           "scope": "application",
           "markdownDescription": "%config.confirmDestructive%"
         },
+        "devcommands.detectProject": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%config.detectProject%"
+        },
         "devcommands.customCommands": {
           "type": "array",
           "default": [],

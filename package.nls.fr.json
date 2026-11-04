@@ -1,6 +1,7 @@
 {
 	"description": "Guide rapide des commandes de développement à envoyer dans le terminal en un clic",
 	"config.confirmDestructive": "Demander une confirmation avant d'écrire dans le terminal ou de copier une commande destructive (par exemple `git reset --hard` ou `rm -rf`).",
+	"config.detectProject": "Afficher d'abord les catégories du projet ouvert, dans une section « Dans ce projet ». Vérifie seulement si ces fichiers ou dossiers existent à la racine de chaque dossier de l'espace de travail : `.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`.",
 	"config.customCommands": "Vos propres catégories de commandes, affichées après celles incluses. Chaque catégorie a `id`, `title`, `icon` facultatif (un Codicon) et `commands`. Chaque commande a `id`, `title` et `command` (le modèle bash, avec des espaces réservés `${nom}` déclarés dans `params`), et en option `description`, `params`, `risk` (`safe`, `caution` ou `destructive`), `shells` (variantes pour `bash`, `zsh`, `powershell` ou `cmd`) et `tags`. Les textes peuvent être une chaîne ou un objet par langue (`{ \"en\": \"…\", \"es\": \"…\" }`). Exécutez **DevCommands : Modifier les commandes personnalisées** pour partir d'un exemple. Les entrées non valides sont ignorées et indiquées dans le journal de DevCommands.",
 	"command.editCustomCommands": "Modifier les commandes personnalisées"
 }

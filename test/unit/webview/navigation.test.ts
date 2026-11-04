@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
 	FAVORITES_CARD_ID,
+	homeSections,
 	initialView,
 	navigate,
 	nextIndex,
@@ -314,5 +315,29 @@ describe('nextIndex', () => {
 
 	it('Fin y después Flecha arriba deja el foco en la penúltima', () => {
 		expect(nextIndex(nextIndex(0, 'End', 5)!, 'ArrowUp', 5)).toBe(3);
+	});
+});
+
+describe('homeSections', () => {
+	const summary = (id: string) => ({ id, title: id, icon: 'terminal', commands: [] });
+	const categories = ['git', 'npm', 'pnpm', 'node', 'docker', 'terminal'].map(summary);
+	const ids = (list: readonly { id: string }[]) => list.map((c) => c.id);
+
+	it('separa las detectadas del resto, en el orden de las categorías', () => {
+		const sections = homeSections(categories, ['node', 'pnpm']);
+		expect(ids(sections.detected)).toEqual(['pnpm', 'node']);
+		expect(ids(sections.rest)).toEqual(['git', 'npm', 'docker', 'terminal']);
+	});
+
+	it('ignora los ids que no están en las categorías', () => {
+		const sections = homeSections(categories, ['prisma', 'docker']);
+		expect(ids(sections.detected)).toEqual(['docker']);
+		expect(sections.rest).toHaveLength(5);
+	});
+
+	it('sin detectadas, todas van al resto', () => {
+		const sections = homeSections(categories, []);
+		expect(sections.detected).toEqual([]);
+		expect(ids(sections.rest)).toEqual(ids(categories));
 	});
 });
