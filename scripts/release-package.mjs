@@ -4,7 +4,7 @@
 import { spawnSync } from 'node:child_process';
 import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { checkSize, disallowedFiles, formatBytes, vsixName } from './release-check.mjs';
+import { checkSize, disallowedFiles, formatBytes, isPreRelease, missingFiles, vsixName } from './release-check.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 
@@ -39,18 +39,25 @@ function checkFiles(when) {
 	if (extra.length > 0) {
 		fail(`contenido del paquete (${when}): archivos no permitidos:\n  ${extra.join('\n  ')}`);
 	}
+	const missing = missingFiles(files, required);
+	if (missing.length > 0) {
+		fail(`contenido del paquete (${when}): faltan archivos obligatorios:\n  ${missing.join('\n  ')}`);
+	}
 	return files;
 }
 
 const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 const name = vsixName(pkg);
+/** Obligatorios en el paquete: el icono de la tienda y los avisos de terceros (D4 de marketplace-release). */
+const required = [pkg.icon ?? 'media/icon.png', 'ThirdPartyNotices.txt'];
+const preRelease = isPreRelease(pkg.version);
 
 console.log('▶ contenido (antes del build)');
 checkFiles('antes del build');
 
-console.log(`\n▶ vsce package → ${name}`);
-// Pre-release mientras la versión sea 0.x (design D4 de release-pipeline).
-vsce(['package', '--no-dependencies', '--pre-release', '--out', name]);
+console.log(`\n▶ vsce package → ${name}${preRelease ? ' (pre-release)' : ''}`);
+// Pre-release solo mientras la versión sea 0.x (D4 de marketplace-release).
+vsce(['package', '--no-dependencies', ...(preRelease ? ['--pre-release'] : []), '--out', name]);
 
 console.log('\n▶ contenido (con el build)');
 const files = checkFiles('con el build');
@@ -62,5 +69,5 @@ if (sizeError) {
 	fail(`tamaño: ${sizeError}`);
 }
 
-console.log(`\n✔ ${name} · ${formatBytes(bytes)} · ${files.length} archivos`);
+console.log(`\n✔ ${name} · ${preRelease ? 'pre-release' : 'estable'} · ${formatBytes(bytes)} · ${files.length} archivos`);
 console.log(`  ${path}`);

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+	<!-- Logo de DevCommands Guide: libro abierto con ">_" en sus páginas. Se exporta a icon.png con scripts/export-icon.mjs. -->
+	<path d="M64 40C52 32 30 30 8 32V108C30 106 52 108 64 116C76 108 98 106 120 108V32C98 30 76 32 64 40Z" fill="#6C5CE7" />
+	<path d="M64 32C52 24 32 22 14 24V100C32 98 52 100 64 108Z" fill="#F5F3FF" />
+	<path d="M64 32C76 24 96 22 114 24V100C96 98 76 100 64 108Z" fill="#E9E5FF" />
+	<path d="M64 33V107" stroke="#B9AFF5" stroke-width="2" />
+	<path d="M28 50L45 64L28 78" fill="none" stroke="#1E1E2E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+	<path d="M78 80H100" stroke="#1E1E2E" stroke-width="9" stroke-linecap="round" />
+</svg>

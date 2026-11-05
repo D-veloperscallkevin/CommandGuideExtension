@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { checkSize, disallowedFiles, formatBytes, MAX_VSIX_BYTES, vsixName } from '../../../scripts/release-check.mjs';
+import {
+	checkSize,
+	disallowedFiles,
+	formatBytes,
+	isPreRelease,
+	MAX_VSIX_BYTES,
+	missingFiles,
+	vsixName,
+} from '../../../scripts/release-check.mjs';
 
 describe('checkSize', () => {
 	it('acepta un paquete justo por debajo del límite', () => {
@@ -29,11 +37,13 @@ describe('disallowedFiles', () => {
 				'README.md',
 				'CHANGELOG.md',
 				'LICENSE',
+				'ThirdPartyNotices.txt',
+				'media/icon.png',
 			]),
 		).toEqual([]);
 	});
 
-	it('rechaza mapas, fuentes, dependencias, el catálogo crudo y paquetes anteriores', () => {
+	it('rechaza mapas, fuentes, dependencias, el catálogo crudo, paquetes anteriores y capturas', () => {
 		expect(
 			disallowedFiles([
 				'dist/extension.js',
@@ -43,6 +53,7 @@ describe('disallowedFiles', () => {
 				'catalog/git.json',
 				'devcommands-0.0.1.vsix',
 				'package.nls.fr-fr-x.json',
+				'docs/images/panel.png',
 			]),
 		).toEqual([
 			'dist/extension.js.map',
@@ -51,6 +62,7 @@ describe('disallowedFiles', () => {
 			'catalog/git.json',
 			'devcommands-0.0.1.vsix',
 			'package.nls.fr-fr-x.json',
+			'docs/images/panel.png',
 		]);
 	});
 
@@ -69,5 +81,37 @@ describe('formatBytes y vsixName', () => {
 
 	it('nombra el paquete con el nombre y la versión', () => {
 		expect(vsixName({ name: 'devcommands', version: '0.1.0' })).toBe('devcommands-0.1.0.vsix');
+	});
+});
+
+describe('isPreRelease', () => {
+	it('marca como pre-release las versiones 0.x', () => {
+		expect(isPreRelease('0.1.0')).toBe(true);
+		expect(isPreRelease('0.9.9')).toBe(true);
+	});
+
+	it('empaqueta como estable a partir de 1.0.0', () => {
+		expect(isPreRelease('1.0.0')).toBe(false);
+		expect(isPreRelease('2.3.4')).toBe(false);
+		expect(isPreRelease('10.0.0')).toBe(false);
+	});
+});
+
+describe('missingFiles', () => {
+	const required = ['media/icon.png', 'ThirdPartyNotices.txt'];
+
+	it('no falta nada cuando están el icono y los avisos', () => {
+		expect(missingFiles(['package.json', 'media/icon.png', 'ThirdPartyNotices.txt'], required)).toEqual([]);
+	});
+
+	it('nombra cada obligatorio que falta, en su orden', () => {
+		expect(missingFiles(['package.json'], required)).toEqual(['media/icon.png', 'ThirdPartyNotices.txt']);
+		expect(missingFiles(['media/icon.png'], required)).toEqual(['ThirdPartyNotices.txt']);
+	});
+
+	it('normaliza las rutas de Windows y el prefijo ./', () => {
+		expect(
+			missingFiles(['media\\icon.png', ' ./ThirdPartyNotices.txt'], ['./media/icon.png', 'ThirdPartyNotices.txt']),
+		).toEqual([]);
 	});
 });
