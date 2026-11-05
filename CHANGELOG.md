@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-04
+
+Primera versión pública (fase 2, v1), en el Marketplace de VS Code y en Open VSX.
+
 ### Added
 
 - Los ejemplos, el texto enviado a la terminal y el copiado usan el shell de la terminal activa (PowerShell, bash, zsh o cmd; Git Bash y WSL cuentan como bash) o, si no hay ninguna, el del perfil por defecto. La vista se actualiza sola al cambiar de terminal o de shell, sin perder la pantalla, la búsqueda ni el foco.
@@ -23,6 +27,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Requiere VS Code 1.99 o posterior (antes, 1.90).
 - La variante de cmd de "seguir un archivo" usa `Get-Content -LiteralPath` entre comillas simples.
+- Nombre visible "DevCommands Guide" en el Marketplace y en Open VSX. El id sigue siendo `aguilardigital.devcommands`, así que se conservan favoritos, historial y ajustes; la vista y la categoría de la paleta siguen llamándose "DevCommands".
+- Icono de la extensión: un libro abierto con `>_`. El icono de la barra de actividad no cambia.
+- Licencia propietaria (todos los derechos reservados, uso gratuito) en lugar de MIT. Los componentes de terceros (React y codicons) mantienen sus licencias, recogidas en `ThirdPartyNotices.txt`.
+- Primera versión estable: el paquete deja de marcarse como pre-release.
+- README con capturas y un resumen de lo que ofrece la extensión.
 
 ## [0.1.0] - 2026-11-02
 

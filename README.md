@@ -1,8 +1,26 @@
-# DevCommands
+# DevCommands Guide
 
-Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click.
+Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click, without memorizing their flags.
 
-> Work in progress (pre-release): categories, commands, search, sending to the terminal and copying work. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what comes next.
+- **More than 100 commands** for Git, npm, pnpm, Node.js, Docker and the terminal, each with a description and an example.
+- **Search** across all categories, in English or Spanish, by name, description or tag.
+- **Nothing runs by itself:** commands are written to the terminal, never executed. You review them and press Enter.
+- **Parameters** such as a branch or file name are asked for and quoted for your shell: PowerShell, bash, zsh or cmd.
+- **Destructive commands** (`git reset --hard`, `rm -rf`…) ask for confirmation first.
+- **Favorites, recent commands** with the values you typed, and **your own commands** in the settings.
+- **Project detection:** the categories that fit the open project come first.
+- **Command Palette search** without opening the panel.
+- Available in **11 languages**.
+
+![The DevCommands panel with the categories of the open project first](docs/images/panel.png)
+
+![Searching commands across all categories](docs/images/search.png)
+
+![Input box asking for the value of a command parameter](docs/images/params.png)
+
+![Confirmation before writing a destructive command](docs/images/destructive.png)
+
+![Searching commands from the Command Palette](docs/images/quick-pick.png)
 
 ## Usage
 
@@ -111,11 +129,15 @@ Press F5 in VS Code to open an Extension Development Host with the extension loa
 
 ```bash
 pnpm run release:package   # builds devcommands-<version>.vsix and checks its size (< 2 MB) and contents
-code --install-extension devcommands-0.1.0.vsix
+code --install-extension devcommands-<version>.vsix
 ```
 
 In WSL, open a folder with Remote-WSL and use Extensions › "…" › "Install from VSIX…" to install it there.
 
+To regenerate the store icon (`media/icon.png`) after editing `media/logo.svg`, run `node scripts/export-icon.mjs` (it uses your installed Chrome; set `CHROME_PATH` if it is not found).
+
 ## License
 
-See [LICENSE](LICENSE).
+DevCommands Guide is free to install and use, for personal or commercial work, but it is not open source: all rights are reserved. The source code is public so it can be read and reviewed; copying, modifying or redistributing it is not allowed. See [LICENSE](LICENSE) for the full terms.
+
+It includes third-party components (React and the VS Code codicons) under their own licenses, listed in [ThirdPartyNotices.txt](ThirdPartyNotices.txt).

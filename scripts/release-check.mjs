@@ -26,7 +26,15 @@ export function checkSize(bytes) {
 	return `el .vsix pesa ${formatBytes(bytes)} y el límite es menos de ${formatBytes(MAX_VSIX_BYTES)}`;
 }
 
-const ROOT_FILES = new Set(['package.json', 'README.md', 'CHANGELOG.md', 'LICENSE', 'LICENSE.md', 'LICENSE.txt']);
+const ROOT_FILES = new Set([
+	'package.json',
+	'README.md',
+	'CHANGELOG.md',
+	'LICENSE',
+	'LICENSE.md',
+	'LICENSE.txt',
+	'ThirdPartyNotices.txt',
+]);
 
 /** @param {string} path Ruta relativa con `/`. */
 function isAllowed(path) {
@@ -39,6 +47,28 @@ function isAllowed(path) {
 	return path.startsWith('media/') || path.startsWith('l10n/');
 }
 
+/** @param {string} path */
+const normalize = (path) => path.trim().replaceAll('\\', '/').replace(/^\.\//, '');
+
+/**
+ * Archivos obligatorios que faltan en el paquete (D4 de marketplace-release).
+ * @param {readonly string[]} paths Rutas del paquete, con `/` o `\`.
+ * @param {readonly string[]} required Rutas obligatorias, con `/`.
+ * @returns {string[]} Las obligatorias que no están, en su orden.
+ */
+export function missingFiles(paths, required) {
+	const present = new Set(paths.map(normalize));
+	return required.map(normalize).filter((p) => !present.has(p));
+}
+
+/**
+ * Pre-release solo mientras la versión mayor sea 0 (D4 de marketplace-release).
+ * @param {string} version Versión semver del manifiesto.
+ */
+export function isPreRelease(version) {
+	return /^0\./.test(version.trim());
+}
+
 /**
  * Archivos del paquete que no están permitidos (D2 de release-pipeline).
  * @param {readonly string[]} paths Rutas relativas a la raíz, con `/` o `\`.
@@ -46,7 +76,7 @@ function isAllowed(path) {
  */
 export function disallowedFiles(paths) {
 	return paths
-		.map((p) => p.trim().replaceAll('\\', '/').replace(/^\.\//, ''))
+		.map(normalize)
 		.filter((p) => p.length > 0 && !isAllowed(p));
 }
 

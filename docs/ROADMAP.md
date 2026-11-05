@@ -69,7 +69,7 @@ Estas reglas se copian al `context` y a las `rules` de `openspec/config.yaml` (p
 
 - Ningún código se escribe sin un change de OpenSpec aprobado (`/opsx:propose`).
 - Conventional Commits. Toda integración a `develop`, `staging` o `main` pasa por PR con `pnpm run verify` en verde (hook pre-push) y, en los PR de release, también en WSL/Linux.
-- Licencia MIT (decisión abierta: cámbiala si piensas monetizar).
+- Licencia propietaria: todos los derechos reservados, uso gratuito; el código es público para leerlo, no para reutilizarlo. Los componentes de terceros conservan sus licencias en `ThirdPartyNotices.txt`.
 
 ## Arquitectura
 
@@ -272,7 +272,8 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.6 | `custom-commands` | Comandos y categorías propios, validados con las mismas reglas del catálogo ✅ |
 | 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, …) ✅ |
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel ✅ |
-| 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --no-dependencies`) y Open VSX (`ovsx publish`) tras crear el tag `vX.Y.Z` |
+| 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --packagePath`) y Open VSX (`ovsx publish`) del `.vsix` probado, tras crear el tag `vX.Y.Z` ✅ |
+| 2.10 | `busy-terminal` | Si la terminal activa está ocupada con un programa (Claude Code, un servidor de desarrollo…), el comando va a otra terminal libre o a una nueva "DevCommands", y el indicador "Ejemplos para" sigue a esa terminal. Antes de la v1.0.0 |
 
 ### Fase 3: v2.x
 
@@ -287,7 +288,7 @@ Cada change sale en su propia versión menor y el orden puede cambiar según el 
 
 Decisiones que hay que tomar antes del change que las necesita:
 - ~~**Antes de `custom-commands` (2.6):** guardar en `settings.json` o en `.devcommands.json` por proyecto.~~ Decidido: ajuste `devcommands.customCommands` en la configuración de usuario (sincronizado con Settings Sync). Un `.devcommands.json` por proyecto queda para más adelante.
-- **Antes de `marketplace-release` (2.9):** nombre visible definitivo y licencia. El publisher ya está decidido: `aguilardigital` (id `aguilardigital.devcommands`).
+- ~~**Antes de `marketplace-release` (2.9):** nombre visible definitivo y licencia.~~ Decidido: "DevCommands Guide" (id `aguilardigital.devcommands`, publisher `aguilardigital`) y licencia propietaria.
 
 Una fase se cierra con un PR de release `develop → staging`. Antes de abrirlo, verifica en Linux desde WSL, con el repo clonado dentro de `~/` (no en `/mnt/c`, porque los binarios de esbuild, rollup y oxlint son distintos por SO):
 
@@ -306,10 +307,29 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 
 **Empaquetado y prueba del `.vsix`** (antes del PR `staging → main`):
 
-1. `pnpm run release:package`. Genera `devcommands-<versión>.vsix` en la raíz (pre-release mientras la versión sea `0.x`) y falla si pesa 2 MB o más o si incluye archivos no permitidos.
+1. `pnpm run release:package`. Genera `devcommands-<versión>.vsix` en la raíz (pre-release mientras la versión sea `0.x`; estable desde la `1.0.0`) y falla si pesa 2 MB o más, si incluye archivos no permitidos o si le falta el icono o `ThirdPartyNotices.txt`.
 2. Windows: `code --install-extension devcommands-<versión>.vsix --force`. En una ventana normal de VS Code (no F5), comprueba la vista, la búsqueda, copiar y enviar un comando a una terminal PowerShell.
 3. WSL: abre una carpeta con Remote-WSL y, en Extensions › "…" › "Install from VSIX…", instala el mismo `.vsix` en WSL. Comprueba que los ejemplos salen en bash y que enviar un comando a una terminal bash funciona.
 4. Anota en el PR el tamaño del `.vsix` y ambas pruebas. Para quitar la versión de prueba: `code --uninstall-extension aguilardigital.devcommands`.
+
+**Publicación** (a mano, en local, desde `main`; igual en PowerShell que en bash). Se publica el mismo `.vsix` que se probó antes del PR a `main`, sin volver a empaquetar. Los tokens nunca se guardan en el repo.
+
+Una sola vez:
+
+1. Marketplace: crea el publisher `aguilardigital` en https://marketplace.visualstudio.com/manage con tu cuenta de Microsoft. En Azure DevOps (https://dev.azure.com), crea un token personal con la organización "All accessible organizations" y el alcance *Marketplace › Manage*.
+2. Open VSX: entra en https://open-vsx.org con tu cuenta de GitHub, firma el acuerdo de publicador (Settings › Profile) y crea un token en Settings › Access Tokens. Después: `pnpm exec ovsx create-namespace aguilardigital -p <token>`.
+3. Antes del primer registro, comprueba otra vez que "DevCommands Guide" sigue libre en ambas tiendas.
+
+En cada versión, tras fusionar `staging → main`:
+
+```bash
+git checkout main && git pull
+git tag v1.0.0 && git push origin v1.0.0
+pnpm exec vsce publish --packagePath devcommands-1.0.0.vsix   # pide el token o usa VSCE_PAT
+pnpm exec ovsx publish devcommands-1.0.0.vsix -p <token>      # o la variable OVSX_PAT sin -p
+```
+
+Comprueba después la ficha en ambas tiendas: nombre, icono, versión sin pre-release y que el README muestra las capturas (se sirven desde `main`).
 
 **Ciclo de cada change**
 
@@ -343,10 +363,12 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - [x] `custom-commands` (2.6): categorías y comandos propios en el ajuste de usuario `devcommands.customCommands`, validados con las reglas del catálogo, con recarga en vivo y el comando "Editar comandos propios"
 - [x] `project-detection` (2.7): secciones "En este proyecto" y "Todas" según los archivos de la raíz de cada carpeta (Git, Node, pnpm, npm y Docker), con recarga en vivo y el ajuste `devcommands.detectProject`. Prisma queda para un change de contenido, porque el catálogo aún no tiene esa categoría
 - [x] `quick-pick` (2.8): "DevCommands: Buscar comandos" en la paleta, con la búsqueda del panel, grupos (Favoritos, Recientes, proyecto y resto), Enter para escribir en la terminal y botones de copiar y favorito; sin atajo por defecto
-- [ ] Elegir el nombre definitivo y comprobar que no esté tomado en el Marketplace ni en Open VSX (antes de 2.9)
-- [ ] Registrar el publisher `aguilardigital` en el Marketplace y en Open VSX (antes de 2.9)
-
-Preguntas abiertas: la licencia (MIT o propietaria).
+- [x] Elegir el nombre definitivo: "DevCommands Guide", libre en el Marketplace y en Open VSX el 2026-11-04
+- [x] `marketplace-release` (2.9): nombre "DevCommands Guide", icono del libro con `>_`, licencia propietaria con avisos de terceros, README con capturas, versión 1.0.0 estable y pasos de publicación manual
+- [ ] `busy-terminal` (2.10): no escribir en una terminal ocupada por otro programa (detectado en la prueba del `.vsix` de la 2.9 con Claude Code abierto en una terminal)
+- [ ] Registrar el publisher `aguilardigital` en el Marketplace y el namespace en Open VSX (antes de publicar la v1.0.0)
+- [ ] Capturas del README en `docs/images/` (`panel.png`, `search.png`, `params.png`, `destructive.png` y `quick-pick.png`; lista en la tarea 5.1 de `marketplace-release`), antes del release v1.0.0
+- [ ] Release v1.0.0: verificación en WSL, PR `develop → staging`, prueba del `.vsix`, PR `staging → main`, tag `v1.0.0` y publicación en ambas tiendas
 
 ## Fuentes
 
