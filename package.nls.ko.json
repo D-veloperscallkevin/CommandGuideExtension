@@ -3,5 +3,6 @@
 	"config.confirmDestructive": "파괴적인 명령(예: `git reset --hard` 또는 `rm -rf`)을 터미널에 쓰거나 복사하기 전에 확인을 요청합니다.",
 	"config.detectProject": "열려 있는 프로젝트의 카테고리를 \"이 프로젝트\" 섹션에 먼저 표시합니다. 각 작업 영역 폴더의 루트에 다음 파일이나 폴더가 있는지만 확인합니다: `.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`.",
 	"config.customCommands": "기본 제공 카테고리 다음에 표시되는 사용자 지정 명령 카테고리입니다. 각 카테고리에는 `id`, `title`, 선택적 `icon`(Codicon), `commands`가 있습니다. 각 명령에는 `id`, `title`, `command`(`params`에 선언된 `${name}` 자리 표시자가 있는 bash 템플릿)가 있고, 선택적으로 `description`, `params`, `risk`(`safe`, `caution`, `destructive`), `shells`(`bash`, `zsh`, `powershell`, `cmd`용 변형), `tags`를 지정할 수 있습니다. 텍스트는 문자열이나 언어별 객체(`{ \"en\": \"…\", \"es\": \"…\" }`)일 수 있습니다. 예제로 시작하려면 **DevCommands: 사용자 지정 명령 편집**을 실행하세요. 잘못된 항목은 건너뛰고 DevCommands 로그에 기록됩니다.",
-	"command.editCustomCommands": "사용자 지정 명령 편집"
+	"command.editCustomCommands": "사용자 지정 명령 편집",
+	"command.searchCommands": "명령 검색"
 }

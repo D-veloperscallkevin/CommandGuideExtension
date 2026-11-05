@@ -3,5 +3,6 @@
 	"config.confirmDestructive": "Vor dem Schreiben in das Terminal oder dem Kopieren eines destruktiven Befehls (zum Beispiel `git reset --hard` oder `rm -rf`) um Bestätigung bitten.",
 	"config.detectProject": "Die Kategorien des geöffneten Projekts zuerst in einem Abschnitt „In diesem Projekt“ anzeigen. Prüft nur, ob diese Dateien oder Ordner im Stammverzeichnis jedes Arbeitsbereichsordners vorhanden sind: `.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`.",
 	"config.customCommands": "Eigene Befehlskategorien, die nach den mitgelieferten angezeigt werden. Jede Kategorie hat `id`, `title`, optional `icon` (ein Codicon) und `commands`. Jeder Befehl hat `id`, `title` und `command` (die Bash-Vorlage mit Platzhaltern `${name}`, die in `params` deklariert sind) und optional `description`, `params`, `risk` (`safe`, `caution` oder `destructive`), `shells` (Varianten für `bash`, `zsh`, `powershell` oder `cmd`) und `tags`. Texte können ein String oder ein Objekt pro Sprache sein (`{ \"en\": \"…\", \"es\": \"…\" }`). Führen Sie **DevCommands: Eigene Befehle bearbeiten** aus, um mit einem Beispiel zu beginnen. Ungültige Einträge werden übersprungen und im DevCommands-Protokoll aufgeführt.",
-	"command.editCustomCommands": "Eigene Befehle bearbeiten"
+	"command.editCustomCommands": "Eigene Befehle bearbeiten",
+	"command.searchCommands": "Befehle suchen"
 }

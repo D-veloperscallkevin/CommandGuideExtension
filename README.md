@@ -28,6 +28,12 @@ Known limitations:
 - If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
 - If you had already typed something in the terminal, the command is appended after it.
 
+## Search from the Command Palette
+
+Run **DevCommands: Search Commands** from the Command Palette (`Ctrl+Shift+P`, `Cmd+Shift+P` on macOS) to find any command without opening the panel. With an empty box it lists Favorites, Recent, your project's categories and the rest; typing uses the same search as the panel. **Enter** writes the command to the terminal without running it; the item buttons copy it or toggle it as a favorite.
+
+It has no default shortcut. To add one, open **Keyboard Shortcuts** (`Ctrl+K Ctrl+S`), search for `devcommands.searchCommands` and assign your own.
+
 ## Project detection
 
 When a folder is open, the categories that fit the project appear first, under **In this project**; the rest stay under **All**. DevCommands only checks whether these files or folders exist in the root of each workspace folder (it never reads them):

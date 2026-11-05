@@ -237,6 +237,41 @@ suite('Detección del proyecto', () => {
 	});
 });
 
+suite('Buscador de la paleta', () => {
+	async function api(): Promise<DevCommandsApi> {
+		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
+		assert.ok(extension);
+		return extension.activate();
+	}
+
+	test('el comando está registrado', async () => {
+		await api();
+		const commands = await vscode.commands.getCommands(true);
+		assert.ok(commands.includes('devcommands.searchCommands'));
+	});
+
+	test('con el cuadro vacío, las categorías del proyecto van antes que el resto', async () => {
+		const devCommands = await api();
+		await devCommands.detectProject();
+		const separators = devCommands
+			.searchEntries('')
+			.flatMap((e) => (e.kind === 'separator' ? [e.label] : []))
+			// Favoritos y Recientes dependen de lo que hayan hecho otros tests.
+			.filter((label) => !['Favorites', 'Recent'].includes(label));
+		assert.deepStrictEqual(separators.slice(0, 2), ['pnpm', 'Node.js']);
+		assert.ok(separators.includes('Git'));
+	});
+
+	test('al escribir usa la búsqueda del panel, sin separadores', async () => {
+		const devCommands = await api();
+		const entries = devCommands.searchEntries('status');
+		assert.ok(entries.length > 0);
+		assert.ok(entries.every((e) => e.kind === 'command'));
+		assert.ok(entries.some((e) => e.kind === 'command' && e.commandId === 'git.status'));
+		assert.deepStrictEqual(devCommands.searchEntries('zzzz-no-existe'), []);
+	});
+});
+
 suite('Comandos propios', () => {
 	async function api(): Promise<DevCommandsApi> {
 		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);

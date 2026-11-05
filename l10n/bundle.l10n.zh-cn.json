@@ -31,5 +31,14 @@
 	"Hello from DevCommands": "来自 DevCommands 的问候",
 	"Open Settings": "打开设置",
 	"Show Log": "查看日志",
-	"{0} custom commands or categories were skipped because they are not valid.": "有 {0} 个自定义命令或类别无效，已被跳过。"
+	"{0} custom commands or categories were skipped because they are not valid.": "有 {0} 个自定义命令或类别无效，已被跳过。",
+	"Favorites": "收藏",
+	"Recent": "最近",
+	"Copy command": "复制命令",
+	"Add to favorites": "添加到收藏",
+	"Remove from favorites": "从收藏中移除",
+	"Not valid in {0}: you'll be asked for the value when sending it.": "在 {0} 中无效：发送时会要求你输入该值。",
+	"DevCommands: Search Commands": "DevCommands: 搜索命令",
+	"Type to search by name, description or tag": "输入以按名称、描述或标签搜索",
+	"Copied: {0}": "已复制：{0}"
 }

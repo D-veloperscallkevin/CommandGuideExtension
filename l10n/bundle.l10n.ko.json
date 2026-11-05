@@ -31,5 +31,14 @@
 	"Hello from DevCommands": "DevCommands에서 보내는 인사",
 	"Open Settings": "설정 열기",
 	"Show Log": "로그 보기",
-	"{0} custom commands or categories were skipped because they are not valid.": "사용자 지정 명령 또는 카테고리 {0}개가 유효하지 않아 건너뛰었습니다."
+	"{0} custom commands or categories were skipped because they are not valid.": "사용자 지정 명령 또는 카테고리 {0}개가 유효하지 않아 건너뛰었습니다.",
+	"Favorites": "즐겨찾기",
+	"Recent": "최근",
+	"Copy command": "명령 복사",
+	"Add to favorites": "즐겨찾기에 추가",
+	"Remove from favorites": "즐겨찾기에서 제거",
+	"Not valid in {0}: you'll be asked for the value when sending it.": "{0}에서는 유효하지 않음: 보낼 때 값을 묻습니다.",
+	"DevCommands: Search Commands": "DevCommands: 명령 검색",
+	"Type to search by name, description or tag": "이름, 설명 또는 태그로 검색하려면 입력하세요",
+	"Copied: {0}": "복사됨: {0}"
 }

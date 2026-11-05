@@ -713,6 +713,11 @@
     },
     "commands": [
       {
+        "command": "devcommands.searchCommands",
+        "title": "%command.searchCommands%",
+        "category": "DevCommands"
+      },
+      {
         "command": "devcommands.editCustomCommands",
         "title": "%command.editCustomCommands%",
         "category": "DevCommands"
