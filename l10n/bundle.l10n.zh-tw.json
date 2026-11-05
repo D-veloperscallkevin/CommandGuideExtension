@@ -31,5 +31,14 @@
 	"Hello from DevCommands": "來自 DevCommands 的問候",
 	"Open Settings": "開啟設定",
 	"Show Log": "檢視記錄",
-	"{0} custom commands or categories were skipped because they are not valid.": "有 {0} 個自訂命令或類別無效，已略過。"
+	"{0} custom commands or categories were skipped because they are not valid.": "有 {0} 個自訂命令或類別無效，已略過。",
+	"Favorites": "我的最愛",
+	"Recent": "最近",
+	"Copy command": "複製命令",
+	"Add to favorites": "加入我的最愛",
+	"Remove from favorites": "從我的最愛移除",
+	"Not valid in {0}: you'll be asked for the value when sending it.": "在 {0} 中無效：傳送時會要求你輸入該值。",
+	"DevCommands: Search Commands": "DevCommands: 搜尋命令",
+	"Type to search by name, description or tag": "輸入以依名稱、描述或標籤搜尋",
+	"Copied: {0}": "已複製：{0}"
 }

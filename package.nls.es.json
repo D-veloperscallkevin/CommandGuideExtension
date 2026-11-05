@@ -3,5 +3,6 @@
 	"config.confirmDestructive": "Pedir confirmación antes de escribir en la terminal o copiar un comando destructivo (por ejemplo `git reset --hard` o `rm -rf`).",
 	"config.detectProject": "Mostrar primero las categorías del proyecto abierto, en una sección \"En este proyecto\". Solo comprueba si existen estos archivos o carpetas en la raíz de cada carpeta del workspace: `.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`.",
 	"config.customCommands": "Tus propias categorías de comandos, que se muestran después de las incluidas. Cada categoría tiene `id`, `title`, `icon` opcional (un Codicon) y `commands`. Cada comando tiene `id`, `title` y `command` (la plantilla de bash, con placeholders `${nombre}` declarados en `params`), y de forma opcional `description`, `params`, `risk` (`safe`, `caution` o `destructive`), `shells` (variantes para `bash`, `zsh`, `powershell` o `cmd`) y `tags`. Los textos pueden ser un texto o un objeto por idioma (`{ \"en\": \"…\", \"es\": \"…\" }`). Ejecuta **DevCommands: Editar comandos propios** para partir de un ejemplo. Las entradas no válidas se omiten y se indican en el registro de DevCommands.",
-	"command.editCustomCommands": "Editar comandos propios"
+	"command.editCustomCommands": "Editar comandos propios",
+	"command.searchCommands": "Buscar comandos"
 }

@@ -31,5 +31,14 @@
 	"Hello from DevCommands": "Bonjour de DevCommands",
 	"Open Settings": "Ouvrir les paramètres",
 	"Show Log": "Afficher le journal",
-	"{0} custom commands or categories were skipped because they are not valid.": "{0} commandes ou catégories personnalisées ont été ignorées, car elles ne sont pas valides."
+	"{0} custom commands or categories were skipped because they are not valid.": "{0} commandes ou catégories personnalisées ont été ignorées, car elles ne sont pas valides.",
+	"Favorites": "Favoris",
+	"Recent": "Récents",
+	"Copy command": "Copier la commande",
+	"Add to favorites": "Ajouter aux favoris",
+	"Remove from favorites": "Retirer des favoris",
+	"Not valid in {0}: you'll be asked for the value when sending it.": "Non valide dans {0} : la valeur vous sera demandée à l'envoi.",
+	"DevCommands: Search Commands": "DevCommands : Rechercher des commandes",
+	"Type to search by name, description or tag": "Tapez pour rechercher par nom, description ou étiquette",
+	"Copied: {0}": "Copié : {0}"
 }

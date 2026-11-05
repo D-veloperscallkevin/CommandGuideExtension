@@ -3,5 +3,6 @@
 	"config.confirmDestructive": "在將破壞性命令（例如 `git reset --hard` 或 `rm -rf`）寫入終端機或複製之前要求確認。",
 	"config.detectProject": "在「此專案」區段中優先顯示所開啟專案的類別。僅檢查每個工作區資料夾的根目錄中是否存在下列檔案或資料夾：`.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`。",
 	"config.customCommands": "你自己的命令類別，顯示在內建類別之後。每個類別包含 `id`、`title`、選用的 `icon`（一個 Codicon）和 `commands`。每個命令包含 `id`、`title` 和 `command`（bash 範本，其中的 `${name}` 預留位置在 `params` 中宣告），以及選用的 `description`、`params`、`risk`（`safe`、`caution` 或 `destructive`）、`shells`（`bash`、`zsh`、`powershell` 或 `cmd` 的變體）和 `tags`。文字可以是字串，也可以是依語言區分的物件（`{ \"en\": \"…\", \"es\": \"…\" }`）。執行 **DevCommands: 編輯自訂命令** 可從範例開始。無效的項目會被略過，並記錄在 DevCommands 記錄中。",
-	"command.editCustomCommands": "編輯自訂命令"
+	"command.editCustomCommands": "編輯自訂命令",
+	"command.searchCommands": "搜尋命令"
 }

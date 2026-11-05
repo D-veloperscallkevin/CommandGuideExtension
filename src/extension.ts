@@ -4,6 +4,8 @@ import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { registerCustomCommands } from './customCommands';
 import { createProjectDetector } from './project/vscodeProject';
+import { searchLabels, showCommandSearch } from './quickPick/CommandSearch';
+import { searchEntries, type SearchEntry } from './quickPick/items';
 import { FavoritesStore } from './favorites/FavoritesStore';
 import { HistoryStore } from './history/HistoryStore';
 import type { HistoryItem } from './messaging/protocol';
@@ -26,7 +28,7 @@ export interface DevCommandsApi {
 	 */
 	copyToClipboard(commandId: string): Promise<boolean>;
 	/** Lo mismo que la estrella: alterna el favorito y envía la lista (si el id existe). */
-	toggleFavorite(commandId: string): Promise<void>;
+	toggleFavorite(commandId: string): Promise<unknown>;
 	/** Lista de favoritos enviada al webview: tras cada handshake y cada cambio. */
 	readonly onDidSendFavorites: vscode.Event<readonly string[]>;
 	/** Lo mismo que enviar una entrada de "Recientes": la escribe con sus valores guardados. */
@@ -35,6 +37,8 @@ export interface DevCommandsApi {
 	clearHistory(): Promise<void>;
 	/** Historial enviado al webview: tras cada handshake, cada cambio y cada cambio de shell. */
 	readonly onDidSendHistory: vscode.Event<readonly HistoryItem[]>;
+	/** Elementos del buscador de la paleta para esa búsqueda, con los datos actuales. */
+	searchEntries(query: string): readonly SearchEntry[];
 	/** Detecta ahora las categorías del proyecto y las devuelve ordenadas por id. */
 	detectProject(): Promise<readonly string[]>;
 }
@@ -102,10 +106,12 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		project,
 		provider,
 		vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewId, provider),
+		vscode.commands.registerCommand('devcommands.searchCommands', () => showCommandSearch(provider, log)),
 	);
 
 	return {
 		onDidSendCatalog: provider.onDidSendCatalog,
+		searchEntries: (query) => searchEntries(provider.searchSnapshot(), query, searchLabels()),
 		detectProject: async () => {
 			await project.refresh();
 			return [...project.current()].sort();

@@ -3,5 +3,6 @@
 	"config.confirmDestructive": "破壊的なコマンド (`git reset --hard` や `rm -rf` など) をターミナルに書き込む前またはコピーする前に確認を求めます。",
 	"config.detectProject": "開いているプロジェクトのカテゴリを「このプロジェクト」セクションに先に表示します。各ワークスペース フォルダーのルートに次のファイルまたはフォルダーが存在するかどうかだけを確認します: `.git`, `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `Dockerfile`, `compose.yaml`/`compose.yml`, `docker-compose.yml`/`docker-compose.yaml`。",
 	"config.customCommands": "独自のコマンド カテゴリ。組み込みのカテゴリの後に表示されます。各カテゴリには `id`、`title`、省略可能な `icon` (Codicon)、`commands` があります。各コマンドには `id`、`title`、`command` (`params` で宣言した `${name}` プレースホルダーを含む bash テンプレート) があり、省略可能な `description`、`params`、`risk` (`safe`、`caution`、`destructive`)、`shells` (`bash`、`zsh`、`powershell`、`cmd` 用のバリエーション)、`tags` を指定できます。テキストは文字列または言語ごとのオブジェクト (`{ \"en\": \"…\", \"es\": \"…\" }`) にできます。例から始めるには **DevCommands: カスタム コマンドの編集** を実行してください。無効なエントリはスキップされ、DevCommands のログに記録されます。",
-	"command.editCustomCommands": "カスタム コマンドの編集"
+	"command.editCustomCommands": "カスタム コマンドの編集",
+	"command.searchCommands": "コマンドの検索"
 }

@@ -15,6 +15,7 @@ import type { HistoryEntry, HistoryStore } from '../history/HistoryStore';
 import { isWebviewMessage, type ExtensionMessage, type HistoryItem } from '../messaging/protocol';
 import { buildCommandText, validateValue } from '../params/escape';
 import type { ParamPrompter } from '../params/ParamPrompter';
+import type { SearchSnapshot } from '../quickPick/items';
 import type { RiskAction, RiskConfirmer } from '../risk/RiskConfirmer';
 import type { TargetShell } from '../terminal/TargetShell';
 import type { TerminalService } from '../terminal/TerminalService';
@@ -143,11 +144,37 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 			: { kind: 'declined' };
 	}
 
-	/** Envía `catalog` con los ejemplos construidos para `shell` y las categorías detectadas. */
-	private postCatalog(webview: vscode.Webview, shell: ShellId): void {
+	/** Categorías resumidas para `shell` y, en su orden, los ids de las detectadas en el proyecto. */
+	private summaries(shell: ShellId): { categories: CategorySummary[]; detected: string[] } {
 		const categories = buildCategorySummaries(this.catalog.getCategories(), resolveLocale(vscode.env.language), shell);
 		const found = this.project.current();
-		const detected = categories.filter((c) => found.has(c.id)).map((c) => c.id);
+		return { categories, detected: categories.filter((c) => found.has(c.id)).map((c) => c.id) };
+	}
+
+	/** Entradas del historial tal como las ve el webview con el shell de destino actual. */
+	private historyItems(entries: readonly HistoryEntry[] = this.history.list()): HistoryItem[] {
+		const locale = resolveLocale(vscode.env.language);
+		const shell = this.targetShell.current();
+		return entries.flatMap((entry) => this.historyItem(entry, locale, shell) ?? []);
+	}
+
+	/** Shell de destino actual (para los avisos del buscador). */
+	currentShell(): ShellId {
+		return this.targetShell.current();
+	}
+
+	/**
+	 * Lo que muestra el buscador de la paleta: lo mismo que recibe el panel (catálogo, favoritos,
+	 * historial y categorías detectadas) con el idioma y el shell de destino actuales.
+	 */
+	searchSnapshot(): SearchSnapshot {
+		const { categories, detected } = this.summaries(this.targetShell.current());
+		return { categories, detected, favorites: this.favorites.list(), history: this.historyItems() };
+	}
+
+	/** Envía `catalog` con los ejemplos construidos para `shell` y las categorías detectadas. */
+	private postCatalog(webview: vscode.Webview, shell: ShellId): void {
+		const { categories, detected } = this.summaries(shell);
 		void webview.postMessage({ type: 'catalog', shell, categories, detected } satisfies ExtensionMessage);
 		this.catalogEmitter.fire({ shell, categories, detected });
 	}
@@ -182,9 +209,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 
 	/** Envía `history` con las entradas dadas (o las guardadas) al webview listo, si lo hay. */
 	private postHistory(webview: vscode.Webview | undefined, entries: readonly HistoryEntry[] = this.history.list()): void {
-		const locale = resolveLocale(vscode.env.language);
-		const shell = this.targetShell.current();
-		const items = entries.flatMap((entry) => this.historyItem(entry, locale, shell) ?? []);
+		const items = this.historyItems(entries);
 		if (webview) {
 			void webview.postMessage({ type: 'history', entries: items } satisfies ExtensionMessage);
 		}
@@ -208,17 +233,18 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 	}
 
 	/**
-	 * Marca o desmarca como favorito el comando con ese id y envía la lista nueva. Con un id que no
-	 * es del catálogo no cambia nada y registra una advertencia.
+	 * Marca o desmarca como favorito el comando con ese id, envía la lista nueva y la devuelve. Con
+	 * un id que no es del catálogo no cambia nada, registra una advertencia y devuelve `undefined`.
 	 */
-	async toggleFavorite(commandId: string): Promise<void> {
+	async toggleFavorite(commandId: string): Promise<readonly string[] | undefined> {
 		const next = await this.favorites.toggle(commandId);
 		if (!next) {
 			this.log.warn('Comando desconocido, no se marca como favorito:', commandId.slice(0, 200));
-			return;
+			return undefined;
 		}
 		this.log.info('Favoritos:', next.length);
 		this.postFavorites(this.readyWebview, next);
+		return next;
 	}
 
 	/**
