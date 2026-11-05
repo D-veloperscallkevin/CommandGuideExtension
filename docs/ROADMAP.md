@@ -274,17 +274,48 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel ✅ |
 | 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --packagePath`) y Open VSX (`ovsx publish`) del `.vsix` probado, tras crear el tag `vX.Y.Z` ✅ |
 | 2.10 | `busy-terminal` | Si la terminal activa está ocupada con un programa (Claude Code, un servidor de desarrollo…), el comando va a otra terminal libre o a una nueva "DevCommands", y el indicador "Ejemplos para" sigue a esa terminal. Antes de la v1.0.0 |
+| 2.11 | `sponsor-button` | Botón **Sponsor** de VS Code (campo `sponsor` del manifiesto) y enlace en el README a GitHub Sponsors. Antes de la v1.0.0 |
 
-### Fase 3: v2.x
+### Fase 3: v1.x, catálogo ampliado (gratis)
 
-Cada change sale en su propia versión menor y el orden puede cambiar según el feedback de la v1.
+Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; después se añade el contenido por lotes, un change y una versión menor por lote, cada uno con tests y prueba en F5. Todo lo de esta fase es gratuito.
 
 | # | Change | Qué entrega |
 | --- | --- | --- |
-| 3.1 | `project-scripts` | Los `scripts` de `package.json` como categoría automática |
-| 3.2 | `docs-links` | Enlace a la documentación oficial de cada comando (el campo `docs` ya existe) |
-| 3.3 | `workflows` | Secuencias de varios comandos con un clic |
-| 3.4 | `importable-packs` | Exportar e importar colecciones en JSON |
+| 3.1 | `catalog-sections` | Categorías agrupadas en secciones (Lenguajes, Control de versiones, Frameworks, Bases de datos, Contenedores e infraestructura, Nube, Servidores y redes, Testing y calidad, Game dev, Herramientas e IA) y carga de categorías bajo demanda para que la activación siga por debajo de 100 ms con ~3 MB de catálogo |
+| 3.2 | `project-signals` | Detección del proyecto ampliada: `go.mod`, `Cargo.toml`, `pyproject.toml`/`requirements.txt`, `composer.json`, `Gemfile`, `pubspec.yaml`, `*.csproj`, `pom.xml`/`build.gradle`, `CMakeLists.txt`, `prisma/schema.prisma`, `wrangler.toml`, `vercel.json`, `*.tf`… según las categorías de cada lote |
+| 3.3 | `catalog-js-python` | npx, yarn, bun, deno y tsc; Python (python, pip, venv, poetry, uv, pipx, conda); gestores de versiones (nvm, fnm, volta, corepack, pyenv) |
+| 3.4 | `catalog-compiled` | Java/Kotlin (java, javac, mvn, gradle, sdkman), .NET (dotnet new/run/build/ef), C/C++ (gcc, g++, clang, make, cmake), Go, Rust (cargo, rustc, rustup) |
+| 3.5 | `catalog-more-languages` | PHP (php, composer), Ruby (ruby, gem, bundle, rake, rbenv), Dart/Flutter, Swift (swift, xcodebuild), Elixir, Haskell, Scala, R, Lua, Zig, Julia, Perl, Clojure, Erlang, OCaml; asdf/mise |
+| 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) |
+| 3.7 | `catalog-frameworks` | Frontend (Vite, Next.js, Angular, Vue, Astro, Nuxt, SvelteKit), backend (NestJS, Laravel, Django, Rails, Spring Boot, Symfony, FastAPI), móvil y escritorio (Expo/EAS, React Native, Ionic/Capacitor, Electron, Tauri), ORM (Prisma, Drizzle, Sequelize, TypeORM, Alembic) y monorepos (turbo, nx) |
+| 3.8 | `catalog-databases` | psql/pg_dump, mysql/mysqldump, sqlcmd, mongosh/mongodump, redis-cli, sqlite3, DuckDB; Supabase, Neon, PlanetScale, Turso |
+| 3.9 | `catalog-infra` | docker compose y podman, kubectl, helm, minikube, kind, k3d, k9s; terraform/OpenTofu, ansible, pulumi, Vagrant, Packer; wsl |
+| 3.10 | `catalog-cloud` | wrangler, vercel, netlify, firebase, aws, az, gcloud, flyctl, railway, heroku, doctl, Render, Deno Deploy, oci |
+| 3.11 | `catalog-servers` | ssh, scp, rsync, curl, wget, ssh-keygen, openssl, gpg; nginx, pm2, systemctl, journalctl; redes (ping, dig/nslookup, ss/netstat, traceroute); jq, yq, tmux; apt, dnf, brew, winget, choco, scoop; ngrok, cloudflared, Stripe CLI |
+| 3.12 | `catalog-quality` | jest, vitest, playwright, cypress, pytest, mocha, k6; eslint, prettier, biome, stylelint, ruff, black, mypy, golangci-lint, clippy, rustfmt, husky, lint-staged |
+| 3.13 | `catalog-gamedev-mobile` | Unity (-batchmode), Godot (--headless), Unreal (RunUAT); adb, xcrun simctl, CocoaPods, fastlane |
+| 3.14 | `catalog-ai-tools` | code (VS Code CLI), claude (Claude Code), ollama, GitHub Copilot CLI, Gemini CLI, Codex CLI, aider, huggingface-cli |
+| 3.15 | `project-scripts` | Los `scripts` de `package.json` como categoría automática |
+| 3.16 | `docs-links` | Enlace a la documentación oficial de cada comando (el campo `docs` ya existe) |
+
+El orden de los lotes puede cambiar según el feedback de la v1.0.0. Cada comando nuevo se comprueba contra la documentación oficial de su herramienta (Context7 o la web oficial) y marca `destructive` cuando corresponde.
+
+### Fase 4: v2.x, premium
+
+Lo que ya es gratis sigue gratis. Las funciones premium se desbloquean con una clave de licencia que el usuario introduce en VS Code.
+
+| # | Change | Qué entrega |
+| --- | --- | --- |
+| 4.1 | `private-repo` | Repo de código privado y repo público aparte para la ficha (README, capturas, CHANGELOG e incidencias), con `repository`, `homepage` y `bugs` apuntando a él. El hook pre-push bloquea los pushes directos y forzados a `main`, `staging` y `develop`, porque GitHub Free no aplica la protección de ramas en repos privados |
+| 4.2 | `licensing` | Compra y validación de la clave sin servidor propio (Lemon Squeezy u otro vendedor que gestione los impuestos), con prueba gratuita y comprobación periódica. Decidir antes: plataforma de cobro, precio (mensual/anual) y duración de la prueba |
+| 4.3 | `studio` | DevCommands Studio: pestaña grande del editor para explorar comandos, con detalles y los ejemplos de cada shell lado a lado |
+| 4.4 | `visual-editor` | Editor visual de comandos propios con formularios, validación y vista previa; el ajuste JSON sigue siendo gratis |
+| 4.5 | `workflows` | Secuencias de varios comandos con un clic |
+| 4.6 | `team-packs` | Exportar e importar colecciones en JSON y un `.devcommands.json` compartido en el repo del proyecto |
+| 4.7 | `ai-assist` | "Explícame este comando" y "constrúyeme el comando para…" con los modelos de lenguaje que el usuario ya tiene en VS Code (API `vscode.lm`), sin coste para el autor |
+| 4.8 | `learning` | Modo aprendizaje: tarjetas de repaso y progreso por categoría |
+| 4.9 | `history-plus` | Historial ilimitado con búsqueda y comandos fijados |
 
 Decisiones que hay que tomar antes del change que las necesita:
 - ~~**Antes de `custom-commands` (2.6):** guardar en `settings.json` o en `.devcommands.json` por proyecto.~~ Decidido: ajuste `devcommands.customCommands` en la configuración de usuario (sincronizado con Settings Sync). Un `.devcommands.json` por proyecto queda para más adelante.
@@ -303,7 +334,8 @@ Requisitos únicos en WSL (validados en Ubuntu 26.04): Node 24 con nvm, `npm i -
 - **Fase 0 → Base lista:** verificación local obligatoria antes de cada push (`pnpm run verify`: lint, tests y build). El webview de React carga dentro de la vista lateral. El catálogo valida contra `schema.json`.
 - **Fase 1 → v0.1.0 pre-release:** de categoría a comando en la terminal en 3 clics o menos, probado en Windows (PowerShell) y en WSL o Linux (bash). Al menos 5 categorías con 15 comandos cada una. El `.vsix` pesa menos de 2 MB.
 - **Fase 2 → v1.0.0 pública:** parámetros, favoritos y comandos propios funcionan. Los comandos destructivos piden confirmación. Publicada en el Marketplace y en Open VSX con README, capturas y CHANGELOG.
-- **Fase 3 → v2.x:** se publica por features, sin una puerta grande. Cada change sale en su propia versión menor.
+- **Fase 3 → v1.x:** se publica por lotes, sin una puerta grande. Cada change sale en su propia versión menor y el `.vsix` sigue por debajo de 2 MB.
+- **Fase 4 → v2.0.0:** licencia y al menos dos funciones premium, probadas con una clave de prueba; el repo de código es privado y la ficha pública funciona (capturas, enlaces e incidencias).
 
 **Empaquetado y prueba del `.vsix`** (antes del PR `staging → main`):
 
@@ -367,6 +399,7 @@ Comprueba después la ficha en ambas tiendas: nombre, icono, versión sin pre-re
 - [x] `marketplace-release` (2.9): nombre "DevCommands Guide", icono del libro con `>_`, licencia propietaria con avisos de terceros, README con capturas, versión 1.0.0 estable y pasos de publicación manual
 - [ ] `busy-terminal` (2.10): no escribir en una terminal ocupada por otro programa (detectado en la prueba del `.vsix` de la 2.9 con Claude Code abierto en una terminal)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y el namespace en Open VSX (antes de publicar la v1.0.0)
+- [ ] `sponsor-button` (2.11): botón Sponsor y enlace a GitHub Sponsors. Antes, date de alta en https://github.com/sponsors (GitHub revisa la solicitud)
 - [ ] Capturas del README en `docs/images/` (`panel.png`, `search.png`, `params.png`, `destructive.png` y `quick-pick.png`; lista en la tarea 5.1 de `marketplace-release`), antes del release v1.0.0
 - [ ] Release v1.0.0: verificación en WSL, PR `develop → staging`, prueba del `.vsix`, PR `staging → main`, tag `v1.0.0` y publicación en ambas tiendas
 
