@@ -1,4 +1,4 @@
-# DevCommands Guide
+# DevCommands Guide · [♥ Sponsor](https://github.com/sponsors/D-veloperscallkevin)
 
 Quick guide to development commands for VS Code. Browse commands by category (Git, npm/pnpm, Docker, …) and send them to the terminal in one click, without memorizing their flags.
 
@@ -35,7 +35,7 @@ The command goes to the active terminal. If that terminal is busy running a prog
 
 Destructive commands (such as `git reset --hard` or `rm -rf`) show a confirmation dialog with the exact text before it is written or copied. To turn it off, uncheck **DevCommands: Confirm Destructive** (`devcommands.confirmDestructive`) in your user settings.
 
-Examples follow the shell of that terminal: PowerShell, bash (also Git Bash and WSL), zsh or cmd. With no terminal open they follow your default terminal profile. The line "Examples for: …" at the top of the view shows which shell is in use, and the examples update as soon as you switch terminals. Other shells (fish, nu…) get the default profile's syntax.
+Examples follow the shell of that terminal: PowerShell, bash (also Git Bash and WSL), zsh or cmd. With no terminal open they follow your default terminal profile. The line "Terminal: …" at the top of the view shows which shell is in use (each shell in its own color), and the examples update as soon as you switch terminals. Other shells (fish, nu…) get the default profile's syntax.
 
 The recent list, including the values you typed, is stored only on this machine (it is not synced with Settings Sync and never written to the log). Use **Clear history** to delete it.
 
@@ -135,6 +135,10 @@ code --install-extension devcommands-<version>.vsix
 In WSL, open a folder with Remote-WSL and use Extensions › "…" › "Install from VSIX…" to install it there.
 
 To regenerate the store icon (`media/icon.png`) after editing `media/logo.svg`, run `node scripts/export-icon.mjs` (it uses your installed Chrome; set `CHROME_PATH` if it is not found).
+
+## Support
+
+DevCommands Guide is free. If it saves you time, you can support its development on [GitHub Sponsors](https://github.com/sponsors/D-veloperscallkevin), or with the **Sponsor** button at the top of the DevCommands panel and on the extension page.
 
 ## License
 

@@ -15,6 +15,9 @@
     "url": "https://github.com/D-veloperscallkevin/CommandGuideExtension.git"
   },
   "homepage": "https://github.com/D-veloperscallkevin/CommandGuideExtension#readme",
+  "sponsor": {
+    "url": "https://github.com/sponsors/D-veloperscallkevin"
+  },
   "bugs": {
     "url": "https://github.com/D-veloperscallkevin/CommandGuideExtension/issues"
   },

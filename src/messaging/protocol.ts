@@ -22,7 +22,8 @@ export interface HistoryItem {
  * Mensajes que envía el webview a la extensión. `sendToTerminal`, `copyToClipboard` y
  * `toggleFavorite` llevan solo el id: el texto y la lista de favoritos los maneja la extensión.
  * `sendRecent` y `copyRecent` llevan solo la clave de una entrada del historial: los valores de
- * sus parámetros nunca salen de la extensión.
+ * sus parámetros nunca salen de la extensión. `openSponsor` no lleva la URL: la decide la extensión
+ * a partir del manifiesto, así el webview nunca elige qué dirección se abre.
  */
 export type WebviewMessage =
 	| { readonly type: 'ready' }
@@ -31,7 +32,8 @@ export type WebviewMessage =
 	| { readonly type: 'toggleFavorite'; readonly commandId: string }
 	| { readonly type: 'sendRecent'; readonly entryId: string }
 	| { readonly type: 'copyRecent'; readonly entryId: string }
-	| { readonly type: 'clearHistory' };
+	| { readonly type: 'clearHistory' }
+	| { readonly type: 'openSponsor' };
 
 /** Longitud máxima de un `commandId` recibido (acota también lo que se registra en el log). */
 export const MAX_COMMAND_ID_LENGTH = 200;
@@ -76,6 +78,7 @@ const webviewMessageFields: Readonly<
 	sendRecent: { type: isString, entryId: isEntryId },
 	copyRecent: { type: isString, entryId: isEntryId },
 	clearHistory: { type: isString },
+	openSponsor: { type: isString },
 };
 
 /**

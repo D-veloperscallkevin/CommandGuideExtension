@@ -13,7 +13,8 @@ El protocolo SHALL definir al menos estos mensajes del webview a la extensión, 
 - `ready`, sin campos;
 - `sendToTerminal`, `copyToClipboard` y `toggleFavorite`, con `commandId`, el id de un comando del catálogo;
 - `sendRecent` y `copyRecent`, con `entryId`, la clave de una entrada del historial;
-- `clearHistory`, sin campos.
+- `clearHistory`, sin campos;
+- `openSponsor`, sin campos.
 
 Y estos de la extensión al webview:
 - `init` y `catalog`;
@@ -21,7 +22,7 @@ Y estos de la extensión al webview:
 - `favorites`, con `commandIds`, la lista de ids de los comandos favoritos en el orden en que se marcaron;
 - `history`, con `entries`, las entradas del historial de la más reciente a la más antigua. Cada entrada lleva su `id`, el `commandId`, su `text` para el shell de destino actual y `needsInput`, que es `true` si algún valor guardado no vale en ese shell (y entonces `text` lleva los valores sin escapar, solo para mostrarlos).
 
-El webview MUST NOT enviar valores de parámetros ni textos de comandos: para reenviar o copiar una entrada envía solo su clave. `history` SHALL enviarse después de `favorites` tras cada `ready`, después de cada cambio del historial y después de cada `catalog` reenviado por un cambio del shell de destino.
+El webview MUST NOT enviar direcciones web: `openSponsor` no lleva la URL, que decide la extensión. El webview MUST NOT enviar valores de parámetros ni textos de comandos: para reenviar o copiar una entrada envía solo su clave. `history` SHALL enviarse después de `favorites` tras cada `ready`, después de cada cambio del historial y después de cada `catalog` reenviado por un cambio del shell de destino.
 
 #### Scenario: Mensaje conocido
 - **WHEN** el webview envía `{ "type": "ready" }`
@@ -58,6 +59,14 @@ El webview MUST NOT enviar valores de parámetros ni textos de comandos: para re
 #### Scenario: Historial tras el handshake
 - **WHEN** el webview envía `ready` y el historial contiene `git.status`
 - **THEN** la extensión envía `init`, `catalog`, `favorites` y después `history` con una entrada de `commandId` `git.status`, `text` `git status` y `needsInput` `false`
+
+#### Scenario: Abrir el patrocinio
+- **WHEN** el webview envía `{ "type": "openSponsor" }`
+- **THEN** la extensión lo reconoce como un mensaje del protocolo
+
+#### Scenario: Patrocinio con una URL
+- **WHEN** el webview envía `{ "type": "openSponsor", "url": "https://example.com" }`
+- **THEN** la extensión descarta el mensaje como no válido y no abre nada
 
 ### Requirement: Validación de todo mensaje entrante
 La extensión SHALL validar el tipo y la forma de cada mensaje recibido del webview antes de actuar: el `type`, que tenga exactamente las claves declaradas y que cada campo tenga el tipo declarado. Un mensaje que no sea un objeto, que tenga un `type` desconocido o que no tenga la forma declarada MUST descartarse sin ejecutar ninguna acción y sin provocar errores no controlados, y MUST registrarse como advertencia en el registro de la extensión. El webview MUST NOT poder hacer que la extensión ejecute texto arbitrario, ni que escriba en la terminal o copie al portapapeles un texto que no provenga del catálogo.

@@ -67,6 +67,12 @@ describe('isWebviewMessage', () => {
 		expect(isWebviewMessage({ type: 'clearHistory', entryId: 'a1' })).toBe(false);
 	});
 
+	it('acepta openSponsor sin campos y rechaza una URL u otros campos', () => {
+		expect(isWebviewMessage({ type: 'openSponsor' })).toBe(true);
+		expect(isWebviewMessage({ type: 'openSponsor', url: 'https://example.com' })).toBe(false);
+		expect(isWebviewMessage({ type: 'openSponsor', commandId: 'git.status' })).toBe(false);
+	});
+
 	it('rechaza commandId en ready', () => {
 		expect(isWebviewMessage({ type: 'ready', commandId: 'git.status' })).toBe(false);
 	});
