@@ -63,8 +63,24 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['deno.json', 'main.ts'] })).toEqual(['deno']);
 	});
 
-	it('.python-version detecta los gestores de versiones', async () => {
-		expect(await ids({ root: ['.python-version'] })).toEqual(['version-managers']);
+	it('.python-version detecta python y los gestores de versiones', async () => {
+		expect(await ids({ root: ['.python-version'] })).toEqual(['python', 'version-managers']);
+	});
+
+	it('proyecto con Poetry', async () => {
+		expect(await ids({ root: ['pyproject.toml', 'poetry.lock'] })).toEqual(['poetry', 'python']);
+	});
+
+	it('proyecto con uv', async () => {
+		expect(await ids({ root: ['pyproject.toml', 'uv.lock', '.python-version'] })).toEqual(['python', 'uv', 'version-managers']);
+	});
+
+	it('requisitos con sufijo (requirements-dev.txt)', async () => {
+		expect(await ids({ root: ['requirements-dev.txt'] })).toEqual(['python']);
+	});
+
+	it('entorno de conda (environment.yml)', async () => {
+		expect(await ids({ root: ['environment.yml'] })).toEqual(['conda']);
 	});
 
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
