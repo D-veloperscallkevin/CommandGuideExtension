@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 23 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 28 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -89,6 +89,11 @@ describe('contenido mínimo', () => {
 			'cmake',
 			'go',
 			'rust',
+			'php',
+			'ruby',
+			'dart',
+			'flutter',
+			'swift',
 		]);
 	});
 
@@ -264,6 +269,46 @@ describe('contenido mínimo', () => {
 		const cleans = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => ids.includes(cmd.id));
 		expect(cleans.map((cmd) => cmd.id).sort()).toEqual([...ids].sort());
 		expect(cleans.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('activar mise usa eval en bash y zsh, e Invoke-Expression en PowerShell', () => {
+		expect(exampleFor('version-managers.mise-activate', 'bash')).toBe('eval "$(mise activate bash)"');
+		expect(exampleFor('version-managers.mise-activate', 'zsh')).toBe('eval "$(mise activate zsh)"');
+		expect(exampleFor('version-managers.mise-activate', 'powershell')).toBe(
+			'(&mise activate pwsh) | Out-String | Invoke-Expression',
+		);
+	});
+
+	it('asdf usa asdf set y nunca asdf local ni asdf global', () => {
+		const asdf = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => cmd.command.startsWith('asdf '));
+		expect(asdf.length).toBeGreaterThan(0);
+		expect(asdf.filter((cmd) => /^asdf (local|global)\b/.test(cmd.command)).map((cmd) => cmd.id)).toEqual([]);
+		expect(asdf.some((cmd) => cmd.command.startsWith('asdf set '))).toBe(true);
+	});
+
+	it('rbenv y asdf avisan en español de que no funcionan en PowerShell ni en cmd', () => {
+		const posix = bundledCatalog
+			.flatMap((c) => c.commands)
+			.filter((cmd) => /^(rbenv|asdf) /.test(cmd.command));
+		expect(posix.length).toBe(10);
+		expect(posix.filter((cmd) => !cmd.description.es.includes('no funciona en PowerShell ni en cmd')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('xcodebuild, xcrun y flutter build ios avisan en español de que solo funcionan en macOS', () => {
+		const mac = bundledCatalog
+			.flatMap((c) => c.commands)
+			.filter((cmd) => /^(xcodebuild|xcrun) /.test(cmd.command) || cmd.command === 'flutter build ios');
+		expect(mac.map((cmd) => cmd.id).sort()).toEqual(
+			['flutter.build-ios', 'swift.simulators', 'swift.xcodebuild-build', 'swift.xcodebuild-list'].sort(),
+		);
+		expect(mac.filter((cmd) => !cmd.description.es.includes('Solo en macOS')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('gem uninstall, flutter clean y swift package clean son destructive', () => {
+		const ids = ['ruby.gem-uninstall', 'flutter.clean', 'swift.package-clean'];
+		const found = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => ids.includes(cmd.id));
+		expect(found.map((cmd) => cmd.id).sort()).toEqual([...ids].sort());
+		expect(found.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
 	});
 });
 

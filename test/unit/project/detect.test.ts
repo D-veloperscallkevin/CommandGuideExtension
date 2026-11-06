@@ -122,6 +122,33 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml'] })).toEqual(['rust']);
 	});
 
+	it('proyecto Laravel', async () => {
+		expect(await ids({ root: ['composer.json', 'composer.lock', 'artisan'] })).toEqual(['php']);
+	});
+
+	it('proyecto Rails con versión de Ruby fijada', async () => {
+		expect(await ids({ root: ['Gemfile', 'Gemfile.lock', 'Rakefile', '.ruby-version'] })).toEqual([
+			'ruby',
+			'version-managers',
+		]);
+	});
+
+	it('proyecto Flutter (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['pubspec.yaml', 'pubspec.lock'] })).toEqual(['dart', 'flutter']);
+	});
+
+	it('paquete de Swift', async () => {
+		expect(await ids({ root: ['Package.swift'] })).toEqual(['swift']);
+	});
+
+	it('proyecto de Xcode (la entrada es una carpeta)', async () => {
+		expect(await ids({ root: ['MyApp.xcodeproj'] })).toEqual(['swift']);
+	});
+
+	it('versiones fijadas con asdf o mise en varias carpetas', async () => {
+		expect(await ids({ a: ['.tool-versions'], b: ['mise.toml'] })).toEqual(['version-managers']);
+	});
+
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
 		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
 	});

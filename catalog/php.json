@@ -1,0 +1,1066 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "php",
+  "title": {
+    "en": "PHP",
+    "es": "PHP",
+    "pt-br": "PHP",
+    "fr": "PHP",
+    "de": "PHP",
+    "it": "PHP",
+    "ja": "PHP",
+    "ko": "PHP",
+    "zh-cn": "PHP",
+    "zh-tw": "PHP",
+    "ru": "PHP"
+  },
+  "icon": "globe",
+  "order": 64,
+  "section": "languages",
+  "detect": ["composer.json", "composer.lock", "*.php"],
+  "commands": [
+    {
+      "id": "php.version",
+      "title": {
+        "en": "Show the PHP version",
+        "es": "Ver la versión de PHP",
+        "pt-br": "Ver a versão do PHP",
+        "fr": "Afficher la version de PHP",
+        "de": "PHP-Version anzeigen",
+        "it": "Mostra la versione di PHP",
+        "ja": "PHP のバージョンを表示",
+        "ko": "PHP 버전 보기",
+        "zh-cn": "查看 PHP 版本",
+        "zh-tw": "檢視 PHP 版本",
+        "ru": "Показать версию PHP"
+      },
+      "description": {
+        "en": "Prints the version of the PHP interpreter in the PATH",
+        "es": "Muestra la versión del intérprete de PHP que hay en el PATH",
+        "pt-br": "Mostra a versão do interpretador PHP no PATH",
+        "fr": "Affiche la version de l’interpréteur PHP du PATH",
+        "de": "Zeigt die Version des PHP-Interpreters im PATH",
+        "it": "Mostra la versione dell’interprete PHP nel PATH",
+        "ja": "PATH にある PHP インタープリターのバージョンを表示します",
+        "ko": "PATH에 있는 PHP 인터프리터 버전을 보여 줍니다",
+        "zh-cn": "显示 PATH 中 PHP 解释器的版本",
+        "zh-tw": "顯示 PATH 中 PHP 直譯器的版本",
+        "ru": "Показывает версию интерпретатора PHP из PATH"
+      },
+      "command": "php -v",
+      "tags": {
+        "en": ["php", "-v", "--version", "version"],
+        "es": ["php", "-v", "--version", "versión"],
+        "pt-br": ["php", "-v", "--version", "versão"],
+        "fr": ["php", "-v", "--version", "version"],
+        "de": ["php", "-v", "--version", "Version"],
+        "it": ["php", "-v", "--version", "versione"],
+        "ja": ["php", "-v", "--version", "バージョン"],
+        "ko": ["php", "-v", "--version", "버전"],
+        "zh-cn": ["php", "-v", "--version", "版本"],
+        "zh-tw": ["php", "-v", "--version", "版本"],
+        "ru": ["php", "-v", "--version", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.options.php"
+    },
+    {
+      "id": "php.run",
+      "title": {
+        "en": "Run a PHP file",
+        "es": "Ejecutar un archivo PHP",
+        "pt-br": "Executar um arquivo PHP",
+        "fr": "Exécuter un fichier PHP",
+        "de": "PHP-Datei ausführen",
+        "it": "Esegui un file PHP",
+        "ja": "PHP ファイルを実行",
+        "ko": "PHP 파일 실행",
+        "zh-cn": "运行 PHP 文件",
+        "zh-tw": "執行 PHP 檔案",
+        "ru": "Запустить файл PHP"
+      },
+      "description": {
+        "en": "Runs a PHP script from the command line",
+        "es": "Ejecuta un script de PHP desde la línea de comandos",
+        "pt-br": "Executa um script PHP pela linha de comando",
+        "fr": "Exécute un script PHP en ligne de commande",
+        "de": "Führt ein PHP-Skript in der Kommandozeile aus",
+        "it": "Esegue uno script PHP dalla riga di comando",
+        "ja": "PHP スクリプトをコマンドラインで実行します",
+        "ko": "명령줄에서 PHP 스크립트를 실행합니다",
+        "zh-cn": "在命令行中运行 PHP 脚本",
+        "zh-tw": "在命令列中執行 PHP 指令碼",
+        "ru": "Запускает сценарий PHP из командной строки"
+      },
+      "command": "php ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "index.php",
+            "es": "index.php",
+            "pt-br": "index.php",
+            "fr": "index.php",
+            "de": "index.php",
+            "it": "index.php",
+            "ja": "index.php",
+            "ko": "index.php",
+            "zh-cn": "index.php",
+            "zh-tw": "index.php",
+            "ru": "index.php"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "run", "script", "execute"],
+        "es": ["php", "run", "script", "ejecutar"],
+        "pt-br": ["php", "run", "script", "executar"],
+        "fr": ["php", "run", "script", "exécuter"],
+        "de": ["php", "run", "script", "ausführen"],
+        "it": ["php", "run", "script", "eseguire"],
+        "ja": ["php", "run", "script", "実行"],
+        "ko": ["php", "run", "script", "실행"],
+        "zh-cn": ["php", "run", "script", "运行"],
+        "zh-tw": ["php", "run", "script", "執行"],
+        "ru": ["php", "run", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.options.php"
+    },
+    {
+      "id": "php.serve",
+      "title": {
+        "en": "Start the built-in web server",
+        "es": "Arrancar el servidor web integrado",
+        "pt-br": "Iniciar o servidor web embutido",
+        "fr": "Lancer le serveur web intégré",
+        "de": "Eingebauten Webserver starten",
+        "it": "Avvia il server web integrato",
+        "ja": "組み込み Web サーバーを起動",
+        "ko": "내장 웹 서버 시작",
+        "zh-cn": "启动内置 Web 服务器",
+        "zh-tw": "啟動內建 Web 伺服器",
+        "ru": "Запустить встроенный веб-сервер"
+      },
+      "description": {
+        "en": "Serves the current folder at localhost on that port, for development only; stop it with Ctrl+C",
+        "es": "Sirve la carpeta actual en localhost en ese puerto, solo para desarrollo; se detiene con Ctrl+C",
+        "pt-br": "Serve a pasta atual em localhost nessa porta, só para desenvolvimento; pare com Ctrl+C",
+        "fr": "Sert le dossier actuel sur localhost à ce port, pour le développement uniquement ; arrêtez avec Ctrl+C",
+        "de": "Stellt den aktuellen Ordner auf localhost unter diesem Port bereit, nur zur Entwicklung; mit Strg+C beenden",
+        "it": "Serve la cartella attuale su localhost a quella porta, solo per sviluppo; si ferma con Ctrl+C",
+        "ja": "現在のフォルダーを localhost のそのポートで公開します（開発専用）。Ctrl+C で停止",
+        "ko": "현재 폴더를 localhost의 그 포트로 제공합니다(개발 전용). Ctrl+C로 멈춥니다",
+        "zh-cn": "在 localhost 的该端口上提供当前文件夹，仅用于开发；按 Ctrl+C 停止",
+        "zh-tw": "在 localhost 的該連接埠上提供目前資料夾，僅用於開發；按 Ctrl+C 停止",
+        "ru": "Раздаёт текущую папку на localhost на этом порту, только для разработки; остановка — Ctrl+C"
+      },
+      "command": "php -S localhost:${port}",
+      "params": [
+        {
+          "name": "port",
+          "label": {
+            "en": "Port",
+            "es": "Puerto",
+            "pt-br": "Porta",
+            "fr": "Port",
+            "de": "Port",
+            "it": "Porta",
+            "ja": "ポート",
+            "ko": "포트",
+            "zh-cn": "端口",
+            "zh-tw": "連接埠",
+            "ru": "Порт"
+          },
+          "placeholder": {
+            "en": "8000",
+            "es": "8000",
+            "pt-br": "8000",
+            "fr": "8000",
+            "de": "8000",
+            "it": "8000",
+            "ja": "8000",
+            "ko": "8000",
+            "zh-cn": "8000",
+            "zh-tw": "8000",
+            "ru": "8000"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "-S", "server", "localhost", "serve", "web"],
+        "es": ["php", "-S", "server", "localhost", "servidor", "web"],
+        "pt-br": ["php", "-S", "server", "localhost", "servidor", "web"],
+        "fr": ["php", "-S", "server", "localhost", "serveur", "web"],
+        "de": ["php", "-S", "server", "localhost", "Server", "Web"],
+        "it": ["php", "-S", "server", "localhost", "web"],
+        "ja": ["php", "-S", "server", "localhost", "サーバー", "Web"],
+        "ko": ["php", "-S", "server", "localhost", "서버", "웹"],
+        "zh-cn": ["php", "-S", "server", "localhost", "服务器", "网页"],
+        "zh-tw": ["php", "-S", "server", "localhost", "伺服器", "網頁"],
+        "ru": ["php", "-S", "server", "localhost", "сервер", "веб"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.webserver.php"
+    },
+    {
+      "id": "php.interactive",
+      "title": {
+        "en": "Open the interactive shell",
+        "es": "Abrir la consola interactiva",
+        "pt-br": "Abrir o console interativo",
+        "fr": "Ouvrir la console interactive",
+        "de": "Interaktive Shell öffnen",
+        "it": "Apri la console interattiva",
+        "ja": "対話シェルを開く",
+        "ko": "대화형 셸 열기",
+        "zh-cn": "打开交互式 shell",
+        "zh-tw": "開啟互動式 shell",
+        "ru": "Открыть интерактивную оболочку"
+      },
+      "description": {
+        "en": "Starts the PHP interactive shell to try code line by line; type exit to leave",
+        "es": "Abre la consola interactiva de PHP para probar código línea a línea; escribe exit para salir",
+        "pt-br": "Abre o console interativo do PHP para testar código linha a linha; digite exit para sair",
+        "fr": "Ouvre la console interactive de PHP pour essayer du code ligne par ligne ; tapez exit pour quitter",
+        "de": "Startet die interaktive PHP-Shell, um Code zeilenweise auszuprobieren; mit exit beenden",
+        "it": "Apre la console interattiva di PHP per provare codice riga per riga; scrivi exit per uscire",
+        "ja": "PHP の対話シェルを起動し、コードを 1 行ずつ試します。exit で終了",
+        "ko": "PHP 대화형 셸을 열어 코드를 한 줄씩 시험합니다. exit로 나갑니다",
+        "zh-cn": "启动 PHP 交互式 shell 逐行试运行代码；输入 exit 退出",
+        "zh-tw": "啟動 PHP 互動式 shell 逐行試跑程式碼；輸入 exit 離開",
+        "ru": "Открывает интерактивную оболочку PHP для пошаговой проверки кода; для выхода введите exit"
+      },
+      "command": "php -a",
+      "tags": {
+        "en": ["php", "-a", "repl", "interactive", "console"],
+        "es": ["php", "-a", "repl", "interactivo", "consola"],
+        "pt-br": ["php", "-a", "repl", "interativo", "console"],
+        "fr": ["php", "-a", "repl", "interactif", "console"],
+        "de": ["php", "-a", "repl", "interaktiv", "Konsole"],
+        "it": ["php", "-a", "repl", "interattivo", "console"],
+        "ja": ["php", "-a", "repl", "対話", "コンソール"],
+        "ko": ["php", "-a", "repl", "대화형", "콘솔"],
+        "zh-cn": ["php", "-a", "repl", "交互式", "控制台"],
+        "zh-tw": ["php", "-a", "repl", "互動式", "主控台"],
+        "ru": ["php", "-a", "repl", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.interactive.php"
+    },
+    {
+      "id": "php.lint",
+      "title": {
+        "en": "Check the syntax of a file",
+        "es": "Comprobar la sintaxis de un archivo",
+        "pt-br": "Verificar a sintaxe de um arquivo",
+        "fr": "Vérifier la syntaxe d’un fichier",
+        "de": "Syntax einer Datei prüfen",
+        "it": "Controlla la sintassi di un file",
+        "ja": "ファイルの構文を検査",
+        "ko": "파일 구문 검사",
+        "zh-cn": "检查文件语法",
+        "zh-tw": "檢查檔案語法",
+        "ru": "Проверить синтаксис файла"
+      },
+      "description": {
+        "en": "Checks the file for syntax errors without running it",
+        "es": "Busca errores de sintaxis en el archivo sin ejecutarlo",
+        "pt-br": "Procura erros de sintaxe no arquivo sem executá-lo",
+        "fr": "Cherche des erreurs de syntaxe dans le fichier sans l’exécuter",
+        "de": "Prüft die Datei auf Syntaxfehler, ohne sie auszuführen",
+        "it": "Cerca errori di sintassi nel file senza eseguirlo",
+        "ja": "ファイルを実行せずに構文エラーを検査します",
+        "ko": "파일을 실행하지 않고 구문 오류를 검사합니다",
+        "zh-cn": "检查文件的语法错误而不运行它",
+        "zh-tw": "檢查檔案的語法錯誤而不執行它",
+        "ru": "Проверяет файл на синтаксические ошибки, не запуская его"
+      },
+      "command": "php -l ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "index.php",
+            "es": "index.php",
+            "pt-br": "index.php",
+            "fr": "index.php",
+            "de": "index.php",
+            "it": "index.php",
+            "ja": "index.php",
+            "ko": "index.php",
+            "zh-cn": "index.php",
+            "zh-tw": "index.php",
+            "ru": "index.php"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "-l", "lint", "syntax", "check"],
+        "es": ["php", "-l", "lint", "syntax", "sintaxis", "comprobar"],
+        "pt-br": ["php", "-l", "lint", "syntax", "sintaxe", "verificar"],
+        "fr": ["php", "-l", "lint", "syntax", "syntaxe", "vérifier"],
+        "de": ["php", "-l", "lint", "syntax", "Syntax", "prüfen"],
+        "it": ["php", "-l", "lint", "syntax", "sintassi", "controllare"],
+        "ja": ["php", "-l", "lint", "syntax", "構文", "検査"],
+        "ko": ["php", "-l", "lint", "syntax", "구문", "검사"],
+        "zh-cn": ["php", "-l", "lint", "syntax", "语法", "检查"],
+        "zh-tw": ["php", "-l", "lint", "syntax", "語法", "檢查"],
+        "ru": ["php", "-l", "lint", "syntax", "синтаксис", "проверка"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.options.php"
+    },
+    {
+      "id": "php.modules",
+      "title": {
+        "en": "List the loaded extensions",
+        "es": "Ver las extensiones cargadas",
+        "pt-br": "Ver as extensões carregadas",
+        "fr": "Lister les extensions chargées",
+        "de": "Geladene Erweiterungen anzeigen",
+        "it": "Elenca le estensioni caricate",
+        "ja": "読み込まれた拡張機能を一覧表示",
+        "ko": "로드된 확장 보기",
+        "zh-cn": "列出已加载的扩展",
+        "zh-tw": "列出已載入的擴充功能",
+        "ru": "Показать загруженные расширения"
+      },
+      "description": {
+        "en": "Lists the PHP extensions that are enabled, such as pdo_mysql, mbstring or curl",
+        "es": "Muestra las extensiones de PHP activadas, como pdo_mysql, mbstring o curl",
+        "pt-br": "Mostra as extensões do PHP ativadas, como pdo_mysql, mbstring ou curl",
+        "fr": "Liste les extensions PHP activées, comme pdo_mysql, mbstring ou curl",
+        "de": "Listet die aktivierten PHP-Erweiterungen wie pdo_mysql, mbstring oder curl auf",
+        "it": "Elenca le estensioni PHP attive, come pdo_mysql, mbstring o curl",
+        "ja": "pdo_mysql、mbstring、curl など、有効な PHP 拡張機能を表示します",
+        "ko": "pdo_mysql, mbstring, curl 같은 활성화된 PHP 확장을 보여 줍니다",
+        "zh-cn": "列出已启用的 PHP 扩展，如 pdo_mysql、mbstring 或 curl",
+        "zh-tw": "列出已啟用的 PHP 擴充功能，如 pdo_mysql、mbstring 或 curl",
+        "ru": "Показывает включённые расширения PHP: pdo_mysql, mbstring, curl и другие"
+      },
+      "command": "php -m",
+      "tags": {
+        "en": ["php", "-m", "extensions", "modules"],
+        "es": ["php", "-m", "extensions", "modules", "extensiones", "módulos"],
+        "pt-br": ["php", "-m", "extensions", "modules", "extensões", "módulos"],
+        "fr": ["php", "-m", "extensions", "modules"],
+        "de": ["php", "-m", "extensions", "modules", "Erweiterungen", "Module"],
+        "it": ["php", "-m", "extensions", "modules", "estensioni", "moduli"],
+        "ja": ["php", "-m", "extensions", "modules", "拡張機能", "モジュール"],
+        "ko": ["php", "-m", "extensions", "modules", "확장", "모듈"],
+        "zh-cn": ["php", "-m", "extensions", "modules", "扩展", "模块"],
+        "zh-tw": ["php", "-m", "extensions", "modules", "擴充功能", "模組"],
+        "ru": ["php", "-m", "extensions", "modules", "расширения", "модули"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.options.php"
+    },
+    {
+      "id": "php.ini",
+      "title": {
+        "en": "Show the php.ini in use",
+        "es": "Ver el php.ini en uso",
+        "pt-br": "Ver o php.ini em uso",
+        "fr": "Afficher le php.ini utilisé",
+        "de": "Verwendete php.ini anzeigen",
+        "it": "Mostra il php.ini in uso",
+        "ja": "使用中の php.ini を表示",
+        "ko": "사용 중인 php.ini 보기",
+        "zh-cn": "查看正在使用的 php.ini",
+        "zh-tw": "檢視正在使用的 php.ini",
+        "ru": "Показать используемый php.ini"
+      },
+      "description": {
+        "en": "Shows which php.ini files the command line loads, to know which one to edit",
+        "es": "Muestra qué archivos php.ini carga la línea de comandos, para saber cuál editar",
+        "pt-br": "Mostra quais arquivos php.ini a linha de comando carrega, para saber qual editar",
+        "fr": "Affiche les fichiers php.ini chargés en ligne de commande, pour savoir lequel modifier",
+        "de": "Zeigt, welche php.ini-Dateien die Kommandozeile lädt, um zu wissen, welche zu bearbeiten ist",
+        "it": "Mostra quali file php.ini carica la riga di comando, per sapere quale modificare",
+        "ja": "コマンドラインが読み込む php.ini を表示し、どれを編集すればよいか分かるようにします",
+        "ko": "명령줄이 불러오는 php.ini 파일을 보여 줘 어느 것을 고칠지 알 수 있게 합니다",
+        "zh-cn": "显示命令行加载了哪些 php.ini 文件，便于知道该编辑哪个",
+        "zh-tw": "顯示命令列載入了哪些 php.ini 檔案，便於知道該編輯哪個",
+        "ru": "Показывает, какие файлы php.ini загружает командная строка, чтобы знать, какой править"
+      },
+      "command": "php --ini",
+      "tags": {
+        "en": ["php", "--ini", "php.ini", "config"],
+        "es": ["php", "--ini", "php.ini", "configuración"],
+        "pt-br": ["php", "--ini", "php.ini", "configuração"],
+        "fr": ["php", "--ini", "php.ini", "configuration"],
+        "de": ["php", "--ini", "php.ini", "Konfiguration"],
+        "it": ["php", "--ini", "php.ini", "configurazione"],
+        "ja": ["php", "--ini", "php.ini", "設定"],
+        "ko": ["php", "--ini", "php.ini", "설정"],
+        "zh-cn": ["php", "--ini", "php.ini", "配置"],
+        "zh-tw": ["php", "--ini", "php.ini", "設定"],
+        "ru": ["php", "--ini", "php.ini", "конфигурация"]
+      },
+      "risk": "safe",
+      "docs": "https://www.php.net/manual/en/features.commandline.options.php"
+    },
+    {
+      "id": "php.composer-install",
+      "title": {
+        "en": "Install the dependencies with Composer",
+        "es": "Instalar las dependencias con Composer",
+        "pt-br": "Instalar as dependências com o Composer",
+        "fr": "Installer les dépendances avec Composer",
+        "de": "Abhängigkeiten mit Composer installieren",
+        "it": "Installa le dipendenze con Composer",
+        "ja": "Composer で依存関係をインストール",
+        "ko": "Composer로 의존성 설치",
+        "zh-cn": "用 Composer 安装依赖",
+        "zh-tw": "用 Composer 安裝相依套件",
+        "ru": "Установить зависимости через Composer"
+      },
+      "description": {
+        "en": "Installs the versions of composer.lock into vendor, or resolves composer.json if there is no lock",
+        "es": "Instala en vendor las versiones de composer.lock, o resuelve composer.json si no hay lock",
+        "pt-br": "Instala em vendor as versões do composer.lock, ou resolve o composer.json se não houver lock",
+        "fr": "Installe dans vendor les versions de composer.lock, ou résout composer.json s’il n’y a pas de lock",
+        "de": "Installiert die Versionen aus composer.lock nach vendor oder löst composer.json auf, wenn kein Lock existiert",
+        "it": "Installa in vendor le versioni di composer.lock, o risolve composer.json se non c’è il lock",
+        "ja": "composer.lock のバージョンを vendor にインストールします。lock がなければ composer.json を解決します",
+        "ko": "composer.lock의 버전을 vendor에 설치하고, lock이 없으면 composer.json을 해석합니다",
+        "zh-cn": "将 composer.lock 中的版本安装到 vendor；没有 lock 时解析 composer.json",
+        "zh-tw": "將 composer.lock 中的版本安裝到 vendor；沒有 lock 時解析 composer.json",
+        "ru": "Ставит в vendor версии из composer.lock или разрешает composer.json, если lock нет"
+      },
+      "command": "composer install",
+      "tags": {
+        "en": ["php", "composer", "install", "vendor", "composer.lock", "dependencies"],
+        "es": ["php", "composer", "install", "vendor", "composer.lock", "instalar", "dependencias"],
+        "pt-br": ["php", "composer", "install", "vendor", "composer.lock", "instalar", "dependências"],
+        "fr": ["php", "composer", "install", "vendor", "composer.lock", "installer", "dépendances"],
+        "de": ["php", "composer", "install", "vendor", "composer.lock", "installieren", "Abhängigkeiten"],
+        "it": ["php", "composer", "install", "vendor", "composer.lock", "installare", "dipendenze"],
+        "ja": ["php", "composer", "install", "vendor", "composer.lock", "インストール", "依存関係"],
+        "ko": ["php", "composer", "install", "vendor", "composer.lock", "설치", "의존성"],
+        "zh-cn": ["php", "composer", "install", "vendor", "composer.lock", "安装", "依赖"],
+        "zh-tw": ["php", "composer", "install", "vendor", "composer.lock", "安裝", "相依套件"],
+        "ru": ["php", "composer", "install", "vendor", "composer.lock", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#install-i"
+    },
+    {
+      "id": "php.composer-require",
+      "title": {
+        "en": "Add a package",
+        "es": "Añadir un paquete",
+        "pt-br": "Adicionar um pacote",
+        "fr": "Ajouter un paquet",
+        "de": "Paket hinzufügen",
+        "it": "Aggiungi un pacchetto",
+        "ja": "パッケージを追加",
+        "ko": "패키지 추가",
+        "zh-cn": "添加包",
+        "zh-tw": "新增套件",
+        "ru": "Добавить пакет"
+      },
+      "description": {
+        "en": "Adds a package from Packagist to composer.json and installs it",
+        "es": "Añade un paquete de Packagist a composer.json y lo instala",
+        "pt-br": "Adiciona um pacote do Packagist ao composer.json e o instala",
+        "fr": "Ajoute un paquet de Packagist à composer.json et l’installe",
+        "de": "Fügt composer.json ein Paket von Packagist hinzu und installiert es",
+        "it": "Aggiunge un pacchetto da Packagist a composer.json e lo installa",
+        "ja": "Packagist のパッケージを composer.json に追加してインストールします",
+        "ko": "Packagist의 패키지를 composer.json에 추가하고 설치합니다",
+        "zh-cn": "将 Packagist 上的包添加到 composer.json 并安装",
+        "zh-tw": "將 Packagist 上的套件新增到 composer.json 並安裝",
+        "ru": "Добавляет пакет с Packagist в composer.json и устанавливает его"
+      },
+      "command": "composer require ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "guzzlehttp/guzzle",
+            "es": "guzzlehttp/guzzle",
+            "pt-br": "guzzlehttp/guzzle",
+            "fr": "guzzlehttp/guzzle",
+            "de": "guzzlehttp/guzzle",
+            "it": "guzzlehttp/guzzle",
+            "ja": "guzzlehttp/guzzle",
+            "ko": "guzzlehttp/guzzle",
+            "zh-cn": "guzzlehttp/guzzle",
+            "zh-tw": "guzzlehttp/guzzle",
+            "ru": "guzzlehttp/guzzle"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "composer", "require", "packagist", "dependency", "add"],
+        "es": ["php", "composer", "require", "packagist", "dependencia", "añadir"],
+        "pt-br": ["php", "composer", "require", "packagist", "dependência", "adicionar"],
+        "fr": ["php", "composer", "require", "packagist", "dépendance", "ajouter"],
+        "de": ["php", "composer", "require", "packagist", "Abhängigkeit", "hinzufügen"],
+        "it": ["php", "composer", "require", "packagist", "dipendenza", "aggiungere"],
+        "ja": ["php", "composer", "require", "packagist", "依存関係", "追加"],
+        "ko": ["php", "composer", "require", "packagist", "의존성", "추가"],
+        "zh-cn": ["php", "composer", "require", "packagist", "依赖", "添加"],
+        "zh-tw": ["php", "composer", "require", "packagist", "相依套件", "新增"],
+        "ru": ["php", "composer", "require", "packagist", "зависимость", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#require-r"
+    },
+    {
+      "id": "php.composer-require-dev",
+      "title": {
+        "en": "Add a development package",
+        "es": "Añadir un paquete de desarrollo",
+        "pt-br": "Adicionar um pacote de desenvolvimento",
+        "fr": "Ajouter un paquet de développement",
+        "de": "Entwicklungspaket hinzufügen",
+        "it": "Aggiungi un pacchetto di sviluppo",
+        "ja": "開発用パッケージを追加",
+        "ko": "개발용 패키지 추가",
+        "zh-cn": "添加开发包",
+        "zh-tw": "新增開發套件",
+        "ru": "Добавить пакет для разработки"
+      },
+      "description": {
+        "en": "Adds a package to require-dev, for tools such as PHPUnit that production does not need",
+        "es": "Añade un paquete a require-dev, para herramientas como PHPUnit que producción no necesita",
+        "pt-br": "Adiciona um pacote a require-dev, para ferramentas como o PHPUnit que a produção não precisa",
+        "fr": "Ajoute un paquet à require-dev, pour des outils comme PHPUnit inutiles en production",
+        "de": "Fügt ein Paket zu require-dev hinzu, für Werkzeuge wie PHPUnit, die die Produktion nicht braucht",
+        "it": "Aggiunge un pacchetto a require-dev, per strumenti come PHPUnit che la produzione non richiede",
+        "ja": "本番では不要な PHPUnit などのツール用に、パッケージを require-dev に追加します",
+        "ko": "운영 환경에 필요 없는 PHPUnit 같은 도구를 require-dev에 추가합니다",
+        "zh-cn": "将包添加到 require-dev，用于 PHPUnit 等生产环境不需要的工具",
+        "zh-tw": "將套件新增到 require-dev，用於 PHPUnit 等正式環境不需要的工具",
+        "ru": "Добавляет пакет в require-dev — для инструментов вроде PHPUnit, не нужных в продакшене"
+      },
+      "command": "composer require --dev ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "phpunit/phpunit",
+            "es": "phpunit/phpunit",
+            "pt-br": "phpunit/phpunit",
+            "fr": "phpunit/phpunit",
+            "de": "phpunit/phpunit",
+            "it": "phpunit/phpunit",
+            "ja": "phpunit/phpunit",
+            "ko": "phpunit/phpunit",
+            "zh-cn": "phpunit/phpunit",
+            "zh-tw": "phpunit/phpunit",
+            "ru": "phpunit/phpunit"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "composer", "require-dev", "--dev", "phpunit", "dependency", "dev"],
+        "es": ["php", "composer", "require-dev", "--dev", "phpunit", "dependencia", "desarrollo"],
+        "pt-br": ["php", "composer", "require-dev", "--dev", "phpunit", "dependência", "desenvolvimento"],
+        "fr": ["php", "composer", "require-dev", "--dev", "phpunit", "dépendance", "développement"],
+        "de": ["php", "composer", "require-dev", "--dev", "phpunit", "Abhängigkeit", "Entwicklung"],
+        "it": ["php", "composer", "require-dev", "--dev", "phpunit", "dipendenza", "sviluppo"],
+        "ja": ["php", "composer", "require-dev", "--dev", "phpunit", "依存関係", "開発"],
+        "ko": ["php", "composer", "require-dev", "--dev", "phpunit", "의존성", "개발"],
+        "zh-cn": ["php", "composer", "require-dev", "--dev", "phpunit", "依赖", "开发"],
+        "zh-tw": ["php", "composer", "require-dev", "--dev", "phpunit", "相依套件", "開發"],
+        "ru": ["php", "composer", "require-dev", "--dev", "phpunit", "зависимость", "разработка"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#require-r"
+    },
+    {
+      "id": "php.composer-remove",
+      "title": {
+        "en": "Remove a package",
+        "es": "Quitar un paquete",
+        "pt-br": "Remover um pacote",
+        "fr": "Retirer un paquet",
+        "de": "Paket entfernen",
+        "it": "Rimuovi un pacchetto",
+        "ja": "パッケージを削除",
+        "ko": "패키지 제거",
+        "zh-cn": "移除包",
+        "zh-tw": "移除套件",
+        "ru": "Удалить пакет"
+      },
+      "description": {
+        "en": "Removes a package from composer.json and from vendor",
+        "es": "Quita un paquete de composer.json y de vendor",
+        "pt-br": "Remove um pacote do composer.json e de vendor",
+        "fr": "Retire un paquet de composer.json et de vendor",
+        "de": "Entfernt ein Paket aus composer.json und aus vendor",
+        "it": "Rimuove un pacchetto da composer.json e da vendor",
+        "ja": "composer.json と vendor からパッケージを削除します",
+        "ko": "composer.json과 vendor에서 패키지를 제거합니다",
+        "zh-cn": "从 composer.json 和 vendor 中移除包",
+        "zh-tw": "從 composer.json 和 vendor 中移除套件",
+        "ru": "Убирает пакет из composer.json и из vendor"
+      },
+      "command": "composer remove ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "guzzlehttp/guzzle",
+            "es": "guzzlehttp/guzzle",
+            "pt-br": "guzzlehttp/guzzle",
+            "fr": "guzzlehttp/guzzle",
+            "de": "guzzlehttp/guzzle",
+            "it": "guzzlehttp/guzzle",
+            "ja": "guzzlehttp/guzzle",
+            "ko": "guzzlehttp/guzzle",
+            "zh-cn": "guzzlehttp/guzzle",
+            "zh-tw": "guzzlehttp/guzzle",
+            "ru": "guzzlehttp/guzzle"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "composer", "remove", "dependency", "uninstall"],
+        "es": ["php", "composer", "remove", "dependencia", "quitar"],
+        "pt-br": ["php", "composer", "remove", "dependência", "remover"],
+        "fr": ["php", "composer", "remove", "dépendance", "retirer"],
+        "de": ["php", "composer", "remove", "Abhängigkeit", "entfernen"],
+        "it": ["php", "composer", "remove", "dipendenza", "rimuovere"],
+        "ja": ["php", "composer", "remove", "依存関係", "削除"],
+        "ko": ["php", "composer", "remove", "의존성", "제거"],
+        "zh-cn": ["php", "composer", "remove", "依赖", "移除"],
+        "zh-tw": ["php", "composer", "remove", "相依套件", "移除"],
+        "ru": ["php", "composer", "remove", "зависимость", "удалить"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#remove-rm-uninstall"
+    },
+    {
+      "id": "php.composer-update",
+      "title": {
+        "en": "Update the dependencies",
+        "es": "Actualizar las dependencias",
+        "pt-br": "Atualizar as dependências",
+        "fr": "Mettre à jour les dépendances",
+        "de": "Abhängigkeiten aktualisieren",
+        "it": "Aggiorna le dipendenze",
+        "ja": "依存関係を更新",
+        "ko": "의존성 업데이트",
+        "zh-cn": "更新依赖",
+        "zh-tw": "更新相依套件",
+        "ru": "Обновить зависимости"
+      },
+      "description": {
+        "en": "Updates the packages to the newest versions allowed by composer.json and rewrites composer.lock",
+        "es": "Actualiza los paquetes a las versiones más nuevas que permite composer.json y reescribe composer.lock",
+        "pt-br": "Atualiza os pacotes para as versões mais novas que o composer.json permite e reescreve o composer.lock",
+        "fr": "Met à jour les paquets vers les versions les plus récentes permises par composer.json et réécrit composer.lock",
+        "de": "Aktualisiert die Pakete auf die neuesten von composer.json erlaubten Versionen und schreibt composer.lock neu",
+        "it": "Aggiorna i pacchetti alle versioni più recenti consentite da composer.json e riscrive composer.lock",
+        "ja": "composer.json が許す最新バージョンにパッケージを更新し、composer.lock を書き直します",
+        "ko": "composer.json이 허용하는 최신 버전으로 패키지를 업데이트하고 composer.lock을 다시 씁니다",
+        "zh-cn": "将包更新到 composer.json 允许的最新版本，并重写 composer.lock",
+        "zh-tw": "將套件更新到 composer.json 允許的最新版本，並重寫 composer.lock",
+        "ru": "Обновляет пакеты до новейших версий, допустимых composer.json, и переписывает composer.lock"
+      },
+      "command": "composer update",
+      "tags": {
+        "en": ["php", "composer", "update", "upgrade", "composer.lock"],
+        "es": ["php", "composer", "update", "upgrade", "composer.lock", "actualizar"],
+        "pt-br": ["php", "composer", "update", "upgrade", "composer.lock", "atualizar"],
+        "fr": ["php", "composer", "update", "upgrade", "composer.lock", "mettre à jour"],
+        "de": ["php", "composer", "update", "upgrade", "composer.lock", "aktualisieren"],
+        "it": ["php", "composer", "update", "upgrade", "composer.lock", "aggiornare"],
+        "ja": ["php", "composer", "update", "upgrade", "composer.lock", "更新"],
+        "ko": ["php", "composer", "update", "upgrade", "composer.lock", "업데이트"],
+        "zh-cn": ["php", "composer", "update", "upgrade", "composer.lock", "更新"],
+        "zh-tw": ["php", "composer", "update", "upgrade", "composer.lock", "更新"],
+        "ru": ["php", "composer", "update", "upgrade", "composer.lock", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://getcomposer.org/doc/03-cli.md#update-u-upgrade"
+    },
+    {
+      "id": "php.composer-outdated",
+      "title": {
+        "en": "List outdated packages",
+        "es": "Ver paquetes desactualizados",
+        "pt-br": "Ver pacotes desatualizados",
+        "fr": "Lister les paquets obsolètes",
+        "de": "Veraltete Pakete anzeigen",
+        "it": "Elenca i pacchetti obsoleti",
+        "ja": "古いパッケージを一覧表示",
+        "ko": "오래된 패키지 보기",
+        "zh-cn": "列出过时的包",
+        "zh-tw": "列出過時的套件",
+        "ru": "Показать устаревшие пакеты"
+      },
+      "description": {
+        "en": "Shows the direct dependencies that have newer versions, without changing anything",
+        "es": "Muestra las dependencias directas que tienen versiones más nuevas, sin cambiar nada",
+        "pt-br": "Mostra as dependências diretas que têm versões mais novas, sem alterar nada",
+        "fr": "Affiche les dépendances directes qui ont des versions plus récentes, sans rien modifier",
+        "de": "Zeigt die direkten Abhängigkeiten mit neueren Versionen, ohne etwas zu ändern",
+        "it": "Mostra le dipendenze dirette che hanno versioni più recenti, senza modificare nulla",
+        "ja": "新しいバージョンがある直接の依存関係を、何も変更せずに表示します",
+        "ko": "새 버전이 있는 직접 의존성을 아무것도 바꾸지 않고 보여 줍니다",
+        "zh-cn": "显示有更新版本的直接依赖，不做任何修改",
+        "zh-tw": "顯示有更新版本的直接相依套件，不做任何修改",
+        "ru": "Показывает прямые зависимости, для которых есть новые версии, ничего не меняя"
+      },
+      "command": "composer outdated --direct",
+      "tags": {
+        "en": ["php", "composer", "outdated", "--direct", "versions"],
+        "es": ["php", "composer", "outdated", "--direct", "desactualizados", "versiones"],
+        "pt-br": ["php", "composer", "outdated", "--direct", "desatualizados", "versões"],
+        "fr": ["php", "composer", "outdated", "--direct", "obsolètes", "versions"],
+        "de": ["php", "composer", "outdated", "--direct", "veraltet", "Versionen"],
+        "it": ["php", "composer", "outdated", "--direct", "obsoleti", "versioni"],
+        "ja": ["php", "composer", "outdated", "--direct", "古い", "バージョン"],
+        "ko": ["php", "composer", "outdated", "--direct", "오래된", "버전"],
+        "zh-cn": ["php", "composer", "outdated", "--direct", "过时", "版本"],
+        "zh-tw": ["php", "composer", "outdated", "--direct", "過時", "版本"],
+        "ru": ["php", "composer", "outdated", "--direct", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#outdated"
+    },
+    {
+      "id": "php.composer-dump-autoload",
+      "title": {
+        "en": "Regenerate the autoloader",
+        "es": "Regenerar el autoloader",
+        "pt-br": "Regenerar o autoloader",
+        "fr": "Régénérer l’autoloader",
+        "de": "Autoloader neu erzeugen",
+        "it": "Rigenera l’autoloader",
+        "ja": "オートローダーを再生成",
+        "ko": "오토로더 다시 생성",
+        "zh-cn": "重新生成自动加载器",
+        "zh-tw": "重新產生自動載入器",
+        "ru": "Пересоздать автозагрузчик"
+      },
+      "description": {
+        "en": "Rebuilds vendor/autoload.php after adding classes or changing the autoload section",
+        "es": "Vuelve a generar vendor/autoload.php tras añadir clases o cambiar la sección autoload",
+        "pt-br": "Gera de novo o vendor/autoload.php depois de adicionar classes ou mudar a seção autoload",
+        "fr": "Régénère vendor/autoload.php après l’ajout de classes ou la modification de la section autoload",
+        "de": "Erzeugt vendor/autoload.php neu, nachdem Klassen hinzugefügt oder der autoload-Abschnitt geändert wurde",
+        "it": "Rigenera vendor/autoload.php dopo aver aggiunto classi o cambiato la sezione autoload",
+        "ja": "クラスを追加したり autoload セクションを変えたりした後に vendor/autoload.php を作り直します",
+        "ko": "클래스를 추가하거나 autoload 섹션을 바꾼 뒤 vendor/autoload.php를 다시 만듭니다",
+        "zh-cn": "添加类或修改 autoload 部分后重新生成 vendor/autoload.php",
+        "zh-tw": "新增類別或修改 autoload 區段後重新產生 vendor/autoload.php",
+        "ru": "Пересоздаёт vendor/autoload.php после добавления классов или изменения секции autoload"
+      },
+      "command": "composer dump-autoload",
+      "tags": {
+        "en": ["php", "composer", "dump-autoload", "autoload", "psr-4", "classes"],
+        "es": ["php", "composer", "dump-autoload", "autoload", "psr-4", "clases"],
+        "pt-br": ["php", "composer", "dump-autoload", "autoload", "psr-4", "classes"],
+        "fr": ["php", "composer", "dump-autoload", "autoload", "psr-4", "classes"],
+        "de": ["php", "composer", "dump-autoload", "autoload", "psr-4", "Klassen"],
+        "it": ["php", "composer", "dump-autoload", "autoload", "psr-4", "classi"],
+        "ja": ["php", "composer", "dump-autoload", "autoload", "psr-4", "クラス"],
+        "ko": ["php", "composer", "dump-autoload", "autoload", "psr-4", "클래스"],
+        "zh-cn": ["php", "composer", "dump-autoload", "autoload", "psr-4", "类"],
+        "zh-tw": ["php", "composer", "dump-autoload", "autoload", "psr-4", "類別"],
+        "ru": ["php", "composer", "dump-autoload", "autoload", "psr-4", "классы"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#dump-autoload-dumpautoload"
+    },
+    {
+      "id": "php.composer-create-project",
+      "title": {
+        "en": "Create a project from a package",
+        "es": "Crear un proyecto desde un paquete",
+        "pt-br": "Criar um projeto a partir de um pacote",
+        "fr": "Créer un projet à partir d’un paquet",
+        "de": "Projekt aus einem Paket erstellen",
+        "it": "Crea un progetto da un pacchetto",
+        "ja": "パッケージからプロジェクトを作成",
+        "ko": "패키지로 프로젝트 만들기",
+        "zh-cn": "从包创建项目",
+        "zh-tw": "從套件建立專案",
+        "ru": "Создать проект из пакета"
+      },
+      "description": {
+        "en": "Creates a new project in that folder from a skeleton package, such as laravel/laravel",
+        "es": "Crea un proyecto nuevo en esa carpeta a partir de un paquete esqueleto, como laravel/laravel",
+        "pt-br": "Cria um projeto novo nessa pasta a partir de um pacote esqueleto, como laravel/laravel",
+        "fr": "Crée un nouveau projet dans ce dossier à partir d’un paquet squelette, comme laravel/laravel",
+        "de": "Erstellt in diesem Ordner ein neues Projekt aus einem Vorlagenpaket wie laravel/laravel",
+        "it": "Crea un nuovo progetto in quella cartella da un pacchetto scheletro, come laravel/laravel",
+        "ja": "laravel/laravel などのひな形パッケージから、そのフォルダーに新しいプロジェクトを作成します",
+        "ko": "laravel/laravel 같은 뼈대 패키지로 그 폴더에 새 프로젝트를 만듭니다",
+        "zh-cn": "用骨架包（如 laravel/laravel）在该文件夹中创建新项目",
+        "zh-tw": "用骨架套件（如 laravel/laravel）在該資料夾中建立新專案",
+        "ru": "Создаёт новый проект в этой папке из пакета-шаблона, например laravel/laravel"
+      },
+      "command": "composer create-project ${package} ${folder}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "laravel/laravel",
+            "es": "laravel/laravel",
+            "pt-br": "laravel/laravel",
+            "fr": "laravel/laravel",
+            "de": "laravel/laravel",
+            "it": "laravel/laravel",
+            "ja": "laravel/laravel",
+            "ko": "laravel/laravel",
+            "zh-cn": "laravel/laravel",
+            "zh-tw": "laravel/laravel",
+            "ru": "laravel/laravel"
+          }
+        },
+        {
+          "name": "folder",
+          "label": {
+            "en": "Folder",
+            "es": "Carpeta",
+            "pt-br": "Pasta",
+            "fr": "Dossier",
+            "de": "Ordner",
+            "it": "Cartella",
+            "ja": "フォルダー",
+            "ko": "폴더",
+            "zh-cn": "文件夹",
+            "zh-tw": "資料夾",
+            "ru": "Папка"
+          },
+          "placeholder": {
+            "en": "my-app",
+            "es": "my-app",
+            "pt-br": "my-app",
+            "fr": "my-app",
+            "de": "my-app",
+            "it": "my-app",
+            "ja": "my-app",
+            "ko": "my-app",
+            "zh-cn": "my-app",
+            "zh-tw": "my-app",
+            "ru": "my-app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "composer", "create-project", "laravel", "symfony", "new project"],
+        "es": ["php", "composer", "create-project", "laravel", "symfony", "nuevo proyecto", "crear"],
+        "pt-br": ["php", "composer", "create-project", "laravel", "symfony", "novo projeto", "criar"],
+        "fr": ["php", "composer", "create-project", "laravel", "symfony", "nouveau projet", "créer"],
+        "de": ["php", "composer", "create-project", "laravel", "symfony", "neues Projekt", "erstellen"],
+        "it": ["php", "composer", "create-project", "laravel", "symfony", "nuovo progetto", "creare"],
+        "ja": ["php", "composer", "create-project", "laravel", "symfony", "新規プロジェクト", "作成"],
+        "ko": ["php", "composer", "create-project", "laravel", "symfony", "새 프로젝트", "만들기"],
+        "zh-cn": ["php", "composer", "create-project", "laravel", "symfony", "新项目", "创建"],
+        "zh-tw": ["php", "composer", "create-project", "laravel", "symfony", "新專案", "建立"],
+        "ru": ["php", "composer", "create-project", "laravel", "symfony", "новый проект", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#create-project"
+    },
+    {
+      "id": "php.composer-run-script",
+      "title": {
+        "en": "Run a Composer script",
+        "es": "Ejecutar un script de Composer",
+        "pt-br": "Executar um script do Composer",
+        "fr": "Exécuter un script Composer",
+        "de": "Composer-Skript ausführen",
+        "it": "Esegui uno script di Composer",
+        "ja": "Composer のスクリプトを実行",
+        "ko": "Composer 스크립트 실행",
+        "zh-cn": "运行 Composer 脚本",
+        "zh-tw": "執行 Composer 指令碼",
+        "ru": "Запустить сценарий Composer"
+      },
+      "description": {
+        "en": "Runs a script from the scripts section of composer.json, such as test",
+        "es": "Ejecuta un script de la sección scripts de composer.json, como test",
+        "pt-br": "Executa um script da seção scripts do composer.json, como test",
+        "fr": "Exécute un script de la section scripts de composer.json, comme test",
+        "de": "Führt ein Skript aus dem Abschnitt scripts von composer.json aus, etwa test",
+        "it": "Esegue uno script della sezione scripts di composer.json, come test",
+        "ja": "composer.json の scripts セクションにあるスクリプト（test など）を実行します",
+        "ko": "composer.json scripts 섹션의 스크립트(예: test)를 실행합니다",
+        "zh-cn": "运行 composer.json 中 scripts 部分的脚本，例如 test",
+        "zh-tw": "執行 composer.json 中 scripts 區段的指令碼，例如 test",
+        "ru": "Запускает сценарий из секции scripts в composer.json, например test"
+      },
+      "command": "composer run-script ${script}",
+      "params": [
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "test",
+            "es": "test",
+            "pt-br": "test",
+            "fr": "test",
+            "de": "test",
+            "it": "test",
+            "ja": "test",
+            "ko": "test",
+            "zh-cn": "test",
+            "zh-tw": "test",
+            "ru": "test"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["php", "composer", "run-script", "scripts", "run"],
+        "es": ["php", "composer", "run-script", "scripts", "ejecutar", "script"],
+        "pt-br": ["php", "composer", "run-script", "scripts", "executar", "script"],
+        "fr": ["php", "composer", "run-script", "scripts", "exécuter", "script"],
+        "de": ["php", "composer", "run-script", "scripts", "ausführen", "Skript"],
+        "it": ["php", "composer", "run-script", "scripts", "eseguire", "script"],
+        "ja": ["php", "composer", "run-script", "scripts", "実行", "スクリプト"],
+        "ko": ["php", "composer", "run-script", "scripts", "실행", "스크립트"],
+        "zh-cn": ["php", "composer", "run-script", "scripts", "运行", "脚本"],
+        "zh-tw": ["php", "composer", "run-script", "scripts", "執行", "指令碼"],
+        "ru": ["php", "composer", "run-script", "scripts", "запустить", "сценарий"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#run-script-run"
+    },
+    {
+      "id": "php.composer-validate",
+      "title": {
+        "en": "Validate composer.json",
+        "es": "Validar composer.json",
+        "pt-br": "Validar o composer.json",
+        "fr": "Valider composer.json",
+        "de": "composer.json validieren",
+        "it": "Convalida composer.json",
+        "ja": "composer.json を検証",
+        "ko": "composer.json 검증",
+        "zh-cn": "验证 composer.json",
+        "zh-tw": "驗證 composer.json",
+        "ru": "Проверить composer.json"
+      },
+      "description": {
+        "en": "Checks that composer.json is valid and that composer.lock is up to date",
+        "es": "Comprueba que composer.json es válido y que composer.lock está al día",
+        "pt-br": "Verifica se o composer.json é válido e se o composer.lock está atualizado",
+        "fr": "Vérifie que composer.json est valide et que composer.lock est à jour",
+        "de": "Prüft, ob composer.json gültig und composer.lock aktuell ist",
+        "it": "Verifica che composer.json sia valido e che composer.lock sia aggiornato",
+        "ja": "composer.json が正しく、composer.lock が最新かを確認します",
+        "ko": "composer.json이 올바르고 composer.lock이 최신인지 확인합니다",
+        "zh-cn": "检查 composer.json 是否有效、composer.lock 是否为最新",
+        "zh-tw": "檢查 composer.json 是否有效、composer.lock 是否為最新",
+        "ru": "Проверяет, что composer.json корректен, а composer.lock актуален"
+      },
+      "command": "composer validate",
+      "tags": {
+        "en": ["php", "composer", "validate", "composer.json", "check"],
+        "es": ["php", "composer", "validate", "composer.json", "validar", "comprobar"],
+        "pt-br": ["php", "composer", "validate", "composer.json", "validar", "verificar"],
+        "fr": ["php", "composer", "validate", "composer.json", "valider", "vérifier"],
+        "de": ["php", "composer", "validate", "composer.json", "validieren", "prüfen"],
+        "it": ["php", "composer", "validate", "composer.json", "convalidare", "controllare"],
+        "ja": ["php", "composer", "validate", "composer.json", "検証"],
+        "ko": ["php", "composer", "validate", "composer.json", "검증"],
+        "zh-cn": ["php", "composer", "validate", "composer.json", "验证"],
+        "zh-tw": ["php", "composer", "validate", "composer.json", "驗證"],
+        "ru": ["php", "composer", "validate", "composer.json", "проверка"]
+      },
+      "risk": "safe",
+      "docs": "https://getcomposer.org/doc/03-cli.md#validate"
+    }
+  ]
+}

@@ -18,7 +18,7 @@
   "icon": "versions",
   "order": 38,
   "section": "languages",
-  "detect": [".nvmrc", ".node-version", ".python-version", ".sdkmanrc"],
+  "detect": [".nvmrc", ".node-version", ".python-version", ".sdkmanrc", ".ruby-version", ".tool-versions", "mise.toml", ".mise.toml"],
   "commands": [
     {
       "id": "version-managers.nvm-install-lts",
@@ -1864,6 +1864,1171 @@
       },
       "risk": "destructive",
       "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.rbenv-install",
+      "title": {
+        "en": "rbenv: install a Ruby version",
+        "es": "rbenv: instalar una versión de Ruby",
+        "pt-br": "rbenv: instalar uma versão do Ruby",
+        "fr": "rbenv: installer une version de Ruby",
+        "de": "rbenv: Ruby-Version installieren",
+        "it": "rbenv: installa una versione di Ruby",
+        "ja": "rbenv: Ruby のバージョンをインストール",
+        "ko": "rbenv: Ruby 버전 설치",
+        "zh-cn": "rbenv: 安装某个 Ruby 版本",
+        "zh-tw": "rbenv: 安裝某個 Ruby 版本",
+        "ru": "rbenv: установить версию Ruby"
+      },
+      "description": {
+        "en": "Compiles and installs that Ruby version with ruby-build; rbenv install -l lists the available ones. Only in bash or zsh: rbenv does not work in PowerShell or cmd (use WSL).",
+        "es": "Compila e instala esa versión de Ruby con ruby-build; rbenv install -l muestra las disponibles. Solo en bash o zsh: rbenv no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Compila e instala essa versão do Ruby com o ruby-build; rbenv install -l mostra as disponíveis. Só em bash ou zsh: o rbenv não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Compile et installe cette version de Ruby avec ruby-build ; rbenv install -l liste les disponibles. Uniquement dans bash ou zsh : rbenv ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Kompiliert und installiert diese Ruby-Version mit ruby-build; rbenv install -l zeigt die verfügbaren. Nur in bash oder zsh: rbenv funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Compila e installa quella versione di Ruby con ruby-build; rbenv install -l mostra quelle disponibili. Solo in bash o zsh: rbenv non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "ruby-build でその Ruby をコンパイルしてインストールします。rbenv install -l で一覧表示。 bash か zsh 専用です。rbenv は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "ruby-build로 그 Ruby 버전을 컴파일해 설치합니다. rbenv install -l로 목록을 봅니다. bash나 zsh 전용입니다. rbenv은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "用 ruby-build 编译并安装该 Ruby 版本；rbenv install -l 列出可用版本。 仅限 bash 或 zsh：rbenv 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "用 ruby-build 編譯並安裝該 Ruby 版本；rbenv install -l 列出可用版本。 僅限 bash 或 zsh：rbenv 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Компилирует и ставит эту версию Ruby через ruby-build; rbenv install -l покажет доступные. Только в bash или zsh: rbenv не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "rbenv install ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.3.6",
+            "es": "3.3.6",
+            "pt-br": "3.3.6",
+            "fr": "3.3.6",
+            "de": "3.3.6",
+            "it": "3.3.6",
+            "ja": "3.3.6",
+            "ko": "3.3.6",
+            "zh-cn": "3.3.6",
+            "zh-tw": "3.3.6",
+            "ru": "3.3.6"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rbenv", "ruby", "version", "install", "ruby-build"],
+        "es": ["rbenv", "ruby", "version", "install", "ruby-build", "versión", "instalar"],
+        "pt-br": ["rbenv", "ruby", "version", "install", "ruby-build", "versão", "instalar"],
+        "fr": ["rbenv", "ruby", "version", "install", "ruby-build", "installer"],
+        "de": ["rbenv", "ruby", "version", "install", "ruby-build", "Version", "installieren"],
+        "it": ["rbenv", "ruby", "version", "install", "ruby-build", "versione", "installare"],
+        "ja": ["rbenv", "ruby", "version", "install", "ruby-build", "バージョン", "インストール"],
+        "ko": ["rbenv", "ruby", "version", "install", "ruby-build", "버전", "설치"],
+        "zh-cn": ["rbenv", "ruby", "version", "install", "ruby-build", "版本", "安装"],
+        "zh-tw": ["rbenv", "ruby", "version", "install", "ruby-build", "版本", "安裝"],
+        "ru": ["rbenv", "ruby", "version", "install", "ruby-build", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/rbenv/rbenv#readme"
+    },
+    {
+      "id": "version-managers.rbenv-local",
+      "title": {
+        "en": "rbenv: pin the Ruby version of the project",
+        "es": "rbenv: fijar la versión de Ruby del proyecto",
+        "pt-br": "rbenv: fixar a versão do Ruby do projeto",
+        "fr": "rbenv: fixer la version de Ruby du projet",
+        "de": "rbenv: Ruby-Version des Projekts festlegen",
+        "it": "rbenv: fissa la versione di Ruby del progetto",
+        "ja": "rbenv: プロジェクトの Ruby バージョンを固定",
+        "ko": "rbenv: 프로젝트 Ruby 버전 고정",
+        "zh-cn": "rbenv: 固定项目的 Ruby 版本",
+        "zh-tw": "rbenv: 固定專案的 Ruby 版本",
+        "ru": "rbenv: закрепить версию Ruby проекта"
+      },
+      "description": {
+        "en": "Writes the version in .ruby-version in the current folder, so it is used whenever you work there. Only in bash or zsh: rbenv does not work in PowerShell or cmd (use WSL).",
+        "es": "Escribe la versión en .ruby-version de la carpeta actual, para usarla siempre que trabajes allí. Solo en bash o zsh: rbenv no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Escreve a versão no .ruby-version da pasta atual, para usá-la sempre que trabalhar ali. Só em bash ou zsh: o rbenv não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Écrit la version dans .ruby-version du dossier actuel, pour l’utiliser chaque fois que vous y travaillez. Uniquement dans bash ou zsh : rbenv ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Schreibt die Version in .ruby-version im aktuellen Ordner, damit sie dort immer gilt. Nur in bash oder zsh: rbenv funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Scrive la versione in .ruby-version della cartella attuale, per usarla ogni volta che lavori lì. Solo in bash o zsh: rbenv non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "現在のフォルダーの .ruby-version にバージョンを書き、そこで作業するときに使います。 bash か zsh 専用です。rbenv は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "현재 폴더의 .ruby-version에 버전을 써서 그곳에서 작업할 때마다 사용합니다. bash나 zsh 전용입니다. rbenv은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "把版本写入当前文件夹的 .ruby-version，在此工作时始终使用它。 仅限 bash 或 zsh：rbenv 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "把版本寫入目前資料夾的 .ruby-version，在此工作時一律使用它。 僅限 bash 或 zsh：rbenv 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Записывает версию в .ruby-version текущей папки, чтобы она применялась при работе там. Только в bash или zsh: rbenv не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "rbenv local ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.3.6",
+            "es": "3.3.6",
+            "pt-br": "3.3.6",
+            "fr": "3.3.6",
+            "de": "3.3.6",
+            "it": "3.3.6",
+            "ja": "3.3.6",
+            "ko": "3.3.6",
+            "zh-cn": "3.3.6",
+            "zh-tw": "3.3.6",
+            "ru": "3.3.6"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rbenv", "ruby", "version", "local", ".ruby-version", "project"],
+        "es": ["rbenv", "ruby", "version", "local", ".ruby-version", "versión", "proyecto"],
+        "pt-br": ["rbenv", "ruby", "version", "local", ".ruby-version", "versão", "projeto"],
+        "fr": ["rbenv", "ruby", "version", "local", ".ruby-version", "projet"],
+        "de": ["rbenv", "ruby", "version", "local", ".ruby-version", "Version", "Projekt", "lokal"],
+        "it": ["rbenv", "ruby", "version", "local", ".ruby-version", "versione", "progetto", "locale"],
+        "ja": ["rbenv", "ruby", "version", "local", ".ruby-version", "バージョン", "プロジェクト", "ローカル"],
+        "ko": ["rbenv", "ruby", "version", "local", ".ruby-version", "버전", "프로젝트", "로컬"],
+        "zh-cn": ["rbenv", "ruby", "version", "local", ".ruby-version", "版本", "项目", "本地"],
+        "zh-tw": ["rbenv", "ruby", "version", "local", ".ruby-version", "版本", "專案", "本機"],
+        "ru": ["rbenv", "ruby", "version", "local", ".ruby-version", "версия", "проект", "локально"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/rbenv/rbenv#readme"
+    },
+    {
+      "id": "version-managers.rbenv-global",
+      "title": {
+        "en": "rbenv: set the default Ruby version",
+        "es": "rbenv: fijar la versión de Ruby por defecto",
+        "pt-br": "rbenv: definir a versão padrão do Ruby",
+        "fr": "rbenv: définir la version de Ruby par défaut",
+        "de": "rbenv: Standard-Ruby-Version festlegen",
+        "it": "rbenv: imposta la versione di Ruby predefinita",
+        "ja": "rbenv: 既定の Ruby バージョンを設定",
+        "ko": "rbenv: 기본 Ruby 버전 설정",
+        "zh-cn": "rbenv: 设置默认 Ruby 版本",
+        "zh-tw": "rbenv: 設定預設 Ruby 版本",
+        "ru": "rbenv: задать версию Ruby по умолчанию"
+      },
+      "description": {
+        "en": "Changes the Ruby version used outside projects with .ruby-version. Only in bash or zsh: rbenv does not work in PowerShell or cmd (use WSL).",
+        "es": "Cambia la versión de Ruby que se usa fuera de los proyectos con .ruby-version. Solo en bash o zsh: rbenv no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Muda a versão do Ruby usada fora dos projetos com .ruby-version. Só em bash ou zsh: o rbenv não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Change la version de Ruby utilisée hors des projets ayant un .ruby-version. Uniquement dans bash ou zsh : rbenv ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Ändert die Ruby-Version, die außerhalb von Projekten mit .ruby-version gilt. Nur in bash oder zsh: rbenv funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Cambia la versione di Ruby usata fuori dai progetti con .ruby-version. Solo in bash o zsh: rbenv non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": ".ruby-version のあるプロジェクト以外で使う Ruby のバージョンを変えます。 bash か zsh 専用です。rbenv は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": ".ruby-version이 있는 프로젝트 밖에서 쓰는 Ruby 버전을 바꿉니다. bash나 zsh 전용입니다. rbenv은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "更改在含 .ruby-version 的项目之外使用的 Ruby 版本。 仅限 bash 或 zsh：rbenv 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "變更在含 .ruby-version 的專案之外使用的 Ruby 版本。 僅限 bash 或 zsh：rbenv 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Меняет версию Ruby, используемую вне проектов с .ruby-version. Только в bash или zsh: rbenv не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "rbenv global ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.3.6",
+            "es": "3.3.6",
+            "pt-br": "3.3.6",
+            "fr": "3.3.6",
+            "de": "3.3.6",
+            "it": "3.3.6",
+            "ja": "3.3.6",
+            "ko": "3.3.6",
+            "zh-cn": "3.3.6",
+            "zh-tw": "3.3.6",
+            "ru": "3.3.6"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rbenv", "ruby", "version", "global", "default"],
+        "es": ["rbenv", "ruby", "version", "global", "versión", "predeterminada"],
+        "pt-br": ["rbenv", "ruby", "version", "global", "versão", "padrão"],
+        "fr": ["rbenv", "ruby", "version", "global", "par défaut"],
+        "de": ["rbenv", "ruby", "version", "global", "Version", "Standard"],
+        "it": ["rbenv", "ruby", "version", "global", "versione", "globale", "predefinita"],
+        "ja": ["rbenv", "ruby", "version", "global", "バージョン", "グローバル", "既定"],
+        "ko": ["rbenv", "ruby", "version", "global", "버전", "전역", "기본"],
+        "zh-cn": ["rbenv", "ruby", "version", "global", "版本", "全局", "默认"],
+        "zh-tw": ["rbenv", "ruby", "version", "global", "版本", "全域", "預設"],
+        "ru": ["rbenv", "ruby", "version", "global", "версия", "глобально", "по умолчанию"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/rbenv/rbenv#readme"
+    },
+    {
+      "id": "version-managers.rbenv-versions",
+      "title": {
+        "en": "rbenv: list installed Ruby versions",
+        "es": "rbenv: ver las versiones de Ruby instaladas",
+        "pt-br": "rbenv: ver as versões do Ruby instaladas",
+        "fr": "rbenv: lister les versions de Ruby installées",
+        "de": "rbenv: installierte Ruby-Versionen anzeigen",
+        "it": "rbenv: elenca le versioni di Ruby installate",
+        "ja": "rbenv: インストール済みの Ruby を一覧表示",
+        "ko": "rbenv: 설치된 Ruby 버전 보기",
+        "zh-cn": "rbenv: 列出已安装的 Ruby 版本",
+        "zh-tw": "rbenv: 列出已安裝的 Ruby 版本",
+        "ru": "rbenv: показать установленные версии Ruby"
+      },
+      "description": {
+        "en": "Lists the Ruby versions installed with rbenv and marks the active one with an asterisk. Only in bash or zsh: rbenv does not work in PowerShell or cmd (use WSL).",
+        "es": "Muestra las versiones de Ruby instaladas con rbenv y marca la activa con un asterisco. Solo en bash o zsh: rbenv no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Mostra as versões do Ruby instaladas com o rbenv e marca a ativa com um asterisco. Só em bash ou zsh: o rbenv não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Liste les versions de Ruby installées avec rbenv et marque l’active d’un astérisque. Uniquement dans bash ou zsh : rbenv ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Listet die mit rbenv installierten Ruby-Versionen und markiert die aktive mit einem Stern. Nur in bash oder zsh: rbenv funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Elenca le versioni di Ruby installate con rbenv e segna quella attiva con un asterisco. Solo in bash o zsh: rbenv non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "rbenv で入れた Ruby のバージョンを表示し、有効なものに * を付けます。 bash か zsh 専用です。rbenv は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "rbenv로 설치한 Ruby 버전을 보여 주고 활성 버전에 별표를 붙입니다. bash나 zsh 전용입니다. rbenv은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "列出用 rbenv 安装的 Ruby 版本，并用星号标出当前版本。 仅限 bash 或 zsh：rbenv 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "列出用 rbenv 安裝的 Ruby 版本，並用星號標出目前版本。 僅限 bash 或 zsh：rbenv 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Показывает версии Ruby, установленные rbenv, и отмечает активную звёздочкой. Только в bash или zsh: rbenv не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "rbenv versions",
+      "tags": {
+        "en": ["rbenv", "ruby", "version", "versions", "list", "installed"],
+        "es": ["rbenv", "ruby", "version", "versions", "versión", "instaladas", "ver"],
+        "pt-br": ["rbenv", "ruby", "version", "versions", "versão", "instaladas", "ver"],
+        "fr": ["rbenv", "ruby", "version", "versions", "installées", "lister"],
+        "de": ["rbenv", "ruby", "version", "versions", "Version", "installiert", "anzeigen"],
+        "it": ["rbenv", "ruby", "version", "versions", "versione", "installate", "elencare"],
+        "ja": ["rbenv", "ruby", "version", "versions", "バージョン", "インストール済み", "一覧"],
+        "ko": ["rbenv", "ruby", "version", "versions", "버전", "설치됨", "목록"],
+        "zh-cn": ["rbenv", "ruby", "version", "versions", "版本", "已安装", "列出"],
+        "zh-tw": ["rbenv", "ruby", "version", "versions", "版本", "已安裝", "列出"],
+        "ru": ["rbenv", "ruby", "version", "versions", "версия", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/rbenv/rbenv#readme"
+    },
+    {
+      "id": "version-managers.rbenv-uninstall",
+      "title": {
+        "en": "rbenv: uninstall a Ruby version",
+        "es": "rbenv: desinstalar una versión de Ruby",
+        "pt-br": "rbenv: desinstalar uma versão do Ruby",
+        "fr": "rbenv: désinstaller une version de Ruby",
+        "de": "rbenv: Ruby-Version deinstallieren",
+        "it": "rbenv: disinstalla una versione di Ruby",
+        "ja": "rbenv: Ruby のバージョンをアンインストール",
+        "ko": "rbenv: Ruby 버전 제거",
+        "zh-cn": "rbenv: 卸载某个 Ruby 版本",
+        "zh-tw": "rbenv: 解除安裝某個 Ruby 版本",
+        "ru": "rbenv: удалить версию Ruby"
+      },
+      "description": {
+        "en": "Deletes that Ruby version and all the gems installed in it. Only in bash or zsh: rbenv does not work in PowerShell or cmd (use WSL).",
+        "es": "Borra esa versión de Ruby y todas las gemas instaladas en ella. Solo en bash o zsh: rbenv no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Apaga essa versão do Ruby e todas as gems instaladas nela. Só em bash ou zsh: o rbenv não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Supprime cette version de Ruby et toutes les gems qui y sont installées. Uniquement dans bash ou zsh : rbenv ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Löscht diese Ruby-Version samt allen darin installierten Gems. Nur in bash oder zsh: rbenv funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Elimina quella versione di Ruby e tutte le gem installate in essa. Solo in bash o zsh: rbenv non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "その Ruby のバージョンと、そこに入れたすべての gem を削除します。 bash か zsh 専用です。rbenv は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "그 Ruby 버전과 거기에 설치된 모든 gem을 삭제합니다. bash나 zsh 전용입니다. rbenv은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "删除该 Ruby 版本及其中安装的所有 gem。 仅限 bash 或 zsh：rbenv 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "刪除該 Ruby 版本及其中安裝的所有 gem。 僅限 bash 或 zsh：rbenv 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Удаляет эту версию Ruby вместе со всеми установленными в ней gem. Только в bash или zsh: rbenv не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "rbenv uninstall ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.3.6",
+            "es": "3.3.6",
+            "pt-br": "3.3.6",
+            "fr": "3.3.6",
+            "de": "3.3.6",
+            "it": "3.3.6",
+            "ja": "3.3.6",
+            "ko": "3.3.6",
+            "zh-cn": "3.3.6",
+            "zh-tw": "3.3.6",
+            "ru": "3.3.6"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rbenv", "ruby", "version", "uninstall", "remove"],
+        "es": ["rbenv", "ruby", "version", "uninstall", "versión", "desinstalar", "borrar"],
+        "pt-br": ["rbenv", "ruby", "version", "uninstall", "versão", "desinstalar", "apagar"],
+        "fr": ["rbenv", "ruby", "version", "uninstall", "désinstaller", "supprimer"],
+        "de": ["rbenv", "ruby", "version", "uninstall", "Version", "deinstallieren", "entfernen"],
+        "it": ["rbenv", "ruby", "version", "uninstall", "versione", "disinstallare", "eliminare"],
+        "ja": ["rbenv", "ruby", "version", "uninstall", "バージョン", "アンインストール", "削除"],
+        "ko": ["rbenv", "ruby", "version", "uninstall", "버전", "제거", "삭제"],
+        "zh-cn": ["rbenv", "ruby", "version", "uninstall", "版本", "卸载", "删除"],
+        "zh-tw": ["rbenv", "ruby", "version", "uninstall", "版本", "解除安裝", "刪除"],
+        "ru": ["rbenv", "ruby", "version", "uninstall", "версия", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://github.com/rbenv/rbenv#readme"
+    },
+    {
+      "id": "version-managers.asdf-plugin-add",
+      "title": {
+        "en": "asdf: add a plugin",
+        "es": "asdf: añadir un plugin",
+        "pt-br": "asdf: adicionar um plugin",
+        "fr": "asdf: ajouter un plugin",
+        "de": "asdf: Plugin hinzufügen",
+        "it": "asdf: aggiungi un plugin",
+        "ja": "asdf: プラグインを追加",
+        "ko": "asdf: 플러그인 추가",
+        "zh-cn": "asdf: 添加插件",
+        "zh-tw": "asdf: 新增外掛",
+        "ru": "asdf: добавить плагин"
+      },
+      "description": {
+        "en": "Adds the plugin of a tool, such as nodejs, python or ruby; it is needed before installing its versions. Only in bash or zsh: asdf does not work in PowerShell or cmd (use WSL).",
+        "es": "Añade el plugin de una herramienta, como nodejs, python o ruby; hace falta antes de instalar sus versiones. Solo en bash o zsh: asdf no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Adiciona o plugin de uma ferramenta, como nodejs, python ou ruby; é preciso antes de instalar suas versões. Só em bash ou zsh: o asdf não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Ajoute le plugin d’un outil, comme nodejs, python ou ruby ; nécessaire avant d’installer ses versions. Uniquement dans bash ou zsh : asdf ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Fügt das Plugin eines Werkzeugs wie nodejs, python oder ruby hinzu; nötig, bevor man Versionen installiert. Nur in bash oder zsh: asdf funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Aggiunge il plugin di uno strumento, come nodejs, python o ruby; serve prima di installarne le versioni. Solo in bash o zsh: asdf non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "nodejs、python、ruby などのツールのプラグインを追加します。バージョンを入れる前に必要です。 bash か zsh 専用です。asdf は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "nodejs, python, ruby 같은 도구의 플러그인을 추가합니다. 버전을 설치하기 전에 필요합니다. bash나 zsh 전용입니다. asdf은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "添加某个工具（如 nodejs、python、ruby）的插件；安装其版本前需要先添加。 仅限 bash 或 zsh：asdf 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "新增某個工具（如 nodejs、python、ruby）的外掛；安裝其版本前需要先新增。 僅限 bash 或 zsh：asdf 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Добавляет плагин инструмента, например nodejs, python или ruby; нужен до установки его версий. Только в bash или zsh: asdf не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "asdf plugin add ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "nodejs",
+            "es": "nodejs",
+            "pt-br": "nodejs",
+            "fr": "nodejs",
+            "de": "nodejs",
+            "it": "nodejs",
+            "ja": "nodejs",
+            "ko": "nodejs",
+            "zh-cn": "nodejs",
+            "zh-tw": "nodejs",
+            "ru": "nodejs"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["asdf", "version", ".tool-versions", "plugin", "add"],
+        "es": ["asdf", "version", ".tool-versions", "plugin", "add", "versión", "añadir"],
+        "pt-br": ["asdf", "version", ".tool-versions", "plugin", "add", "versão", "adicionar"],
+        "fr": ["asdf", "version", ".tool-versions", "plugin", "add", "ajouter"],
+        "de": ["asdf", "version", ".tool-versions", "plugin", "add", "Version", "Plugin", "hinzufügen"],
+        "it": ["asdf", "version", ".tool-versions", "plugin", "add", "versione", "aggiungere"],
+        "ja": ["asdf", "version", ".tool-versions", "plugin", "add", "バージョン", "プラグイン", "追加"],
+        "ko": ["asdf", "version", ".tool-versions", "plugin", "add", "버전", "플러그인", "추가"],
+        "zh-cn": ["asdf", "version", ".tool-versions", "plugin", "add", "版本", "插件", "添加"],
+        "zh-tw": ["asdf", "version", ".tool-versions", "plugin", "add", "版本", "外掛", "新增"],
+        "ru": ["asdf", "version", ".tool-versions", "plugin", "add", "версия", "плагин", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://asdf-vm.com/manage/commands.html"
+    },
+    {
+      "id": "version-managers.asdf-install",
+      "title": {
+        "en": "asdf: install a version of a tool",
+        "es": "asdf: instalar una versión de una herramienta",
+        "pt-br": "asdf: instalar uma versão de uma ferramenta",
+        "fr": "asdf: installer une version d’un outil",
+        "de": "asdf: Version eines Werkzeugs installieren",
+        "it": "asdf: installa una versione di uno strumento",
+        "ja": "asdf: ツールのバージョンをインストール",
+        "ko": "asdf: 도구 버전 설치",
+        "zh-cn": "asdf: 安装工具的某个版本",
+        "zh-tw": "asdf: 安裝工具的某個版本",
+        "ru": "asdf: установить версию инструмента"
+      },
+      "description": {
+        "en": "Installs that version of the tool; asdf install without arguments installs everything in .tool-versions. Only in bash or zsh: asdf does not work in PowerShell or cmd (use WSL).",
+        "es": "Instala esa versión de la herramienta; asdf install sin argumentos instala todo lo de .tool-versions. Solo en bash o zsh: asdf no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Instala essa versão da ferramenta; asdf install sem argumentos instala tudo do .tool-versions. Só em bash ou zsh: o asdf não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Installe cette version de l’outil ; asdf install sans argument installe tout .tool-versions. Uniquement dans bash ou zsh : asdf ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Installiert diese Version des Werkzeugs; asdf install ohne Argumente installiert alles aus .tool-versions. Nur in bash oder zsh: asdf funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Installa quella versione dello strumento; asdf install senza argomenti installa tutto .tool-versions. Solo in bash o zsh: asdf non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "ツールのそのバージョンを入れます。引数なしの asdf install は .tool-versions の全部を入れます。 bash か zsh 専用です。asdf は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "그 도구 버전을 설치합니다. 인수 없는 asdf install은 .tool-versions 전체를 설치합니다. bash나 zsh 전용입니다. asdf은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "安装该工具的此版本；不带参数的 asdf install 会安装 .tool-versions 中的全部内容。 仅限 bash 或 zsh：asdf 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "安裝該工具的此版本；不帶參數的 asdf install 會安裝 .tool-versions 中的全部內容。 僅限 bash 或 zsh：asdf 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Ставит эту версию инструмента; asdf install без аргументов ставит всё из .tool-versions. Только в bash или zsh: asdf не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "asdf install ${name} ${version}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "nodejs",
+            "es": "nodejs",
+            "pt-br": "nodejs",
+            "fr": "nodejs",
+            "de": "nodejs",
+            "it": "nodejs",
+            "ja": "nodejs",
+            "ko": "nodejs",
+            "zh-cn": "nodejs",
+            "zh-tw": "nodejs",
+            "ru": "nodejs"
+          }
+        },
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22.11.0",
+            "es": "22.11.0",
+            "pt-br": "22.11.0",
+            "fr": "22.11.0",
+            "de": "22.11.0",
+            "it": "22.11.0",
+            "ja": "22.11.0",
+            "ko": "22.11.0",
+            "zh-cn": "22.11.0",
+            "zh-tw": "22.11.0",
+            "ru": "22.11.0"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["asdf", "version", ".tool-versions", "install"],
+        "es": ["asdf", "version", ".tool-versions", "install", "versión", "instalar"],
+        "pt-br": ["asdf", "version", ".tool-versions", "install", "versão", "instalar"],
+        "fr": ["asdf", "version", ".tool-versions", "install", "installer"],
+        "de": ["asdf", "version", ".tool-versions", "install", "Version", "installieren"],
+        "it": ["asdf", "version", ".tool-versions", "install", "versione", "installare"],
+        "ja": ["asdf", "version", ".tool-versions", "install", "バージョン", "インストール"],
+        "ko": ["asdf", "version", ".tool-versions", "install", "버전", "설치"],
+        "zh-cn": ["asdf", "version", ".tool-versions", "install", "版本", "安装"],
+        "zh-tw": ["asdf", "version", ".tool-versions", "install", "版本", "安裝"],
+        "ru": ["asdf", "version", ".tool-versions", "install", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://asdf-vm.com/manage/commands.html"
+    },
+    {
+      "id": "version-managers.asdf-set",
+      "title": {
+        "en": "asdf: pin a version in the project",
+        "es": "asdf: fijar una versión en el proyecto",
+        "pt-br": "asdf: fixar uma versão no projeto",
+        "fr": "asdf: fixer une version dans le projet",
+        "de": "asdf: Version im Projekt festlegen",
+        "it": "asdf: fissa una versione nel progetto",
+        "ja": "asdf: プロジェクトでバージョンを固定",
+        "ko": "asdf: 프로젝트에 버전 고정",
+        "zh-cn": "asdf: 在项目中固定版本",
+        "zh-tw": "asdf: 在專案中固定版本",
+        "ru": "asdf: закрепить версию в проекте"
+      },
+      "description": {
+        "en": "Writes the version in .tool-versions in the current folder, creating it if it does not exist. Requires asdf 0.16 or later. Only in bash or zsh: asdf does not work in PowerShell or cmd (use WSL).",
+        "es": "Escribe la versión en .tool-versions de la carpeta actual, y lo crea si no existe. Requiere asdf 0.16 o posterior. Solo en bash o zsh: asdf no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Escreve a versão no .tool-versions da pasta atual, e o cria se não existir. Requer asdf 0.16 ou posterior. Só em bash ou zsh: o asdf não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Écrit la version dans .tool-versions du dossier actuel, en le créant s’il n’existe pas. Nécessite asdf 0.16 ou ultérieur. Uniquement dans bash ou zsh : asdf ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Schreibt die Version in .tool-versions im aktuellen Ordner und legt die Datei bei Bedarf an. Erfordert asdf 0.16 oder neuer. Nur in bash oder zsh: asdf funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Scrive la versione in .tool-versions della cartella attuale, creandolo se non esiste. Richiede asdf 0.16 o successivo. Solo in bash o zsh: asdf non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "現在のフォルダーの .tool-versions にバージョンを書きます。なければ作成します。 asdf 0.16 以降が必要です。 bash か zsh 専用です。asdf は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "현재 폴더의 .tool-versions에 버전을 쓰고, 없으면 만듭니다. asdf 0.16 이상이 필요합니다. bash나 zsh 전용입니다. asdf은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "把版本写入当前文件夹的 .tool-versions，不存在时创建。 需要 asdf 0.16 或更高版本。 仅限 bash 或 zsh：asdf 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "把版本寫入目前資料夾的 .tool-versions，不存在時建立。 需要 asdf 0.16 或更新版本。 僅限 bash 或 zsh：asdf 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Записывает версию в .tool-versions текущей папки и создаёт файл, если его нет. Нужен asdf 0.16 или новее. Только в bash или zsh: asdf не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "asdf set ${name} ${version}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "nodejs",
+            "es": "nodejs",
+            "pt-br": "nodejs",
+            "fr": "nodejs",
+            "de": "nodejs",
+            "it": "nodejs",
+            "ja": "nodejs",
+            "ko": "nodejs",
+            "zh-cn": "nodejs",
+            "zh-tw": "nodejs",
+            "ru": "nodejs"
+          }
+        },
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22.11.0",
+            "es": "22.11.0",
+            "pt-br": "22.11.0",
+            "fr": "22.11.0",
+            "de": "22.11.0",
+            "it": "22.11.0",
+            "ja": "22.11.0",
+            "ko": "22.11.0",
+            "zh-cn": "22.11.0",
+            "zh-tw": "22.11.0",
+            "ru": "22.11.0"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["asdf", "version", ".tool-versions", "set", "project", "local"],
+        "es": ["asdf", "version", ".tool-versions", "set", "versión", "proyecto", "local"],
+        "pt-br": ["asdf", "version", ".tool-versions", "set", "versão", "projeto", "local"],
+        "fr": ["asdf", "version", ".tool-versions", "set", "projet", "local"],
+        "de": ["asdf", "version", ".tool-versions", "set", "Version", "Projekt", "lokal"],
+        "it": ["asdf", "version", ".tool-versions", "set", "versione", "progetto", "locale"],
+        "ja": ["asdf", "version", ".tool-versions", "set", "バージョン", "プロジェクト", "ローカル"],
+        "ko": ["asdf", "version", ".tool-versions", "set", "버전", "프로젝트", "로컬"],
+        "zh-cn": ["asdf", "version", ".tool-versions", "set", "版本", "项目", "本地"],
+        "zh-tw": ["asdf", "version", ".tool-versions", "set", "版本", "專案", "本機"],
+        "ru": ["asdf", "version", ".tool-versions", "set", "версия", "проект", "локально"]
+      },
+      "risk": "safe",
+      "docs": "https://asdf-vm.com/manage/versions.html"
+    },
+    {
+      "id": "version-managers.asdf-set-home",
+      "title": {
+        "en": "asdf: set the default version",
+        "es": "asdf: fijar la versión por defecto",
+        "pt-br": "asdf: definir a versão padrão",
+        "fr": "asdf: définir la version par défaut",
+        "de": "asdf: Standardversion festlegen",
+        "it": "asdf: imposta la versione predefinita",
+        "ja": "asdf: 既定のバージョンを設定",
+        "ko": "asdf: 기본 버전 설정",
+        "zh-cn": "asdf: 设置默认版本",
+        "zh-tw": "asdf: 設定預設版本",
+        "ru": "asdf: задать версию по умолчанию"
+      },
+      "description": {
+        "en": "Writes the version in the .tool-versions of your home folder, used outside projects that pin their own. Requires asdf 0.16 or later. Only in bash or zsh: asdf does not work in PowerShell or cmd (use WSL).",
+        "es": "Escribe la versión en el .tool-versions de tu carpeta personal, que se usa fuera de los proyectos que fijan la suya. Requiere asdf 0.16 o posterior. Solo en bash o zsh: asdf no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Escreve a versão no .tool-versions da sua pasta pessoal, usado fora dos projetos que fixam a sua. Requer asdf 0.16 ou posterior. Só em bash ou zsh: o asdf não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Écrit la version dans le .tool-versions de votre dossier personnel, utilisé hors des projets qui fixent la leur. Nécessite asdf 0.16 ou ultérieur. Uniquement dans bash ou zsh : asdf ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Schreibt die Version in die .tool-versions im Home-Ordner; sie gilt außerhalb von Projekten mit eigener Version. Erfordert asdf 0.16 oder neuer. Nur in bash oder zsh: asdf funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Scrive la versione nel .tool-versions della tua cartella home, usato fuori dai progetti che fissano la propria. Richiede asdf 0.16 o successivo. Solo in bash o zsh: asdf non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "ホームフォルダーの .tool-versions にバージョンを書きます。独自の指定がないプロジェクト外で使われます。 asdf 0.16 以降が必要です。 bash か zsh 専用です。asdf は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "홈 폴더의 .tool-versions에 버전을 씁니다. 자체 버전이 없는 곳에서 쓰입니다. asdf 0.16 이상이 필요합니다. bash나 zsh 전용입니다. asdf은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "把版本写入主目录的 .tool-versions，在未固定版本的项目之外使用。 需要 asdf 0.16 或更高版本。 仅限 bash 或 zsh：asdf 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "把版本寫入主目錄的 .tool-versions，在未固定版本的專案之外使用。 需要 asdf 0.16 或更新版本。 僅限 bash 或 zsh：asdf 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Записывает версию в .tool-versions домашней папки; она действует вне проектов со своей версией. Нужен asdf 0.16 или новее. Только в bash или zsh: asdf не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "asdf set -u ${name} ${version}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "nodejs",
+            "es": "nodejs",
+            "pt-br": "nodejs",
+            "fr": "nodejs",
+            "de": "nodejs",
+            "it": "nodejs",
+            "ja": "nodejs",
+            "ko": "nodejs",
+            "zh-cn": "nodejs",
+            "zh-tw": "nodejs",
+            "ru": "nodejs"
+          }
+        },
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22.11.0",
+            "es": "22.11.0",
+            "pt-br": "22.11.0",
+            "fr": "22.11.0",
+            "de": "22.11.0",
+            "it": "22.11.0",
+            "ja": "22.11.0",
+            "ko": "22.11.0",
+            "zh-cn": "22.11.0",
+            "zh-tw": "22.11.0",
+            "ru": "22.11.0"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "global", "default"],
+        "es": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "versión", "global", "predeterminada"],
+        "pt-br": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "versão", "global", "padrão"],
+        "fr": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "global", "par défaut"],
+        "de": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "Version", "global", "Standard"],
+        "it": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "versione", "globale", "predefinita"],
+        "ja": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "バージョン", "グローバル", "既定"],
+        "ko": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "버전", "전역", "기본"],
+        "zh-cn": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "版本", "全局", "默认"],
+        "zh-tw": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "版本", "全域", "預設"],
+        "ru": ["asdf", "version", ".tool-versions", "set", "-u", "--home", "версия", "глобально", "по умолчанию"]
+      },
+      "risk": "caution",
+      "docs": "https://asdf-vm.com/manage/versions.html"
+    },
+    {
+      "id": "version-managers.asdf-list",
+      "title": {
+        "en": "asdf: list installed versions of a tool",
+        "es": "asdf: ver las versiones instaladas de una herramienta",
+        "pt-br": "asdf: ver as versões instaladas de uma ferramenta",
+        "fr": "asdf: lister les versions installées d’un outil",
+        "de": "asdf: installierte Versionen eines Werkzeugs anzeigen",
+        "it": "asdf: elenca le versioni installate di uno strumento",
+        "ja": "asdf: ツールのインストール済みバージョンを一覧表示",
+        "ko": "asdf: 도구의 설치된 버전 보기",
+        "zh-cn": "asdf: 列出工具已安装的版本",
+        "zh-tw": "asdf: 列出工具已安裝的版本",
+        "ru": "asdf: показать установленные версии инструмента"
+      },
+      "description": {
+        "en": "Lists the versions of that tool installed with asdf. Only in bash or zsh: asdf does not work in PowerShell or cmd (use WSL).",
+        "es": "Muestra las versiones de esa herramienta instaladas con asdf. Solo en bash o zsh: asdf no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Mostra as versões dessa ferramenta instaladas com o asdf. Só em bash ou zsh: o asdf não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Liste les versions de cet outil installées avec asdf. Uniquement dans bash ou zsh : asdf ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Listet die mit asdf installierten Versionen dieses Werkzeugs auf. Nur in bash oder zsh: asdf funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Elenca le versioni di quello strumento installate con asdf. Solo in bash o zsh: asdf non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "asdf で入れたそのツールのバージョンを表示します。 bash か zsh 専用です。asdf は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "asdf로 설치한 그 도구의 버전을 보여 줍니다. bash나 zsh 전용입니다. asdf은(는) PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "列出用 asdf 安装的该工具的版本。 仅限 bash 或 zsh：asdf 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "列出用 asdf 安裝的該工具的版本。 僅限 bash 或 zsh：asdf 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Показывает версии этого инструмента, установленные через asdf. Только в bash или zsh: asdf не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "asdf list ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "nodejs",
+            "es": "nodejs",
+            "pt-br": "nodejs",
+            "fr": "nodejs",
+            "de": "nodejs",
+            "it": "nodejs",
+            "ja": "nodejs",
+            "ko": "nodejs",
+            "zh-cn": "nodejs",
+            "zh-tw": "nodejs",
+            "ru": "nodejs"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["asdf", "version", ".tool-versions", "list", "installed"],
+        "es": ["asdf", "version", ".tool-versions", "list", "versión", "instaladas", "ver"],
+        "pt-br": ["asdf", "version", ".tool-versions", "list", "versão", "instaladas", "ver"],
+        "fr": ["asdf", "version", ".tool-versions", "list", "installées", "lister"],
+        "de": ["asdf", "version", ".tool-versions", "list", "Version", "installiert", "anzeigen"],
+        "it": ["asdf", "version", ".tool-versions", "list", "versione", "installate", "elencare"],
+        "ja": ["asdf", "version", ".tool-versions", "list", "バージョン", "インストール済み", "一覧"],
+        "ko": ["asdf", "version", ".tool-versions", "list", "버전", "설치됨", "목록"],
+        "zh-cn": ["asdf", "version", ".tool-versions", "list", "版本", "已安装", "列出"],
+        "zh-tw": ["asdf", "version", ".tool-versions", "list", "版本", "已安裝", "列出"],
+        "ru": ["asdf", "version", ".tool-versions", "list", "версия", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://asdf-vm.com/manage/commands.html"
+    },
+    {
+      "id": "version-managers.mise-activate",
+      "title": {
+        "en": "mise: activate in this session",
+        "es": "mise: activar en esta sesión",
+        "pt-br": "mise: ativar nesta sessão",
+        "fr": "mise: activer dans cette session",
+        "de": "mise: in dieser Sitzung aktivieren",
+        "it": "mise: attiva in questa sessione",
+        "ja": "mise: このセッションで有効化",
+        "ko": "mise: 이 세션에서 활성화",
+        "zh-cn": "mise: 在当前会话中激活",
+        "zh-tw": "mise: 在目前工作階段中啟用",
+        "ru": "mise: активировать в этом сеансе"
+      },
+      "description": {
+        "en": "Makes mise switch versions when you change folders; add it to your profile to keep it. In PowerShell it reacts on folder change only from version 7. cmd cannot be activated: add %LOCALAPPDATA%\\mise\\shims to the Path.",
+        "es": "Hace que mise cambie de versión al cambiar de carpeta; añádelo a tu perfil para conservarlo. En PowerShell reacciona al cambiar de carpeta solo desde la versión 7. cmd no se puede activar: añade %LOCALAPPDATA%\\mise\\shims al Path.",
+        "pt-br": "Faz o mise trocar de versão ao mudar de pasta; adicione ao seu perfil para manter. No PowerShell reage à mudança de pasta só a partir da versão 7. O cmd não pode ser ativado: adicione %LOCALAPPDATA%\\mise\\shims ao Path.",
+        "fr": "Fait changer mise de version quand vous changez de dossier ; ajoutez-le à votre profil pour le garder. Dans PowerShell, il réagit au changement de dossier seulement à partir de la version 7. cmd ne peut pas être activé : ajoutez %LOCALAPPDATA%\\mise\\shims au Path.",
+        "de": "Lässt mise beim Ordnerwechsel die Version wechseln; zum Behalten ins Profil eintragen. In PowerShell reagiert es erst ab Version 7 auf Ordnerwechsel. cmd lässt sich nicht aktivieren: %LOCALAPPDATA%\\mise\\shims zum Path hinzufügen.",
+        "it": "Fa cambiare versione a mise quando cambi cartella; aggiungilo al profilo per mantenerlo. In PowerShell reagisce al cambio di cartella solo dalla versione 7. cmd non si può attivare: aggiungi %LOCALAPPDATA%\\mise\\shims al Path.",
+        "ja": "フォルダー移動時に mise がバージョンを切り替えるようにします。保持するにはプロファイルに追加。PowerShell では 7 以降のみフォルダー移動に反応します。cmd は有効化できないので %LOCALAPPDATA%\\mise\\shims を Path に追加します。",
+        "ko": "폴더를 옮길 때 mise가 버전을 바꾸게 합니다. 유지하려면 프로필에 추가하세요. PowerShell은 7 이상에서만 폴더 이동에 반응합니다. cmd는 활성화할 수 없으니 %LOCALAPPDATA%\\mise\\shims를 Path에 추가하세요.",
+        "zh-cn": "让 mise 在切换文件夹时切换版本；要保留请加入配置文件。PowerShell 仅 7 及以上会在切换文件夹时响应。cmd 无法激活：请把 %LOCALAPPDATA%\\mise\\shims 加入 Path。",
+        "zh-tw": "讓 mise 在切換資料夾時切換版本；要保留請加入設定檔。PowerShell 僅 7 以上會在切換資料夾時回應。cmd 無法啟用：請把 %LOCALAPPDATA%\\mise\\shims 加入 Path。",
+        "ru": "Заставляет mise переключать версию при смене папки; чтобы сохранить, добавьте в профиль. В PowerShell реагирует на смену папки только с версии 7. cmd активировать нельзя: добавьте %LOCALAPPDATA%\\mise\\shims в Path."
+      },
+      "command": "eval \"$(mise activate bash)\"",
+      "tags": {
+        "en": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "session"],
+        "es": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "versión", "activar", "sesión"],
+        "pt-br": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "versão", "ativar", "sessão"],
+        "fr": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "activer", "session"],
+        "de": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "Version", "aktivieren", "Sitzung"],
+        "it": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "versione", "attivare", "sessione"],
+        "ja": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "バージョン", "有効化", "セッション"],
+        "ko": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "버전", "활성화", "세션"],
+        "zh-cn": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "版本", "激活", "会话"],
+        "zh-tw": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "版本", "啟用", "工作階段"],
+        "ru": ["mise", "version", "mise.toml", "activate", "shell", "profile", "shims", "версия", "активировать", "сеанс"]
+      },
+      "risk": "safe",
+      "shells": {
+        "zsh": "eval \"$(mise activate zsh)\"",
+        "powershell": "(&mise activate pwsh) | Out-String | Invoke-Expression"
+      },
+      "docs": "https://mise.jdx.dev/shell-setup.html"
+    },
+    {
+      "id": "version-managers.mise-use",
+      "title": {
+        "en": "mise: use a version in the project",
+        "es": "mise: usar una versión en el proyecto",
+        "pt-br": "mise: usar uma versão no projeto",
+        "fr": "mise: utiliser une version dans le projet",
+        "de": "mise: Version im Projekt verwenden",
+        "it": "mise: usa una versione nel progetto",
+        "ja": "mise: プロジェクトでバージョンを使用",
+        "ko": "mise: 프로젝트에서 버전 사용",
+        "zh-cn": "mise: 在项目中使用某个版本",
+        "zh-tw": "mise: 在專案中使用某個版本",
+        "ru": "mise: использовать версию в проекте"
+      },
+      "description": {
+        "en": "Installs the version if needed and writes it in mise.toml in the current folder",
+        "es": "Instala la versión si hace falta y la escribe en mise.toml de la carpeta actual",
+        "pt-br": "Instala a versão se necessário e a escreve no mise.toml da pasta atual",
+        "fr": "Installe la version si besoin et l’écrit dans mise.toml du dossier actuel",
+        "de": "Installiert die Version bei Bedarf und schreibt sie in mise.toml im aktuellen Ordner",
+        "it": "Installa la versione se serve e la scrive in mise.toml della cartella attuale",
+        "ja": "必要ならバージョンを入れ、現在のフォルダーの mise.toml に書きます",
+        "ko": "필요하면 버전을 설치하고 현재 폴더의 mise.toml에 씁니다",
+        "zh-cn": "必要时安装该版本，并写入当前文件夹的 mise.toml",
+        "zh-tw": "必要時安裝該版本，並寫入目前資料夾的 mise.toml",
+        "ru": "При необходимости ставит версию и записывает её в mise.toml текущей папки"
+      },
+      "command": "mise use ${tool}@${version}",
+      "params": [
+        {
+          "name": "tool",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "node",
+            "es": "node",
+            "pt-br": "node",
+            "fr": "node",
+            "de": "node",
+            "it": "node",
+            "ja": "node",
+            "ko": "node",
+            "zh-cn": "node",
+            "zh-tw": "node",
+            "ru": "node"
+          }
+        },
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["mise", "version", "mise.toml", "use", "project", "local"],
+        "es": ["mise", "version", "mise.toml", "use", "versión", "proyecto", "local"],
+        "pt-br": ["mise", "version", "mise.toml", "use", "versão", "projeto", "local"],
+        "fr": ["mise", "version", "mise.toml", "use", "projet", "local"],
+        "de": ["mise", "version", "mise.toml", "use", "Version", "Projekt", "lokal"],
+        "it": ["mise", "version", "mise.toml", "use", "versione", "progetto", "locale"],
+        "ja": ["mise", "version", "mise.toml", "use", "バージョン", "プロジェクト", "ローカル"],
+        "ko": ["mise", "version", "mise.toml", "use", "버전", "프로젝트", "로컬"],
+        "zh-cn": ["mise", "version", "mise.toml", "use", "版本", "项目", "本地"],
+        "zh-tw": ["mise", "version", "mise.toml", "use", "版本", "專案", "本機"],
+        "ru": ["mise", "version", "mise.toml", "use", "версия", "проект", "локально"]
+      },
+      "risk": "safe",
+      "docs": "https://mise.jdx.dev/cli/use.html"
+    },
+    {
+      "id": "version-managers.mise-install",
+      "title": {
+        "en": "mise: install the project tools",
+        "es": "mise: instalar las herramientas del proyecto",
+        "pt-br": "mise: instalar as ferramentas do projeto",
+        "fr": "mise: installer les outils du projet",
+        "de": "mise: Projektwerkzeuge installieren",
+        "it": "mise: installa gli strumenti del progetto",
+        "ja": "mise: プロジェクトのツールをインストール",
+        "ko": "mise: 프로젝트 도구 설치",
+        "zh-cn": "mise: 安装项目的工具",
+        "zh-tw": "mise: 安裝專案的工具",
+        "ru": "mise: установить инструменты проекта"
+      },
+      "description": {
+        "en": "Installs every version listed in mise.toml or .tool-versions that is missing",
+        "es": "Instala todas las versiones de mise.toml o .tool-versions que falten",
+        "pt-br": "Instala todas as versões do mise.toml ou .tool-versions que faltam",
+        "fr": "Installe toutes les versions manquantes de mise.toml ou .tool-versions",
+        "de": "Installiert alle fehlenden Versionen aus mise.toml oder .tool-versions",
+        "it": "Installa tutte le versioni mancanti di mise.toml o .tool-versions",
+        "ja": "mise.toml や .tool-versions にあって未インストールのバージョンをすべて入れます",
+        "ko": "mise.toml이나 .tool-versions에 있는 빠진 버전을 모두 설치합니다",
+        "zh-cn": "安装 mise.toml 或 .tool-versions 中缺少的所有版本",
+        "zh-tw": "安裝 mise.toml 或 .tool-versions 中缺少的所有版本",
+        "ru": "Ставит все недостающие версии из mise.toml или .tool-versions"
+      },
+      "command": "mise install",
+      "tags": {
+        "en": ["mise", "version", "mise.toml", "install", ".tool-versions"],
+        "es": ["mise", "version", "mise.toml", "install", ".tool-versions", "versión", "instalar"],
+        "pt-br": ["mise", "version", "mise.toml", "install", ".tool-versions", "versão", "instalar"],
+        "fr": ["mise", "version", "mise.toml", "install", ".tool-versions", "installer"],
+        "de": ["mise", "version", "mise.toml", "install", ".tool-versions", "Version", "installieren"],
+        "it": ["mise", "version", "mise.toml", "install", ".tool-versions", "versione", "installare"],
+        "ja": ["mise", "version", "mise.toml", "install", ".tool-versions", "バージョン", "インストール"],
+        "ko": ["mise", "version", "mise.toml", "install", ".tool-versions", "버전", "설치"],
+        "zh-cn": ["mise", "version", "mise.toml", "install", ".tool-versions", "版本", "安装"],
+        "zh-tw": ["mise", "version", "mise.toml", "install", ".tool-versions", "版本", "安裝"],
+        "ru": ["mise", "version", "mise.toml", "install", ".tool-versions", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://mise.jdx.dev/cli/install.html"
+    },
+    {
+      "id": "version-managers.mise-ls",
+      "title": {
+        "en": "mise: list installed versions",
+        "es": "mise: ver las versiones instaladas",
+        "pt-br": "mise: ver as versões instaladas",
+        "fr": "mise: lister les versions installées",
+        "de": "mise: installierte Versionen anzeigen",
+        "it": "mise: elenca le versioni installate",
+        "ja": "mise: インストール済みのバージョンを一覧表示",
+        "ko": "mise: 설치된 버전 보기",
+        "zh-cn": "mise: 列出已安装的版本",
+        "zh-tw": "mise: 列出已安裝的版本",
+        "ru": "mise: показать установленные версии"
+      },
+      "description": {
+        "en": "Lists the tools and versions installed with mise and which ones are active here",
+        "es": "Muestra las herramientas y versiones instaladas con mise y cuáles están activas aquí",
+        "pt-br": "Mostra as ferramentas e versões instaladas com o mise e quais estão ativas aqui",
+        "fr": "Liste les outils et versions installés avec mise et ceux actifs ici",
+        "de": "Listet die mit mise installierten Werkzeuge und Versionen und welche hier aktiv sind",
+        "it": "Elenca strumenti e versioni installati con mise e quali sono attivi qui",
+        "ja": "mise で入れたツールとバージョン、ここで有効なものを表示します",
+        "ko": "mise로 설치한 도구와 버전, 여기서 활성인 것을 보여 줍니다",
+        "zh-cn": "列出用 mise 安装的工具和版本，以及此处正在使用哪些",
+        "zh-tw": "列出用 mise 安裝的工具和版本，以及此處正在使用哪些",
+        "ru": "Показывает инструменты и версии, установленные mise, и какие активны здесь"
+      },
+      "command": "mise ls",
+      "tags": {
+        "en": ["mise", "version", "mise.toml", "ls", "list", "installed"],
+        "es": ["mise", "version", "mise.toml", "ls", "list", "versión", "instaladas", "ver"],
+        "pt-br": ["mise", "version", "mise.toml", "ls", "list", "versão", "instaladas", "ver"],
+        "fr": ["mise", "version", "mise.toml", "ls", "list", "installées", "lister"],
+        "de": ["mise", "version", "mise.toml", "ls", "list", "Version", "installiert", "anzeigen"],
+        "it": ["mise", "version", "mise.toml", "ls", "list", "versione", "installate", "elencare"],
+        "ja": ["mise", "version", "mise.toml", "ls", "list", "バージョン", "インストール済み", "一覧"],
+        "ko": ["mise", "version", "mise.toml", "ls", "list", "버전", "설치됨", "목록"],
+        "zh-cn": ["mise", "version", "mise.toml", "ls", "list", "版本", "已安装", "列出"],
+        "zh-tw": ["mise", "version", "mise.toml", "ls", "list", "版本", "已安裝", "列出"],
+        "ru": ["mise", "version", "mise.toml", "ls", "list", "версия", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://mise.jdx.dev/cli/ls.html"
+    },
+    {
+      "id": "version-managers.mise-uninstall",
+      "title": {
+        "en": "mise: uninstall a version",
+        "es": "mise: desinstalar una versión",
+        "pt-br": "mise: desinstalar uma versão",
+        "fr": "mise: désinstaller une version",
+        "de": "mise: Version deinstallieren",
+        "it": "mise: disinstalla una versione",
+        "ja": "mise: バージョンをアンインストール",
+        "ko": "mise: 버전 제거",
+        "zh-cn": "mise: 卸载某个版本",
+        "zh-tw": "mise: 解除安裝某個版本",
+        "ru": "mise: удалить версию"
+      },
+      "description": {
+        "en": "Deletes that installed version of the tool; projects that pin it will need it installed again",
+        "es": "Borra esa versión instalada de la herramienta; los proyectos que la fijen tendrán que volver a instalarla",
+        "pt-br": "Apaga essa versão instalada da ferramenta; os projetos que a fixam precisarão reinstalá-la",
+        "fr": "Supprime cette version installée de l’outil ; les projets qui la fixent devront la réinstaller",
+        "de": "Löscht diese installierte Version des Werkzeugs; Projekte, die sie festlegen, müssen sie neu installieren",
+        "it": "Elimina quella versione installata dello strumento; i progetti che la fissano dovranno reinstallarla",
+        "ja": "ツールのそのバージョンを削除します。固定しているプロジェクトでは再インストールが必要です",
+        "ko": "설치된 그 도구 버전을 삭제합니다. 이를 고정한 프로젝트는 다시 설치해야 합니다",
+        "zh-cn": "删除该工具的这个已安装版本；固定使用它的项目需要重新安装",
+        "zh-tw": "刪除該工具的這個已安裝版本；固定使用它的專案需要重新安裝",
+        "ru": "Удаляет эту установленную версию инструмента; проектам, где она закреплена, придётся ставить её снова"
+      },
+      "command": "mise uninstall ${tool}@${version}",
+      "params": [
+        {
+          "name": "tool",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "node",
+            "es": "node",
+            "pt-br": "node",
+            "fr": "node",
+            "de": "node",
+            "it": "node",
+            "ja": "node",
+            "ko": "node",
+            "zh-cn": "node",
+            "zh-tw": "node",
+            "ru": "node"
+          }
+        },
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["mise", "version", "mise.toml", "uninstall", "remove"],
+        "es": ["mise", "version", "mise.toml", "uninstall", "versión", "desinstalar", "borrar"],
+        "pt-br": ["mise", "version", "mise.toml", "uninstall", "versão", "desinstalar", "apagar"],
+        "fr": ["mise", "version", "mise.toml", "uninstall", "désinstaller", "supprimer"],
+        "de": ["mise", "version", "mise.toml", "uninstall", "Version", "deinstallieren", "entfernen"],
+        "it": ["mise", "version", "mise.toml", "uninstall", "versione", "disinstallare", "eliminare"],
+        "ja": ["mise", "version", "mise.toml", "uninstall", "バージョン", "アンインストール", "削除"],
+        "ko": ["mise", "version", "mise.toml", "uninstall", "버전", "제거", "삭제"],
+        "zh-cn": ["mise", "version", "mise.toml", "uninstall", "版本", "卸载", "删除"],
+        "zh-tw": ["mise", "version", "mise.toml", "uninstall", "版本", "解除安裝", "刪除"],
+        "ru": ["mise", "version", "mise.toml", "uninstall", "версия", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://mise.jdx.dev/cli/uninstall.html"
     }
   ]
 }

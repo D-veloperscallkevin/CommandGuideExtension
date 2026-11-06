@@ -26,7 +26,7 @@ Las señales SHALL ser:
 - `bun.lock`, `bun.lockb` o `bunfig.toml` → `bun`;
 - `deno.json`, `deno.jsonc` o `deno.lock` → `deno`;
 - cualquier `tsconfig*.json` (`tsconfig.json`, `tsconfig.build.json`…) → `typescript`;
-- `.nvmrc`, `.node-version`, `.python-version` o `.sdkmanrc` → `version-managers`;
+- `.nvmrc`, `.node-version`, `.python-version`, `.sdkmanrc`, `.ruby-version`, `.tool-versions`, `mise.toml` o `.mise.toml` → `version-managers`;
 - `pyproject.toml`, cualquier `requirements*.txt` (`requirements.txt`, `requirements-dev.txt`…), `setup.py`, `setup.cfg`, `Pipfile` o `.python-version` → `python`;
 - `poetry.lock` → `poetry`;
 - `uv.lock` → `uv`;
@@ -38,11 +38,16 @@ Las señales SHALL ser:
 - cualquier `*.c`, `*.cpp`, `*.h` o `*.hpp` → `c-cpp`;
 - `CMakeLists.txt`, `CMakePresets.json` o `CMakeUserPresets.json` → `cmake`;
 - `go.mod`, `go.sum` o `go.work` → `go`;
-- `Cargo.toml`, `Cargo.lock`, `rust-toolchain.toml` o `rust-toolchain` → `rust`.
+- `Cargo.toml`, `Cargo.lock`, `rust-toolchain.toml` o `rust-toolchain` → `rust`;
+- `composer.json`, `composer.lock` o cualquier `*.php` → `php`;
+- `Gemfile`, `Gemfile.lock`, `Rakefile`, cualquier `*.gemspec` o `.ruby-version` → `ruby`;
+- `pubspec.yaml` o `pubspec.lock` → `dart`;
+- `pubspec.yaml` → `flutter`;
+- `Package.swift`, o cualquier `*.xcodeproj` o `*.xcworkspace` → `swift`.
 
 Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes.
 
-Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, y `pom.xml` detecta `java` y `maven`.
+Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, `.ruby-version` detecta `ruby` y `version-managers`, `pom.xml` detecta `java` y `maven`, y `pubspec.yaml` detecta `dart` y `flutter`.
 
 Con varias carpetas en el workspace, las categorías detectadas SHALL ser la unión de las de todas. La categoría `terminal` MUST NOT detectarse nunca. Sin carpetas abiertas, no SHALL detectarse ninguna categoría. Las categorías propias del usuario MUST NOT detectarse. Si no se puede leer la raíz de una carpeta o falla una comprobación (por ejemplo, por falta de permisos), SHALL tratarse como si la entrada no existiera, sin aviso al usuario. La detección MUST NOT necesitar leer los archivos del catálogo, que solo se cargan bajo demanda.
 
@@ -161,6 +166,26 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Proyecto de Rust
 - **WHEN** la raíz contiene `Cargo.toml`, `Cargo.lock` y `rust-toolchain.toml`
 - **THEN** la única categoría detectada es `rust`
+
+#### Scenario: Proyecto Laravel
+- **WHEN** la raíz contiene `composer.json`, `composer.lock` y `artisan`
+- **THEN** la única categoría detectada es `php`
+
+#### Scenario: Proyecto Rails con versión de Ruby fijada
+- **WHEN** la raíz contiene `Gemfile`, `Gemfile.lock`, `Rakefile` y `.ruby-version`
+- **THEN** las categorías detectadas son `ruby` y `version-managers`
+
+#### Scenario: Proyecto Flutter en Windows y en Linux
+- **WHEN** la raíz contiene `pubspec.yaml` y `pubspec.lock`, tanto en Windows con PowerShell como en Linux con bash
+- **THEN** las categorías detectadas son `dart` y `flutter` en los dos casos
+
+#### Scenario: Paquete de Swift
+- **WHEN** la raíz contiene solo `Package.swift`
+- **THEN** la única categoría detectada es `swift`
+
+#### Scenario: Versiones fijadas con asdf o mise
+- **WHEN** una carpeta del workspace contiene solo `.tool-versions` y otra contiene solo `mise.toml`
+- **THEN** la única categoría detectada es `version-managers`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

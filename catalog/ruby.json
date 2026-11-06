@@ -1,0 +1,961 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "ruby",
+  "title": {
+    "en": "Ruby",
+    "es": "Ruby",
+    "pt-br": "Ruby",
+    "fr": "Ruby",
+    "de": "Ruby",
+    "it": "Ruby",
+    "ja": "Ruby",
+    "ko": "Ruby",
+    "zh-cn": "Ruby",
+    "zh-tw": "Ruby",
+    "ru": "Ruby"
+  },
+  "icon": "ruby",
+  "order": 66,
+  "section": "languages",
+  "detect": ["Gemfile", "Gemfile.lock", "Rakefile", "*.gemspec", ".ruby-version"],
+  "commands": [
+    {
+      "id": "ruby.version",
+      "title": {
+        "en": "Show the Ruby version",
+        "es": "Ver la versión de Ruby",
+        "pt-br": "Ver a versão do Ruby",
+        "fr": "Afficher la version de Ruby",
+        "de": "Ruby-Version anzeigen",
+        "it": "Mostra la versione di Ruby",
+        "ja": "Ruby のバージョンを表示",
+        "ko": "Ruby 버전 보기",
+        "zh-cn": "查看 Ruby 版本",
+        "zh-tw": "檢視 Ruby 版本",
+        "ru": "Показать версию Ruby"
+      },
+      "description": {
+        "en": "Prints the version of the Ruby interpreter in the PATH",
+        "es": "Muestra la versión del intérprete de Ruby que hay en el PATH",
+        "pt-br": "Mostra a versão do interpretador Ruby no PATH",
+        "fr": "Affiche la version de l’interpréteur Ruby du PATH",
+        "de": "Zeigt die Version des Ruby-Interpreters im PATH",
+        "it": "Mostra la versione dell’interprete Ruby nel PATH",
+        "ja": "PATH にある Ruby インタープリターのバージョンを表示します",
+        "ko": "PATH에 있는 Ruby 인터프리터 버전을 보여 줍니다",
+        "zh-cn": "显示 PATH 中 Ruby 解释器的版本",
+        "zh-tw": "顯示 PATH 中 Ruby 直譯器的版本",
+        "ru": "Показывает версию интерпретатора Ruby из PATH"
+      },
+      "command": "ruby -v",
+      "tags": {
+        "en": ["ruby", "-v", "--version", "version"],
+        "es": ["ruby", "-v", "--version", "versión"],
+        "pt-br": ["ruby", "-v", "--version", "versão"],
+        "fr": ["ruby", "-v", "--version", "version"],
+        "de": ["ruby", "-v", "--version", "Version"],
+        "it": ["ruby", "-v", "--version", "versione"],
+        "ja": ["ruby", "-v", "--version", "バージョン"],
+        "ko": ["ruby", "-v", "--version", "버전"],
+        "zh-cn": ["ruby", "-v", "--version", "版本"],
+        "zh-tw": ["ruby", "-v", "--version", "版本"],
+        "ru": ["ruby", "-v", "--version", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.ruby-lang.org/en/master/ruby/options_md.html"
+    },
+    {
+      "id": "ruby.run",
+      "title": {
+        "en": "Run a Ruby file",
+        "es": "Ejecutar un archivo Ruby",
+        "pt-br": "Executar um arquivo Ruby",
+        "fr": "Exécuter un fichier Ruby",
+        "de": "Ruby-Datei ausführen",
+        "it": "Esegui un file Ruby",
+        "ja": "Ruby ファイルを実行",
+        "ko": "Ruby 파일 실행",
+        "zh-cn": "运行 Ruby 文件",
+        "zh-tw": "執行 Ruby 檔案",
+        "ru": "Запустить файл Ruby"
+      },
+      "description": {
+        "en": "Runs a Ruby script with the interpreter in the PATH",
+        "es": "Ejecuta un script de Ruby con el intérprete del PATH",
+        "pt-br": "Executa um script Ruby com o interpretador do PATH",
+        "fr": "Exécute un script Ruby avec l’interpréteur du PATH",
+        "de": "Führt ein Ruby-Skript mit dem Interpreter im PATH aus",
+        "it": "Esegue uno script Ruby con l’interprete nel PATH",
+        "ja": "PATH にあるインタープリターで Ruby スクリプトを実行します",
+        "ko": "PATH의 인터프리터로 Ruby 스크립트를 실행합니다",
+        "zh-cn": "用 PATH 中的解释器运行 Ruby 脚本",
+        "zh-tw": "用 PATH 中的直譯器執行 Ruby 指令碼",
+        "ru": "Запускает сценарий Ruby интерпретатором из PATH"
+      },
+      "command": "ruby ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "app.rb",
+            "es": "app.rb",
+            "pt-br": "app.rb",
+            "fr": "app.rb",
+            "de": "app.rb",
+            "it": "app.rb",
+            "ja": "app.rb",
+            "ko": "app.rb",
+            "zh-cn": "app.rb",
+            "zh-tw": "app.rb",
+            "ru": "app.rb"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "run", "script", "execute"],
+        "es": ["ruby", "run", "script", "ejecutar"],
+        "pt-br": ["ruby", "run", "script", "executar"],
+        "fr": ["ruby", "run", "script", "exécuter"],
+        "de": ["ruby", "run", "script", "ausführen"],
+        "it": ["ruby", "run", "script", "eseguire"],
+        "ja": ["ruby", "run", "script", "実行"],
+        "ko": ["ruby", "run", "script", "실행"],
+        "zh-cn": ["ruby", "run", "script", "运行"],
+        "zh-tw": ["ruby", "run", "script", "執行"],
+        "ru": ["ruby", "run", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.ruby-lang.org/en/master/ruby/options_md.html"
+    },
+    {
+      "id": "ruby.check-syntax",
+      "title": {
+        "en": "Check the syntax of a file",
+        "es": "Comprobar la sintaxis de un archivo",
+        "pt-br": "Verificar a sintaxe de um arquivo",
+        "fr": "Vérifier la syntaxe d’un fichier",
+        "de": "Syntax einer Datei prüfen",
+        "it": "Controlla la sintassi di un file",
+        "ja": "ファイルの構文を検査",
+        "ko": "파일 구문 검사",
+        "zh-cn": "检查文件语法",
+        "zh-tw": "檢查檔案語法",
+        "ru": "Проверить синтаксис файла"
+      },
+      "description": {
+        "en": "Checks the file for syntax errors without running it; prints Syntax OK if there are none",
+        "es": "Busca errores de sintaxis en el archivo sin ejecutarlo; si no hay, muestra Syntax OK",
+        "pt-br": "Procura erros de sintaxe no arquivo sem executá-lo; se não houver, mostra Syntax OK",
+        "fr": "Cherche des erreurs de syntaxe sans exécuter le fichier ; affiche Syntax OK s’il n’y en a pas",
+        "de": "Prüft die Datei auf Syntaxfehler, ohne sie auszuführen; ohne Fehler erscheint Syntax OK",
+        "it": "Cerca errori di sintassi senza eseguire il file; se non ce ne sono, mostra Syntax OK",
+        "ja": "ファイルを実行せずに構文エラーを検査します。問題がなければ Syntax OK と表示します",
+        "ko": "파일을 실행하지 않고 구문 오류를 검사하며, 없으면 Syntax OK를 표시합니다",
+        "zh-cn": "检查文件的语法错误而不运行；没有错误时显示 Syntax OK",
+        "zh-tw": "檢查檔案的語法錯誤而不執行；沒有錯誤時顯示 Syntax OK",
+        "ru": "Проверяет синтаксис файла, не запуская его; если ошибок нет, выводит Syntax OK"
+      },
+      "command": "ruby -c ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "app.rb",
+            "es": "app.rb",
+            "pt-br": "app.rb",
+            "fr": "app.rb",
+            "de": "app.rb",
+            "it": "app.rb",
+            "ja": "app.rb",
+            "ko": "app.rb",
+            "zh-cn": "app.rb",
+            "zh-tw": "app.rb",
+            "ru": "app.rb"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "-c", "syntax", "lint", "check"],
+        "es": ["ruby", "-c", "syntax", "lint", "sintaxis", "comprobar"],
+        "pt-br": ["ruby", "-c", "syntax", "lint", "sintaxe", "verificar"],
+        "fr": ["ruby", "-c", "syntax", "lint", "syntaxe", "vérifier"],
+        "de": ["ruby", "-c", "syntax", "lint", "Syntax", "prüfen"],
+        "it": ["ruby", "-c", "syntax", "lint", "sintassi", "controllare"],
+        "ja": ["ruby", "-c", "syntax", "lint", "構文", "検査"],
+        "ko": ["ruby", "-c", "syntax", "lint", "구문", "검사"],
+        "zh-cn": ["ruby", "-c", "syntax", "lint", "语法", "检查"],
+        "zh-tw": ["ruby", "-c", "syntax", "lint", "語法", "檢查"],
+        "ru": ["ruby", "-c", "syntax", "lint", "синтаксис", "проверка"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.ruby-lang.org/en/master/ruby/options_md.html"
+    },
+    {
+      "id": "ruby.irb",
+      "title": {
+        "en": "Open the interactive console (irb)",
+        "es": "Abrir la consola interactiva (irb)",
+        "pt-br": "Abrir o console interativo (irb)",
+        "fr": "Ouvrir la console interactive (irb)",
+        "de": "Interaktive Konsole öffnen (irb)",
+        "it": "Apri la console interattiva (irb)",
+        "ja": "対話コンソールを開く (irb)",
+        "ko": "대화형 콘솔 열기 (irb)",
+        "zh-cn": "打开交互式控制台 (irb)",
+        "zh-tw": "開啟互動式主控台 (irb)",
+        "ru": "Открыть интерактивную консоль (irb)"
+      },
+      "description": {
+        "en": "Starts irb to try Ruby code line by line; type exit to leave",
+        "es": "Abre irb para probar código Ruby línea a línea; escribe exit para salir",
+        "pt-br": "Abre o irb para testar código Ruby linha a linha; digite exit para sair",
+        "fr": "Ouvre irb pour essayer du code Ruby ligne par ligne ; tapez exit pour quitter",
+        "de": "Startet irb, um Ruby-Code zeilenweise auszuprobieren; mit exit beenden",
+        "it": "Apre irb per provare codice Ruby riga per riga; scrivi exit per uscire",
+        "ja": "irb を起動し、Ruby のコードを 1 行ずつ試します。exit で終了",
+        "ko": "irb를 열어 Ruby 코드를 한 줄씩 시험합니다. exit로 나갑니다",
+        "zh-cn": "启动 irb 逐行试运行 Ruby 代码；输入 exit 退出",
+        "zh-tw": "啟動 irb 逐行試跑 Ruby 程式碼；輸入 exit 離開",
+        "ru": "Запускает irb для пошаговой проверки кода Ruby; для выхода введите exit"
+      },
+      "command": "irb",
+      "tags": {
+        "en": ["ruby", "irb", "repl", "interactive", "console"],
+        "es": ["ruby", "irb", "repl", "interactivo", "consola"],
+        "pt-br": ["ruby", "irb", "repl", "interativo", "console"],
+        "fr": ["ruby", "irb", "repl", "interactif", "console"],
+        "de": ["ruby", "irb", "repl", "interaktiv", "Konsole"],
+        "it": ["ruby", "irb", "repl", "interattivo", "console"],
+        "ja": ["ruby", "irb", "repl", "対話", "コンソール"],
+        "ko": ["ruby", "irb", "repl", "대화형", "콘솔"],
+        "zh-cn": ["ruby", "irb", "repl", "交互式", "控制台"],
+        "zh-tw": ["ruby", "irb", "repl", "互動式", "主控台"],
+        "ru": ["ruby", "irb", "repl", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "docs": "https://ruby.github.io/irb/"
+    },
+    {
+      "id": "ruby.gem-install",
+      "title": {
+        "en": "Install a gem",
+        "es": "Instalar una gema",
+        "pt-br": "Instalar uma gem",
+        "fr": "Installer une gem",
+        "de": "Gem installieren",
+        "it": "Installa una gem",
+        "ja": "gem をインストール",
+        "ko": "gem 설치",
+        "zh-cn": "安装 gem",
+        "zh-tw": "安裝 gem",
+        "ru": "Установить gem"
+      },
+      "description": {
+        "en": "Installs a gem for the current Ruby, outside the Gemfile; in a project, prefer bundle add",
+        "es": "Instala una gema para el Ruby actual, fuera del Gemfile; en un proyecto, mejor bundle add",
+        "pt-br": "Instala uma gem para o Ruby atual, fora do Gemfile; num projeto, prefira bundle add",
+        "fr": "Installe une gem pour le Ruby actuel, hors du Gemfile ; dans un projet, préférez bundle add",
+        "de": "Installiert ein Gem für das aktuelle Ruby außerhalb des Gemfile; im Projekt besser bundle add",
+        "it": "Installa una gem per il Ruby attuale, fuori dal Gemfile; in un progetto, meglio bundle add",
+        "ja": "現在の Ruby に Gemfile の外で gem をインストールします。プロジェクトでは bundle add を推奨",
+        "ko": "Gemfile 밖에서 현재 Ruby에 gem을 설치합니다. 프로젝트에서는 bundle add를 권장합니다",
+        "zh-cn": "为当前 Ruby 安装 gem（不经过 Gemfile）；项目中建议用 bundle add",
+        "zh-tw": "為目前的 Ruby 安裝 gem（不經過 Gemfile）；專案中建議用 bundle add",
+        "ru": "Ставит gem для текущего Ruby в обход Gemfile; в проекте лучше bundle add"
+      },
+      "command": "gem install ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "rails",
+            "es": "rails",
+            "pt-br": "rails",
+            "fr": "rails",
+            "de": "rails",
+            "it": "rails",
+            "ja": "rails",
+            "ko": "rails",
+            "zh-cn": "rails",
+            "zh-tw": "rails",
+            "ru": "rails"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "gem", "install", "package"],
+        "es": ["ruby", "gem", "install", "instalar", "gema", "paquete"],
+        "pt-br": ["ruby", "gem", "install", "instalar", "pacote"],
+        "fr": ["ruby", "gem", "install", "installer", "paquet"],
+        "de": ["ruby", "gem", "install", "installieren", "Paket"],
+        "it": ["ruby", "gem", "install", "installare", "pacchetto"],
+        "ja": ["ruby", "gem", "install", "インストール", "パッケージ"],
+        "ko": ["ruby", "gem", "install", "설치", "패키지"],
+        "zh-cn": ["ruby", "gem", "install", "安装", "包"],
+        "zh-tw": ["ruby", "gem", "install", "安裝", "套件"],
+        "ru": ["ruby", "gem", "install", "установить", "пакет"]
+      },
+      "risk": "caution",
+      "docs": "https://guides.rubygems.org/command-reference/#gem-install"
+    },
+    {
+      "id": "ruby.gem-list",
+      "title": {
+        "en": "List the installed gems",
+        "es": "Ver las gemas instaladas",
+        "pt-br": "Ver as gems instaladas",
+        "fr": "Lister les gems installées",
+        "de": "Installierte Gems anzeigen",
+        "it": "Elenca le gem installate",
+        "ja": "インストール済みの gem を一覧表示",
+        "ko": "설치된 gem 보기",
+        "zh-cn": "列出已安装的 gem",
+        "zh-tw": "列出已安裝的 gem",
+        "ru": "Показать установленные gem"
+      },
+      "description": {
+        "en": "Lists the gems installed for the current Ruby and their versions",
+        "es": "Muestra las gemas instaladas para el Ruby actual y sus versiones",
+        "pt-br": "Mostra as gems instaladas para o Ruby atual e suas versões",
+        "fr": "Liste les gems installées pour le Ruby actuel et leurs versions",
+        "de": "Listet die für das aktuelle Ruby installierten Gems und ihre Versionen auf",
+        "it": "Elenca le gem installate per il Ruby attuale e le loro versioni",
+        "ja": "現在の Ruby にインストールされた gem とバージョンを表示します",
+        "ko": "현재 Ruby에 설치된 gem과 버전을 보여 줍니다",
+        "zh-cn": "列出当前 Ruby 已安装的 gem 及其版本",
+        "zh-tw": "列出目前 Ruby 已安裝的 gem 及其版本",
+        "ru": "Показывает gem, установленные для текущего Ruby, и их версии"
+      },
+      "command": "gem list",
+      "tags": {
+        "en": ["ruby", "gem", "list", "installed"],
+        "es": ["ruby", "gem", "list", "gemas", "instaladas"],
+        "pt-br": ["ruby", "gem", "list", "instaladas"],
+        "fr": ["ruby", "gem", "list", "installées"],
+        "de": ["ruby", "gem", "list", "installiert"],
+        "it": ["ruby", "gem", "list", "installate"],
+        "ja": ["ruby", "gem", "list", "インストール済み"],
+        "ko": ["ruby", "gem", "list", "설치됨"],
+        "zh-cn": ["ruby", "gem", "list", "已安装"],
+        "zh-tw": ["ruby", "gem", "list", "已安裝"],
+        "ru": ["ruby", "gem", "list", "установленные"]
+      },
+      "risk": "safe",
+      "docs": "https://guides.rubygems.org/command-reference/#gem-list"
+    },
+    {
+      "id": "ruby.gem-uninstall",
+      "title": {
+        "en": "Uninstall a gem",
+        "es": "Desinstalar una gema",
+        "pt-br": "Desinstalar uma gem",
+        "fr": "Désinstaller une gem",
+        "de": "Gem deinstallieren",
+        "it": "Disinstalla una gem",
+        "ja": "gem をアンインストール",
+        "ko": "gem 제거",
+        "zh-cn": "卸载 gem",
+        "zh-tw": "解除安裝 gem",
+        "ru": "Удалить gem"
+      },
+      "description": {
+        "en": "Removes a gem from the current Ruby; projects that use it will fail until it is installed again",
+        "es": "Borra una gema del Ruby actual; los proyectos que la usen fallarán hasta volver a instalarla",
+        "pt-br": "Apaga uma gem do Ruby atual; os projetos que a usam falharão até reinstalá-la",
+        "fr": "Supprime une gem du Ruby actuel ; les projets qui l’utilisent échoueront jusqu’à sa réinstallation",
+        "de": "Entfernt ein Gem aus dem aktuellen Ruby; Projekte, die es nutzen, schlagen fehl, bis es neu installiert ist",
+        "it": "Elimina una gem dal Ruby attuale; i progetti che la usano falliranno finché non la reinstalli",
+        "ja": "現在の Ruby から gem を削除します。使っているプロジェクトは再インストールまで失敗します",
+        "ko": "현재 Ruby에서 gem을 삭제합니다. 이를 쓰는 프로젝트는 다시 설치할 때까지 실패합니다",
+        "zh-cn": "从当前 Ruby 删除 gem；使用它的项目在重新安装前会失败",
+        "zh-tw": "從目前 Ruby 刪除 gem；使用它的專案在重新安裝前會失敗",
+        "ru": "Удаляет gem из текущего Ruby; проекты, которые его используют, будут падать до переустановки"
+      },
+      "command": "gem uninstall ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "rails",
+            "es": "rails",
+            "pt-br": "rails",
+            "fr": "rails",
+            "de": "rails",
+            "it": "rails",
+            "ja": "rails",
+            "ko": "rails",
+            "zh-cn": "rails",
+            "zh-tw": "rails",
+            "ru": "rails"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "gem", "uninstall", "remove", "delete"],
+        "es": ["ruby", "gem", "uninstall", "remove", "desinstalar", "borrar"],
+        "pt-br": ["ruby", "gem", "uninstall", "remove", "desinstalar", "apagar"],
+        "fr": ["ruby", "gem", "uninstall", "remove", "désinstaller", "supprimer"],
+        "de": ["ruby", "gem", "uninstall", "remove", "deinstallieren", "entfernen"],
+        "it": ["ruby", "gem", "uninstall", "remove", "disinstallare", "eliminare"],
+        "ja": ["ruby", "gem", "uninstall", "remove", "アンインストール", "削除"],
+        "ko": ["ruby", "gem", "uninstall", "remove", "제거", "삭제"],
+        "zh-cn": ["ruby", "gem", "uninstall", "remove", "卸载", "删除"],
+        "zh-tw": ["ruby", "gem", "uninstall", "remove", "解除安裝", "刪除"],
+        "ru": ["ruby", "gem", "uninstall", "remove", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://guides.rubygems.org/command-reference/#gem-uninstall"
+    },
+    {
+      "id": "ruby.bundle-install",
+      "title": {
+        "en": "Install the Gemfile dependencies",
+        "es": "Instalar las dependencias del Gemfile",
+        "pt-br": "Instalar as dependências do Gemfile",
+        "fr": "Installer les dépendances du Gemfile",
+        "de": "Gemfile-Abhängigkeiten installieren",
+        "it": "Installa le dipendenze del Gemfile",
+        "ja": "Gemfile の依存関係をインストール",
+        "ko": "Gemfile 의존성 설치",
+        "zh-cn": "安装 Gemfile 的依赖",
+        "zh-tw": "安裝 Gemfile 的相依套件",
+        "ru": "Установить зависимости из Gemfile"
+      },
+      "description": {
+        "en": "Installs the gems of the Gemfile with the versions of Gemfile.lock, creating it if it does not exist",
+        "es": "Instala las gemas del Gemfile con las versiones de Gemfile.lock, y lo crea si no existe",
+        "pt-br": "Instala as gems do Gemfile com as versões do Gemfile.lock, e o cria se não existir",
+        "fr": "Installe les gems du Gemfile aux versions de Gemfile.lock, et le crée s’il n’existe pas",
+        "de": "Installiert die Gems des Gemfile mit den Versionen aus Gemfile.lock und legt es an, falls es fehlt",
+        "it": "Installa le gem del Gemfile con le versioni di Gemfile.lock, e lo crea se non esiste",
+        "ja": "Gemfile.lock のバージョンで Gemfile の gem をインストールします。lock がなければ作成します",
+        "ko": "Gemfile.lock의 버전으로 Gemfile의 gem을 설치하고, 없으면 lock을 만듭니다",
+        "zh-cn": "按 Gemfile.lock 的版本安装 Gemfile 中的 gem；不存在时创建它",
+        "zh-tw": "按 Gemfile.lock 的版本安裝 Gemfile 中的 gem；不存在時建立它",
+        "ru": "Ставит gem из Gemfile в версиях из Gemfile.lock и создаёт его, если его нет"
+      },
+      "command": "bundle install",
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "dependencies"],
+        "es": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "instalar", "dependencias"],
+        "pt-br": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "instalar", "dependências"],
+        "fr": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "installer", "dépendances"],
+        "de": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "installieren", "Abhängigkeiten"],
+        "it": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "installare", "dipendenze"],
+        "ja": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "インストール", "依存関係"],
+        "ko": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "설치", "의존성"],
+        "zh-cn": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "安装", "依赖"],
+        "zh-tw": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "安裝", "相依套件"],
+        "ru": ["ruby", "bundle", "bundler", "install", "Gemfile", "Gemfile.lock", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-install.1.html"
+    },
+    {
+      "id": "ruby.bundle-add",
+      "title": {
+        "en": "Add a gem to the Gemfile",
+        "es": "Añadir una gema al Gemfile",
+        "pt-br": "Adicionar uma gem ao Gemfile",
+        "fr": "Ajouter une gem au Gemfile",
+        "de": "Gem zum Gemfile hinzufügen",
+        "it": "Aggiungi una gem al Gemfile",
+        "ja": "Gemfile に gem を追加",
+        "ko": "Gemfile에 gem 추가",
+        "zh-cn": "向 Gemfile 添加 gem",
+        "zh-tw": "向 Gemfile 新增 gem",
+        "ru": "Добавить gem в Gemfile"
+      },
+      "description": {
+        "en": "Adds the gem to the Gemfile and installs it",
+        "es": "Añade la gema al Gemfile y la instala",
+        "pt-br": "Adiciona a gem ao Gemfile e a instala",
+        "fr": "Ajoute la gem au Gemfile et l’installe",
+        "de": "Fügt das Gem zum Gemfile hinzu und installiert es",
+        "it": "Aggiunge la gem al Gemfile e la installa",
+        "ja": "gem を Gemfile に追加してインストールします",
+        "ko": "gem을 Gemfile에 추가하고 설치합니다",
+        "zh-cn": "将 gem 添加到 Gemfile 并安装",
+        "zh-tw": "將 gem 新增到 Gemfile 並安裝",
+        "ru": "Добавляет gem в Gemfile и устанавливает его"
+      },
+      "command": "bundle add ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "rspec",
+            "es": "rspec",
+            "pt-br": "rspec",
+            "fr": "rspec",
+            "de": "rspec",
+            "it": "rspec",
+            "ja": "rspec",
+            "ko": "rspec",
+            "zh-cn": "rspec",
+            "zh-tw": "rspec",
+            "ru": "rspec"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "add", "Gemfile", "dependency"],
+        "es": ["ruby", "bundle", "bundler", "add", "Gemfile", "añadir", "dependencia"],
+        "pt-br": ["ruby", "bundle", "bundler", "add", "Gemfile", "adicionar", "dependência"],
+        "fr": ["ruby", "bundle", "bundler", "add", "Gemfile", "ajouter", "dépendance"],
+        "de": ["ruby", "bundle", "bundler", "add", "Gemfile", "hinzufügen", "Abhängigkeit"],
+        "it": ["ruby", "bundle", "bundler", "add", "Gemfile", "aggiungere", "dipendenza"],
+        "ja": ["ruby", "bundle", "bundler", "add", "Gemfile", "追加", "依存関係"],
+        "ko": ["ruby", "bundle", "bundler", "add", "Gemfile", "추가", "의존성"],
+        "zh-cn": ["ruby", "bundle", "bundler", "add", "Gemfile", "添加", "依赖"],
+        "zh-tw": ["ruby", "bundle", "bundler", "add", "Gemfile", "新增", "相依套件"],
+        "ru": ["ruby", "bundle", "bundler", "add", "Gemfile", "добавить", "зависимость"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-add.1.html"
+    },
+    {
+      "id": "ruby.bundle-update",
+      "title": {
+        "en": "Update the gems",
+        "es": "Actualizar las gemas",
+        "pt-br": "Atualizar as gems",
+        "fr": "Mettre à jour les gems",
+        "de": "Gems aktualisieren",
+        "it": "Aggiorna le gem",
+        "ja": "gem を更新",
+        "ko": "gem 업데이트",
+        "zh-cn": "更新 gem",
+        "zh-tw": "更新 gem",
+        "ru": "Обновить gem"
+      },
+      "description": {
+        "en": "Updates all gems to the newest versions the Gemfile allows and rewrites Gemfile.lock",
+        "es": "Actualiza todas las gemas a las versiones más nuevas que permite el Gemfile y reescribe Gemfile.lock",
+        "pt-br": "Atualiza todas as gems para as versões mais novas que o Gemfile permite e reescreve o Gemfile.lock",
+        "fr": "Met à jour toutes les gems vers les versions les plus récentes permises par le Gemfile et réécrit Gemfile.lock",
+        "de": "Aktualisiert alle Gems auf die neuesten vom Gemfile erlaubten Versionen und schreibt Gemfile.lock neu",
+        "it": "Aggiorna tutte le gem alle versioni più recenti consentite dal Gemfile e riscrive Gemfile.lock",
+        "ja": "Gemfile が許す最新バージョンにすべての gem を更新し、Gemfile.lock を書き直します",
+        "ko": "Gemfile이 허용하는 최신 버전으로 모든 gem을 업데이트하고 Gemfile.lock을 다시 씁니다",
+        "zh-cn": "将所有 gem 更新到 Gemfile 允许的最新版本，并重写 Gemfile.lock",
+        "zh-tw": "將所有 gem 更新到 Gemfile 允許的最新版本，並重寫 Gemfile.lock",
+        "ru": "Обновляет все gem до новейших версий, допустимых Gemfile, и переписывает Gemfile.lock"
+      },
+      "command": "bundle update",
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock"],
+        "es": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "actualizar"],
+        "pt-br": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "atualizar"],
+        "fr": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "mettre à jour"],
+        "de": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "aktualisieren"],
+        "it": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "aggiornare"],
+        "ja": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "更新"],
+        "ko": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "업데이트"],
+        "zh-cn": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "更新"],
+        "zh-tw": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "更新"],
+        "ru": ["ruby", "bundle", "bundler", "update", "upgrade", "Gemfile.lock", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://bundler.io/man/bundle-update.1.html"
+    },
+    {
+      "id": "ruby.bundle-exec",
+      "title": {
+        "en": "Run a command with the project gems",
+        "es": "Ejecutar un comando con las gemas del proyecto",
+        "pt-br": "Executar um comando com as gems do projeto",
+        "fr": "Exécuter une commande avec les gems du projet",
+        "de": "Befehl mit den Projekt-Gems ausführen",
+        "it": "Esegui un comando con le gem del progetto",
+        "ja": "プロジェクトの gem でコマンドを実行",
+        "ko": "프로젝트 gem으로 명령 실행",
+        "zh-cn": "用项目的 gem 运行命令",
+        "zh-tw": "用專案的 gem 執行命令",
+        "ru": "Запустить команду с gem проекта"
+      },
+      "description": {
+        "en": "Runs the command with the exact gem versions of Gemfile.lock, such as rspec or rails",
+        "es": "Ejecuta el comando con las versiones exactas de Gemfile.lock, como rspec o rails",
+        "pt-br": "Executa o comando com as versões exatas do Gemfile.lock, como rspec ou rails",
+        "fr": "Exécute la commande avec les versions exactes de Gemfile.lock, comme rspec ou rails",
+        "de": "Führt den Befehl mit den exakten Gem-Versionen aus Gemfile.lock aus, etwa rspec oder rails",
+        "it": "Esegue il comando con le versioni esatte di Gemfile.lock, come rspec o rails",
+        "ja": "rspec や rails などのコマンドを、Gemfile.lock の正確なバージョンで実行します",
+        "ko": "rspec, rails 같은 명령을 Gemfile.lock의 정확한 버전으로 실행합니다",
+        "zh-cn": "用 Gemfile.lock 中的确切版本运行命令，例如 rspec 或 rails",
+        "zh-tw": "用 Gemfile.lock 中的確切版本執行命令，例如 rspec 或 rails",
+        "ru": "Запускает команду с точными версиями gem из Gemfile.lock, например rspec или rails"
+      },
+      "command": "bundle exec ${command}",
+      "params": [
+        {
+          "name": "command",
+          "label": {
+            "en": "Command",
+            "es": "Comando",
+            "pt-br": "Comando",
+            "fr": "Commande",
+            "de": "Befehl",
+            "it": "Comando",
+            "ja": "コマンド",
+            "ko": "명령",
+            "zh-cn": "命令",
+            "zh-tw": "命令",
+            "ru": "Команда"
+          },
+          "placeholder": {
+            "en": "rspec",
+            "es": "rspec",
+            "pt-br": "rspec",
+            "fr": "rspec",
+            "de": "rspec",
+            "it": "rspec",
+            "ja": "rspec",
+            "ko": "rspec",
+            "zh-cn": "rspec",
+            "zh-tw": "rspec",
+            "ru": "rspec"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "exec", "rspec", "run"],
+        "es": ["ruby", "bundle", "bundler", "exec", "rspec", "ejecutar"],
+        "pt-br": ["ruby", "bundle", "bundler", "exec", "rspec", "executar"],
+        "fr": ["ruby", "bundle", "bundler", "exec", "rspec", "exécuter"],
+        "de": ["ruby", "bundle", "bundler", "exec", "rspec", "ausführen"],
+        "it": ["ruby", "bundle", "bundler", "exec", "rspec", "eseguire"],
+        "ja": ["ruby", "bundle", "bundler", "exec", "rspec", "実行"],
+        "ko": ["ruby", "bundle", "bundler", "exec", "rspec", "실행"],
+        "zh-cn": ["ruby", "bundle", "bundler", "exec", "rspec", "运行"],
+        "zh-tw": ["ruby", "bundle", "bundler", "exec", "rspec", "執行"],
+        "ru": ["ruby", "bundle", "bundler", "exec", "rspec", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-exec.1.html"
+    },
+    {
+      "id": "ruby.bundle-outdated",
+      "title": {
+        "en": "List outdated gems",
+        "es": "Ver gemas desactualizadas",
+        "pt-br": "Ver gems desatualizadas",
+        "fr": "Lister les gems obsolètes",
+        "de": "Veraltete Gems anzeigen",
+        "it": "Elenca le gem obsolete",
+        "ja": "古い gem を一覧表示",
+        "ko": "오래된 gem 보기",
+        "zh-cn": "列出过时的 gem",
+        "zh-tw": "列出過時的 gem",
+        "ru": "Показать устаревшие gem"
+      },
+      "description": {
+        "en": "Shows the gems of the Gemfile that have newer versions, without changing anything",
+        "es": "Muestra las gemas del Gemfile que tienen versiones más nuevas, sin cambiar nada",
+        "pt-br": "Mostra as gems do Gemfile que têm versões mais novas, sem alterar nada",
+        "fr": "Affiche les gems du Gemfile qui ont des versions plus récentes, sans rien modifier",
+        "de": "Zeigt die Gems im Gemfile mit neueren Versionen, ohne etwas zu ändern",
+        "it": "Mostra le gem del Gemfile che hanno versioni più recenti, senza modificare nulla",
+        "ja": "新しいバージョンがある Gemfile の gem を、何も変更せずに表示します",
+        "ko": "새 버전이 있는 Gemfile의 gem을 아무것도 바꾸지 않고 보여 줍니다",
+        "zh-cn": "显示 Gemfile 中有更新版本的 gem，不做任何修改",
+        "zh-tw": "顯示 Gemfile 中有更新版本的 gem，不做任何修改",
+        "ru": "Показывает gem из Gemfile, для которых есть новые версии, ничего не меняя"
+      },
+      "command": "bundle outdated",
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "outdated", "versions"],
+        "es": ["ruby", "bundle", "bundler", "outdated", "desactualizadas", "versiones"],
+        "pt-br": ["ruby", "bundle", "bundler", "outdated", "desatualizadas", "versões"],
+        "fr": ["ruby", "bundle", "bundler", "outdated", "obsolètes", "versions"],
+        "de": ["ruby", "bundle", "bundler", "outdated", "veraltet", "Versionen"],
+        "it": ["ruby", "bundle", "bundler", "outdated", "obsolete", "versioni"],
+        "ja": ["ruby", "bundle", "bundler", "outdated", "古い", "バージョン"],
+        "ko": ["ruby", "bundle", "bundler", "outdated", "오래된", "버전"],
+        "zh-cn": ["ruby", "bundle", "bundler", "outdated", "过时", "版本"],
+        "zh-tw": ["ruby", "bundle", "bundler", "outdated", "過時", "版本"],
+        "ru": ["ruby", "bundle", "bundler", "outdated", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-outdated.1.html"
+    },
+    {
+      "id": "ruby.bundle-init",
+      "title": {
+        "en": "Create a Gemfile",
+        "es": "Crear un Gemfile",
+        "pt-br": "Criar um Gemfile",
+        "fr": "Créer un Gemfile",
+        "de": "Gemfile erstellen",
+        "it": "Crea un Gemfile",
+        "ja": "Gemfile を作成",
+        "ko": "Gemfile 만들기",
+        "zh-cn": "创建 Gemfile",
+        "zh-tw": "建立 Gemfile",
+        "ru": "Создать Gemfile"
+      },
+      "description": {
+        "en": "Creates an empty Gemfile in the current folder to start managing gems with Bundler",
+        "es": "Crea un Gemfile vacío en la carpeta actual para empezar a gestionar gemas con Bundler",
+        "pt-br": "Cria um Gemfile vazio na pasta atual para começar a gerenciar gems com o Bundler",
+        "fr": "Crée un Gemfile vide dans le dossier actuel pour gérer les gems avec Bundler",
+        "de": "Legt im aktuellen Ordner ein leeres Gemfile an, um Gems mit Bundler zu verwalten",
+        "it": "Crea un Gemfile vuoto nella cartella attuale per gestire le gem con Bundler",
+        "ja": "現在のフォルダーに空の Gemfile を作成し、Bundler で gem を管理し始めます",
+        "ko": "현재 폴더에 빈 Gemfile을 만들어 Bundler로 gem 관리를 시작합니다",
+        "zh-cn": "在当前文件夹创建空的 Gemfile，开始用 Bundler 管理 gem",
+        "zh-tw": "在目前資料夾建立空的 Gemfile，開始用 Bundler 管理 gem",
+        "ru": "Создаёт пустой Gemfile в текущей папке, чтобы управлять gem через Bundler"
+      },
+      "command": "bundle init",
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "init", "Gemfile", "new"],
+        "es": ["ruby", "bundle", "bundler", "init", "Gemfile", "crear", "nuevo"],
+        "pt-br": ["ruby", "bundle", "bundler", "init", "Gemfile", "criar", "novo"],
+        "fr": ["ruby", "bundle", "bundler", "init", "Gemfile", "créer", "nouveau"],
+        "de": ["ruby", "bundle", "bundler", "init", "Gemfile", "erstellen", "neu"],
+        "it": ["ruby", "bundle", "bundler", "init", "Gemfile", "creare", "nuovo"],
+        "ja": ["ruby", "bundle", "bundler", "init", "Gemfile", "作成", "新規"],
+        "ko": ["ruby", "bundle", "bundler", "init", "Gemfile", "만들기", "새"],
+        "zh-cn": ["ruby", "bundle", "bundler", "init", "Gemfile", "创建", "新建"],
+        "zh-tw": ["ruby", "bundle", "bundler", "init", "Gemfile", "建立", "新增"],
+        "ru": ["ruby", "bundle", "bundler", "init", "Gemfile", "создать", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-init.1.html"
+    },
+    {
+      "id": "ruby.bundle-path",
+      "title": {
+        "en": "Install gems inside the project",
+        "es": "Instalar las gemas dentro del proyecto",
+        "pt-br": "Instalar as gems dentro do projeto",
+        "fr": "Installer les gems dans le projet",
+        "de": "Gems im Projekt installieren",
+        "it": "Installa le gem nel progetto",
+        "ja": "gem をプロジェクト内にインストール",
+        "ko": "gem을 프로젝트 안에 설치",
+        "zh-cn": "将 gem 安装到项目内",
+        "zh-tw": "將 gem 安裝到專案內",
+        "ru": "Ставить gem внутрь проекта"
+      },
+      "description": {
+        "en": "Configures Bundler, for this project only, to install the gems in vendor/bundle instead of the system",
+        "es": "Configura Bundler, solo en este proyecto, para instalar las gemas en vendor/bundle en vez de en el sistema",
+        "pt-br": "Configura o Bundler, só neste projeto, para instalar as gems em vendor/bundle em vez do sistema",
+        "fr": "Configure Bundler, pour ce projet seulement, pour installer les gems dans vendor/bundle plutôt que dans le système",
+        "de": "Stellt Bundler nur für dieses Projekt so ein, dass Gems in vendor/bundle statt im System landen",
+        "it": "Configura Bundler, solo per questo progetto, per installare le gem in vendor/bundle invece che nel sistema",
+        "ja": "このプロジェクトだけ、gem をシステムではなく vendor/bundle にインストールするよう Bundler を設定します",
+        "ko": "이 프로젝트에서만 gem을 시스템 대신 vendor/bundle에 설치하도록 Bundler를 설정합니다",
+        "zh-cn": "仅为此项目配置 Bundler，将 gem 安装到 vendor/bundle 而不是系统中",
+        "zh-tw": "僅為此專案設定 Bundler，將 gem 安裝到 vendor/bundle 而不是系統中",
+        "ru": "Настраивает Bundler только для этого проекта: gem ставятся в vendor/bundle, а не в систему"
+      },
+      "command": "bundle config set --local path vendor/bundle",
+      "tags": {
+        "en": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "local"],
+        "es": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "configurar", "local"],
+        "pt-br": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "configurar", "local"],
+        "fr": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "configurer", "local"],
+        "de": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "konfigurieren", "lokal"],
+        "it": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "configurare", "locale"],
+        "ja": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "設定", "ローカル"],
+        "ko": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "설정", "로컬"],
+        "zh-cn": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "配置", "本地"],
+        "zh-tw": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "設定", "本機"],
+        "ru": ["ruby", "bundle", "bundler", "config", "path", "vendor/bundle", "--local", "настроить", "локально"]
+      },
+      "risk": "safe",
+      "docs": "https://bundler.io/man/bundle-config.1.html"
+    },
+    {
+      "id": "ruby.rake-tasks",
+      "title": {
+        "en": "List the Rake tasks",
+        "es": "Ver las tareas de Rake",
+        "pt-br": "Ver as tarefas do Rake",
+        "fr": "Lister les tâches Rake",
+        "de": "Rake-Aufgaben anzeigen",
+        "it": "Elenca le attività Rake",
+        "ja": "Rake のタスクを一覧表示",
+        "ko": "Rake 작업 보기",
+        "zh-cn": "列出 Rake 任务",
+        "zh-tw": "列出 Rake 工作",
+        "ru": "Показать задачи Rake"
+      },
+      "description": {
+        "en": "Lists the tasks defined in the Rakefile with their descriptions",
+        "es": "Muestra las tareas definidas en el Rakefile con su descripción",
+        "pt-br": "Mostra as tarefas definidas no Rakefile com sua descrição",
+        "fr": "Liste les tâches définies dans le Rakefile avec leur description",
+        "de": "Listet die im Rakefile definierten Aufgaben mit ihrer Beschreibung auf",
+        "it": "Elenca le attività definite nel Rakefile con la loro descrizione",
+        "ja": "Rakefile に定義されたタスクを説明付きで表示します",
+        "ko": "Rakefile에 정의된 작업을 설명과 함께 보여 줍니다",
+        "zh-cn": "列出 Rakefile 中定义的任务及其说明",
+        "zh-tw": "列出 Rakefile 中定義的工作及其說明",
+        "ru": "Показывает задачи из Rakefile с их описанием"
+      },
+      "command": "rake -T",
+      "tags": {
+        "en": ["ruby", "rake", "-T", "Rakefile", "tasks"],
+        "es": ["ruby", "rake", "-T", "Rakefile", "tareas"],
+        "pt-br": ["ruby", "rake", "-T", "Rakefile", "tarefas"],
+        "fr": ["ruby", "rake", "-T", "Rakefile", "tâches"],
+        "de": ["ruby", "rake", "-T", "Rakefile", "Aufgaben"],
+        "it": ["ruby", "rake", "-T", "Rakefile", "attività"],
+        "ja": ["ruby", "rake", "-T", "Rakefile", "タスク"],
+        "ko": ["ruby", "rake", "-T", "Rakefile", "작업"],
+        "zh-cn": ["ruby", "rake", "-T", "Rakefile", "任务"],
+        "zh-tw": ["ruby", "rake", "-T", "Rakefile", "工作"],
+        "ru": ["ruby", "rake", "-T", "Rakefile", "задачи"]
+      },
+      "risk": "safe",
+      "docs": "https://ruby.github.io/rake/doc/command_line_usage_rdoc.html"
+    },
+    {
+      "id": "ruby.rake-run",
+      "title": {
+        "en": "Run a Rake task",
+        "es": "Ejecutar una tarea de Rake",
+        "pt-br": "Executar uma tarefa do Rake",
+        "fr": "Exécuter une tâche Rake",
+        "de": "Rake-Aufgabe ausführen",
+        "it": "Esegui un’attività Rake",
+        "ja": "Rake のタスクを実行",
+        "ko": "Rake 작업 실행",
+        "zh-cn": "运行 Rake 任务",
+        "zh-tw": "執行 Rake 工作",
+        "ru": "Запустить задачу Rake"
+      },
+      "description": {
+        "en": "Runs a task of the Rakefile, such as test",
+        "es": "Ejecuta una tarea del Rakefile, como test",
+        "pt-br": "Executa uma tarefa do Rakefile, como test",
+        "fr": "Exécute une tâche du Rakefile, comme test",
+        "de": "Führt eine Aufgabe des Rakefile aus, etwa test",
+        "it": "Esegue un’attività del Rakefile, come test",
+        "ja": "Rakefile のタスク（test など）を実行します",
+        "ko": "Rakefile의 작업(예: test)을 실행합니다",
+        "zh-cn": "运行 Rakefile 中的任务，例如 test",
+        "zh-tw": "執行 Rakefile 中的工作，例如 test",
+        "ru": "Запускает задачу из Rakefile, например test"
+      },
+      "command": "rake ${task}",
+      "params": [
+        {
+          "name": "task",
+          "label": {
+            "en": "Task name",
+            "es": "Nombre de la tarea",
+            "pt-br": "Nome da tarefa",
+            "fr": "Nom de la tâche",
+            "de": "Aufgabenname",
+            "it": "Nome dell’attività",
+            "ja": "タスク名",
+            "ko": "작업 이름",
+            "zh-cn": "任务名称",
+            "zh-tw": "工作名稱",
+            "ru": "Имя задачи"
+          },
+          "placeholder": {
+            "en": "test",
+            "es": "test",
+            "pt-br": "test",
+            "fr": "test",
+            "de": "test",
+            "it": "test",
+            "ja": "test",
+            "ko": "test",
+            "zh-cn": "test",
+            "zh-tw": "test",
+            "ru": "test"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["ruby", "rake", "Rakefile", "task", "run"],
+        "es": ["ruby", "rake", "Rakefile", "tarea", "ejecutar"],
+        "pt-br": ["ruby", "rake", "Rakefile", "tarefa", "executar"],
+        "fr": ["ruby", "rake", "Rakefile", "tâche", "exécuter"],
+        "de": ["ruby", "rake", "Rakefile", "Aufgabe", "ausführen"],
+        "it": ["ruby", "rake", "Rakefile", "attività", "eseguire"],
+        "ja": ["ruby", "rake", "Rakefile", "タスク", "実行"],
+        "ko": ["ruby", "rake", "Rakefile", "작업", "실행"],
+        "zh-cn": ["ruby", "rake", "Rakefile", "任务", "运行"],
+        "zh-tw": ["ruby", "rake", "Rakefile", "工作", "執行"],
+        "ru": ["ruby", "rake", "Rakefile", "задача", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://ruby.github.io/rake/doc/command_line_usage_rdoc.html"
+    }
+  ]
+}
