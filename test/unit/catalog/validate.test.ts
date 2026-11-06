@@ -13,6 +13,11 @@ describe('checkCatalogRules', () => {
 		expect(errors).toEqual(['custom-tools: el prefijo "custom-" está reservado para los comandos propios']);
 	});
 
+	it.each(['..', '.', '../go.mod', 'prisma/..', './go.mod'])('rechaza el patrón de detección %s', (pattern) => {
+		const category = { ...makeCategory('go', [makeCommand({ id: 'go.build' })]), detect: ['go.mod', pattern] };
+		expect(checkCatalogRules([category])).toEqual([`go: patrón de detección no admitido "${pattern}"`]);
+	});
+
 	it('detecta un id duplicado entre categorías', () => {
 		const errors = checkCatalogRules([
 			makeCategory('git', [makeCommand({ id: 'git.status' })]),

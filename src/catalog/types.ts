@@ -62,6 +62,8 @@ export interface Category {
 	readonly icon: string;
 	readonly order: number;
 	readonly section: SectionId;
+	/** Patrones de detección del proyecto (ver `catalog/schema.json`); sin ellos, la categoría no se detecta. */
+	readonly detect?: readonly string[];
 	readonly commands: readonly Command[];
 }
 

@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Changed
 
+- La detección del proyecto reconoce más archivos: `.nvmrc` y `.node-version` (Node), `npm-shrinkwrap.json` (npm), `pnpm-workspace.yaml` (pnpm), y `Containerfile` y `.dockerignore` (Docker). Ya no distingue mayúsculas, así que `dockerfile` cuenta igual en Windows que en Linux. Cada categoría del catálogo declara sus señales en el campo `detect`, que admite comodines (`*.csproj`) y rutas de un nivel (`prisma/schema.prisma`).
 - El catálogo ya no va dentro del código de la extensión: se lee de `dist/catalog/` la primera vez que abres el panel o el buscador, no al arrancar VS Code. Desaparece el encabezado "Todas".
 - El indicador "Ejemplos para: …" pasa a "Terminal: …", en la misma fila que el botón Sponsor, con el nombre del shell en su color (PowerShell azul, bash verde, zsh morado, cmd amarillo, según el tema). El buscador queda más separado de esa fila y de la lista.
 

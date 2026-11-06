@@ -18,6 +18,33 @@ function copyCatalog() {
 	}
 }
 
+/**
+ * `virtual:project-signals`: los `detect` de cada categoría del catálogo, para que la detección
+ * del proyecto funcione al activar sin leer dist/catalog/ (D2 de project-signals). Declara los
+ * JSON en `watchFiles`, así el modo watch lo regenera al editar uno.
+ * @type {import('esbuild').Plugin}
+ */
+const projectSignalsPlugin = {
+	name: 'project-signals',
+	setup(build) {
+		build.onResolve({ filter: /^virtual:project-signals$/ }, (args) => ({ path: args.path, namespace: 'project-signals' }));
+		build.onLoad({ filter: /.*/, namespace: 'project-signals' }, () => {
+			const dir = path.join(__dirname, 'catalog');
+			const files = fs
+				.readdirSync(dir)
+				.filter((file) => file.endsWith('.json') && file !== 'schema.json')
+				.sort()
+				.map((file) => path.join(dir, file));
+			const entries = files
+				.map((file) => JSON.parse(fs.readFileSync(file, 'utf8')))
+				.filter((category) => Array.isArray(category.detect))
+				.map((category) => ({ id: category.id, detect: category.detect }))
+				.sort((a, b) => a.id.localeCompare(b.id));
+			return { contents: `export default ${JSON.stringify(entries)};`, loader: 'js', watchFiles: files, watchDirs: [dir] };
+		});
+	},
+};
+
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
 
@@ -57,6 +84,7 @@ async function main() {
 		external: ['vscode'],
 		logLevel: 'silent',
 		plugins: [
+			projectSignalsPlugin,
 			/* add to the end of plugins array */
 			esbuildProblemMatcherPlugin,
 		],

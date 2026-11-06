@@ -103,6 +103,10 @@ describe('contenido mínimo', () => {
 		expect(removeDirectoryFor('zsh')).toMatch(/^rm -rf /);
 	});
 
+	it('Terminal no declara patrones de detección', () => {
+		expect(bundledCatalog.find((c) => c.id === 'terminal')?.detect).toBeUndefined();
+	});
+
 	it('todos los comandos de Terminal tienen variante de cmd', () => {
 		const terminal = bundledCatalog.find((c) => c.id === 'terminal');
 		const withoutCmd = (terminal?.commands ?? []).filter((cmd) => !cmd.shells?.cmd);

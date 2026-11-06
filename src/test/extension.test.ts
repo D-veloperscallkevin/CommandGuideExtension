@@ -36,6 +36,9 @@ suite('Vista lateral', () => {
 		assert.strictEqual(extension.isActive, true, 'debe activarse al terminar el arranque');
 		const api = extension.exports;
 		assert.strictEqual(api.isCatalogLoaded(), false, 'no debe leer el catálogo al activarse');
+		// La detección usa las señales del bundle, no los archivos del catálogo.
+		assert.deepStrictEqual(await api.detectProject(), ['node', 'pnpm']);
+		assert.strictEqual(api.isCatalogLoaded(), false, 'detectar el proyecto no debe leer el catálogo');
 		let sentBeforeOpening = false;
 		const early = api.onDidSendCatalog(() => {
 			sentBeforeOpening = true;
@@ -234,6 +237,23 @@ suite('Detección del proyecto', () => {
 		} finally {
 			const removed = catalogWhere(devCommands, (d) => !d.includes('docker'), 10_000);
 			await vscode.workspace.fs.delete(dockerfile);
+			assert.deepStrictEqual(await removed, ['pnpm', 'node']);
+		}
+	});
+
+	test('crear y borrar un Containerfile (señal nueva) actualiza detected en vivo', async function () {
+		this.timeout(20_000);
+		const devCommands = await api();
+		const folder = vscode.workspace.workspaceFolders?.[0];
+		assert.ok(folder, 'los tests deben abrir test/fixtures/workspace');
+		const containerfile = vscode.Uri.joinPath(folder.uri, 'Containerfile');
+		try {
+			const added = catalogWhere(devCommands, (d) => d.includes('docker'), 10_000);
+			await vscode.workspace.fs.writeFile(containerfile, new Uint8Array());
+			assert.deepStrictEqual(await added, ['pnpm', 'node', 'docker']);
+		} finally {
+			const removed = catalogWhere(devCommands, (d) => !d.includes('docker'), 10_000);
+			await vscode.workspace.fs.delete(containerfile);
 			assert.deepStrictEqual(await removed, ['pnpm', 'node']);
 		}
 	});

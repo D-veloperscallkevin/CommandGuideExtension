@@ -18,6 +18,7 @@
   "icon": "server-environment",
   "order": 40,
   "section": "infra",
+  "detect": ["Dockerfile", "Containerfile", "compose.yaml", "compose.yml", "docker-compose.yml", "docker-compose.yaml", ".dockerignore"],
   "commands": [
     {
       "id": "docker.ps",

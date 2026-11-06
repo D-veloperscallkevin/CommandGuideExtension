@@ -283,7 +283,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | # | Change | Qué entrega |
 | --- | --- | --- |
 | 3.1 | `catalog-sections` | Categorías agrupadas en secciones (Lenguajes, Control de versiones, Frameworks, Bases de datos, Contenedores e infraestructura, Nube, Servidores y redes, Testing y calidad, Game dev, Herramientas e IA) y carga de categorías bajo demanda para que la activación siga por debajo de 100 ms con ~3 MB de catálogo ✅ |
-| 3.2 | `project-signals` | Detección del proyecto ampliada: `go.mod`, `Cargo.toml`, `pyproject.toml`/`requirements.txt`, `composer.json`, `Gemfile`, `pubspec.yaml`, `*.csproj`, `pom.xml`/`build.gradle`, `CMakeLists.txt`, `prisma/schema.prisma`, `wrangler.toml`, `vercel.json`, `*.tf`… según las categorías de cada lote |
+| 3.2 | `project-signals` | Detección del proyecto ampliada: `go.mod`, `Cargo.toml`, `pyproject.toml`/`requirements.txt`, `composer.json`, `Gemfile`, `pubspec.yaml`, `*.csproj`, `pom.xml`/`build.gradle`, `CMakeLists.txt`, `prisma/schema.prisma`, `wrangler.toml`, `vercel.json`, `*.tf`… según las categorías de cada lote ✅ |
 | 3.3 | `catalog-js-python` | npx, yarn, bun, deno y tsc; Python (python, pip, venv, poetry, uv, pipx, conda); gestores de versiones (nvm, fnm, volta, corepack, pyenv) |
 | 3.4 | `catalog-compiled` | Java/Kotlin (java, javac, mvn, gradle, sdkman), .NET (dotnet new/run/build/ef), C/C++ (gcc, g++, clang, make, cmake), Go, Rust (cargo, rustc, rustup) |
 | 3.5 | `catalog-more-languages` | PHP (php, composer), Ruby (ruby, gem, bundle, rake, rbenv), Dart/Flutter, Swift (swift, xcodebuild), Elixir, Haskell, Scala, R, Lua, Zig, Julia, Perl, Clojure, Erlang, OCaml; asdf/mise |
@@ -299,7 +299,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | 3.15 | `project-scripts` | Los `scripts` de `package.json` como categoría automática |
 | 3.16 | `docs-links` | Enlace a la documentación oficial de cada comando (el campo `docs` ya existe) |
 
-El orden de los lotes puede cambiar según el feedback de la v1.0.0. Cada comando nuevo se comprueba contra la documentación oficial de su herramienta (Context7 o la web oficial) y marca `destructive` cuando corresponde.
+El orden de los lotes puede cambiar según el feedback de la v1.0.0. Cada comando nuevo se comprueba contra la documentación oficial de su herramienta (Context7 o la web oficial) y marca `destructive` cuando corresponde. Desde la 3.2, cada categoría nueva declara en su JSON el campo `detect` con sus señales (las de la fila 3.2 que le correspondan), sin tocar código.
 
 ### Fase 4: v2.x, premium
 

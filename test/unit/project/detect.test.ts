@@ -1,14 +1,25 @@
 import { describe, expect, it } from 'vitest';
 import { bundledCatalog } from '../catalog/bundled';
-import { detectCategories, PROJECT_SIGNALS, SIGNAL_GLOB } from '../../../src/project/detect';
+import { compileSignals, detectCategories, signalsFromCatalog, watchGlob, type ProjectSignal } from '../../../src/project/detect';
 
-/** Comprobación de existencia sobre un mapa raíz → entradas. */
-const fs = (tree: Record<string, string[]>) => async (root: string, name: string) => (tree[root] ?? []).includes(name);
-const ids = async (tree: Record<string, string[]>) => [...(await detectCategories(Object.keys(tree), fs(tree)))].sort();
+const realSignals = signalsFromCatalog(bundledCatalog);
+const real = compileSignals(realSignals);
+
+/** Listado sobre un mapa raíz → entradas; una entrada `dir/nombre` hace de archivo dentro de `dir`. */
+const lister = (tree: Record<string, string[]>) => async (root: string, dir?: string) => {
+	const entries = tree[root] ?? [];
+	if (dir === undefined) {
+		return [...new Set(entries.map((e) => e.split('/')[0]))];
+	}
+	return entries.filter((e) => e.startsWith(`${dir}/`)).map((e) => e.slice(dir.length + 1));
+};
+const ids = async (tree: Record<string, string[]>, signals = real) =>
+	[...(await detectCategories(Object.keys(tree), signals, lister(tree)))].sort();
+const custom = (...signals: ProjectSignal[]) => compileSignals(signals);
 
 describe('detectCategories', () => {
-	it.each(PROJECT_SIGNALS.map((s) => [s.file, s.categoryId]))('%s en la raíz detecta %s', async (file, categoryId) => {
-		expect(await ids({ root: [file] })).toEqual([categoryId]);
+	it.each(realSignals.map((s) => [s.pattern, s.categoryId]))('%s en la raíz detecta %s', async (pattern, categoryId) => {
+		expect(await ids({ root: [pattern] })).toEqual([categoryId]);
 	});
 
 	it('proyecto con pnpm y Docker', async () => {
@@ -27,37 +38,102 @@ describe('detectCategories', () => {
 		expect(await ids({})).toEqual([]);
 	});
 
-	it('una comprobación que falla cuenta como inexistente', async () => {
-		const result = await detectCategories(['root'], async (_root, name) => {
-			if (name === '.git') {
-				throw new Error('EACCES');
-			}
-			return name === 'package.json';
-		});
-		expect([...result]).toEqual(['node']);
+	it('solo mira la raíz (no subcarpetas)', async () => {
+		expect(await ids({ root: ['webview-ui/package.json', 'api/Dockerfile'] })).toEqual([]);
 	});
 
-	it('solo mira las entradas de las señales (no subcarpetas)', async () => {
-		expect(await ids({ root: ['webview-ui/package.json', 'api/Dockerfile'] })).toEqual([]);
+	it('las señales nuevas de las categorías existentes', async () => {
+		expect(await ids({ root: ['.nvmrc', 'pnpm-workspace.yaml', 'Containerfile'] })).toEqual(['docker', 'node', 'pnpm']);
+	});
+
+	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
+		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
+	});
+
+	it('una raíz que no se puede listar cuenta como vacía, sin afectar a las demás', async () => {
+		const result = await detectCategories(['rota', 'bien'], real, async (root) => {
+			if (root === 'rota') {
+				throw new Error('EACCES');
+			}
+			return ['.git'];
+		});
+		expect([...result]).toEqual(['git']);
+	});
+
+	describe('comodines', () => {
+		const dotnet = custom({ categoryId: 'dotnet', pattern: '*.csproj' });
+
+		it('coincide en la raíz', async () => {
+			expect(await ids({ root: ['Api.csproj'] }, dotnet)).toEqual(['dotnet']);
+			expect(await ids({ root: ['api.CSPROJ'] }, dotnet)).toEqual(['dotnet']);
+		});
+
+		it('no coincide fuera de la raíz ni con otra extensión', async () => {
+			expect(await ids({ root: ['src/Api/Api.csproj', 'Api.csproj.user.txt'] }, dotnet)).toEqual([]);
+		});
+
+		it('escapa los demás caracteres (el punto no es comodín)', async () => {
+			expect(await ids({ root: ['Apixcsproj'] }, dotnet)).toEqual([]);
+		});
+	});
+
+	describe('rutas de un nivel', () => {
+		const prisma = custom({ categoryId: 'prisma', pattern: 'prisma/schema.prisma' });
+
+		it('con el archivo en la carpeta', async () => {
+			expect(await ids({ root: ['prisma/schema.prisma'] }, prisma)).toEqual(['prisma']);
+		});
+
+		it('sin distinguir mayúsculas en la carpeta ni en el archivo', async () => {
+			expect(await ids({ root: ['Prisma/Schema.prisma'] }, prisma)).toEqual(['prisma']);
+		});
+
+		it('con la carpeta vacía o con otro archivo, no', async () => {
+			expect(await ids({ root: ['prisma/other.sql'] }, prisma)).toEqual([]);
+		});
+
+		it('lista la carpeta una sola vez aunque haya varias rutas en ella, y no la lista si no existe', async () => {
+			const calls: (string | undefined)[] = [];
+			const signals = custom(
+				{ categoryId: 'a', pattern: 'conf/a.toml' },
+				{ categoryId: 'b', pattern: 'conf/b.toml' },
+				{ categoryId: 'c', pattern: 'missing/c.toml' },
+			);
+			const result = await detectCategories(['root'], signals, async (_root, dir) => {
+				calls.push(dir);
+				return dir === undefined ? ['conf'] : ['b.toml'];
+			});
+			expect([...result]).toEqual(['b']);
+			expect(calls).toEqual([undefined, 'conf']);
+		});
 	});
 });
 
-describe('PROJECT_SIGNALS', () => {
-	it('cada señal apunta a una categoría del catálogo incluido', () => {
-		const catalogIds = new Set(bundledCatalog.map((c) => c.id));
-		for (const signal of PROJECT_SIGNALS) {
-			expect(catalogIds.has(signal.categoryId), signal.file).toBe(true);
-		}
+describe('señales del catálogo', () => {
+	it('signalsFromCatalog aplana los detect en el orden del catálogo', () => {
+		expect(signalsFromCatalog([{ id: 'a', detect: ['x', 'y'] }, { id: 'b' }, { id: 'c', detect: ['z'] }])).toEqual([
+			{ categoryId: 'a', pattern: 'x' },
+			{ categoryId: 'a', pattern: 'y' },
+			{ categoryId: 'c', pattern: 'z' },
+		]);
 	});
 
 	it('terminal nunca se detecta', () => {
-		expect(PROJECT_SIGNALS.some((s) => s.categoryId === 'terminal')).toBe(false);
+		expect(realSignals.some((s) => s.categoryId === 'terminal')).toBe(false);
+	});
+});
+
+describe('watchGlob', () => {
+	it('sin rutas de un nivel vigila toda la raíz', () => {
+		expect(watchGlob(real)).toBe('*');
 	});
 
-	it('el glob del watcher incluye todas las señales', () => {
-		expect(SIGNAL_GLOB).toBe(`{${PROJECT_SIGNALS.map((s) => s.file).join(',')}}`);
-		for (const signal of PROJECT_SIGNALS) {
-			expect(SIGNAL_GLOB).toContain(signal.file);
-		}
+	it('con rutas añade cada carpeta una vez', () => {
+		const signals = custom(
+			{ categoryId: 'go', pattern: 'go.mod' },
+			{ categoryId: 'prisma', pattern: 'prisma/schema.prisma' },
+			{ categoryId: 'other', pattern: 'Prisma/migrate.toml' },
+		);
+		expect(watchGlob(signals)).toBe('{*,prisma/*}');
 	});
 });
