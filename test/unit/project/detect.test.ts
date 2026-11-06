@@ -83,6 +83,29 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['environment.yml'] })).toEqual(['conda']);
 	});
 
+	it('proyecto Maven con wrapper', async () => {
+		expect(await ids({ root: ['pom.xml', 'mvnw', 'mvnw.cmd'] })).toEqual(['java', 'maven']);
+	});
+
+	it('proyecto Gradle con Kotlin (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['build.gradle.kts', 'settings.gradle.kts', 'gradlew', 'gradlew.bat'] })).toEqual([
+			'gradle',
+			'java',
+		]);
+	});
+
+	it('solución de .NET', async () => {
+		expect(await ids({ root: ['App.sln', 'global.json'] })).toEqual(['dotnet']);
+	});
+
+	it('proyecto de C#', async () => {
+		expect(await ids({ root: ['Api.csproj'] })).toEqual(['dotnet']);
+	});
+
+	it('versión de Java fijada con sdkman', async () => {
+		expect(await ids({ root: ['.sdkmanrc'] })).toEqual(['version-managers']);
+	});
+
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
 		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
 	});

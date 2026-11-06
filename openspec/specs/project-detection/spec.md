@@ -26,13 +26,17 @@ Las señales SHALL ser:
 - `bun.lock`, `bun.lockb` o `bunfig.toml` → `bun`;
 - `deno.json`, `deno.jsonc` o `deno.lock` → `deno`;
 - cualquier `tsconfig*.json` (`tsconfig.json`, `tsconfig.build.json`…) → `typescript`;
-- `.nvmrc`, `.node-version` o `.python-version` → `version-managers`;
+- `.nvmrc`, `.node-version`, `.python-version` o `.sdkmanrc` → `version-managers`;
 - `pyproject.toml`, cualquier `requirements*.txt` (`requirements.txt`, `requirements-dev.txt`…), `setup.py`, `setup.cfg`, `Pipfile` o `.python-version` → `python`;
 - `poetry.lock` → `poetry`;
 - `uv.lock` → `uv`;
-- `environment.yml` o `environment.yaml` → `conda`.
+- `environment.yml` o `environment.yaml` → `conda`;
+- `pom.xml`, `build.gradle`, `build.gradle.kts` o `.java-version` → `java`;
+- `pom.xml` o `mvnw` → `maven`;
+- `build.gradle`, `build.gradle.kts`, `settings.gradle`, `settings.gradle.kts` o `gradlew` → `gradle`;
+- cualquier `*.csproj`, `*.fsproj`, `*.sln` o `*.slnx`, o `global.json` → `dotnet`.
 
-Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, y `.python-version` detecta `python` y `version-managers`.
+Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, y `pom.xml` detecta `java` y `maven`.
 
 Con varias carpetas en el workspace, las categorías detectadas SHALL ser la unión de las de todas. La categoría `terminal` MUST NOT detectarse nunca. Sin carpetas abiertas, no SHALL detectarse ninguna categoría. Las categorías propias del usuario MUST NOT detectarse. Si no se puede leer la raíz de una carpeta o falla una comprobación (por ejemplo, por falta de permisos), SHALL tratarse como si la entrada no existiera, sin aviso al usuario. La detección MUST NOT necesitar leer los archivos del catálogo, que solo se cargan bajo demanda.
 
@@ -115,6 +119,26 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Entorno de conda
 - **WHEN** la raíz contiene solo `environment.yml`
 - **THEN** la única categoría detectada es `conda`
+
+#### Scenario: Proyecto Maven con wrapper
+- **WHEN** la raíz contiene `pom.xml` y `mvnw`
+- **THEN** las categorías detectadas son `java` y `maven`
+
+#### Scenario: Proyecto Gradle con Kotlin en Windows y en Linux
+- **WHEN** la raíz contiene `build.gradle.kts`, `settings.gradle.kts` y `gradlew`, tanto en Windows con PowerShell como en Linux con bash
+- **THEN** las categorías detectadas son `java` y `gradle` en los dos casos
+
+#### Scenario: Solución de .NET
+- **WHEN** la raíz contiene `App.sln` y `global.json`
+- **THEN** la única categoría detectada es `dotnet`
+
+#### Scenario: Proyecto de C#
+- **WHEN** la raíz contiene solo `Api.csproj`
+- **THEN** la única categoría detectada es `dotnet`
+
+#### Scenario: Versión de Java fijada con sdkman
+- **WHEN** la raíz contiene solo `.sdkmanrc`
+- **THEN** la única categoría detectada es `version-managers`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

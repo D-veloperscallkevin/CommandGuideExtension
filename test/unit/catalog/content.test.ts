@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 15 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 19 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -81,6 +81,10 @@ describe('contenido mínimo', () => {
 			'uv',
 			'conda',
 			'terminal',
+			'java',
+			'maven',
+			'gradle',
+			'dotnet',
 		]);
 	});
 
@@ -194,6 +198,40 @@ describe('contenido mínimo', () => {
 			'uv.python-uninstall',
 		]);
 		expect(deletes.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('el wrapper de Gradle usa ./gradlew en bash y zsh, .\\gradlew en PowerShell y gradlew en cmd', () => {
+		expect(exampleFor('gradle.build', 'bash')).toBe('./gradlew build');
+		expect(exampleFor('gradle.build', 'zsh')).toBe('./gradlew build');
+		expect(exampleFor('gradle.build', 'powershell')).toBe('.\\gradlew build');
+		expect(exampleFor('gradle.build', 'cmd')).toBe('gradlew build');
+	});
+
+	it('el wrapper de Maven usa ./mvnw en bash, .\\mvnw en PowerShell y mvnw en cmd', () => {
+		expect(exampleFor('maven.package', 'bash')).toBe('./mvnw package');
+		expect(exampleFor('maven.package', 'powershell')).toBe('.\\mvnw package');
+		expect(exampleFor('maven.package', 'cmd')).toBe('mvnw package');
+	});
+
+	it('todo comando de Maven y Gradle con el wrapper declara variantes de PowerShell y cmd', () => {
+		const wrapped = bundledCatalog
+			.filter((c) => c.id === 'maven' || c.id === 'gradle')
+			.flatMap((c) => c.commands)
+			.filter((cmd) => cmd.command.startsWith('./mvnw ') || cmd.command.startsWith('./gradlew '));
+		expect(wrapped.length).toBeGreaterThan(0);
+		const wrong = wrapped.filter((cmd) => {
+			const tool = cmd.command.slice(2).split(' ')[0];
+			const args = cmd.command.slice(2 + tool.length);
+			return cmd.shells?.powershell !== `.\\${tool}${args}` || cmd.shells?.cmd !== `${tool}${args}`;
+		});
+		expect(wrong.map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('los clean de Maven, Gradle y .NET son destructive', () => {
+		const ids = ['maven.clean', 'gradle.clean', 'dotnet.clean'];
+		const cleans = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => ids.includes(cmd.id));
+		expect(cleans.map((cmd) => cmd.id).sort()).toEqual([...ids].sort());
+		expect(cleans.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
 	});
 });
 

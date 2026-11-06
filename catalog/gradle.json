@@ -1,0 +1,866 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "gradle",
+  "title": {
+    "en": "Gradle",
+    "es": "Gradle",
+    "pt-br": "Gradle",
+    "fr": "Gradle",
+    "de": "Gradle",
+    "it": "Gradle",
+    "ja": "Gradle",
+    "ko": "Gradle",
+    "zh-cn": "Gradle",
+    "zh-tw": "Gradle",
+    "ru": "Gradle"
+  },
+  "icon": "gear",
+  "order": 53,
+  "section": "languages",
+  "detect": ["build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts", "gradlew"],
+  "commands": [
+    {
+      "id": "gradle.build",
+      "title": {
+        "en": "Build the project",
+        "es": "Compilar el proyecto",
+        "pt-br": "Compilar o projeto",
+        "fr": "Construire le projet",
+        "de": "Projekt bauen",
+        "it": "Compila il progetto",
+        "ja": "プロジェクトをビルド",
+        "ko": "프로젝트 빌드",
+        "zh-cn": "构建项目",
+        "zh-tw": "建置專案",
+        "ru": "Собрать проект"
+      },
+      "description": {
+        "en": "Compiles, tests and assembles the project; needs the wrapper (create it with gradle wrapper)",
+        "es": "Compila, prueba y empaqueta el proyecto; necesita el wrapper (créalo con gradle wrapper)",
+        "pt-br": "Compila, testa e empacota o projeto; precisa do wrapper (crie-o com gradle wrapper)",
+        "fr": "Compile, teste et assemble le projet ; nécessite le wrapper (créez-le avec gradle wrapper)",
+        "de": "Kompiliert, testet und baut das Projekt zusammen; braucht den Wrapper (mit gradle wrapper anlegen)",
+        "it": "Compila, testa e assembla il progetto; serve il wrapper (crealo con gradle wrapper)",
+        "ja": "プロジェクトをコンパイル・テストして組み立てます。ラッパーが必要です（gradle wrapper で作成）",
+        "ko": "프로젝트를 컴파일·테스트하고 조립합니다. 래퍼가 필요합니다(gradle wrapper로 생성)",
+        "zh-cn": "编译、测试并组装项目；需要包装器（用 gradle wrapper 创建）",
+        "zh-tw": "編譯、測試並組裝專案；需要包裝器（用 gradle wrapper 建立）",
+        "ru": "Компилирует, тестирует и собирает проект; нужен wrapper (создайте его через gradle wrapper)"
+      },
+      "command": "./gradlew build",
+      "tags": {
+        "en": ["gradle", "gradlew", "build", "compile"],
+        "es": ["gradle", "gradlew", "build", "compilar", "construir"],
+        "pt-br": ["gradle", "gradlew", "build", "compilar", "construir"],
+        "fr": ["gradle", "gradlew", "build", "construire", "compiler"],
+        "de": ["gradle", "gradlew", "build", "bauen", "kompilieren"],
+        "it": ["gradle", "gradlew", "build", "compilare", "costruire"],
+        "ja": ["gradle", "gradlew", "build", "ビルド", "コンパイル"],
+        "ko": ["gradle", "gradlew", "build", "빌드", "컴파일"],
+        "zh-cn": ["gradle", "gradlew", "build", "构建", "编译"],
+        "zh-tw": ["gradle", "gradlew", "build", "建置", "編譯"],
+        "ru": ["gradle", "gradlew", "build", "сборка", "компиляция"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew build",
+        "cmd": "gradlew build"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/command_line_interface.html"
+    },
+    {
+      "id": "gradle.build-skip-tests",
+      "title": {
+        "en": "Build without running the tests",
+        "es": "Compilar sin ejecutar los tests",
+        "pt-br": "Compilar sem executar os testes",
+        "fr": "Construire sans exécuter les tests",
+        "de": "Bauen, ohne Tests auszuführen",
+        "it": "Compila senza eseguire i test",
+        "ja": "テストを実行せずにビルド",
+        "ko": "테스트 없이 빌드",
+        "zh-cn": "构建但不运行测试",
+        "zh-tw": "建置但不執行測試",
+        "ru": "Собрать без запуска тестов"
+      },
+      "description": {
+        "en": "Runs build but excludes the test task",
+        "es": "Ejecuta build pero excluye la tarea test",
+        "pt-br": "Executa build, mas exclui a tarefa test",
+        "fr": "Lance build mais exclut la tâche test",
+        "de": "Führt build aus, schließt aber die Aufgabe test aus",
+        "it": "Esegue build ma esclude l’attività test",
+        "ja": "build を実行しますが、test タスクは除外します",
+        "ko": "build를 실행하되 test 작업은 제외합니다",
+        "zh-cn": "运行 build，但排除 test 任务",
+        "zh-tw": "執行 build，但排除 test 工作",
+        "ru": "Запускает build, исключая задачу test"
+      },
+      "command": "./gradlew build -x test",
+      "tags": {
+        "en": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "skip tests"],
+        "es": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "saltar tests"],
+        "pt-br": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "pular testes"],
+        "fr": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "ignorer tests"],
+        "de": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "Tests überspringen"],
+        "it": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "saltare test"],
+        "ja": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "テスト省略"],
+        "ko": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "테스트 건너뛰기"],
+        "zh-cn": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "跳过测试"],
+        "zh-tw": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "略過測試"],
+        "ru": ["gradle", "gradlew", "build", "-x test", "--exclude-task", "пропустить тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew build -x test",
+        "cmd": "gradlew build -x test"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/command_line_interface.html"
+    },
+    {
+      "id": "gradle.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Exécuter les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Compiles and runs the tests of the project",
+        "es": "Compila y ejecuta los tests del proyecto",
+        "pt-br": "Compila e executa os testes do projeto",
+        "fr": "Compile et exécute les tests du projet",
+        "de": "Kompiliert und führt die Tests des Projekts aus",
+        "it": "Compila ed esegue i test del progetto",
+        "ja": "プロジェクトのテストをコンパイルして実行します",
+        "ko": "프로젝트의 테스트를 컴파일하고 실행합니다",
+        "zh-cn": "编译并运行项目的测试",
+        "zh-tw": "編譯並執行專案的測試",
+        "ru": "Компилирует и запускает тесты проекта"
+      },
+      "command": "./gradlew test",
+      "tags": {
+        "en": ["gradle", "gradlew", "test", "junit", "tests"],
+        "es": ["gradle", "gradlew", "test", "junit", "tests", "pruebas"],
+        "pt-br": ["gradle", "gradlew", "test", "junit", "testes"],
+        "fr": ["gradle", "gradlew", "test", "junit", "tests"],
+        "de": ["gradle", "gradlew", "test", "junit", "Tests"],
+        "it": ["gradle", "gradlew", "test", "junit"],
+        "ja": ["gradle", "gradlew", "test", "junit", "テスト"],
+        "ko": ["gradle", "gradlew", "test", "junit", "테스트"],
+        "zh-cn": ["gradle", "gradlew", "test", "junit", "测试"],
+        "zh-tw": ["gradle", "gradlew", "test", "junit", "測試"],
+        "ru": ["gradle", "gradlew", "test", "junit", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew test",
+        "cmd": "gradlew test"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/java_testing.html"
+    },
+    {
+      "id": "gradle.test-class",
+      "title": {
+        "en": "Run a single test class",
+        "es": "Ejecutar una sola clase de test",
+        "pt-br": "Executar uma única classe de teste",
+        "fr": "Exécuter une seule classe de test",
+        "de": "Eine einzelne Testklasse ausführen",
+        "it": "Esegui una sola classe di test",
+        "ja": "1 つのテストクラスだけ実行",
+        "ko": "테스트 클래스 하나만 실행",
+        "zh-cn": "只运行一个测试类",
+        "zh-tw": "只執行一個測試類別",
+        "ru": "Запустить один тестовый класс"
+      },
+      "description": {
+        "en": "Runs only the tests that match the filter; it accepts a class, a method or a pattern with *",
+        "es": "Ejecuta solo los tests que coinciden con el filtro; admite una clase, un método o un patrón con *",
+        "pt-br": "Executa só os testes que batem com o filtro; aceita uma classe, um método ou um padrão com *",
+        "fr": "Exécute seulement les tests qui correspondent au filtre ; accepte une classe, une méthode ou un motif avec *",
+        "de": "Führt nur die Tests aus, die zum Filter passen; akzeptiert Klasse, Methode oder Muster mit *",
+        "it": "Esegue solo i test che corrispondono al filtro; accetta una classe, un metodo o un pattern con *",
+        "ja": "フィルターに合うテストだけを実行します。クラス、メソッド、* を使ったパターンを指定できます",
+        "ko": "필터에 맞는 테스트만 실행합니다. 클래스, 메서드, * 패턴을 쓸 수 있습니다",
+        "zh-cn": "只运行与过滤条件匹配的测试；可以是类、方法或带 * 的模式",
+        "zh-tw": "只執行與篩選條件相符的測試；可以是類別、方法或帶 * 的模式",
+        "ru": "Запускает только тесты, подходящие под фильтр: класс, метод или шаблон с *"
+      },
+      "command": "./gradlew test --tests ${class}",
+      "params": [
+        {
+          "name": "class",
+          "label": {
+            "en": "Class name",
+            "es": "Nombre de la clase",
+            "pt-br": "Nome da classe",
+            "fr": "Nom de la classe",
+            "de": "Klassenname",
+            "it": "Nome della classe",
+            "ja": "クラス名",
+            "ko": "클래스 이름",
+            "zh-cn": "类名",
+            "zh-tw": "類別名稱",
+            "ru": "Имя класса"
+          },
+          "placeholder": {
+            "en": "com.example.AppTest",
+            "es": "com.example.AppTest",
+            "pt-br": "com.example.AppTest",
+            "fr": "com.example.AppTest",
+            "de": "com.example.AppTest",
+            "it": "com.example.AppTest",
+            "ja": "com.example.AppTest",
+            "ko": "com.example.AppTest",
+            "zh-cn": "com.example.AppTest",
+            "zh-tw": "com.example.AppTest",
+            "ru": "com.example.AppTest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["gradle", "gradlew", "test", "--tests", "filter", "single test"],
+        "es": ["gradle", "gradlew", "test", "--tests", "filter", "un test", "filtro"],
+        "pt-br": ["gradle", "gradlew", "test", "--tests", "filter", "um teste", "filtro"],
+        "fr": ["gradle", "gradlew", "test", "--tests", "filter", "un test", "filtre"],
+        "de": ["gradle", "gradlew", "test", "--tests", "filter", "einzelner Test", "Filter"],
+        "it": ["gradle", "gradlew", "test", "--tests", "filter", "singolo test", "filtro"],
+        "ja": ["gradle", "gradlew", "test", "--tests", "filter", "単一テスト", "フィルター"],
+        "ko": ["gradle", "gradlew", "test", "--tests", "filter", "단일 테스트", "필터"],
+        "zh-cn": ["gradle", "gradlew", "test", "--tests", "filter", "单个测试", "过滤"],
+        "zh-tw": ["gradle", "gradlew", "test", "--tests", "filter", "單一測試", "篩選"],
+        "ru": ["gradle", "gradlew", "test", "--tests", "filter", "один тест", "фильтр"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew test --tests ${class}",
+        "cmd": "gradlew test --tests ${class}"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/java_testing.html"
+    },
+    {
+      "id": "gradle.continuous",
+      "title": {
+        "en": "Run the tests on every change",
+        "es": "Ejecutar los tests en cada cambio",
+        "pt-br": "Executar os testes a cada mudança",
+        "fr": "Exécuter les tests à chaque changement",
+        "de": "Tests bei jeder Änderung ausführen",
+        "it": "Esegui i test a ogni modifica",
+        "ja": "変更のたびにテストを実行",
+        "ko": "변경할 때마다 테스트 실행",
+        "zh-cn": "每次更改时运行测试",
+        "zh-tw": "每次變更時執行測試",
+        "ru": "Запускать тесты при каждом изменении"
+      },
+      "description": {
+        "en": "Runs the tests again whenever a source or test file changes; stop it with Ctrl+C",
+        "es": "Vuelve a ejecutar los tests cada vez que cambia un archivo de código o de test; se detiene con Ctrl+C",
+        "pt-br": "Executa os testes de novo sempre que um arquivo de código ou de teste muda; pare com Ctrl+C",
+        "fr": "Relance les tests dès qu’un fichier source ou de test change ; arrêtez avec Ctrl+C",
+        "de": "Führt die Tests erneut aus, sobald sich eine Quell- oder Testdatei ändert; mit Strg+C beenden",
+        "it": "Riesegue i test ogni volta che cambia un file sorgente o di test; si ferma con Ctrl+C",
+        "ja": "ソースやテストのファイルが変わるたびにテストを再実行します。Ctrl+C で停止",
+        "ko": "소스나 테스트 파일이 바뀔 때마다 테스트를 다시 실행합니다. Ctrl+C로 멈춥니다",
+        "zh-cn": "源文件或测试文件变化时重新运行测试；按 Ctrl+C 停止",
+        "zh-tw": "原始檔或測試檔變更時重新執行測試；按 Ctrl+C 停止",
+        "ru": "Перезапускает тесты при каждом изменении исходников или тестов; остановка — Ctrl+C"
+      },
+      "command": "./gradlew test --continuous",
+      "tags": {
+        "en": ["gradle", "gradlew", "--continuous", "-t", "watch", "tests"],
+        "es": ["gradle", "gradlew", "--continuous", "-t", "watch", "vigilar", "tests"],
+        "pt-br": ["gradle", "gradlew", "--continuous", "-t", "watch", "observar", "testes"],
+        "fr": ["gradle", "gradlew", "--continuous", "-t", "watch", "surveiller", "tests"],
+        "de": ["gradle", "gradlew", "--continuous", "-t", "watch", "beobachten", "Tests"],
+        "it": ["gradle", "gradlew", "--continuous", "-t", "watch", "osservare", "test"],
+        "ja": ["gradle", "gradlew", "--continuous", "-t", "watch", "監視", "テスト"],
+        "ko": ["gradle", "gradlew", "--continuous", "-t", "watch", "감시", "테스트"],
+        "zh-cn": ["gradle", "gradlew", "--continuous", "-t", "watch", "监视", "测试"],
+        "zh-tw": ["gradle", "gradlew", "--continuous", "-t", "watch", "監看", "測試"],
+        "ru": ["gradle", "gradlew", "--continuous", "-t", "watch", "отслеживание", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew test --continuous",
+        "cmd": "gradlew test --continuous"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/continuous_builds.html"
+    },
+    {
+      "id": "gradle.run",
+      "title": {
+        "en": "Run the application",
+        "es": "Ejecutar la aplicación",
+        "pt-br": "Executar a aplicação",
+        "fr": "Lancer l’application",
+        "de": "Anwendung starten",
+        "it": "Avvia l’applicazione",
+        "ja": "アプリケーションを実行",
+        "ko": "애플리케이션 실행",
+        "zh-cn": "运行应用",
+        "zh-tw": "執行應用程式",
+        "ru": "Запустить приложение"
+      },
+      "description": {
+        "en": "Compiles and runs the main class of the project (application plugin)",
+        "es": "Compila y ejecuta la clase principal del proyecto (plugin application)",
+        "pt-br": "Compila e executa a classe principal do projeto (plugin application)",
+        "fr": "Compile et exécute la classe principale du projet (plugin application)",
+        "de": "Kompiliert und startet die Hauptklasse des Projekts (Plugin application)",
+        "it": "Compila ed esegue la classe principale del progetto (plugin application)",
+        "ja": "プロジェクトのメインクラスをコンパイルして実行します（application プラグイン）",
+        "ko": "프로젝트의 메인 클래스를 컴파일하고 실행합니다(application 플러그인)",
+        "zh-cn": "编译并运行项目的主类（application 插件）",
+        "zh-tw": "編譯並執行專案的主類別（application 外掛程式）",
+        "ru": "Компилирует и запускает главный класс проекта (плагин application)"
+      },
+      "command": "./gradlew run",
+      "tags": {
+        "en": ["gradle", "gradlew", "run", "application", "execute"],
+        "es": ["gradle", "gradlew", "run", "application", "ejecutar"],
+        "pt-br": ["gradle", "gradlew", "run", "application", "executar"],
+        "fr": ["gradle", "gradlew", "run", "application", "exécuter"],
+        "de": ["gradle", "gradlew", "run", "application", "ausführen"],
+        "it": ["gradle", "gradlew", "run", "application", "eseguire"],
+        "ja": ["gradle", "gradlew", "run", "application", "実行"],
+        "ko": ["gradle", "gradlew", "run", "application", "실행"],
+        "zh-cn": ["gradle", "gradlew", "run", "application", "运行"],
+        "zh-tw": ["gradle", "gradlew", "run", "application", "執行"],
+        "ru": ["gradle", "gradlew", "run", "application", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew run",
+        "cmd": "gradlew run"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/application_plugin.html"
+    },
+    {
+      "id": "gradle.boot-run",
+      "title": {
+        "en": "Run the Spring Boot app",
+        "es": "Ejecutar la app de Spring Boot",
+        "pt-br": "Executar o app Spring Boot",
+        "fr": "Lancer l’application Spring Boot",
+        "de": "Spring-Boot-App starten",
+        "it": "Avvia l’app Spring Boot",
+        "ja": "Spring Boot アプリを実行",
+        "ko": "Spring Boot 앱 실행",
+        "zh-cn": "运行 Spring Boot 应用",
+        "zh-tw": "執行 Spring Boot 應用程式",
+        "ru": "Запустить приложение Spring Boot"
+      },
+      "description": {
+        "en": "Compiles and starts the application with the Spring Boot Gradle plugin; stop it with Ctrl+C",
+        "es": "Compila y arranca la aplicación con el plugin de Spring Boot para Gradle; se detiene con Ctrl+C",
+        "pt-br": "Compila e inicia a aplicação com o plugin do Spring Boot para Gradle; pare com Ctrl+C",
+        "fr": "Compile et démarre l’application avec le plugin Spring Boot pour Gradle ; arrêtez-la avec Ctrl+C",
+        "de": "Kompiliert und startet die Anwendung mit dem Spring-Boot-Gradle-Plugin; mit Strg+C beenden",
+        "it": "Compila e avvia l’applicazione con il plugin Spring Boot per Gradle; si ferma con Ctrl+C",
+        "ja": "Spring Boot の Gradle プラグインでアプリをコンパイルして起動します。Ctrl+C で停止",
+        "ko": "Spring Boot Gradle 플러그인으로 앱을 컴파일하고 시작합니다. Ctrl+C로 멈춥니다",
+        "zh-cn": "用 Spring Boot Gradle 插件编译并启动应用；按 Ctrl+C 停止",
+        "zh-tw": "用 Spring Boot Gradle 外掛程式編譯並啟動應用程式；按 Ctrl+C 停止",
+        "ru": "Компилирует и запускает приложение плагином Spring Boot для Gradle; остановка — Ctrl+C"
+      },
+      "command": "./gradlew bootRun",
+      "tags": {
+        "en": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "run", "server"],
+        "es": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "ejecutar", "servidor"],
+        "pt-br": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "executar", "servidor"],
+        "fr": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "lancer", "serveur"],
+        "de": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "starten", "Server"],
+        "it": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "avviare", "server"],
+        "ja": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "実行", "サーバー"],
+        "ko": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "실행", "서버"],
+        "zh-cn": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "运行", "服务器"],
+        "zh-tw": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "執行", "伺服器"],
+        "ru": ["gradle", "gradlew", "bootRun", "spring", "spring boot", "запустить", "сервер"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootRun",
+        "cmd": "gradlew bootRun"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/running.html"
+    },
+    {
+      "id": "gradle.clean",
+      "title": {
+        "en": "Delete the build output",
+        "es": "Borrar la salida de compilación",
+        "pt-br": "Apagar a saída da compilação",
+        "fr": "Supprimer la sortie de compilation",
+        "de": "Build-Ausgabe löschen",
+        "it": "Elimina l’output della build",
+        "ja": "ビルド出力を削除",
+        "ko": "빌드 출력 삭제",
+        "zh-cn": "删除构建输出",
+        "zh-tw": "刪除建置輸出",
+        "ru": "Удалить результаты сборки"
+      },
+      "description": {
+        "en": "Deletes the build folder with everything compiled and packaged",
+        "es": "Borra la carpeta build con todo lo compilado y empaquetado",
+        "pt-br": "Apaga a pasta build com tudo o que foi compilado e empacotado",
+        "fr": "Supprime le dossier build avec tout ce qui a été compilé et empaqueté",
+        "de": "Löscht den Ordner build mit allem Kompilierten und Paketierten",
+        "it": "Elimina la cartella build con tutto ciò che è stato compilato e impacchettato",
+        "ja": "コンパイル・パッケージ化したものを含む build フォルダーを削除します",
+        "ko": "컴파일하고 패키징한 결과가 든 build 폴더를 삭제합니다",
+        "zh-cn": "删除包含所有编译和打包结果的 build 文件夹",
+        "zh-tw": "刪除包含所有編譯和封裝結果的 build 資料夾",
+        "ru": "Удаляет папку build со всем скомпилированным и упакованным"
+      },
+      "command": "./gradlew clean",
+      "tags": {
+        "en": ["gradle", "gradlew", "clean", "delete"],
+        "es": ["gradle", "gradlew", "clean", "borrar", "limpiar"],
+        "pt-br": ["gradle", "gradlew", "clean", "apagar", "limpar"],
+        "fr": ["gradle", "gradlew", "clean", "supprimer", "nettoyer"],
+        "de": ["gradle", "gradlew", "clean", "löschen", "aufräumen"],
+        "it": ["gradle", "gradlew", "clean", "eliminare", "pulire"],
+        "ja": ["gradle", "gradlew", "clean", "削除", "クリーン"],
+        "ko": ["gradle", "gradlew", "clean", "삭제", "정리"],
+        "zh-cn": ["gradle", "gradlew", "clean", "删除", "清理"],
+        "zh-tw": ["gradle", "gradlew", "clean", "刪除", "清理"],
+        "ru": ["gradle", "gradlew", "clean", "удалить", "очистка"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": ".\\gradlew clean",
+        "cmd": "gradlew clean"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/command_line_interface.html"
+    },
+    {
+      "id": "gradle.tasks",
+      "title": {
+        "en": "List the available tasks",
+        "es": "Ver las tareas disponibles",
+        "pt-br": "Ver as tarefas disponíveis",
+        "fr": "Lister les tâches disponibles",
+        "de": "Verfügbare Aufgaben anzeigen",
+        "it": "Elenca le attività disponibili",
+        "ja": "利用できるタスクを一覧表示",
+        "ko": "사용 가능한 작업 보기",
+        "zh-cn": "列出可用任务",
+        "zh-tw": "列出可用工作",
+        "ru": "Показать доступные задачи"
+      },
+      "description": {
+        "en": "Lists the tasks of the project grouped by type, with a short description",
+        "es": "Muestra las tareas del proyecto agrupadas por tipo, con una descripción corta",
+        "pt-br": "Mostra as tarefas do projeto agrupadas por tipo, com uma descrição curta",
+        "fr": "Liste les tâches du projet regroupées par type, avec une courte description",
+        "de": "Listet die Aufgaben des Projekts nach Typ gruppiert mit kurzer Beschreibung auf",
+        "it": "Elenca le attività del progetto raggruppate per tipo, con una breve descrizione",
+        "ja": "プロジェクトのタスクを種類ごとに短い説明付きで一覧表示します",
+        "ko": "프로젝트 작업을 종류별로 짧은 설명과 함께 보여 줍니다",
+        "zh-cn": "按类型分组列出项目的任务及简短说明",
+        "zh-tw": "依類型分組列出專案的工作及簡短說明",
+        "ru": "Показывает задачи проекта по группам с кратким описанием"
+      },
+      "command": "./gradlew tasks",
+      "tags": {
+        "en": ["gradle", "gradlew", "tasks", "list"],
+        "es": ["gradle", "gradlew", "tasks", "tareas", "lista"],
+        "pt-br": ["gradle", "gradlew", "tasks", "tarefas", "lista"],
+        "fr": ["gradle", "gradlew", "tasks", "tâches", "liste"],
+        "de": ["gradle", "gradlew", "tasks", "Aufgaben", "Liste"],
+        "it": ["gradle", "gradlew", "tasks", "attività", "elenco"],
+        "ja": ["gradle", "gradlew", "tasks", "タスク", "一覧"],
+        "ko": ["gradle", "gradlew", "tasks", "작업", "목록"],
+        "zh-cn": ["gradle", "gradlew", "tasks", "任务", "列表"],
+        "zh-tw": ["gradle", "gradlew", "tasks", "工作", "清單"],
+        "ru": ["gradle", "gradlew", "tasks", "задачи", "список"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew tasks",
+        "cmd": "gradlew tasks"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/command_line_interface.html"
+    },
+    {
+      "id": "gradle.dependencies",
+      "title": {
+        "en": "Show the dependency tree",
+        "es": "Ver el árbol de dependencias",
+        "pt-br": "Ver a árvore de dependências",
+        "fr": "Afficher l’arbre des dépendances",
+        "de": "Abhängigkeitsbaum anzeigen",
+        "it": "Mostra l’albero delle dipendenze",
+        "ja": "依存関係ツリーを表示",
+        "ko": "의존성 트리 보기",
+        "zh-cn": "查看依赖树",
+        "zh-tw": "檢視相依套件樹",
+        "ru": "Показать дерево зависимостей"
+      },
+      "description": {
+        "en": "Shows the dependencies of each configuration, including transitive ones and resolved versions",
+        "es": "Muestra las dependencias de cada configuración, incluidas las transitivas y las versiones resueltas",
+        "pt-br": "Mostra as dependências de cada configuração, incluindo as transitivas e as versões resolvidas",
+        "fr": "Affiche les dépendances de chaque configuration, transitives et versions résolues comprises",
+        "de": "Zeigt die Abhängigkeiten jeder Konfiguration inklusive transitiver und aufgelöster Versionen",
+        "it": "Mostra le dipendenze di ogni configurazione, incluse le transitive e le versioni risolte",
+        "ja": "構成ごとの依存関係を、推移的なものと解決されたバージョンを含めて表示します",
+        "ko": "구성별 의존성을 전이 의존성과 해석된 버전까지 보여 줍니다",
+        "zh-cn": "显示每个配置的依赖，包括传递依赖和解析出的版本",
+        "zh-tw": "顯示每個設定的相依套件，包括遞移相依和解析出的版本",
+        "ru": "Показывает зависимости каждой конфигурации, включая транзитивные и итоговые версии"
+      },
+      "command": "./gradlew dependencies",
+      "tags": {
+        "en": ["gradle", "gradlew", "dependencies", "tree"],
+        "es": ["gradle", "gradlew", "dependencies", "dependencias", "árbol"],
+        "pt-br": ["gradle", "gradlew", "dependencies", "dependências", "árvore"],
+        "fr": ["gradle", "gradlew", "dependencies", "dépendances", "arbre"],
+        "de": ["gradle", "gradlew", "dependencies", "Abhängigkeiten", "Baum"],
+        "it": ["gradle", "gradlew", "dependencies", "dipendenze", "albero"],
+        "ja": ["gradle", "gradlew", "dependencies", "依存関係", "ツリー"],
+        "ko": ["gradle", "gradlew", "dependencies", "의존성", "트리"],
+        "zh-cn": ["gradle", "gradlew", "dependencies", "依赖", "树"],
+        "zh-tw": ["gradle", "gradlew", "dependencies", "相依套件", "樹"],
+        "ru": ["gradle", "gradlew", "dependencies", "зависимости", "дерево"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew dependencies",
+        "cmd": "gradlew dependencies"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html"
+    },
+    {
+      "id": "gradle.refresh-dependencies",
+      "title": {
+        "en": "Build downloading the dependencies again",
+        "es": "Compilar descargando de nuevo las dependencias",
+        "pt-br": "Compilar baixando de novo as dependências",
+        "fr": "Construire en retéléchargeant les dépendances",
+        "de": "Bauen und Abhängigkeiten neu herunterladen",
+        "it": "Compila riscaricando le dipendenze",
+        "ja": "依存関係を再ダウンロードしてビルド",
+        "ko": "의존성을 다시 내려받아 빌드",
+        "zh-cn": "重新下载依赖并构建",
+        "zh-tw": "重新下載相依套件並建置",
+        "ru": "Собрать, заново скачав зависимости"
+      },
+      "description": {
+        "en": "Ignores the cached dependency metadata and checks every repository again",
+        "es": "Ignora los metadatos de dependencias en caché y vuelve a consultar todos los repositorios",
+        "pt-br": "Ignora os metadados de dependências em cache e consulta de novo todos os repositórios",
+        "fr": "Ignore les métadonnées de dépendances en cache et interroge à nouveau tous les dépôts",
+        "de": "Ignoriert die zwischengespeicherten Abhängigkeitsmetadaten und fragt alle Repositorys erneut ab",
+        "it": "Ignora i metadati delle dipendenze in cache e interroga di nuovo tutti i repository",
+        "ja": "キャッシュ済みの依存関係メタデータを無視し、すべてのリポジトリを再確認します",
+        "ko": "캐시된 의존성 메타데이터를 무시하고 모든 저장소를 다시 확인합니다",
+        "zh-cn": "忽略缓存的依赖元数据，重新检查所有仓库",
+        "zh-tw": "忽略快取的相依套件中繼資料，重新檢查所有儲存庫",
+        "ru": "Игнорирует кэшированные метаданные зависимостей и заново опрашивает все репозитории"
+      },
+      "command": "./gradlew build --refresh-dependencies",
+      "tags": {
+        "en": ["gradle", "gradlew", "--refresh-dependencies", "cache", "refresh"],
+        "es": ["gradle", "gradlew", "--refresh-dependencies", "cache", "actualizar", "dependencias"],
+        "pt-br": ["gradle", "gradlew", "--refresh-dependencies", "cache", "atualizar", "dependências"],
+        "fr": ["gradle", "gradlew", "--refresh-dependencies", "cache", "rafraîchir", "dépendances"],
+        "de": ["gradle", "gradlew", "--refresh-dependencies", "cache", "aktualisieren", "Abhängigkeiten"],
+        "it": ["gradle", "gradlew", "--refresh-dependencies", "cache", "aggiornare", "dipendenze"],
+        "ja": ["gradle", "gradlew", "--refresh-dependencies", "cache", "更新", "依存関係"],
+        "ko": ["gradle", "gradlew", "--refresh-dependencies", "cache", "새로 고침", "의존성"],
+        "zh-cn": ["gradle", "gradlew", "--refresh-dependencies", "cache", "刷新", "依赖"],
+        "zh-tw": ["gradle", "gradlew", "--refresh-dependencies", "cache", "重新整理", "相依套件"],
+        "ru": ["gradle", "gradlew", "--refresh-dependencies", "cache", "обновить", "зависимости"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": ".\\gradlew build --refresh-dependencies",
+        "cmd": "gradlew build --refresh-dependencies"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/dependency_caching.html"
+    },
+    {
+      "id": "gradle.stop",
+      "title": {
+        "en": "Stop the Gradle daemons",
+        "es": "Detener los daemons de Gradle",
+        "pt-br": "Parar os daemons do Gradle",
+        "fr": "Arrêter les daemons Gradle",
+        "de": "Gradle-Daemons stoppen",
+        "it": "Ferma i daemon di Gradle",
+        "ja": "Gradle デーモンを停止",
+        "ko": "Gradle 데몬 중지",
+        "zh-cn": "停止 Gradle 守护进程",
+        "zh-tw": "停止 Gradle 背景程式",
+        "ru": "Остановить демоны Gradle"
+      },
+      "description": {
+        "en": "Stops the background Gradle processes of this version, useful when a build behaves oddly",
+        "es": "Detiene los procesos de Gradle en segundo plano de esta versión, útil cuando un build se comporta raro",
+        "pt-br": "Para os processos do Gradle em segundo plano desta versão, útil quando um build se comporta de forma estranha",
+        "fr": "Arrête les processus Gradle en arrière-plan de cette version, utile quand un build se comporte bizarrement",
+        "de": "Stoppt die Gradle-Hintergrundprozesse dieser Version, hilfreich bei merkwürdigem Build-Verhalten",
+        "it": "Ferma i processi Gradle in background di questa versione, utile quando una build si comporta in modo strano",
+        "ja": "このバージョンのバックグラウンドの Gradle プロセスを停止します。ビルドの挙動がおかしいときに役立ちます",
+        "ko": "이 버전의 백그라운드 Gradle 프로세스를 멈춥니다. 빌드가 이상할 때 유용합니다",
+        "zh-cn": "停止此版本在后台运行的 Gradle 进程，构建行为异常时很有用",
+        "zh-tw": "停止此版本在背景執行的 Gradle 處理程序，建置行為異常時很有用",
+        "ru": "Останавливает фоновые процессы Gradle этой версии; полезно, когда сборка ведёт себя странно"
+      },
+      "command": "./gradlew --stop",
+      "tags": {
+        "en": ["gradle", "gradlew", "--stop", "daemon", "stop"],
+        "es": ["gradle", "gradlew", "--stop", "daemon", "detener"],
+        "pt-br": ["gradle", "gradlew", "--stop", "daemon", "parar"],
+        "fr": ["gradle", "gradlew", "--stop", "daemon", "arrêter"],
+        "de": ["gradle", "gradlew", "--stop", "daemon", "stoppen", "Daemon"],
+        "it": ["gradle", "gradlew", "--stop", "daemon", "fermare"],
+        "ja": ["gradle", "gradlew", "--stop", "daemon", "停止", "デーモン"],
+        "ko": ["gradle", "gradlew", "--stop", "daemon", "중지", "데몬"],
+        "zh-cn": ["gradle", "gradlew", "--stop", "daemon", "停止", "守护进程"],
+        "zh-tw": ["gradle", "gradlew", "--stop", "daemon", "停止", "背景程式"],
+        "ru": ["gradle", "gradlew", "--stop", "daemon", "остановить", "демон"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew --stop",
+        "cmd": "gradlew --stop"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/gradle_daemon.html"
+    },
+    {
+      "id": "gradle.scan",
+      "title": {
+        "en": "Build and publish a build scan",
+        "es": "Compilar y publicar un build scan",
+        "pt-br": "Compilar e publicar um build scan",
+        "fr": "Construire et publier un build scan",
+        "de": "Bauen und Build-Scan veröffentlichen",
+        "it": "Compila e pubblica un build scan",
+        "ja": "ビルドしてビルドスキャンを公開",
+        "ko": "빌드하고 빌드 스캔 게시",
+        "zh-cn": "构建并发布构建扫描",
+        "zh-tw": "建置並發布建置掃描",
+        "ru": "Собрать и опубликовать build scan"
+      },
+      "description": {
+        "en": "Builds and uploads a report of the build to scans.gradle.com, after you accept its terms",
+        "es": "Compila y sube un informe del build a scans.gradle.com, después de aceptar sus condiciones",
+        "pt-br": "Compila e envia um relatório do build para scans.gradle.com, depois de aceitar os termos",
+        "fr": "Construit et envoie un rapport du build sur scans.gradle.com, après acceptation des conditions",
+        "de": "Baut und lädt einen Build-Bericht auf scans.gradle.com hoch, nachdem du die Bedingungen akzeptiert hast",
+        "it": "Compila e carica un report della build su scans.gradle.com, dopo aver accettato i termini",
+        "ja": "ビルドしてレポートを scans.gradle.com にアップロードします（利用規約への同意が必要）",
+        "ko": "빌드하고 약관에 동의하면 빌드 보고서를 scans.gradle.com에 올립니다",
+        "zh-cn": "构建并在你接受条款后把构建报告上传到 scans.gradle.com",
+        "zh-tw": "建置並在你接受條款後把建置報告上傳到 scans.gradle.com",
+        "ru": "Собирает проект и после принятия условий загружает отчёт о сборке на scans.gradle.com"
+      },
+      "command": "./gradlew build --scan",
+      "tags": {
+        "en": ["gradle", "gradlew", "--scan", "build scan", "report", "performance"],
+        "es": ["gradle", "gradlew", "--scan", "build scan", "informe", "rendimiento"],
+        "pt-br": ["gradle", "gradlew", "--scan", "build scan", "relatório", "desempenho"],
+        "fr": ["gradle", "gradlew", "--scan", "build scan", "rapport", "performances"],
+        "de": ["gradle", "gradlew", "--scan", "build scan", "Bericht", "Leistung"],
+        "it": ["gradle", "gradlew", "--scan", "build scan", "report", "prestazioni"],
+        "ja": ["gradle", "gradlew", "--scan", "build scan", "レポート", "パフォーマンス"],
+        "ko": ["gradle", "gradlew", "--scan", "build scan", "보고서", "성능"],
+        "zh-cn": ["gradle", "gradlew", "--scan", "build scan", "报告", "性能"],
+        "zh-tw": ["gradle", "gradlew", "--scan", "build scan", "報告", "效能"],
+        "ru": ["gradle", "gradlew", "--scan", "build scan", "отчёт", "производительность"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": ".\\gradlew build --scan",
+        "cmd": "gradlew build --scan"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/build_scans.html"
+    },
+    {
+      "id": "gradle.version",
+      "title": {
+        "en": "Show the Gradle version",
+        "es": "Ver la versión de Gradle",
+        "pt-br": "Ver a versão do Gradle",
+        "fr": "Afficher la version de Gradle",
+        "de": "Gradle-Version anzeigen",
+        "it": "Mostra la versione di Gradle",
+        "ja": "Gradle のバージョンを表示",
+        "ko": "Gradle 버전 보기",
+        "zh-cn": "查看 Gradle 版本",
+        "zh-tw": "檢視 Gradle 版本",
+        "ru": "Показать версию Gradle"
+      },
+      "description": {
+        "en": "Prints the Gradle version of the wrapper, and the Kotlin and Java versions it uses",
+        "es": "Muestra la versión de Gradle del wrapper y las de Kotlin y Java que usa",
+        "pt-br": "Mostra a versão do Gradle do wrapper e as do Kotlin e do Java que ele usa",
+        "fr": "Affiche la version de Gradle du wrapper et celles de Kotlin et Java qu’il utilise",
+        "de": "Zeigt die Gradle-Version des Wrappers sowie die verwendeten Kotlin- und Java-Versionen",
+        "it": "Mostra la versione di Gradle del wrapper e quelle di Kotlin e Java che usa",
+        "ja": "ラッパーの Gradle のバージョンと、使用している Kotlin と Java のバージョンを表示します",
+        "ko": "래퍼의 Gradle 버전과 사용하는 Kotlin, Java 버전을 보여 줍니다",
+        "zh-cn": "显示包装器的 Gradle 版本及其使用的 Kotlin 和 Java 版本",
+        "zh-tw": "顯示包裝器的 Gradle 版本及其使用的 Kotlin 和 Java 版本",
+        "ru": "Показывает версию Gradle из wrapper и используемые версии Kotlin и Java"
+      },
+      "command": "./gradlew --version",
+      "tags": {
+        "en": ["gradle", "gradlew", "--version", "version"],
+        "es": ["gradle", "gradlew", "--version", "versión"],
+        "pt-br": ["gradle", "gradlew", "--version", "versão"],
+        "fr": ["gradle", "gradlew", "--version", "version"],
+        "de": ["gradle", "gradlew", "--version", "Version"],
+        "it": ["gradle", "gradlew", "--version", "versione"],
+        "ja": ["gradle", "gradlew", "--version", "バージョン"],
+        "ko": ["gradle", "gradlew", "--version", "버전"],
+        "zh-cn": ["gradle", "gradlew", "--version", "版本"],
+        "zh-tw": ["gradle", "gradlew", "--version", "版本"],
+        "ru": ["gradle", "gradlew", "--version", "версия"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew --version",
+        "cmd": "gradlew --version"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/command_line_interface.html"
+    },
+    {
+      "id": "gradle.wrapper",
+      "title": {
+        "en": "Create the Gradle wrapper",
+        "es": "Crear el wrapper de Gradle",
+        "pt-br": "Criar o wrapper do Gradle",
+        "fr": "Créer le wrapper Gradle",
+        "de": "Gradle-Wrapper erstellen",
+        "it": "Crea il wrapper di Gradle",
+        "ja": "Gradle ラッパーを作成",
+        "ko": "Gradle 래퍼 만들기",
+        "zh-cn": "创建 Gradle 包装器",
+        "zh-tw": "建立 Gradle 包裝器",
+        "ru": "Создать Gradle Wrapper"
+      },
+      "description": {
+        "en": "Adds gradlew, gradlew.bat and gradle/wrapper to the project using the Gradle installed on the system",
+        "es": "Añade gradlew, gradlew.bat y gradle/wrapper al proyecto usando el Gradle instalado en el sistema",
+        "pt-br": "Adiciona gradlew, gradlew.bat e gradle/wrapper ao projeto usando o Gradle instalado no sistema",
+        "fr": "Ajoute gradlew, gradlew.bat et gradle/wrapper au projet avec le Gradle installé sur le système",
+        "de": "Fügt dem Projekt gradlew, gradlew.bat und gradle/wrapper mit dem systemweit installierten Gradle hinzu",
+        "it": "Aggiunge gradlew, gradlew.bat e gradle/wrapper al progetto usando il Gradle installato nel sistema",
+        "ja": "システムにインストールされた Gradle を使って、gradlew、gradlew.bat、gradle/wrapper をプロジェクトに追加します",
+        "ko": "시스템에 설치된 Gradle로 gradlew, gradlew.bat, gradle/wrapper를 프로젝트에 추가합니다",
+        "zh-cn": "使用系统中安装的 Gradle，向项目添加 gradlew、gradlew.bat 和 gradle/wrapper",
+        "zh-tw": "使用系統中安裝的 Gradle，向專案新增 gradlew、gradlew.bat 和 gradle/wrapper",
+        "ru": "Добавляет в проект gradlew, gradlew.bat и gradle/wrapper с помощью установленного в системе Gradle"
+      },
+      "command": "gradle wrapper",
+      "tags": {
+        "en": ["gradle", "gradlew", "wrapper", "create"],
+        "es": ["gradle", "gradlew", "wrapper", "crear"],
+        "pt-br": ["gradle", "gradlew", "wrapper", "criar"],
+        "fr": ["gradle", "gradlew", "wrapper", "créer"],
+        "de": ["gradle", "gradlew", "wrapper", "erstellen"],
+        "it": ["gradle", "gradlew", "wrapper", "creare"],
+        "ja": ["gradle", "gradlew", "wrapper", "作成"],
+        "ko": ["gradle", "gradlew", "wrapper", "만들기"],
+        "zh-cn": ["gradle", "gradlew", "wrapper", "创建"],
+        "zh-tw": ["gradle", "gradlew", "wrapper", "建立"],
+        "ru": ["gradle", "gradlew", "wrapper", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.gradle.org/current/userguide/gradle_wrapper.html"
+    },
+    {
+      "id": "gradle.wrapper-upgrade",
+      "title": {
+        "en": "Upgrade the Gradle version of the project",
+        "es": "Actualizar la versión de Gradle del proyecto",
+        "pt-br": "Atualizar a versão do Gradle do projeto",
+        "fr": "Mettre à jour la version de Gradle du projet",
+        "de": "Gradle-Version des Projekts aktualisieren",
+        "it": "Aggiorna la versione di Gradle del progetto",
+        "ja": "プロジェクトの Gradle バージョンを更新",
+        "ko": "프로젝트 Gradle 버전 업그레이드",
+        "zh-cn": "升级项目的 Gradle 版本",
+        "zh-tw": "升級專案的 Gradle 版本",
+        "ru": "Обновить версию Gradle в проекте"
+      },
+      "description": {
+        "en": "Changes the Gradle version that the wrapper downloads and updates its files",
+        "es": "Cambia la versión de Gradle que descarga el wrapper y actualiza sus archivos",
+        "pt-br": "Muda a versão do Gradle que o wrapper baixa e atualiza seus arquivos",
+        "fr": "Change la version de Gradle téléchargée par le wrapper et met à jour ses fichiers",
+        "de": "Ändert die Gradle-Version, die der Wrapper herunterlädt, und aktualisiert seine Dateien",
+        "it": "Cambia la versione di Gradle che scarica il wrapper e ne aggiorna i file",
+        "ja": "ラッパーがダウンロードする Gradle のバージョンを変更し、そのファイルを更新します",
+        "ko": "래퍼가 내려받는 Gradle 버전을 바꾸고 래퍼 파일을 갱신합니다",
+        "zh-cn": "更改包装器下载的 Gradle 版本并更新其文件",
+        "zh-tw": "變更包裝器下載的 Gradle 版本並更新其檔案",
+        "ru": "Меняет версию Gradle, которую скачивает wrapper, и обновляет его файлы"
+      },
+      "command": "./gradlew wrapper --gradle-version ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "latest",
+            "es": "latest",
+            "pt-br": "latest",
+            "fr": "latest",
+            "de": "latest",
+            "it": "latest",
+            "ja": "latest",
+            "ko": "latest",
+            "zh-cn": "latest",
+            "zh-tw": "latest",
+            "ru": "latest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["gradle", "gradlew", "wrapper", "--gradle-version", "upgrade", "version"],
+        "es": ["gradle", "gradlew", "wrapper", "--gradle-version", "actualizar", "versión"],
+        "pt-br": ["gradle", "gradlew", "wrapper", "--gradle-version", "atualizar", "versão"],
+        "fr": ["gradle", "gradlew", "wrapper", "--gradle-version", "mettre à jour", "version"],
+        "de": ["gradle", "gradlew", "wrapper", "--gradle-version", "aktualisieren", "Version"],
+        "it": ["gradle", "gradlew", "wrapper", "--gradle-version", "aggiornare", "versione"],
+        "ja": ["gradle", "gradlew", "wrapper", "--gradle-version", "更新", "バージョン"],
+        "ko": ["gradle", "gradlew", "wrapper", "--gradle-version", "업그레이드", "버전"],
+        "zh-cn": ["gradle", "gradlew", "wrapper", "--gradle-version", "升级", "版本"],
+        "zh-tw": ["gradle", "gradlew", "wrapper", "--gradle-version", "升級", "版本"],
+        "ru": ["gradle", "gradlew", "wrapper", "--gradle-version", "обновить", "версия"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": ".\\gradlew wrapper --gradle-version ${version}",
+        "cmd": "gradlew wrapper --gradle-version ${version}"
+      },
+      "docs": "https://docs.gradle.org/current/userguide/gradle_wrapper.html"
+    }
+  ]
+}

@@ -1,0 +1,866 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "maven",
+  "title": {
+    "en": "Maven",
+    "es": "Maven",
+    "pt-br": "Maven",
+    "fr": "Maven",
+    "de": "Maven",
+    "it": "Maven",
+    "ja": "Maven",
+    "ko": "Maven",
+    "zh-cn": "Maven",
+    "zh-tw": "Maven",
+    "ru": "Maven"
+  },
+  "icon": "library",
+  "order": 52,
+  "section": "languages",
+  "detect": ["pom.xml", "mvnw"],
+  "commands": [
+    {
+      "id": "maven.compile",
+      "title": {
+        "en": "Compile the project",
+        "es": "Compilar el proyecto",
+        "pt-br": "Compilar o projeto",
+        "fr": "Compiler le projet",
+        "de": "Projekt kompilieren",
+        "it": "Compila il progetto",
+        "ja": "プロジェクトをコンパイル",
+        "ko": "프로젝트 컴파일",
+        "zh-cn": "编译项目",
+        "zh-tw": "編譯專案",
+        "ru": "Скомпилировать проект"
+      },
+      "description": {
+        "en": "Compiles the main sources with the Maven wrapper of the project",
+        "es": "Compila el código principal con el wrapper de Maven del proyecto",
+        "pt-br": "Compila o código principal com o wrapper do Maven do projeto",
+        "fr": "Compile les sources principales avec le wrapper Maven du projet",
+        "de": "Kompiliert die Hauptquellen mit dem Maven-Wrapper des Projekts",
+        "it": "Compila i sorgenti principali con il wrapper Maven del progetto",
+        "ja": "プロジェクトの Maven ラッパーでメインのソースをコンパイルします",
+        "ko": "프로젝트의 Maven 래퍼로 메인 소스를 컴파일합니다",
+        "zh-cn": "使用项目的 Maven 包装器编译主源码",
+        "zh-tw": "使用專案的 Maven 包裝器編譯主要原始碼",
+        "ru": "Компилирует основной код через Maven Wrapper проекта"
+      },
+      "command": "./mvnw compile",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "compile", "build"],
+        "es": ["maven", "mvn", "mvnw", "compile", "construir"],
+        "pt-br": ["maven", "mvn", "mvnw", "compile", "construir"],
+        "fr": ["maven", "mvn", "mvnw", "compile", "construire"],
+        "de": ["maven", "mvn", "mvnw", "compile", "bauen"],
+        "it": ["maven", "mvn", "mvnw", "compile", "compilare"],
+        "ja": ["maven", "mvn", "mvnw", "compile", "ビルド"],
+        "ko": ["maven", "mvn", "mvnw", "compile", "빌드"],
+        "zh-cn": ["maven", "mvn", "mvnw", "compile", "构建"],
+        "zh-tw": ["maven", "mvn", "mvnw", "compile", "建置"],
+        "ru": ["maven", "mvn", "mvnw", "compile", "сборка"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw compile",
+        "cmd": "mvnw compile"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Exécuter les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Compiles and runs the unit tests of the project",
+        "es": "Compila y ejecuta los tests unitarios del proyecto",
+        "pt-br": "Compila e executa os testes unitários do projeto",
+        "fr": "Compile et exécute les tests unitaires du projet",
+        "de": "Kompiliert und führt die Unit-Tests des Projekts aus",
+        "it": "Compila ed esegue i test unitari del progetto",
+        "ja": "プロジェクトの単体テストをコンパイルして実行します",
+        "ko": "프로젝트의 단위 테스트를 컴파일하고 실행합니다",
+        "zh-cn": "编译并运行项目的单元测试",
+        "zh-tw": "編譯並執行專案的單元測試",
+        "ru": "Компилирует и запускает модульные тесты проекта"
+      },
+      "command": "./mvnw test",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "tests"],
+        "es": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "tests", "pruebas"],
+        "pt-br": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "testes"],
+        "fr": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "tests"],
+        "de": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "Tests"],
+        "it": ["maven", "mvn", "mvnw", "test", "surefire", "junit"],
+        "ja": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "テスト"],
+        "ko": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "테스트"],
+        "zh-cn": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "测试"],
+        "zh-tw": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "測試"],
+        "ru": ["maven", "mvn", "mvnw", "test", "surefire", "junit", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw test",
+        "cmd": "mvnw test"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.test-class",
+      "title": {
+        "en": "Run a single test class",
+        "es": "Ejecutar una sola clase de test",
+        "pt-br": "Executar uma única classe de teste",
+        "fr": "Exécuter une seule classe de test",
+        "de": "Eine einzelne Testklasse ausführen",
+        "it": "Esegui una sola classe di test",
+        "ja": "1 つのテストクラスだけ実行",
+        "ko": "테스트 클래스 하나만 실행",
+        "zh-cn": "只运行一个测试类",
+        "zh-tw": "只執行一個測試類別",
+        "ru": "Запустить один тестовый класс"
+      },
+      "description": {
+        "en": "Runs only the tests of one class; the name also accepts Class#method",
+        "es": "Ejecuta solo los tests de una clase; el nombre admite también Clase#método",
+        "pt-br": "Executa só os testes de uma classe; o nome também aceita Classe#método",
+        "fr": "Exécute seulement les tests d’une classe ; le nom accepte aussi Classe#méthode",
+        "de": "Führt nur die Tests einer Klasse aus; der Name akzeptiert auch Klasse#Methode",
+        "it": "Esegue solo i test di una classe; il nome accetta anche Classe#metodo",
+        "ja": "1 つのクラスのテストだけを実行します。Class#method の形も指定できます",
+        "ko": "한 클래스의 테스트만 실행합니다. Class#method 형식도 쓸 수 있습니다",
+        "zh-cn": "只运行一个类的测试；名称也可写成 类#方法",
+        "zh-tw": "只執行一個類別的測試；名稱也可寫成 類別#方法",
+        "ru": "Запускает тесты только одного класса; можно указать и Класс#метод"
+      },
+      "command": "./mvnw test -Dtest=${class}",
+      "params": [
+        {
+          "name": "class",
+          "label": {
+            "en": "Class name",
+            "es": "Nombre de la clase",
+            "pt-br": "Nome da classe",
+            "fr": "Nom de la classe",
+            "de": "Klassenname",
+            "it": "Nome della classe",
+            "ja": "クラス名",
+            "ko": "클래스 이름",
+            "zh-cn": "类名",
+            "zh-tw": "類別名稱",
+            "ru": "Имя класса"
+          },
+          "placeholder": {
+            "en": "AppTest",
+            "es": "AppTest",
+            "pt-br": "AppTest",
+            "fr": "AppTest",
+            "de": "AppTest",
+            "it": "AppTest",
+            "ja": "AppTest",
+            "ko": "AppTest",
+            "zh-cn": "AppTest",
+            "zh-tw": "AppTest",
+            "ru": "AppTest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "test", "-Dtest", "single test"],
+        "es": ["maven", "mvn", "mvnw", "test", "-Dtest", "un test", "clase"],
+        "pt-br": ["maven", "mvn", "mvnw", "test", "-Dtest", "um teste", "classe"],
+        "fr": ["maven", "mvn", "mvnw", "test", "-Dtest", "un test", "classe"],
+        "de": ["maven", "mvn", "mvnw", "test", "-Dtest", "einzelner Test", "Klasse"],
+        "it": ["maven", "mvn", "mvnw", "test", "-Dtest", "singolo test", "classe"],
+        "ja": ["maven", "mvn", "mvnw", "test", "-Dtest", "単一テスト", "クラス"],
+        "ko": ["maven", "mvn", "mvnw", "test", "-Dtest", "단일 테스트", "클래스"],
+        "zh-cn": ["maven", "mvn", "mvnw", "test", "-Dtest", "单个测试", "类"],
+        "zh-tw": ["maven", "mvn", "mvnw", "test", "-Dtest", "單一測試", "類別"],
+        "ru": ["maven", "mvn", "mvnw", "test", "-Dtest", "один тест", "класс"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw test -Dtest=${class}",
+        "cmd": "mvnw test -Dtest=${class}"
+      },
+      "docs": "https://maven.apache.org/surefire/maven-surefire-plugin/examples/single-test.html"
+    },
+    {
+      "id": "maven.package",
+      "title": {
+        "en": "Package the project",
+        "es": "Empaquetar el proyecto",
+        "pt-br": "Empacotar o projeto",
+        "fr": "Empaqueter le projet",
+        "de": "Projekt paketieren",
+        "it": "Impacchetta il progetto",
+        "ja": "プロジェクトをパッケージ化",
+        "ko": "프로젝트 패키징",
+        "zh-cn": "打包项目",
+        "zh-tw": "封裝專案",
+        "ru": "Упаковать проект"
+      },
+      "description": {
+        "en": "Compiles, tests and builds the JAR or WAR in target; needs the wrapper (create it with mvn wrapper:wrapper)",
+        "es": "Compila, prueba y genera el JAR o WAR en target; necesita el wrapper (créalo con mvn wrapper:wrapper)",
+        "pt-br": "Compila, testa e gera o JAR ou WAR em target; precisa do wrapper (crie-o com mvn wrapper:wrapper)",
+        "fr": "Compile, teste et produit le JAR ou WAR dans target ; nécessite le wrapper (créez-le avec mvn wrapper:wrapper)",
+        "de": "Kompiliert, testet und erzeugt das JAR oder WAR in target; braucht den Wrapper (mit mvn wrapper:wrapper anlegen)",
+        "it": "Compila, testa e genera il JAR o WAR in target; serve il wrapper (crealo con mvn wrapper:wrapper)",
+        "ja": "コンパイルとテストを行い、target に JAR か WAR を作ります。ラッパーが必要です（mvn wrapper:wrapper で作成）",
+        "ko": "컴파일·테스트 후 target에 JAR나 WAR를 만듭니다. 래퍼가 필요합니다(mvn wrapper:wrapper로 생성)",
+        "zh-cn": "编译、测试并在 target 中生成 JAR 或 WAR；需要包装器（用 mvn wrapper:wrapper 创建）",
+        "zh-tw": "編譯、測試並在 target 中產生 JAR 或 WAR；需要包裝器（用 mvn wrapper:wrapper 建立）",
+        "ru": "Компилирует, тестирует и собирает JAR или WAR в target; нужен wrapper (создайте его через mvn wrapper:wrapper)"
+      },
+      "command": "./mvnw package",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "package", "jar", "war", "build"],
+        "es": ["maven", "mvn", "mvnw", "package", "jar", "war", "empaquetar", "construir"],
+        "pt-br": ["maven", "mvn", "mvnw", "package", "jar", "war", "empacotar", "construir"],
+        "fr": ["maven", "mvn", "mvnw", "package", "jar", "war", "empaqueter", "construire"],
+        "de": ["maven", "mvn", "mvnw", "package", "jar", "war", "paketieren", "bauen"],
+        "it": ["maven", "mvn", "mvnw", "package", "jar", "war", "impacchettare", "compilare"],
+        "ja": ["maven", "mvn", "mvnw", "package", "jar", "war", "パッケージ", "ビルド"],
+        "ko": ["maven", "mvn", "mvnw", "package", "jar", "war", "패키징", "빌드"],
+        "zh-cn": ["maven", "mvn", "mvnw", "package", "jar", "war", "打包", "构建"],
+        "zh-tw": ["maven", "mvn", "mvnw", "package", "jar", "war", "封裝", "建置"],
+        "ru": ["maven", "mvn", "mvnw", "package", "jar", "war", "упаковать", "сборка"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw package",
+        "cmd": "mvnw package"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.package-skip-tests",
+      "title": {
+        "en": "Package without running the tests",
+        "es": "Empaquetar sin ejecutar los tests",
+        "pt-br": "Empacotar sem executar os testes",
+        "fr": "Empaqueter sans exécuter les tests",
+        "de": "Paketieren, ohne Tests auszuführen",
+        "it": "Impacchetta senza eseguire i test",
+        "ja": "テストを実行せずにパッケージ化",
+        "ko": "테스트 없이 패키징",
+        "zh-cn": "打包但不运行测试",
+        "zh-tw": "封裝但不執行測試",
+        "ru": "Упаковать без запуска тестов"
+      },
+      "description": {
+        "en": "Builds the package compiling the tests but without running them",
+        "es": "Genera el paquete compilando los tests pero sin ejecutarlos",
+        "pt-br": "Gera o pacote compilando os testes, mas sem executá-los",
+        "fr": "Produit le paquet en compilant les tests sans les exécuter",
+        "de": "Erzeugt das Paket; die Tests werden kompiliert, aber nicht ausgeführt",
+        "it": "Genera il pacchetto compilando i test senza eseguirli",
+        "ja": "テストはコンパイルするが実行せずにパッケージを作成します",
+        "ko": "테스트는 컴파일하지만 실행하지 않고 패키지를 만듭니다",
+        "zh-cn": "编译测试但不运行，生成包",
+        "zh-tw": "編譯測試但不執行，產生套件",
+        "ru": "Собирает пакет, компилируя тесты, но не запуская их"
+      },
+      "command": "./mvnw package -DskipTests",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "package", "-DskipTests", "skip tests"],
+        "es": ["maven", "mvn", "mvnw", "package", "-DskipTests", "saltar tests", "empaquetar"],
+        "pt-br": ["maven", "mvn", "mvnw", "package", "-DskipTests", "pular testes", "empacotar"],
+        "fr": ["maven", "mvn", "mvnw", "package", "-DskipTests", "ignorer tests", "empaqueter"],
+        "de": ["maven", "mvn", "mvnw", "package", "-DskipTests", "Tests überspringen", "paketieren"],
+        "it": ["maven", "mvn", "mvnw", "package", "-DskipTests", "saltare test", "impacchettare"],
+        "ja": ["maven", "mvn", "mvnw", "package", "-DskipTests", "テスト省略", "パッケージ"],
+        "ko": ["maven", "mvn", "mvnw", "package", "-DskipTests", "테스트 건너뛰기", "패키징"],
+        "zh-cn": ["maven", "mvn", "mvnw", "package", "-DskipTests", "跳过测试", "打包"],
+        "zh-tw": ["maven", "mvn", "mvnw", "package", "-DskipTests", "略過測試", "封裝"],
+        "ru": ["maven", "mvn", "mvnw", "package", "-DskipTests", "пропустить тесты", "упаковать"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw package -DskipTests",
+        "cmd": "mvnw package -DskipTests"
+      },
+      "docs": "https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html"
+    },
+    {
+      "id": "maven.verify",
+      "title": {
+        "en": "Verify the project",
+        "es": "Verificar el proyecto",
+        "pt-br": "Verificar o projeto",
+        "fr": "Vérifier le projet",
+        "de": "Projekt verifizieren",
+        "it": "Verifica il progetto",
+        "ja": "プロジェクトを検証",
+        "ko": "프로젝트 검증",
+        "zh-cn": "验证项目",
+        "zh-tw": "驗證專案",
+        "ru": "Проверить проект"
+      },
+      "description": {
+        "en": "Packages and runs the integration tests and quality checks, as in CI",
+        "es": "Empaqueta y ejecuta los tests de integración y las comprobaciones de calidad, como en CI",
+        "pt-br": "Empacota e executa os testes de integração e as verificações de qualidade, como na CI",
+        "fr": "Empaquette et exécute les tests d’intégration et les contrôles qualité, comme en CI",
+        "de": "Paketiert und führt Integrationstests und Qualitätsprüfungen aus, wie in CI",
+        "it": "Impacchetta ed esegue i test di integrazione e i controlli di qualità, come in CI",
+        "ja": "パッケージ化して結合テストと品質チェックを実行します（CI と同じ）",
+        "ko": "패키징 후 통합 테스트와 품질 검사를 실행합니다(CI와 같음)",
+        "zh-cn": "打包并运行集成测试和质量检查，与 CI 相同",
+        "zh-tw": "封裝並執行整合測試和品質檢查，與 CI 相同",
+        "ru": "Упаковывает проект и запускает интеграционные тесты и проверки качества, как в CI"
+      },
+      "command": "./mvnw verify",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "check"],
+        "es": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "verificar", "integración"],
+        "pt-br": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "verificar", "integração"],
+        "fr": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "vérifier", "intégration"],
+        "de": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "verifizieren", "Integration"],
+        "it": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "verificare", "integrazione"],
+        "ja": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "検証", "結合テスト"],
+        "ko": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "검증", "통합 테스트"],
+        "zh-cn": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "验证", "集成测试"],
+        "zh-tw": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "驗證", "整合測試"],
+        "ru": ["maven", "mvn", "mvnw", "verify", "ci", "failsafe", "проверка", "интеграция"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw verify",
+        "cmd": "mvnw verify"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.install",
+      "title": {
+        "en": "Install in the local repository",
+        "es": "Instalar en el repositorio local",
+        "pt-br": "Instalar no repositório local",
+        "fr": "Installer dans le dépôt local",
+        "de": "Im lokalen Repository installieren",
+        "it": "Installa nel repository locale",
+        "ja": "ローカルリポジトリにインストール",
+        "ko": "로컬 저장소에 설치",
+        "zh-cn": "安装到本地仓库",
+        "zh-tw": "安裝到本機儲存庫",
+        "ru": "Установить в локальный репозиторий"
+      },
+      "description": {
+        "en": "Packages the project and copies it to ~/.m2, where your other projects can use it",
+        "es": "Empaqueta el proyecto y lo copia a ~/.m2, donde lo pueden usar tus otros proyectos",
+        "pt-br": "Empacota o projeto e o copia para ~/.m2, onde seus outros projetos podem usá-lo",
+        "fr": "Empaquette le projet et le copie dans ~/.m2, où vos autres projets peuvent l’utiliser",
+        "de": "Paketiert das Projekt und kopiert es nach ~/.m2, wo deine anderen Projekte es nutzen können",
+        "it": "Impacchetta il progetto e lo copia in ~/.m2, dove possono usarlo gli altri tuoi progetti",
+        "ja": "プロジェクトをパッケージ化して ~/.m2 にコピーし、ほかのプロジェクトから使えるようにします",
+        "ko": "프로젝트를 패키징해 ~/.m2에 복사하여 다른 프로젝트에서 쓸 수 있게 합니다",
+        "zh-cn": "打包项目并复制到 ~/.m2，供你的其他项目使用",
+        "zh-tw": "封裝專案並複製到 ~/.m2，供你的其他專案使用",
+        "ru": "Упаковывает проект и копирует его в ~/.m2, где его смогут использовать другие ваши проекты"
+      },
+      "command": "./mvnw install",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "install", ".m2", "local repository"],
+        "es": ["maven", "mvn", "mvnw", "install", ".m2", "instalar", "repositorio local"],
+        "pt-br": ["maven", "mvn", "mvnw", "install", ".m2", "instalar", "repositório local"],
+        "fr": ["maven", "mvn", "mvnw", "install", ".m2", "installer", "dépôt local"],
+        "de": ["maven", "mvn", "mvnw", "install", ".m2", "installieren", "lokales Repository"],
+        "it": ["maven", "mvn", "mvnw", "install", ".m2", "installare", "repository locale"],
+        "ja": ["maven", "mvn", "mvnw", "install", ".m2", "インストール", "ローカルリポジトリ"],
+        "ko": ["maven", "mvn", "mvnw", "install", ".m2", "설치", "로컬 저장소"],
+        "zh-cn": ["maven", "mvn", "mvnw", "install", ".m2", "安装", "本地仓库"],
+        "zh-tw": ["maven", "mvn", "mvnw", "install", ".m2", "安裝", "本機儲存庫"],
+        "ru": ["maven", "mvn", "mvnw", "install", ".m2", "установить", "локальный репозиторий"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": ".\\mvnw install",
+        "cmd": "mvnw install"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.clean",
+      "title": {
+        "en": "Delete the build output",
+        "es": "Borrar la salida de compilación",
+        "pt-br": "Apagar a saída da compilação",
+        "fr": "Supprimer la sortie de compilation",
+        "de": "Build-Ausgabe löschen",
+        "it": "Elimina l’output della build",
+        "ja": "ビルド出力を削除",
+        "ko": "빌드 출력 삭제",
+        "zh-cn": "删除构建输出",
+        "zh-tw": "刪除建置輸出",
+        "ru": "Удалить результаты сборки"
+      },
+      "description": {
+        "en": "Deletes the target folder with everything compiled and packaged",
+        "es": "Borra la carpeta target con todo lo compilado y empaquetado",
+        "pt-br": "Apaga a pasta target com tudo o que foi compilado e empacotado",
+        "fr": "Supprime le dossier target avec tout ce qui a été compilé et empaqueté",
+        "de": "Löscht den Ordner target mit allem Kompilierten und Paketierten",
+        "it": "Elimina la cartella target con tutto ciò che è stato compilato e impacchettato",
+        "ja": "コンパイル・パッケージ化したものを含む target フォルダーを削除します",
+        "ko": "컴파일하고 패키징한 결과가 든 target 폴더를 삭제합니다",
+        "zh-cn": "删除包含所有编译和打包结果的 target 文件夹",
+        "zh-tw": "刪除包含所有編譯和封裝結果的 target 資料夾",
+        "ru": "Удаляет папку target со всем скомпилированным и упакованным"
+      },
+      "command": "./mvnw clean",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "clean", "target", "delete"],
+        "es": ["maven", "mvn", "mvnw", "clean", "target", "borrar", "limpiar"],
+        "pt-br": ["maven", "mvn", "mvnw", "clean", "target", "apagar", "limpar"],
+        "fr": ["maven", "mvn", "mvnw", "clean", "target", "supprimer", "nettoyer"],
+        "de": ["maven", "mvn", "mvnw", "clean", "target", "löschen", "aufräumen"],
+        "it": ["maven", "mvn", "mvnw", "clean", "target", "eliminare", "pulire"],
+        "ja": ["maven", "mvn", "mvnw", "clean", "target", "削除", "クリーン"],
+        "ko": ["maven", "mvn", "mvnw", "clean", "target", "삭제", "정리"],
+        "zh-cn": ["maven", "mvn", "mvnw", "clean", "target", "删除", "清理"],
+        "zh-tw": ["maven", "mvn", "mvnw", "clean", "target", "刪除", "清理"],
+        "ru": ["maven", "mvn", "mvnw", "clean", "target", "удалить", "очистка"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": ".\\mvnw clean",
+        "cmd": "mvnw clean"
+      },
+      "docs": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "id": "maven.module",
+      "title": {
+        "en": "Build one module and its dependencies",
+        "es": "Compilar un módulo y sus dependencias",
+        "pt-br": "Compilar um módulo e suas dependências",
+        "fr": "Construire un module et ses dépendances",
+        "de": "Ein Modul samt Abhängigkeiten bauen",
+        "it": "Compila un modulo e le sue dipendenze",
+        "ja": "1 つのモジュールと依存先をビルド",
+        "ko": "모듈 하나와 의존 모듈 빌드",
+        "zh-cn": "构建一个模块及其依赖",
+        "zh-tw": "建置一個模組及其相依模組",
+        "ru": "Собрать модуль и его зависимости"
+      },
+      "description": {
+        "en": "In a multi-module project, packages only that module and the modules it needs",
+        "es": "En un proyecto multimódulo, empaqueta solo ese módulo y los módulos que necesita",
+        "pt-br": "Em um projeto multimódulo, empacota só esse módulo e os módulos de que ele precisa",
+        "fr": "Dans un projet multimodule, empaquette seulement ce module et ceux dont il a besoin",
+        "de": "Paketiert in einem Multi-Modul-Projekt nur dieses Modul und die Module, die es braucht",
+        "it": "In un progetto multimodulo, impacchetta solo quel modulo e i moduli di cui ha bisogno",
+        "ja": "マルチモジュールのプロジェクトで、そのモジュールと必要なモジュールだけをパッケージ化します",
+        "ko": "멀티 모듈 프로젝트에서 그 모듈과 필요한 모듈만 패키징합니다",
+        "zh-cn": "在多模块项目中，只打包该模块及其所需的模块",
+        "zh-tw": "在多模組專案中，只封裝該模組及其所需的模組",
+        "ru": "В многомодульном проекте упаковывает только этот модуль и нужные ему модули"
+      },
+      "command": "./mvnw -pl ${module} -am package",
+      "params": [
+        {
+          "name": "module",
+          "label": {
+            "en": "Module",
+            "es": "Módulo",
+            "pt-br": "Módulo",
+            "fr": "Module",
+            "de": "Modul",
+            "it": "Modulo",
+            "ja": "モジュール",
+            "ko": "모듈",
+            "zh-cn": "模块",
+            "zh-tw": "模組",
+            "ru": "Модуль"
+          },
+          "placeholder": {
+            "en": "api",
+            "es": "api",
+            "pt-br": "api",
+            "fr": "api",
+            "de": "api",
+            "it": "api",
+            "ja": "api",
+            "ko": "api",
+            "zh-cn": "api",
+            "zh-tw": "api",
+            "ru": "api"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "module"],
+        "es": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "módulo"],
+        "pt-br": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "módulo"],
+        "fr": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "module"],
+        "de": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "Modul"],
+        "it": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "modulo"],
+        "ja": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "モジュール"],
+        "ko": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "모듈"],
+        "zh-cn": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "模块"],
+        "zh-tw": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "模組"],
+        "ru": ["maven", "mvn", "mvnw", "-pl", "-am", "multi-module", "reactor", "модуль"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw -pl ${module} -am package",
+        "cmd": "mvnw -pl ${module} -am package"
+      },
+      "docs": "https://maven.apache.org/ref/current/maven-embedder/cli.html"
+    },
+    {
+      "id": "maven.dependency-tree",
+      "title": {
+        "en": "Show the dependency tree",
+        "es": "Ver el árbol de dependencias",
+        "pt-br": "Ver a árvore de dependências",
+        "fr": "Afficher l’arbre des dépendances",
+        "de": "Abhängigkeitsbaum anzeigen",
+        "it": "Mostra l’albero delle dipendenze",
+        "ja": "依存関係ツリーを表示",
+        "ko": "의존성 트리 보기",
+        "zh-cn": "查看依赖树",
+        "zh-tw": "檢視相依套件樹",
+        "ru": "Показать дерево зависимостей"
+      },
+      "description": {
+        "en": "Shows every dependency, including transitive ones, to find version conflicts",
+        "es": "Muestra todas las dependencias, incluidas las transitivas, para encontrar conflictos de versiones",
+        "pt-br": "Mostra todas as dependências, incluindo as transitivas, para achar conflitos de versão",
+        "fr": "Affiche toutes les dépendances, transitives comprises, pour repérer les conflits de versions",
+        "de": "Zeigt alle Abhängigkeiten inklusive transitiver, um Versionskonflikte zu finden",
+        "it": "Mostra tutte le dipendenze, incluse le transitive, per trovare conflitti di versione",
+        "ja": "推移的なものも含めすべての依存関係を表示し、バージョンの衝突を探します",
+        "ko": "전이 의존성을 포함한 모든 의존성을 보여 줘 버전 충돌을 찾습니다",
+        "zh-cn": "显示所有依赖（包括传递依赖），以查找版本冲突",
+        "zh-tw": "顯示所有相依套件（包括遞移相依），以找出版本衝突",
+        "ru": "Показывает все зависимости, включая транзитивные, чтобы найти конфликты версий"
+      },
+      "command": "./mvnw dependency:tree",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "dependency:tree", "dependencies", "tree"],
+        "es": ["maven", "mvn", "mvnw", "dependency:tree", "dependencias", "árbol"],
+        "pt-br": ["maven", "mvn", "mvnw", "dependency:tree", "dependências", "árvore"],
+        "fr": ["maven", "mvn", "mvnw", "dependency:tree", "dépendances", "arbre"],
+        "de": ["maven", "mvn", "mvnw", "dependency:tree", "Abhängigkeiten", "Baum"],
+        "it": ["maven", "mvn", "mvnw", "dependency:tree", "dipendenze", "albero"],
+        "ja": ["maven", "mvn", "mvnw", "dependency:tree", "依存関係", "ツリー"],
+        "ko": ["maven", "mvn", "mvnw", "dependency:tree", "의존성", "트리"],
+        "zh-cn": ["maven", "mvn", "mvnw", "dependency:tree", "依赖", "树"],
+        "zh-tw": ["maven", "mvn", "mvnw", "dependency:tree", "相依套件", "樹"],
+        "ru": ["maven", "mvn", "mvnw", "dependency:tree", "зависимости", "дерево"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw dependency:tree",
+        "cmd": "mvnw dependency:tree"
+      },
+      "docs": "https://maven.apache.org/plugins/maven-dependency-plugin/tree-mojo.html"
+    },
+    {
+      "id": "maven.dependency-updates",
+      "title": {
+        "en": "List outdated dependencies",
+        "es": "Ver dependencias desactualizadas",
+        "pt-br": "Ver dependências desatualizadas",
+        "fr": "Lister les dépendances obsolètes",
+        "de": "Veraltete Abhängigkeiten anzeigen",
+        "it": "Elenca le dipendenze obsolete",
+        "ja": "古い依存関係を一覧表示",
+        "ko": "오래된 의존성 보기",
+        "zh-cn": "列出过时的依赖",
+        "zh-tw": "列出過時的相依套件",
+        "ru": "Показать устаревшие зависимости"
+      },
+      "description": {
+        "en": "Shows the dependencies of pom.xml that have newer versions, without changing anything",
+        "es": "Muestra las dependencias de pom.xml que tienen versiones más nuevas, sin cambiar nada",
+        "pt-br": "Mostra as dependências do pom.xml que têm versões mais novas, sem alterar nada",
+        "fr": "Affiche les dépendances de pom.xml qui ont des versions plus récentes, sans rien modifier",
+        "de": "Zeigt die Abhängigkeiten aus pom.xml mit neueren Versionen, ohne etwas zu ändern",
+        "it": "Mostra le dipendenze di pom.xml che hanno versioni più recenti, senza modificare nulla",
+        "ja": "新しいバージョンがある pom.xml の依存関係を、何も変更せずに表示します",
+        "ko": "새 버전이 있는 pom.xml의 의존성을 아무것도 바꾸지 않고 보여 줍니다",
+        "zh-cn": "显示 pom.xml 中有更新版本的依赖，不做任何修改",
+        "zh-tw": "顯示 pom.xml 中有更新版本的相依套件，不做任何修改",
+        "ru": "Показывает зависимости из pom.xml, для которых есть новые версии, ничего не меняя"
+      },
+      "command": "./mvnw versions:display-dependency-updates",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "versions", "outdated", "updates"],
+        "es": ["maven", "mvn", "mvnw", "versions", "outdated", "desactualizadas", "versiones"],
+        "pt-br": ["maven", "mvn", "mvnw", "versions", "outdated", "desatualizadas", "versões"],
+        "fr": ["maven", "mvn", "mvnw", "versions", "outdated", "obsolètes"],
+        "de": ["maven", "mvn", "mvnw", "versions", "outdated", "veraltet", "Versionen"],
+        "it": ["maven", "mvn", "mvnw", "versions", "outdated", "obsolete", "versioni"],
+        "ja": ["maven", "mvn", "mvnw", "versions", "outdated", "古い", "バージョン"],
+        "ko": ["maven", "mvn", "mvnw", "versions", "outdated", "오래된", "버전"],
+        "zh-cn": ["maven", "mvn", "mvnw", "versions", "outdated", "过时", "版本"],
+        "zh-tw": ["maven", "mvn", "mvnw", "versions", "outdated", "過時", "版本"],
+        "ru": ["maven", "mvn", "mvnw", "versions", "outdated", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw versions:display-dependency-updates",
+        "cmd": "mvnw versions:display-dependency-updates"
+      },
+      "docs": "https://www.mojohaus.org/versions/versions-maven-plugin/display-dependency-updates-mojo.html"
+    },
+    {
+      "id": "maven.effective-pom",
+      "title": {
+        "en": "Show the effective POM",
+        "es": "Ver el POM efectivo",
+        "pt-br": "Ver o POM efetivo",
+        "fr": "Afficher le POM effectif",
+        "de": "Effektives POM anzeigen",
+        "it": "Mostra il POM effettivo",
+        "ja": "有効な POM を表示",
+        "ko": "유효 POM 보기",
+        "zh-cn": "查看有效 POM",
+        "zh-tw": "檢視有效 POM",
+        "ru": "Показать итоговый POM"
+      },
+      "description": {
+        "en": "Prints the final pom.xml after applying parents, profiles and default values",
+        "es": "Muestra el pom.xml final después de aplicar padres, perfiles y valores por defecto",
+        "pt-br": "Mostra o pom.xml final depois de aplicar pais, perfis e valores padrão",
+        "fr": "Affiche le pom.xml final après application des parents, profils et valeurs par défaut",
+        "de": "Gibt das endgültige pom.xml nach Anwendung von Parents, Profilen und Standardwerten aus",
+        "it": "Mostra il pom.xml finale dopo aver applicato parent, profili e valori predefiniti",
+        "ja": "親 POM、プロファイル、既定値を適用した最終的な pom.xml を表示します",
+        "ko": "부모, 프로필, 기본값을 적용한 최종 pom.xml을 보여 줍니다",
+        "zh-cn": "显示应用父 POM、配置文件和默认值后的最终 pom.xml",
+        "zh-tw": "顯示套用父 POM、設定檔和預設值後的最終 pom.xml",
+        "ru": "Выводит итоговый pom.xml с учётом родителей, профилей и значений по умолчанию"
+      },
+      "command": "./mvnw help:effective-pom",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "config", "debug"],
+        "es": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "configuración", "depurar"],
+        "pt-br": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "configuração", "depurar"],
+        "fr": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "configuration", "déboguer"],
+        "de": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "Konfiguration", "debuggen"],
+        "it": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "configurazione", "debug"],
+        "ja": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "構成", "デバッグ"],
+        "ko": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "구성", "디버그"],
+        "zh-cn": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "配置", "调试"],
+        "zh-tw": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "設定", "偵錯"],
+        "ru": ["maven", "mvn", "mvnw", "help:effective-pom", "pom.xml", "конфигурация", "отладка"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw help:effective-pom",
+        "cmd": "mvnw help:effective-pom"
+      },
+      "docs": "https://maven.apache.org/plugins/maven-help-plugin/effective-pom-mojo.html"
+    },
+    {
+      "id": "maven.spring-boot-run",
+      "title": {
+        "en": "Run the Spring Boot app",
+        "es": "Ejecutar la app de Spring Boot",
+        "pt-br": "Executar o app Spring Boot",
+        "fr": "Lancer l’application Spring Boot",
+        "de": "Spring-Boot-App starten",
+        "it": "Avvia l’app Spring Boot",
+        "ja": "Spring Boot アプリを実行",
+        "ko": "Spring Boot 앱 실행",
+        "zh-cn": "运行 Spring Boot 应用",
+        "zh-tw": "執行 Spring Boot 應用程式",
+        "ru": "Запустить приложение Spring Boot"
+      },
+      "description": {
+        "en": "Compiles and starts the application with the Spring Boot Maven plugin; stop it with Ctrl+C",
+        "es": "Compila y arranca la aplicación con el plugin de Spring Boot para Maven; se detiene con Ctrl+C",
+        "pt-br": "Compila e inicia a aplicação com o plugin do Spring Boot para Maven; pare com Ctrl+C",
+        "fr": "Compile et démarre l’application avec le plugin Spring Boot pour Maven ; arrêtez-la avec Ctrl+C",
+        "de": "Kompiliert und startet die Anwendung mit dem Spring-Boot-Maven-Plugin; mit Strg+C beenden",
+        "it": "Compila e avvia l’applicazione con il plugin Spring Boot per Maven; si ferma con Ctrl+C",
+        "ja": "Spring Boot の Maven プラグインでアプリをコンパイルして起動します。Ctrl+C で停止",
+        "ko": "Spring Boot Maven 플러그인으로 앱을 컴파일하고 시작합니다. Ctrl+C로 멈춥니다",
+        "zh-cn": "用 Spring Boot Maven 插件编译并启动应用；按 Ctrl+C 停止",
+        "zh-tw": "用 Spring Boot Maven 外掛程式編譯並啟動應用程式；按 Ctrl+C 停止",
+        "ru": "Компилирует и запускает приложение плагином Spring Boot для Maven; остановка — Ctrl+C"
+      },
+      "command": "./mvnw spring-boot:run",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "run", "server"],
+        "es": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "ejecutar", "servidor"],
+        "pt-br": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "executar", "servidor"],
+        "fr": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "lancer", "serveur"],
+        "de": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "starten", "Server"],
+        "it": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "avviare", "server"],
+        "ja": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "実行", "サーバー"],
+        "ko": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "실행", "서버"],
+        "zh-cn": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "运行", "服务器"],
+        "zh-tw": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "執行", "伺服器"],
+        "ru": ["maven", "mvn", "mvnw", "spring-boot:run", "spring", "spring boot", "запустить", "сервер"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw spring-boot:run",
+        "cmd": "mvnw spring-boot:run"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/run.html"
+    },
+    {
+      "id": "maven.update-snapshots",
+      "title": {
+        "en": "Build forcing dependency updates",
+        "es": "Compilar forzando la actualización de dependencias",
+        "pt-br": "Compilar forçando a atualização de dependências",
+        "fr": "Construire en forçant la mise à jour des dépendances",
+        "de": "Bauen und Abhängigkeiten neu laden",
+        "it": "Compila forzando l’aggiornamento delle dipendenze",
+        "ja": "依存関係の更新を強制してビルド",
+        "ko": "의존성 업데이트를 강제하고 빌드",
+        "zh-cn": "强制更新依赖并构建",
+        "zh-tw": "強制更新相依套件並建置",
+        "ru": "Собрать с принудительным обновлением зависимостей"
+      },
+      "description": {
+        "en": "Verifies the project checking the remote repositories again for new snapshots and releases",
+        "es": "Verifica el proyecto consultando de nuevo los repositorios remotos por snapshots y versiones nuevas",
+        "pt-br": "Verifica o projeto consultando de novo os repositórios remotos por snapshots e versões novas",
+        "fr": "Vérifie le projet en interrogeant à nouveau les dépôts distants pour les nouveaux snapshots et versions",
+        "de": "Verifiziert das Projekt und fragt die Remote-Repositorys erneut nach neuen Snapshots und Releases",
+        "it": "Verifica il progetto interrogando di nuovo i repository remoti per nuovi snapshot e release",
+        "ja": "リモートリポジトリに新しいスナップショットやリリースを再確認しながらプロジェクトを検証します",
+        "ko": "원격 저장소에서 새 스냅숏과 릴리스를 다시 확인하며 프로젝트를 검증합니다",
+        "zh-cn": "重新检查远程仓库中的新快照和新版本并验证项目",
+        "zh-tw": "重新檢查遠端儲存庫中的新快照和新版本並驗證專案",
+        "ru": "Проверяет проект, заново запрашивая у удалённых репозиториев новые снапшоты и релизы"
+      },
+      "command": "./mvnw -U verify",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "refresh", "dependencies"],
+        "es": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "actualizar", "dependencias"],
+        "pt-br": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "atualizar", "dependências"],
+        "fr": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "mettre à jour", "dépendances"],
+        "de": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "aktualisieren", "Abhängigkeiten"],
+        "it": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "aggiornare", "dipendenze"],
+        "ja": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "更新", "依存関係"],
+        "ko": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "업데이트", "의존성"],
+        "zh-cn": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "更新", "依赖"],
+        "zh-tw": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "更新", "相依套件"],
+        "ru": ["maven", "mvn", "mvnw", "-U", "--update-snapshots", "snapshot", "обновить", "зависимости"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": ".\\mvnw -U verify",
+        "cmd": "mvnw -U verify"
+      },
+      "docs": "https://maven.apache.org/ref/current/maven-embedder/cli.html"
+    },
+    {
+      "id": "maven.version",
+      "title": {
+        "en": "Show the Maven and Java versions",
+        "es": "Ver las versiones de Maven y Java",
+        "pt-br": "Ver as versões do Maven e do Java",
+        "fr": "Afficher les versions de Maven et Java",
+        "de": "Maven- und Java-Version anzeigen",
+        "it": "Mostra le versioni di Maven e Java",
+        "ja": "Maven と Java のバージョンを表示",
+        "ko": "Maven과 Java 버전 보기",
+        "zh-cn": "查看 Maven 和 Java 版本",
+        "zh-tw": "檢視 Maven 和 Java 版本",
+        "ru": "Показать версии Maven и Java"
+      },
+      "description": {
+        "en": "Prints the Maven version of the wrapper and the Java it uses",
+        "es": "Muestra la versión de Maven del wrapper y el Java que usa",
+        "pt-br": "Mostra a versão do Maven do wrapper e o Java que ele usa",
+        "fr": "Affiche la version de Maven du wrapper et le Java qu’il utilise",
+        "de": "Zeigt die Maven-Version des Wrappers und das verwendete Java",
+        "it": "Mostra la versione di Maven del wrapper e il Java che usa",
+        "ja": "ラッパーの Maven のバージョンと、使用している Java を表示します",
+        "ko": "래퍼의 Maven 버전과 사용하는 Java를 보여 줍니다",
+        "zh-cn": "显示包装器的 Maven 版本及其使用的 Java",
+        "zh-tw": "顯示包裝器的 Maven 版本及其使用的 Java",
+        "ru": "Показывает версию Maven из wrapper и используемую Java"
+      },
+      "command": "./mvnw --version",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "--version", "-v", "version"],
+        "es": ["maven", "mvn", "mvnw", "--version", "-v", "versión"],
+        "pt-br": ["maven", "mvn", "mvnw", "--version", "-v", "versão"],
+        "fr": ["maven", "mvn", "mvnw", "--version", "-v", "version"],
+        "de": ["maven", "mvn", "mvnw", "--version", "-v", "Version"],
+        "it": ["maven", "mvn", "mvnw", "--version", "-v", "versione"],
+        "ja": ["maven", "mvn", "mvnw", "--version", "-v", "バージョン"],
+        "ko": ["maven", "mvn", "mvnw", "--version", "-v", "버전"],
+        "zh-cn": ["maven", "mvn", "mvnw", "--version", "-v", "版本"],
+        "zh-tw": ["maven", "mvn", "mvnw", "--version", "-v", "版本"],
+        "ru": ["maven", "mvn", "mvnw", "--version", "-v", "версия"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw --version",
+        "cmd": "mvnw --version"
+      },
+      "docs": "https://maven.apache.org/ref/current/maven-embedder/cli.html"
+    },
+    {
+      "id": "maven.wrapper",
+      "title": {
+        "en": "Create the Maven wrapper",
+        "es": "Crear el wrapper de Maven",
+        "pt-br": "Criar o wrapper do Maven",
+        "fr": "Créer le wrapper Maven",
+        "de": "Maven-Wrapper erstellen",
+        "it": "Crea il wrapper di Maven",
+        "ja": "Maven ラッパーを作成",
+        "ko": "Maven 래퍼 만들기",
+        "zh-cn": "创建 Maven 包装器",
+        "zh-tw": "建立 Maven 包裝器",
+        "ru": "Создать Maven Wrapper"
+      },
+      "description": {
+        "en": "Adds mvnw, mvnw.cmd and .mvn to the project using the Maven installed on the system",
+        "es": "Añade mvnw, mvnw.cmd y .mvn al proyecto usando el Maven instalado en el sistema",
+        "pt-br": "Adiciona mvnw, mvnw.cmd e .mvn ao projeto usando o Maven instalado no sistema",
+        "fr": "Ajoute mvnw, mvnw.cmd et .mvn au projet avec le Maven installé sur le système",
+        "de": "Fügt dem Projekt mvnw, mvnw.cmd und .mvn mit dem systemweit installierten Maven hinzu",
+        "it": "Aggiunge mvnw, mvnw.cmd e .mvn al progetto usando il Maven installato nel sistema",
+        "ja": "システムにインストールされた Maven を使って、mvnw、mvnw.cmd、.mvn をプロジェクトに追加します",
+        "ko": "시스템에 설치된 Maven으로 mvnw, mvnw.cmd, .mvn을 프로젝트에 추가합니다",
+        "zh-cn": "使用系统中安装的 Maven，向项目添加 mvnw、mvnw.cmd 和 .mvn",
+        "zh-tw": "使用系統中安裝的 Maven，向專案新增 mvnw、mvnw.cmd 和 .mvn",
+        "ru": "Добавляет в проект mvnw, mvnw.cmd и .mvn с помощью установленного в системе Maven"
+      },
+      "command": "mvn wrapper:wrapper",
+      "tags": {
+        "en": ["maven", "mvn", "mvnw", "wrapper:wrapper", "create"],
+        "es": ["maven", "mvn", "mvnw", "wrapper:wrapper", "crear"],
+        "pt-br": ["maven", "mvn", "mvnw", "wrapper:wrapper", "criar"],
+        "fr": ["maven", "mvn", "mvnw", "wrapper:wrapper", "créer"],
+        "de": ["maven", "mvn", "mvnw", "wrapper:wrapper", "erstellen"],
+        "it": ["maven", "mvn", "mvnw", "wrapper:wrapper", "creare"],
+        "ja": ["maven", "mvn", "mvnw", "wrapper:wrapper", "作成"],
+        "ko": ["maven", "mvn", "mvnw", "wrapper:wrapper", "만들기"],
+        "zh-cn": ["maven", "mvn", "mvnw", "wrapper:wrapper", "创建"],
+        "zh-tw": ["maven", "mvn", "mvnw", "wrapper:wrapper", "建立"],
+        "ru": ["maven", "mvn", "mvnw", "wrapper:wrapper", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://maven.apache.org/tools/wrapper/"
+    }
+  ]
+}
