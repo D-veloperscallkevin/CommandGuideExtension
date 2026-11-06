@@ -8,6 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
+- Cinco categorías nuevas en "Lenguajes y entornos": **Yarn** (los comandos de Yarn 2 o superior lo indican), **Bun**, **Deno**, **TypeScript** (`tsc`, incluido `tsc -b` para referencias de proyecto) y **Gestores de versiones** (nvm, fnm, Volta, Corepack y pyenv). Los ejemplos de nvm usan la sintaxis de nvm-windows en PowerShell y cmd, y activar fnm muestra la línea propia de cada shell. Se detectan por `yarn.lock`, `.yarnrc.yml`, `bun.lock`, `bun.lockb`, `bunfig.toml`, `deno.json`, `deno.jsonc`, `deno.lock`, `tsconfig*.json`, `.nvmrc`, `.node-version` y `.python-version`.
 - Secciones plegables en el panel: "En este proyecto" y después Lenguajes y entornos, Control de versiones, Contenedores e infraestructura, Herramientas e IA… (y "Mis comandos" para las categorías propias). Se despliegan con clic o con → y ←, y el panel recuerda cuáles abriste. Cada categoría del catálogo declara su sección (`section`).
 - Botón **Sponsor** arriba del panel de DevCommands, en todas sus pantallas, que abre GitHub Sponsors en el navegador. También aparece en la ficha de la extensión (campo `sponsor` del manifiesto) y en la sección "Support" del README, además de un enlace junto a su título.
 

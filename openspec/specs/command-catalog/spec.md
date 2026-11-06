@@ -171,19 +171,22 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **WHEN** `docker` y `bash` tienen el mismo `order`
 - **THEN** `bash` aparece antes que `docker`
 
-### Requirement: Catálogo empaquetado sin acceso a disco ni red
-El catálogo SHALL viajar dentro del bundle de la extensión. Consultarlo MUST NOT requerir leer archivos en tiempo de ejecución ni hacer llamadas de red. Todo archivo de `catalog/` (salvo `schema.json`) SHALL formar parte del catálogo cargado.
-
-#### Scenario: Categoría añadida pero no registrada
-- **WHEN** existe `catalog/npm.json` pero no forma parte del catálogo cargado
-- **THEN** los tests del catálogo fallan nombrando `npm.json`
-
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `node`, `docker` y `terminal`. Los comandos de `terminal` SHALL declarar `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX, y `shells.cmd` siempre que su sintaxis en cmd difiera de la variante POSIX.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker` y `terminal`.
+
+Los comandos de `terminal` SHALL declarar:
+- `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
+- `shells.cmd` siempre que su sintaxis en cmd difiera de la variante POSIX.
+
+Los comandos de `version-managers` SHALL declarar `shells.powershell` y `shells.cmd` cuando la herramienta o su sintaxis cambie en Windows:
+- activar `fnm` en la sesión;
+- nvm, que en Windows es nvm-windows y usa otros subcomandos u opciones.
+
+Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis documentada por su herramienta, y SHALL declarar `risk: destructive` si borra versiones instaladas, cachés o archivos del proyecto sin posibilidad de deshacerlo.
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `node`, `docker` y `terminal`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker` y `terminal`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -200,6 +203,20 @@ El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL
 #### Scenario: Ejemplo de Terminal en bash
 - **WHEN** el shell es `bash` y se muestra el comando de Terminal que borra una carpeta
 - **THEN** el ejemplo es la variante POSIX (`rm -rf …`)
+
+#### Scenario: Activar fnm en PowerShell y en bash
+- **WHEN** se muestra el comando de `version-managers` que activa fnm en la sesión
+- **THEN** en `bash` el ejemplo es `eval "$(fnm env --use-on-cd --shell bash)"` y en `zsh` es `eval "$(fnm env --use-on-cd --shell zsh)"`
+- **AND** en `powershell` es `fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression`
+
+#### Scenario: Instalar la versión LTS de Node.js con nvm
+- **WHEN** se muestra el comando de `version-managers` que instala la LTS de Node.js con nvm
+- **THEN** en `bash` el ejemplo es `nvm install --lts`
+- **AND** en `powershell` y `cmd` es `nvm install lts` (nvm-windows)
+
+#### Scenario: Desinstalar una versión
+- **WHEN** un comando de `version-managers` desinstala una versión de Node.js o de Python
+- **THEN** declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.

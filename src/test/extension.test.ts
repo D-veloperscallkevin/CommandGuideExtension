@@ -55,7 +55,7 @@ suite('Vista lateral', () => {
 		assert.strictEqual(extension.isActive, true);
 		assert.deepStrictEqual(
 			categories.map((c) => c.id),
-			['git', 'npm', 'pnpm', 'node', 'docker', 'terminal'],
+			['git', 'npm', 'pnpm', 'yarn', 'bun', 'node', 'deno', 'typescript', 'version-managers', 'docker', 'terminal'],
 		);
 		const git = categories.find((c) => c.id === 'git');
 		assert.ok(git, 'el catálogo enviado no incluye git');

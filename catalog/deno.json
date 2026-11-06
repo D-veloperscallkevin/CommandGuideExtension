@@ -1,0 +1,1113 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "deno",
+  "title": {
+    "en": "Deno",
+    "es": "Deno",
+    "pt-br": "Deno",
+    "fr": "Deno",
+    "de": "Deno",
+    "it": "Deno",
+    "ja": "Deno",
+    "ko": "Deno",
+    "zh-cn": "Deno",
+    "zh-tw": "Deno",
+    "ru": "Deno"
+  },
+  "icon": "symbol-namespace",
+  "order": 32,
+  "section": "languages",
+  "detect": ["deno.json", "deno.jsonc", "deno.lock"],
+  "commands": [
+    {
+      "id": "deno.run",
+      "title": {
+        "en": "Run a file",
+        "es": "Ejecutar un archivo",
+        "pt-br": "Executar um arquivo",
+        "fr": "Exécuter un fichier",
+        "de": "Datei ausführen",
+        "it": "Esegui un file",
+        "ja": "ファイルを実行",
+        "ko": "파일 실행",
+        "zh-cn": "运行文件",
+        "zh-tw": "執行檔案",
+        "ru": "Запустить файл"
+      },
+      "description": {
+        "en": "Runs a TypeScript or JavaScript file in the sandbox, without network or disk access",
+        "es": "Ejecuta un archivo TypeScript o JavaScript en el sandbox, sin acceso a red ni a disco",
+        "pt-br": "Executa um arquivo TypeScript ou JavaScript no sandbox, sem acesso à rede nem ao disco",
+        "fr": "Exécute un fichier TypeScript ou JavaScript dans le bac à sable, sans accès réseau ni disque",
+        "de": "Führt eine TypeScript- oder JavaScript-Datei in der Sandbox aus, ohne Netz- und Dateizugriff",
+        "it": "Esegue un file TypeScript o JavaScript nella sandbox, senza accesso a rete né disco",
+        "ja": "TypeScript や JavaScript のファイルを、ネットワークやディスクにアクセスできないサンドボックスで実行します",
+        "ko": "TypeScript나 JavaScript 파일을 네트워크와 디스크 접근 없이 샌드박스에서 실행합니다",
+        "zh-cn": "在沙箱中运行 TypeScript 或 JavaScript 文件，不能访问网络和磁盘",
+        "zh-tw": "在沙箱中執行 TypeScript 或 JavaScript 檔案，無法存取網路和磁碟",
+        "ru": "Запускает файл TypeScript или JavaScript в песочнице, без доступа к сети и диску"
+      },
+      "command": "deno run ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.ts",
+            "es": "main.ts",
+            "pt-br": "main.ts",
+            "fr": "main.ts",
+            "de": "main.ts",
+            "it": "main.ts",
+            "ja": "main.ts",
+            "ko": "main.ts",
+            "zh-cn": "main.ts",
+            "zh-tw": "main.ts",
+            "ru": "main.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "run", "typescript", "execute", "sandbox"],
+        "es": ["deno", "run", "typescript", "ejecutar", "archivo"],
+        "pt-br": ["deno", "run", "typescript", "executar", "arquivo"],
+        "fr": ["deno", "run", "typescript", "exécuter", "fichier"],
+        "de": ["deno", "run", "typescript", "ausführen", "Datei"],
+        "it": ["deno", "run", "typescript", "eseguire", "file"],
+        "ja": ["deno", "run", "typescript", "実行", "ファイル"],
+        "ko": ["deno", "run", "typescript", "실행", "파일"],
+        "zh-cn": ["deno", "run", "typescript", "运行", "文件"],
+        "zh-tw": ["deno", "run", "typescript", "執行", "檔案"],
+        "ru": ["deno", "run", "typescript", "запустить", "файл"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/run/"
+    },
+    {
+      "id": "deno.run-net",
+      "title": {
+        "en": "Run with network access",
+        "es": "Ejecutar con acceso a la red",
+        "pt-br": "Executar com acesso à rede",
+        "fr": "Exécuter avec accès au réseau",
+        "de": "Mit Netzwerkzugriff ausführen",
+        "it": "Esegui con accesso alla rete",
+        "ja": "ネットワークアクセスを許可して実行",
+        "ko": "네트워크 접근을 허용해 실행",
+        "zh-cn": "允许网络访问运行",
+        "zh-tw": "允許網路存取執行",
+        "ru": "Запустить с доступом к сети"
+      },
+      "description": {
+        "en": "Runs a file allowing only network access, for example for a server",
+        "es": "Ejecuta un archivo permitiendo solo el acceso a la red, por ejemplo para un servidor",
+        "pt-br": "Executa um arquivo permitindo apenas o acesso à rede, por exemplo para um servidor",
+        "fr": "Exécute un fichier en autorisant seulement l’accès au réseau, par exemple pour un serveur",
+        "de": "Führt eine Datei aus und erlaubt nur den Netzwerkzugriff, etwa für einen Server",
+        "it": "Esegue un file consentendo solo l’accesso alla rete, per esempio per un server",
+        "ja": "ネットワークアクセスだけを許可してファイルを実行します（サーバーなど）",
+        "ko": "네트워크 접근만 허용하고 파일을 실행합니다(예: 서버)",
+        "zh-cn": "仅允许网络访问来运行文件，例如服务器",
+        "zh-tw": "僅允許網路存取來執行檔案，例如伺服器",
+        "ru": "Запускает файл, разрешая только доступ к сети, например для сервера"
+      },
+      "command": "deno run --allow-net ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "server.ts",
+            "es": "server.ts",
+            "pt-br": "server.ts",
+            "fr": "server.ts",
+            "de": "server.ts",
+            "it": "server.ts",
+            "ja": "server.ts",
+            "ko": "server.ts",
+            "zh-cn": "server.ts",
+            "zh-tw": "server.ts",
+            "ru": "server.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "run", "--allow-net", "permissions", "network", "server"],
+        "es": ["deno", "run", "--allow-net", "permissions", "red", "permisos", "servidor"],
+        "pt-br": ["deno", "run", "--allow-net", "permissions", "rede", "permissões", "servidor"],
+        "fr": ["deno", "run", "--allow-net", "permissions", "réseau", "serveur"],
+        "de": ["deno", "run", "--allow-net", "permissions", "Netzwerk", "Berechtigungen", "Server"],
+        "it": ["deno", "run", "--allow-net", "permissions", "rete", "permessi", "server"],
+        "ja": ["deno", "run", "--allow-net", "permissions", "ネットワーク", "権限", "サーバー"],
+        "ko": ["deno", "run", "--allow-net", "permissions", "네트워크", "권한", "서버"],
+        "zh-cn": ["deno", "run", "--allow-net", "permissions", "网络", "权限", "服务器"],
+        "zh-tw": ["deno", "run", "--allow-net", "permissions", "網路", "權限", "伺服器"],
+        "ru": ["deno", "run", "--allow-net", "permissions", "сеть", "разрешения", "сервер"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/run/"
+    },
+    {
+      "id": "deno.run-all",
+      "title": {
+        "en": "Run with all permissions",
+        "es": "Ejecutar con todos los permisos",
+        "pt-br": "Executar com todas as permissões",
+        "fr": "Exécuter avec toutes les permissions",
+        "de": "Mit allen Berechtigungen ausführen",
+        "it": "Esegui con tutti i permessi",
+        "ja": "すべての権限を許可して実行",
+        "ko": "모든 권한으로 실행",
+        "zh-cn": "授予所有权限运行",
+        "zh-tw": "授予所有權限執行",
+        "ru": "Запустить со всеми разрешениями"
+      },
+      "description": {
+        "en": "Runs a file without the sandbox: it can read, write, use the network and run programs",
+        "es": "Ejecuta un archivo sin sandbox: puede leer, escribir, usar la red y lanzar programas",
+        "pt-br": "Executa um arquivo sem sandbox: pode ler, gravar, usar a rede e iniciar programas",
+        "fr": "Exécute un fichier sans bac à sable : il peut lire, écrire, utiliser le réseau et lancer des programmes",
+        "de": "Führt eine Datei ohne Sandbox aus: Sie darf lesen, schreiben, das Netz nutzen und Programme starten",
+        "it": "Esegue un file senza sandbox: può leggere, scrivere, usare la rete e avviare programmi",
+        "ja": "サンドボックスなしでファイルを実行します。読み書き、ネットワーク、プログラムの起動がすべて可能です",
+        "ko": "샌드박스 없이 파일을 실행합니다. 읽기, 쓰기, 네트워크, 프로그램 실행이 모두 가능합니다",
+        "zh-cn": "不使用沙箱运行文件：可读写、访问网络并启动程序",
+        "zh-tw": "不使用沙箱執行檔案：可讀寫、存取網路並啟動程式",
+        "ru": "Запускает файл без песочницы: он может читать, писать, использовать сеть и запускать программы"
+      },
+      "command": "deno run -A ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.ts",
+            "es": "main.ts",
+            "pt-br": "main.ts",
+            "fr": "main.ts",
+            "de": "main.ts",
+            "it": "main.ts",
+            "ja": "main.ts",
+            "ko": "main.ts",
+            "zh-cn": "main.ts",
+            "zh-tw": "main.ts",
+            "ru": "main.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "run", "-A", "--allow-all", "permissions", "all"],
+        "es": ["deno", "run", "-A", "--allow-all", "permissions", "todos los permisos"],
+        "pt-br": ["deno", "run", "-A", "--allow-all", "permissions", "todas as permissões"],
+        "fr": ["deno", "run", "-A", "--allow-all", "permissions", "toutes les permissions"],
+        "de": ["deno", "run", "-A", "--allow-all", "permissions", "alle Berechtigungen"],
+        "it": ["deno", "run", "-A", "--allow-all", "permissions", "tutti i permessi"],
+        "ja": ["deno", "run", "-A", "--allow-all", "permissions", "すべての権限"],
+        "ko": ["deno", "run", "-A", "--allow-all", "permissions", "모든 권한"],
+        "zh-cn": ["deno", "run", "-A", "--allow-all", "permissions", "所有权限"],
+        "zh-tw": ["deno", "run", "-A", "--allow-all", "permissions", "所有權限"],
+        "ru": ["deno", "run", "-A", "--allow-all", "permissions", "все разрешения"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.deno.com/runtime/reference/cli/run/"
+    },
+    {
+      "id": "deno.watch",
+      "title": {
+        "en": "Run a file and restart on changes",
+        "es": "Ejecutar un archivo y reiniciar al cambiar",
+        "pt-br": "Executar um arquivo e reiniciar ao mudar",
+        "fr": "Exécuter un fichier et redémarrer aux changements",
+        "de": "Datei ausführen und bei Änderungen neu starten",
+        "it": "Esegui un file e riavvia alle modifiche",
+        "ja": "ファイルを実行し、変更時に再起動",
+        "ko": "파일을 실행하고 변경 시 다시 시작",
+        "zh-cn": "运行文件并在更改时重启",
+        "zh-tw": "執行檔案並在變更時重新啟動",
+        "ru": "Запустить файл с перезапуском при изменениях"
+      },
+      "description": {
+        "en": "Runs a file and restarts it whenever it or its imports change",
+        "es": "Ejecuta un archivo y lo reinicia cada vez que cambian él o sus imports",
+        "pt-br": "Executa um arquivo e o reinicia sempre que ele ou seus imports mudam",
+        "fr": "Exécute un fichier et le redémarre dès que lui ou ses imports changent",
+        "de": "Führt eine Datei aus und startet sie neu, sobald sie oder ihre Imports sich ändern",
+        "it": "Esegue un file e lo riavvia ogni volta che esso o i suoi import cambiano",
+        "ja": "ファイルを実行し、そのファイルやインポート先が変わるたびに再起動します",
+        "ko": "파일을 실행하고 파일이나 import가 바뀔 때마다 다시 시작합니다",
+        "zh-cn": "运行文件，并在文件或其导入变化时重启",
+        "zh-tw": "執行檔案，並在檔案或其匯入變更時重新啟動",
+        "ru": "Запускает файл и перезапускает его при каждом изменении файла или его импортов"
+      },
+      "command": "deno run --watch ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.ts",
+            "es": "main.ts",
+            "pt-br": "main.ts",
+            "fr": "main.ts",
+            "de": "main.ts",
+            "it": "main.ts",
+            "ja": "main.ts",
+            "ko": "main.ts",
+            "zh-cn": "main.ts",
+            "zh-tw": "main.ts",
+            "ru": "main.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "watch", "--watch", "restart", "reload"],
+        "es": ["deno", "watch", "--watch", "reiniciar", "vigilar", "recargar"],
+        "pt-br": ["deno", "watch", "--watch", "reiniciar", "observar"],
+        "fr": ["deno", "watch", "--watch", "redémarrer", "surveiller"],
+        "de": ["deno", "watch", "--watch", "neu starten", "beobachten"],
+        "it": ["deno", "watch", "--watch", "riavviare", "osservare"],
+        "ja": ["deno", "watch", "--watch", "再起動", "監視"],
+        "ko": ["deno", "watch", "--watch", "다시 시작", "감시"],
+        "zh-cn": ["deno", "watch", "--watch", "重启", "监视"],
+        "zh-tw": ["deno", "watch", "--watch", "重新啟動", "監看"],
+        "ru": ["deno", "watch", "--watch", "перезапуск", "отслеживание"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/run/"
+    },
+    {
+      "id": "deno.task",
+      "title": {
+        "en": "Run a task",
+        "es": "Ejecutar una tarea",
+        "pt-br": "Executar uma tarefa",
+        "fr": "Exécuter une tâche",
+        "de": "Aufgabe ausführen",
+        "it": "Esegui un’attività",
+        "ja": "タスクを実行",
+        "ko": "작업 실행",
+        "zh-cn": "运行任务",
+        "zh-tw": "執行工作",
+        "ru": "Запустить задачу"
+      },
+      "description": {
+        "en": "Runs a task defined in deno.json or a script of package.json",
+        "es": "Ejecuta una tarea definida en deno.json o un script de package.json",
+        "pt-br": "Executa uma tarefa definida no deno.json ou um script do package.json",
+        "fr": "Exécute une tâche définie dans deno.json ou un script de package.json",
+        "de": "Führt eine in deno.json definierte Aufgabe oder ein Skript aus package.json aus",
+        "it": "Esegue un’attività definita in deno.json o uno script di package.json",
+        "ja": "deno.json に定義したタスク、または package.json のスクリプトを実行します",
+        "ko": "deno.json에 정의한 작업이나 package.json의 스크립트를 실행합니다",
+        "zh-cn": "运行 deno.json 中定义的任务或 package.json 中的脚本",
+        "zh-tw": "執行 deno.json 中定義的工作或 package.json 中的指令碼",
+        "ru": "Запускает задачу из deno.json или скрипт из package.json"
+      },
+      "command": "deno task ${task}",
+      "params": [
+        {
+          "name": "task",
+          "label": {
+            "en": "Task name",
+            "es": "Nombre de la tarea",
+            "pt-br": "Nome da tarefa",
+            "fr": "Nom de la tâche",
+            "de": "Aufgabenname",
+            "it": "Nome dell’attività",
+            "ja": "タスク名",
+            "ko": "작업 이름",
+            "zh-cn": "任务名称",
+            "zh-tw": "工作名稱",
+            "ru": "Имя задачи"
+          },
+          "placeholder": {
+            "en": "dev",
+            "es": "dev",
+            "pt-br": "dev",
+            "fr": "dev",
+            "de": "dev",
+            "it": "dev",
+            "ja": "dev",
+            "ko": "dev",
+            "zh-cn": "dev",
+            "zh-tw": "dev",
+            "ru": "dev"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "task", "script", "run"],
+        "es": ["deno", "task", "script", "tarea", "ejecutar"],
+        "pt-br": ["deno", "task", "script", "tarefa", "executar"],
+        "fr": ["deno", "task", "script", "tâche", "exécuter"],
+        "de": ["deno", "task", "script", "Aufgabe", "ausführen"],
+        "it": ["deno", "task", "script", "attività", "eseguire"],
+        "ja": ["deno", "task", "script", "タスク", "実行"],
+        "ko": ["deno", "task", "script", "작업", "실행"],
+        "zh-cn": ["deno", "task", "script", "任务", "运行"],
+        "zh-tw": ["deno", "task", "script", "工作", "執行"],
+        "ru": ["deno", "task", "script", "задача", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/task/"
+    },
+    {
+      "id": "deno.add",
+      "title": {
+        "en": "Add a dependency",
+        "es": "Añadir una dependencia",
+        "pt-br": "Adicionar uma dependência",
+        "fr": "Ajouter une dépendance",
+        "de": "Abhängigkeit hinzufügen",
+        "it": "Aggiungi una dipendenza",
+        "ja": "依存関係を追加",
+        "ko": "의존성 추가",
+        "zh-cn": "添加依赖",
+        "zh-tw": "新增相依套件",
+        "ru": "Добавить зависимость"
+      },
+      "description": {
+        "en": "Adds a JSR or npm package (jsr: or npm: prefix) to deno.json",
+        "es": "Añade a deno.json un paquete de JSR o de npm (prefijo jsr: o npm:)",
+        "pt-br": "Adiciona ao deno.json um pacote do JSR ou do npm (prefixo jsr: ou npm:)",
+        "fr": "Ajoute à deno.json un paquet JSR ou npm (préfixe jsr: ou npm:)",
+        "de": "Fügt deno.json ein JSR- oder npm-Paket hinzu (Präfix jsr: oder npm:)",
+        "it": "Aggiunge a deno.json un pacchetto JSR o npm (prefisso jsr: o npm:)",
+        "ja": "JSR または npm のパッケージ（jsr: または npm: プレフィックス）を deno.json に追加します",
+        "ko": "JSR 또는 npm 패키지(jsr: 또는 npm: 접두사)를 deno.json에 추가합니다",
+        "zh-cn": "向 deno.json 添加 JSR 或 npm 包（前缀 jsr: 或 npm:）",
+        "zh-tw": "將 JSR 或 npm 套件（前綴 jsr: 或 npm:）新增到 deno.json",
+        "ru": "Добавляет в deno.json пакет из JSR или npm (префикс jsr: или npm:)"
+      },
+      "command": "deno add ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "jsr:@std/path",
+            "es": "jsr:@std/path",
+            "pt-br": "jsr:@std/path",
+            "fr": "jsr:@std/path",
+            "de": "jsr:@std/path",
+            "it": "jsr:@std/path",
+            "ja": "jsr:@std/path",
+            "ko": "jsr:@std/path",
+            "zh-cn": "jsr:@std/path",
+            "zh-tw": "jsr:@std/path",
+            "ru": "jsr:@std/path"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "add", "jsr", "npm", "dependency", "install"],
+        "es": ["deno", "add", "jsr", "npm", "dependencia", "añadir"],
+        "pt-br": ["deno", "add", "jsr", "npm", "dependência", "adicionar"],
+        "fr": ["deno", "add", "jsr", "npm", "dépendance", "ajouter"],
+        "de": ["deno", "add", "jsr", "npm", "Abhängigkeit", "hinzufügen"],
+        "it": ["deno", "add", "jsr", "npm", "dipendenza", "aggiungere"],
+        "ja": ["deno", "add", "jsr", "npm", "依存関係", "追加"],
+        "ko": ["deno", "add", "jsr", "npm", "의존성", "추가"],
+        "zh-cn": ["deno", "add", "jsr", "npm", "依赖", "添加"],
+        "zh-tw": ["deno", "add", "jsr", "npm", "相依套件", "新增"],
+        "ru": ["deno", "add", "jsr", "npm", "зависимость", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/add/"
+    },
+    {
+      "id": "deno.remove",
+      "title": {
+        "en": "Remove a dependency",
+        "es": "Quitar una dependencia",
+        "pt-br": "Remover uma dependência",
+        "fr": "Supprimer une dépendance",
+        "de": "Abhängigkeit entfernen",
+        "it": "Rimuovi una dipendenza",
+        "ja": "依存関係を削除",
+        "ko": "의존성 제거",
+        "zh-cn": "移除依赖",
+        "zh-tw": "移除相依套件",
+        "ru": "Удалить зависимость"
+      },
+      "description": {
+        "en": "Removes a package from deno.json or package.json",
+        "es": "Quita un paquete de deno.json o de package.json",
+        "pt-br": "Remove um pacote do deno.json ou do package.json",
+        "fr": "Retire un paquet de deno.json ou de package.json",
+        "de": "Entfernt ein Paket aus deno.json oder package.json",
+        "it": "Rimuove un pacchetto da deno.json o da package.json",
+        "ja": "deno.json または package.json からパッケージを削除します",
+        "ko": "deno.json 또는 package.json에서 패키지를 제거합니다",
+        "zh-cn": "从 deno.json 或 package.json 中移除一个包",
+        "zh-tw": "從 deno.json 或 package.json 移除一個套件",
+        "ru": "Убирает пакет из deno.json или package.json"
+      },
+      "command": "deno remove ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "@std/path",
+            "es": "@std/path",
+            "pt-br": "@std/path",
+            "fr": "@std/path",
+            "de": "@std/path",
+            "it": "@std/path",
+            "ja": "@std/path",
+            "ko": "@std/path",
+            "zh-cn": "@std/path",
+            "zh-tw": "@std/path",
+            "ru": "@std/path"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "remove", "uninstall", "delete"],
+        "es": ["deno", "remove", "quitar", "desinstalar", "eliminar"],
+        "pt-br": ["deno", "remove", "remover", "desinstalar"],
+        "fr": ["deno", "remove", "supprimer", "désinstaller"],
+        "de": ["deno", "remove", "entfernen", "deinstallieren"],
+        "it": ["deno", "remove", "rimuovere", "disinstallare"],
+        "ja": ["deno", "remove", "削除", "アンインストール"],
+        "ko": ["deno", "remove", "제거", "삭제"],
+        "zh-cn": ["deno", "remove", "移除", "卸载"],
+        "zh-tw": ["deno", "remove", "移除", "解除安裝"],
+        "ru": ["deno", "remove", "удалить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/remove/"
+    },
+    {
+      "id": "deno.install",
+      "title": {
+        "en": "Install dependencies",
+        "es": "Instalar dependencias",
+        "pt-br": "Instalar dependências",
+        "fr": "Installer les dépendances",
+        "de": "Abhängigkeiten installieren",
+        "it": "Installa le dipendenze",
+        "ja": "依存関係をインストール",
+        "ko": "의존성 설치",
+        "zh-cn": "安装依赖",
+        "zh-tw": "安裝相依套件",
+        "ru": "Установить зависимости"
+      },
+      "description": {
+        "en": "Installs the dependencies listed in deno.json and package.json",
+        "es": "Instala las dependencias de deno.json y package.json",
+        "pt-br": "Instala as dependências do deno.json e do package.json",
+        "fr": "Installe les dépendances de deno.json et de package.json",
+        "de": "Installiert die Abhängigkeiten aus deno.json und package.json",
+        "it": "Installa le dipendenze di deno.json e package.json",
+        "ja": "deno.json と package.json の依存関係をインストールします",
+        "ko": "deno.json과 package.json의 의존성을 설치합니다",
+        "zh-cn": "安装 deno.json 和 package.json 中的依赖",
+        "zh-tw": "安裝 deno.json 和 package.json 中的相依套件",
+        "ru": "Устанавливает зависимости из deno.json и package.json"
+      },
+      "command": "deno install",
+      "tags": {
+        "en": ["deno", "install", "dependencies"],
+        "es": ["deno", "install", "dependencias", "instalar"],
+        "pt-br": ["deno", "install", "dependências", "instalar"],
+        "fr": ["deno", "install", "dépendances", "installer"],
+        "de": ["deno", "install", "Abhängigkeiten", "installieren"],
+        "it": ["deno", "install", "dipendenze", "installare"],
+        "ja": ["deno", "install", "依存関係", "インストール"],
+        "ko": ["deno", "install", "의존성", "설치"],
+        "zh-cn": ["deno", "install", "依赖", "安装"],
+        "zh-tw": ["deno", "install", "相依套件", "安裝"],
+        "ru": ["deno", "install", "зависимости", "установка"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/install/"
+    },
+    {
+      "id": "deno.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Exécuter les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Runs the *_test.ts and *.test.ts files with the built-in test runner",
+        "es": "Ejecuta los archivos *_test.ts y *.test.ts con el test runner integrado",
+        "pt-br": "Executa os arquivos *_test.ts e *.test.ts com o test runner integrado",
+        "fr": "Exécute les fichiers *_test.ts et *.test.ts avec le test runner intégré",
+        "de": "Führt die Dateien *_test.ts und *.test.ts mit dem integrierten Test-Runner aus",
+        "it": "Esegue i file *_test.ts e *.test.ts con il test runner integrato",
+        "ja": "組み込みのテストランナーで *_test.ts と *.test.ts を実行します",
+        "ko": "내장 테스트 러너로 *_test.ts와 *.test.ts 파일을 실행합니다",
+        "zh-cn": "使用内置测试运行器运行 *_test.ts 和 *.test.ts 文件",
+        "zh-tw": "使用內建測試執行器執行 *_test.ts 和 *.test.ts 檔案",
+        "ru": "Запускает файлы *_test.ts и *.test.ts встроенным средством тестирования"
+      },
+      "command": "deno test",
+      "tags": {
+        "en": ["deno", "test", "tests", "unit"],
+        "es": ["deno", "test", "tests", "pruebas"],
+        "pt-br": ["deno", "test", "testes"],
+        "fr": ["deno", "test", "tests"],
+        "de": ["deno", "test", "Tests"],
+        "it": ["deno", "test"],
+        "ja": ["deno", "test", "テスト"],
+        "ko": ["deno", "test", "테스트"],
+        "zh-cn": ["deno", "test", "测试"],
+        "zh-tw": ["deno", "test", "測試"],
+        "ru": ["deno", "test", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/test/"
+    },
+    {
+      "id": "deno.fmt",
+      "title": {
+        "en": "Format the code",
+        "es": "Formatear el código",
+        "pt-br": "Formatar o código",
+        "fr": "Formater le code",
+        "de": "Code formatieren",
+        "it": "Formatta il codice",
+        "ja": "コードを整形",
+        "ko": "코드 서식 지정",
+        "zh-cn": "格式化代码",
+        "zh-tw": "格式化程式碼",
+        "ru": "Отформатировать код"
+      },
+      "description": {
+        "en": "Formats the project files with the built-in formatter",
+        "es": "Formatea los archivos del proyecto con el formateador integrado",
+        "pt-br": "Formata os arquivos do projeto com o formatador integrado",
+        "fr": "Formate les fichiers du projet avec le formateur intégré",
+        "de": "Formatiert die Projektdateien mit dem integrierten Formatierer",
+        "it": "Formatta i file del progetto con il formattatore integrato",
+        "ja": "組み込みのフォーマッターでプロジェクトのファイルを整形します",
+        "ko": "내장 포매터로 프로젝트 파일의 서식을 지정합니다",
+        "zh-cn": "使用内置格式化工具格式化项目文件",
+        "zh-tw": "使用內建格式化工具格式化專案檔案",
+        "ru": "Форматирует файлы проекта встроенным форматировщиком"
+      },
+      "command": "deno fmt",
+      "tags": {
+        "en": ["deno", "fmt", "format", "prettier", "style"],
+        "es": ["deno", "fmt", "format", "prettier", "formatear", "estilo"],
+        "pt-br": ["deno", "fmt", "format", "prettier", "formatar", "estilo"],
+        "fr": ["deno", "fmt", "format", "prettier", "formater", "style"],
+        "de": ["deno", "fmt", "format", "prettier", "formatieren", "Stil"],
+        "it": ["deno", "fmt", "format", "prettier", "formattare", "stile"],
+        "ja": ["deno", "fmt", "format", "prettier", "整形", "フォーマット"],
+        "ko": ["deno", "fmt", "format", "prettier", "서식", "포맷"],
+        "zh-cn": ["deno", "fmt", "format", "prettier", "格式化"],
+        "zh-tw": ["deno", "fmt", "format", "prettier", "格式化"],
+        "ru": ["deno", "fmt", "format", "prettier", "форматирование"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/fmt/"
+    },
+    {
+      "id": "deno.fmt-check",
+      "title": {
+        "en": "Check the formatting",
+        "es": "Comprobar el formato",
+        "pt-br": "Verificar a formatação",
+        "fr": "Vérifier le formatage",
+        "de": "Formatierung prüfen",
+        "it": "Verifica la formattazione",
+        "ja": "整形を確認",
+        "ko": "서식 확인",
+        "zh-cn": "检查格式",
+        "zh-tw": "檢查格式",
+        "ru": "Проверить форматирование"
+      },
+      "description": {
+        "en": "Checks the formatting without changing files and fails if any file needs it, as in CI",
+        "es": "Comprueba el formato sin cambiar archivos y falla si alguno lo necesita, como en CI",
+        "pt-br": "Verifica a formatação sem alterar arquivos e falha se algum precisar, como na CI",
+        "fr": "Vérifie le formatage sans modifier les fichiers et échoue si l’un en a besoin, comme en CI",
+        "de": "Prüft die Formatierung, ohne Dateien zu ändern, und schlägt fehl, wenn eine sie braucht, wie in CI",
+        "it": "Verifica la formattazione senza modificare i file e fallisce se uno ne ha bisogno, come in CI",
+        "ja": "ファイルを変更せずに整形を確認し、必要なファイルがあれば失敗します（CI 向け）",
+        "ko": "파일을 바꾸지 않고 서식을 확인하며, 필요한 파일이 있으면 실패합니다(CI용)",
+        "zh-cn": "检查格式但不修改文件，有文件需要格式化时失败（适用于 CI）",
+        "zh-tw": "檢查格式但不修改檔案，有檔案需要格式化時失敗（適用於 CI）",
+        "ru": "Проверяет форматирование, не меняя файлы, и завершается ошибкой, если что-то нужно поправить, как в CI"
+      },
+      "command": "deno fmt --check",
+      "tags": {
+        "en": ["deno", "fmt", "check", "ci", "format"],
+        "es": ["deno", "fmt", "check", "ci", "formato", "comprobar"],
+        "pt-br": ["deno", "fmt", "check", "ci", "formatação", "verificar"],
+        "fr": ["deno", "fmt", "check", "ci", "formatage", "vérifier"],
+        "de": ["deno", "fmt", "check", "ci", "Formatierung", "prüfen"],
+        "it": ["deno", "fmt", "check", "ci", "formattazione", "verificare"],
+        "ja": ["deno", "fmt", "check", "ci", "整形", "確認"],
+        "ko": ["deno", "fmt", "check", "ci", "서식", "확인"],
+        "zh-cn": ["deno", "fmt", "check", "ci", "格式", "检查"],
+        "zh-tw": ["deno", "fmt", "check", "ci", "格式", "檢查"],
+        "ru": ["deno", "fmt", "check", "ci", "форматирование", "проверка"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/fmt/"
+    },
+    {
+      "id": "deno.lint",
+      "title": {
+        "en": "Lint the code",
+        "es": "Analizar el código con el linter",
+        "pt-br": "Analisar o código com o linter",
+        "fr": "Analyser le code avec le linter",
+        "de": "Code mit dem Linter prüfen",
+        "it": "Analizza il codice con il linter",
+        "ja": "リンターでコードを検査",
+        "ko": "린터로 코드 검사",
+        "zh-cn": "用 linter 检查代码",
+        "zh-tw": "用 linter 檢查程式碼",
+        "ru": "Проверить код линтером"
+      },
+      "description": {
+        "en": "Checks the code with the built-in linter and reports problems",
+        "es": "Revisa el código con el linter integrado e informa de los problemas",
+        "pt-br": "Revisa o código com o linter integrado e informa os problemas",
+        "fr": "Analyse le code avec le linter intégré et signale les problèmes",
+        "de": "Prüft den Code mit dem integrierten Linter und meldet Probleme",
+        "it": "Controlla il codice con il linter integrato e segnala i problemi",
+        "ja": "組み込みのリンターでコードを検査し、問題を報告します",
+        "ko": "내장 린터로 코드를 검사하고 문제를 알려 줍니다",
+        "zh-cn": "使用内置 linter 检查代码并报告问题",
+        "zh-tw": "使用內建 linter 檢查程式碼並回報問題",
+        "ru": "Проверяет код встроенным линтером и сообщает о проблемах"
+      },
+      "command": "deno lint",
+      "tags": {
+        "en": ["deno", "lint", "eslint", "errors"],
+        "es": ["deno", "lint", "eslint", "linter", "errores"],
+        "pt-br": ["deno", "lint", "eslint", "linter", "erros"],
+        "fr": ["deno", "lint", "eslint", "linter", "erreurs"],
+        "de": ["deno", "lint", "eslint", "Linter", "Fehler"],
+        "it": ["deno", "lint", "eslint", "linter", "errori"],
+        "ja": ["deno", "lint", "eslint", "リンター", "エラー"],
+        "ko": ["deno", "lint", "eslint", "린터", "오류"],
+        "zh-cn": ["deno", "lint", "eslint", "代码检查", "错误"],
+        "zh-tw": ["deno", "lint", "eslint", "程式碼檢查", "錯誤"],
+        "ru": ["deno", "lint", "eslint", "линтер", "ошибки"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/lint/"
+    },
+    {
+      "id": "deno.check",
+      "title": {
+        "en": "Type-check without running",
+        "es": "Comprobar tipos sin ejecutar",
+        "pt-br": "Verificar tipos sem executar",
+        "fr": "Vérifier les types sans exécuter",
+        "de": "Typen prüfen, ohne auszuführen",
+        "it": "Controlla i tipi senza eseguire",
+        "ja": "実行せずに型チェック",
+        "ko": "실행하지 않고 타입 검사",
+        "zh-cn": "只检查类型不运行",
+        "zh-tw": "只檢查型別不執行",
+        "ru": "Проверить типы без запуска"
+      },
+      "description": {
+        "en": "Type-checks a file and its imports without running it",
+        "es": "Comprueba los tipos de un archivo y sus imports sin ejecutarlo",
+        "pt-br": "Verifica os tipos de um arquivo e seus imports sem executá-lo",
+        "fr": "Vérifie les types d’un fichier et de ses imports sans l’exécuter",
+        "de": "Prüft die Typen einer Datei und ihrer Imports, ohne sie auszuführen",
+        "it": "Controlla i tipi di un file e dei suoi import senza eseguirlo",
+        "ja": "ファイルとそのインポートを実行せずに型チェックします",
+        "ko": "파일과 import의 타입을 실행하지 않고 검사합니다",
+        "zh-cn": "检查文件及其导入的类型而不运行",
+        "zh-tw": "檢查檔案及其匯入的型別而不執行",
+        "ru": "Проверяет типы файла и его импортов, не запуская его"
+      },
+      "command": "deno check ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.ts",
+            "es": "main.ts",
+            "pt-br": "main.ts",
+            "fr": "main.ts",
+            "de": "main.ts",
+            "it": "main.ts",
+            "ja": "main.ts",
+            "ko": "main.ts",
+            "zh-cn": "main.ts",
+            "zh-tw": "main.ts",
+            "ru": "main.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "check", "types", "typescript", "type check"],
+        "es": ["deno", "check", "types", "typescript", "tipos", "comprobar"],
+        "pt-br": ["deno", "check", "types", "typescript", "tipos", "verificar"],
+        "fr": ["deno", "check", "types", "typescript", "vérifier"],
+        "de": ["deno", "check", "types", "typescript", "Typen", "prüfen"],
+        "it": ["deno", "check", "types", "typescript", "tipi", "controllare"],
+        "ja": ["deno", "check", "types", "typescript", "型", "チェック"],
+        "ko": ["deno", "check", "types", "typescript", "타입", "검사"],
+        "zh-cn": ["deno", "check", "types", "typescript", "类型", "检查"],
+        "zh-tw": ["deno", "check", "types", "typescript", "型別", "檢查"],
+        "ru": ["deno", "check", "types", "typescript", "типы", "проверка"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/check/"
+    },
+    {
+      "id": "deno.compile",
+      "title": {
+        "en": "Compile to an executable",
+        "es": "Compilar a un ejecutable",
+        "pt-br": "Compilar para um executável",
+        "fr": "Compiler en exécutable",
+        "de": "Zu einer ausführbaren Datei kompilieren",
+        "it": "Compila in un eseguibile",
+        "ja": "実行ファイルにコンパイル",
+        "ko": "실행 파일로 컴파일",
+        "zh-cn": "编译为可执行文件",
+        "zh-tw": "編譯為可執行檔",
+        "ru": "Скомпилировать в исполняемый файл"
+      },
+      "description": {
+        "en": "Creates a standalone binary that runs without Deno installed",
+        "es": "Crea un binario independiente que funciona sin tener Deno instalado",
+        "pt-br": "Cria um binário independente que funciona sem o Deno instalado",
+        "fr": "Crée un binaire autonome qui fonctionne sans Deno installé",
+        "de": "Erstellt eine eigenständige Binärdatei, die ohne installiertes Deno läuft",
+        "it": "Crea un binario autonomo che funziona senza Deno installato",
+        "ja": "Deno がなくても動く単体の実行ファイルを作成します",
+        "ko": "Deno 없이도 실행되는 독립 실행 파일을 만듭니다",
+        "zh-cn": "创建无需安装 Deno 即可运行的独立可执行文件",
+        "zh-tw": "建立無需安裝 Deno 即可執行的獨立可執行檔",
+        "ru": "Создаёт самостоятельный бинарник, работающий без установленного Deno"
+      },
+      "command": "deno compile ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.ts",
+            "es": "main.ts",
+            "pt-br": "main.ts",
+            "fr": "main.ts",
+            "de": "main.ts",
+            "it": "main.ts",
+            "ja": "main.ts",
+            "ko": "main.ts",
+            "zh-cn": "main.ts",
+            "zh-tw": "main.ts",
+            "ru": "main.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["deno", "compile", "binary", "executable"],
+        "es": ["deno", "compile", "binary", "ejecutable", "binario"],
+        "pt-br": ["deno", "compile", "binary", "executável", "binário"],
+        "fr": ["deno", "compile", "binary", "exécutable", "binaire"],
+        "de": ["deno", "compile", "binary", "ausführbar", "Binärdatei"],
+        "it": ["deno", "compile", "binary", "eseguibile", "binario"],
+        "ja": ["deno", "compile", "binary", "実行ファイル", "バイナリ"],
+        "ko": ["deno", "compile", "binary", "실행 파일", "바이너리"],
+        "zh-cn": ["deno", "compile", "binary", "可执行文件", "二进制"],
+        "zh-tw": ["deno", "compile", "binary", "可執行檔", "二進位"],
+        "ru": ["deno", "compile", "binary", "исполняемый файл", "бинарник"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/compile/"
+    },
+    {
+      "id": "deno.init",
+      "title": {
+        "en": "Create a project in this folder",
+        "es": "Crear un proyecto en esta carpeta",
+        "pt-br": "Criar um projeto nesta pasta",
+        "fr": "Créer un projet dans ce dossier",
+        "de": "Projekt in diesem Ordner erstellen",
+        "it": "Crea un progetto in questa cartella",
+        "ja": "このフォルダーにプロジェクトを作成",
+        "ko": "이 폴더에 프로젝트 만들기",
+        "zh-cn": "在此文件夹中创建项目",
+        "zh-tw": "在此資料夾中建立專案",
+        "ru": "Создать проект в этой папке"
+      },
+      "description": {
+        "en": "Creates deno.json, main.ts and a test file to start a Deno project",
+        "es": "Crea deno.json, main.ts y un archivo de test para empezar un proyecto con Deno",
+        "pt-br": "Cria deno.json, main.ts e um arquivo de teste para começar um projeto com Deno",
+        "fr": "Crée deno.json, main.ts et un fichier de test pour démarrer un projet Deno",
+        "de": "Erstellt deno.json, main.ts und eine Testdatei für ein neues Deno-Projekt",
+        "it": "Crea deno.json, main.ts e un file di test per iniziare un progetto Deno",
+        "ja": "Deno プロジェクトを始めるために deno.json、main.ts、テストファイルを作成します",
+        "ko": "Deno 프로젝트를 시작하도록 deno.json, main.ts, 테스트 파일을 만듭니다",
+        "zh-cn": "创建 deno.json、main.ts 和测试文件，开始一个 Deno 项目",
+        "zh-tw": "建立 deno.json、main.ts 和測試檔案，開始一個 Deno 專案",
+        "ru": "Создаёт deno.json, main.ts и файл теста для нового проекта Deno"
+      },
+      "command": "deno init",
+      "tags": {
+        "en": ["deno", "init", "new project", "create"],
+        "es": ["deno", "init", "nuevo proyecto", "crear"],
+        "pt-br": ["deno", "init", "novo projeto", "criar"],
+        "fr": ["deno", "init", "nouveau projet", "créer"],
+        "de": ["deno", "init", "neues Projekt", "erstellen"],
+        "it": ["deno", "init", "nuovo progetto", "creare"],
+        "ja": ["deno", "init", "新規プロジェクト", "作成"],
+        "ko": ["deno", "init", "새 프로젝트", "만들기"],
+        "zh-cn": ["deno", "init", "新项目", "创建"],
+        "zh-tw": ["deno", "init", "新專案", "建立"],
+        "ru": ["deno", "init", "новый проект", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/init/"
+    },
+    {
+      "id": "deno.outdated",
+      "title": {
+        "en": "List outdated dependencies",
+        "es": "Ver dependencias desactualizadas",
+        "pt-br": "Ver dependências desatualizadas",
+        "fr": "Lister les dépendances obsolètes",
+        "de": "Veraltete Abhängigkeiten anzeigen",
+        "it": "Elenca le dipendenze obsolete",
+        "ja": "古い依存関係を一覧表示",
+        "ko": "오래된 의존성 보기",
+        "zh-cn": "列出过时的依赖",
+        "zh-tw": "列出過時的相依套件",
+        "ru": "Показать устаревшие зависимости"
+      },
+      "description": {
+        "en": "Shows which JSR and npm dependencies have newer versions",
+        "es": "Muestra qué dependencias de JSR y npm tienen versiones más nuevas",
+        "pt-br": "Mostra quais dependências do JSR e do npm têm versões mais novas",
+        "fr": "Montre quelles dépendances JSR et npm ont des versions plus récentes",
+        "de": "Zeigt, für welche JSR- und npm-Abhängigkeiten neuere Versionen existieren",
+        "it": "Mostra quali dipendenze JSR e npm hanno versioni più recenti",
+        "ja": "新しいバージョンがある JSR と npm の依存関係を表示します",
+        "ko": "새 버전이 있는 JSR 및 npm 의존성을 보여 줍니다",
+        "zh-cn": "显示哪些 JSR 和 npm 依赖有更新的版本",
+        "zh-tw": "顯示哪些 JSR 和 npm 相依套件有更新的版本",
+        "ru": "Показывает, для каких зависимостей из JSR и npm есть более новые версии"
+      },
+      "command": "deno outdated",
+      "tags": {
+        "en": ["deno", "outdated", "jsr", "versions", "update"],
+        "es": ["deno", "outdated", "jsr", "desactualizadas", "versiones"],
+        "pt-br": ["deno", "outdated", "jsr", "desatualizadas", "versões"],
+        "fr": ["deno", "outdated", "jsr", "obsolètes", "versions"],
+        "de": ["deno", "outdated", "jsr", "veraltet", "Versionen"],
+        "it": ["deno", "outdated", "jsr", "obsolete", "versioni"],
+        "ja": ["deno", "outdated", "jsr", "古い", "バージョン"],
+        "ko": ["deno", "outdated", "jsr", "오래된", "버전"],
+        "zh-cn": ["deno", "outdated", "jsr", "过时", "版本"],
+        "zh-tw": ["deno", "outdated", "jsr", "過時", "版本"],
+        "ru": ["deno", "outdated", "jsr", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.deno.com/runtime/reference/cli/outdated/"
+    },
+    {
+      "id": "deno.upgrade",
+      "title": {
+        "en": "Upgrade Deno",
+        "es": "Actualizar Deno",
+        "pt-br": "Atualizar o Deno",
+        "fr": "Mettre à jour Deno",
+        "de": "Deno aktualisieren",
+        "it": "Aggiorna Deno",
+        "ja": "Deno をアップグレード",
+        "ko": "Deno 업그레이드",
+        "zh-cn": "升级 Deno",
+        "zh-tw": "升級 Deno",
+        "ru": "Обновить Deno"
+      },
+      "description": {
+        "en": "Downloads the latest stable Deno and replaces the installed version",
+        "es": "Descarga el último Deno estable y reemplaza la versión instalada",
+        "pt-br": "Baixa o Deno estável mais recente e substitui a versão instalada",
+        "fr": "Télécharge le dernier Deno stable et remplace la version installée",
+        "de": "Lädt das neueste stabile Deno herunter und ersetzt die installierte Version",
+        "it": "Scarica l’ultimo Deno stabile e sostituisce la versione installata",
+        "ja": "最新の安定版 Deno をダウンロードし、インストール済みのバージョンを置き換えます",
+        "ko": "최신 안정 Deno를 내려받아 설치된 버전을 교체합니다",
+        "zh-cn": "下载最新稳定版 Deno 并替换已安装的版本",
+        "zh-tw": "下載最新穩定版 Deno 並取代已安裝的版本",
+        "ru": "Скачивает последний стабильный Deno и заменяет установленную версию"
+      },
+      "command": "deno upgrade",
+      "tags": {
+        "en": ["deno", "upgrade", "update", "version"],
+        "es": ["deno", "upgrade", "actualizar", "versión"],
+        "pt-br": ["deno", "upgrade", "atualizar", "versão"],
+        "fr": ["deno", "upgrade", "mettre à jour", "version"],
+        "de": ["deno", "upgrade", "aktualisieren", "Version"],
+        "it": ["deno", "upgrade", "aggiornare", "versione"],
+        "ja": ["deno", "upgrade", "更新", "バージョン"],
+        "ko": ["deno", "upgrade", "업데이트", "버전"],
+        "zh-cn": ["deno", "upgrade", "升级", "版本"],
+        "zh-tw": ["deno", "upgrade", "升級", "版本"],
+        "ru": ["deno", "upgrade", "обновить", "версия"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.deno.com/runtime/reference/cli/upgrade/"
+    },
+    {
+      "id": "deno.clean",
+      "title": {
+        "en": "Clear the module cache",
+        "es": "Borrar la caché de módulos",
+        "pt-br": "Limpar o cache de módulos",
+        "fr": "Vider le cache des modules",
+        "de": "Modul-Cache leeren",
+        "it": "Svuota la cache dei moduli",
+        "ja": "モジュールキャッシュを削除",
+        "ko": "모듈 캐시 삭제",
+        "zh-cn": "清除模块缓存",
+        "zh-tw": "清除模組快取",
+        "ru": "Очистить кэш модулей"
+      },
+      "description": {
+        "en": "Deletes the global cache of downloaded modules; they are downloaded again when needed",
+        "es": "Borra la caché global de módulos descargados; se vuelven a descargar cuando hacen falta",
+        "pt-br": "Apaga o cache global de módulos baixados; eles são baixados de novo quando necessário",
+        "fr": "Supprime le cache global des modules téléchargés ; ils seront retéléchargés au besoin",
+        "de": "Löscht den globalen Cache heruntergeladener Module; sie werden bei Bedarf neu geladen",
+        "it": "Elimina la cache globale dei moduli scaricati; vengono riscaricati quando servono",
+        "ja": "ダウンロード済みモジュールのグローバルキャッシュを削除します。必要なときに再ダウンロードされます",
+        "ko": "내려받은 모듈의 전역 캐시를 삭제합니다. 필요할 때 다시 내려받습니다",
+        "zh-cn": "删除已下载模块的全局缓存，需要时会重新下载",
+        "zh-tw": "刪除已下載模組的全域快取，需要時會重新下載",
+        "ru": "Удаляет глобальный кэш скачанных модулей; при необходимости они скачаются снова"
+      },
+      "command": "deno clean",
+      "tags": {
+        "en": ["deno", "clean", "cache", "clear", "delete"],
+        "es": ["deno", "clean", "cache", "caché", "borrar", "limpiar"],
+        "pt-br": ["deno", "clean", "cache", "limpar"],
+        "fr": ["deno", "clean", "cache", "vider"],
+        "de": ["deno", "clean", "cache", "Cache", "leeren"],
+        "it": ["deno", "clean", "cache", "svuotare"],
+        "ja": ["deno", "clean", "cache", "キャッシュ", "削除"],
+        "ko": ["deno", "clean", "cache", "캐시", "삭제"],
+        "zh-cn": ["deno", "clean", "cache", "缓存", "清除"],
+        "zh-tw": ["deno", "clean", "cache", "快取", "清除"],
+        "ru": ["deno", "clean", "cache", "кэш", "очистить"]
+      },
+      "risk": "destructive",
+      "docs": "https://docs.deno.com/runtime/reference/cli/clean/"
+    }
+  ]
+}

@@ -1,0 +1,1475 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "version-managers",
+  "title": {
+    "en": "Version managers",
+    "es": "Gestores de versiones",
+    "pt-br": "Gerenciadores de versão",
+    "fr": "Gestionnaires de versions",
+    "de": "Versionsmanager",
+    "it": "Gestori di versioni",
+    "ja": "バージョン管理ツール",
+    "ko": "버전 관리자",
+    "zh-cn": "版本管理器",
+    "zh-tw": "版本管理工具",
+    "ru": "Менеджеры версий"
+  },
+  "icon": "versions",
+  "order": 38,
+  "section": "languages",
+  "detect": [".nvmrc", ".node-version", ".python-version"],
+  "commands": [
+    {
+      "id": "version-managers.nvm-install-lts",
+      "title": {
+        "en": "nvm: install the LTS of Node.js",
+        "es": "nvm: instalar la LTS de Node.js",
+        "pt-br": "nvm: instalar a LTS do Node.js",
+        "fr": "nvm: installer la LTS de Node.js",
+        "de": "nvm: LTS von Node.js installieren",
+        "it": "nvm: installa la LTS di Node.js",
+        "ja": "nvm: Node.js の LTS をインストール",
+        "ko": "nvm: Node.js LTS 설치",
+        "zh-cn": "nvm: 安装 Node.js LTS",
+        "zh-tw": "nvm: 安裝 Node.js LTS",
+        "ru": "nvm: установить LTS Node.js"
+      },
+      "description": {
+        "en": "Downloads and installs the latest long-term support version of Node.js (nvm-windows on Windows)",
+        "es": "Descarga e instala la última versión LTS de Node.js (nvm-windows en Windows)",
+        "pt-br": "Baixa e instala a versão LTS mais recente do Node.js (nvm-windows no Windows)",
+        "fr": "Télécharge et installe la dernière version LTS de Node.js (nvm-windows sous Windows)",
+        "de": "Lädt die neueste LTS-Version von Node.js herunter und installiert sie (nvm-windows unter Windows)",
+        "it": "Scarica e installa l’ultima versione LTS di Node.js (nvm-windows su Windows)",
+        "ja": "Node.js の最新 LTS をダウンロードしてインストールします（Windows では nvm-windows）",
+        "ko": "Node.js 최신 LTS 버전을 내려받아 설치합니다(Windows에서는 nvm-windows)",
+        "zh-cn": "下载并安装最新的 Node.js LTS 版本（Windows 上为 nvm-windows）",
+        "zh-tw": "下載並安裝最新的 Node.js LTS 版本（Windows 上為 nvm-windows）",
+        "ru": "Скачивает и устанавливает последнюю LTS-версию Node.js (в Windows — nvm-windows)"
+      },
+      "command": "nvm install --lts",
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "lts", "install"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "instalar"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "instalar"],
+        "fr": ["nvm", "node", "node.js", "version", "installer"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "installieren"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "installare"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "インストール"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "설치"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "安装"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "安裝"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "установить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "nvm install lts",
+        "cmd": "nvm install lts"
+      },
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-install",
+      "title": {
+        "en": "nvm: install a version",
+        "es": "nvm: instalar una versión",
+        "pt-br": "nvm: instalar uma versão",
+        "fr": "nvm: installer une version",
+        "de": "nvm: Version installieren",
+        "it": "nvm: installa una versione",
+        "ja": "nvm: バージョンをインストール",
+        "ko": "nvm: 버전 설치",
+        "zh-cn": "nvm: 安装某个版本",
+        "zh-tw": "nvm: 安裝某個版本",
+        "ru": "nvm: установить версию"
+      },
+      "description": {
+        "en": "Downloads and installs a specific Node.js version",
+        "es": "Descarga e instala una versión concreta de Node.js",
+        "pt-br": "Baixa e instala uma versão específica do Node.js",
+        "fr": "Télécharge et installe une version précise de Node.js",
+        "de": "Lädt eine bestimmte Node.js-Version herunter und installiert sie",
+        "it": "Scarica e installa una versione specifica di Node.js",
+        "ja": "特定のバージョンの Node.js をダウンロードしてインストールします",
+        "ko": "특정 버전의 Node.js를 내려받아 설치합니다",
+        "zh-cn": "下载并安装指定版本的 Node.js",
+        "zh-tw": "下載並安裝指定版本的 Node.js",
+        "ru": "Скачивает и устанавливает указанную версию Node.js"
+      },
+      "command": "nvm install ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "install"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "instalar"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "instalar"],
+        "fr": ["nvm", "node", "node.js", "version", "installer"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "installieren"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "installare"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "インストール"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "설치"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "安装"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "安裝"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-use",
+      "title": {
+        "en": "nvm: use a version",
+        "es": "nvm: usar una versión",
+        "pt-br": "nvm: usar uma versão",
+        "fr": "nvm: utiliser une version",
+        "de": "nvm: Version verwenden",
+        "it": "nvm: usa una versione",
+        "ja": "nvm: バージョンを使用",
+        "ko": "nvm: 버전 사용",
+        "zh-cn": "nvm: 使用某个版本",
+        "zh-tw": "nvm: 使用某個版本",
+        "ru": "nvm: использовать версию"
+      },
+      "description": {
+        "en": "Switches the active Node.js version to an installed one",
+        "es": "Cambia la versión activa de Node.js a una ya instalada",
+        "pt-br": "Troca a versão ativa do Node.js para uma já instalada",
+        "fr": "Passe la version active de Node.js à une version installée",
+        "de": "Wechselt die aktive Node.js-Version zu einer installierten",
+        "it": "Passa la versione attiva di Node.js a una già installata",
+        "ja": "有効な Node.js のバージョンをインストール済みのものに切り替えます",
+        "ko": "활성 Node.js 버전을 설치된 버전으로 바꿉니다",
+        "zh-cn": "将当前的 Node.js 版本切换为已安装的某个版本",
+        "zh-tw": "將目前的 Node.js 版本切換為已安裝的某個版本",
+        "ru": "Переключает активную версию Node.js на установленную"
+      },
+      "command": "nvm use ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "use", "switch"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "usar", "cambiar"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "usar", "trocar"],
+        "fr": ["nvm", "node", "node.js", "version", "utiliser", "changer"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "verwenden", "wechseln"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "usare", "cambiare"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "使用", "切り替え"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "사용", "전환"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "使用", "切换"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "使用", "切換"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "использовать", "переключить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-list",
+      "title": {
+        "en": "nvm: list installed versions",
+        "es": "nvm: ver las versiones instaladas",
+        "pt-br": "nvm: ver as versões instaladas",
+        "fr": "nvm: lister les versions installées",
+        "de": "nvm: installierte Versionen anzeigen",
+        "it": "nvm: elenca le versioni installate",
+        "ja": "nvm: インストール済みのバージョンを一覧表示",
+        "ko": "nvm: 설치된 버전 보기",
+        "zh-cn": "nvm: 列出已安装的版本",
+        "zh-tw": "nvm: 列出已安裝的版本",
+        "ru": "nvm: показать установленные версии"
+      },
+      "description": {
+        "en": "Lists the Node.js versions installed with nvm and marks the one in use",
+        "es": "Muestra las versiones de Node.js instaladas con nvm y marca la que está en uso",
+        "pt-br": "Mostra as versões do Node.js instaladas com o nvm e marca a que está em uso",
+        "fr": "Liste les versions de Node.js installées avec nvm et indique celle utilisée",
+        "de": "Listet die mit nvm installierten Node.js-Versionen auf und markiert die aktive",
+        "it": "Elenca le versioni di Node.js installate con nvm e indica quella in uso",
+        "ja": "nvm でインストールした Node.js のバージョンを一覧表示し、使用中のものを示します",
+        "ko": "nvm으로 설치한 Node.js 버전을 보여 주고 사용 중인 버전을 표시합니다",
+        "zh-cn": "列出用 nvm 安装的 Node.js 版本并标出正在使用的版本",
+        "zh-tw": "列出用 nvm 安裝的 Node.js 版本並標出正在使用的版本",
+        "ru": "Показывает установленные через nvm версии Node.js и отмечает текущую"
+      },
+      "command": "nvm list",
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "list", "ls", "installed"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "instaladas", "lista"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "instaladas", "lista"],
+        "fr": ["nvm", "node", "node.js", "version", "installées", "liste"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "installiert", "Liste"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "installate", "elenco"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "インストール済み", "一覧"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "설치됨", "목록"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "已安装", "列表"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "已安裝", "清單"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-list-remote",
+      "title": {
+        "en": "nvm: list LTS versions to download",
+        "es": "nvm: ver las versiones LTS para descargar",
+        "pt-br": "nvm: ver as versões LTS para baixar",
+        "fr": "nvm: lister les versions LTS téléchargeables",
+        "de": "nvm: herunterladbare LTS-Versionen anzeigen",
+        "it": "nvm: elenca le versioni LTS da scaricare",
+        "ja": "nvm: ダウンロードできる LTS を一覧表示",
+        "ko": "nvm: 다운로드할 수 있는 LTS 버전 보기",
+        "zh-cn": "nvm: 列出可下载的 LTS 版本",
+        "zh-tw": "nvm: 列出可下載的 LTS 版本",
+        "ru": "nvm: показать доступные LTS-версии"
+      },
+      "description": {
+        "en": "Shows the long-term support versions of Node.js that can be installed",
+        "es": "Muestra las versiones LTS de Node.js que se pueden instalar",
+        "pt-br": "Mostra as versões LTS do Node.js que podem ser instaladas",
+        "fr": "Affiche les versions LTS de Node.js qu’il est possible d’installer",
+        "de": "Zeigt die LTS-Versionen von Node.js, die installiert werden können",
+        "it": "Mostra le versioni LTS di Node.js che si possono installare",
+        "ja": "インストールできる Node.js の LTS バージョンを表示します",
+        "ko": "설치할 수 있는 Node.js LTS 버전을 보여 줍니다",
+        "zh-cn": "显示可以安装的 Node.js LTS 版本",
+        "zh-tw": "顯示可以安裝的 Node.js LTS 版本",
+        "ru": "Показывает LTS-версии Node.js, доступные для установки"
+      },
+      "command": "nvm ls-remote --lts",
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "lts", "available", "remote"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "disponibles"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "disponíveis"],
+        "fr": ["nvm", "node", "node.js", "version", "disponibles"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "verfügbar"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "disponibili"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "利用可能"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "사용 가능"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "可用"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "可用"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "доступные"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "nvm list available",
+        "cmd": "nvm list available"
+      },
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-current",
+      "title": {
+        "en": "nvm: show the version in use",
+        "es": "nvm: ver la versión en uso",
+        "pt-br": "nvm: ver a versão em uso",
+        "fr": "nvm: afficher la version utilisée",
+        "de": "nvm: aktive Version anzeigen",
+        "it": "nvm: mostra la versione in uso",
+        "ja": "nvm: 使用中のバージョンを表示",
+        "ko": "nvm: 사용 중인 버전 보기",
+        "zh-cn": "nvm: 查看正在使用的版本",
+        "zh-tw": "nvm: 檢視正在使用的版本",
+        "ru": "nvm: показать текущую версию"
+      },
+      "description": {
+        "en": "Prints the Node.js version that nvm has activated",
+        "es": "Muestra la versión de Node.js que nvm tiene activada",
+        "pt-br": "Mostra a versão do Node.js que o nvm ativou",
+        "fr": "Affiche la version de Node.js activée par nvm",
+        "de": "Zeigt die Node.js-Version, die nvm aktiviert hat",
+        "it": "Mostra la versione di Node.js attivata da nvm",
+        "ja": "nvm が有効にしている Node.js のバージョンを表示します",
+        "ko": "nvm이 활성화한 Node.js 버전을 보여 줍니다",
+        "zh-cn": "显示 nvm 当前启用的 Node.js 版本",
+        "zh-tw": "顯示 nvm 目前啟用的 Node.js 版本",
+        "ru": "Показывает версию Node.js, активированную nvm"
+      },
+      "command": "nvm current",
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "current"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "actual"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "atual"],
+        "fr": ["nvm", "node", "node.js", "version", "actuelle"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "aktuell"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "attuale"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "現在"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "현재"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "当前"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "目前"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "текущая"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.nvm-uninstall",
+      "title": {
+        "en": "nvm: uninstall a version",
+        "es": "nvm: desinstalar una versión",
+        "pt-br": "nvm: desinstalar uma versão",
+        "fr": "nvm: désinstaller une version",
+        "de": "nvm: Version deinstallieren",
+        "it": "nvm: disinstalla una versione",
+        "ja": "nvm: バージョンをアンインストール",
+        "ko": "nvm: 버전 제거",
+        "zh-cn": "nvm: 卸载某个版本",
+        "zh-tw": "nvm: 解除安裝某個版本",
+        "ru": "nvm: удалить версию"
+      },
+      "description": {
+        "en": "Deletes an installed Node.js version and its global packages",
+        "es": "Borra una versión instalada de Node.js y sus paquetes globales",
+        "pt-br": "Apaga uma versão instalada do Node.js e seus pacotes globais",
+        "fr": "Supprime une version installée de Node.js et ses paquets globaux",
+        "de": "Löscht eine installierte Node.js-Version samt ihrer globalen Pakete",
+        "it": "Elimina una versione installata di Node.js e i suoi pacchetti globali",
+        "ja": "インストール済みの Node.js のバージョンとそのグローバルパッケージを削除します",
+        "ko": "설치된 Node.js 버전과 전역 패키지를 삭제합니다",
+        "zh-cn": "删除已安装的某个 Node.js 版本及其全局包",
+        "zh-tw": "刪除已安裝的某個 Node.js 版本及其全域套件",
+        "ru": "Удаляет установленную версию Node.js и её глобальные пакеты"
+      },
+      "command": "nvm uninstall ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nvm", "node", "node.js", "version", "uninstall", "remove"],
+        "es": ["nvm", "node", "node.js", "version", "versión", "desinstalar", "borrar"],
+        "pt-br": ["nvm", "node", "node.js", "version", "versão", "desinstalar", "apagar"],
+        "fr": ["nvm", "node", "node.js", "version", "désinstaller", "supprimer"],
+        "de": ["nvm", "node", "node.js", "version", "Version", "deinstallieren", "löschen"],
+        "it": ["nvm", "node", "node.js", "version", "versione", "disinstallare", "eliminare"],
+        "ja": ["nvm", "node", "node.js", "version", "バージョン", "アンインストール", "削除"],
+        "ko": ["nvm", "node", "node.js", "version", "버전", "제거", "삭제"],
+        "zh-cn": ["nvm", "node", "node.js", "version", "版本", "卸载", "删除"],
+        "zh-tw": ["nvm", "node", "node.js", "version", "版本", "解除安裝", "刪除"],
+        "ru": ["nvm", "node", "node.js", "version", "версия", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://github.com/nvm-sh/nvm#usage"
+    },
+    {
+      "id": "version-managers.fnm-env",
+      "title": {
+        "en": "fnm: activate it in this terminal",
+        "es": "fnm: activarlo en esta terminal",
+        "pt-br": "fnm: ativá-lo neste terminal",
+        "fr": "fnm: l’activer dans ce terminal",
+        "de": "fnm: in diesem Terminal aktivieren",
+        "it": "fnm: attivalo in questo terminale",
+        "ja": "fnm: このターミナルで有効化",
+        "ko": "fnm: 이 터미널에서 활성화",
+        "zh-cn": "fnm: 在此终端中启用",
+        "zh-tw": "fnm: 在此終端機中啟用",
+        "ru": "fnm: включить в этом терминале"
+      },
+      "description": {
+        "en": "Loads fnm in the current session and switches version when you enter a folder with .nvmrc or .node-version",
+        "es": "Carga fnm en la sesión actual y cambia de versión al entrar en una carpeta con .nvmrc o .node-version",
+        "pt-br": "Carrega o fnm na sessão atual e troca de versão ao entrar em uma pasta com .nvmrc ou .node-version",
+        "fr": "Charge fnm dans la session actuelle et change de version en entrant dans un dossier avec .nvmrc ou .node-version",
+        "de": "Lädt fnm in die aktuelle Sitzung und wechselt die Version beim Betreten eines Ordners mit .nvmrc oder .node-version",
+        "it": "Carica fnm nella sessione corrente e cambia versione quando entri in una cartella con .nvmrc o .node-version",
+        "ja": "現在のセッションに fnm を読み込み、.nvmrc や .node-version のあるフォルダーに入るとバージョンを切り替えます",
+        "ko": "현재 세션에 fnm을 불러오고 .nvmrc나 .node-version이 있는 폴더에 들어가면 버전을 바꿉니다",
+        "zh-cn": "在当前会话中加载 fnm，进入含 .nvmrc 或 .node-version 的文件夹时自动切换版本",
+        "zh-tw": "在目前工作階段中載入 fnm，進入含 .nvmrc 或 .node-version 的資料夾時自動切換版本",
+        "ru": "Загружает fnm в текущую сессию и переключает версию при входе в папку с .nvmrc или .node-version"
+      },
+      "command": "eval \"$(fnm env --use-on-cd --shell bash)\"",
+      "tags": {
+        "en": ["fnm", "node", "node.js", "version", "env", "setup", "shell", "use-on-cd"],
+        "es": ["fnm", "node", "node.js", "version", "versión", "configurar", "activar"],
+        "pt-br": ["fnm", "node", "node.js", "version", "versão", "configurar", "ativar"],
+        "fr": ["fnm", "node", "node.js", "version", "configurer", "activer"],
+        "de": ["fnm", "node", "node.js", "version", "Version", "einrichten", "aktivieren"],
+        "it": ["fnm", "node", "node.js", "version", "versione", "configurare", "attivare"],
+        "ja": ["fnm", "node", "node.js", "version", "バージョン", "設定", "有効化"],
+        "ko": ["fnm", "node", "node.js", "version", "버전", "설정", "활성화"],
+        "zh-cn": ["fnm", "node", "node.js", "version", "版本", "配置", "启用"],
+        "zh-tw": ["fnm", "node", "node.js", "version", "版本", "設定", "啟用"],
+        "ru": ["fnm", "node", "node.js", "version", "версия", "настройка", "включить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "zsh": "eval \"$(fnm env --use-on-cd --shell zsh)\"",
+        "powershell": "fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression",
+        "cmd": "FOR /f \"tokens=*\" %i IN ('fnm env --use-on-cd') DO CALL %i"
+      },
+      "docs": "https://github.com/Schniz/fnm#shell-setup"
+    },
+    {
+      "id": "version-managers.fnm-install",
+      "title": {
+        "en": "fnm: install a version",
+        "es": "fnm: instalar una versión",
+        "pt-br": "fnm: instalar uma versão",
+        "fr": "fnm: installer une version",
+        "de": "fnm: Version installieren",
+        "it": "fnm: installa una versione",
+        "ja": "fnm: バージョンをインストール",
+        "ko": "fnm: 버전 설치",
+        "zh-cn": "fnm: 安装某个版本",
+        "zh-tw": "fnm: 安裝某個版本",
+        "ru": "fnm: установить версию"
+      },
+      "description": {
+        "en": "Downloads and installs a Node.js version; use --lts for the latest LTS",
+        "es": "Descarga e instala una versión de Node.js; usa --lts para la última LTS",
+        "pt-br": "Baixa e instala uma versão do Node.js; use --lts para a LTS mais recente",
+        "fr": "Télécharge et installe une version de Node.js ; utilisez --lts pour la dernière LTS",
+        "de": "Lädt eine Node.js-Version herunter und installiert sie; --lts für die neueste LTS",
+        "it": "Scarica e installa una versione di Node.js; usa --lts per l’ultima LTS",
+        "ja": "Node.js のバージョンをダウンロードしてインストールします。最新の LTS は --lts",
+        "ko": "Node.js 버전을 내려받아 설치합니다. 최신 LTS는 --lts를 쓰세요",
+        "zh-cn": "下载并安装某个 Node.js 版本；最新 LTS 用 --lts",
+        "zh-tw": "下載並安裝某個 Node.js 版本；最新 LTS 用 --lts",
+        "ru": "Скачивает и устанавливает версию Node.js; для последней LTS укажите --lts"
+      },
+      "command": "fnm install ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["fnm", "node", "node.js", "version", "install", "lts"],
+        "es": ["fnm", "node", "node.js", "version", "versión", "instalar"],
+        "pt-br": ["fnm", "node", "node.js", "version", "versão", "instalar"],
+        "fr": ["fnm", "node", "node.js", "version", "installer"],
+        "de": ["fnm", "node", "node.js", "version", "Version", "installieren"],
+        "it": ["fnm", "node", "node.js", "version", "versione", "installare"],
+        "ja": ["fnm", "node", "node.js", "version", "バージョン", "インストール"],
+        "ko": ["fnm", "node", "node.js", "version", "버전", "설치"],
+        "zh-cn": ["fnm", "node", "node.js", "version", "版本", "安装"],
+        "zh-tw": ["fnm", "node", "node.js", "version", "版本", "安裝"],
+        "ru": ["fnm", "node", "node.js", "version", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/Schniz/fnm/blob/master/docs/commands.md"
+    },
+    {
+      "id": "version-managers.fnm-use",
+      "title": {
+        "en": "fnm: use the version of the project",
+        "es": "fnm: usar la versión del proyecto",
+        "pt-br": "fnm: usar a versão do projeto",
+        "fr": "fnm: utiliser la version du projet",
+        "de": "fnm: Version des Projekts verwenden",
+        "it": "fnm: usa la versione del progetto",
+        "ja": "fnm: プロジェクトのバージョンを使用",
+        "ko": "fnm: 프로젝트 버전 사용",
+        "zh-cn": "fnm: 使用项目的版本",
+        "zh-tw": "fnm: 使用專案的版本",
+        "ru": "fnm: использовать версию проекта"
+      },
+      "description": {
+        "en": "Switches to the version written in .nvmrc or .node-version of this folder",
+        "es": "Cambia a la versión indicada en .nvmrc o .node-version de esta carpeta",
+        "pt-br": "Troca para a versão indicada em .nvmrc ou .node-version desta pasta",
+        "fr": "Passe à la version indiquée dans .nvmrc ou .node-version de ce dossier",
+        "de": "Wechselt zu der Version aus .nvmrc oder .node-version dieses Ordners",
+        "it": "Passa alla versione indicata in .nvmrc o .node-version di questa cartella",
+        "ja": "このフォルダーの .nvmrc または .node-version に書かれたバージョンに切り替えます",
+        "ko": "이 폴더의 .nvmrc 또는 .node-version에 적힌 버전으로 바꿉니다",
+        "zh-cn": "切换到此文件夹 .nvmrc 或 .node-version 中指定的版本",
+        "zh-tw": "切換到此資料夾 .nvmrc 或 .node-version 中指定的版本",
+        "ru": "Переключается на версию из .nvmrc или .node-version этой папки"
+      },
+      "command": "fnm use",
+      "tags": {
+        "en": ["fnm", "node", "node.js", "version", "use", ".nvmrc", ".node-version"],
+        "es": ["fnm", "node", "node.js", "version", "versión", "usar", "proyecto"],
+        "pt-br": ["fnm", "node", "node.js", "version", "versão", "usar", "projeto"],
+        "fr": ["fnm", "node", "node.js", "version", "utiliser", "projet"],
+        "de": ["fnm", "node", "node.js", "version", "Version", "verwenden", "Projekt"],
+        "it": ["fnm", "node", "node.js", "version", "versione", "usare", "progetto"],
+        "ja": ["fnm", "node", "node.js", "version", "バージョン", "使用", "プロジェクト"],
+        "ko": ["fnm", "node", "node.js", "version", "버전", "사용", "프로젝트"],
+        "zh-cn": ["fnm", "node", "node.js", "version", "版本", "使用", "项目"],
+        "zh-tw": ["fnm", "node", "node.js", "version", "版本", "使用", "專案"],
+        "ru": ["fnm", "node", "node.js", "version", "версия", "использовать", "проект"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/Schniz/fnm/blob/master/docs/commands.md"
+    },
+    {
+      "id": "version-managers.fnm-default",
+      "title": {
+        "en": "fnm: set the default version",
+        "es": "fnm: fijar la versión por defecto",
+        "pt-br": "fnm: definir a versão padrão",
+        "fr": "fnm: définir la version par défaut",
+        "de": "fnm: Standardversion festlegen",
+        "it": "fnm: imposta la versione predefinita",
+        "ja": "fnm: 既定のバージョンを設定",
+        "ko": "fnm: 기본 버전 설정",
+        "zh-cn": "fnm: 设置默认版本",
+        "zh-tw": "fnm: 設定預設版本",
+        "ru": "fnm: задать версию по умолчанию"
+      },
+      "description": {
+        "en": "Sets the Node.js version used in new terminals",
+        "es": "Fija la versión de Node.js que usan las terminales nuevas",
+        "pt-br": "Define a versão do Node.js usada nos novos terminais",
+        "fr": "Définit la version de Node.js utilisée dans les nouveaux terminaux",
+        "de": "Legt die Node.js-Version für neue Terminals fest",
+        "it": "Imposta la versione di Node.js usata nei nuovi terminali",
+        "ja": "新しいターミナルで使う Node.js のバージョンを設定します",
+        "ko": "새 터미널에서 쓸 Node.js 버전을 설정합니다",
+        "zh-cn": "设置新终端使用的 Node.js 版本",
+        "zh-tw": "設定新終端機使用的 Node.js 版本",
+        "ru": "Задаёт версию Node.js для новых терминалов"
+      },
+      "command": "fnm default ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["fnm", "node", "node.js", "version", "default", "global"],
+        "es": ["fnm", "node", "node.js", "version", "versión", "por defecto"],
+        "pt-br": ["fnm", "node", "node.js", "version", "versão", "padrão"],
+        "fr": ["fnm", "node", "node.js", "version", "par défaut"],
+        "de": ["fnm", "node", "node.js", "version", "Version", "Standard"],
+        "it": ["fnm", "node", "node.js", "version", "versione", "predefinita"],
+        "ja": ["fnm", "node", "node.js", "version", "バージョン", "既定"],
+        "ko": ["fnm", "node", "node.js", "version", "버전", "기본"],
+        "zh-cn": ["fnm", "node", "node.js", "version", "版本", "默认"],
+        "zh-tw": ["fnm", "node", "node.js", "version", "版本", "預設"],
+        "ru": ["fnm", "node", "node.js", "version", "версия", "по умолчанию"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/Schniz/fnm/blob/master/docs/commands.md"
+    },
+    {
+      "id": "version-managers.fnm-uninstall",
+      "title": {
+        "en": "fnm: uninstall a version",
+        "es": "fnm: desinstalar una versión",
+        "pt-br": "fnm: desinstalar uma versão",
+        "fr": "fnm: désinstaller une version",
+        "de": "fnm: Version deinstallieren",
+        "it": "fnm: disinstalla una versione",
+        "ja": "fnm: バージョンをアンインストール",
+        "ko": "fnm: 버전 제거",
+        "zh-cn": "fnm: 卸载某个版本",
+        "zh-tw": "fnm: 解除安裝某個版本",
+        "ru": "fnm: удалить версию"
+      },
+      "description": {
+        "en": "Deletes an installed Node.js version",
+        "es": "Borra una versión instalada de Node.js",
+        "pt-br": "Apaga uma versão instalada do Node.js",
+        "fr": "Supprime une version installée de Node.js",
+        "de": "Löscht eine installierte Node.js-Version",
+        "it": "Elimina una versione installata di Node.js",
+        "ja": "インストール済みの Node.js のバージョンを削除します",
+        "ko": "설치된 Node.js 버전을 삭제합니다",
+        "zh-cn": "删除已安装的某个 Node.js 版本",
+        "zh-tw": "刪除已安裝的某個 Node.js 版本",
+        "ru": "Удаляет установленную версию Node.js"
+      },
+      "command": "fnm uninstall ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "22",
+            "es": "22",
+            "pt-br": "22",
+            "fr": "22",
+            "de": "22",
+            "it": "22",
+            "ja": "22",
+            "ko": "22",
+            "zh-cn": "22",
+            "zh-tw": "22",
+            "ru": "22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["fnm", "node", "node.js", "version", "uninstall", "remove"],
+        "es": ["fnm", "node", "node.js", "version", "versión", "desinstalar", "borrar"],
+        "pt-br": ["fnm", "node", "node.js", "version", "versão", "desinstalar", "apagar"],
+        "fr": ["fnm", "node", "node.js", "version", "désinstaller", "supprimer"],
+        "de": ["fnm", "node", "node.js", "version", "Version", "deinstallieren", "löschen"],
+        "it": ["fnm", "node", "node.js", "version", "versione", "disinstallare", "eliminare"],
+        "ja": ["fnm", "node", "node.js", "version", "バージョン", "アンインストール", "削除"],
+        "ko": ["fnm", "node", "node.js", "version", "버전", "제거", "삭제"],
+        "zh-cn": ["fnm", "node", "node.js", "version", "版本", "卸载", "删除"],
+        "zh-tw": ["fnm", "node", "node.js", "version", "版本", "解除安裝", "刪除"],
+        "ru": ["fnm", "node", "node.js", "version", "версия", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://github.com/Schniz/fnm/blob/master/docs/commands.md"
+    },
+    {
+      "id": "version-managers.volta-install",
+      "title": {
+        "en": "volta: install a tool as default",
+        "es": "volta: instalar una herramienta por defecto",
+        "pt-br": "volta: instalar uma ferramenta como padrão",
+        "fr": "volta: installer un outil par défaut",
+        "de": "volta: Werkzeug als Standard installieren",
+        "it": "volta: installa uno strumento come predefinito",
+        "ja": "volta: ツールを既定としてインストール",
+        "ko": "volta: 도구를 기본값으로 설치",
+        "zh-cn": "volta: 安装工具并设为默认",
+        "zh-tw": "volta: 安裝工具並設為預設",
+        "ru": "volta: установить инструмент по умолчанию"
+      },
+      "description": {
+        "en": "Downloads Node.js, a package manager or a CLI and makes it your default version",
+        "es": "Descarga Node.js, un gestor de paquetes o una CLI y lo deja como tu versión por defecto",
+        "pt-br": "Baixa o Node.js, um gerenciador de pacotes ou uma CLI e o define como sua versão padrão",
+        "fr": "Télécharge Node.js, un gestionnaire de paquets ou une CLI et en fait votre version par défaut",
+        "de": "Lädt Node.js, einen Paketmanager oder eine CLI herunter und macht sie zur Standardversion",
+        "it": "Scarica Node.js, un gestore di pacchetti o una CLI e lo rende la tua versione predefinita",
+        "ja": "Node.js、パッケージマネージャー、CLI をダウンロードし、既定のバージョンにします",
+        "ko": "Node.js, 패키지 관리자 또는 CLI를 내려받아 기본 버전으로 만듭니다",
+        "zh-cn": "下载 Node.js、包管理器或 CLI，并设为默认版本",
+        "zh-tw": "下載 Node.js、套件管理員或 CLI，並設為預設版本",
+        "ru": "Скачивает Node.js, менеджер пакетов или CLI и делает его версией по умолчанию"
+      },
+      "command": "volta install ${tool}",
+      "params": [
+        {
+          "name": "tool",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "node@lts",
+            "es": "node@lts",
+            "pt-br": "node@lts",
+            "fr": "node@lts",
+            "de": "node@lts",
+            "it": "node@lts",
+            "ja": "node@lts",
+            "ko": "node@lts",
+            "zh-cn": "node@lts",
+            "zh-tw": "node@lts",
+            "ru": "node@lts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["volta", "node", "node.js", "version", "install", "default"],
+        "es": ["volta", "node", "node.js", "version", "versión", "instalar", "por defecto"],
+        "pt-br": ["volta", "node", "node.js", "version", "versão", "instalar", "padrão"],
+        "fr": ["volta", "node", "node.js", "version", "installer", "par défaut"],
+        "de": ["volta", "node", "node.js", "version", "Version", "installieren", "Standard"],
+        "it": ["volta", "node", "node.js", "version", "versione", "installare", "predefinito"],
+        "ja": ["volta", "node", "node.js", "version", "バージョン", "インストール", "既定"],
+        "ko": ["volta", "node", "node.js", "version", "버전", "설치", "기본"],
+        "zh-cn": ["volta", "node", "node.js", "version", "版本", "安装", "默认"],
+        "zh-tw": ["volta", "node", "node.js", "version", "版本", "安裝", "預設"],
+        "ru": ["volta", "node", "node.js", "version", "версия", "установить", "по умолчанию"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.volta.sh/reference/install"
+    },
+    {
+      "id": "version-managers.volta-pin",
+      "title": {
+        "en": "volta: pin a version in the project",
+        "es": "volta: fijar una versión en el proyecto",
+        "pt-br": "volta: fixar uma versão no projeto",
+        "fr": "volta: épingler une version dans le projet",
+        "de": "volta: Version im Projekt festlegen",
+        "it": "volta: fissa una versione nel progetto",
+        "ja": "volta: プロジェクトにバージョンを固定",
+        "ko": "volta: 프로젝트에 버전 고정",
+        "zh-cn": "volta: 在项目中固定版本",
+        "zh-tw": "volta: 在專案中固定版本",
+        "ru": "volta: закрепить версию в проекте"
+      },
+      "description": {
+        "en": "Saves the Node.js or package manager version in the volta field of package.json",
+        "es": "Guarda la versión de Node.js o del gestor de paquetes en el campo volta de package.json",
+        "pt-br": "Salva a versão do Node.js ou do gerenciador de pacotes no campo volta do package.json",
+        "fr": "Enregistre la version de Node.js ou du gestionnaire de paquets dans le champ volta de package.json",
+        "de": "Speichert die Version von Node.js oder des Paketmanagers im Feld volta von package.json",
+        "it": "Salva la versione di Node.js o del gestore di pacchetti nel campo volta di package.json",
+        "ja": "Node.js またはパッケージマネージャーのバージョンを package.json の volta フィールドに保存します",
+        "ko": "Node.js 또는 패키지 관리자 버전을 package.json의 volta 필드에 저장합니다",
+        "zh-cn": "将 Node.js 或包管理器的版本写入 package.json 的 volta 字段",
+        "zh-tw": "將 Node.js 或套件管理員的版本寫入 package.json 的 volta 欄位",
+        "ru": "Сохраняет версию Node.js или менеджера пакетов в поле volta файла package.json"
+      },
+      "command": "volta pin ${tool}",
+      "params": [
+        {
+          "name": "tool",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "node@22",
+            "es": "node@22",
+            "pt-br": "node@22",
+            "fr": "node@22",
+            "de": "node@22",
+            "it": "node@22",
+            "ja": "node@22",
+            "ko": "node@22",
+            "zh-cn": "node@22",
+            "zh-tw": "node@22",
+            "ru": "node@22"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["volta", "node", "node.js", "version", "pin", "package.json"],
+        "es": ["volta", "node", "node.js", "version", "versión", "fijar", "proyecto"],
+        "pt-br": ["volta", "node", "node.js", "version", "versão", "fixar", "projeto"],
+        "fr": ["volta", "node", "node.js", "version", "épingler", "projet"],
+        "de": ["volta", "node", "node.js", "version", "Version", "festlegen", "Projekt"],
+        "it": ["volta", "node", "node.js", "version", "versione", "fissare", "progetto"],
+        "ja": ["volta", "node", "node.js", "version", "バージョン", "固定", "プロジェクト"],
+        "ko": ["volta", "node", "node.js", "version", "버전", "고정", "프로젝트"],
+        "zh-cn": ["volta", "node", "node.js", "version", "版本", "固定", "项目"],
+        "zh-tw": ["volta", "node", "node.js", "version", "版本", "固定", "專案"],
+        "ru": ["volta", "node", "node.js", "version", "версия", "закрепить", "проект"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.volta.sh/reference/pin"
+    },
+    {
+      "id": "version-managers.volta-list",
+      "title": {
+        "en": "volta: show the active tools",
+        "es": "volta: ver las herramientas activas",
+        "pt-br": "volta: ver as ferramentas ativas",
+        "fr": "volta: afficher les outils actifs",
+        "de": "volta: aktive Werkzeuge anzeigen",
+        "it": "volta: mostra gli strumenti attivi",
+        "ja": "volta: 有効なツールを表示",
+        "ko": "volta: 활성 도구 보기",
+        "zh-cn": "volta: 查看当前工具",
+        "zh-tw": "volta: 檢視目前的工具",
+        "ru": "volta: показать активные инструменты"
+      },
+      "description": {
+        "en": "Shows the Node.js, package managers and CLIs that Volta uses here",
+        "es": "Muestra el Node.js, los gestores de paquetes y las CLI que usa Volta aquí",
+        "pt-br": "Mostra o Node.js, os gerenciadores de pacotes e as CLIs que o Volta usa aqui",
+        "fr": "Affiche le Node.js, les gestionnaires de paquets et les CLI que Volta utilise ici",
+        "de": "Zeigt Node.js, Paketmanager und CLIs, die Volta hier verwendet",
+        "it": "Mostra Node.js, i gestori di pacchetti e le CLI che Volta usa qui",
+        "ja": "ここで Volta が使う Node.js、パッケージマネージャー、CLI を表示します",
+        "ko": "여기서 Volta가 쓰는 Node.js, 패키지 관리자, CLI를 보여 줍니다",
+        "zh-cn": "显示 Volta 在此处使用的 Node.js、包管理器和 CLI",
+        "zh-tw": "顯示 Volta 在此處使用的 Node.js、套件管理員和 CLI",
+        "ru": "Показывает Node.js, менеджеры пакетов и CLI, которые здесь использует Volta"
+      },
+      "command": "volta list",
+      "tags": {
+        "en": ["volta", "node", "node.js", "version", "list", "toolchain"],
+        "es": ["volta", "node", "node.js", "version", "versión", "lista", "herramientas"],
+        "pt-br": ["volta", "node", "node.js", "version", "versão", "lista", "ferramentas"],
+        "fr": ["volta", "node", "node.js", "version", "liste", "outils"],
+        "de": ["volta", "node", "node.js", "version", "Version", "Liste", "Werkzeuge"],
+        "it": ["volta", "node", "node.js", "version", "versione", "elenco", "strumenti"],
+        "ja": ["volta", "node", "node.js", "version", "バージョン", "一覧", "ツール"],
+        "ko": ["volta", "node", "node.js", "version", "버전", "목록", "도구"],
+        "zh-cn": ["volta", "node", "node.js", "version", "版本", "列表", "工具"],
+        "zh-tw": ["volta", "node", "node.js", "version", "版本", "清單", "工具"],
+        "ru": ["volta", "node", "node.js", "version", "версия", "список", "инструменты"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.volta.sh/reference/list"
+    },
+    {
+      "id": "version-managers.corepack-enable",
+      "title": {
+        "en": "corepack: enable pnpm and Yarn",
+        "es": "corepack: activar pnpm y Yarn",
+        "pt-br": "corepack: ativar pnpm e Yarn",
+        "fr": "corepack: activer pnpm et Yarn",
+        "de": "corepack: pnpm und Yarn aktivieren",
+        "it": "corepack: attiva pnpm e Yarn",
+        "ja": "corepack: pnpm と Yarn を有効化",
+        "ko": "corepack: pnpm과 Yarn 활성화",
+        "zh-cn": "corepack: 启用 pnpm 和 Yarn",
+        "zh-tw": "corepack: 啟用 pnpm 和 Yarn",
+        "ru": "corepack: включить pnpm и Yarn"
+      },
+      "description": {
+        "en": "Installs the pnpm and yarn shims so each project uses the version in its packageManager field",
+        "es": "Instala los accesos de pnpm y yarn para que cada proyecto use la versión de su campo packageManager",
+        "pt-br": "Instala os atalhos do pnpm e do yarn para que cada projeto use a versão do campo packageManager",
+        "fr": "Installe les raccourcis pnpm et yarn pour que chaque projet utilise la version de son champ packageManager",
+        "de": "Installiert die Shims für pnpm und yarn, damit jedes Projekt die Version aus packageManager nutzt",
+        "it": "Installa i collegamenti di pnpm e yarn perché ogni progetto usi la versione del campo packageManager",
+        "ja": "pnpm と yarn のシムを入れ、各プロジェクトが packageManager のバージョンを使うようにします",
+        "ko": "pnpm과 yarn shim을 설치해 프로젝트마다 packageManager의 버전을 쓰게 합니다",
+        "zh-cn": "安装 pnpm 和 yarn 的垫片，让每个项目使用其 packageManager 字段中的版本",
+        "zh-tw": "安裝 pnpm 和 yarn 的 shim，讓每個專案使用其 packageManager 欄位中的版本",
+        "ru": "Устанавливает прослойки pnpm и yarn, чтобы каждый проект использовал версию из packageManager"
+      },
+      "command": "corepack enable",
+      "tags": {
+        "en": ["corepack", "node", "node.js", "version", "enable", "pnpm", "yarn", "packageManager"],
+        "es": ["corepack", "node", "node.js", "version", "versión", "activar"],
+        "pt-br": ["corepack", "node", "node.js", "version", "versão", "ativar"],
+        "fr": ["corepack", "node", "node.js", "version", "activer"],
+        "de": ["corepack", "node", "node.js", "version", "Version", "aktivieren"],
+        "it": ["corepack", "node", "node.js", "version", "versione", "attivare"],
+        "ja": ["corepack", "node", "node.js", "version", "バージョン", "有効化"],
+        "ko": ["corepack", "node", "node.js", "version", "버전", "활성화"],
+        "zh-cn": ["corepack", "node", "node.js", "version", "版本", "启用"],
+        "zh-tw": ["corepack", "node", "node.js", "version", "版本", "啟用"],
+        "ru": ["corepack", "node", "node.js", "version", "версия", "включить"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/nodejs/corepack#usage"
+    },
+    {
+      "id": "version-managers.corepack-use",
+      "title": {
+        "en": "corepack: set the package manager of the project",
+        "es": "corepack: fijar el gestor de paquetes del proyecto",
+        "pt-br": "corepack: definir o gerenciador de pacotes do projeto",
+        "fr": "corepack: définir le gestionnaire de paquets du projet",
+        "de": "corepack: Paketmanager des Projekts festlegen",
+        "it": "corepack: imposta il gestore di pacchetti del progetto",
+        "ja": "corepack: プロジェクトのパッケージマネージャーを設定",
+        "ko": "corepack: 프로젝트 패키지 관리자 설정",
+        "zh-cn": "corepack: 设置项目的包管理器",
+        "zh-tw": "corepack: 設定專案的套件管理員",
+        "ru": "corepack: задать менеджер пакетов проекта"
+      },
+      "description": {
+        "en": "Writes the package manager and version in packageManager of package.json and runs an install",
+        "es": "Escribe el gestor de paquetes y su versión en packageManager de package.json y ejecuta una instalación",
+        "pt-br": "Grava o gerenciador de pacotes e a versão em packageManager do package.json e executa uma instalação",
+        "fr": "Écrit le gestionnaire de paquets et sa version dans packageManager de package.json puis lance une installation",
+        "de": "Schreibt Paketmanager und Version in packageManager von package.json und führt eine Installation aus",
+        "it": "Scrive il gestore di pacchetti e la versione in packageManager di package.json ed esegue un’installazione",
+        "ja": "package.json の packageManager にパッケージマネージャーとバージョンを書き込み、インストールを実行します",
+        "ko": "package.json의 packageManager에 패키지 관리자와 버전을 쓰고 설치를 실행합니다",
+        "zh-cn": "将包管理器及版本写入 package.json 的 packageManager 并执行安装",
+        "zh-tw": "將套件管理員及版本寫入 package.json 的 packageManager 並執行安裝",
+        "ru": "Записывает менеджер пакетов и его версию в packageManager файла package.json и запускает установку"
+      },
+      "command": "corepack use ${tool}",
+      "params": [
+        {
+          "name": "tool",
+          "label": {
+            "en": "Tool",
+            "es": "Herramienta",
+            "pt-br": "Ferramenta",
+            "fr": "Outil",
+            "de": "Werkzeug",
+            "it": "Strumento",
+            "ja": "ツール",
+            "ko": "도구",
+            "zh-cn": "工具",
+            "zh-tw": "工具",
+            "ru": "Инструмент"
+          },
+          "placeholder": {
+            "en": "pnpm@latest",
+            "es": "pnpm@latest",
+            "pt-br": "pnpm@latest",
+            "fr": "pnpm@latest",
+            "de": "pnpm@latest",
+            "it": "pnpm@latest",
+            "ja": "pnpm@latest",
+            "ko": "pnpm@latest",
+            "zh-cn": "pnpm@latest",
+            "zh-tw": "pnpm@latest",
+            "ru": "pnpm@latest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["corepack", "node", "node.js", "version", "use", "packageManager", "pnpm", "yarn"],
+        "es": ["corepack", "node", "node.js", "version", "versión", "fijar", "proyecto"],
+        "pt-br": ["corepack", "node", "node.js", "version", "versão", "definir", "projeto"],
+        "fr": ["corepack", "node", "node.js", "version", "définir", "projet"],
+        "de": ["corepack", "node", "node.js", "version", "Version", "festlegen", "Projekt"],
+        "it": ["corepack", "node", "node.js", "version", "versione", "impostare", "progetto"],
+        "ja": ["corepack", "node", "node.js", "version", "バージョン", "設定", "プロジェクト"],
+        "ko": ["corepack", "node", "node.js", "version", "버전", "설정", "프로젝트"],
+        "zh-cn": ["corepack", "node", "node.js", "version", "版本", "设置", "项目"],
+        "zh-tw": ["corepack", "node", "node.js", "version", "版本", "設定", "專案"],
+        "ru": ["corepack", "node", "node.js", "version", "версия", "задать", "проект"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/nodejs/corepack#usage"
+    },
+    {
+      "id": "version-managers.corepack-up",
+      "title": {
+        "en": "corepack: update the package manager of the project",
+        "es": "corepack: actualizar el gestor de paquetes del proyecto",
+        "pt-br": "corepack: atualizar o gerenciador de pacotes do projeto",
+        "fr": "corepack: mettre à jour le gestionnaire de paquets du projet",
+        "de": "corepack: Paketmanager des Projekts aktualisieren",
+        "it": "corepack: aggiorna il gestore di pacchetti del progetto",
+        "ja": "corepack: プロジェクトのパッケージマネージャーを更新",
+        "ko": "corepack: 프로젝트 패키지 관리자 업데이트",
+        "zh-cn": "corepack: 更新项目的包管理器",
+        "zh-tw": "corepack: 更新專案的套件管理員",
+        "ru": "corepack: обновить менеджер пакетов проекта"
+      },
+      "description": {
+        "en": "Moves packageManager to the latest release of the same major version",
+        "es": "Lleva packageManager a la última versión dentro de la misma versión mayor",
+        "pt-br": "Leva o packageManager para a versão mais recente da mesma versão principal",
+        "fr": "Passe packageManager à la dernière version de la même version majeure",
+        "de": "Hebt packageManager auf die neueste Version derselben Hauptversion",
+        "it": "Porta packageManager all’ultima versione della stessa versione principale",
+        "ja": "packageManager を同じメジャーバージョンの最新リリースに更新します",
+        "ko": "packageManager를 같은 메이저 버전의 최신 릴리스로 올립니다",
+        "zh-cn": "将 packageManager 更新到同一主版本的最新发布",
+        "zh-tw": "將 packageManager 更新到同一主版本的最新發行版",
+        "ru": "Обновляет packageManager до последнего выпуска той же мажорной версии"
+      },
+      "command": "corepack up",
+      "tags": {
+        "en": ["corepack", "node", "node.js", "version", "up", "update", "packageManager"],
+        "es": ["corepack", "node", "node.js", "version", "versión", "actualizar"],
+        "pt-br": ["corepack", "node", "node.js", "version", "versão", "atualizar"],
+        "fr": ["corepack", "node", "node.js", "version", "mettre à jour"],
+        "de": ["corepack", "node", "node.js", "version", "Version", "aktualisieren"],
+        "it": ["corepack", "node", "node.js", "version", "versione", "aggiornare"],
+        "ja": ["corepack", "node", "node.js", "version", "バージョン", "更新"],
+        "ko": ["corepack", "node", "node.js", "version", "버전", "업데이트"],
+        "zh-cn": ["corepack", "node", "node.js", "version", "版本", "更新"],
+        "zh-tw": ["corepack", "node", "node.js", "version", "版本", "更新"],
+        "ru": ["corepack", "node", "node.js", "version", "версия", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/nodejs/corepack#usage"
+    },
+    {
+      "id": "version-managers.pyenv-install",
+      "title": {
+        "en": "pyenv: install a Python version",
+        "es": "pyenv: instalar una versión de Python",
+        "pt-br": "pyenv: instalar uma versão do Python",
+        "fr": "pyenv: installer une version de Python",
+        "de": "pyenv: Python-Version installieren",
+        "it": "pyenv: installa una versione di Python",
+        "ja": "pyenv: Python のバージョンをインストール",
+        "ko": "pyenv: Python 버전 설치",
+        "zh-cn": "pyenv: 安装某个 Python 版本",
+        "zh-tw": "pyenv: 安裝某個 Python 版本",
+        "ru": "pyenv: установить версию Python"
+      },
+      "description": {
+        "en": "Downloads and installs a Python version (pyenv-win on Windows)",
+        "es": "Descarga e instala una versión de Python (pyenv-win en Windows)",
+        "pt-br": "Baixa e instala uma versão do Python (pyenv-win no Windows)",
+        "fr": "Télécharge et installe une version de Python (pyenv-win sous Windows)",
+        "de": "Lädt eine Python-Version herunter und installiert sie (pyenv-win unter Windows)",
+        "it": "Scarica e installa una versione di Python (pyenv-win su Windows)",
+        "ja": "Python のバージョンをダウンロードしてインストールします（Windows では pyenv-win）",
+        "ko": "Python 버전을 내려받아 설치합니다(Windows에서는 pyenv-win)",
+        "zh-cn": "下载并安装某个 Python 版本（Windows 上为 pyenv-win）",
+        "zh-tw": "下載並安裝某個 Python 版本（Windows 上為 pyenv-win）",
+        "ru": "Скачивает и устанавливает версию Python (в Windows — pyenv-win)"
+      },
+      "command": "pyenv install ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.13",
+            "es": "3.13",
+            "pt-br": "3.13",
+            "fr": "3.13",
+            "de": "3.13",
+            "it": "3.13",
+            "ja": "3.13",
+            "ko": "3.13",
+            "zh-cn": "3.13",
+            "zh-tw": "3.13",
+            "ru": "3.13"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pyenv", "python", "version", "install"],
+        "es": ["pyenv", "python", "version", "versión", "instalar"],
+        "pt-br": ["pyenv", "python", "version", "versão", "instalar"],
+        "fr": ["pyenv", "python", "version", "installer"],
+        "de": ["pyenv", "python", "version", "Version", "installieren"],
+        "it": ["pyenv", "python", "version", "versione", "installare"],
+        "ja": ["pyenv", "python", "version", "バージョン", "インストール"],
+        "ko": ["pyenv", "python", "version", "버전", "설치"],
+        "zh-cn": ["pyenv", "python", "version", "版本", "安装"],
+        "zh-tw": ["pyenv", "python", "version", "版本", "安裝"],
+        "ru": ["pyenv", "python", "version", "версия", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    },
+    {
+      "id": "version-managers.pyenv-versions",
+      "title": {
+        "en": "pyenv: list installed versions",
+        "es": "pyenv: ver las versiones instaladas",
+        "pt-br": "pyenv: ver as versões instaladas",
+        "fr": "pyenv: lister les versions installées",
+        "de": "pyenv: installierte Versionen anzeigen",
+        "it": "pyenv: elenca le versioni installate",
+        "ja": "pyenv: インストール済みのバージョンを一覧表示",
+        "ko": "pyenv: 설치된 버전 보기",
+        "zh-cn": "pyenv: 列出已安装的版本",
+        "zh-tw": "pyenv: 列出已安裝的版本",
+        "ru": "pyenv: показать установленные версии"
+      },
+      "description": {
+        "en": "Lists the Python versions installed with pyenv and marks the active one",
+        "es": "Muestra las versiones de Python instaladas con pyenv y marca la activa",
+        "pt-br": "Mostra as versões do Python instaladas com o pyenv e marca a ativa",
+        "fr": "Liste les versions de Python installées avec pyenv et indique l’active",
+        "de": "Listet die mit pyenv installierten Python-Versionen auf und markiert die aktive",
+        "it": "Elenca le versioni di Python installate con pyenv e indica quella attiva",
+        "ja": "pyenv でインストールした Python のバージョンを一覧表示し、有効なものを示します",
+        "ko": "pyenv로 설치한 Python 버전을 보여 주고 활성 버전을 표시합니다",
+        "zh-cn": "列出用 pyenv 安装的 Python 版本并标出当前版本",
+        "zh-tw": "列出用 pyenv 安裝的 Python 版本並標出目前版本",
+        "ru": "Показывает установленные через pyenv версии Python и отмечает активную"
+      },
+      "command": "pyenv versions",
+      "tags": {
+        "en": ["pyenv", "python", "version", "versions", "list", "installed"],
+        "es": ["pyenv", "python", "version", "versión", "instaladas", "lista"],
+        "pt-br": ["pyenv", "python", "version", "versão", "instaladas", "lista"],
+        "fr": ["pyenv", "python", "version", "installées", "liste"],
+        "de": ["pyenv", "python", "version", "Version", "installiert", "Liste"],
+        "it": ["pyenv", "python", "version", "versione", "installate", "elenco"],
+        "ja": ["pyenv", "python", "version", "バージョン", "インストール済み", "一覧"],
+        "ko": ["pyenv", "python", "version", "버전", "설치됨", "목록"],
+        "zh-cn": ["pyenv", "python", "version", "版本", "已安装", "列表"],
+        "zh-tw": ["pyenv", "python", "version", "版本", "已安裝", "清單"],
+        "ru": ["pyenv", "python", "version", "версия", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    },
+    {
+      "id": "version-managers.pyenv-local",
+      "title": {
+        "en": "pyenv: set the version of this folder",
+        "es": "pyenv: fijar la versión de esta carpeta",
+        "pt-br": "pyenv: definir a versão desta pasta",
+        "fr": "pyenv: définir la version de ce dossier",
+        "de": "pyenv: Version dieses Ordners festlegen",
+        "it": "pyenv: imposta la versione di questa cartella",
+        "ja": "pyenv: このフォルダーのバージョンを設定",
+        "ko": "pyenv: 이 폴더의 버전 설정",
+        "zh-cn": "pyenv: 设置此文件夹的版本",
+        "zh-tw": "pyenv: 設定此資料夾的版本",
+        "ru": "pyenv: задать версию для этой папки"
+      },
+      "description": {
+        "en": "Writes .python-version so this folder and its subfolders use that Python version",
+        "es": "Escribe .python-version para que esta carpeta y sus subcarpetas usen esa versión de Python",
+        "pt-br": "Grava o .python-version para que esta pasta e suas subpastas usem essa versão do Python",
+        "fr": "Écrit .python-version pour que ce dossier et ses sous-dossiers utilisent cette version de Python",
+        "de": "Schreibt .python-version, damit dieser Ordner und seine Unterordner diese Python-Version nutzen",
+        "it": "Scrive .python-version perché questa cartella e le sottocartelle usino quella versione di Python",
+        "ja": ".python-version を書き込み、このフォルダーとサブフォルダーでその Python を使うようにします",
+        "ko": ".python-version을 써서 이 폴더와 하위 폴더가 그 Python 버전을 쓰게 합니다",
+        "zh-cn": "写入 .python-version，让此文件夹及其子文件夹使用该 Python 版本",
+        "zh-tw": "寫入 .python-version，讓此資料夾及其子資料夾使用該 Python 版本",
+        "ru": "Записывает .python-version, чтобы эта папка и её подпапки использовали эту версию Python"
+      },
+      "command": "pyenv local ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.13",
+            "es": "3.13",
+            "pt-br": "3.13",
+            "fr": "3.13",
+            "de": "3.13",
+            "it": "3.13",
+            "ja": "3.13",
+            "ko": "3.13",
+            "zh-cn": "3.13",
+            "zh-tw": "3.13",
+            "ru": "3.13"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pyenv", "python", "version", "local", ".python-version", "project"],
+        "es": ["pyenv", "python", "version", "versión", "proyecto", "carpeta"],
+        "pt-br": ["pyenv", "python", "version", "versão", "projeto", "pasta"],
+        "fr": ["pyenv", "python", "version", "projet", "dossier"],
+        "de": ["pyenv", "python", "version", "Version", "Projekt", "Ordner"],
+        "it": ["pyenv", "python", "version", "versione", "progetto", "cartella"],
+        "ja": ["pyenv", "python", "version", "バージョン", "プロジェクト", "フォルダー"],
+        "ko": ["pyenv", "python", "version", "버전", "프로젝트", "폴더"],
+        "zh-cn": ["pyenv", "python", "version", "版本", "项目", "文件夹"],
+        "zh-tw": ["pyenv", "python", "version", "版本", "專案", "資料夾"],
+        "ru": ["pyenv", "python", "version", "версия", "проект", "папка"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    },
+    {
+      "id": "version-managers.pyenv-global",
+      "title": {
+        "en": "pyenv: set the global version",
+        "es": "pyenv: fijar la versión global",
+        "pt-br": "pyenv: definir a versão global",
+        "fr": "pyenv: définir la version globale",
+        "de": "pyenv: globale Version festlegen",
+        "it": "pyenv: imposta la versione globale",
+        "ja": "pyenv: グローバルのバージョンを設定",
+        "ko": "pyenv: 전역 버전 설정",
+        "zh-cn": "pyenv: 设置全局版本",
+        "zh-tw": "pyenv: 設定全域版本",
+        "ru": "pyenv: задать глобальную версию"
+      },
+      "description": {
+        "en": "Sets the Python version used everywhere that has no .python-version",
+        "es": "Fija la versión de Python que se usa en todas partes donde no hay .python-version",
+        "pt-br": "Define a versão do Python usada em todo lugar que não tem .python-version",
+        "fr": "Définit la version de Python utilisée partout où il n’y a pas de .python-version",
+        "de": "Legt die Python-Version fest, die überall ohne .python-version gilt",
+        "it": "Imposta la versione di Python usata ovunque non ci sia un .python-version",
+        "ja": ".python-version がない場所で使う Python のバージョンを設定します",
+        "ko": ".python-version이 없는 모든 곳에서 쓸 Python 버전을 설정합니다",
+        "zh-cn": "设置在没有 .python-version 的地方使用的 Python 版本",
+        "zh-tw": "設定在沒有 .python-version 的地方使用的 Python 版本",
+        "ru": "Задаёт версию Python для всех мест без .python-version"
+      },
+      "command": "pyenv global ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.13",
+            "es": "3.13",
+            "pt-br": "3.13",
+            "fr": "3.13",
+            "de": "3.13",
+            "it": "3.13",
+            "ja": "3.13",
+            "ko": "3.13",
+            "zh-cn": "3.13",
+            "zh-tw": "3.13",
+            "ru": "3.13"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pyenv", "python", "version", "global", "default"],
+        "es": ["pyenv", "python", "version", "versión", "global", "por defecto"],
+        "pt-br": ["pyenv", "python", "version", "versão", "global", "padrão"],
+        "fr": ["pyenv", "python", "version", "globale", "par défaut"],
+        "de": ["pyenv", "python", "version", "Version", "global", "Standard"],
+        "it": ["pyenv", "python", "version", "versione", "globale", "predefinita"],
+        "ja": ["pyenv", "python", "version", "バージョン", "グローバル", "既定"],
+        "ko": ["pyenv", "python", "version", "버전", "전역", "기본"],
+        "zh-cn": ["pyenv", "python", "version", "版本", "全局", "默认"],
+        "zh-tw": ["pyenv", "python", "version", "版本", "全域", "預設"],
+        "ru": ["pyenv", "python", "version", "версия", "глобальная", "по умолчанию"]
+      },
+      "risk": "caution",
+      "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    },
+    {
+      "id": "version-managers.pyenv-uninstall",
+      "title": {
+        "en": "pyenv: uninstall a Python version",
+        "es": "pyenv: desinstalar una versión de Python",
+        "pt-br": "pyenv: desinstalar uma versão do Python",
+        "fr": "pyenv: désinstaller une version de Python",
+        "de": "pyenv: Python-Version deinstallieren",
+        "it": "pyenv: disinstalla una versione di Python",
+        "ja": "pyenv: Python のバージョンをアンインストール",
+        "ko": "pyenv: Python 버전 제거",
+        "zh-cn": "pyenv: 卸载某个 Python 版本",
+        "zh-tw": "pyenv: 解除安裝某個 Python 版本",
+        "ru": "pyenv: удалить версию Python"
+      },
+      "description": {
+        "en": "Deletes an installed Python version and the packages installed in it",
+        "es": "Borra una versión instalada de Python y los paquetes instalados en ella",
+        "pt-br": "Apaga uma versão instalada do Python e os pacotes instalados nela",
+        "fr": "Supprime une version installée de Python et les paquets qui y sont installés",
+        "de": "Löscht eine installierte Python-Version und die darin installierten Pakete",
+        "it": "Elimina una versione installata di Python e i pacchetti installati in essa",
+        "ja": "インストール済みの Python とそこに入れたパッケージを削除します",
+        "ko": "설치된 Python 버전과 그 안에 설치한 패키지를 삭제합니다",
+        "zh-cn": "删除已安装的某个 Python 版本及其中安装的包",
+        "zh-tw": "刪除已安裝的某個 Python 版本及其中安裝的套件",
+        "ru": "Удаляет установленную версию Python и установленные в неё пакеты"
+      },
+      "command": "pyenv uninstall ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "3.13",
+            "es": "3.13",
+            "pt-br": "3.13",
+            "fr": "3.13",
+            "de": "3.13",
+            "it": "3.13",
+            "ja": "3.13",
+            "ko": "3.13",
+            "zh-cn": "3.13",
+            "zh-tw": "3.13",
+            "ru": "3.13"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pyenv", "python", "version", "uninstall", "remove"],
+        "es": ["pyenv", "python", "version", "versión", "desinstalar", "borrar"],
+        "pt-br": ["pyenv", "python", "version", "versão", "desinstalar", "apagar"],
+        "fr": ["pyenv", "python", "version", "désinstaller", "supprimer"],
+        "de": ["pyenv", "python", "version", "Version", "deinstallieren", "löschen"],
+        "it": ["pyenv", "python", "version", "versione", "disinstallare", "eliminare"],
+        "ja": ["pyenv", "python", "version", "バージョン", "アンインストール", "削除"],
+        "ko": ["pyenv", "python", "version", "버전", "제거", "삭제"],
+        "zh-cn": ["pyenv", "python", "version", "版本", "卸载", "删除"],
+        "zh-tw": ["pyenv", "python", "version", "版本", "解除安裝", "刪除"],
+        "ru": ["pyenv", "python", "version", "версия", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    }
+  ]
+}

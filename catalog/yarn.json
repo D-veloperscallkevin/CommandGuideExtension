@@ -1,0 +1,1128 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "yarn",
+  "title": {
+    "en": "Yarn",
+    "es": "Yarn",
+    "pt-br": "Yarn",
+    "fr": "Yarn",
+    "de": "Yarn",
+    "it": "Yarn",
+    "ja": "Yarn",
+    "ko": "Yarn",
+    "zh-cn": "Yarn",
+    "zh-tw": "Yarn",
+    "ru": "Yarn"
+  },
+  "icon": "package",
+  "order": 26,
+  "section": "languages",
+  "detect": ["yarn.lock", ".yarnrc.yml"],
+  "commands": [
+    {
+      "id": "yarn.install",
+      "title": {
+        "en": "Install dependencies",
+        "es": "Instalar dependencias",
+        "pt-br": "Instalar dependências",
+        "fr": "Installer les dépendances",
+        "de": "Abhängigkeiten installieren",
+        "it": "Installa le dipendenze",
+        "ja": "依存関係をインストール",
+        "ko": "의존성 설치",
+        "zh-cn": "安装依赖",
+        "zh-tw": "安裝相依套件",
+        "ru": "Установить зависимости"
+      },
+      "description": {
+        "en": "Installs all dependencies of the project with Yarn",
+        "es": "Instala con Yarn todas las dependencias del proyecto",
+        "pt-br": "Instala com o Yarn todas as dependências do projeto",
+        "fr": "Installe avec Yarn toutes les dépendances du projet",
+        "de": "Installiert mit Yarn alle Abhängigkeiten des Projekts",
+        "it": "Installa con Yarn tutte le dipendenze del progetto",
+        "ja": "プロジェクトのすべての依存関係を Yarn でインストールします",
+        "ko": "Yarn으로 프로젝트의 모든 의존성을 설치합니다",
+        "zh-cn": "使用 Yarn 安装项目的所有依赖",
+        "zh-tw": "使用 Yarn 安裝專案的所有相依套件",
+        "ru": "Устанавливает все зависимости проекта с помощью Yarn"
+      },
+      "command": "yarn install",
+      "tags": {
+        "en": ["yarn", "install", "dependencies"],
+        "es": ["yarn", "install", "dependencias", "instalar"],
+        "pt-br": ["yarn", "install", "dependências", "instalar"],
+        "fr": ["yarn", "install", "dépendances", "installer"],
+        "de": ["yarn", "install", "Abhängigkeiten", "installieren"],
+        "it": ["yarn", "install", "dipendenze", "installare"],
+        "ja": ["yarn", "install", "依存関係", "インストール"],
+        "ko": ["yarn", "install", "의존성", "설치"],
+        "zh-cn": ["yarn", "install", "依赖", "安装"],
+        "zh-tw": ["yarn", "install", "相依套件", "安裝"],
+        "ru": ["yarn", "install", "зависимости", "установка"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/install"
+    },
+    {
+      "id": "yarn.install-immutable",
+      "title": {
+        "en": "Install without changing the lockfile",
+        "es": "Instalar sin cambiar el lockfile",
+        "pt-br": "Instalar sem alterar o lockfile",
+        "fr": "Installer sans modifier le lockfile",
+        "de": "Installieren, ohne den Lockfile zu ändern",
+        "it": "Installa senza modificare il lockfile",
+        "ja": "lockfile を変更せずにインストール",
+        "ko": "lockfile을 변경하지 않고 설치",
+        "zh-cn": "不修改 lockfile 进行安装",
+        "zh-tw": "不修改 lockfile 進行安裝",
+        "ru": "Установить без изменения lockfile"
+      },
+      "description": {
+        "en": "Installs exactly what yarn.lock says and fails if it would need to change, as in CI (Yarn 2+)",
+        "es": "Instala exactamente lo que indica yarn.lock y falla si tuviera que cambiarlo, como en CI (Yarn 2 o superior)",
+        "pt-br": "Instala exatamente o que diz o yarn.lock e falha se precisar alterá-lo, como na CI (Yarn 2 ou superior)",
+        "fr": "Installe exactement ce qu’indique yarn.lock et échoue s’il devait changer, comme en CI (Yarn 2 ou supérieur)",
+        "de": "Installiert genau, was yarn.lock vorgibt, und schlägt fehl, wenn er sich ändern müsste, wie in CI (ab Yarn 2)",
+        "it": "Installa esattamente ciò che indica yarn.lock e fallisce se dovesse cambiarlo, come in CI (Yarn 2 o successivo)",
+        "ja": "yarn.lock のとおりにインストールし、変更が必要なら失敗します（CI 向け） （Yarn 2 以降）",
+        "ko": "yarn.lock 그대로 설치하고 변경이 필요하면 실패합니다(CI용) (Yarn 2 이상)",
+        "zh-cn": "严格按照 yarn.lock 安装，需要修改时失败（适用于 CI） （Yarn 2 及以上）",
+        "zh-tw": "嚴格依照 yarn.lock 安裝，需要修改時失敗（適用於 CI） （Yarn 2 以上）",
+        "ru": "Устанавливает строго по yarn.lock и завершается ошибкой, если его нужно изменить, как в CI (Yarn 2 и новее)"
+      },
+      "command": "yarn install --immutable",
+      "tags": {
+        "en": ["yarn", "immutable", "ci", "lockfile", "frozen"],
+        "es": ["yarn", "immutable", "ci", "lockfile", "congelado", "integración continua"],
+        "pt-br": ["yarn", "immutable", "ci", "lockfile", "congelado", "integração contínua"],
+        "fr": ["yarn", "immutable", "ci", "lockfile", "figé", "intégration continue"],
+        "de": ["yarn", "immutable", "ci", "lockfile", "eingefroren"],
+        "it": ["yarn", "immutable", "ci", "lockfile", "bloccato"],
+        "ja": ["yarn", "immutable", "ci", "lockfile", "固定"],
+        "ko": ["yarn", "immutable", "ci", "lockfile", "고정"],
+        "zh-cn": ["yarn", "immutable", "ci", "lockfile", "锁定"],
+        "zh-tw": ["yarn", "immutable", "ci", "lockfile", "鎖定"],
+        "ru": ["yarn", "immutable", "ci", "lockfile", "фиксированный"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/install"
+    },
+    {
+      "id": "yarn.add",
+      "title": {
+        "en": "Add a dependency",
+        "es": "Añadir una dependencia",
+        "pt-br": "Adicionar uma dependência",
+        "fr": "Ajouter une dépendance",
+        "de": "Abhängigkeit hinzufügen",
+        "it": "Aggiungi una dipendenza",
+        "ja": "依存関係を追加",
+        "ko": "의존성 추가",
+        "zh-cn": "添加依赖",
+        "zh-tw": "新增相依套件",
+        "ru": "Добавить зависимость"
+      },
+      "description": {
+        "en": "Installs a package and saves it in dependencies",
+        "es": "Instala un paquete y lo guarda en dependencies",
+        "pt-br": "Instala um pacote e o salva em dependencies",
+        "fr": "Installe un paquet et l’enregistre dans dependencies",
+        "de": "Installiert ein Paket und speichert es unter dependencies",
+        "it": "Installa un pacchetto e lo salva in dependencies",
+        "ja": "パッケージをインストールし、dependencies に保存します",
+        "ko": "패키지를 설치하고 dependencies에 저장합니다",
+        "zh-cn": "安装一个包并保存到 dependencies",
+        "zh-tw": "安裝一個套件並儲存到 dependencies",
+        "ru": "Устанавливает пакет и сохраняет его в dependencies"
+      },
+      "command": "yarn add ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "zod",
+            "es": "zod",
+            "pt-br": "zod",
+            "fr": "zod",
+            "de": "zod",
+            "it": "zod",
+            "ja": "zod",
+            "ko": "zod",
+            "zh-cn": "zod",
+            "zh-tw": "zod",
+            "ru": "zod"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "add", "dependency", "install"],
+        "es": ["yarn", "add", "dependencia", "añadir", "instalar"],
+        "pt-br": ["yarn", "add", "dependência", "adicionar"],
+        "fr": ["yarn", "add", "dépendance", "ajouter"],
+        "de": ["yarn", "add", "Abhängigkeit", "hinzufügen"],
+        "it": ["yarn", "add", "dipendenza", "aggiungere"],
+        "ja": ["yarn", "add", "依存関係", "追加"],
+        "ko": ["yarn", "add", "의존성", "추가"],
+        "zh-cn": ["yarn", "add", "依赖", "添加"],
+        "zh-tw": ["yarn", "add", "相依套件", "新增"],
+        "ru": ["yarn", "add", "зависимость", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/add"
+    },
+    {
+      "id": "yarn.add-dev",
+      "title": {
+        "en": "Add a dev dependency",
+        "es": "Añadir una dependencia de desarrollo",
+        "pt-br": "Adicionar uma dependência de desenvolvimento",
+        "fr": "Ajouter une dépendance de développement",
+        "de": "Entwicklungsabhängigkeit hinzufügen",
+        "it": "Aggiungi una dipendenza di sviluppo",
+        "ja": "開発用の依存関係を追加",
+        "ko": "개발 의존성 추가",
+        "zh-cn": "添加开发依赖",
+        "zh-tw": "新增開發相依套件",
+        "ru": "Добавить dev-зависимость"
+      },
+      "description": {
+        "en": "Installs a package and saves it in devDependencies",
+        "es": "Instala un paquete y lo guarda en devDependencies",
+        "pt-br": "Instala um pacote e o salva em devDependencies",
+        "fr": "Installe un paquet et l’enregistre dans devDependencies",
+        "de": "Installiert ein Paket und speichert es unter devDependencies",
+        "it": "Installa un pacchetto e lo salva in devDependencies",
+        "ja": "パッケージをインストールし、devDependencies に保存します",
+        "ko": "패키지를 설치하고 devDependencies에 저장합니다",
+        "zh-cn": "安装一个包并保存到 devDependencies",
+        "zh-tw": "安裝一個套件並儲存到 devDependencies",
+        "ru": "Устанавливает пакет и сохраняет его в devDependencies"
+      },
+      "command": "yarn add -D ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "typescript",
+            "es": "typescript",
+            "pt-br": "typescript",
+            "fr": "typescript",
+            "de": "typescript",
+            "it": "typescript",
+            "ja": "typescript",
+            "ko": "typescript",
+            "zh-cn": "typescript",
+            "zh-tw": "typescript",
+            "ru": "typescript"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "add", "dev", "devDependencies", "install"],
+        "es": ["yarn", "add", "dev", "devDependencies", "desarrollo", "añadir"],
+        "pt-br": ["yarn", "add", "dev", "devDependencies", "desenvolvimento", "adicionar"],
+        "fr": ["yarn", "add", "dev", "devDependencies", "développement", "ajouter"],
+        "de": ["yarn", "add", "dev", "devDependencies", "Entwicklung", "hinzufügen"],
+        "it": ["yarn", "add", "dev", "devDependencies", "sviluppo", "aggiungere"],
+        "ja": ["yarn", "add", "dev", "devDependencies", "開発", "追加"],
+        "ko": ["yarn", "add", "dev", "devDependencies", "개발", "추가"],
+        "zh-cn": ["yarn", "add", "dev", "devDependencies", "开发", "添加"],
+        "zh-tw": ["yarn", "add", "dev", "devDependencies", "開發", "新增"],
+        "ru": ["yarn", "add", "dev", "devDependencies", "разработка", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/add"
+    },
+    {
+      "id": "yarn.remove",
+      "title": {
+        "en": "Remove a dependency",
+        "es": "Quitar una dependencia",
+        "pt-br": "Remover uma dependência",
+        "fr": "Supprimer une dépendance",
+        "de": "Abhängigkeit entfernen",
+        "it": "Rimuovi una dipendenza",
+        "ja": "依存関係を削除",
+        "ko": "의존성 제거",
+        "zh-cn": "移除依赖",
+        "zh-tw": "移除相依套件",
+        "ru": "Удалить зависимость"
+      },
+      "description": {
+        "en": "Uninstalls a package and removes it from package.json",
+        "es": "Desinstala un paquete y lo quita de package.json",
+        "pt-br": "Desinstala um pacote e o remove do package.json",
+        "fr": "Désinstalle un paquet et le retire de package.json",
+        "de": "Deinstalliert ein Paket und entfernt es aus package.json",
+        "it": "Disinstalla un pacchetto e lo rimuove da package.json",
+        "ja": "パッケージをアンインストールし、package.json から削除します",
+        "ko": "패키지를 제거하고 package.json에서 삭제합니다",
+        "zh-cn": "卸载一个包并从 package.json 中移除",
+        "zh-tw": "解除安裝一個套件並從 package.json 移除",
+        "ru": "Удаляет пакет и убирает его из package.json"
+      },
+      "command": "yarn remove ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "zod",
+            "es": "zod",
+            "pt-br": "zod",
+            "fr": "zod",
+            "de": "zod",
+            "it": "zod",
+            "ja": "zod",
+            "ko": "zod",
+            "zh-cn": "zod",
+            "zh-tw": "zod",
+            "ru": "zod"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "remove", "uninstall", "delete"],
+        "es": ["yarn", "remove", "quitar", "desinstalar", "eliminar"],
+        "pt-br": ["yarn", "remove", "remover", "desinstalar"],
+        "fr": ["yarn", "remove", "supprimer", "désinstaller"],
+        "de": ["yarn", "remove", "entfernen", "deinstallieren"],
+        "it": ["yarn", "remove", "rimuovere", "disinstallare"],
+        "ja": ["yarn", "remove", "削除", "アンインストール"],
+        "ko": ["yarn", "remove", "제거", "삭제"],
+        "zh-cn": ["yarn", "remove", "移除", "卸载"],
+        "zh-tw": ["yarn", "remove", "移除", "解除安裝"],
+        "ru": ["yarn", "remove", "удалить"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/remove"
+    },
+    {
+      "id": "yarn.run",
+      "title": {
+        "en": "Run a script",
+        "es": "Ejecutar un script",
+        "pt-br": "Executar um script",
+        "fr": "Exécuter un script",
+        "de": "Skript ausführen",
+        "it": "Esegui uno script",
+        "ja": "スクリプトを実行",
+        "ko": "스크립트 실행",
+        "zh-cn": "运行脚本",
+        "zh-tw": "執行指令碼",
+        "ru": "Запустить скрипт"
+      },
+      "description": {
+        "en": "Runs a script from package.json",
+        "es": "Ejecuta un script de package.json",
+        "pt-br": "Executa um script do package.json",
+        "fr": "Exécute un script de package.json",
+        "de": "Führt ein Skript aus package.json aus",
+        "it": "Esegue uno script di package.json",
+        "ja": "package.json のスクリプトを実行します",
+        "ko": "package.json의 스크립트를 실행합니다",
+        "zh-cn": "运行 package.json 中的脚本",
+        "zh-tw": "執行 package.json 中的指令碼",
+        "ru": "Запускает скрипт из package.json"
+      },
+      "command": "yarn run ${script}",
+      "params": [
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "build",
+            "es": "build",
+            "pt-br": "build",
+            "fr": "build",
+            "de": "build",
+            "it": "build",
+            "ja": "build",
+            "ko": "build",
+            "zh-cn": "build",
+            "zh-tw": "build",
+            "ru": "build"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "run", "script", "scripts"],
+        "es": ["yarn", "run", "script", "ejecutar"],
+        "pt-br": ["yarn", "run", "script", "executar"],
+        "fr": ["yarn", "run", "script", "exécuter"],
+        "de": ["yarn", "run", "script", "ausführen"],
+        "it": ["yarn", "run", "script", "eseguire"],
+        "ja": ["yarn", "run", "script", "実行"],
+        "ko": ["yarn", "run", "script", "실행"],
+        "zh-cn": ["yarn", "run", "script", "运行"],
+        "zh-tw": ["yarn", "run", "script", "執行"],
+        "ru": ["yarn", "run", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/run"
+    },
+    {
+      "id": "yarn.dlx",
+      "title": {
+        "en": "Run a package without installing it",
+        "es": "Ejecutar un paquete sin instalarlo",
+        "pt-br": "Executar um pacote sem instalá-lo",
+        "fr": "Exécuter un paquet sans l’installer",
+        "de": "Paket ausführen, ohne es zu installieren",
+        "it": "Esegui un pacchetto senza installarlo",
+        "ja": "インストールせずにパッケージを実行",
+        "ko": "설치하지 않고 패키지 실행",
+        "zh-cn": "不安装直接运行包",
+        "zh-tw": "不安裝直接執行套件",
+        "ru": "Запустить пакет без установки"
+      },
+      "description": {
+        "en": "Downloads a package to a temporary folder and runs its binary, like npx (Yarn 2+)",
+        "es": "Descarga un paquete en una carpeta temporal y ejecuta su binario, como npx (Yarn 2 o superior)",
+        "pt-br": "Baixa um pacote em uma pasta temporária e executa o binário, como o npx (Yarn 2 ou superior)",
+        "fr": "Télécharge un paquet dans un dossier temporaire et exécute son binaire, comme npx (Yarn 2 ou supérieur)",
+        "de": "Lädt ein Paket in einen temporären Ordner und führt dessen Binärdatei aus, wie npx (ab Yarn 2)",
+        "it": "Scarica un pacchetto in una cartella temporanea ed esegue il suo binario, come npx (Yarn 2 o successivo)",
+        "ja": "パッケージを一時フォルダーにダウンロードしてバイナリを実行します（npx と同様） （Yarn 2 以降）",
+        "ko": "패키지를 임시 폴더에 내려받아 바이너리를 실행합니다(npx와 비슷) (Yarn 2 이상)",
+        "zh-cn": "将包下载到临时文件夹并运行其可执行文件，类似 npx （Yarn 2 及以上）",
+        "zh-tw": "將套件下載到暫存資料夾並執行其可執行檔，類似 npx （Yarn 2 以上）",
+        "ru": "Скачивает пакет во временную папку и запускает его бинарник, как npx (Yarn 2 и новее)"
+      },
+      "command": "yarn dlx ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "create-vite@latest",
+            "es": "create-vite@latest",
+            "pt-br": "create-vite@latest",
+            "fr": "create-vite@latest",
+            "de": "create-vite@latest",
+            "it": "create-vite@latest",
+            "ja": "create-vite@latest",
+            "ko": "create-vite@latest",
+            "zh-cn": "create-vite@latest",
+            "zh-tw": "create-vite@latest",
+            "ru": "create-vite@latest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "dlx", "npx", "execute", "create"],
+        "es": ["yarn", "dlx", "npx", "ejecutar", "crear"],
+        "pt-br": ["yarn", "dlx", "npx", "executar", "criar"],
+        "fr": ["yarn", "dlx", "npx", "exécuter", "créer"],
+        "de": ["yarn", "dlx", "npx", "ausführen", "erstellen"],
+        "it": ["yarn", "dlx", "npx", "eseguire", "creare"],
+        "ja": ["yarn", "dlx", "npx", "実行", "作成"],
+        "ko": ["yarn", "dlx", "npx", "실행", "생성"],
+        "zh-cn": ["yarn", "dlx", "npx", "运行", "创建"],
+        "zh-tw": ["yarn", "dlx", "npx", "執行", "建立"],
+        "ru": ["yarn", "dlx", "npx", "запустить", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/dlx"
+    },
+    {
+      "id": "yarn.up",
+      "title": {
+        "en": "Update a package",
+        "es": "Actualizar un paquete",
+        "pt-br": "Atualizar um pacote",
+        "fr": "Mettre à jour un paquet",
+        "de": "Paket aktualisieren",
+        "it": "Aggiorna un pacchetto",
+        "ja": "パッケージを更新",
+        "ko": "패키지 업데이트",
+        "zh-cn": "更新包",
+        "zh-tw": "更新套件",
+        "ru": "Обновить пакет"
+      },
+      "description": {
+        "en": "Updates a package to its latest version in every workspace (Yarn 2+)",
+        "es": "Actualiza un paquete a su última versión en todos los workspaces (Yarn 2 o superior)",
+        "pt-br": "Atualiza um pacote para a versão mais recente em todos os workspaces (Yarn 2 ou superior)",
+        "fr": "Met à jour un paquet vers sa dernière version dans tous les workspaces (Yarn 2 ou supérieur)",
+        "de": "Aktualisiert ein Paket in allen Workspaces auf die neueste Version (ab Yarn 2)",
+        "it": "Aggiorna un pacchetto all’ultima versione in tutti i workspace (Yarn 2 o successivo)",
+        "ja": "すべてのワークスペースでパッケージを最新バージョンに更新します （Yarn 2 以降）",
+        "ko": "모든 워크스페이스에서 패키지를 최신 버전으로 업데이트합니다 (Yarn 2 이상)",
+        "zh-cn": "在所有工作区中将包更新到最新版本 （Yarn 2 及以上）",
+        "zh-tw": "在所有工作區中將套件更新到最新版本 （Yarn 2 以上）",
+        "ru": "Обновляет пакет до последней версии во всех workspace (Yarn 2 и новее)"
+      },
+      "command": "yarn up ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "react",
+            "es": "react",
+            "pt-br": "react",
+            "fr": "react",
+            "de": "react",
+            "it": "react",
+            "ja": "react",
+            "ko": "react",
+            "zh-cn": "react",
+            "zh-tw": "react",
+            "ru": "react"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "up", "upgrade", "update", "latest"],
+        "es": ["yarn", "up", "upgrade", "actualizar", "última versión"],
+        "pt-br": ["yarn", "up", "upgrade", "atualizar"],
+        "fr": ["yarn", "up", "upgrade", "mettre à jour"],
+        "de": ["yarn", "up", "upgrade", "aktualisieren"],
+        "it": ["yarn", "up", "upgrade", "aggiornare"],
+        "ja": ["yarn", "up", "upgrade", "更新", "アップグレード"],
+        "ko": ["yarn", "up", "upgrade", "업데이트"],
+        "zh-cn": ["yarn", "up", "upgrade", "更新", "升级"],
+        "zh-tw": ["yarn", "up", "upgrade", "更新", "升級"],
+        "ru": ["yarn", "up", "upgrade", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://yarnpkg.com/cli/up"
+    },
+    {
+      "id": "yarn.upgrade-interactive",
+      "title": {
+        "en": "Choose updates interactively",
+        "es": "Elegir actualizaciones de forma interactiva",
+        "pt-br": "Escolher atualizações de forma interativa",
+        "fr": "Choisir les mises à jour de façon interactive",
+        "de": "Updates interaktiv auswählen",
+        "it": "Scegli gli aggiornamenti in modo interattivo",
+        "ja": "更新を対話形式で選択",
+        "ko": "대화형으로 업데이트 선택",
+        "zh-cn": "交互式选择更新",
+        "zh-tw": "以互動方式選擇更新",
+        "ru": "Выбрать обновления интерактивно"
+      },
+      "description": {
+        "en": "Lists outdated dependencies and lets you pick which ones to update (Yarn 2+)",
+        "es": "Muestra las dependencias desactualizadas y te deja elegir cuáles actualizar (Yarn 2 o superior)",
+        "pt-br": "Mostra as dependências desatualizadas e permite escolher quais atualizar (Yarn 2 ou superior)",
+        "fr": "Liste les dépendances obsolètes et permet de choisir celles à mettre à jour (Yarn 2 ou supérieur)",
+        "de": "Listet veraltete Abhängigkeiten auf und lässt dich auswählen, welche aktualisiert werden (ab Yarn 2)",
+        "it": "Elenca le dipendenze obsolete e permette di scegliere quali aggiornare (Yarn 2 o successivo)",
+        "ja": "古い依存関係を一覧表示し、更新するものを選べます （Yarn 2 以降）",
+        "ko": "오래된 의존성을 보여 주고 업데이트할 항목을 고르게 합니다 (Yarn 2 이상)",
+        "zh-cn": "列出过时的依赖并让你选择要更新哪些 （Yarn 2 及以上）",
+        "zh-tw": "列出過時的相依套件並讓你選擇要更新哪些 （Yarn 2 以上）",
+        "ru": "Показывает устаревшие зависимости и позволяет выбрать, какие обновить (Yarn 2 и новее)"
+      },
+      "command": "yarn upgrade-interactive",
+      "tags": {
+        "en": ["yarn", "upgrade-interactive", "outdated", "update", "interactive"],
+        "es": ["yarn", "upgrade-interactive", "outdated", "actualizar", "desactualizadas", "interactivo"],
+        "pt-br": ["yarn", "upgrade-interactive", "outdated", "atualizar", "desatualizadas"],
+        "fr": ["yarn", "upgrade-interactive", "outdated", "mettre à jour", "obsolètes"],
+        "de": ["yarn", "upgrade-interactive", "outdated", "aktualisieren", "veraltet"],
+        "it": ["yarn", "upgrade-interactive", "outdated", "aggiornare", "obsolete"],
+        "ja": ["yarn", "upgrade-interactive", "outdated", "更新", "古い"],
+        "ko": ["yarn", "upgrade-interactive", "outdated", "업데이트", "오래된"],
+        "zh-cn": ["yarn", "upgrade-interactive", "outdated", "更新", "过时"],
+        "zh-tw": ["yarn", "upgrade-interactive", "outdated", "更新", "過時"],
+        "ru": ["yarn", "upgrade-interactive", "outdated", "обновить", "устаревшие"]
+      },
+      "risk": "caution",
+      "docs": "https://yarnpkg.com/cli/upgrade-interactive"
+    },
+    {
+      "id": "yarn.why",
+      "title": {
+        "en": "Why is a package installed",
+        "es": "Por qué está instalado un paquete",
+        "pt-br": "Por que um pacote está instalado",
+        "fr": "Pourquoi un paquet est installé",
+        "de": "Warum ein Paket installiert ist",
+        "it": "Perché un pacchetto è installato",
+        "ja": "パッケージがインストールされている理由",
+        "ko": "패키지가 설치된 이유",
+        "zh-cn": "为什么安装了某个包",
+        "zh-tw": "為什麼安裝了某個套件",
+        "ru": "Почему установлен пакет"
+      },
+      "description": {
+        "en": "Shows which dependencies pull in a package",
+        "es": "Muestra qué dependencias traen un paquete",
+        "pt-br": "Mostra quais dependências trazem um pacote",
+        "fr": "Montre quelles dépendances entraînent un paquet",
+        "de": "Zeigt, welche Abhängigkeiten ein Paket mitbringen",
+        "it": "Mostra quali dipendenze portano un pacchetto",
+        "ja": "どの依存関係がパッケージを取り込んでいるかを表示します",
+        "ko": "어떤 의존성이 패키지를 가져오는지 보여 줍니다",
+        "zh-cn": "显示哪些依赖引入了某个包",
+        "zh-tw": "顯示哪些相依套件引入了某個套件",
+        "ru": "Показывает, какие зависимости подтягивают пакет"
+      },
+      "command": "yarn why ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "lodash",
+            "es": "lodash",
+            "pt-br": "lodash",
+            "fr": "lodash",
+            "de": "lodash",
+            "it": "lodash",
+            "ja": "lodash",
+            "ko": "lodash",
+            "zh-cn": "lodash",
+            "zh-tw": "lodash",
+            "ru": "lodash"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "why", "dependency tree"],
+        "es": ["yarn", "why", "árbol de dependencias", "por qué"],
+        "pt-br": ["yarn", "why", "árvore de dependências"],
+        "fr": ["yarn", "why", "arbre des dépendances"],
+        "de": ["yarn", "why", "Abhängigkeitsbaum"],
+        "it": ["yarn", "why", "albero delle dipendenze"],
+        "ja": ["yarn", "why", "依存関係ツリー"],
+        "ko": ["yarn", "why", "의존성 트리"],
+        "zh-cn": ["yarn", "why", "依赖树"],
+        "zh-tw": ["yarn", "why", "相依樹"],
+        "ru": ["yarn", "why", "дерево зависимостей"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/why"
+    },
+    {
+      "id": "yarn.info",
+      "title": {
+        "en": "Show package information",
+        "es": "Ver información de un paquete",
+        "pt-br": "Ver informações de um pacote",
+        "fr": "Afficher les informations d’un paquet",
+        "de": "Paketinformationen anzeigen",
+        "it": "Mostra le informazioni di un pacchetto",
+        "ja": "パッケージ情報を表示",
+        "ko": "패키지 정보 보기",
+        "zh-cn": "查看包信息",
+        "zh-tw": "檢視套件資訊",
+        "ru": "Показать сведения о пакете"
+      },
+      "description": {
+        "en": "Shows the registry data of a package: versions, tags and dependencies (Yarn 2+)",
+        "es": "Muestra los datos del registro de un paquete: versiones, etiquetas y dependencias (Yarn 2 o superior)",
+        "pt-br": "Mostra os dados do registro de um pacote: versões, tags e dependências (Yarn 2 ou superior)",
+        "fr": "Affiche les données du registre d’un paquet : versions, tags et dépendances (Yarn 2 ou supérieur)",
+        "de": "Zeigt die Registry-Daten eines Pakets: Versionen, Tags und Abhängigkeiten (ab Yarn 2)",
+        "it": "Mostra i dati del registro di un pacchetto: versioni, tag e dipendenze (Yarn 2 o successivo)",
+        "ja": "パッケージのレジストリ情報（バージョン、タグ、依存関係）を表示します （Yarn 2 以降）",
+        "ko": "패키지의 레지스트리 정보(버전, 태그, 의존성)를 보여 줍니다 (Yarn 2 이상)",
+        "zh-cn": "显示包在注册表中的数据：版本、标签和依赖 （Yarn 2 及以上）",
+        "zh-tw": "顯示套件在登錄中的資料：版本、標籤和相依套件 （Yarn 2 以上）",
+        "ru": "Показывает данные пакета из реестра: версии, теги и зависимости (Yarn 2 и новее)"
+      },
+      "command": "yarn npm info ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "react",
+            "es": "react",
+            "pt-br": "react",
+            "fr": "react",
+            "de": "react",
+            "it": "react",
+            "ja": "react",
+            "ko": "react",
+            "zh-cn": "react",
+            "zh-tw": "react",
+            "ru": "react"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "info", "npm", "registry", "versions"],
+        "es": ["yarn", "info", "npm", "registry", "versiones", "registro"],
+        "pt-br": ["yarn", "info", "npm", "registry", "versões", "registro"],
+        "fr": ["yarn", "info", "npm", "registry", "versions", "registre"],
+        "de": ["yarn", "info", "npm", "registry", "Versionen"],
+        "it": ["yarn", "info", "npm", "registry", "versioni", "registro"],
+        "ja": ["yarn", "info", "npm", "registry", "バージョン", "レジストリ"],
+        "ko": ["yarn", "info", "npm", "registry", "버전", "레지스트리"],
+        "zh-cn": ["yarn", "info", "npm", "registry", "版本", "注册表"],
+        "zh-tw": ["yarn", "info", "npm", "registry", "版本", "登錄"],
+        "ru": ["yarn", "info", "npm", "registry", "версии", "реестр"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/npm/info"
+    },
+    {
+      "id": "yarn.audit",
+      "title": {
+        "en": "Check for vulnerabilities",
+        "es": "Buscar vulnerabilidades",
+        "pt-br": "Verificar vulnerabilidades",
+        "fr": "Rechercher des vulnérabilités",
+        "de": "Auf Sicherheitslücken prüfen",
+        "it": "Cerca vulnerabilità",
+        "ja": "脆弱性を確認",
+        "ko": "취약점 확인",
+        "zh-cn": "检查漏洞",
+        "zh-tw": "檢查弱點",
+        "ru": "Проверить уязвимости"
+      },
+      "description": {
+        "en": "Audits the dependencies of every workspace, including transitive ones (Yarn 2+)",
+        "es": "Audita las dependencias de todos los workspaces, también las transitivas (Yarn 2 o superior)",
+        "pt-br": "Audita as dependências de todos os workspaces, inclusive as transitivas (Yarn 2 ou superior)",
+        "fr": "Audite les dépendances de tous les workspaces, y compris les transitives (Yarn 2 ou supérieur)",
+        "de": "Prüft die Abhängigkeiten aller Workspaces, auch die transitiven (ab Yarn 2)",
+        "it": "Verifica le dipendenze di tutti i workspace, anche quelle transitive (Yarn 2 o successivo)",
+        "ja": "すべてのワークスペースの依存関係（推移的なものを含む）を監査します （Yarn 2 以降）",
+        "ko": "모든 워크스페이스의 의존성(전이 의존성 포함)을 검사합니다 (Yarn 2 이상)",
+        "zh-cn": "审计所有工作区的依赖，包括传递依赖 （Yarn 2 及以上）",
+        "zh-tw": "稽核所有工作區的相依套件，包括遞移相依 （Yarn 2 以上）",
+        "ru": "Проверяет зависимости всех workspace, включая транзитивные (Yarn 2 и новее)"
+      },
+      "command": "yarn npm audit --all --recursive",
+      "tags": {
+        "en": ["yarn", "audit", "security", "vulnerabilities"],
+        "es": ["yarn", "audit", "security", "vulnerabilidades", "seguridad"],
+        "pt-br": ["yarn", "audit", "security", "vulnerabilidades", "segurança"],
+        "fr": ["yarn", "audit", "security", "vulnérabilités", "sécurité"],
+        "de": ["yarn", "audit", "security", "Sicherheitslücken", "Sicherheit"],
+        "it": ["yarn", "audit", "security", "vulnerabilità", "sicurezza"],
+        "ja": ["yarn", "audit", "security", "脆弱性", "セキュリティ"],
+        "ko": ["yarn", "audit", "security", "취약점", "보안"],
+        "zh-cn": ["yarn", "audit", "security", "漏洞", "安全"],
+        "zh-tw": ["yarn", "audit", "security", "弱點", "安全性"],
+        "ru": ["yarn", "audit", "security", "уязвимости", "безопасность"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/npm/audit"
+    },
+    {
+      "id": "yarn.workspace-run",
+      "title": {
+        "en": "Run a script in a workspace",
+        "es": "Ejecutar un script en un workspace",
+        "pt-br": "Executar um script em um workspace",
+        "fr": "Exécuter un script dans un workspace",
+        "de": "Skript in einem Workspace ausführen",
+        "it": "Esegui uno script in un workspace",
+        "ja": "ワークスペースでスクリプトを実行",
+        "ko": "워크스페이스에서 스크립트 실행",
+        "zh-cn": "在工作区中运行脚本",
+        "zh-tw": "在工作區中執行指令碼",
+        "ru": "Запустить скрипт в workspace"
+      },
+      "description": {
+        "en": "Runs a script of one package of the monorepo",
+        "es": "Ejecuta un script de un paquete del monorepo",
+        "pt-br": "Executa um script de um pacote do monorepo",
+        "fr": "Exécute un script d’un paquet du monorepo",
+        "de": "Führt ein Skript eines Pakets im Monorepo aus",
+        "it": "Esegue uno script di un pacchetto del monorepo",
+        "ja": "モノレポ内の 1 つのパッケージのスクリプトを実行します",
+        "ko": "모노레포의 한 패키지에서 스크립트를 실행합니다",
+        "zh-cn": "运行 monorepo 中某个包的脚本",
+        "zh-tw": "執行 monorepo 中某個套件的指令碼",
+        "ru": "Запускает скрипт одного пакета монорепозитория"
+      },
+      "command": "yarn workspace ${workspace} run ${script}",
+      "params": [
+        {
+          "name": "workspace",
+          "label": {
+            "en": "Workspace package",
+            "es": "Paquete del workspace",
+            "pt-br": "Pacote do workspace",
+            "fr": "Paquet du workspace",
+            "de": "Workspace-Paket",
+            "it": "Pacchetto del workspace",
+            "ja": "ワークスペースのパッケージ",
+            "ko": "워크스페이스 패키지",
+            "zh-cn": "工作区包",
+            "zh-tw": "工作區套件",
+            "ru": "Пакет workspace"
+          },
+          "placeholder": {
+            "en": "web",
+            "es": "web",
+            "pt-br": "web",
+            "fr": "web",
+            "de": "web",
+            "it": "web",
+            "ja": "web",
+            "ko": "web",
+            "zh-cn": "web",
+            "zh-tw": "web",
+            "ru": "web"
+          }
+        },
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "build",
+            "es": "build",
+            "pt-br": "build",
+            "fr": "build",
+            "de": "build",
+            "it": "build",
+            "ja": "build",
+            "ko": "build",
+            "zh-cn": "build",
+            "zh-tw": "build",
+            "ru": "build"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "workspace", "monorepo", "run"],
+        "es": ["yarn", "workspace", "monorepo", "ejecutar"],
+        "pt-br": ["yarn", "workspace", "monorepo", "executar"],
+        "fr": ["yarn", "workspace", "monorepo", "exécuter"],
+        "de": ["yarn", "workspace", "monorepo", "ausführen"],
+        "it": ["yarn", "workspace", "monorepo", "eseguire"],
+        "ja": ["yarn", "workspace", "monorepo", "実行"],
+        "ko": ["yarn", "workspace", "monorepo", "실행"],
+        "zh-cn": ["yarn", "workspace", "monorepo", "运行"],
+        "zh-tw": ["yarn", "workspace", "monorepo", "執行"],
+        "ru": ["yarn", "workspace", "monorepo", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/workspace"
+    },
+    {
+      "id": "yarn.workspaces-foreach",
+      "title": {
+        "en": "Run a script in all workspaces",
+        "es": "Ejecutar un script en todos los workspaces",
+        "pt-br": "Executar um script em todos os workspaces",
+        "fr": "Exécuter un script dans tous les workspaces",
+        "de": "Skript in allen Workspaces ausführen",
+        "it": "Esegui uno script in tutti i workspace",
+        "ja": "すべてのワークスペースでスクリプトを実行",
+        "ko": "모든 워크스페이스에서 스크립트 실행",
+        "zh-cn": "在所有工作区中运行脚本",
+        "zh-tw": "在所有工作區中執行指令碼",
+        "ru": "Запустить скрипт во всех workspace"
+      },
+      "description": {
+        "en": "Runs the same script in every package of the monorepo that defines it (Yarn 2+)",
+        "es": "Ejecuta el mismo script en cada paquete del monorepo que lo define (Yarn 2 o superior)",
+        "pt-br": "Executa o mesmo script em cada pacote do monorepo que o define (Yarn 2 ou superior)",
+        "fr": "Exécute le même script dans chaque paquet du monorepo qui le définit (Yarn 2 ou supérieur)",
+        "de": "Führt dasselbe Skript in jedem Paket des Monorepos aus, das es definiert (ab Yarn 2)",
+        "it": "Esegue lo stesso script in ogni pacchetto del monorepo che lo definisce (Yarn 2 o successivo)",
+        "ja": "そのスクリプトを定義しているモノレポ内の各パッケージで実行します （Yarn 2 以降）",
+        "ko": "해당 스크립트를 정의한 모노레포의 모든 패키지에서 실행합니다 (Yarn 2 이상)",
+        "zh-cn": "在 monorepo 中定义了该脚本的每个包中运行它 （Yarn 2 及以上）",
+        "zh-tw": "在 monorepo 中定義了該指令碼的每個套件中執行它 （Yarn 2 以上）",
+        "ru": "Запускает один и тот же скрипт в каждом пакете монорепозитория, где он есть (Yarn 2 и новее)"
+      },
+      "command": "yarn workspaces foreach --all run ${script}",
+      "params": [
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "build",
+            "es": "build",
+            "pt-br": "build",
+            "fr": "build",
+            "de": "build",
+            "it": "build",
+            "ja": "build",
+            "ko": "build",
+            "zh-cn": "build",
+            "zh-tw": "build",
+            "ru": "build"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["yarn", "workspaces", "foreach", "monorepo", "all"],
+        "es": ["yarn", "workspaces", "foreach", "monorepo", "todos"],
+        "pt-br": ["yarn", "workspaces", "foreach", "monorepo", "todos"],
+        "fr": ["yarn", "workspaces", "foreach", "monorepo", "tous"],
+        "de": ["yarn", "workspaces", "foreach", "monorepo", "alle"],
+        "it": ["yarn", "workspaces", "foreach", "monorepo", "tutti"],
+        "ja": ["yarn", "workspaces", "foreach", "monorepo", "すべて"],
+        "ko": ["yarn", "workspaces", "foreach", "monorepo", "모두"],
+        "zh-cn": ["yarn", "workspaces", "foreach", "monorepo", "全部"],
+        "zh-tw": ["yarn", "workspaces", "foreach", "monorepo", "全部"],
+        "ru": ["yarn", "workspaces", "foreach", "monorepo", "все"]
+      },
+      "risk": "safe",
+      "docs": "https://yarnpkg.com/cli/workspaces/foreach"
+    },
+    {
+      "id": "yarn.dedupe",
+      "title": {
+        "en": "Deduplicate dependencies",
+        "es": "Eliminar dependencias duplicadas",
+        "pt-br": "Remover dependências duplicadas",
+        "fr": "Dédupliquer les dépendances",
+        "de": "Doppelte Abhängigkeiten zusammenführen",
+        "it": "Deduplica le dipendenze",
+        "ja": "重複した依存関係を統合",
+        "ko": "중복 의존성 정리",
+        "zh-cn": "去除重复依赖",
+        "zh-tw": "去除重複相依套件",
+        "ru": "Убрать дубли зависимостей"
+      },
+      "description": {
+        "en": "Rewrites yarn.lock so that each package uses as few versions as possible (Yarn 2+)",
+        "es": "Reescribe yarn.lock para que cada paquete use el menor número de versiones posible (Yarn 2 o superior)",
+        "pt-br": "Reescreve o yarn.lock para que cada pacote use o menor número possível de versões (Yarn 2 ou superior)",
+        "fr": "Réécrit yarn.lock pour que chaque paquet utilise le moins de versions possible (Yarn 2 ou supérieur)",
+        "de": "Schreibt yarn.lock neu, damit jedes Paket möglichst wenige Versionen nutzt (ab Yarn 2)",
+        "it": "Riscrive yarn.lock perché ogni pacchetto usi il minor numero possibile di versioni (Yarn 2 o successivo)",
+        "ja": "各パッケージのバージョン数が最小になるよう yarn.lock を書き換えます （Yarn 2 以降）",
+        "ko": "각 패키지가 가능한 한 적은 버전을 쓰도록 yarn.lock을 다시 씁니다 (Yarn 2 이상)",
+        "zh-cn": "重写 yarn.lock，让每个包使用尽可能少的版本 （Yarn 2 及以上）",
+        "zh-tw": "重寫 yarn.lock，讓每個套件使用盡可能少的版本 （Yarn 2 以上）",
+        "ru": "Переписывает yarn.lock, чтобы каждый пакет использовал как можно меньше версий (Yarn 2 и новее)"
+      },
+      "command": "yarn dedupe",
+      "tags": {
+        "en": ["yarn", "dedupe", "lockfile", "duplicates"],
+        "es": ["yarn", "dedupe", "lockfile", "duplicados"],
+        "pt-br": ["yarn", "dedupe", "lockfile", "duplicados"],
+        "fr": ["yarn", "dedupe", "lockfile", "doublons"],
+        "de": ["yarn", "dedupe", "lockfile", "Duplikate"],
+        "it": ["yarn", "dedupe", "lockfile", "duplicati"],
+        "ja": ["yarn", "dedupe", "lockfile", "重複"],
+        "ko": ["yarn", "dedupe", "lockfile", "중복"],
+        "zh-cn": ["yarn", "dedupe", "lockfile", "重复"],
+        "zh-tw": ["yarn", "dedupe", "lockfile", "重複"],
+        "ru": ["yarn", "dedupe", "lockfile", "дубликаты"]
+      },
+      "risk": "caution",
+      "docs": "https://yarnpkg.com/cli/dedupe"
+    },
+    {
+      "id": "yarn.set-version",
+      "title": {
+        "en": "Switch the project to the latest Yarn",
+        "es": "Cambiar el proyecto al último Yarn",
+        "pt-br": "Mudar o projeto para o Yarn mais recente",
+        "fr": "Passer le projet au dernier Yarn",
+        "de": "Projekt auf das neueste Yarn umstellen",
+        "it": "Passa il progetto all’ultimo Yarn",
+        "ja": "プロジェクトを最新の Yarn に切り替え",
+        "ko": "프로젝트를 최신 Yarn으로 전환",
+        "zh-cn": "将项目切换到最新的 Yarn",
+        "zh-tw": "將專案切換到最新的 Yarn",
+        "ru": "Перевести проект на последний Yarn"
+      },
+      "description": {
+        "en": "Downloads the latest stable Yarn and records it in packageManager of package.json",
+        "es": "Descarga el último Yarn estable y lo fija en packageManager de package.json",
+        "pt-br": "Baixa o Yarn estável mais recente e o registra em packageManager do package.json",
+        "fr": "Télécharge le dernier Yarn stable et l’inscrit dans packageManager de package.json",
+        "de": "Lädt das neueste stabile Yarn herunter und trägt es in packageManager von package.json ein",
+        "it": "Scarica l’ultimo Yarn stabile e lo registra in packageManager di package.json",
+        "ja": "最新の安定版 Yarn をダウンロードし、package.json の packageManager に記録します",
+        "ko": "최신 안정 Yarn을 내려받아 package.json의 packageManager에 기록합니다",
+        "zh-cn": "下载最新稳定版 Yarn 并写入 package.json 的 packageManager",
+        "zh-tw": "下載最新穩定版 Yarn 並寫入 package.json 的 packageManager",
+        "ru": "Скачивает последний стабильный Yarn и записывает его в packageManager файла package.json"
+      },
+      "command": "yarn set version stable",
+      "tags": {
+        "en": ["yarn", "set version", "packageManager", "stable", "upgrade"],
+        "es": ["yarn", "set version", "packageManager", "stable", "versión", "actualizar"],
+        "pt-br": ["yarn", "set version", "packageManager", "stable", "versão", "atualizar"],
+        "fr": ["yarn", "set version", "packageManager", "stable", "version", "mettre à jour"],
+        "de": ["yarn", "set version", "packageManager", "stable", "Version", "aktualisieren"],
+        "it": ["yarn", "set version", "packageManager", "stable", "versione", "aggiornare"],
+        "ja": ["yarn", "set version", "packageManager", "stable", "バージョン", "更新"],
+        "ko": ["yarn", "set version", "packageManager", "stable", "버전", "업데이트"],
+        "zh-cn": ["yarn", "set version", "packageManager", "stable", "版本", "升级"],
+        "zh-tw": ["yarn", "set version", "packageManager", "stable", "版本", "升級"],
+        "ru": ["yarn", "set version", "packageManager", "stable", "версия", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://yarnpkg.com/cli/set/version"
+    },
+    {
+      "id": "yarn.cache-clean",
+      "title": {
+        "en": "Clear the cache",
+        "es": "Borrar la caché",
+        "pt-br": "Limpar o cache",
+        "fr": "Vider le cache",
+        "de": "Cache leeren",
+        "it": "Svuota la cache",
+        "ja": "キャッシュを削除",
+        "ko": "캐시 삭제",
+        "zh-cn": "清除缓存",
+        "zh-tw": "清除快取",
+        "ru": "Очистить кэш"
+      },
+      "description": {
+        "en": "Deletes the cached package archives; the next install downloads them again",
+        "es": "Borra los paquetes guardados en caché; la próxima instalación los vuelve a descargar",
+        "pt-br": "Apaga os pacotes em cache; a próxima instalação os baixa de novo",
+        "fr": "Supprime les archives de paquets en cache ; la prochaine installation les retélécharge",
+        "de": "Löscht die zwischengespeicherten Paketarchive; die nächste Installation lädt sie neu herunter",
+        "it": "Elimina gli archivi dei pacchetti in cache; la prossima installazione li riscarica",
+        "ja": "キャッシュされたパッケージを削除します。次回のインストールで再ダウンロードされます",
+        "ko": "캐시된 패키지를 삭제합니다. 다음 설치 때 다시 내려받습니다",
+        "zh-cn": "删除缓存的包，下次安装时会重新下载",
+        "zh-tw": "刪除快取的套件，下次安裝時會重新下載",
+        "ru": "Удаляет пакеты из кэша; при следующей установке они скачаются снова"
+      },
+      "command": "yarn cache clean",
+      "tags": {
+        "en": ["yarn", "cache", "clean", "clear", "delete"],
+        "es": ["yarn", "cache", "clean", "caché", "borrar", "limpiar"],
+        "pt-br": ["yarn", "cache", "clean", "limpar"],
+        "fr": ["yarn", "cache", "clean", "vider"],
+        "de": ["yarn", "cache", "clean", "Cache", "leeren"],
+        "it": ["yarn", "cache", "clean", "svuotare"],
+        "ja": ["yarn", "cache", "clean", "キャッシュ", "削除"],
+        "ko": ["yarn", "cache", "clean", "캐시", "삭제"],
+        "zh-cn": ["yarn", "cache", "clean", "缓存", "清除"],
+        "zh-tw": ["yarn", "cache", "clean", "快取", "清除"],
+        "ru": ["yarn", "cache", "clean", "кэш", "очистить"]
+      },
+      "risk": "destructive",
+      "docs": "https://yarnpkg.com/cli/cache/clean"
+    }
+  ]
+}
