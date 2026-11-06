@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 28 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 34 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -94,6 +94,12 @@ describe('contenido mínimo', () => {
 			'dart',
 			'flutter',
 			'swift',
+			'elixir',
+			'erlang',
+			'haskell',
+			'scala',
+			'clojure',
+			'ocaml',
 		]);
 	});
 
@@ -302,6 +308,37 @@ describe('contenido mínimo', () => {
 			['flutter.build-ios', 'swift.simulators', 'swift.xcodebuild-build', 'swift.xcodebuild-list'].sort(),
 		);
 		expect(mac.filter((cmd) => !cmd.description.es.includes('Solo en macOS')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('cargar el entorno de opam usa eval en bash, Invoke-Expression en PowerShell y for /f en cmd', () => {
+		expect(exampleFor('ocaml.opam-env', 'bash')).toBe('eval $(opam env)');
+		expect(exampleFor('ocaml.opam-env', 'zsh')).toBe('eval $(opam env)');
+		expect(exampleFor('ocaml.opam-env', 'powershell')).toBe(
+			"(& opam env) -split '\\r?\\n' | ForEach-Object { Invoke-Expression $_ }",
+		);
+		expect(exampleFor('ocaml.opam-env', 'cmd')).toBe(`for /f "tokens=*" %i in ('opam env') do @%i`);
+	});
+
+	it('iex usa iex.bat en PowerShell, porque iex es el alias de Invoke-Expression', () => {
+		expect(exampleFor('elixir.iex-mix', 'powershell')).toBe('iex.bat -S mix');
+		expect(exampleFor('elixir.iex-mix', 'bash')).toBe('iex -S mix');
+		expect(exampleFor('elixir.iex-mix', 'cmd')).toBe('iex -S mix');
+		expect(exampleFor('elixir.iex', 'powershell')).toBe('iex.bat');
+	});
+
+	it('Clojure CLI avisa en español de que en Windows no funciona en cmd', () => {
+		const cli = bundledCatalog
+			.flatMap((c) => c.commands)
+			.filter((cmd) => /^(clj|clojure)\b/.test(cmd.command));
+		expect(cli.length).toBe(8);
+		expect(cli.filter((cmd) => !cmd.description.es.includes('no en cmd')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('los clean de Mix, rebar3, Cabal, Stack, sbt, Leiningen y Dune son destructive', () => {
+		const commands = ['mix clean', 'rebar3 clean', 'cabal clean', 'stack clean', 'sbt clean', 'lein clean', 'dune clean'];
+		const cleans = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => commands.includes(cmd.command));
+		expect(cleans.map((cmd) => cmd.command).sort()).toEqual([...commands].sort());
+		expect(cleans.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
 	});
 
 	it('gem uninstall, flutter clean y swift package clean son destructive', () => {

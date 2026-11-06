@@ -149,6 +149,31 @@ describe('detectCategories', () => {
 		expect(await ids({ a: ['.tool-versions'], b: ['mise.toml'] })).toEqual(['version-managers']);
 	});
 
+	it('proyecto Phoenix', async () => {
+		expect(await ids({ root: ['mix.exs', 'mix.lock', '.formatter.exs'] })).toEqual(['elixir']);
+	});
+
+	it('proyecto rebar3', async () => {
+		expect(await ids({ root: ['rebar.config', 'rebar.lock'] })).toEqual(['erlang']);
+	});
+
+	it('proyecto Haskell con Stack (package.yaml no detecta nada por sí solo)', async () => {
+		expect(await ids({ root: ['stack.yaml', 'stack.yaml.lock', 'package.yaml', 'my-app.cabal'] })).toEqual(['haskell']);
+		expect(await ids({ root: ['package.yaml'] })).toEqual([]);
+	});
+
+	it('proyecto sbt', async () => {
+		expect(await ids({ root: ['build.sbt', 'project'] })).toEqual(['scala']);
+	});
+
+	it('proyecto Clojure con deps.edn y Leiningen', async () => {
+		expect(await ids({ root: ['deps.edn', 'project.clj'] })).toEqual(['clojure']);
+	});
+
+	it('proyecto Dune (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['dune-project', 'my_lib.opam', '.ocamlformat'] })).toEqual(['ocaml']);
+	});
+
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
 		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
 	});

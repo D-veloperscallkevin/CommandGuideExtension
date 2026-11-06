@@ -289,7 +289,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | 3.4a | `catalog-jvm-dotnet` | Java (java, javac, jar, jshell), Maven, Gradle (con wrapper por shell), .NET (dotnet new/run/build/ef) y sdkman en Gestores de versiones ✅ |
 | 3.4b | `catalog-native` | C/C++ (gcc, g++, clang, make), CMake, Go, Rust (cargo, rustc, rustup) ✅ |
 | 3.5a | `catalog-app-langs` | PHP (php, composer), Ruby (ruby, gem, bundle, rake), Dart, Flutter, Swift (swift, xcodebuild); rbenv, asdf y mise en Gestores de versiones ✅ |
-| 3.5b | `catalog-functional` | Elixir, Erlang, Haskell, Scala, Clojure y OCaml |
+| 3.5b | `catalog-functional` | Elixir (mix), Erlang (rebar3), Haskell (ghc, cabal, stack, ghcup), Scala (sbt, Scala CLI, coursier), Clojure (Clojure CLI, Leiningen) y OCaml (opam, dune) ✅ |
 | 3.5c | `catalog-scripting` | R, Lua, Zig, Julia y Perl |
 | 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) |
 | 3.7 | `catalog-frameworks` | Frontend (Vite, Next.js, Angular, Vue, Astro, Nuxt, SvelteKit), backend (NestJS, Laravel, Django, Rails, Spring Boot, Symfony, FastAPI), móvil y escritorio (Expo/EAS, React Native, Ionic/Capacitor, Electron, Tauri), ORM (Prisma, Drizzle, Sequelize, TypeORM, Alembic) y monorepos (turbo, nx) |
