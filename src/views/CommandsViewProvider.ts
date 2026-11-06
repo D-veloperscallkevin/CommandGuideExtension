@@ -80,6 +80,8 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly favorites: FavoritesStore,
 		private readonly history: HistoryStore,
 		private readonly project: DetectedCategories,
+		/** Abre la página de patrocinio del manifiesto; nunca lanza. */
+		private readonly openSponsor: () => Promise<void>,
 		private readonly catalog = new CatalogService(),
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
@@ -399,6 +401,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 					this.clearHistory().catch((error: unknown) =>
 						this.log.error('No se pudo borrar el historial:', String(error)),
 					);
+					break;
+				case 'openSponsor':
+					// La URL la decide la extensión (manifiesto); el mensaje no lleva ninguna.
+					void this.openSponsor();
 					break;
 				case 'toggleFavorite':
 					this.toggleFavorite(message.commandId).catch((error: unknown) =>

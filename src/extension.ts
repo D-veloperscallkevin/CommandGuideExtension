@@ -14,6 +14,7 @@ import { ParamPrompter } from './params/ParamPrompter';
 import { RiskConfirmer } from './risk/RiskConfirmer';
 import { TargetShell } from './terminal/TargetShell';
 import { TerminalActivity } from './terminal/TerminalActivity';
+import { openSponsor, sponsorUrl } from './sponsor/sponsorLink';
 import { TerminalService } from './terminal/TerminalService';
 import { CommandsViewProvider, type SentCatalog } from './views/CommandsViewProvider';
 
@@ -88,6 +89,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		randomUUID,
 	);
 	const project = createProjectDetector();
+	// Misma URL que el botón Sponsor de la ficha; validada aquí, nunca viene del webview.
+	const sponsor = sponsorUrl(context.extension.packageJSON);
 	const provider = new CommandsViewProvider(
 		context.extensionUri,
 		version,
@@ -100,6 +103,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		favorites,
 		history,
 		project,
+		() => openSponsor({ url: sponsor, openExternal: vscode.env.openExternal, parse: vscode.Uri.parse, log }),
 		catalog,
 	);
 

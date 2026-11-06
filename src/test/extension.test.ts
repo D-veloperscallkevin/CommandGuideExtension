@@ -1,6 +1,7 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import type { DevCommandsApi } from '../extension';
+import { sponsorUrl } from '../sponsor/sponsorLink';
 import { resolveTargetShell } from '../terminal/shell';
 
 // <publisher>.<name> de package.json.
@@ -372,5 +373,13 @@ suite('Portapapeles', () => {
 		} finally {
 			await config.update('confirmDestructive', undefined, vscode.ConfigurationTarget.Global);
 		}
+	});
+});
+
+suite('Patrocinio', () => {
+	test('el manifiesto de la extensión instalada declara una URL de GitHub Sponsors válida', () => {
+		const extension = vscode.extensions.getExtension(extensionId);
+		assert.ok(extension);
+		assert.strictEqual(sponsorUrl(extension.packageJSON), 'https://github.com/sponsors/D-veloperscallkevin');
 	});
 });

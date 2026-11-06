@@ -5,12 +5,13 @@ import CategoryList from './CategoryList'
 import CategoryScreen from './CategoryScreen'
 import type { CommandListHandle, Copied, Starred } from './CommandList'
 import FavoritesScreen from './FavoritesScreen'
+import Icon from './Icon'
 import { toLocale, useT } from './i18n'
 import { initialView, navigate, parseSavedView } from './navigation'
 import RecentScreen from './RecentScreen'
 import SearchBox from './SearchBox'
 import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
-import { shellLabel } from './shellLabel'
+import { shellClass, shellLabel, splitAroundShell } from './shellLabel'
 import { getState, postMessage, setState } from './vscode'
 
 type InitData = Omit<Extract<ExtensionMessage, { type: 'init' }>, 'type'>
@@ -169,8 +170,9 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown, true)
   }, [clearable, searchFor])
 
+  const loading = !categories || !favorites || !history
   let content
-  if (!categories || !favorites || !history) {
+  if (loading) {
     content = (
       <p className="muted" role="status" aria-live="polite">
         {t('loading')}
@@ -272,12 +274,42 @@ function App() {
 
   return (
     <main className="shell" aria-label="DevCommands">
-      {/* Siempre montado: así el lector de pantalla anuncia cada cambio de shell sin mover el foco. */}
-      <p className="muted shell-indicator" role="status" aria-live="polite">
-        {shell ? t('examplesFor', { shell: shellLabel(shell) }) : ''}
-      </p>
+      {/* Primera fila, en todas las pantallas: a la izquierda el shell de la terminal de destino y a
+          la derecha el patrocinio. */}
+      <div className="top-bar">
+        {/* Siempre montado: así el lector de pantalla anuncia cada cambio de shell sin mover el foco. */}
+        <p className="muted shell-indicator" role="status" aria-live="polite">
+          {shell ? <ShellIndicator shell={shell} t={t} /> : ''}
+        </p>
+        {/* No durante la carga (aún sin idioma ni catálogo). Solo pide abrir el patrocinio: la URL
+            la decide la extensión. */}
+        {!loading && (
+          <button
+            type="button"
+            className="back sponsor"
+            aria-label={t('sponsorLabel')}
+            title={t('sponsorLabel')}
+            onClick={() => postMessage({ type: 'openSponsor' })}
+          >
+            <Icon name="heart" />
+            <span>{t('sponsor')}</span>
+          </button>
+        )}
+      </div>
       {content}
     </main>
+  )
+}
+
+/** "Terminal: PowerShell", con el nombre del shell en su color. */
+function ShellIndicator({ shell, t }: { shell: ShellId; t: ReturnType<typeof useT> }) {
+  const { before, after } = splitAroundShell((name) => t('terminalIndicator', { shell: name }))
+  return (
+    <>
+      {before}
+      <span className={shellClass(shell)}>{shellLabel(shell)}</span>
+      {after}
+    </>
   )
 }
 

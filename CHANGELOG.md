@@ -6,6 +6,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+### Added
+
+- Botón **Sponsor** arriba del panel de DevCommands, en todas sus pantallas, que abre GitHub Sponsors en el navegador. También aparece en la ficha de la extensión (campo `sponsor` del manifiesto) y en la sección "Support" del README, además de un enlace junto a su título.
+
+### Changed
+
+- El indicador "Ejemplos para: …" pasa a "Terminal: …", en la misma fila que el botón Sponsor, con el nombre del shell en su color (PowerShell azul, bash verde, zsh morado, cmd amarillo, según el tema). El buscador queda más separado de esa fila y de la lista.
+
 ### Fixed
 
 - Los comandos ya no se escriben en una terminal ocupada por un programa (Claude Code, un servidor de desarrollo…): van a la última terminal libre usada o a una nueva "DevCommands", y "Ejemplos para" sigue a esa terminal. La extensión se activa al terminar el arranque de VS Code para detectarlo desde el principio.

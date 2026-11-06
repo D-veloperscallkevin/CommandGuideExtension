@@ -46,13 +46,89 @@ body {
   display: none;
 }
 
+/* Primera fila: indicador del shell a la izquierda y patrocinio a la derecha; en un panel estrecho
+   el botón baja a la línea siguiente. */
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-height: 26px;
+  margin-bottom: 6px;
+}
+
+.top-bar .shell-indicator {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Botón de patrocinio: secundario, solo el corazón lleva color. `.top-bar .sponsor` pesa más que
+   `.back` (ancho completo), que se declara más abajo. */
+.top-bar .sponsor {
+  flex: none;
+  width: auto;
+  margin-inline-end: 12px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* Nombre del shell en el indicador, con un color por shell tomado de los colores de terminal del
+   tema: tonos claros (Bright) en los temas oscuros y normales en los claros; en alto contraste, el
+   color de texto. */
+.shell-name {
+  font-weight: 600;
+}
+
+.shell-powershell {
+  color: var(--vscode-terminal-ansiBrightBlue, var(--vscode-foreground));
+}
+
+.shell-bash {
+  color: var(--vscode-terminal-ansiBrightGreen, var(--vscode-foreground));
+}
+
+.shell-zsh {
+  color: var(--vscode-terminal-ansiBrightMagenta, var(--vscode-foreground));
+}
+
+.shell-cmd {
+  color: var(--vscode-terminal-ansiBrightYellow, var(--vscode-foreground));
+}
+
+body.vscode-light .shell-powershell {
+  color: var(--vscode-terminal-ansiBlue, var(--vscode-foreground));
+}
+
+body.vscode-light .shell-bash {
+  color: var(--vscode-terminal-ansiGreen, var(--vscode-foreground));
+}
+
+body.vscode-light .shell-zsh {
+  color: var(--vscode-terminal-ansiMagenta, var(--vscode-foreground));
+}
+
+body.vscode-light .shell-cmd {
+  color: var(--vscode-terminal-ansiYellow, var(--vscode-foreground));
+}
+
+body.vscode-high-contrast .shell-name,
+body.vscode-high-contrast-light .shell-name {
+  color: var(--vscode-foreground);
+}
+
+.sponsor .codicon {
+  color: var(--vscode-charts-red, var(--vscode-foreground));
+}
+
 .codicon {
   flex: none;
 }
 
 /* Campo de búsqueda con los colores de input del tema (como el filtro del explorador). */
 .search-box {
-  padding: 4px 20px 6px;
+  padding: 4px 20px;
+  margin-bottom: 10px;
 }
 
 .search-input {

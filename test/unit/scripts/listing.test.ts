@@ -51,6 +51,12 @@ describe('manifiesto de tienda', () => {
 	});
 });
 
+describe('patrocinio', () => {
+	it('enlace de patrocinio en el manifiesto (botón Sponsor de la ficha)', () => {
+		expect(pkg.sponsor).toEqual({ url: 'https://github.com/sponsors/D-veloperscallkevin' });
+	});
+});
+
 describe('avisos de terceros', () => {
 	const notices = readFileSync(resolve('ThirdPartyNotices.txt'), 'utf8');
 
@@ -86,6 +92,17 @@ describe('README de la tienda', () => {
 
 	it('no contiene imágenes SVG', () => {
 		expect(images.filter((src) => /\.svg($|\?)/i.test(src))).toEqual([]);
+	});
+
+	it('lleva un enlace de texto a GitHub Sponsors junto al título', () => {
+		expect(readme.split(/\r?\n/)[0].trim()).toBe('# DevCommands Guide · [♥ Sponsor](https://github.com/sponsors/D-veloperscallkevin)');
+	});
+
+	it('tiene la sección Support con el enlace a GitHub Sponsors, antes de License', () => {
+		const support = readme.indexOf('## Support');
+		expect(support).toBeGreaterThan(-1);
+		expect(support).toBeLessThan(readme.indexOf('## License'));
+		expect(readme.slice(support, readme.indexOf('## License'))).toContain('(https://github.com/sponsors/D-veloperscallkevin)');
 	});
 
 	it('describe la licencia y enlaza los avisos de terceros', () => {

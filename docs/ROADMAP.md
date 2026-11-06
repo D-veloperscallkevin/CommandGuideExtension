@@ -274,7 +274,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel ✅ |
 | 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --packagePath`) y Open VSX (`ovsx publish`) del `.vsix` probado, tras crear el tag `vX.Y.Z` ✅ |
 | 2.10 | `busy-terminal` | Si la terminal activa está ocupada con un programa (Claude Code, un servidor de desarrollo…), el comando va a otra terminal libre o a una nueva "DevCommands", y el indicador "Ejemplos para" sigue a esa terminal ✅ |
-| 2.11 | `sponsor-button` | Botón **Sponsor** de VS Code (campo `sponsor` del manifiesto) y enlace en el README a GitHub Sponsors. Antes de la v1.0.0 |
+| 2.11 | `sponsor-button` | Botón **Sponsor** de VS Code (campo `sponsor` del manifiesto) y enlace en el README a GitHub Sponsors; además, botón en el panel ✅ |
 
 ### Fase 3: v1.x, catálogo ampliado (gratis)
 
@@ -399,7 +399,7 @@ Comprueba después la ficha en ambas tiendas: nombre, icono, versión sin pre-re
 - [x] `marketplace-release` (2.9): nombre "DevCommands Guide", icono del libro con `>_`, licencia propietaria con avisos de terceros, README con capturas, versión 1.0.0 estable y pasos de publicación manual
 - [x] `busy-terminal` (2.10): no escribir en una terminal ocupada por otro programa (detectado en la prueba del `.vsix` de la 2.9 con Claude Code abierto en una terminal)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y el namespace en Open VSX (antes de publicar la v1.0.0)
-- [ ] `sponsor-button` (2.11): botón Sponsor y enlace a GitHub Sponsors. Antes, date de alta en https://github.com/sponsors (GitHub revisa la solicitud)
+- [x] `sponsor-button` (2.11): botón Sponsor y enlace a GitHub Sponsors. Antes, date de alta en https://github.com/sponsors (GitHub revisa la solicitud)
 - [ ] Capturas del README en `docs/images/` (`panel.png`, `search.png`, `params.png`, `destructive.png` y `quick-pick.png`; lista en la tarea 5.1 de `marketplace-release`), antes del release v1.0.0
 - [ ] Release v1.0.0: verificación en WSL, PR `develop → staging`, prueba del `.vsix`, PR `staging → main`, tag `v1.0.0` y publicación en ambas tiendas
 
