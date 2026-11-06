@@ -82,7 +82,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider, vscode.
 		private readonly project: DetectedCategories,
 		/** Abre la página de patrocinio del manifiesto; nunca lanza. */
 		private readonly openSponsor: () => Promise<void>,
-		private readonly catalog = new CatalogService(),
+		private readonly catalog: CatalogService,
 	) {
 		this.shellSubscription = targetShell.onDidChange((shell) => {
 			if (this.readyWebview) {

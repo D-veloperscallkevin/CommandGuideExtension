@@ -11,6 +11,7 @@ import {
 } from '../../../src/catalog/CatalogService';
 import { parseCustomCommands } from '../../../src/catalog/custom';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
+import { bundledCatalog } from './bundled';
 
 const newBranch = makeCommand({ id: 'git.new-branch', command: 'git checkout -b ${branch}', params: [branchParam] });
 const status = makeCommand({ id: 'git.status', command: 'git status' });
@@ -58,14 +59,14 @@ describe('CatalogService con comandos propios', () => {
 	]).categories;
 
 	it('pone las categorías propias detrás de las del catálogo', () => {
-		const catalog = new CatalogService();
+		const catalog = new CatalogService(bundledCatalog);
 		const before = catalog.getCategories().map((c) => c.id);
 		catalog.setCustomCategories(custom);
 		expect(catalog.getCategories().map((c) => c.id)).toEqual([...before, 'custom-mi-proyecto']);
 	});
 
 	it('getCommand encuentra un comando propio y deja de encontrarlo al reemplazarlas', () => {
-		const catalog = new CatalogService();
+		const catalog = new CatalogService(bundledCatalog);
 		catalog.setCustomCategories(custom);
 		expect(catalog.getCommand('custom-mi-proyecto.deploy')?.command).toBe('pnpm run deploy');
 		expect(catalog.getCommand('git.status')).toBeDefined();
@@ -74,7 +75,7 @@ describe('CatalogService con comandos propios', () => {
 	});
 
 	it('avisa a quien escucha hasta que deja de hacerlo', () => {
-		const catalog = new CatalogService();
+		const catalog = new CatalogService(bundledCatalog);
 		let calls = 0;
 		const subscription = catalog.onDidChange(() => calls++);
 		catalog.setCustomCategories(custom);
@@ -92,7 +93,7 @@ describe('CatalogService con comandos propios', () => {
 });
 
 describe('buildDisplayText', () => {
-	const catalog = new CatalogService();
+	const catalog = new CatalogService(bundledCatalog);
 
 	it('sustituye cada valor tal cual, sin escapar, en la variante del shell', () => {
 		const commit = catalog.getCommand('git.commit');
@@ -164,13 +165,13 @@ describe('buildCategorySummaries', () => {
 
 	it('el resumen solo lleva los campos que necesita el webview', () => {
 		const [git] = buildCategorySummaries(ordered, 'en', 'bash');
-		expect(Object.keys(git).sort()).toEqual(['commands', 'icon', 'id', 'title']);
+		expect(Object.keys(git).sort()).toEqual(['commands', 'icon', 'id', 'section', 'title']);
 		expect(Object.keys(git.commands[0]).sort()).toEqual(['description', 'example', 'id', 'risk', 'searchText', 'title']);
 	});
 
 	describe('searchText con el catálogo empaquetado', () => {
 		const command = (locale: 'en' | 'es' | 'fr', id: string) =>
-			buildCategorySummaries(new CatalogService().getCategories(), locale, 'bash')
+			buildCategorySummaries(new CatalogService(bundledCatalog).getCategories(), locale, 'bash')
 				.flatMap((c) => c.commands)
 				.find((c) => c.id === id);
 
@@ -230,7 +231,7 @@ describe('CatalogService', () => {
 	});
 
 	it('por defecto usa el catálogo empaquetado, y todos sus comandos producen ejemplo en ambos idiomas y shells', () => {
-		const bundled = new CatalogService();
+		const bundled = new CatalogService(bundledCatalog);
 		const commands = bundled.getCategories().flatMap((c) => c.commands);
 		expect(bundled.getCommand('git.new-branch')).toBeDefined();
 		for (const cmd of commands) {
@@ -241,5 +242,46 @@ describe('CatalogService', () => {
 				}
 			}
 		}
+	});
+});
+
+describe('CatalogService: carga bajo demanda', () => {
+	it('no carga al construir ni al fijar categorías propias; carga una sola vez al consultar', () => {
+		let loads = 0;
+		const service = new CatalogService(() => {
+			loads++;
+			return bundledCatalog;
+		});
+		service.setCustomCategories([]);
+		expect(loads).toBe(0);
+		expect(service.isLoaded).toBe(false);
+
+		expect(service.getCategories().length).toBe(bundledCatalog.length);
+		expect(service.getCommand('git.status')).toBeDefined();
+		service.setCustomCategories([]);
+		service.getCategories();
+		expect(loads).toBe(1);
+		expect(service.isLoaded).toBe(true);
+	});
+
+	it('las propias van detrás de las incluidas aunque se fijen antes de cargar', () => {
+		const service = new CatalogService(() => bundledCatalog);
+		const custom = { ...bundledCatalog[0], id: 'custom-x', section: 'custom' as const, commands: [] };
+		service.setCustomCategories([custom]);
+		expect(service.getCategories().at(-1)?.id).toBe('custom-x');
+		expect(service.getCategories().length).toBe(bundledCatalog.length + 1);
+	});
+});
+
+describe('buildCategorySummaries: sección', () => {
+	it('cada resumen lleva la sección de su categoría y las propias llevan custom', () => {
+		const custom = { ...bundledCatalog[0], id: 'custom-x', section: 'custom' as const };
+		const summaries = buildCategorySummaries([...bundledCatalog, custom], 'es', 'bash');
+		const byId = new Map(summaries.map((s) => [s.id, s.section]));
+		expect(byId.get('git')).toBe('vcs');
+		expect(byId.get('npm')).toBe('languages');
+		expect(byId.get('docker')).toBe('infra');
+		expect(byId.get('terminal')).toBe('tools');
+		expect(byId.get('custom-x')).toBe('custom');
 	});
 });

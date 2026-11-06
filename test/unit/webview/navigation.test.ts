@@ -2,13 +2,18 @@ import { describe, expect, it } from 'vitest';
 import {
 	FAVORITES_CARD_ID,
 	homeSections,
+	initialExpanded,
 	initialView,
 	navigate,
 	nextIndex,
+	parseSavedState,
 	parseSavedView,
+	PROJECT_SECTION,
+	toggleSection,
 	RECENT_CARD_ID,
 	resolveView,
 } from '../../../webview-ui/src/navigation';
+import type { SectionId } from '../../../src/catalog/types';
 
 describe('navigate', () => {
 	it('abre una categoría', () => {
@@ -319,25 +324,77 @@ describe('nextIndex', () => {
 });
 
 describe('homeSections', () => {
-	const summary = (id: string) => ({ id, title: id, icon: 'terminal', commands: [] });
-	const categories = ['git', 'npm', 'pnpm', 'node', 'docker', 'terminal'].map(summary);
+	const sections: Record<string, SectionId> = {
+		git: 'vcs',
+		npm: 'languages',
+		pnpm: 'languages',
+		node: 'languages',
+		docker: 'infra',
+		terminal: 'tools',
+		'custom-mio': 'custom',
+	};
+	const summary = (id: string) => ({ id, title: id, icon: 'terminal', section: sections[id], commands: [] });
+	const categories = Object.keys(sections).map(summary);
 	const ids = (list: readonly { id: string }[]) => list.map((c) => c.id);
+	const shape = (home: ReturnType<typeof homeSections>) => home.sections.map((x) => [x.id, ids(x.categories)]);
 
-	it('separa las detectadas del resto, en el orden de las categorías', () => {
-		const sections = homeSections(categories, ['node', 'pnpm']);
-		expect(ids(sections.detected)).toEqual(['pnpm', 'node']);
-		expect(ids(sections.rest)).toEqual(['git', 'npm', 'docker', 'terminal']);
+	it('separa las detectadas y agrupa el resto por sección, en el orden de SECTION_ORDER', () => {
+		const home = homeSections(categories, ['node', 'pnpm']);
+		expect(ids(home.detected)).toEqual(['pnpm', 'node']);
+		expect(shape(home)).toEqual([
+			['languages', ['npm']],
+			['vcs', ['git']],
+			['infra', ['docker']],
+			['tools', ['terminal']],
+			['custom', ['custom-mio']],
+		]);
+	});
+
+	it('no muestra secciones vacías (una sección cuya única categoría está detectada)', () => {
+		const home = homeSections(categories, ['git']);
+		expect(home.sections.map((x) => x.id)).not.toContain('vcs');
 	});
 
 	it('ignora los ids que no están en las categorías', () => {
-		const sections = homeSections(categories, ['prisma', 'docker']);
-		expect(ids(sections.detected)).toEqual(['docker']);
-		expect(sections.rest).toHaveLength(5);
+		const home = homeSections(categories, ['prisma', 'docker']);
+		expect(ids(home.detected)).toEqual(['docker']);
+		expect(home.sections.flatMap((x) => x.categories)).toHaveLength(6);
 	});
 
-	it('sin detectadas, todas van al resto', () => {
-		const sections = homeSections(categories, []);
-		expect(sections.detected).toEqual([]);
-		expect(ids(sections.rest)).toEqual(ids(categories));
+	it('sin detectadas, todas van a su sección', () => {
+		const home = homeSections(categories, []);
+		expect(home.detected).toEqual([]);
+		expect(shape(home)[0]).toEqual(['languages', ['npm', 'pnpm', 'node']]);
+	});
+});
+
+describe('parseSavedState', () => {
+	const view = { screen: 'category', categoryId: 'git' };
+
+	it('acepta { view, expanded }', () => {
+		expect(parseSavedState({ view, expanded: ['project', 'vcs'] })).toEqual({ view, expanded: ['project', 'vcs'] });
+	});
+
+	it('migra el formato anterior (solo la vista) con "En este proyecto" desplegada', () => {
+		expect(parseSavedState(view)).toEqual({ view, expanded: [PROJECT_SECTION] });
+	});
+
+	it('sin estado: sin vista y con los valores iniciales', () => {
+		expect(parseSavedState(undefined)).toEqual({ view: undefined, expanded: initialExpanded });
+	});
+
+	it('descarta secciones desconocidas, repetidas o que no son texto', () => {
+		expect(parseSavedState({ view, expanded: ['vcs', 'misc', 'vcs', 3, '__proto__'] }).expanded).toEqual(['vcs']);
+	});
+
+	it('expanded que no es una lista vuelve al valor inicial; una vista inválida se descarta', () => {
+		expect(parseSavedState({ view: { screen: 'nope' }, expanded: 'vcs' })).toEqual({ view: undefined, expanded: initialExpanded });
+	});
+});
+
+describe('toggleSection', () => {
+	it('despliega y pliega', () => {
+		expect(toggleSection(['project'], 'vcs')).toEqual(['project', 'vcs']);
+		expect(toggleSection(['project', 'vcs'], 'project')).toEqual(['vcs']);
 	});
 });

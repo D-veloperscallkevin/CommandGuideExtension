@@ -1,6 +1,5 @@
-import { bundledCatalog } from './index';
 import { buildSearchText } from './search';
-import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, Risk, ShellId } from './types';
+import type { Catalog, Category, Command, Locale, LocalizedString, LocalizedTags, Risk, SectionId, ShellId } from './types';
 
 export { resolveLocale } from '../i18n/locales';
 
@@ -55,6 +54,8 @@ export interface CategorySummary {
 	readonly id: string;
 	readonly title: string;
 	readonly icon: string;
+	/** Sección del panel; `custom` para las categorías propias. */
+	readonly section: SectionId;
 	readonly commands: readonly CommandSummary[];
 }
 
@@ -83,6 +84,7 @@ export function buildCategorySummaries(
 			id: c.id,
 			title: localize(c.title, locale),
 			icon: c.icon,
+			section: c.section,
 			commands: c.commands.map((cmd) => {
 				const example = buildExample(cmd, locale, shell);
 				return {
@@ -108,22 +110,42 @@ export function buildCategorySummaries(
 
 /**
  * Consulta del catálogo: el incluido y, detrás, las categorías propias del usuario, que se pueden
- * reemplazar. Sin acceso a disco, red ni a la API de VS Code.
+ * reemplazar. El incluido se recibe ya cargado o como una función que lo carga; en ese caso se
+ * llama una sola vez, en la primera consulta, nunca al construir ni al fijar las propias.
+ * Sin red ni API de VS Code.
  */
 export class CatalogService {
-	private readonly bundled: readonly Category[];
-	private categories: readonly Category[];
-	private commandsById: ReadonlyMap<string, Command>;
+	private bundled: readonly Category[] | undefined;
+	private custom: readonly Category[] = [];
+	private combined: { categories: readonly Category[]; commandsById: ReadonlyMap<string, Command> } | undefined;
 	private readonly listeners = new Set<() => void>();
 
-	constructor(catalog: Catalog = bundledCatalog) {
-		this.bundled = [...catalog].sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
-		this.categories = this.bundled;
-		this.commandsById = CatalogService.index(this.bundled);
+	private readonly source: Catalog | (() => Catalog);
+
+	constructor(source: Catalog | (() => Catalog)) {
+		this.source = source;
 	}
 
 	private static index(categories: readonly Category[]): ReadonlyMap<string, Command> {
 		return new Map(categories.flatMap((c) => c.commands.map((cmd) => [cmd.id, cmd] as const)));
+	}
+
+	/** Si el catálogo incluido ya se ha cargado (para tests y diagnóstico). */
+	get isLoaded(): boolean {
+		return this.bundled !== undefined;
+	}
+
+	private data(): { categories: readonly Category[]; commandsById: ReadonlyMap<string, Command> } {
+		if (!this.bundled) {
+			const catalog = typeof this.source === 'function' ? this.source() : this.source;
+			this.bundled = [...catalog].sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
+		}
+		this.combined ??= {
+			categories: [...this.bundled, ...this.custom],
+			// Las ids de las incluidas tienen prioridad si coincidieran.
+			commandsById: new Map([...CatalogService.index(this.custom), ...CatalogService.index(this.bundled)]),
+		};
+		return this.combined;
 	}
 
 	/**
@@ -131,16 +153,16 @@ export class CatalogService {
 	 * en el orden recibido. Los comandos conservan el orden del archivo o del ajuste.
 	 */
 	getCategories(): readonly Category[] {
-		return this.categories;
+		return this.data().categories;
 	}
 
 	/**
 	 * Reemplaza las categorías propias (ya validadas, con ids `custom-…`) y avisa a quien escuche
-	 * `onDidChange`. Las ids de las incluidas tienen prioridad si coincidieran.
+	 * `onDidChange`. No carga el catálogo incluido.
 	 */
 	setCustomCategories(custom: readonly Category[]): void {
-		this.categories = [...this.bundled, ...custom];
-		this.commandsById = new Map([...CatalogService.index(custom), ...CatalogService.index(this.bundled)]);
+		this.custom = custom;
+		this.combined = undefined;
 		for (const listener of this.listeners) {
 			listener();
 		}
@@ -153,6 +175,6 @@ export class CatalogService {
 	}
 
 	getCommand(id: string): Command | undefined {
-		return this.commandsById.get(id);
+		return this.data().commandsById.get(id);
 	}
 }

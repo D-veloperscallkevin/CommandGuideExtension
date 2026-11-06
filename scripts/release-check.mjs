@@ -62,6 +62,19 @@ export function missingFiles(paths, required) {
 }
 
 /**
+ * Rutas que el catálogo ocupa en el paquete: cada `catalog/*.json` (salvo `schema.json`) se copia a
+ * `dist/catalog/` en el build (D1 de catalog-sections).
+ * @param {readonly string[]} files Nombres de archivo de `catalog/`.
+ * @returns {string[]} Rutas `dist/catalog/<archivo>`, en orden alfabético.
+ */
+export function catalogPackageFiles(files) {
+	return files
+		.filter((f) => f.endsWith('.json') && f !== 'schema.json')
+		.sort()
+		.map((f) => `dist/catalog/${f}`);
+}
+
+/**
  * Pre-release solo mientras la versión mayor sea 0 (D4 de marketplace-release).
  * @param {string} version Versión semver del manifiesto.
  */

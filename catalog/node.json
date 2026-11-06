@@ -17,6 +17,7 @@
   },
   "icon": "symbol-method",
   "order": 30,
+  "section": "languages",
   "commands": [
     {
       "id": "node.version",

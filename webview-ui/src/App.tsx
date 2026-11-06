@@ -7,7 +7,7 @@ import type { CommandListHandle, Copied, Starred } from './CommandList'
 import FavoritesScreen from './FavoritesScreen'
 import Icon from './Icon'
 import { toLocale, useT } from './i18n'
-import { initialView, navigate, parseSavedView } from './navigation'
+import { initialView, navigate, parseSavedState, toggleSection } from './navigation'
 import RecentScreen from './RecentScreen'
 import SearchBox from './SearchBox'
 import SearchResults, { SEARCH_RESULTS_ID } from './SearchResults'
@@ -50,7 +50,10 @@ function App() {
   // Shell para el que la extensión ha construido los ejemplos; cambia con la terminal activa.
   const [shell, setShell] = useState<ShellId | null>(null)
   // Arranca en la vista guardada (si es válida); al llegar el catálogo se ajusta con 'resolve'.
-  const [view, dispatch] = useReducer(navigate, undefined, () => parseSavedView(getState()) ?? initialView)
+  // Estado guardado (vista y secciones desplegadas), leído una sola vez al cargar el webview.
+  const [saved] = useState(() => parseSavedState(getState()))
+  const [view, dispatch] = useReducer(navigate, undefined, () => saved.view ?? initialView)
+  const [expanded, setExpanded] = useState<readonly string[]>(saved.expanded)
   const t = useT(init?.locale ?? initialLocale)
   // Confirmación de copia: se muestra COPIED_MS. Cada `copied` lleva un `seq` nuevo, así que
   // copiar otra vez (aunque sea el mismo comando) reinicia el tiempo y se vuelve a anunciar.
@@ -134,9 +137,9 @@ function App() {
   useEffect(() => {
     // Solo con catálogo: durante la carga no se sobrescribe la vista guardada.
     if (categories) {
-      setState(view)
+      setState({ view, expanded })
     }
-  }, [categories, view])
+  }, [categories, view, expanded])
 
   const open = useCallback((categoryId: string) => dispatch({ type: 'open', categoryId }), [])
   const openFavorites = useCallback(() => dispatch({ type: 'openFavorites' }), [])
@@ -264,6 +267,8 @@ function App() {
             onOpen={open}
             onOpenFavorites={openFavorites}
             onOpenRecent={openRecent}
+            expanded={expanded}
+            onToggleSection={(id) => setExpanded((list) => toggleSection(list, id))}
             onFocusCategory={focusCategory}
             t={t}
           />

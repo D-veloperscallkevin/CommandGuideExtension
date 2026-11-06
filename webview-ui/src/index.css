@@ -414,12 +414,41 @@ body.vscode-light .risk-destructive {
 }
 
 /* Encabezado de sección de la portada ("En este proyecto", "Todas"), como las cabeceras de VS Code. */
+/* Encabezado plegable de una sección de la portada: el propio botón ocupa la fila, como en las
+   secciones de la barra lateral de VS Code. */
 .section-heading {
-  margin: 8px 0 2px;
-  padding: 0 20px;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.section-header {
+  padding-inline-start: 12px;
   color: var(--vscode-sideBarSectionHeader-foreground, var(--vscode-foreground));
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.section-header .category-count {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Separación vertical: entre las tarjetas (Favoritos y Recientes) y las secciones, y entre una
+   sección y la siguiente. */
+.shortcuts {
+  margin-bottom: 14px;
+}
+
+.home-section + .home-section {
+  margin-top: 10px;
+}
+
+/* Categorías de una sección, un poco sangradas bajo su encabezado. */
+.home-section .item-list .category {
+  padding-inline-start: 28px;
 }

@@ -38,6 +38,8 @@ describe('catalog/schema.json', () => {
 		['invalid-risk.json', '/commands/0/risk'],
 		['unsupported-shell.json', '/commands/0/shells'],
 		['unknown-locale-key.json', '/commands/0/title'],
+		['missing-section.json', '/'],
+		['invalid-section.json', '/section'],
 	];
 
 	it.each(invalid)('rechaza %s señalando %s', (file, instancePath) => {
@@ -57,6 +59,7 @@ describe('catalog/schema.json', () => {
 			title: { en: 'Demo', es: 'Demo' },
 			icon: 'beaker',
 			order: 1,
+			section: 'tools',
 			commands: [
 				{
 					id: 'demo.hello',

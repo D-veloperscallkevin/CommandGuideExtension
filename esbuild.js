@@ -1,4 +1,22 @@
 const esbuild = require("esbuild");
+const fs = require('node:fs');
+const path = require('node:path');
+
+/**
+ * El catálogo no va en el bundle: se copia a dist/catalog/ y la extensión lo lee en el primer
+ * uso. Se vacía antes, para que una categoría borrada no quede en el paquete.
+ */
+function copyCatalog() {
+	const from = path.join(__dirname, 'catalog');
+	const to = path.join(__dirname, 'dist', 'catalog');
+	fs.rmSync(to, { recursive: true, force: true });
+	fs.mkdirSync(to, { recursive: true });
+	for (const file of fs.readdirSync(from)) {
+		if (file.endsWith('.json') && file !== 'schema.json') {
+			fs.copyFileSync(path.join(from, file), path.join(to, file));
+		}
+	}
+}
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
@@ -14,6 +32,7 @@ const esbuildProblemMatcherPlugin = {
 			console.log('[watch] build started');
 		});
 		build.onEnd((result) => {
+			copyCatalog();
 			result.errors.forEach(({ text, location }) => {
 				console.error(`✘ [ERROR] ${text}`);
 				console.error(`    ${location.file}:${location.line}:${location.column}:`);

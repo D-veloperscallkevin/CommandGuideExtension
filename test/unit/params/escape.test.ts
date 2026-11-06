@@ -10,8 +10,9 @@ import {
 	basicValueError,
 } from '../../../src/params/escape';
 import { makeCommand } from '../catalog/fixtures';
+import { bundledCatalog } from '../catalog/bundled';
 
-const catalog = new CatalogService();
+const catalog = new CatalogService(bundledCatalog);
 
 function command(id: string): Command {
 	const cmd = catalog.getCommand(id);

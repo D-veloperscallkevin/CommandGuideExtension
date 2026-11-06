@@ -275,6 +275,7 @@ export function parseCustomCommands(value: unknown): CustomResult {
 			icon: typeof raw.icon === 'string' && idPattern.test(raw.icon) ? raw.icon : DEFAULT_CUSTOM_ICON,
 			// Las propias van tras las del catálogo en el orden del ajuste (ver CatalogService).
 			order: ci,
+			section: 'custom',
 			commands,
 		});
 	});

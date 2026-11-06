@@ -17,6 +17,7 @@
   },
   "icon": "server-environment",
   "order": 40,
+  "section": "infra",
   "commands": [
     {
       "id": "docker.ps",

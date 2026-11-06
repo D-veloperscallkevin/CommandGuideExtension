@@ -1,5 +1,6 @@
 // Navegación del webview: lógica pura (sin React ni DOM) para poder testearla con Vitest.
-import type { CategorySummary } from '../../src/messaging/protocol'
+import { SECTION_ORDER } from '../../src/catalog/types'
+import type { CategorySummary, SectionId } from '../../src/messaging/protocol'
 
 /**
  * Pantalla visible y elemento con foco. Es también lo que se guarda con `setState`, así que
@@ -27,6 +28,11 @@ export const FAVORITES_CARD_ID = '@favorites'
 
 /** Id de la tarjeta "Recientes" en la lista de categorías, con `@` por lo mismo. */
 export const RECENT_CARD_ID = '@recent'
+
+/** Id del encabezado de una sección en la lista de categorías (para el foco), con `@` por lo mismo. */
+export function sectionHeaderId(section: string): string {
+  return `@section:${section}`
+}
 
 export type NavigationAction =
   | { readonly type: 'open'; readonly categoryId: string }
@@ -137,8 +143,8 @@ export function resolveView(view: View, categories: readonly CatalogIds[]): View
     let resolved: View = view
     if (
       view.focusCategoryId !== undefined &&
-      view.focusCategoryId !== FAVORITES_CARD_ID &&
-      view.focusCategoryId !== RECENT_CARD_ID &&
+      // Las tarjetas y los encabezados de sección llevan `@`: no son categorías del catálogo.
+      !view.focusCategoryId.startsWith('@') &&
       !categories.some((c) => c.id === view.focusCategoryId)
     ) {
       const { focusCategoryId: _gone, ...rest } = resolved
@@ -193,17 +199,61 @@ export function nextIndex(current: number, key: string, length: number): number 
   }
 }
 
+/** Id de la sección "En este proyecto" en el estado de secciones desplegadas. */
+export const PROJECT_SECTION = 'project'
+
+/** Una sección de la portada con sus categorías, en el orden de `categories`. */
+export interface HomeSection {
+  readonly id: SectionId
+  readonly categories: readonly CategorySummary[]
+}
+
 /**
- * Reparte las categorías de la portada: las detectadas en el proyecto y el resto, las dos en el
- * orden de `categories`. Los ids detectados que no están en `categories` se ignoran.
+ * Reparte las categorías de la portada: las detectadas en el proyecto y, el resto, por sección en
+ * el orden de `SECTION_ORDER`, sin secciones vacías. Una detectada no se repite en su sección.
+ * Los ids detectados que no están en `categories` se ignoran.
  */
 export function homeSections(
   categories: readonly CategorySummary[],
   detected: readonly string[],
-): { readonly detected: readonly CategorySummary[]; readonly rest: readonly CategorySummary[] } {
+): { readonly detected: readonly CategorySummary[]; readonly sections: readonly HomeSection[] } {
   const ids = new Set(detected)
+  const rest = categories.filter((c) => !ids.has(c.id))
   return {
     detected: categories.filter((c) => ids.has(c.id)),
-    rest: categories.filter((c) => !ids.has(c.id)),
+    sections: SECTION_ORDER.map((id) => ({ id, categories: rest.filter((c) => c.section === id) })).filter(
+      (section) => section.categories.length > 0,
+    ),
   }
+}
+
+/** Lo que se guarda con `setState`: la vista y las secciones desplegadas. */
+export interface SavedState {
+  readonly view: View
+  readonly expanded: readonly string[]
+}
+
+/** Secciones desplegadas la primera vez: solo "En este proyecto". */
+export const initialExpanded: readonly string[] = [PROJECT_SECTION]
+
+const knownSections: ReadonlySet<string> = new Set([PROJECT_SECTION, ...SECTION_ORDER])
+
+/**
+ * Estado guardado por una carga anterior (puede venir de otra versión de la extensión). Acepta
+ * `{ view, expanded }` y el formato anterior, que era solo la vista. Las secciones desconocidas
+ * o repetidas se descartan; lo que no se entiende vuelve a los valores iniciales.
+ */
+export function parseSavedState(value: unknown): { view: View | undefined; expanded: readonly string[] } {
+  if (isPlainObject(value) && 'expanded' in value && 'view' in value) {
+    const expanded = Array.isArray(value.expanded)
+      ? [...new Set(value.expanded.filter((id): id is string => typeof id === 'string' && knownSections.has(id)))]
+      : initialExpanded
+    return { view: parseSavedView(value.view), expanded }
+  }
+  return { view: parseSavedView(value), expanded: initialExpanded }
+}
+
+/** Despliega o pliega una sección y devuelve la lista nueva. */
+export function toggleSection(expanded: readonly string[], id: string): readonly string[] {
+  return expanded.includes(id) ? expanded.filter((x) => x !== id) : [...expanded, id]
 }

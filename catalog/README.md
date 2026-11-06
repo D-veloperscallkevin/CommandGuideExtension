@@ -63,10 +63,11 @@ Solo se admiten los idiomas de la lista: una clave como `fr-fr` hace fallar la v
      "title": { "en": "npm", "es": "npm" },
      "icon": "package",
      "order": 20,
+     "section": "languages",
      "commands": []
    }
    ```
 
-   `icon` es el nombre de un [Codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html). `order` define la posición (ascendente, empates por `id`).
+   `icon` es el nombre de un [Codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html). `order` define la posición dentro de su sección (ascendente, empates por `id`). `section` es la sección del panel: `languages`, `vcs`, `frameworks`, `databases`, `infra`, `cloud`, `servers`, `quality`, `gamedev` o `tools`.
 2. Regístrala en `src/catalog/index.ts` con un import estático y añádela al array.
 3. Añade al menos 15 comandos, con sus textos en los 11 idiomas, y ejecuta `pnpm run test:unit`. Si olvidaste el paso 2, el test lo indica nombrando el archivo. Añade la nueva categoría a la lista de `test/unit/catalog/content.test.ts`.

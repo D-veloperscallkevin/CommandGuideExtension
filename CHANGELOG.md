@@ -8,10 +8,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
+- Secciones plegables en el panel: "En este proyecto" y después Lenguajes y entornos, Control de versiones, Contenedores e infraestructura, Herramientas e IA… (y "Mis comandos" para las categorías propias). Se despliegan con clic o con → y ←, y el panel recuerda cuáles abriste. Cada categoría del catálogo declara su sección (`section`).
 - Botón **Sponsor** arriba del panel de DevCommands, en todas sus pantallas, que abre GitHub Sponsors en el navegador. También aparece en la ficha de la extensión (campo `sponsor` del manifiesto) y en la sección "Support" del README, además de un enlace junto a su título.
 
 ### Changed
 
+- El catálogo ya no va dentro del código de la extensión: se lee de `dist/catalog/` la primera vez que abres el panel o el buscador, no al arrancar VS Code. Desaparece el encabezado "Todas".
 - El indicador "Ejemplos para: …" pasa a "Terminal: …", en la misma fila que el botón Sponsor, con el nombre del shell en su color (PowerShell azul, bash verde, zsh morado, cmd amarillo, según el tema). El buscador queda más separado de esa fila y de la lista.
 
 ### Fixed

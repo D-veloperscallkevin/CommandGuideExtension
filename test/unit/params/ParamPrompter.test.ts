@@ -8,6 +8,7 @@ import {
 	type PromptWindow,
 } from '../../../src/params/ParamPrompter';
 import { branchParam, makeCommand } from '../catalog/fixtures';
+import { bundledCatalog } from '../catalog/bundled';
 
 const messages: ParamMessages = {
 	empty: 'vacío',
@@ -29,7 +30,7 @@ function fakeWindow(answers: (string | undefined)[]) {
 	return { window, shown };
 }
 
-const catalog = new CatalogService();
+const catalog = new CatalogService(bundledCatalog);
 const copy = catalog.getCommand('terminal.copy') as Command;
 const newBranch = makeCommand({
 	id: 'git.new-branch',
