@@ -12,7 +12,6 @@ export interface TerminalLike {
 
 /** Lo que usamos de `vscode.window`. */
 export interface TerminalHost {
-	readonly activeTerminal: TerminalLike | undefined;
 	createTerminal(options: { name: string }): TerminalLike;
 	/** Avisa cuando una terminal activa la integración del shell. */
 	readonly onDidChangeTerminalShellIntegration: (
@@ -28,22 +27,27 @@ export class TerminalService {
 	 */
 	static readonly readyTimeoutMs = 3000;
 
+	/**
+	 * @param target terminal libre en la que escribir ahora (la activa, o la última libre usada
+	 * si la activa está ocupada); `undefined` si hay que crear una.
+	 */
 	constructor(
 		private readonly host: TerminalHost,
+		private readonly target: () => TerminalLike | undefined,
 		private readonly readyTimeoutMs = TerminalService.readyTimeoutMs,
 	) {}
 
 	/**
-	 * Escribe `text` en la terminal activa (o en una nueva "DevCommands") sin ejecutarlo:
+	 * Escribe `text` en la terminal de destino (o en una nueva "DevCommands") sin ejecutarlo:
 	 * primero la muestra con el foco, para que el usuario confirme con Enter. En una terminal
 	 * recién creada espera a que el shell esté listo; si no, el texto llega antes que el prompt
 	 * y se ve mezclado con él (`git statususer@host:~$ git status`).
 	 */
 	async write(text: string): Promise<TerminalLike> {
-		const active = this.host.activeTerminal;
-		const terminal = active ?? this.host.createTerminal({ name: TerminalService.terminalName });
+		const existing = this.target();
+		const terminal = existing ?? this.host.createTerminal({ name: TerminalService.terminalName });
 		terminal.show(false);
-		if (!active) {
+		if (!existing) {
 			await this.whenShellReady(terminal);
 		}
 		// false: sin salto de línea. Nunca se ejecuta nada automáticamente.

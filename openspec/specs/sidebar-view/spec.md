@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Ofrece la vista lateral de DevCommands en la Activity Bar de VS Code, carga en ella la interfaz web de forma segura y respetando el tema, y activa la extensión solo cuando el usuario la abre.
+Ofrece la vista lateral de DevCommands en la Activity Bar de VS Code, carga en ella la interfaz web de forma segura y respetando el tema, y no crea esa interfaz hasta que el usuario abre la vista, aunque la extensión se active al terminar el arranque de VS Code.
 
 ## Requirements
 
@@ -18,15 +18,17 @@ La extensión SHALL aportar un contenedor propio en la Activity Bar, con el nomb
 - **THEN** no aparece ningún comando de DevCommands
 
 ### Requirement: Activación perezosa
-La extensión SHALL activarse únicamente cuando se abre su vista o se ejecuta uno de sus comandos. MUST NOT activarse al arrancar VS Code.
+La extensión SHALL activarse cuando VS Code termina de arrancar, sin retrasar el arranque, para poder saber desde el principio qué terminales están ocupadas. También SHALL activarse al abrir su vista o al ejecutar uno de sus comandos, si aún no lo estaba. MUST NOT activarse antes de que VS Code termine de arrancar.
+
+Con la extensión activa y la vista sin abrir, el webview MUST NOT crearse y no se le envía ningún mensaje. La vista SHALL cargar su interfaz cuando el usuario la abre.
 
 #### Scenario: Arranque sin abrir la vista
-- **WHEN** VS Code arranca y el usuario no abre la vista de DevCommands
-- **THEN** la extensión no se activa
+- **WHEN** VS Code arranca, en Windows con PowerShell o en Linux con bash, y el usuario no abre la vista de DevCommands
+- **THEN** la extensión se activa cuando el arranque ha terminado y el webview de la vista no se crea
 
 #### Scenario: Apertura de la vista
 - **WHEN** el usuario abre la vista de DevCommands
-- **THEN** la extensión se activa y la vista carga su interfaz
+- **THEN** la extensión está activa y la vista carga su interfaz
 
 ### Requirement: Carga segura del webview
 El contenido de la vista SHALL cargarse con una Content Security Policy que deniega todo por defecto, permite scripts solo con un `nonce` distinto en cada carga y permite estilos, imágenes y fuentes solo desde los recursos de la propia extensión. La política MUST NOT incluir `'unsafe-inline'` ni `'unsafe-eval'`. El webview MUST poder leer únicamente los archivos de la interfaz compilada de la extensión.

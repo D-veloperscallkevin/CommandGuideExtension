@@ -13,6 +13,7 @@ import { MAX_VALUE_LENGTH } from './params/escape';
 import { ParamPrompter } from './params/ParamPrompter';
 import { RiskConfirmer } from './risk/RiskConfirmer';
 import { TargetShell } from './terminal/TargetShell';
+import { TerminalActivity } from './terminal/TerminalActivity';
 import { TerminalService } from './terminal/TerminalService';
 import { CommandsViewProvider, type SentCatalog } from './views/CommandsViewProvider';
 
@@ -43,13 +44,16 @@ export interface DevCommandsApi {
 	detectProject(): Promise<readonly string[]>;
 }
 
-// Se activa solo al abrir la vista (evento implícito onView:devcommands.commands).
+// Se activa al terminar el arranque de VS Code (onStartupFinished), para saber desde el principio
+// qué terminales están ocupadas con un programa; el webview no se crea hasta abrir la vista.
 export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 	const log = vscode.window.createOutputChannel('DevCommands', { log: true });
 	const version = String(context.extension.packageJSON.version);
-	const terminal = new TerminalService(vscode.window);
+	// Destino común del envío y de los ejemplos: la activa si está libre; si no, la última libre usada.
+	const activity = new TerminalActivity<vscode.Terminal>(vscode.window);
+	const terminal = new TerminalService(vscode.window, () => activity.target());
 	const clipboard = new ClipboardService(vscode.env.clipboard);
-	const targetShell = new TargetShell(vscode.window, vscode.env, process.platform);
+	const targetShell = new TargetShell(vscode.env, process.platform, activity);
 	const params = new ParamPrompter(vscode.window, {
 		empty: vscode.l10n.t('Enter a value.'),
 		control: vscode.l10n.t("The value can't contain line breaks or control characters."),
@@ -101,6 +105,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 
 	context.subscriptions.push(
 		log,
+		activity,
 		targetShell,
 		customCommands,
 		project,

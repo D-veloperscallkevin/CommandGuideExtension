@@ -273,7 +273,7 @@ El orden sigue las dependencias: cada change usa lo que dejó el anterior. Las f
 | 2.7 | `project-detection` | Sugiere primero las categorías del proyecto (`package.json`, `Dockerfile`, …) ✅ |
 | 2.8 | `quick-pick` | `Ctrl+Shift+P` → "DevCommands: Buscar" sin abrir el panel ✅ |
 | 2.9 | `marketplace-release` | Nombre definitivo, publisher, README con capturas, icono y publicación manual en el Marketplace (`vsce publish --packagePath`) y Open VSX (`ovsx publish`) del `.vsix` probado, tras crear el tag `vX.Y.Z` ✅ |
-| 2.10 | `busy-terminal` | Si la terminal activa está ocupada con un programa (Claude Code, un servidor de desarrollo…), el comando va a otra terminal libre o a una nueva "DevCommands", y el indicador "Ejemplos para" sigue a esa terminal. Antes de la v1.0.0 |
+| 2.10 | `busy-terminal` | Si la terminal activa está ocupada con un programa (Claude Code, un servidor de desarrollo…), el comando va a otra terminal libre o a una nueva "DevCommands", y el indicador "Ejemplos para" sigue a esa terminal ✅ |
 
 ### Fase 3: v2.x
 
@@ -365,7 +365,7 @@ Comprueba después la ficha en ambas tiendas: nombre, icono, versión sin pre-re
 - [x] `quick-pick` (2.8): "DevCommands: Buscar comandos" en la paleta, con la búsqueda del panel, grupos (Favoritos, Recientes, proyecto y resto), Enter para escribir en la terminal y botones de copiar y favorito; sin atajo por defecto
 - [x] Elegir el nombre definitivo: "DevCommands Guide", libre en el Marketplace y en Open VSX el 2026-11-04
 - [x] `marketplace-release` (2.9): nombre "DevCommands Guide", icono del libro con `>_`, licencia propietaria con avisos de terceros, README con capturas, versión 1.0.0 estable y pasos de publicación manual
-- [ ] `busy-terminal` (2.10): no escribir en una terminal ocupada por otro programa (detectado en la prueba del `.vsix` de la 2.9 con Claude Code abierto en una terminal)
+- [x] `busy-terminal` (2.10): no escribir en una terminal ocupada por otro programa (detectado en la prueba del `.vsix` de la 2.9 con Claude Code abierto en una terminal)
 - [ ] Registrar el publisher `aguilardigital` en el Marketplace y el namespace en Open VSX (antes de publicar la v1.0.0)
 - [ ] Capturas del README en `docs/images/` (`panel.png`, `search.png`, `params.png`, `destructive.png` y `quick-pick.png`; lista en la tarea 5.1 de `marketplace-release`), antes del release v1.0.0
 - [ ] Release v1.0.0: verificación en WSL, PR `develop → staging`, prueba del `.vsix`, PR `staging → main`, tag `v1.0.0` y publicación en ambas tiendas

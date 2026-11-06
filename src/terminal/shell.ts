@@ -21,13 +21,30 @@ const shellIds: Readonly<Record<string, ShellId>> = {
  * carpeta ni `.exe`. Un shell que el catálogo no cubre (`fish`, `nu`…) devuelve `undefined`.
  */
 export function shellIdFromName(name: string | undefined): ShellId | undefined {
-	const base = name
+	const base = baseName(name);
+	return base && Object.hasOwn(shellIds, base) ? shellIds[base] : undefined;
+}
+
+/** Shells que el catálogo no cubre pero que siguen siendo shells, no programas. */
+const otherShells: ReadonlySet<string> = new Set(['fish', 'nu', 'csh', 'tcsh', 'xonsh']);
+
+/**
+ * Si un nombre o ruta de ejecutable es un shell (`pwsh`, `/usr/bin/fish`, `wsl.exe`…) y no un
+ * programa (`node`, `claude.exe`…). Mismas reglas que `shellIdFromName`.
+ */
+export function isKnownShell(name: string | undefined): boolean {
+	const base = baseName(name);
+	return !!base && (Object.hasOwn(shellIds, base) || otherShells.has(base));
+}
+
+/** Nombre sin carpeta ni `.exe`, en minúsculas. */
+function baseName(name: string | undefined): string | undefined {
+	return name
 		?.trim()
 		.toLowerCase()
 		.split(/[\\/]/)
 		.pop()
 		?.replace(/\.exe$/, '');
-	return base ? shellIds[base] : undefined;
 }
 
 /** Lo que se sabe del shell de la terminal de destino, de más a menos fiable. */

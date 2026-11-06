@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+### Fixed
+
+- Los comandos ya no se escriben en una terminal ocupada por un programa (Claude Code, un servidor de desarrollo…): van a la última terminal libre usada o a una nueva "DevCommands", y "Ejemplos para" sigue a esa terminal. La extensión se activa al terminar el arranque de VS Code para detectarlo desde el principio.
+
 ## [1.0.0] - 2026-11-04
 
 Primera versión pública (fase 2, v1), en el Marketplace de VS Code y en Open VSX.
