@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 19 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 23 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -85,6 +85,10 @@ describe('contenido mínimo', () => {
 			'maven',
 			'gradle',
 			'dotnet',
+			'c-cpp',
+			'cmake',
+			'go',
+			'rust',
 		]);
 	});
 
@@ -227,8 +231,36 @@ describe('contenido mínimo', () => {
 		expect(wrong.map((cmd) => cmd.id)).toEqual([]);
 	});
 
-	it('los clean de Maven, Gradle y .NET son destructive', () => {
-		const ids = ['maven.clean', 'gradle.clean', 'dotnet.clean'];
+	it('ejecutar el binario de C/C++ usa ./app en bash y zsh, .\\app.exe en PowerShell y app.exe en cmd', () => {
+		expect(exampleFor('c-cpp.run', 'bash')).toBe('./app');
+		expect(exampleFor('c-cpp.run', 'zsh')).toBe('./app');
+		expect(exampleFor('c-cpp.run', 'powershell')).toBe('.\\app.exe');
+		expect(exampleFor('c-cpp.run', 'cmd')).toBe('app.exe');
+	});
+
+	it('la compilación cruzada de Go fija GOOS y GOARCH con la sintaxis de cada shell', () => {
+		expect(exampleFor('go.cross-compile', 'bash')).toBe('GOOS=linux GOARCH=amd64 go build');
+		expect(exampleFor('go.cross-compile', 'zsh')).toBe('GOOS=linux GOARCH=amd64 go build');
+		expect(exampleFor('go.cross-compile', 'powershell')).toBe('$env:GOOS="linux"; $env:GOARCH="amd64"; go build');
+		expect(exampleFor('go.cross-compile', 'cmd')).toBe('set GOOS=linux&& set GOARCH=amd64&& go build');
+	});
+
+	it('C/C++ no usa el compilador de Microsoft (cl)', () => {
+		const cpp = bundledCatalog.find((c) => c.id === 'c-cpp');
+		expect(cpp?.commands.length).toBeGreaterThan(0);
+		const withCl = (cpp?.commands ?? []).filter((cmd) =>
+			[cmd.command, ...Object.values(cmd.shells ?? {})].some((text) => text?.startsWith('cl ')),
+		);
+		expect(withCl.map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('borrar la caché de módulos de Go es destructive', () => {
+		const modcache = bundledCatalog.flatMap((c) => c.commands).find((cmd) => cmd.command === 'go clean -modcache');
+		expect(modcache?.risk).toBe('destructive');
+	});
+
+	it('los clean de Maven, Gradle, .NET, C/C++, CMake y Rust son destructive', () => {
+		const ids = ['maven.clean', 'gradle.clean', 'dotnet.clean', 'c-cpp.make-clean', 'cmake.clean', 'rust.clean'];
 		const cleans = bundledCatalog.flatMap((c) => c.commands).filter((cmd) => ids.includes(cmd.id));
 		expect(cleans.map((cmd) => cmd.id).sort()).toEqual([...ids].sort());
 		expect(cleans.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);

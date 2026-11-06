@@ -106,6 +106,22 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['.sdkmanrc'] })).toEqual(['version-managers']);
 	});
 
+	it('proyecto de C++ con CMake', async () => {
+		expect(await ids({ root: ['CMakeLists.txt', 'main.cpp'] })).toEqual(['c-cpp', 'cmake']);
+	});
+
+	it('un Makefile solo no detecta ninguna categoría', async () => {
+		expect(await ids({ root: ['Makefile'] })).toEqual([]);
+	});
+
+	it('proyecto de Go con Makefile (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['go.mod', 'go.sum', 'Makefile'] })).toEqual(['go']);
+	});
+
+	it('proyecto de Rust', async () => {
+		expect(await ids({ root: ['Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml'] })).toEqual(['rust']);
+	});
+
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
 		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
 	});

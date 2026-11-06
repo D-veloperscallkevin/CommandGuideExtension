@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle` y `dotnet`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go` y `rust`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -197,11 +197,25 @@ Los comandos que crean el wrapper usan la herramienta instalada globalmente (`mv
 
 Los comandos de sdkman SHALL ir en `version-managers`, y su descripción SHALL avisar, en los 11 idiomas, de que sdkman no funciona en PowerShell ni en cmd (solo en bash y zsh, incluidos WSL y Git Bash).
 
+Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
+- `./app` en `command` (bash y zsh);
+- `.\app.exe` en `shells.powershell`;
+- `app.exe` en `shells.cmd`.
+
+Los comandos de `c-cpp` SHALL usar GCC o Clang, nunca el compilador de Microsoft (`cl`). Los comandos de `make` SHALL avisar en su descripción, en los 11 idiomas, de que en Windows make se instala con MSYS2 o MinGW (`mingw32-make`).
+
+El comando de `go` que compila para otro sistema SHALL fijar `GOOS` y `GOARCH` con la sintaxis de cada shell:
+- `GOOS=… GOARCH=… go build` en `command` (bash y zsh);
+- `$env:GOOS="…"; $env:GOARCH="…"; go build` en `shells.powershell`;
+- `set GOOS=…&& set GOARCH=…&& go build` en `shells.cmd`.
+
+Su descripción SHALL avisar, en los 11 idiomas, de que en PowerShell y cmd las variables quedan fijadas en esa terminal.
+
 Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis documentada por su herramienta, y SHALL declarar `risk: destructive` si borra versiones instaladas, entornos, cachés o archivos del proyecto sin posibilidad de deshacerlo.
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle` y `dotnet`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go` y `rust`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -266,7 +280,26 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 - **THEN** declara `shells.powershell` con `.\mvnw` o `.\gradlew` y `shells.cmd` con `mvnw` o `gradlew`
 
 #### Scenario: Borrar la salida de compilación
-- **WHEN** un comando de `maven`, `gradle` o `dotnet` borra la salida de compilación (`clean`)
+- **WHEN** un comando de `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake` o `rust` borra la salida de compilación (`clean`)
+- **THEN** declara `risk: destructive`
+
+#### Scenario: Ejecutar el binario compilado en PowerShell, cmd y bash
+- **WHEN** se muestra el comando de `c-cpp` que ejecuta el programa compilado
+- **THEN** en `powershell` el ejemplo es `.\app.exe` y en `cmd` es `app.exe`
+- **AND** en `bash` y `zsh` es `./app`
+
+#### Scenario: Compilación cruzada de Go en PowerShell, cmd y bash
+- **WHEN** se muestra el comando de `go` que compila para Linux en amd64
+- **THEN** en `bash` y `zsh` el ejemplo es `GOOS=linux GOARCH=amd64 go build`
+- **AND** en `powershell` es `$env:GOOS="linux"; $env:GOARCH="amd64"; go build`
+- **AND** en `cmd` es `set GOOS=linux&& set GOARCH=amd64&& go build`
+
+#### Scenario: Sin el compilador de Microsoft
+- **WHEN** se recorren los comandos de `c-cpp`
+- **THEN** ninguno empieza por `cl `
+
+#### Scenario: Borrar la caché de módulos de Go
+- **WHEN** se muestra el comando de `go` que borra la caché de módulos (`go clean -modcache`)
 - **THEN** declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
