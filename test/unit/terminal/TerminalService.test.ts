@@ -16,12 +16,11 @@ function fakeTerminal(name: string, shellIntegration?: unknown) {
 
 type FakeTerminal = ReturnType<typeof fakeTerminal>;
 
-/** Ventana falsa. `fireShellReady` dispara el evento de integración del shell para una terminal. */
-function fakeHost(active?: FakeTerminal) {
+/** Ventana falsa con `target` como destino. `fireShellReady` dispara el evento de integración del shell para una terminal. */
+function fakeHost(destination?: FakeTerminal) {
 	const created: FakeTerminal[] = [];
 	const listeners = new Set<(event: { terminal: TerminalLike }) => unknown>();
 	const host: TerminalHost = {
-		activeTerminal: active,
 		createTerminal: ({ name }) => {
 			const terminal = fakeTerminal(name);
 			created.push(terminal);
@@ -35,7 +34,8 @@ function fakeHost(active?: FakeTerminal) {
 	const fireShellReady = (terminal: TerminalLike) => {
 		for (const listener of [...listeners]) listener({ terminal });
 	};
-	return { host, created, listeners, fireShellReady };
+	const target = () => destination;
+	return { host, target, created, listeners, fireShellReady };
 }
 
 describe('TerminalService', () => {
@@ -45,16 +45,16 @@ describe('TerminalService', () => {
 
 	it('usa la terminal activa sin crear otra y escribe sin esperar', async () => {
 		const active = fakeTerminal('pwsh');
-		const { host, created, listeners } = fakeHost(active);
-		expect(await new TerminalService(host).write('git status')).toBe(active);
+		const { host, target, created, listeners } = fakeHost(active);
+		expect(await new TerminalService(host, target).write('git status')).toBe(active);
 		expect(created).toEqual([]);
 		expect(listeners.size).toBe(0);
 		expect(active.calls).toEqual(['show(false)', 'sendText(git status, false)']);
 	});
 
 	it('sin terminal activa crea "DevCommands"', async () => {
-		const { host, created, fireShellReady } = fakeHost();
-		const writing = new TerminalService(host).write('git status');
+		const { host, target, created, fireShellReady } = fakeHost();
+		const writing = new TerminalService(host, target).write('git status');
 		fireShellReady(created[0]);
 		const terminal = await writing;
 		expect(created).toHaveLength(1);
@@ -64,8 +64,8 @@ describe('TerminalService', () => {
 
 	it('en una terminal nueva espera a que el shell esté listo antes de escribir', async () => {
 		vi.useFakeTimers();
-		const { host, created, listeners, fireShellReady } = fakeHost();
-		const writing = new TerminalService(host).write('docker images');
+		const { host, target, created, listeners, fireShellReady } = fakeHost();
+		const writing = new TerminalService(host, target).write('docker images');
 		await vi.advanceTimersByTimeAsync(500);
 		expect(created[0].calls).toEqual(['show(false)']);
 
@@ -82,8 +82,8 @@ describe('TerminalService', () => {
 
 	it('con la integración del shell desactivada (sin aviso), escribe al agotar la espera', async () => {
 		vi.useFakeTimers();
-		const { host, created, listeners } = fakeHost();
-		const writing = new TerminalService(host, 1000).write('git status');
+		const { host, target, created, listeners } = fakeHost();
+		const writing = new TerminalService(host, target, 1000).write('git status');
 		await vi.advanceTimersByTimeAsync(999);
 		expect(created[0].calls).toEqual(['show(false)']);
 		await vi.advanceTimersByTimeAsync(1);
@@ -92,9 +92,36 @@ describe('TerminalService', () => {
 		expect(listeners.size).toBe(0);
 	});
 
+	it('escribe en el destino aunque no sea la terminal activa (la activa está ocupada), sin crear otra', async () => {
+		const free = fakeTerminal('gitbash', {});
+		let asked = 0;
+		const { host, created, listeners } = fakeHost();
+		const service = new TerminalService(host, () => {
+			asked++;
+			return free;
+		});
+		expect(await service.write('git status')).toBe(free);
+		expect(asked).toBe(1);
+		expect(created).toEqual([]);
+		expect(listeners.size).toBe(0);
+		expect(free.calls).toEqual(['show(false)', 'sendText(git status, false)']);
+	});
+
+	it('sin destino libre (todas ocupadas) crea "DevCommands" y espera al shell', async () => {
+		vi.useFakeTimers();
+		const { host, target, created, fireShellReady } = fakeHost();
+		const writing = new TerminalService(host, target).write('git status');
+		await vi.advanceTimersByTimeAsync(100);
+		expect(created[0].name).toBe('DevCommands');
+		expect(created[0].calls).toEqual(['show(false)']);
+		fireShellReady(created[0]);
+		await writing;
+		expect(created[0].calls).toEqual(['show(false)', 'sendText(git status, false)']);
+	});
+
 	it('muestra la terminal con el foco antes de escribir, y nunca ejecuta', async () => {
-		const { host, created, fireShellReady } = fakeHost();
-		const writing = new TerminalService(host).write('git reset --hard');
+		const { host, target, created, fireShellReady } = fakeHost();
+		const writing = new TerminalService(host, target).write('git reset --hard');
 		fireShellReady(created[0]);
 		await writing;
 		expect(created[0].calls).toEqual(['show(false)', 'sendText(git reset --hard, false)']);

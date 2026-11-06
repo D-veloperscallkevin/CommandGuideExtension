@@ -1,5 +1,26 @@
 import { describe, expect, it } from 'vitest';
-import { resolveTargetShell, shellIdFromName } from '../../../src/terminal/shell';
+import { isKnownShell, resolveTargetShell, shellIdFromName } from '../../../src/terminal/shell';
+
+describe('isKnownShell', () => {
+	it.each([
+		'C:\\Program Files\\PowerShell\\7\\pwsh.exe',
+		'C:\\Windows\\System32\\wsl.exe',
+		'C:\\Program Files\\Git\\bin\\bash.exe',
+		'/bin/bash',
+		'/usr/bin/fish',
+		'nu',
+		'CMD.EXE',
+	])('%s es un shell', (name) => {
+		expect(isKnownShell(name)).toBe(true);
+	});
+
+	it.each(['node', 'claude.exe', 'C:\\Program Files\\nodejs\\node.exe', '/usr/bin/python3', 'constructor', '', undefined])(
+		'"%s" no es un shell',
+		(name) => {
+			expect(isKnownShell(name)).toBe(false);
+		},
+	);
+});
 
 describe('shellIdFromName', () => {
 	it.each([

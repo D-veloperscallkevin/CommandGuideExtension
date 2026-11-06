@@ -1,6 +1,7 @@
-// Shell de la terminal de destino (la activa o, sin terminales, la del perfil por defecto) y
-// aviso cuando cambia. No importa `vscode`: recibe `window` y `env` con interfaces mínimas
-// (en la extensión, `vscode.window` y `vscode.env` encajan tal cual), así se testea con Vitest.
+// Shell de la terminal de destino (la misma en la que se escribiría o, si hay que crear una, la
+// del perfil por defecto) y aviso cuando cambia. No importa `vscode`: recibe el destino y
+// `env` con interfaces mínimas (en la extensión, `TerminalActivity` y `vscode.env`), así se
+// testea con Vitest.
 import type { ShellId } from '../catalog/types';
 import { resolveTargetShell } from './shell';
 
@@ -18,11 +19,12 @@ export interface ShellTerminal {
 	readonly creationOptions: object;
 }
 
-/** Lo que usamos de `vscode.window`. */
-export interface ShellWindow {
-	readonly activeTerminal: ShellTerminal | undefined;
-	readonly onDidChangeActiveTerminal: Subscribe<ShellTerminal | undefined>;
-	readonly onDidChangeTerminalState: Subscribe<ShellTerminal>;
+/** Lo que usamos de `TerminalActivity`. */
+export interface ShellTarget {
+	/** Terminal en la que se escribiría ahora; `undefined` si hay que crear una. */
+	target(): ShellTerminal | undefined;
+	/** Avisa cuando cambia el foco, una terminal se cierra, empieza o acaba un comando, o cambia su estado. */
+	onDidChange(listener: () => unknown): Disposable;
 }
 
 /** Lo que usamos de `vscode.env`. */
@@ -43,26 +45,18 @@ export class TargetShell implements Disposable {
 	private last: ShellId;
 
 	constructor(
-		private readonly window: ShellWindow,
 		private readonly env: ShellEnv,
 		private readonly platform: string,
+		private readonly destination: ShellTarget,
 	) {
 		this.last = this.current();
-		this.subscriptions = [
-			window.onDidChangeActiveTerminal(() => this.refresh()),
-			window.onDidChangeTerminalState((terminal) => {
-				// Solo importa la terminal en la que se escribiría.
-				if (terminal === this.window.activeTerminal) {
-					this.refresh();
-				}
-			}),
-			env.onDidChangeShell(() => this.refresh()),
-		];
+		// `refresh` solo avisa si el shell cambia: un evento de otra terminal no tiene efecto.
+		this.subscriptions = [destination.onDidChange(() => this.refresh()), env.onDidChangeShell(() => this.refresh())];
 	}
 
 	/** Shell de destino en este momento. */
 	current(): ShellId {
-		const terminal = this.window.activeTerminal;
+		const terminal = this.destination.target();
 		return resolveTargetShell(
 			{
 				detected: terminal?.state.shell,

@@ -22,15 +22,29 @@ function nextEvent<T>(event: vscode.Event<T>, ms: number): Promise<T> {
 }
 
 suite('Vista lateral', () => {
-	test('al abrir la vista, la extensión se activa, completa el handshake y envía el catálogo', async function () {
+	test('se activa tras el arranque sin crear la vista; al abrirla completa el handshake y envía el catálogo', async function () {
 		this.timeout(20_000);
 		const extension = vscode.extensions.getExtension<DevCommandsApi>(extensionId);
 		assert.ok(extension, `no se encuentra la extensión ${extensionId}`);
-		assert.strictEqual(extension.isActive, false, 'no debe activarse antes de abrir la vista');
 
+		// onStartupFinished: activa sin abrir la vista, y sin catálogo enviado (no hay webview).
+		const deadline = Date.now() + 10_000;
+		while (!extension.isActive && Date.now() < deadline) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+		}
+		assert.strictEqual(extension.isActive, true, 'debe activarse al terminar el arranque');
+		const api = extension.exports;
+		let sentBeforeOpening = false;
+		const early = api.onDidSendCatalog(() => {
+			sentBeforeOpening = true;
+		});
+		await new Promise((resolve) => setTimeout(resolve, 300));
+		early.dispose();
+		assert.strictEqual(sentBeforeOpening, false, 'no debe enviar el catálogo antes de abrir la vista');
+
+		const catalogSent = nextEvent(api.onDidSendCatalog, 10_000);
 		await vscode.commands.executeCommand('workbench.view.extension.devcommands');
-		const api = await extension.activate();
-		const { shell, categories } = await nextEvent(api.onDidSendCatalog, 10_000);
+		const { shell, categories } = await catalogSent;
 
 		assert.strictEqual(extension.isActive, true);
 		assert.deepStrictEqual(

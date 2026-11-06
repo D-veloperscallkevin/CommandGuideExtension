@@ -31,7 +31,7 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 5. To use it somewhere else, click the copy button next to it (or press `Ctrl+C`, `Cmd+C` on macOS, while the command has focus). It is copied to the clipboard and nothing is sent to the terminal.
 6. To repeat a command, open the **Recent** card: it lists the last 20 commands you wrote to the terminal, with the values you typed. Sending or copying one reuses those values without asking again. **Clear history** empties the list.
 
-The command goes to the active terminal; if there is none, a terminal named "DevCommands" is created. For commands with parameters (for instance the branch name in `git checkout -b feature/my-change`), an input box asks for each value first; press Escape to cancel. Values are quoted for the target shell, so spaces, quotes or `$` can't change the command. Copying asks for the same values.
+The command goes to the active terminal. If that terminal is busy running a program (Claude Code, a dev server, a Python REPL…), it goes to the free terminal you used most recently instead; if there is no free terminal, a terminal named "DevCommands" is created. The chosen terminal gets the focus, so you can see where the command went. For commands with parameters (for instance the branch name in `git checkout -b feature/my-change`), an input box asks for each value first; press Escape to cancel. Values are quoted for the target shell, so spaces, quotes or `$` can't change the command. Copying asks for the same values.
 
 Destructive commands (such as `git reset --hard` or `rm -rf`) show a confirmation dialog with the exact text before it is written or copied. To turn it off, uncheck **DevCommands: Confirm Destructive** (`devcommands.confirmDestructive`) in your user settings.
 
@@ -43,7 +43,7 @@ Requires VS Code 1.99 or later.
 
 Known limitations:
 
-- If the active terminal is running a process (for example a dev server), the text goes to that process. Nothing is run, but switch to a free terminal first.
+- Busy terminals are detected with VS Code's shell integration. In `cmd.exe`, or with shell integration turned off, a program started in the terminal is only detected if VS Code reports it (for example `node` or `python`); otherwise the text goes to that program. Nothing is run, but switch to a free terminal first.
 - If you had already typed something in the terminal, the command is appended after it.
 
 ## Search from the Command Palette

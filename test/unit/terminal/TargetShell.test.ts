@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { ShellId } from '../../../src/catalog/types';
-import { TargetShell, type ShellEnv, type ShellTerminal, type ShellWindow, type Subscribe } from '../../../src/terminal/TargetShell';
+import { TargetShell, type ShellEnv, type ShellTerminal, type Subscribe } from '../../../src/terminal/TargetShell';
+import { TerminalActivity, type ActivityWindow, type ShellExecutionEvent } from '../../../src/terminal/TerminalActivity';
 
 /** Evento falso: `fire` avisa a los suscritos y `size` dice cuántos quedan. */
 function fakeEvent<T>() {
@@ -22,26 +23,54 @@ function terminal(shell: string | undefined, creationOptions: object = {}): Shel
 	return { state: { shell }, creationOptions };
 }
 
-/** Ventana y entorno falsos, con el sistema operativo dado. */
-function setup({ active, defaultShell = '', platform = 'win32' }: { active?: ShellTerminal; defaultShell?: string; platform?: string } = {}) {
+/**
+ * Ventana y entorno falsos, con el sistema operativo dado. El destino lo decide un
+ * `TerminalActivity` real sobre la ventana falsa, como en la extensión.
+ */
+function setup({
+	active,
+	others = [],
+	defaultShell = '',
+	platform = 'win32',
+}: { active?: ShellTerminal; others?: ShellTerminal[]; defaultShell?: string; platform?: string } = {}) {
 	const activeChanged = fakeEvent<ShellTerminal | undefined>();
+	const closed = fakeEvent<ShellTerminal>();
 	const stateChanged = fakeEvent<ShellTerminal>();
+	const started = fakeEvent<ShellExecutionEvent<ShellTerminal>>();
+	const ended = fakeEvent<ShellExecutionEvent<ShellTerminal>>();
 	const shellChanged = fakeEvent<string>();
-	const window: ShellWindow & { activeTerminal: ShellTerminal | undefined } = {
+	const window: ActivityWindow<ShellTerminal> & { activeTerminal: ShellTerminal | undefined; terminals: ShellTerminal[] } = {
 		activeTerminal: active,
+		terminals: active ? [...others, active] : [...others],
 		onDidChangeActiveTerminal: activeChanged.subscribe,
+		onDidCloseTerminal: closed.subscribe,
 		onDidChangeTerminalState: stateChanged.subscribe,
+		onDidStartTerminalShellExecution: started.subscribe,
+		onDidEndTerminalShellExecution: ended.subscribe,
 	};
 	const env: ShellEnv & { shell: string } = { shell: defaultShell, onDidChangeShell: shellChanged.subscribe };
-	const target = new TargetShell(window, env, platform);
+	const activity = new TerminalActivity(window);
+	const target = new TargetShell(env, platform, activity);
 	const emitted: ShellId[] = [];
 	target.onDidChange((shell) => emitted.push(shell));
 
+	/** Activa `next` (abriéndola si hace falta); `undefined` cierra todas las terminales. */
 	const activate = (next: ShellTerminal | undefined) => {
+		if (next) {
+			if (!window.terminals.includes(next)) window.terminals.push(next);
+		} else {
+			for (const t of window.terminals.splice(0)) closed.fire(t);
+		}
 		window.activeTerminal = next;
 		activeChanged.fire(next);
 	};
-	return { target, window, env, emitted, activate, stateChanged, shellChanged, activeChanged };
+	/** Empieza un comando en `t` y devuelve cómo terminarlo. */
+	const run = (t: ShellTerminal) => {
+		const execution = {};
+		started.fire({ terminal: t, execution });
+		return () => ended.fire({ terminal: t, execution });
+	};
+	return { target, activity, window, env, emitted, activate, run, stateChanged, shellChanged, activeChanged };
 }
 
 describe('TargetShell.current', () => {
@@ -114,11 +143,52 @@ describe('TargetShell.onDidChange', () => {
 		expect(emitted).toEqual(['cmd']);
 	});
 
-	it('dispose deja de escuchar los eventos de VS Code', () => {
-		const { target, activeChanged, stateChanged, shellChanged, activate, emitted } = setup({ active: terminal('pwsh') });
+	it('dispose deja de escuchar el destino y el perfil por defecto', () => {
+		const { target, shellChanged, activate, emitted } = setup({ active: terminal('pwsh') });
 		target.dispose();
-		expect([activeChanged.size(), stateChanged.size(), shellChanged.size()]).toEqual([0, 0, 0]);
+		expect(shellChanged.size()).toBe(0);
 		activate(terminal('bash'));
+		expect(emitted).toEqual([]);
+	});
+});
+
+describe('TargetShell con terminales ocupadas', () => {
+	it('Windows: activa PowerShell ocupada con `claude` y Git Bash libre → bash; al salir vuelve a powershell', () => {
+		const gitbash = terminal('gitbash');
+		const pwsh = terminal('pwsh');
+		const { target, run, emitted } = setup({ active: pwsh, others: [gitbash], defaultShell: 'powershell.exe' });
+		expect(target.current()).toBe('powershell');
+		const stop = run(pwsh);
+		expect(target.current()).toBe('bash');
+		stop();
+		expect(target.current()).toBe('powershell');
+		expect(emitted).toEqual(['bash', 'powershell']);
+	});
+
+	it('Linux: la única terminal bash ocupada con `pnpm dev` → perfil por defecto zsh', () => {
+		const bash = terminal('bash');
+		const { target, run, emitted } = setup({ active: bash, defaultShell: '/usr/bin/zsh', platform: 'linux' });
+		run(bash);
+		expect(target.current()).toBe('zsh');
+		expect(emitted).toEqual(['zsh']);
+	});
+
+	it('`node` detectado en la activa → shell de la otra terminal libre', () => {
+		const gitbash = terminal('gitbash');
+		const active = terminal('pwsh');
+		const { target, stateChanged, emitted } = setup({ active, others: [gitbash], defaultShell: 'powershell.exe' });
+		active.state.shell = 'node';
+		stateChanged.fire(active);
+		expect(target.current()).toBe('bash');
+		expect(emitted).toEqual(['bash']);
+	});
+
+	it('un cambio de ocupación que no mueve el shell no avisa', () => {
+		const a = terminal('bash');
+		const b = terminal('bash');
+		const { run, emitted } = setup({ active: a, others: [b], platform: 'linux' });
+		const stop = run(a);
+		stop();
 		expect(emitted).toEqual([]);
 	});
 });
