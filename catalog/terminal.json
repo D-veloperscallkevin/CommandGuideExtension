@@ -17,6 +17,7 @@
   },
   "icon": "terminal",
   "order": 50,
+  "section": "tools",
   "commands": [
     {
       "id": "terminal.current-directory",

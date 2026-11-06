@@ -35,6 +35,7 @@ suite('Vista lateral', () => {
 		}
 		assert.strictEqual(extension.isActive, true, 'debe activarse al terminar el arranque');
 		const api = extension.exports;
+		assert.strictEqual(api.isCatalogLoaded(), false, 'no debe leer el catálogo al activarse');
 		let sentBeforeOpening = false;
 		const early = api.onDidSendCatalog(() => {
 			sentBeforeOpening = true;
@@ -46,6 +47,7 @@ suite('Vista lateral', () => {
 		const catalogSent = nextEvent(api.onDidSendCatalog, 10_000);
 		await vscode.commands.executeCommand('workbench.view.extension.devcommands');
 		const { shell, categories } = await catalogSent;
+		assert.strictEqual(api.isCatalogLoaded(), true, 'al abrir la vista lee el catálogo');
 
 		assert.strictEqual(extension.isActive, true);
 		assert.deepStrictEqual(

@@ -5,7 +5,7 @@
   "description": "Una categoría del catálogo de DevCommands con sus comandos.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "id", "title", "icon", "order", "commands"],
+  "required": ["version", "id", "title", "icon", "order", "section", "commands"],
   "properties": {
     "$schema": { "type": "string" },
     "version": {
@@ -26,6 +26,10 @@
     "order": {
       "description": "Posición de la categoría (ascendente). Empates por id.",
       "type": "integer"
+    },
+    "section": {
+      "description": "Sección del panel en la que aparece la categoría.",
+      "enum": ["languages", "vcs", "frameworks", "databases", "infra", "cloud", "servers", "quality", "gamedev", "tools"]
     },
     "commands": {
       "type": "array",

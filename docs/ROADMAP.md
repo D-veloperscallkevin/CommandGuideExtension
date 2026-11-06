@@ -282,7 +282,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 
 | # | Change | Qué entrega |
 | --- | --- | --- |
-| 3.1 | `catalog-sections` | Categorías agrupadas en secciones (Lenguajes, Control de versiones, Frameworks, Bases de datos, Contenedores e infraestructura, Nube, Servidores y redes, Testing y calidad, Game dev, Herramientas e IA) y carga de categorías bajo demanda para que la activación siga por debajo de 100 ms con ~3 MB de catálogo |
+| 3.1 | `catalog-sections` | Categorías agrupadas en secciones (Lenguajes, Control de versiones, Frameworks, Bases de datos, Contenedores e infraestructura, Nube, Servidores y redes, Testing y calidad, Game dev, Herramientas e IA) y carga de categorías bajo demanda para que la activación siga por debajo de 100 ms con ~3 MB de catálogo ✅ |
 | 3.2 | `project-signals` | Detección del proyecto ampliada: `go.mod`, `Cargo.toml`, `pyproject.toml`/`requirements.txt`, `composer.json`, `Gemfile`, `pubspec.yaml`, `*.csproj`, `pom.xml`/`build.gradle`, `CMakeLists.txt`, `prisma/schema.prisma`, `wrangler.toml`, `vercel.json`, `*.tf`… según las categorías de cada lote |
 | 3.3 | `catalog-js-python` | npx, yarn, bun, deno y tsc; Python (python, pip, venv, poetry, uv, pipx, conda); gestores de versiones (nvm, fnm, volta, corepack, pyenv) |
 | 3.4 | `catalog-compiled` | Java/Kotlin (java, javac, mvn, gradle, sdkman), .NET (dotnet new/run/build/ef), C/C++ (gcc, g++, clang, make, cmake), Go, Rust (cargo, rustc, rustup) |

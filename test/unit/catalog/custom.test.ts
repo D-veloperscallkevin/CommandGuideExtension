@@ -32,12 +32,17 @@ describe('parseCustomCommands', () => {
 		});
 	});
 
-	it('categoría mínima: ids custom-, icono terminal, riesgo safe y sin descripción', () => {
+	it('categoría mínima: ids custom-, sección custom, icono terminal, riesgo safe y sin descripción', () => {
 		const { categories, problems } = parseCustomCommands([category([deploy])]);
 		expect(problems).toEqual([]);
 		expect(categories).toHaveLength(1);
 		const [cat] = categories;
-		expect(cat).toMatchObject({ id: 'custom-mi-proyecto', icon: 'terminal', title: { en: 'Mi proyecto', es: 'Mi proyecto' } });
+		expect(cat).toMatchObject({
+			id: 'custom-mi-proyecto',
+			icon: 'terminal',
+			section: 'custom',
+			title: { en: 'Mi proyecto', es: 'Mi proyecto' },
+		});
 		expect(cat.commands[0]).toMatchObject({
 			id: 'custom-mi-proyecto.deploy',
 			command: 'pnpm run deploy',

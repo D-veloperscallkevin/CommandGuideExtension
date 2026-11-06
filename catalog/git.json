@@ -17,6 +17,7 @@
   },
   "icon": "git-branch",
   "order": 10,
+  "section": "vcs",
   "commands": [
     {
       "id": "git.clone",

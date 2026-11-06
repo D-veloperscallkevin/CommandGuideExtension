@@ -17,6 +17,7 @@
   },
   "icon": "package",
   "order": 25,
+  "section": "languages",
   "commands": [
     {
       "id": "pnpm.install",

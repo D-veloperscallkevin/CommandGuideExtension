@@ -2,9 +2,9 @@
 // tipos (`import type`); la validación se ejecuta en la extensión, que no confía en
 // nada de lo que llega del webview.
 import type { CategorySummary, CommandSummary } from '../catalog/CatalogService';
-import type { Locale, ShellId } from '../catalog/types';
+import type { Locale, SectionId, ShellId } from '../catalog/types';
 
-export type { CategorySummary, CommandSummary, ShellId };
+export type { CategorySummary, CommandSummary, SectionId, ShellId };
 
 /**
  * Entrada del historial tal como la ve el webview: su clave, el comando y su texto para el shell

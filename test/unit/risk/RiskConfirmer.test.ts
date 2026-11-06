@@ -7,6 +7,7 @@ import {
 	type RiskMessageOptions,
 	type RiskMessages,
 } from '../../../src/risk/RiskConfirmer';
+import { bundledCatalog } from '../catalog/bundled';
 
 const messages: RiskMessages = {
 	message: (title) => `«${title}» es destructivo`,
@@ -34,7 +35,7 @@ function fakeWindow(answer: 'button' | string | undefined) {
 	return { window, shown };
 }
 
-const catalog = new CatalogService();
+const catalog = new CatalogService(bundledCatalog);
 const command = (id: string) => catalog.getCommand(id) as Command;
 
 describe('RiskConfirmer', () => {

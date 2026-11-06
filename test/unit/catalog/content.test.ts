@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildCategorySummaries, CatalogService } from '../../../src/catalog/CatalogService';
-import { bundledCatalog } from '../../../src/catalog/index';
+import { bundledCatalog } from './bundled';
 import type { Catalog, LocalizedString, LocalizedTags, ShellId } from '../../../src/catalog/types';
 import { SUPPORTED_LOCALES } from '../../../src/i18n/locales';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
@@ -65,7 +65,7 @@ describe('contenido mínimo', () => {
 	});
 
 	it('el catálogo empaquetado tiene las 6 categorías en orden', () => {
-		expect(new CatalogService().getCategories().map((c) => c.id)).toEqual([
+		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
 			'pnpm',
@@ -86,7 +86,7 @@ describe('contenido mínimo', () => {
 
 	/** Ejemplo de borrar una carpeta de Terminal para un shell. */
 	const removeDirectoryFor = (shell: ShellId) =>
-		buildCategorySummaries(new CatalogService().getCategories(), 'en', shell)
+		buildCategorySummaries(new CatalogService(bundledCatalog).getCategories(), 'en', shell)
 			.flatMap((c) => c.commands)
 			.find((c) => c.id === 'terminal.remove-directory')?.example;
 

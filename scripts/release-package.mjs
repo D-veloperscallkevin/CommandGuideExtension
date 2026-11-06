@@ -2,9 +2,9 @@
 // (que ejecuta antes vscode:prepublish, el build de producción) y comprueba su contenido y su
 // tamaño. Sin dependencias propias: funciona igual en Windows (cmd/PowerShell) y en Linux/WSL.
 import { spawnSync } from 'node:child_process';
-import { readFileSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { checkSize, disallowedFiles, formatBytes, isPreRelease, missingFiles, vsixName } from './release-check.mjs';
+import { catalogPackageFiles, checkSize, disallowedFiles, formatBytes, isPreRelease, missingFiles, vsixName } from './release-check.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 
@@ -30,8 +30,8 @@ function vsce(args, { capture = false } = {}) {
 	return result.stdout ?? '';
 }
 
-/** Lista los archivos que entrarían en el paquete y falla si alguno no está permitido. */
-function checkFiles(when) {
+/** Lista los archivos que entrarían en el paquete y falla si alguno no está permitido o falta uno de `required`. */
+function checkFiles(when, required) {
 	const files = vsce(['ls', '--no-dependencies'], { capture: true })
 		.split(/\r?\n/)
 		.filter((line) => line.trim().length > 0);
@@ -53,14 +53,15 @@ const required = [pkg.icon ?? 'media/icon.png', 'ThirdPartyNotices.txt'];
 const preRelease = isPreRelease(pkg.version);
 
 console.log('▶ contenido (antes del build)');
-checkFiles('antes del build');
+checkFiles('antes del build', required);
 
 console.log(`\n▶ vsce package → ${name}${preRelease ? ' (pre-release)' : ''}`);
 // Pre-release solo mientras la versión sea 0.x (D4 de marketplace-release).
 vsce(['package', '--no-dependencies', ...(preRelease ? ['--pre-release'] : []), '--out', name]);
 
 console.log('\n▶ contenido (con el build)');
-const files = checkFiles('con el build');
+// Con el build, también cada categoría del catálogo en dist/catalog/ (D1 de catalog-sections).
+const files = checkFiles('con el build', [...required, ...catalogPackageFiles(readdirSync(resolve(root, 'catalog')))]);
 
 const path = resolve(root, name);
 const bytes = statSync(path).size;

@@ -25,7 +25,7 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 ## Usage
 
 1. Open the **DevCommands** view in the Activity Bar. It includes more than 100 commands for Git, npm, pnpm, Node.js, Docker and the terminal (files, folders, processes).
-2. Pick a category to see its commands, with a description, an example and a warning on risky ones. Or type in the search box to find commands across all categories, in English or Spanish (accents and case don't matter); press Down to jump to the results and Escape to clear the search.
+2. Categories are grouped in collapsible sections (Languages & runtimes, Version control, Containers & infrastructure, Tools & AI…): click a section, or press Right and Left on it, to expand or collapse it. The panel remembers which ones you opened. Pick a category to see its commands, with a description, an example and a warning on risky ones. Or type in the search box to find commands across all categories, in English or Spanish (accents and case don't matter); press Down to jump to the results and Escape to clear the search.
 3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
 4. To keep a command at hand, click the star next to it (or press `Ctrl+D`, `Cmd+D` on macOS, while it has focus). Your favorites appear in the **Favorites** card at the top of the categories, in the order you starred them, and sync across machines with Settings Sync.
 5. To use it somewhere else, click the copy button next to it (or press `Ctrl+C`, `Cmd+C` on macOS, while the command has focus). It is copied to the clipboard and nothing is sent to the terminal.
@@ -54,7 +54,7 @@ It has no default shortcut. To add one, open **Keyboard Shortcuts** (`Ctrl+K Ctr
 
 ## Project detection
 
-When a folder is open, the categories that fit the project appear first, under **In this project**; the rest stay under **All**. DevCommands only checks whether these files or folders exist in the root of each workspace folder (it never reads them):
+When a folder is open, the categories that fit the project appear first, under **In this project** (expanded); the rest stay in their sections. DevCommands only checks whether these files or folders exist in the root of each workspace folder (it never reads them):
 
 | In the root | Category |
 | --- | --- |

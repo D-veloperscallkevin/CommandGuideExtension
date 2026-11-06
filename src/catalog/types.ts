@@ -8,6 +8,26 @@ export type ShellId = 'bash' | 'zsh' | 'powershell' | 'cmd';
 
 export type Risk = 'safe' | 'caution' | 'destructive';
 
+/**
+ * Secciones del panel, en el orden en que se muestran. `custom` es solo para las categorías
+ * propias del usuario: el schema del catálogo no la acepta.
+ */
+export const SECTION_ORDER = [
+	'languages',
+	'vcs',
+	'frameworks',
+	'databases',
+	'infra',
+	'cloud',
+	'servers',
+	'quality',
+	'gamedev',
+	'tools',
+	'custom',
+] as const;
+
+export type SectionId = (typeof SECTION_ORDER)[number];
+
 /** `en` y `es` obligatorios; el resto de idiomas, opcionales (se muestra `en` si faltan). */
 export type LocalizedString = Readonly<Record<RequiredCatalogLocale, string> & Partial<Record<Locale, string>>>;
 
@@ -41,6 +61,7 @@ export interface Category {
 	/** Nombre de un Codicon de VS Code. */
 	readonly icon: string;
 	readonly order: number;
+	readonly section: SectionId;
 	readonly commands: readonly Command[];
 }
 

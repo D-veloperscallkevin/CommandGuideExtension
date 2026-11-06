@@ -17,6 +17,7 @@
   },
   "icon": "package",
   "order": 20,
+  "section": "languages",
   "commands": [
     {
       "id": "npm.install",

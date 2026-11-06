@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bundledCatalog } from '../../../src/catalog/index';
+import { bundledCatalog } from './bundled';
 import { checkCatalogRules, paramProblems } from '../../../src/catalog/validate';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 

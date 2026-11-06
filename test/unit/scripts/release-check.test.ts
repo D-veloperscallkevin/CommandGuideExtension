@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+	catalogPackageFiles,
 	checkSize,
 	disallowedFiles,
 	formatBytes,
@@ -113,5 +114,23 @@ describe('missingFiles', () => {
 		expect(
 			missingFiles(['media\\icon.png', ' ./ThirdPartyNotices.txt'], ['./media/icon.png', 'ThirdPartyNotices.txt']),
 		).toEqual([]);
+	});
+});
+
+describe('catalogPackageFiles', () => {
+	it('cada categoría de catalog/ va en dist/catalog/, sin schema.json ni otros archivos', () => {
+		expect(catalogPackageFiles(['schema.json', 'npm.json', 'git.json', 'README.md'])).toEqual([
+			'dist/catalog/git.json',
+			'dist/catalog/npm.json',
+		]);
+	});
+
+	it('con missingFiles nombra la categoría que falta en el paquete', () => {
+		const required = catalogPackageFiles(['git.json', 'npm.json']);
+		expect(missingFiles(['package.json', 'dist/catalog/git.json'], required)).toEqual(['dist/catalog/npm.json']);
+	});
+
+	it('dist/catalog/*.json está permitido en el paquete', () => {
+		expect(disallowedFiles(['dist/catalog/git.json'])).toEqual([]);
 	});
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bundledCatalog } from '../../../src/catalog/index';
+import { bundledCatalog } from '../catalog/bundled';
 import { detectCategories, PROJECT_SIGNALS, SIGNAL_GLOB } from '../../../src/project/detect';
 
 /** Comprobación de existencia sobre un mapa raíz → entradas. */

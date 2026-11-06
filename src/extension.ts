@@ -1,5 +1,7 @@
 import { randomUUID } from 'node:crypto';
+import * as path from 'node:path';
 import * as vscode from 'vscode';
+import { loadCatalogDir } from './catalog/load';
 import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { registerCustomCommands } from './customCommands';
@@ -43,6 +45,8 @@ export interface DevCommandsApi {
 	searchEntries(query: string): readonly SearchEntry[];
 	/** Detecta ahora las categorías del proyecto y las devuelve ordenadas por id. */
 	detectProject(): Promise<readonly string[]>;
+	/** Si ya se han leído los archivos del catálogo (no debe ocurrir al activar). */
+	isCatalogLoaded(): boolean;
 }
 
 // Se activa al terminar el arranque de VS Code (onStartupFinished), para saber desde el principio
@@ -74,7 +78,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 			copyButton: vscode.l10n.t('Copy'),
 		},
 	);
-	const catalog = new CatalogService();
+	// El catálogo se lee de dist/catalog/ en el primer uso (abrir la vista o la paleta), nunca aquí.
+	const catalog = new CatalogService(() => loadCatalogDir(path.join(context.extensionPath, 'dist', 'catalog')));
 	// Antes del proveedor: el primer catalog ya incluye los comandos propios.
 	const customCommands = registerCustomCommands(catalog, log);
 	context.globalState.setKeysForSync([FavoritesStore.key]);
@@ -125,6 +130,7 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 			await project.refresh();
 			return [...project.current()].sort();
 		},
+		isCatalogLoaded: () => catalog.isLoaded,
 		sendToTerminal: (commandId) => provider.sendToTerminal(commandId),
 		copyToClipboard: (commandId) => provider.copyToClipboard(commandId),
 		toggleFavorite: (commandId) => provider.toggleFavorite(commandId),

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { bundledCatalog } from '../../../src/catalog/index';
+import { bundledCatalog } from './bundled';
 import type { Category } from '../../../src/catalog/types';
 import { makeCategory } from './fixtures';
 
