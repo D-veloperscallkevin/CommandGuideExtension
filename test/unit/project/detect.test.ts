@@ -19,7 +19,7 @@ const custom = (...signals: ProjectSignal[]) => compileSignals(signals);
 
 describe('detectCategories', () => {
 	it.each(realSignals.map((s) => [s.pattern, s.categoryId]))('%s en la raíz detecta %s', async (pattern, categoryId) => {
-		expect(await ids({ root: [pattern] })).toEqual([categoryId]);
+		expect(await ids({ root: [pattern] })).toContain(categoryId);
 	});
 
 	it('proyecto con pnpm y Docker', async () => {
@@ -43,7 +43,28 @@ describe('detectCategories', () => {
 	});
 
 	it('las señales nuevas de las categorías existentes', async () => {
-		expect(await ids({ root: ['.nvmrc', 'pnpm-workspace.yaml', 'Containerfile'] })).toEqual(['docker', 'node', 'pnpm']);
+		expect(await ids({ root: ['.nvmrc', 'pnpm-workspace.yaml', 'Containerfile'] })).toEqual([
+			'docker',
+			'node',
+			'pnpm',
+			'version-managers',
+		]);
+	});
+
+	it('Yarn y TypeScript (tsconfig.build.json)', async () => {
+		expect(await ids({ root: ['package.json', 'yarn.lock', 'tsconfig.build.json'] })).toEqual([
+			'node',
+			'typescript',
+			'yarn',
+		]);
+	});
+
+	it('Deno sin package.json', async () => {
+		expect(await ids({ root: ['deno.json', 'main.ts'] })).toEqual(['deno']);
+	});
+
+	it('.python-version detecta los gestores de versiones', async () => {
+		expect(await ids({ root: ['.python-version'] })).toEqual(['version-managers']);
 	});
 
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {

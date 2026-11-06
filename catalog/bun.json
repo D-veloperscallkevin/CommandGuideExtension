@@ -1,0 +1,1187 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "bun",
+  "title": {
+    "en": "Bun",
+    "es": "Bun",
+    "pt-br": "Bun",
+    "fr": "Bun",
+    "de": "Bun",
+    "it": "Bun",
+    "ja": "Bun",
+    "ko": "Bun",
+    "zh-cn": "Bun",
+    "zh-tw": "Bun",
+    "ru": "Bun"
+  },
+  "icon": "zap",
+  "order": 27,
+  "section": "languages",
+  "detect": ["bun.lock", "bun.lockb", "bunfig.toml"],
+  "commands": [
+    {
+      "id": "bun.install",
+      "title": {
+        "en": "Install dependencies",
+        "es": "Instalar dependencias",
+        "pt-br": "Instalar dependências",
+        "fr": "Installer les dépendances",
+        "de": "Abhängigkeiten installieren",
+        "it": "Installa le dipendenze",
+        "ja": "依存関係をインストール",
+        "ko": "의존성 설치",
+        "zh-cn": "安装依赖",
+        "zh-tw": "安裝相依套件",
+        "ru": "Установить зависимости"
+      },
+      "description": {
+        "en": "Installs all dependencies of package.json with Bun",
+        "es": "Instala con Bun todas las dependencias de package.json",
+        "pt-br": "Instala com o Bun todas as dependências do package.json",
+        "fr": "Installe avec Bun toutes les dépendances de package.json",
+        "de": "Installiert mit Bun alle Abhängigkeiten aus package.json",
+        "it": "Installa con Bun tutte le dipendenze di package.json",
+        "ja": "package.json のすべての依存関係を Bun でインストールします",
+        "ko": "Bun으로 package.json의 모든 의존성을 설치합니다",
+        "zh-cn": "使用 Bun 安装 package.json 中的所有依赖",
+        "zh-tw": "使用 Bun 安裝 package.json 中的所有相依套件",
+        "ru": "Устанавливает все зависимости из package.json с помощью Bun"
+      },
+      "command": "bun install",
+      "tags": {
+        "en": ["bun", "install", "dependencies"],
+        "es": ["bun", "install", "dependencias", "instalar"],
+        "pt-br": ["bun", "install", "dependências", "instalar"],
+        "fr": ["bun", "install", "dépendances", "installer"],
+        "de": ["bun", "install", "Abhängigkeiten", "installieren"],
+        "it": ["bun", "install", "dipendenze", "installare"],
+        "ja": ["bun", "install", "依存関係", "インストール"],
+        "ko": ["bun", "install", "의존성", "설치"],
+        "zh-cn": ["bun", "install", "依赖", "安装"],
+        "zh-tw": ["bun", "install", "相依套件", "安裝"],
+        "ru": ["bun", "install", "зависимости", "установка"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/install"
+    },
+    {
+      "id": "bun.install-frozen",
+      "title": {
+        "en": "Install without changing the lockfile",
+        "es": "Instalar sin cambiar el lockfile",
+        "pt-br": "Instalar sem alterar o lockfile",
+        "fr": "Installer sans modifier le lockfile",
+        "de": "Installieren, ohne den Lockfile zu ändern",
+        "it": "Installa senza modificare il lockfile",
+        "ja": "lockfile を変更せずにインストール",
+        "ko": "lockfile을 변경하지 않고 설치",
+        "zh-cn": "不修改 lockfile 进行安装",
+        "zh-tw": "不修改 lockfile 進行安裝",
+        "ru": "Установить без изменения lockfile"
+      },
+      "description": {
+        "en": "Installs exactly what bun.lock says and fails if it is out of date, as in CI",
+        "es": "Instala exactamente lo que indica bun.lock y falla si está desactualizado, como en CI",
+        "pt-br": "Instala exatamente o que diz o bun.lock e falha se estiver desatualizado, como na CI",
+        "fr": "Installe exactement ce qu’indique bun.lock et échoue s’il n’est pas à jour, comme en CI",
+        "de": "Installiert genau, was bun.lock vorgibt, und schlägt fehl, wenn er veraltet ist, wie in CI",
+        "it": "Installa esattamente ciò che indica bun.lock e fallisce se non è aggiornato, come in CI",
+        "ja": "bun.lock のとおりにインストールし、古い場合は失敗します（CI 向け）",
+        "ko": "bun.lock 그대로 설치하고 오래되었으면 실패합니다(CI용)",
+        "zh-cn": "严格按照 bun.lock 安装，过期时失败（适用于 CI）",
+        "zh-tw": "嚴格依照 bun.lock 安裝，過期時失敗（適用於 CI）",
+        "ru": "Устанавливает строго по bun.lock и завершается ошибкой, если он устарел, как в CI"
+      },
+      "command": "bun install --frozen-lockfile",
+      "tags": {
+        "en": ["bun", "frozen-lockfile", "ci", "lockfile", "frozen"],
+        "es": ["bun", "frozen-lockfile", "ci", "lockfile", "congelado", "integración continua"],
+        "pt-br": ["bun", "frozen-lockfile", "ci", "lockfile", "congelado", "integração contínua"],
+        "fr": ["bun", "frozen-lockfile", "ci", "lockfile", "figé", "intégration continue"],
+        "de": ["bun", "frozen-lockfile", "ci", "lockfile", "eingefroren"],
+        "it": ["bun", "frozen-lockfile", "ci", "lockfile", "bloccato"],
+        "ja": ["bun", "frozen-lockfile", "ci", "lockfile", "固定"],
+        "ko": ["bun", "frozen-lockfile", "ci", "lockfile", "고정"],
+        "zh-cn": ["bun", "frozen-lockfile", "ci", "lockfile", "锁定"],
+        "zh-tw": ["bun", "frozen-lockfile", "ci", "lockfile", "鎖定"],
+        "ru": ["bun", "frozen-lockfile", "ci", "lockfile", "фиксированный"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/install"
+    },
+    {
+      "id": "bun.add",
+      "title": {
+        "en": "Add a dependency",
+        "es": "Añadir una dependencia",
+        "pt-br": "Adicionar uma dependência",
+        "fr": "Ajouter une dépendance",
+        "de": "Abhängigkeit hinzufügen",
+        "it": "Aggiungi una dipendenza",
+        "ja": "依存関係を追加",
+        "ko": "의존성 추가",
+        "zh-cn": "添加依赖",
+        "zh-tw": "新增相依套件",
+        "ru": "Добавить зависимость"
+      },
+      "description": {
+        "en": "Installs a package and saves it in dependencies",
+        "es": "Instala un paquete y lo guarda en dependencies",
+        "pt-br": "Instala um pacote e o salva em dependencies",
+        "fr": "Installe un paquet et l’enregistre dans dependencies",
+        "de": "Installiert ein Paket und speichert es unter dependencies",
+        "it": "Installa un pacchetto e lo salva in dependencies",
+        "ja": "パッケージをインストールし、dependencies に保存します",
+        "ko": "패키지를 설치하고 dependencies에 저장합니다",
+        "zh-cn": "安装一个包并保存到 dependencies",
+        "zh-tw": "安裝一個套件並儲存到 dependencies",
+        "ru": "Устанавливает пакет и сохраняет его в dependencies"
+      },
+      "command": "bun add ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "zod",
+            "es": "zod",
+            "pt-br": "zod",
+            "fr": "zod",
+            "de": "zod",
+            "it": "zod",
+            "ja": "zod",
+            "ko": "zod",
+            "zh-cn": "zod",
+            "zh-tw": "zod",
+            "ru": "zod"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "add", "dependency", "install"],
+        "es": ["bun", "add", "dependencia", "añadir", "instalar"],
+        "pt-br": ["bun", "add", "dependência", "adicionar"],
+        "fr": ["bun", "add", "dépendance", "ajouter"],
+        "de": ["bun", "add", "Abhängigkeit", "hinzufügen"],
+        "it": ["bun", "add", "dipendenza", "aggiungere"],
+        "ja": ["bun", "add", "依存関係", "追加"],
+        "ko": ["bun", "add", "의존성", "추가"],
+        "zh-cn": ["bun", "add", "依赖", "添加"],
+        "zh-tw": ["bun", "add", "相依套件", "新增"],
+        "ru": ["bun", "add", "зависимость", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/add"
+    },
+    {
+      "id": "bun.add-dev",
+      "title": {
+        "en": "Add a dev dependency",
+        "es": "Añadir una dependencia de desarrollo",
+        "pt-br": "Adicionar uma dependência de desenvolvimento",
+        "fr": "Ajouter une dépendance de développement",
+        "de": "Entwicklungsabhängigkeit hinzufügen",
+        "it": "Aggiungi una dipendenza di sviluppo",
+        "ja": "開発用の依存関係を追加",
+        "ko": "개발 의존성 추가",
+        "zh-cn": "添加开发依赖",
+        "zh-tw": "新增開發相依套件",
+        "ru": "Добавить dev-зависимость"
+      },
+      "description": {
+        "en": "Installs a package and saves it in devDependencies",
+        "es": "Instala un paquete y lo guarda en devDependencies",
+        "pt-br": "Instala um pacote e o salva em devDependencies",
+        "fr": "Installe un paquet et l’enregistre dans devDependencies",
+        "de": "Installiert ein Paket und speichert es unter devDependencies",
+        "it": "Installa un pacchetto e lo salva in devDependencies",
+        "ja": "パッケージをインストールし、devDependencies に保存します",
+        "ko": "패키지를 설치하고 devDependencies에 저장합니다",
+        "zh-cn": "安装一个包并保存到 devDependencies",
+        "zh-tw": "安裝一個套件並儲存到 devDependencies",
+        "ru": "Устанавливает пакет и сохраняет его в devDependencies"
+      },
+      "command": "bun add -d ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "typescript",
+            "es": "typescript",
+            "pt-br": "typescript",
+            "fr": "typescript",
+            "de": "typescript",
+            "it": "typescript",
+            "ja": "typescript",
+            "ko": "typescript",
+            "zh-cn": "typescript",
+            "zh-tw": "typescript",
+            "ru": "typescript"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "add", "dev", "devDependencies", "install"],
+        "es": ["bun", "add", "dev", "devDependencies", "desarrollo", "añadir"],
+        "pt-br": ["bun", "add", "dev", "devDependencies", "desenvolvimento", "adicionar"],
+        "fr": ["bun", "add", "dev", "devDependencies", "développement", "ajouter"],
+        "de": ["bun", "add", "dev", "devDependencies", "Entwicklung", "hinzufügen"],
+        "it": ["bun", "add", "dev", "devDependencies", "sviluppo", "aggiungere"],
+        "ja": ["bun", "add", "dev", "devDependencies", "開発", "追加"],
+        "ko": ["bun", "add", "dev", "devDependencies", "개발", "추가"],
+        "zh-cn": ["bun", "add", "dev", "devDependencies", "开发", "添加"],
+        "zh-tw": ["bun", "add", "dev", "devDependencies", "開發", "新增"],
+        "ru": ["bun", "add", "dev", "devDependencies", "разработка", "добавить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/add"
+    },
+    {
+      "id": "bun.remove",
+      "title": {
+        "en": "Remove a dependency",
+        "es": "Quitar una dependencia",
+        "pt-br": "Remover uma dependência",
+        "fr": "Supprimer une dépendance",
+        "de": "Abhängigkeit entfernen",
+        "it": "Rimuovi una dipendenza",
+        "ja": "依存関係を削除",
+        "ko": "의존성 제거",
+        "zh-cn": "移除依赖",
+        "zh-tw": "移除相依套件",
+        "ru": "Удалить зависимость"
+      },
+      "description": {
+        "en": "Uninstalls a package and removes it from package.json and bun.lock",
+        "es": "Desinstala un paquete y lo quita de package.json y bun.lock",
+        "pt-br": "Desinstala um pacote e o remove do package.json e do bun.lock",
+        "fr": "Désinstalle un paquet et le retire de package.json et de bun.lock",
+        "de": "Deinstalliert ein Paket und entfernt es aus package.json und bun.lock",
+        "it": "Disinstalla un pacchetto e lo rimuove da package.json e bun.lock",
+        "ja": "パッケージをアンインストールし、package.json と bun.lock から削除します",
+        "ko": "패키지를 제거하고 package.json과 bun.lock에서 삭제합니다",
+        "zh-cn": "卸载一个包并从 package.json 和 bun.lock 中移除",
+        "zh-tw": "解除安裝一個套件並從 package.json 和 bun.lock 移除",
+        "ru": "Удаляет пакет и убирает его из package.json и bun.lock"
+      },
+      "command": "bun remove ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "zod",
+            "es": "zod",
+            "pt-br": "zod",
+            "fr": "zod",
+            "de": "zod",
+            "it": "zod",
+            "ja": "zod",
+            "ko": "zod",
+            "zh-cn": "zod",
+            "zh-tw": "zod",
+            "ru": "zod"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "remove", "uninstall", "delete"],
+        "es": ["bun", "remove", "quitar", "desinstalar", "eliminar"],
+        "pt-br": ["bun", "remove", "remover", "desinstalar"],
+        "fr": ["bun", "remove", "supprimer", "désinstaller"],
+        "de": ["bun", "remove", "entfernen", "deinstallieren"],
+        "it": ["bun", "remove", "rimuovere", "disinstallare"],
+        "ja": ["bun", "remove", "削除", "アンインストール"],
+        "ko": ["bun", "remove", "제거", "삭제"],
+        "zh-cn": ["bun", "remove", "移除", "卸载"],
+        "zh-tw": ["bun", "remove", "移除", "解除安裝"],
+        "ru": ["bun", "remove", "удалить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/remove"
+    },
+    {
+      "id": "bun.run",
+      "title": {
+        "en": "Run a script",
+        "es": "Ejecutar un script",
+        "pt-br": "Executar um script",
+        "fr": "Exécuter un script",
+        "de": "Skript ausführen",
+        "it": "Esegui uno script",
+        "ja": "スクリプトを実行",
+        "ko": "스크립트 실행",
+        "zh-cn": "运行脚本",
+        "zh-tw": "執行指令碼",
+        "ru": "Запустить скрипт"
+      },
+      "description": {
+        "en": "Runs a script from package.json with Bun",
+        "es": "Ejecuta con Bun un script de package.json",
+        "pt-br": "Executa com o Bun um script do package.json",
+        "fr": "Exécute avec Bun un script de package.json",
+        "de": "Führt mit Bun ein Skript aus package.json aus",
+        "it": "Esegue con Bun uno script di package.json",
+        "ja": "package.json のスクリプトを Bun で実行します",
+        "ko": "Bun으로 package.json의 스크립트를 실행합니다",
+        "zh-cn": "使用 Bun 运行 package.json 中的脚本",
+        "zh-tw": "使用 Bun 執行 package.json 中的指令碼",
+        "ru": "Запускает скрипт из package.json с помощью Bun"
+      },
+      "command": "bun run ${script}",
+      "params": [
+        {
+          "name": "script",
+          "label": {
+            "en": "Script name",
+            "es": "Nombre del script",
+            "pt-br": "Nome do script",
+            "fr": "Nom du script",
+            "de": "Skriptname",
+            "it": "Nome dello script",
+            "ja": "スクリプト名",
+            "ko": "스크립트 이름",
+            "zh-cn": "脚本名称",
+            "zh-tw": "指令碼名稱",
+            "ru": "Имя скрипта"
+          },
+          "placeholder": {
+            "en": "dev",
+            "es": "dev",
+            "pt-br": "dev",
+            "fr": "dev",
+            "de": "dev",
+            "it": "dev",
+            "ja": "dev",
+            "ko": "dev",
+            "zh-cn": "dev",
+            "zh-tw": "dev",
+            "ru": "dev"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "run", "script", "scripts"],
+        "es": ["bun", "run", "script", "ejecutar"],
+        "pt-br": ["bun", "run", "script", "executar"],
+        "fr": ["bun", "run", "script", "exécuter"],
+        "de": ["bun", "run", "script", "ausführen"],
+        "it": ["bun", "run", "script", "eseguire"],
+        "ja": ["bun", "run", "script", "実行"],
+        "ko": ["bun", "run", "script", "실행"],
+        "zh-cn": ["bun", "run", "script", "运行"],
+        "zh-tw": ["bun", "run", "script", "執行"],
+        "ru": ["bun", "run", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/runtime"
+    },
+    {
+      "id": "bun.run-file",
+      "title": {
+        "en": "Run a file",
+        "es": "Ejecutar un archivo",
+        "pt-br": "Executar um arquivo",
+        "fr": "Exécuter un fichier",
+        "de": "Datei ausführen",
+        "it": "Esegui un file",
+        "ja": "ファイルを実行",
+        "ko": "파일 실행",
+        "zh-cn": "运行文件",
+        "zh-tw": "執行檔案",
+        "ru": "Запустить файл"
+      },
+      "description": {
+        "en": "Runs a TypeScript or JavaScript file directly, without compiling it first",
+        "es": "Ejecuta directamente un archivo TypeScript o JavaScript, sin compilarlo antes",
+        "pt-br": "Executa diretamente um arquivo TypeScript ou JavaScript, sem compilá-lo antes",
+        "fr": "Exécute directement un fichier TypeScript ou JavaScript, sans le compiler avant",
+        "de": "Führt eine TypeScript- oder JavaScript-Datei direkt aus, ohne sie vorher zu kompilieren",
+        "it": "Esegue direttamente un file TypeScript o JavaScript, senza compilarlo prima",
+        "ja": "TypeScript や JavaScript のファイルを事前にコンパイルせずに直接実行します",
+        "ko": "TypeScript나 JavaScript 파일을 미리 컴파일하지 않고 바로 실행합니다",
+        "zh-cn": "直接运行 TypeScript 或 JavaScript 文件，无需先编译",
+        "zh-tw": "直接執行 TypeScript 或 JavaScript 檔案，無需先編譯",
+        "ru": "Запускает файл TypeScript или JavaScript напрямую, без предварительной компиляции"
+      },
+      "command": "bun ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "index.ts",
+            "es": "index.ts",
+            "pt-br": "index.ts",
+            "fr": "index.ts",
+            "de": "index.ts",
+            "it": "index.ts",
+            "ja": "index.ts",
+            "ko": "index.ts",
+            "zh-cn": "index.ts",
+            "zh-tw": "index.ts",
+            "ru": "index.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "run", "typescript", "javascript", "file", "execute"],
+        "es": ["bun", "run", "typescript", "javascript", "archivo", "ejecutar"],
+        "pt-br": ["bun", "run", "typescript", "javascript", "arquivo", "executar"],
+        "fr": ["bun", "run", "typescript", "javascript", "fichier", "exécuter"],
+        "de": ["bun", "run", "typescript", "javascript", "Datei", "ausführen"],
+        "it": ["bun", "run", "typescript", "javascript", "file", "eseguire"],
+        "ja": ["bun", "run", "typescript", "javascript", "ファイル", "実行"],
+        "ko": ["bun", "run", "typescript", "javascript", "파일", "실행"],
+        "zh-cn": ["bun", "run", "typescript", "javascript", "文件", "运行"],
+        "zh-tw": ["bun", "run", "typescript", "javascript", "檔案", "執行"],
+        "ru": ["bun", "run", "typescript", "javascript", "файл", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/runtime"
+    },
+    {
+      "id": "bun.watch",
+      "title": {
+        "en": "Run a file and restart on changes",
+        "es": "Ejecutar un archivo y reiniciar al cambiar",
+        "pt-br": "Executar um arquivo e reiniciar ao mudar",
+        "fr": "Exécuter un fichier et redémarrer aux changements",
+        "de": "Datei ausführen und bei Änderungen neu starten",
+        "it": "Esegui un file e riavvia alle modifiche",
+        "ja": "ファイルを実行し、変更時に再起動",
+        "ko": "파일을 실행하고 변경 시 다시 시작",
+        "zh-cn": "运行文件并在更改时重启",
+        "zh-tw": "執行檔案並在變更時重新啟動",
+        "ru": "Запустить файл с перезапуском при изменениях"
+      },
+      "description": {
+        "en": "Runs a file and restarts the process whenever it or its imports change",
+        "es": "Ejecuta un archivo y reinicia el proceso cada vez que cambian él o sus imports",
+        "pt-br": "Executa um arquivo e reinicia o processo sempre que ele ou seus imports mudam",
+        "fr": "Exécute un fichier et redémarre le processus dès que lui ou ses imports changent",
+        "de": "Führt eine Datei aus und startet den Prozess neu, sobald sie oder ihre Imports sich ändern",
+        "it": "Esegue un file e riavvia il processo ogni volta che esso o i suoi import cambiano",
+        "ja": "ファイルを実行し、そのファイルやインポート先が変わるたびにプロセスを再起動します",
+        "ko": "파일을 실행하고 파일이나 import가 바뀔 때마다 프로세스를 다시 시작합니다",
+        "zh-cn": "运行文件，并在文件或其导入变化时重启进程",
+        "zh-tw": "執行檔案，並在檔案或其匯入變更時重新啟動程序",
+        "ru": "Запускает файл и перезапускает процесс при каждом изменении файла или его импортов"
+      },
+      "command": "bun --watch ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "index.ts",
+            "es": "index.ts",
+            "pt-br": "index.ts",
+            "fr": "index.ts",
+            "de": "index.ts",
+            "it": "index.ts",
+            "ja": "index.ts",
+            "ko": "index.ts",
+            "zh-cn": "index.ts",
+            "zh-tw": "index.ts",
+            "ru": "index.ts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "watch", "--watch", "restart", "reload"],
+        "es": ["bun", "watch", "--watch", "reiniciar", "vigilar", "recargar"],
+        "pt-br": ["bun", "watch", "--watch", "reiniciar", "observar"],
+        "fr": ["bun", "watch", "--watch", "redémarrer", "surveiller"],
+        "de": ["bun", "watch", "--watch", "neu starten", "beobachten"],
+        "it": ["bun", "watch", "--watch", "riavviare", "osservare"],
+        "ja": ["bun", "watch", "--watch", "再起動", "監視"],
+        "ko": ["bun", "watch", "--watch", "다시 시작", "감시"],
+        "zh-cn": ["bun", "watch", "--watch", "重启", "监视"],
+        "zh-tw": ["bun", "watch", "--watch", "重新啟動", "監看"],
+        "ru": ["bun", "watch", "--watch", "перезапуск", "отслеживание"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/runtime/watch-mode"
+    },
+    {
+      "id": "bun.x",
+      "title": {
+        "en": "Run a package without installing it",
+        "es": "Ejecutar un paquete sin instalarlo",
+        "pt-br": "Executar um pacote sem instalá-lo",
+        "fr": "Exécuter un paquet sans l’installer",
+        "de": "Paket ausführen, ohne es zu installieren",
+        "it": "Esegui un pacchetto senza installarlo",
+        "ja": "インストールせずにパッケージを実行",
+        "ko": "설치하지 않고 패키지 실행",
+        "zh-cn": "不安装直接运行包",
+        "zh-tw": "不安裝直接執行套件",
+        "ru": "Запустить пакет без установки"
+      },
+      "description": {
+        "en": "Downloads a package if needed and runs its binary, like npx",
+        "es": "Descarga un paquete si hace falta y ejecuta su binario, como npx",
+        "pt-br": "Baixa um pacote se necessário e executa o binário, como o npx",
+        "fr": "Télécharge un paquet si besoin et exécute son binaire, comme npx",
+        "de": "Lädt ein Paket bei Bedarf herunter und führt dessen Binärdatei aus, wie npx",
+        "it": "Scarica un pacchetto se serve ed esegue il suo binario, come npx",
+        "ja": "必要ならパッケージをダウンロードしてバイナリを実行します（npx と同様）",
+        "ko": "필요하면 패키지를 내려받아 바이너리를 실행합니다(npx와 비슷)",
+        "zh-cn": "必要时下载包并运行其可执行文件，类似 npx",
+        "zh-tw": "必要時下載套件並執行其可執行檔，類似 npx",
+        "ru": "При необходимости скачивает пакет и запускает его бинарник, как npx"
+      },
+      "command": "bunx ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "cowsay",
+            "es": "cowsay",
+            "pt-br": "cowsay",
+            "fr": "cowsay",
+            "de": "cowsay",
+            "it": "cowsay",
+            "ja": "cowsay",
+            "ko": "cowsay",
+            "zh-cn": "cowsay",
+            "zh-tw": "cowsay",
+            "ru": "cowsay"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "bunx", "npx", "execute"],
+        "es": ["bun", "bunx", "npx", "ejecutar"],
+        "pt-br": ["bun", "bunx", "npx", "executar"],
+        "fr": ["bun", "bunx", "npx", "exécuter"],
+        "de": ["bun", "bunx", "npx", "ausführen"],
+        "it": ["bun", "bunx", "npx", "eseguire"],
+        "ja": ["bun", "bunx", "npx", "実行"],
+        "ko": ["bun", "bunx", "npx", "실행"],
+        "zh-cn": ["bun", "bunx", "npx", "运行"],
+        "zh-tw": ["bun", "bunx", "npx", "執行"],
+        "ru": ["bun", "bunx", "npx", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/bunx"
+    },
+    {
+      "id": "bun.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Exécuter les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Runs the project tests with the built-in Bun test runner",
+        "es": "Ejecuta los tests del proyecto con el test runner integrado de Bun",
+        "pt-br": "Executa os testes do projeto com o test runner integrado do Bun",
+        "fr": "Exécute les tests du projet avec le test runner intégré de Bun",
+        "de": "Führt die Projekttests mit dem integrierten Test-Runner von Bun aus",
+        "it": "Esegue i test del progetto con il test runner integrato di Bun",
+        "ja": "Bun 組み込みのテストランナーでプロジェクトのテストを実行します",
+        "ko": "Bun 내장 테스트 러너로 프로젝트 테스트를 실행합니다",
+        "zh-cn": "使用 Bun 内置的测试运行器运行项目测试",
+        "zh-tw": "使用 Bun 內建的測試執行器執行專案測試",
+        "ru": "Запускает тесты проекта встроенным в Bun средством тестирования"
+      },
+      "command": "bun test",
+      "tags": {
+        "en": ["bun", "test", "tests", "unit"],
+        "es": ["bun", "test", "tests", "pruebas"],
+        "pt-br": ["bun", "test", "testes"],
+        "fr": ["bun", "test", "tests"],
+        "de": ["bun", "test", "Tests"],
+        "it": ["bun", "test"],
+        "ja": ["bun", "test", "テスト"],
+        "ko": ["bun", "test", "테스트"],
+        "zh-cn": ["bun", "test", "测试"],
+        "zh-tw": ["bun", "test", "測試"],
+        "ru": ["bun", "test", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/test"
+    },
+    {
+      "id": "bun.test-watch",
+      "title": {
+        "en": "Run the tests on every change",
+        "es": "Ejecutar los tests en cada cambio",
+        "pt-br": "Executar os testes a cada mudança",
+        "fr": "Exécuter les tests à chaque changement",
+        "de": "Tests bei jeder Änderung ausführen",
+        "it": "Esegui i test a ogni modifica",
+        "ja": "変更のたびにテストを実行",
+        "ko": "변경할 때마다 테스트 실행",
+        "zh-cn": "每次更改时运行测试",
+        "zh-tw": "每次變更時執行測試",
+        "ru": "Запускать тесты при каждом изменении"
+      },
+      "description": {
+        "en": "Runs the tests and runs them again whenever a file changes",
+        "es": "Ejecuta los tests y los vuelve a ejecutar cada vez que cambia un archivo",
+        "pt-br": "Executa os testes e os executa de novo sempre que um arquivo muda",
+        "fr": "Exécute les tests et les relance dès qu’un fichier change",
+        "de": "Führt die Tests aus und wiederholt sie, sobald sich eine Datei ändert",
+        "it": "Esegue i test e li riesegue ogni volta che un file cambia",
+        "ja": "テストを実行し、ファイルが変わるたびに再実行します",
+        "ko": "테스트를 실행하고 파일이 바뀔 때마다 다시 실행합니다",
+        "zh-cn": "运行测试，并在文件变化时重新运行",
+        "zh-tw": "執行測試，並在檔案變更時重新執行",
+        "ru": "Запускает тесты и повторяет их при каждом изменении файла"
+      },
+      "command": "bun test --watch",
+      "tags": {
+        "en": ["bun", "test", "watch", "tests"],
+        "es": ["bun", "test", "watch", "tests", "vigilar"],
+        "pt-br": ["bun", "test", "watch", "testes", "observar"],
+        "fr": ["bun", "test", "watch", "tests", "surveiller"],
+        "de": ["bun", "test", "watch", "Tests", "beobachten"],
+        "it": ["bun", "test", "watch", "osservare"],
+        "ja": ["bun", "test", "watch", "テスト", "監視"],
+        "ko": ["bun", "test", "watch", "테스트", "감시"],
+        "zh-cn": ["bun", "test", "watch", "测试", "监视"],
+        "zh-tw": ["bun", "test", "watch", "測試", "監看"],
+        "ru": ["bun", "test", "watch", "тесты", "отслеживание"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/test"
+    },
+    {
+      "id": "bun.build",
+      "title": {
+        "en": "Bundle for production",
+        "es": "Empaquetar para producción",
+        "pt-br": "Empacotar para produção",
+        "fr": "Empaqueter pour la production",
+        "de": "Für die Produktion bündeln",
+        "it": "Crea il bundle per la produzione",
+        "ja": "本番用にバンドル",
+        "ko": "프로덕션용 번들 생성",
+        "zh-cn": "为生产环境打包",
+        "zh-tw": "為正式環境打包",
+        "ru": "Собрать бандл для продакшена"
+      },
+      "description": {
+        "en": "Bundles an entry file and its imports into an output folder",
+        "es": "Empaqueta un archivo de entrada y sus imports en una carpeta de salida",
+        "pt-br": "Empacota um arquivo de entrada e seus imports em uma pasta de saída",
+        "fr": "Empaquette un fichier d’entrée et ses imports dans un dossier de sortie",
+        "de": "Bündelt eine Einstiegsdatei und ihre Imports in einen Ausgabeordner",
+        "it": "Crea il bundle di un file di ingresso e dei suoi import in una cartella di output",
+        "ja": "エントリファイルとそのインポートを出力フォルダーにバンドルします",
+        "ko": "진입 파일과 import를 출력 폴더로 번들링합니다",
+        "zh-cn": "将入口文件及其导入打包到输出文件夹",
+        "zh-tw": "將進入點檔案及其匯入打包到輸出資料夾",
+        "ru": "Собирает входной файл и его импорты в папку вывода"
+      },
+      "command": "bun build ${file} --outdir ${outdir}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "./index.ts",
+            "es": "./index.ts",
+            "pt-br": "./index.ts",
+            "fr": "./index.ts",
+            "de": "./index.ts",
+            "it": "./index.ts",
+            "ja": "./index.ts",
+            "ko": "./index.ts",
+            "zh-cn": "./index.ts",
+            "zh-tw": "./index.ts",
+            "ru": "./index.ts"
+          }
+        },
+        {
+          "name": "outdir",
+          "label": {
+            "en": "Output folder",
+            "es": "Carpeta de salida",
+            "pt-br": "Pasta de saída",
+            "fr": "Dossier de sortie",
+            "de": "Ausgabeordner",
+            "it": "Cartella di output",
+            "ja": "出力フォルダー",
+            "ko": "출력 폴더",
+            "zh-cn": "输出文件夹",
+            "zh-tw": "輸出資料夾",
+            "ru": "Папка вывода"
+          },
+          "placeholder": {
+            "en": "./dist",
+            "es": "./dist",
+            "pt-br": "./dist",
+            "fr": "./dist",
+            "de": "./dist",
+            "it": "./dist",
+            "ja": "./dist",
+            "ko": "./dist",
+            "zh-cn": "./dist",
+            "zh-tw": "./dist",
+            "ru": "./dist"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "build", "bundle", "bundler", "production"],
+        "es": ["bun", "build", "bundle", "bundler", "empaquetar", "producción"],
+        "pt-br": ["bun", "build", "bundle", "bundler", "empacotar", "produção"],
+        "fr": ["bun", "build", "bundle", "bundler", "empaqueter", "production"],
+        "de": ["bun", "build", "bundle", "bundler", "bündeln", "Produktion"],
+        "it": ["bun", "build", "bundle", "bundler", "produzione"],
+        "ja": ["bun", "build", "bundle", "bundler", "バンドル", "本番"],
+        "ko": ["bun", "build", "bundle", "bundler", "번들", "프로덕션"],
+        "zh-cn": ["bun", "build", "bundle", "bundler", "打包", "生产"],
+        "zh-tw": ["bun", "build", "bundle", "bundler", "打包", "正式環境"],
+        "ru": ["bun", "build", "bundle", "bundler", "сборка", "продакшен"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/bundler"
+    },
+    {
+      "id": "bun.init",
+      "title": {
+        "en": "Create a project in this folder",
+        "es": "Crear un proyecto en esta carpeta",
+        "pt-br": "Criar um projeto nesta pasta",
+        "fr": "Créer un projet dans ce dossier",
+        "de": "Projekt in diesem Ordner erstellen",
+        "it": "Crea un progetto in questa cartella",
+        "ja": "このフォルダーにプロジェクトを作成",
+        "ko": "이 폴더에 프로젝트 만들기",
+        "zh-cn": "在此文件夹中创建项目",
+        "zh-tw": "在此資料夾中建立專案",
+        "ru": "Создать проект в этой папке"
+      },
+      "description": {
+        "en": "Creates package.json, tsconfig.json and an entry file to start a Bun project",
+        "es": "Crea package.json, tsconfig.json y un archivo de entrada para empezar un proyecto con Bun",
+        "pt-br": "Cria package.json, tsconfig.json e um arquivo de entrada para começar um projeto com Bun",
+        "fr": "Crée package.json, tsconfig.json et un fichier d’entrée pour démarrer un projet Bun",
+        "de": "Erstellt package.json, tsconfig.json und eine Einstiegsdatei für ein neues Bun-Projekt",
+        "it": "Crea package.json, tsconfig.json e un file di ingresso per iniziare un progetto Bun",
+        "ja": "Bun プロジェクトを始めるために package.json、tsconfig.json、エントリファイルを作成します",
+        "ko": "Bun 프로젝트를 시작하도록 package.json, tsconfig.json, 진입 파일을 만듭니다",
+        "zh-cn": "创建 package.json、tsconfig.json 和入口文件，开始一个 Bun 项目",
+        "zh-tw": "建立 package.json、tsconfig.json 和進入點檔案，開始一個 Bun 專案",
+        "ru": "Создаёт package.json, tsconfig.json и входной файл для нового проекта Bun"
+      },
+      "command": "bun init",
+      "tags": {
+        "en": ["bun", "init", "new project", "create"],
+        "es": ["bun", "init", "nuevo proyecto", "crear"],
+        "pt-br": ["bun", "init", "novo projeto", "criar"],
+        "fr": ["bun", "init", "nouveau projet", "créer"],
+        "de": ["bun", "init", "neues Projekt", "erstellen"],
+        "it": ["bun", "init", "nuovo progetto", "creare"],
+        "ja": ["bun", "init", "新規プロジェクト", "作成"],
+        "ko": ["bun", "init", "새 프로젝트", "만들기"],
+        "zh-cn": ["bun", "init", "新项目", "创建"],
+        "zh-tw": ["bun", "init", "新專案", "建立"],
+        "ru": ["bun", "init", "новый проект", "создать"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/runtime/templating/init"
+    },
+    {
+      "id": "bun.create",
+      "title": {
+        "en": "Create a project from a template",
+        "es": "Crear un proyecto desde una plantilla",
+        "pt-br": "Criar um projeto a partir de um modelo",
+        "fr": "Créer un projet à partir d’un modèle",
+        "de": "Projekt aus einer Vorlage erstellen",
+        "it": "Crea un progetto da un modello",
+        "ja": "テンプレートからプロジェクトを作成",
+        "ko": "템플릿으로 프로젝트 만들기",
+        "zh-cn": "从模板创建项目",
+        "zh-tw": "從範本建立專案",
+        "ru": "Создать проект из шаблона"
+      },
+      "description": {
+        "en": "Runs the create-<template> package of npm to scaffold a new project",
+        "es": "Ejecuta el paquete create-<plantilla> de npm para generar un proyecto nuevo",
+        "pt-br": "Executa o pacote create-<modelo> do npm para gerar um novo projeto",
+        "fr": "Exécute le paquet npm create-<modèle> pour générer un nouveau projet",
+        "de": "Führt das npm-Paket create-<Vorlage> aus, um ein neues Projekt anzulegen",
+        "it": "Esegue il pacchetto npm create-<modello> per generare un nuovo progetto",
+        "ja": "npm の create-<テンプレート> パッケージを実行して新しいプロジェクトを作成します",
+        "ko": "npm의 create-<템플릿> 패키지를 실행해 새 프로젝트를 만듭니다",
+        "zh-cn": "运行 npm 的 create-<模板> 包来生成新项目",
+        "zh-tw": "執行 npm 的 create-<範本> 套件來產生新專案",
+        "ru": "Запускает npm-пакет create-<шаблон>, чтобы создать новый проект"
+      },
+      "command": "bun create ${template}",
+      "params": [
+        {
+          "name": "template",
+          "label": {
+            "en": "Template",
+            "es": "Plantilla",
+            "pt-br": "Modelo",
+            "fr": "Modèle",
+            "de": "Vorlage",
+            "it": "Modello",
+            "ja": "テンプレート",
+            "ko": "템플릿",
+            "zh-cn": "模板",
+            "zh-tw": "範本",
+            "ru": "Шаблон"
+          },
+          "placeholder": {
+            "en": "vite",
+            "es": "vite",
+            "pt-br": "vite",
+            "fr": "vite",
+            "de": "vite",
+            "it": "vite",
+            "ja": "vite",
+            "ko": "vite",
+            "zh-cn": "vite",
+            "zh-tw": "vite",
+            "ru": "vite"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["bun", "create", "scaffold", "template", "new project"],
+        "es": ["bun", "create", "scaffold", "plantilla", "nuevo proyecto"],
+        "pt-br": ["bun", "create", "scaffold", "modelo", "novo projeto"],
+        "fr": ["bun", "create", "scaffold", "modèle", "nouveau projet"],
+        "de": ["bun", "create", "scaffold", "Vorlage", "neues Projekt"],
+        "it": ["bun", "create", "scaffold", "modello", "nuovo progetto"],
+        "ja": ["bun", "create", "scaffold", "テンプレート", "新規プロジェクト"],
+        "ko": ["bun", "create", "scaffold", "템플릿", "새 프로젝트"],
+        "zh-cn": ["bun", "create", "scaffold", "模板", "新项目"],
+        "zh-tw": ["bun", "create", "scaffold", "範本", "新專案"],
+        "ru": ["bun", "create", "scaffold", "шаблон", "новый проект"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/runtime/templating/create"
+    },
+    {
+      "id": "bun.outdated",
+      "title": {
+        "en": "List outdated dependencies",
+        "es": "Ver dependencias desactualizadas",
+        "pt-br": "Ver dependências desatualizadas",
+        "fr": "Lister les dépendances obsolètes",
+        "de": "Veraltete Abhängigkeiten anzeigen",
+        "it": "Elenca le dipendenze obsolete",
+        "ja": "古い依存関係を一覧表示",
+        "ko": "오래된 의존성 보기",
+        "zh-cn": "列出过时的依赖",
+        "zh-tw": "列出過時的相依套件",
+        "ru": "Показать устаревшие зависимости"
+      },
+      "description": {
+        "en": "Shows which dependencies have newer versions available",
+        "es": "Muestra qué dependencias tienen versiones más nuevas disponibles",
+        "pt-br": "Mostra quais dependências têm versões mais novas disponíveis",
+        "fr": "Montre quelles dépendances ont des versions plus récentes",
+        "de": "Zeigt, für welche Abhängigkeiten neuere Versionen verfügbar sind",
+        "it": "Mostra quali dipendenze hanno versioni più recenti disponibili",
+        "ja": "新しいバージョンがある依存関係を表示します",
+        "ko": "새 버전이 있는 의존성을 보여 줍니다",
+        "zh-cn": "显示哪些依赖有更新的版本",
+        "zh-tw": "顯示哪些相依套件有更新的版本",
+        "ru": "Показывает, для каких зависимостей есть более новые версии"
+      },
+      "command": "bun outdated",
+      "tags": {
+        "en": ["bun", "outdated", "versions", "update"],
+        "es": ["bun", "outdated", "desactualizadas", "versiones"],
+        "pt-br": ["bun", "outdated", "desatualizadas", "versões"],
+        "fr": ["bun", "outdated", "obsolètes", "versions"],
+        "de": ["bun", "outdated", "veraltet", "Versionen"],
+        "it": ["bun", "outdated", "obsolete", "versioni"],
+        "ja": ["bun", "outdated", "古い", "バージョン"],
+        "ko": ["bun", "outdated", "오래된", "버전"],
+        "zh-cn": ["bun", "outdated", "过时", "版本"],
+        "zh-tw": ["bun", "outdated", "過時", "版本"],
+        "ru": ["bun", "outdated", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/outdated"
+    },
+    {
+      "id": "bun.update",
+      "title": {
+        "en": "Update dependencies",
+        "es": "Actualizar dependencias",
+        "pt-br": "Atualizar dependências",
+        "fr": "Mettre à jour les dépendances",
+        "de": "Abhängigkeiten aktualisieren",
+        "it": "Aggiorna le dipendenze",
+        "ja": "依存関係を更新",
+        "ko": "의존성 업데이트",
+        "zh-cn": "更新依赖",
+        "zh-tw": "更新相依套件",
+        "ru": "Обновить зависимости"
+      },
+      "description": {
+        "en": "Updates the dependencies to the newest versions allowed by package.json",
+        "es": "Actualiza las dependencias a las versiones más nuevas que permite package.json",
+        "pt-br": "Atualiza as dependências para as versões mais novas permitidas pelo package.json",
+        "fr": "Met à jour les dépendances vers les versions les plus récentes autorisées par package.json",
+        "de": "Aktualisiert die Abhängigkeiten auf die neuesten Versionen, die package.json erlaubt",
+        "it": "Aggiorna le dipendenze alle versioni più recenti consentite da package.json",
+        "ja": "package.json で許可される最新バージョンに依存関係を更新します",
+        "ko": "package.json이 허용하는 최신 버전으로 의존성을 업데이트합니다",
+        "zh-cn": "将依赖更新到 package.json 允许的最新版本",
+        "zh-tw": "將相依套件更新到 package.json 允許的最新版本",
+        "ru": "Обновляет зависимости до самых новых версий, разрешённых package.json"
+      },
+      "command": "bun update",
+      "tags": {
+        "en": ["bun", "update", "upgrade", "dependencies"],
+        "es": ["bun", "update", "upgrade", "actualizar", "dependencias"],
+        "pt-br": ["bun", "update", "upgrade", "atualizar", "dependências"],
+        "fr": ["bun", "update", "upgrade", "mettre à jour", "dépendances"],
+        "de": ["bun", "update", "upgrade", "aktualisieren", "Abhängigkeiten"],
+        "it": ["bun", "update", "upgrade", "aggiornare", "dipendenze"],
+        "ja": ["bun", "update", "upgrade", "更新", "依存関係"],
+        "ko": ["bun", "update", "upgrade", "업데이트", "의존성"],
+        "zh-cn": ["bun", "update", "upgrade", "更新", "依赖"],
+        "zh-tw": ["bun", "update", "upgrade", "更新", "相依套件"],
+        "ru": ["bun", "update", "upgrade", "обновить", "зависимости"]
+      },
+      "risk": "caution",
+      "docs": "https://bun.com/docs/pm/cli/update"
+    },
+    {
+      "id": "bun.pm-ls",
+      "title": {
+        "en": "List installed packages",
+        "es": "Ver los paquetes instalados",
+        "pt-br": "Ver os pacotes instalados",
+        "fr": "Lister les paquets installés",
+        "de": "Installierte Pakete anzeigen",
+        "it": "Elenca i pacchetti installati",
+        "ja": "インストール済みパッケージを一覧表示",
+        "ko": "설치된 패키지 보기",
+        "zh-cn": "列出已安装的包",
+        "zh-tw": "列出已安裝的套件",
+        "ru": "Показать установленные пакеты"
+      },
+      "description": {
+        "en": "Shows the installed dependencies and their versions",
+        "es": "Muestra las dependencias instaladas y sus versiones",
+        "pt-br": "Mostra as dependências instaladas e suas versões",
+        "fr": "Affiche les dépendances installées et leurs versions",
+        "de": "Zeigt die installierten Abhängigkeiten und ihre Versionen",
+        "it": "Mostra le dipendenze installate e le loro versioni",
+        "ja": "インストール済みの依存関係とそのバージョンを表示します",
+        "ko": "설치된 의존성과 버전을 보여 줍니다",
+        "zh-cn": "显示已安装的依赖及其版本",
+        "zh-tw": "顯示已安裝的相依套件及其版本",
+        "ru": "Показывает установленные зависимости и их версии"
+      },
+      "command": "bun pm ls",
+      "tags": {
+        "en": ["bun", "pm", "ls", "list", "installed"],
+        "es": ["bun", "pm", "ls", "list", "instalados", "lista"],
+        "pt-br": ["bun", "pm", "ls", "list", "instalados", "lista"],
+        "fr": ["bun", "pm", "ls", "list", "installés", "liste"],
+        "de": ["bun", "pm", "ls", "list", "installiert", "Liste"],
+        "it": ["bun", "pm", "ls", "list", "installati", "elenco"],
+        "ja": ["bun", "pm", "ls", "list", "インストール済み", "一覧"],
+        "ko": ["bun", "pm", "ls", "list", "설치됨", "목록"],
+        "zh-cn": ["bun", "pm", "ls", "list", "已安装", "列表"],
+        "zh-tw": ["bun", "pm", "ls", "list", "已安裝", "清單"],
+        "ru": ["bun", "pm", "ls", "list", "установленные", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://bun.com/docs/pm/cli/pm"
+    },
+    {
+      "id": "bun.upgrade",
+      "title": {
+        "en": "Upgrade Bun",
+        "es": "Actualizar Bun",
+        "pt-br": "Atualizar o Bun",
+        "fr": "Mettre à jour Bun",
+        "de": "Bun aktualisieren",
+        "it": "Aggiorna Bun",
+        "ja": "Bun をアップグレード",
+        "ko": "Bun 업그레이드",
+        "zh-cn": "升级 Bun",
+        "zh-tw": "升級 Bun",
+        "ru": "Обновить Bun"
+      },
+      "description": {
+        "en": "Downloads the latest stable Bun and replaces the installed version",
+        "es": "Descarga el último Bun estable y reemplaza la versión instalada",
+        "pt-br": "Baixa o Bun estável mais recente e substitui a versão instalada",
+        "fr": "Télécharge le dernier Bun stable et remplace la version installée",
+        "de": "Lädt das neueste stabile Bun herunter und ersetzt die installierte Version",
+        "it": "Scarica l’ultimo Bun stabile e sostituisce la versione installata",
+        "ja": "最新の安定版 Bun をダウンロードし、インストール済みのバージョンを置き換えます",
+        "ko": "최신 안정 Bun을 내려받아 설치된 버전을 교체합니다",
+        "zh-cn": "下载最新稳定版 Bun 并替换已安装的版本",
+        "zh-tw": "下載最新穩定版 Bun 並取代已安裝的版本",
+        "ru": "Скачивает последний стабильный Bun и заменяет установленную версию"
+      },
+      "command": "bun upgrade",
+      "tags": {
+        "en": ["bun", "upgrade", "update", "version"],
+        "es": ["bun", "upgrade", "actualizar", "versión"],
+        "pt-br": ["bun", "upgrade", "atualizar", "versão"],
+        "fr": ["bun", "upgrade", "mettre à jour", "version"],
+        "de": ["bun", "upgrade", "aktualisieren", "Version"],
+        "it": ["bun", "upgrade", "aggiornare", "versione"],
+        "ja": ["bun", "upgrade", "更新", "バージョン"],
+        "ko": ["bun", "upgrade", "업데이트", "버전"],
+        "zh-cn": ["bun", "upgrade", "升级", "版本"],
+        "zh-tw": ["bun", "upgrade", "升級", "版本"],
+        "ru": ["bun", "upgrade", "обновить", "версия"]
+      },
+      "risk": "caution",
+      "docs": "https://bun.com/docs/guides/util/upgrade"
+    },
+    {
+      "id": "bun.cache-rm",
+      "title": {
+        "en": "Clear the cache",
+        "es": "Borrar la caché",
+        "pt-br": "Limpar o cache",
+        "fr": "Vider le cache",
+        "de": "Cache leeren",
+        "it": "Svuota la cache",
+        "ja": "キャッシュを削除",
+        "ko": "캐시 삭제",
+        "zh-cn": "清除缓存",
+        "zh-tw": "清除快取",
+        "ru": "Очистить кэш"
+      },
+      "description": {
+        "en": "Deletes the Bun install cache; the next install downloads the packages again",
+        "es": "Borra la caché de instalación de Bun; la próxima instalación vuelve a descargar los paquetes",
+        "pt-br": "Apaga o cache de instalação do Bun; a próxima instalação baixa os pacotes de novo",
+        "fr": "Supprime le cache d’installation de Bun ; la prochaine installation retélécharge les paquets",
+        "de": "Löscht den Installations-Cache von Bun; die nächste Installation lädt die Pakete neu herunter",
+        "it": "Elimina la cache di installazione di Bun; la prossima installazione riscarica i pacchetti",
+        "ja": "Bun のインストールキャッシュを削除します。次回のインストールで再ダウンロードされます",
+        "ko": "Bun 설치 캐시를 삭제합니다. 다음 설치 때 패키지를 다시 내려받습니다",
+        "zh-cn": "删除 Bun 的安装缓存，下次安装时会重新下载包",
+        "zh-tw": "刪除 Bun 的安裝快取，下次安裝時會重新下載套件",
+        "ru": "Удаляет кэш установки Bun; при следующей установке пакеты скачаются снова"
+      },
+      "command": "bun pm cache rm",
+      "tags": {
+        "en": ["bun", "cache", "pm", "clear", "delete"],
+        "es": ["bun", "cache", "pm", "caché", "borrar", "limpiar"],
+        "pt-br": ["bun", "cache", "pm", "limpar"],
+        "fr": ["bun", "cache", "pm", "vider"],
+        "de": ["bun", "cache", "pm", "Cache", "leeren"],
+        "it": ["bun", "cache", "pm", "svuotare"],
+        "ja": ["bun", "cache", "pm", "キャッシュ", "削除"],
+        "ko": ["bun", "cache", "pm", "캐시", "삭제"],
+        "zh-cn": ["bun", "cache", "pm", "缓存", "清除"],
+        "zh-tw": ["bun", "cache", "pm", "快取", "清除"],
+        "ru": ["bun", "cache", "pm", "кэш", "очистить"]
+      },
+      "risk": "destructive",
+      "docs": "https://bun.com/docs/pm/cli/pm"
+    }
+  ]
+}

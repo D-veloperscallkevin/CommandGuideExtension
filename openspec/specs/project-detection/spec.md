@@ -21,7 +21,14 @@ Las señales SHALL ser:
 - `package.json`, `.nvmrc` o `.node-version` → `node`;
 - `pnpm-lock.yaml` o `pnpm-workspace.yaml` → `pnpm`;
 - `package-lock.json` o `npm-shrinkwrap.json` → `npm`;
-- `Dockerfile`, `Containerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml` o `.dockerignore` → `docker`.
+- `Dockerfile`, `Containerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml` o `.dockerignore` → `docker`;
+- `yarn.lock` o `.yarnrc.yml` → `yarn`;
+- `bun.lock`, `bun.lockb` o `bunfig.toml` → `bun`;
+- `deno.json`, `deno.jsonc` o `deno.lock` → `deno`;
+- cualquier `tsconfig*.json` (`tsconfig.json`, `tsconfig.build.json`…) → `typescript`;
+- `.nvmrc`, `.node-version` o `.python-version` → `version-managers`.
+
+Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`.
 
 Con varias carpetas en el workspace, las categorías detectadas SHALL ser la unión de las de todas. La categoría `terminal` MUST NOT detectarse nunca. Sin carpetas abiertas, no SHALL detectarse ninguna categoría. Las categorías propias del usuario MUST NOT detectarse. Si no se puede leer la raíz de una carpeta o falla una comprobación (por ejemplo, por falta de permisos), SHALL tratarse como si la entrada no existiera, sin aviso al usuario. La detección MUST NOT necesitar leer los archivos del catálogo, que solo se cargan bajo demanda.
 
@@ -67,7 +74,7 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 
 #### Scenario: Señales nuevas de las categorías existentes
 - **WHEN** la raíz contiene solo `.nvmrc`, `pnpm-workspace.yaml` y `Containerfile`
-- **THEN** las categorías detectadas son `node`, `pnpm` y `docker`
+- **THEN** las categorías detectadas son `node`, `version-managers`, `pnpm` y `docker`
 
 #### Scenario: Raíz ilegible
 - **WHEN** no se puede listar la raíz de una carpeta del workspace y otra carpeta contiene `.git`
@@ -76,6 +83,18 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Activación sin cargar el catálogo
 - **WHEN** la extensión se activa en un proyecto con `package.json`
 - **THEN** `node` se detecta y los archivos del catálogo siguen sin leerse
+
+#### Scenario: Proyecto con Yarn y TypeScript
+- **WHEN** la raíz contiene `package.json`, `yarn.lock` y `tsconfig.build.json`
+- **THEN** las categorías detectadas son `node`, `yarn` y `typescript`
+
+#### Scenario: Proyecto de Deno sin package.json
+- **WHEN** la raíz contiene solo `deno.json`
+- **THEN** la única categoría detectada es `deno`
+
+#### Scenario: Versión de Python fijada
+- **WHEN** la raíz contiene solo `.python-version`
+- **THEN** la única categoría detectada es `version-managers`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

@@ -64,12 +64,17 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 6 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 11 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
 			'pnpm',
+			'yarn',
+			'bun',
 			'node',
+			'deno',
+			'typescript',
+			'version-managers',
 			'docker',
 			'terminal',
 		]);
@@ -111,6 +116,36 @@ describe('contenido mínimo', () => {
 		const terminal = bundledCatalog.find((c) => c.id === 'terminal');
 		const withoutCmd = (terminal?.commands ?? []).filter((cmd) => !cmd.shells?.cmd);
 		expect(withoutCmd.map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	/** Ejemplo de un comando del catálogo empaquetado para un shell. */
+	const exampleFor = (id: string, shell: ShellId) =>
+		buildCategorySummaries(new CatalogService(bundledCatalog).getCategories(), 'en', shell)
+			.flatMap((c) => c.commands)
+			.find((c) => c.id === id)?.example;
+
+	it('activar fnm en bash usa eval con --shell bash', () => {
+		expect(exampleFor('version-managers.fnm-env', 'bash')).toBe('eval "$(fnm env --use-on-cd --shell bash)"');
+		expect(exampleFor('version-managers.fnm-env', 'zsh')).toBe('eval "$(fnm env --use-on-cd --shell zsh)"');
+	});
+
+	it('activar fnm en PowerShell usa Invoke-Expression', () => {
+		expect(exampleFor('version-managers.fnm-env', 'powershell')).toBe(
+			'fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression',
+		);
+	});
+
+	it('la LTS de nvm usa --lts en bash y la sintaxis de nvm-windows en PowerShell y cmd', () => {
+		expect(exampleFor('version-managers.nvm-install-lts', 'bash')).toBe('nvm install --lts');
+		expect(exampleFor('version-managers.nvm-install-lts', 'powershell')).toBe('nvm install lts');
+		expect(exampleFor('version-managers.nvm-install-lts', 'cmd')).toBe('nvm install lts');
+	});
+
+	it('todo comando de los gestores de versiones que desinstala es destructive', () => {
+		const managers = bundledCatalog.find((c) => c.id === 'version-managers');
+		const uninstalls = (managers?.commands ?? []).filter((cmd) => / uninstall /.test(` ${cmd.command} `));
+		expect(uninstalls.length).toBeGreaterThan(0);
+		expect(uninstalls.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
 	});
 });
 
