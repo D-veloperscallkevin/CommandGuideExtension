@@ -1,0 +1,1185 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "java",
+  "title": {
+    "en": "Java",
+    "es": "Java",
+    "pt-br": "Java",
+    "fr": "Java",
+    "de": "Java",
+    "it": "Java",
+    "ja": "Java",
+    "ko": "Java",
+    "zh-cn": "Java",
+    "zh-tw": "Java",
+    "ru": "Java"
+  },
+  "icon": "coffee",
+  "order": 51,
+  "section": "languages",
+  "detect": ["pom.xml", "build.gradle", "build.gradle.kts", ".java-version"],
+  "commands": [
+    {
+      "id": "java.version",
+      "title": {
+        "en": "Show the Java version",
+        "es": "Ver la versión de Java",
+        "pt-br": "Ver a versão do Java",
+        "fr": "Afficher la version de Java",
+        "de": "Java-Version anzeigen",
+        "it": "Mostra la versione di Java",
+        "ja": "Java のバージョンを表示",
+        "ko": "Java 버전 보기",
+        "zh-cn": "查看 Java 版本",
+        "zh-tw": "檢視 Java 版本",
+        "ru": "Показать версию Java"
+      },
+      "description": {
+        "en": "Prints the version of the Java runtime found in the PATH",
+        "es": "Muestra la versión del runtime de Java que hay en el PATH",
+        "pt-br": "Mostra a versão do runtime Java encontrado no PATH",
+        "fr": "Affiche la version du runtime Java trouvé dans le PATH",
+        "de": "Zeigt die Version der Java-Laufzeit im PATH",
+        "it": "Mostra la versione del runtime Java presente nel PATH",
+        "ja": "PATH にある Java ランタイムのバージョンを表示します",
+        "ko": "PATH에 있는 Java 런타임의 버전을 보여 줍니다",
+        "zh-cn": "显示 PATH 中 Java 运行时的版本",
+        "zh-tw": "顯示 PATH 中 Java 執行環境的版本",
+        "ru": "Показывает версию среды выполнения Java из PATH"
+      },
+      "command": "java --version",
+      "tags": {
+        "en": ["java", "jdk", "--version", "version"],
+        "es": ["java", "jdk", "--version", "versión"],
+        "pt-br": ["java", "jdk", "--version", "versão"],
+        "fr": ["java", "jdk", "--version", "version"],
+        "de": ["java", "jdk", "--version", "Version"],
+        "it": ["java", "jdk", "--version", "versione"],
+        "ja": ["java", "jdk", "--version", "バージョン"],
+        "ko": ["java", "jdk", "--version", "버전"],
+        "zh-cn": ["java", "jdk", "--version", "版本"],
+        "zh-tw": ["java", "jdk", "--version", "版本"],
+        "ru": ["java", "jdk", "--version", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html"
+    },
+    {
+      "id": "java.javac-version",
+      "title": {
+        "en": "Show the compiler version",
+        "es": "Ver la versión del compilador",
+        "pt-br": "Ver a versão do compilador",
+        "fr": "Afficher la version du compilateur",
+        "de": "Compiler-Version anzeigen",
+        "it": "Mostra la versione del compilatore",
+        "ja": "コンパイラーのバージョンを表示",
+        "ko": "컴파일러 버전 보기",
+        "zh-cn": "查看编译器版本",
+        "zh-tw": "檢視編譯器版本",
+        "ru": "Показать версию компилятора"
+      },
+      "description": {
+        "en": "Prints the version of javac; if it fails, only a JRE is installed and not a JDK",
+        "es": "Muestra la versión de javac; si falla, solo hay un JRE instalado y no un JDK",
+        "pt-br": "Mostra a versão do javac; se falhar, só há um JRE instalado e não um JDK",
+        "fr": "Affiche la version de javac ; en cas d’échec, seul un JRE est installé et pas de JDK",
+        "de": "Zeigt die Version von javac; schlägt es fehl, ist nur eine JRE und kein JDK installiert",
+        "it": "Mostra la versione di javac; se fallisce, è installato solo un JRE e non un JDK",
+        "ja": "javac のバージョンを表示します。失敗する場合は JDK ではなく JRE だけが入っています",
+        "ko": "javac 버전을 보여 줍니다. 실패하면 JDK가 아니라 JRE만 설치된 것입니다",
+        "zh-cn": "显示 javac 的版本；如果失败，说明只安装了 JRE 而没有 JDK",
+        "zh-tw": "顯示 javac 的版本；如果失敗，表示只安裝了 JRE 而沒有 JDK",
+        "ru": "Показывает версию javac; если команда не работает, установлен только JRE, а не JDK"
+      },
+      "command": "javac --version",
+      "tags": {
+        "en": ["java", "jdk", "javac", "--version", "compiler"],
+        "es": ["java", "jdk", "versión", "compilador"],
+        "pt-br": ["java", "jdk", "versão", "compilador"],
+        "fr": ["java", "jdk", "version", "compilateur"],
+        "de": ["java", "jdk", "Version", "Compiler"],
+        "it": ["java", "jdk", "versione", "compilatore"],
+        "ja": ["java", "jdk", "バージョン", "コンパイラー"],
+        "ko": ["java", "jdk", "버전", "컴파일러"],
+        "zh-cn": ["java", "jdk", "版本", "编译器"],
+        "zh-tw": ["java", "jdk", "版本", "編譯器"],
+        "ru": ["java", "jdk", "версия", "компилятор"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html"
+    },
+    {
+      "id": "java.run-source",
+      "title": {
+        "en": "Run a source file",
+        "es": "Ejecutar un archivo fuente",
+        "pt-br": "Executar um arquivo-fonte",
+        "fr": "Exécuter un fichier source",
+        "de": "Quelldatei ausführen",
+        "it": "Esegui un file sorgente",
+        "ja": "ソースファイルを実行",
+        "ko": "소스 파일 실행",
+        "zh-cn": "运行源文件",
+        "zh-tw": "執行原始檔",
+        "ru": "Запустить исходный файл"
+      },
+      "description": {
+        "en": "Compiles in memory and runs a single .java file, without javac (Java 11 or later)",
+        "es": "Compila en memoria y ejecuta un único archivo .java, sin javac (Java 11 o superior)",
+        "pt-br": "Compila em memória e executa um único arquivo .java, sem javac (Java 11 ou superior)",
+        "fr": "Compile en mémoire et exécute un seul fichier .java, sans javac (Java 11 ou supérieur)",
+        "de": "Kompiliert im Speicher und führt eine einzelne .java-Datei ohne javac aus (ab Java 11)",
+        "it": "Compila in memoria ed esegue un singolo file .java, senza javac (Java 11 o successivo)",
+        "ja": "javac を使わずに 1 つの .java ファイルをメモリ上でコンパイルして実行します（Java 11 以降）",
+        "ko": "javac 없이 .java 파일 하나를 메모리에서 컴파일해 실행합니다(Java 11 이상)",
+        "zh-cn": "无需 javac，在内存中编译并运行单个 .java 文件（Java 11 及以上）",
+        "zh-tw": "無需 javac，在記憶體中編譯並執行單一 .java 檔案（Java 11 以上）",
+        "ru": "Компилирует в памяти и запускает один файл .java без javac (Java 11 и новее)"
+      },
+      "command": "java ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "Main.java",
+            "es": "Main.java",
+            "pt-br": "Main.java",
+            "fr": "Main.java",
+            "de": "Main.java",
+            "it": "Main.java",
+            "ja": "Main.java",
+            "ko": "Main.java",
+            "zh-cn": "Main.java",
+            "zh-tw": "Main.java",
+            "ru": "Main.java"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "run", "source", "execute"],
+        "es": ["java", "jdk", "run", "source", "ejecutar", "archivo"],
+        "pt-br": ["java", "jdk", "run", "source", "executar", "arquivo"],
+        "fr": ["java", "jdk", "run", "source", "exécuter", "fichier"],
+        "de": ["java", "jdk", "run", "source", "ausführen", "Datei"],
+        "it": ["java", "jdk", "run", "source", "eseguire", "file"],
+        "ja": ["java", "jdk", "run", "source", "実行", "ファイル"],
+        "ko": ["java", "jdk", "run", "source", "실행", "파일"],
+        "zh-cn": ["java", "jdk", "run", "source", "运行", "文件"],
+        "zh-tw": ["java", "jdk", "run", "source", "執行", "檔案"],
+        "ru": ["java", "jdk", "run", "source", "запустить", "файл"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html"
+    },
+    {
+      "id": "java.run-jar",
+      "title": {
+        "en": "Run a JAR",
+        "es": "Ejecutar un JAR",
+        "pt-br": "Executar um JAR",
+        "fr": "Exécuter un JAR",
+        "de": "JAR ausführen",
+        "it": "Esegui un JAR",
+        "ja": "JAR を実行",
+        "ko": "JAR 실행",
+        "zh-cn": "运行 JAR",
+        "zh-tw": "執行 JAR",
+        "ru": "Запустить JAR"
+      },
+      "description": {
+        "en": "Runs an executable JAR, for example the one built by Maven or Gradle",
+        "es": "Ejecuta un JAR ejecutable, por ejemplo el que genera Maven o Gradle",
+        "pt-br": "Executa um JAR executável, por exemplo o gerado pelo Maven ou Gradle",
+        "fr": "Exécute un JAR exécutable, par exemple celui produit par Maven ou Gradle",
+        "de": "Führt ein ausführbares JAR aus, etwa das von Maven oder Gradle erzeugte",
+        "it": "Esegue un JAR eseguibile, per esempio quello generato da Maven o Gradle",
+        "ja": "Maven や Gradle が作成したものなど、実行可能な JAR を実行します",
+        "ko": "Maven이나 Gradle이 만든 것처럼 실행 가능한 JAR을 실행합니다",
+        "zh-cn": "运行可执行 JAR，例如 Maven 或 Gradle 生成的 JAR",
+        "zh-tw": "執行可執行的 JAR，例如 Maven 或 Gradle 產生的 JAR",
+        "ru": "Запускает исполняемый JAR, например собранный Maven или Gradle"
+      },
+      "command": "java -jar ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "target/app.jar",
+            "es": "target/app.jar",
+            "pt-br": "target/app.jar",
+            "fr": "target/app.jar",
+            "de": "target/app.jar",
+            "it": "target/app.jar",
+            "ja": "target/app.jar",
+            "ko": "target/app.jar",
+            "zh-cn": "target/app.jar",
+            "zh-tw": "target/app.jar",
+            "ru": "target/app.jar"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "-jar", "jar", "run", "execute"],
+        "es": ["java", "jdk", "-jar", "jar", "run", "ejecutar"],
+        "pt-br": ["java", "jdk", "-jar", "jar", "run", "executar"],
+        "fr": ["java", "jdk", "-jar", "jar", "run", "exécuter"],
+        "de": ["java", "jdk", "-jar", "jar", "run", "ausführen"],
+        "it": ["java", "jdk", "-jar", "jar", "run", "eseguire"],
+        "ja": ["java", "jdk", "-jar", "jar", "run", "実行"],
+        "ko": ["java", "jdk", "-jar", "jar", "run", "실행"],
+        "zh-cn": ["java", "jdk", "-jar", "jar", "run", "运行"],
+        "zh-tw": ["java", "jdk", "-jar", "jar", "run", "執行"],
+        "ru": ["java", "jdk", "-jar", "jar", "run", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html"
+    },
+    {
+      "id": "java.run-class",
+      "title": {
+        "en": "Run a compiled class",
+        "es": "Ejecutar una clase compilada",
+        "pt-br": "Executar uma classe compilada",
+        "fr": "Exécuter une classe compilée",
+        "de": "Kompilierte Klasse ausführen",
+        "it": "Esegui una classe compilata",
+        "ja": "コンパイル済みのクラスを実行",
+        "ko": "컴파일된 클래스 실행",
+        "zh-cn": "运行已编译的类",
+        "zh-tw": "執行已編譯的類別",
+        "ru": "Запустить скомпилированный класс"
+      },
+      "description": {
+        "en": "Runs the main method of a class found in a folder of .class files",
+        "es": "Ejecuta el método main de una clase que está en una carpeta de archivos .class",
+        "pt-br": "Executa o método main de uma classe que está em uma pasta de arquivos .class",
+        "fr": "Exécute la méthode main d’une classe située dans un dossier de fichiers .class",
+        "de": "Führt die main-Methode einer Klasse aus einem Ordner mit .class-Dateien aus",
+        "it": "Esegue il metodo main di una classe che si trova in una cartella di file .class",
+        "ja": ".class ファイルのフォルダーにあるクラスの main メソッドを実行します",
+        "ko": ".class 파일 폴더에 있는 클래스의 main 메서드를 실행합니다",
+        "zh-cn": "运行 .class 文件夹中某个类的 main 方法",
+        "zh-tw": "執行 .class 資料夾中某個類別的 main 方法",
+        "ru": "Запускает метод main класса из папки с файлами .class"
+      },
+      "command": "java -cp ${classpath} ${class}",
+      "params": [
+        {
+          "name": "classpath",
+          "label": {
+            "en": "Class path",
+            "es": "Ruta de clases",
+            "pt-br": "Caminho de classes",
+            "fr": "Chemin de classes",
+            "de": "Klassenpfad",
+            "it": "Percorso delle classi",
+            "ja": "クラスパス",
+            "ko": "클래스 경로",
+            "zh-cn": "类路径",
+            "zh-tw": "類別路徑",
+            "ru": "Путь к классам"
+          },
+          "placeholder": {
+            "en": "out",
+            "es": "out",
+            "pt-br": "out",
+            "fr": "out",
+            "de": "out",
+            "it": "out",
+            "ja": "out",
+            "ko": "out",
+            "zh-cn": "out",
+            "zh-tw": "out",
+            "ru": "out"
+          }
+        },
+        {
+          "name": "class",
+          "label": {
+            "en": "Class name",
+            "es": "Nombre de la clase",
+            "pt-br": "Nome da classe",
+            "fr": "Nom de la classe",
+            "de": "Klassenname",
+            "it": "Nome della classe",
+            "ja": "クラス名",
+            "ko": "클래스 이름",
+            "zh-cn": "类名",
+            "zh-tw": "類別名稱",
+            "ru": "Имя класса"
+          },
+          "placeholder": {
+            "en": "com.example.Main",
+            "es": "com.example.Main",
+            "pt-br": "com.example.Main",
+            "fr": "com.example.Main",
+            "de": "com.example.Main",
+            "it": "com.example.Main",
+            "ja": "com.example.Main",
+            "ko": "com.example.Main",
+            "zh-cn": "com.example.Main",
+            "zh-tw": "com.example.Main",
+            "ru": "com.example.Main"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "-cp", "classpath", "main", "run", "class"],
+        "es": ["java", "jdk", "-cp", "classpath", "main", "ejecutar", "clase"],
+        "pt-br": ["java", "jdk", "-cp", "classpath", "main", "executar", "classe"],
+        "fr": ["java", "jdk", "-cp", "classpath", "main", "exécuter", "classe"],
+        "de": ["java", "jdk", "-cp", "classpath", "main", "ausführen", "Klasse"],
+        "it": ["java", "jdk", "-cp", "classpath", "main", "eseguire", "classe"],
+        "ja": ["java", "jdk", "-cp", "classpath", "main", "実行", "クラス"],
+        "ko": ["java", "jdk", "-cp", "classpath", "main", "실행", "클래스"],
+        "zh-cn": ["java", "jdk", "-cp", "classpath", "main", "运行", "类"],
+        "zh-tw": ["java", "jdk", "-cp", "classpath", "main", "執行", "類別"],
+        "ru": ["java", "jdk", "-cp", "classpath", "main", "запустить", "класс"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html"
+    },
+    {
+      "id": "java.compile",
+      "title": {
+        "en": "Compile a file",
+        "es": "Compilar un archivo",
+        "pt-br": "Compilar um arquivo",
+        "fr": "Compiler un fichier",
+        "de": "Datei kompilieren",
+        "it": "Compila un file",
+        "ja": "ファイルをコンパイル",
+        "ko": "파일 컴파일",
+        "zh-cn": "编译文件",
+        "zh-tw": "編譯檔案",
+        "ru": "Скомпилировать файл"
+      },
+      "description": {
+        "en": "Compiles a .java file and writes the .class files next to it",
+        "es": "Compila un archivo .java y escribe los .class a su lado",
+        "pt-br": "Compila um arquivo .java e grava os .class ao lado dele",
+        "fr": "Compile un fichier .java et écrit les .class à côté",
+        "de": "Kompiliert eine .java-Datei und legt die .class-Dateien daneben ab",
+        "it": "Compila un file .java e scrive i .class accanto",
+        "ja": ".java ファイルをコンパイルし、同じ場所に .class を書き出します",
+        "ko": ".java 파일을 컴파일하고 옆에 .class 파일을 씁니다",
+        "zh-cn": "编译 .java 文件并在旁边生成 .class 文件",
+        "zh-tw": "編譯 .java 檔案並在旁邊產生 .class 檔案",
+        "ru": "Компилирует файл .java и кладёт файлы .class рядом с ним"
+      },
+      "command": "javac ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "Main.java",
+            "es": "Main.java",
+            "pt-br": "Main.java",
+            "fr": "Main.java",
+            "de": "Main.java",
+            "it": "Main.java",
+            "ja": "Main.java",
+            "ko": "Main.java",
+            "zh-cn": "Main.java",
+            "zh-tw": "Main.java",
+            "ru": "Main.java"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "javac", "compile", "build"],
+        "es": ["java", "jdk", "javac", "compile", "compilar"],
+        "pt-br": ["java", "jdk", "javac", "compile", "compilar"],
+        "fr": ["java", "jdk", "javac", "compile", "compiler"],
+        "de": ["java", "jdk", "javac", "compile", "kompilieren"],
+        "it": ["java", "jdk", "javac", "compile", "compilare"],
+        "ja": ["java", "jdk", "javac", "compile", "コンパイル"],
+        "ko": ["java", "jdk", "javac", "compile", "컴파일"],
+        "zh-cn": ["java", "jdk", "javac", "compile", "编译"],
+        "zh-tw": ["java", "jdk", "javac", "compile", "編譯"],
+        "ru": ["java", "jdk", "javac", "compile", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html"
+    },
+    {
+      "id": "java.compile-outdir",
+      "title": {
+        "en": "Compile to an output folder",
+        "es": "Compilar a una carpeta de salida",
+        "pt-br": "Compilar para uma pasta de saída",
+        "fr": "Compiler vers un dossier de sortie",
+        "de": "In einen Ausgabeordner kompilieren",
+        "it": "Compila in una cartella di output",
+        "ja": "出力フォルダーにコンパイル",
+        "ko": "출력 폴더로 컴파일",
+        "zh-cn": "编译到输出文件夹",
+        "zh-tw": "編譯到輸出資料夾",
+        "ru": "Скомпилировать в папку вывода"
+      },
+      "description": {
+        "en": "Compiles the files and writes the .class files to a separate folder, keeping the package structure",
+        "es": "Compila los archivos y escribe los .class en otra carpeta, con la estructura de paquetes",
+        "pt-br": "Compila os arquivos e grava os .class em outra pasta, com a estrutura de pacotes",
+        "fr": "Compile les fichiers et écrit les .class dans un autre dossier, avec la structure des paquets",
+        "de": "Kompiliert die Dateien und legt die .class-Dateien mit Paketstruktur in einem eigenen Ordner ab",
+        "it": "Compila i file e scrive i .class in un’altra cartella, con la struttura dei pacchetti",
+        "ja": "ファイルをコンパイルし、パッケージ構成を保ったまま .class を別フォルダーに書き出します",
+        "ko": "파일을 컴파일하고 패키지 구조를 유지한 채 .class를 별도 폴더에 씁니다",
+        "zh-cn": "编译文件，并按包结构把 .class 写入另一个文件夹",
+        "zh-tw": "編譯檔案，並依套件結構把 .class 寫入另一個資料夾",
+        "ru": "Компилирует файлы и кладёт .class в отдельную папку с сохранением структуры пакетов"
+      },
+      "command": "javac -d ${outdir} ${file}",
+      "params": [
+        {
+          "name": "outdir",
+          "label": {
+            "en": "Output folder",
+            "es": "Carpeta de salida",
+            "pt-br": "Pasta de saída",
+            "fr": "Dossier de sortie",
+            "de": "Ausgabeordner",
+            "it": "Cartella di output",
+            "ja": "出力フォルダー",
+            "ko": "출력 폴더",
+            "zh-cn": "输出文件夹",
+            "zh-tw": "輸出資料夾",
+            "ru": "Папка вывода"
+          },
+          "placeholder": {
+            "en": "out",
+            "es": "out",
+            "pt-br": "out",
+            "fr": "out",
+            "de": "out",
+            "it": "out",
+            "ja": "out",
+            "ko": "out",
+            "zh-cn": "out",
+            "zh-tw": "out",
+            "ru": "out"
+          }
+        },
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/com/example/Main.java",
+            "es": "src/com/example/Main.java",
+            "pt-br": "src/com/example/Main.java",
+            "fr": "src/com/example/Main.java",
+            "de": "src/com/example/Main.java",
+            "it": "src/com/example/Main.java",
+            "ja": "src/com/example/Main.java",
+            "ko": "src/com/example/Main.java",
+            "zh-cn": "src/com/example/Main.java",
+            "zh-tw": "src/com/example/Main.java",
+            "ru": "src/com/example/Main.java"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "javac", "-d", "compile", "output"],
+        "es": ["java", "jdk", "javac", "-d", "compile", "compilar", "salida"],
+        "pt-br": ["java", "jdk", "javac", "-d", "compile", "compilar", "saída"],
+        "fr": ["java", "jdk", "javac", "-d", "compile", "compiler", "sortie"],
+        "de": ["java", "jdk", "javac", "-d", "compile", "kompilieren", "Ausgabe"],
+        "it": ["java", "jdk", "javac", "-d", "compile", "compilare", "output"],
+        "ja": ["java", "jdk", "javac", "-d", "compile", "コンパイル", "出力"],
+        "ko": ["java", "jdk", "javac", "-d", "compile", "컴파일", "출력"],
+        "zh-cn": ["java", "jdk", "javac", "-d", "compile", "编译", "输出"],
+        "zh-tw": ["java", "jdk", "javac", "-d", "compile", "編譯", "輸出"],
+        "ru": ["java", "jdk", "javac", "-d", "compile", "компиляция", "вывод"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html"
+    },
+    {
+      "id": "java.jar-create",
+      "title": {
+        "en": "Create an executable JAR",
+        "es": "Crear un JAR ejecutable",
+        "pt-br": "Criar um JAR executável",
+        "fr": "Créer un JAR exécutable",
+        "de": "Ausführbares JAR erstellen",
+        "it": "Crea un JAR eseguibile",
+        "ja": "実行可能な JAR を作成",
+        "ko": "실행 가능한 JAR 만들기",
+        "zh-cn": "创建可执行 JAR",
+        "zh-tw": "建立可執行的 JAR",
+        "ru": "Создать исполняемый JAR"
+      },
+      "description": {
+        "en": "Packs the compiled classes of a folder into a JAR with its main class",
+        "es": "Empaqueta las clases compiladas de una carpeta en un JAR con su clase principal",
+        "pt-br": "Empacota as classes compiladas de uma pasta em um JAR com sua classe principal",
+        "fr": "Regroupe les classes compilées d’un dossier dans un JAR avec sa classe principale",
+        "de": "Packt die kompilierten Klassen eines Ordners mit ihrer Hauptklasse in ein JAR",
+        "it": "Impacchetta le classi compilate di una cartella in un JAR con la sua classe principale",
+        "ja": "フォルダー内のコンパイル済みクラスを、メインクラスを指定して JAR にまとめます",
+        "ko": "폴더의 컴파일된 클래스를 메인 클래스와 함께 JAR로 묶습니다",
+        "zh-cn": "把文件夹中已编译的类与主类一起打包成 JAR",
+        "zh-tw": "把資料夾中已編譯的類別與主類別一起打包成 JAR",
+        "ru": "Упаковывает скомпилированные классы папки в JAR с главным классом"
+      },
+      "command": "jar --create --file ${file} --main-class ${class} -C ${outdir} .",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "app.jar",
+            "es": "app.jar",
+            "pt-br": "app.jar",
+            "fr": "app.jar",
+            "de": "app.jar",
+            "it": "app.jar",
+            "ja": "app.jar",
+            "ko": "app.jar",
+            "zh-cn": "app.jar",
+            "zh-tw": "app.jar",
+            "ru": "app.jar"
+          }
+        },
+        {
+          "name": "class",
+          "label": {
+            "en": "Class name",
+            "es": "Nombre de la clase",
+            "pt-br": "Nome da classe",
+            "fr": "Nom de la classe",
+            "de": "Klassenname",
+            "it": "Nome della classe",
+            "ja": "クラス名",
+            "ko": "클래스 이름",
+            "zh-cn": "类名",
+            "zh-tw": "類別名稱",
+            "ru": "Имя класса"
+          },
+          "placeholder": {
+            "en": "com.example.Main",
+            "es": "com.example.Main",
+            "pt-br": "com.example.Main",
+            "fr": "com.example.Main",
+            "de": "com.example.Main",
+            "it": "com.example.Main",
+            "ja": "com.example.Main",
+            "ko": "com.example.Main",
+            "zh-cn": "com.example.Main",
+            "zh-tw": "com.example.Main",
+            "ru": "com.example.Main"
+          }
+        },
+        {
+          "name": "outdir",
+          "label": {
+            "en": "Output folder",
+            "es": "Carpeta de salida",
+            "pt-br": "Pasta de saída",
+            "fr": "Dossier de sortie",
+            "de": "Ausgabeordner",
+            "it": "Cartella di output",
+            "ja": "出力フォルダー",
+            "ko": "출력 폴더",
+            "zh-cn": "输出文件夹",
+            "zh-tw": "輸出資料夾",
+            "ru": "Папка вывода"
+          },
+          "placeholder": {
+            "en": "out",
+            "es": "out",
+            "pt-br": "out",
+            "fr": "out",
+            "de": "out",
+            "it": "out",
+            "ja": "out",
+            "ko": "out",
+            "zh-cn": "out",
+            "zh-tw": "out",
+            "ru": "out"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "jar", "--create", "package", "create"],
+        "es": ["java", "jdk", "jar", "--create", "package", "crear", "empaquetar"],
+        "pt-br": ["java", "jdk", "jar", "--create", "package", "criar", "empacotar"],
+        "fr": ["java", "jdk", "jar", "--create", "package", "créer", "empaqueter"],
+        "de": ["java", "jdk", "jar", "--create", "package", "erstellen", "packen"],
+        "it": ["java", "jdk", "jar", "--create", "package", "creare", "impacchettare"],
+        "ja": ["java", "jdk", "jar", "--create", "package", "作成", "パッケージ"],
+        "ko": ["java", "jdk", "jar", "--create", "package", "만들기", "패키징"],
+        "zh-cn": ["java", "jdk", "jar", "--create", "package", "创建", "打包"],
+        "zh-tw": ["java", "jdk", "jar", "--create", "package", "建立", "打包"],
+        "ru": ["java", "jdk", "jar", "--create", "package", "создать", "упаковать"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jar.html"
+    },
+    {
+      "id": "java.jar-list",
+      "title": {
+        "en": "List the contents of a JAR",
+        "es": "Ver el contenido de un JAR",
+        "pt-br": "Ver o conteúdo de um JAR",
+        "fr": "Lister le contenu d’un JAR",
+        "de": "Inhalt eines JAR anzeigen",
+        "it": "Elenca il contenuto di un JAR",
+        "ja": "JAR の中身を一覧表示",
+        "ko": "JAR 내용 보기",
+        "zh-cn": "列出 JAR 的内容",
+        "zh-tw": "列出 JAR 的內容",
+        "ru": "Показать содержимое JAR"
+      },
+      "description": {
+        "en": "Lists the files packed in a JAR without extracting them",
+        "es": "Muestra los archivos que contiene un JAR sin extraerlos",
+        "pt-br": "Mostra os arquivos contidos em um JAR sem extraí-los",
+        "fr": "Liste les fichiers d’un JAR sans les extraire",
+        "de": "Listet die Dateien eines JAR auf, ohne sie zu entpacken",
+        "it": "Elenca i file contenuti in un JAR senza estrarli",
+        "ja": "JAR に含まれるファイルを展開せずに一覧表示します",
+        "ko": "JAR에 든 파일을 압축을 풀지 않고 보여 줍니다",
+        "zh-cn": "列出 JAR 中的文件而不解压",
+        "zh-tw": "列出 JAR 中的檔案而不解壓縮",
+        "ru": "Показывает файлы внутри JAR, не распаковывая их"
+      },
+      "command": "jar --list --file ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "app.jar",
+            "es": "app.jar",
+            "pt-br": "app.jar",
+            "fr": "app.jar",
+            "de": "app.jar",
+            "it": "app.jar",
+            "ja": "app.jar",
+            "ko": "app.jar",
+            "zh-cn": "app.jar",
+            "zh-tw": "app.jar",
+            "ru": "app.jar"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "jar", "--list", "list", "contents"],
+        "es": ["java", "jdk", "jar", "--list", "contenido", "listar"],
+        "pt-br": ["java", "jdk", "jar", "--list", "conteúdo", "listar"],
+        "fr": ["java", "jdk", "jar", "--list", "contenu", "lister"],
+        "de": ["java", "jdk", "jar", "--list", "Inhalt", "auflisten"],
+        "it": ["java", "jdk", "jar", "--list", "contenuto", "elencare"],
+        "ja": ["java", "jdk", "jar", "--list", "中身", "一覧"],
+        "ko": ["java", "jdk", "jar", "--list", "내용", "목록"],
+        "zh-cn": ["java", "jdk", "jar", "--list", "内容", "列表"],
+        "zh-tw": ["java", "jdk", "jar", "--list", "內容", "清單"],
+        "ru": ["java", "jdk", "jar", "--list", "содержимое", "список"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jar.html"
+    },
+    {
+      "id": "java.jshell",
+      "title": {
+        "en": "Open the Java REPL (jshell)",
+        "es": "Abrir el REPL de Java (jshell)",
+        "pt-br": "Abrir o REPL do Java (jshell)",
+        "fr": "Ouvrir le REPL Java (jshell)",
+        "de": "Java-REPL öffnen (jshell)",
+        "it": "Apri il REPL di Java (jshell)",
+        "ja": "Java の REPL を開く（jshell）",
+        "ko": "Java REPL 열기(jshell)",
+        "zh-cn": "打开 Java REPL（jshell）",
+        "zh-tw": "開啟 Java REPL（jshell）",
+        "ru": "Открыть REPL Java (jshell)"
+      },
+      "description": {
+        "en": "Starts an interactive shell to try Java code line by line; type /exit to leave",
+        "es": "Abre una consola interactiva para probar código Java línea a línea; escribe /exit para salir",
+        "pt-br": "Abre um console interativo para testar código Java linha a linha; digite /exit para sair",
+        "fr": "Ouvre une console interactive pour essayer du code Java ligne par ligne ; tapez /exit pour quitter",
+        "de": "Startet eine interaktive Konsole, um Java-Code zeilenweise auszuprobieren; mit /exit beenden",
+        "it": "Apre una console interattiva per provare codice Java riga per riga; scrivi /exit per uscire",
+        "ja": "Java のコードを 1 行ずつ試せる対話シェルを起動します。終了は /exit",
+        "ko": "Java 코드를 한 줄씩 시험하는 대화형 셸을 엽니다. 끝내려면 /exit를 입력하세요",
+        "zh-cn": "启动交互式 shell 逐行试运行 Java 代码；输入 /exit 退出",
+        "zh-tw": "啟動互動式 shell 逐行試跑 Java 程式碼；輸入 /exit 離開",
+        "ru": "Открывает интерактивную оболочку для пошаговой проверки кода Java; для выхода введите /exit"
+      },
+      "command": "jshell",
+      "tags": {
+        "en": ["java", "jdk", "jshell", "repl", "interactive", "console"],
+        "es": ["java", "jdk", "jshell", "repl", "interactivo", "consola"],
+        "pt-br": ["java", "jdk", "jshell", "repl", "interativo", "console"],
+        "fr": ["java", "jdk", "jshell", "repl", "interactif", "console"],
+        "de": ["java", "jdk", "jshell", "repl", "interaktiv", "Konsole"],
+        "it": ["java", "jdk", "jshell", "repl", "interattivo", "console"],
+        "ja": ["java", "jdk", "jshell", "repl", "対話", "コンソール"],
+        "ko": ["java", "jdk", "jshell", "repl", "대화형", "콘솔"],
+        "zh-cn": ["java", "jdk", "jshell", "repl", "交互式", "控制台"],
+        "zh-tw": ["java", "jdk", "jshell", "repl", "互動式", "主控台"],
+        "ru": ["java", "jdk", "jshell", "repl", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jshell.html"
+    },
+    {
+      "id": "java.jps",
+      "title": {
+        "en": "List running Java processes",
+        "es": "Ver los procesos de Java en marcha",
+        "pt-br": "Ver os processos Java em execução",
+        "fr": "Lister les processus Java en cours",
+        "de": "Laufende Java-Prozesse anzeigen",
+        "it": "Elenca i processi Java in esecuzione",
+        "ja": "実行中の Java プロセスを一覧表示",
+        "ko": "실행 중인 Java 프로세스 보기",
+        "zh-cn": "列出正在运行的 Java 进程",
+        "zh-tw": "列出執行中的 Java 處理程序",
+        "ru": "Показать запущенные процессы Java"
+      },
+      "description": {
+        "en": "Lists the Java processes of your user with their ID and main class",
+        "es": "Muestra los procesos de Java de tu usuario con su ID y su clase principal",
+        "pt-br": "Mostra os processos Java do seu usuário com o ID e a classe principal",
+        "fr": "Liste les processus Java de votre utilisateur avec leur ID et leur classe principale",
+        "de": "Listet die Java-Prozesse deines Benutzers mit ID und Hauptklasse auf",
+        "it": "Elenca i processi Java del tuo utente con ID e classe principale",
+        "ja": "自分のユーザーの Java プロセスを ID とメインクラス付きで表示します",
+        "ko": "내 사용자의 Java 프로세스를 ID와 메인 클래스와 함께 보여 줍니다",
+        "zh-cn": "列出当前用户的 Java 进程及其 ID 和主类",
+        "zh-tw": "列出目前使用者的 Java 處理程序及其 ID 和主類別",
+        "ru": "Показывает процессы Java вашего пользователя с ID и главным классом"
+      },
+      "command": "jps -l",
+      "tags": {
+        "en": ["java", "jdk", "jps", "pid", "processes"],
+        "es": ["java", "jdk", "jps", "pid", "procesos"],
+        "pt-br": ["java", "jdk", "jps", "pid", "processos"],
+        "fr": ["java", "jdk", "jps", "pid", "processus"],
+        "de": ["java", "jdk", "jps", "pid", "Prozesse"],
+        "it": ["java", "jdk", "jps", "pid", "processi"],
+        "ja": ["java", "jdk", "jps", "pid", "プロセス"],
+        "ko": ["java", "jdk", "jps", "pid", "프로세스"],
+        "zh-cn": ["java", "jdk", "jps", "pid", "进程"],
+        "zh-tw": ["java", "jdk", "jps", "pid", "處理程序"],
+        "ru": ["java", "jdk", "jps", "pid", "процессы"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jps.html"
+    },
+    {
+      "id": "java.heap-info",
+      "title": {
+        "en": "Show the memory of a process",
+        "es": "Ver la memoria de un proceso",
+        "pt-br": "Ver a memória de um processo",
+        "fr": "Afficher la mémoire d’un processus",
+        "de": "Speicher eines Prozesses anzeigen",
+        "it": "Mostra la memoria di un processo",
+        "ja": "プロセスのメモリを表示",
+        "ko": "프로세스 메모리 보기",
+        "zh-cn": "查看进程的内存",
+        "zh-tw": "檢視處理程序的記憶體",
+        "ru": "Показать память процесса"
+      },
+      "description": {
+        "en": "Shows the heap use of a running Java process (find its ID with jps)",
+        "es": "Muestra el uso del heap de un proceso de Java en marcha (su ID se ve con jps)",
+        "pt-br": "Mostra o uso do heap de um processo Java em execução (o ID aparece no jps)",
+        "fr": "Affiche l’utilisation du tas d’un processus Java en cours (son ID s’obtient avec jps)",
+        "de": "Zeigt die Heap-Nutzung eines laufenden Java-Prozesses (ID mit jps ermitteln)",
+        "it": "Mostra l’uso dell’heap di un processo Java in esecuzione (l’ID si trova con jps)",
+        "ja": "実行中の Java プロセスのヒープ使用量を表示します（ID は jps で確認）",
+        "ko": "실행 중인 Java 프로세스의 힙 사용량을 보여 줍니다(ID는 jps로 확인)",
+        "zh-cn": "显示正在运行的 Java 进程的堆使用情况（用 jps 查找 ID）",
+        "zh-tw": "顯示執行中 Java 處理程序的堆積使用量（用 jps 查詢 ID）",
+        "ru": "Показывает использование кучи запущенным процессом Java (ID можно узнать через jps)"
+      },
+      "command": "jcmd ${pid} GC.heap_info",
+      "params": [
+        {
+          "name": "pid",
+          "label": {
+            "en": "Process ID",
+            "es": "ID del proceso",
+            "pt-br": "ID do processo",
+            "fr": "ID du processus",
+            "de": "Prozess-ID",
+            "it": "ID del processo",
+            "ja": "プロセス ID",
+            "ko": "프로세스 ID",
+            "zh-cn": "进程 ID",
+            "zh-tw": "處理程序 ID",
+            "ru": "ID процесса"
+          },
+          "placeholder": {
+            "en": "12345",
+            "es": "12345",
+            "pt-br": "12345",
+            "fr": "12345",
+            "de": "12345",
+            "it": "12345",
+            "ja": "12345",
+            "ko": "12345",
+            "zh-cn": "12345",
+            "zh-tw": "12345",
+            "ru": "12345"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "jcmd", "heap", "gc", "memory"],
+        "es": ["java", "jdk", "jcmd", "heap", "gc", "memoria"],
+        "pt-br": ["java", "jdk", "jcmd", "heap", "gc", "memória"],
+        "fr": ["java", "jdk", "jcmd", "heap", "gc", "mémoire"],
+        "de": ["java", "jdk", "jcmd", "heap", "gc", "Speicher"],
+        "it": ["java", "jdk", "jcmd", "heap", "gc", "memoria"],
+        "ja": ["java", "jdk", "jcmd", "heap", "gc", "メモリ"],
+        "ko": ["java", "jdk", "jcmd", "heap", "gc", "메모리"],
+        "zh-cn": ["java", "jdk", "jcmd", "heap", "gc", "内存"],
+        "zh-tw": ["java", "jdk", "jcmd", "heap", "gc", "記憶體"],
+        "ru": ["java", "jdk", "jcmd", "heap", "gc", "память"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jcmd.html"
+    },
+    {
+      "id": "java.thread-dump",
+      "title": {
+        "en": "Dump the threads of a process",
+        "es": "Volcar los hilos de un proceso",
+        "pt-br": "Despejar as threads de um processo",
+        "fr": "Afficher les threads d’un processus",
+        "de": "Threads eines Prozesses ausgeben",
+        "it": "Mostra i thread di un processo",
+        "ja": "プロセスのスレッドをダンプ",
+        "ko": "프로세스 스레드 덤프",
+        "zh-cn": "转储进程的线程",
+        "zh-tw": "傾印處理程序的執行緒",
+        "ru": "Снять дамп потоков процесса"
+      },
+      "description": {
+        "en": "Prints the stack of every thread of a Java process, useful when it hangs",
+        "es": "Muestra la pila de cada hilo de un proceso de Java, útil cuando se queda colgado",
+        "pt-br": "Mostra a pilha de cada thread de um processo Java, útil quando ele trava",
+        "fr": "Affiche la pile de chaque thread d’un processus Java, utile quand il est bloqué",
+        "de": "Gibt den Stack jedes Threads eines Java-Prozesses aus, hilfreich wenn er hängt",
+        "it": "Mostra lo stack di ogni thread di un processo Java, utile quando si blocca",
+        "ja": "Java プロセスの全スレッドのスタックを表示します。固まったときに役立ちます",
+        "ko": "Java 프로세스의 모든 스레드 스택을 출력합니다. 멈췄을 때 유용합니다",
+        "zh-cn": "打印 Java 进程每个线程的堆栈，进程卡住时很有用",
+        "zh-tw": "印出 Java 處理程序每個執行緒的堆疊，處理程序卡住時很有用",
+        "ru": "Выводит стек каждого потока процесса Java; полезно, когда он завис"
+      },
+      "command": "jstack ${pid}",
+      "params": [
+        {
+          "name": "pid",
+          "label": {
+            "en": "Process ID",
+            "es": "ID del proceso",
+            "pt-br": "ID do processo",
+            "fr": "ID du processus",
+            "de": "Prozess-ID",
+            "it": "ID del processo",
+            "ja": "プロセス ID",
+            "ko": "프로세스 ID",
+            "zh-cn": "进程 ID",
+            "zh-tw": "處理程序 ID",
+            "ru": "ID процесса"
+          },
+          "placeholder": {
+            "en": "12345",
+            "es": "12345",
+            "pt-br": "12345",
+            "fr": "12345",
+            "de": "12345",
+            "it": "12345",
+            "ja": "12345",
+            "ko": "12345",
+            "zh-cn": "12345",
+            "zh-tw": "12345",
+            "ru": "12345"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "jstack", "thread dump", "deadlock", "threads", "hang"],
+        "es": ["java", "jdk", "jstack", "thread dump", "deadlock", "hilos", "colgado"],
+        "pt-br": ["java", "jdk", "jstack", "thread dump", "deadlock", "threads", "travado"],
+        "fr": ["java", "jdk", "jstack", "thread dump", "deadlock", "threads", "bloqué"],
+        "de": ["java", "jdk", "jstack", "thread dump", "deadlock", "Threads", "hängt"],
+        "it": ["java", "jdk", "jstack", "thread dump", "deadlock", "thread", "bloccato"],
+        "ja": ["java", "jdk", "jstack", "thread dump", "deadlock", "スレッド", "フリーズ"],
+        "ko": ["java", "jdk", "jstack", "thread dump", "deadlock", "스레드", "멈춤"],
+        "zh-cn": ["java", "jdk", "jstack", "thread dump", "deadlock", "线程", "卡住"],
+        "zh-tw": ["java", "jdk", "jstack", "thread dump", "deadlock", "執行緒", "卡住"],
+        "ru": ["java", "jdk", "jstack", "thread dump", "deadlock", "потоки", "завис"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jstack.html"
+    },
+    {
+      "id": "java.keytool-list",
+      "title": {
+        "en": "List the certificates of a keystore",
+        "es": "Ver los certificados de un keystore",
+        "pt-br": "Ver os certificados de um keystore",
+        "fr": "Lister les certificats d’un keystore",
+        "de": "Zertifikate eines Keystores anzeigen",
+        "it": "Elenca i certificati di un keystore",
+        "ja": "キーストアの証明書を一覧表示",
+        "ko": "키 저장소의 인증서 보기",
+        "zh-cn": "列出密钥库中的证书",
+        "zh-tw": "列出金鑰庫中的憑證",
+        "ru": "Показать сертификаты хранилища ключей"
+      },
+      "description": {
+        "en": "Lists the entries of a keystore; it asks for the keystore password",
+        "es": "Muestra las entradas de un keystore; pide la contraseña del keystore",
+        "pt-br": "Mostra as entradas de um keystore; pede a senha do keystore",
+        "fr": "Liste les entrées d’un keystore ; demande le mot de passe du keystore",
+        "de": "Listet die Einträge eines Keystores auf; fragt nach dessen Passwort",
+        "it": "Elenca le voci di un keystore; chiede la password del keystore",
+        "ja": "キーストアのエントリを一覧表示します。キーストアのパスワードを尋ねます",
+        "ko": "키 저장소의 항목을 보여 줍니다. 키 저장소 비밀번호를 묻습니다",
+        "zh-cn": "列出密钥库中的条目；会要求输入密钥库密码",
+        "zh-tw": "列出金鑰庫中的項目；會要求輸入金鑰庫密碼",
+        "ru": "Показывает записи хранилища ключей; запрашивает его пароль"
+      },
+      "command": "keytool -list -keystore ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "keystore.p12",
+            "es": "keystore.p12",
+            "pt-br": "keystore.p12",
+            "fr": "keystore.p12",
+            "de": "keystore.p12",
+            "it": "keystore.p12",
+            "ja": "keystore.p12",
+            "ko": "keystore.p12",
+            "zh-cn": "keystore.p12",
+            "zh-tw": "keystore.p12",
+            "ru": "keystore.p12"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "certificates"],
+        "es": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "certificados"],
+        "pt-br": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "certificados"],
+        "fr": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "certificats"],
+        "de": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "Zertifikate"],
+        "it": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "certificati"],
+        "ja": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "証明書"],
+        "ko": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "인증서"],
+        "zh-cn": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "证书"],
+        "zh-tw": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "憑證"],
+        "ru": ["java", "jdk", "keytool", "keystore", "ssl", "tls", "сертификаты"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html"
+    },
+    {
+      "id": "java.javadoc",
+      "title": {
+        "en": "Generate the documentation",
+        "es": "Generar la documentación",
+        "pt-br": "Gerar a documentação",
+        "fr": "Générer la documentation",
+        "de": "Dokumentation erzeugen",
+        "it": "Genera la documentazione",
+        "ja": "ドキュメントを生成",
+        "ko": "문서 생성",
+        "zh-cn": "生成文档",
+        "zh-tw": "產生文件",
+        "ru": "Сгенерировать документацию"
+      },
+      "description": {
+        "en": "Generates HTML documentation from the Javadoc comments of the source files",
+        "es": "Genera documentación HTML a partir de los comentarios Javadoc de los archivos fuente",
+        "pt-br": "Gera documentação HTML a partir dos comentários Javadoc dos arquivos-fonte",
+        "fr": "Génère une documentation HTML à partir des commentaires Javadoc des sources",
+        "de": "Erzeugt HTML-Dokumentation aus den Javadoc-Kommentaren der Quelldateien",
+        "it": "Genera documentazione HTML dai commenti Javadoc dei file sorgente",
+        "ja": "ソースファイルの Javadoc コメントから HTML ドキュメントを生成します",
+        "ko": "소스 파일의 Javadoc 주석으로 HTML 문서를 만듭니다",
+        "zh-cn": "根据源文件中的 Javadoc 注释生成 HTML 文档",
+        "zh-tw": "根據原始檔中的 Javadoc 註解產生 HTML 文件",
+        "ru": "Создаёт HTML-документацию из комментариев Javadoc в исходниках"
+      },
+      "command": "javadoc -d ${outdir} ${file}",
+      "params": [
+        {
+          "name": "outdir",
+          "label": {
+            "en": "Output folder",
+            "es": "Carpeta de salida",
+            "pt-br": "Pasta de saída",
+            "fr": "Dossier de sortie",
+            "de": "Ausgabeordner",
+            "it": "Cartella di output",
+            "ja": "出力フォルダー",
+            "ko": "출력 폴더",
+            "zh-cn": "输出文件夹",
+            "zh-tw": "輸出資料夾",
+            "ru": "Папка вывода"
+          },
+          "placeholder": {
+            "en": "docs",
+            "es": "docs",
+            "pt-br": "docs",
+            "fr": "docs",
+            "de": "docs",
+            "it": "docs",
+            "ja": "docs",
+            "ko": "docs",
+            "zh-cn": "docs",
+            "zh-tw": "docs",
+            "ru": "docs"
+          }
+        },
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "src/com/example/Main.java",
+            "es": "src/com/example/Main.java",
+            "pt-br": "src/com/example/Main.java",
+            "fr": "src/com/example/Main.java",
+            "de": "src/com/example/Main.java",
+            "it": "src/com/example/Main.java",
+            "ja": "src/com/example/Main.java",
+            "ko": "src/com/example/Main.java",
+            "zh-cn": "src/com/example/Main.java",
+            "zh-tw": "src/com/example/Main.java",
+            "ru": "src/com/example/Main.java"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["java", "jdk", "javadoc", "docs", "documentation"],
+        "es": ["java", "jdk", "javadoc", "docs", "documentación"],
+        "pt-br": ["java", "jdk", "javadoc", "docs", "documentação"],
+        "fr": ["java", "jdk", "javadoc", "docs", "documentation"],
+        "de": ["java", "jdk", "javadoc", "docs", "Dokumentation"],
+        "it": ["java", "jdk", "javadoc", "docs", "documentazione"],
+        "ja": ["java", "jdk", "javadoc", "docs", "ドキュメント"],
+        "ko": ["java", "jdk", "javadoc", "docs", "문서"],
+        "zh-cn": ["java", "jdk", "javadoc", "docs", "文档"],
+        "zh-tw": ["java", "jdk", "javadoc", "docs", "文件"],
+        "ru": ["java", "jdk", "javadoc", "docs", "документация"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html"
+    }
+  ]
+}

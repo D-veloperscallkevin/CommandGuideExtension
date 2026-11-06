@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda` y `terminal`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle` y `dotnet`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -188,11 +188,20 @@ Los comandos de `python` siguen la convención POSIX en `bash` y `zsh` (Linux, m
 - activar un entorno virtual SHALL ser `source .venv/bin/activate` en `command`, `.venv\Scripts\Activate.ps1` en `shells.powershell` y `.venv\Scripts\activate.bat` en `shells.cmd`;
 - la descripción de los comandos que usan `python3` o `.venv/bin` SHALL avisar, en los 11 idiomas, que en Git Bash sobre Windows se usa `python` y `.venv/Scripts/activate`.
 
+Los comandos de `maven` y `gradle` que usan el wrapper del proyecto SHALL escribirlo según el shell:
+- `./mvnw …` y `./gradlew …` en `command` (bash y zsh);
+- `.\mvnw …` y `.\gradlew …` en `shells.powershell`;
+- `mvnw …` y `gradlew …` en `shells.cmd`.
+
+Los comandos que crean el wrapper usan la herramienta instalada globalmente (`mvn` o `gradle`) y no llevan variantes.
+
+Los comandos de sdkman SHALL ir en `version-managers`, y su descripción SHALL avisar, en los 11 idiomas, de que sdkman no funciona en PowerShell ni en cmd (solo en bash y zsh, incluidos WSL y Git Bash).
+
 Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis documentada por su herramienta, y SHALL declarar `risk: destructive` si borra versiones instaladas, entornos, cachés o archivos del proyecto sin posibilidad de deshacerlo.
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda` y `terminal`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle` y `dotnet`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -240,6 +249,24 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Borrar cachés o entornos de Python
 - **WHEN** un comando de `python`, `poetry`, `uv` o `conda` borra una caché, un entorno o una versión de Python instalada
+- **THEN** declara `risk: destructive`
+
+#### Scenario: Compilar con el wrapper de Gradle en PowerShell, cmd y bash
+- **WHEN** se muestra el comando de `gradle` que compila el proyecto
+- **THEN** en `powershell` el ejemplo es `.\gradlew build` y en `cmd` es `gradlew build`
+- **AND** en `bash` y `zsh` es `./gradlew build`
+
+#### Scenario: Empaquetar con el wrapper de Maven en PowerShell y bash
+- **WHEN** se muestra el comando de `maven` que empaqueta el proyecto
+- **THEN** en `powershell` el ejemplo es `.\mvnw package` y en `cmd` es `mvnw package`
+- **AND** en `bash` es `./mvnw package`
+
+#### Scenario: Wrapper en todos los comandos de compilación
+- **WHEN** un comando de `maven` o `gradle` empieza por `./mvnw` o `./gradlew`
+- **THEN** declara `shells.powershell` con `.\mvnw` o `.\gradlew` y `shells.cmd` con `mvnw` o `gradlew`
+
+#### Scenario: Borrar la salida de compilación
+- **WHEN** un comando de `maven`, `gradle` o `dotnet` borra la salida de compilación (`clean`)
 - **THEN** declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas

@@ -18,7 +18,7 @@
   "icon": "versions",
   "order": 38,
   "section": "languages",
-  "detect": [".nvmrc", ".node-version", ".python-version"],
+  "detect": [".nvmrc", ".node-version", ".python-version", ".sdkmanrc"],
   "commands": [
     {
       "id": "version-managers.nvm-install-lts",
@@ -1470,6 +1470,400 @@
       },
       "risk": "destructive",
       "docs": "https://github.com/pyenv/pyenv/blob/master/COMMANDS.md"
+    },
+    {
+      "id": "version-managers.sdk-install",
+      "title": {
+        "en": "sdkman: install a Java version",
+        "es": "sdkman: instalar una versión de Java",
+        "pt-br": "sdkman: instalar uma versão do Java",
+        "fr": "sdkman: installer une version de Java",
+        "de": "sdkman: Java-Version installieren",
+        "it": "sdkman: installa una versione di Java",
+        "ja": "sdkman: Java のバージョンをインストール",
+        "ko": "sdkman: Java 버전 설치",
+        "zh-cn": "sdkman: 安装某个 Java 版本",
+        "zh-tw": "sdkman: 安裝某個 Java 版本",
+        "ru": "sdkman: установить версию Java"
+      },
+      "description": {
+        "en": "Downloads and installs a JDK; the identifiers come from sdk list java. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Descarga e instala un JDK; los identificadores salen de sdk list java. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Baixa e instala um JDK; os identificadores vêm de sdk list java. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Télécharge et installe un JDK ; les identifiants viennent de sdk list java. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Lädt ein JDK herunter und installiert es; die Kennungen liefert sdk list java. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Scarica e installa un JDK; gli identificatori arrivano da sdk list java. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "JDK をダウンロードしてインストールします。識別子は sdk list java で確認できます。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "JDK를 내려받아 설치합니다. 식별자는 sdk list java에서 확인합니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "下载并安装 JDK；标识符可在 sdk list java 中查看。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "下載並安裝 JDK；識別碼可在 sdk list java 中查看。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Скачивает и устанавливает JDK; идентификаторы можно узнать через sdk list java. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk install java ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "21.0.5-tem",
+            "es": "21.0.5-tem",
+            "pt-br": "21.0.5-tem",
+            "fr": "21.0.5-tem",
+            "de": "21.0.5-tem",
+            "it": "21.0.5-tem",
+            "ja": "21.0.5-tem",
+            "ko": "21.0.5-tem",
+            "zh-cn": "21.0.5-tem",
+            "zh-tw": "21.0.5-tem",
+            "ru": "21.0.5-tem"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "install"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "instalar"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "instalar"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "installer"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "installieren"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "installare"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "インストール"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "설치"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "安装"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "安裝"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.sdk-use",
+      "title": {
+        "en": "sdkman: use a Java version in this terminal",
+        "es": "sdkman: usar una versión de Java en esta terminal",
+        "pt-br": "sdkman: usar uma versão do Java neste terminal",
+        "fr": "sdkman: utiliser une version de Java dans ce terminal",
+        "de": "sdkman: Java-Version in diesem Terminal verwenden",
+        "it": "sdkman: usa una versione di Java in questo terminale",
+        "ja": "sdkman: このターミナルで Java のバージョンを使用",
+        "ko": "sdkman: 이 터미널에서 Java 버전 사용",
+        "zh-cn": "sdkman: 在此终端使用某个 Java 版本",
+        "zh-tw": "sdkman: 在此終端機使用某個 Java 版本",
+        "ru": "sdkman: использовать версию Java в этом терминале"
+      },
+      "description": {
+        "en": "Switches the Java of the current terminal only; new terminals keep the default. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Cambia el Java solo de la terminal actual; las terminales nuevas siguen con el predeterminado. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Troca o Java só do terminal atual; os terminais novos continuam com o padrão. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Change le Java du terminal actuel seulement ; les nouveaux terminaux gardent celui par défaut. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Wechselt das Java nur im aktuellen Terminal; neue Terminals behalten den Standard. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Cambia il Java solo del terminale attuale; i nuovi terminali mantengono quello predefinito. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "現在のターミナルの Java だけを切り替えます。新しいターミナルは既定のままです。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "현재 터미널의 Java만 바꿉니다. 새 터미널은 기본값을 유지합니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "只切换当前终端的 Java；新终端仍使用默认版本。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "只切換目前終端機的 Java；新終端機仍使用預設版本。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Меняет Java только в текущем терминале; новые терминалы используют версию по умолчанию. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk use java ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "21.0.5-tem",
+            "es": "21.0.5-tem",
+            "pt-br": "21.0.5-tem",
+            "fr": "21.0.5-tem",
+            "de": "21.0.5-tem",
+            "it": "21.0.5-tem",
+            "ja": "21.0.5-tem",
+            "ko": "21.0.5-tem",
+            "zh-cn": "21.0.5-tem",
+            "zh-tw": "21.0.5-tem",
+            "ru": "21.0.5-tem"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "use", "switch"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "usar", "cambiar"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "usar", "trocar"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "utiliser", "changer"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "verwenden", "wechseln"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "usare", "cambiare"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "使用", "切り替え"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "사용", "전환"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "使用", "切换"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "使用", "切換"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "использовать", "переключить"]
+      },
+      "risk": "safe",
+      "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.sdk-list-java",
+      "title": {
+        "en": "sdkman: list the Java versions",
+        "es": "sdkman: ver las versiones de Java",
+        "pt-br": "sdkman: ver as versões do Java",
+        "fr": "sdkman: lister les versions de Java",
+        "de": "sdkman: Java-Versionen anzeigen",
+        "it": "sdkman: elenca le versioni di Java",
+        "ja": "sdkman: Java のバージョンを一覧表示",
+        "ko": "sdkman: Java 버전 보기",
+        "zh-cn": "sdkman: 列出 Java 版本",
+        "zh-tw": "sdkman: 列出 Java 版本",
+        "ru": "sdkman: показать версии Java"
+      },
+      "description": {
+        "en": "Lists the available JDKs by vendor and marks the installed ones and the one in use. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Muestra los JDK disponibles por proveedor y marca los instalados y el que está en uso. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Mostra os JDKs disponíveis por fornecedor e marca os instalados e o que está em uso. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Liste les JDK disponibles par fournisseur et indique ceux installés et celui utilisé. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Listet die verfügbaren JDKs nach Anbieter und markiert die installierten und das aktive. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Elenca i JDK disponibili per fornitore e segna quelli installati e quello in uso. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "利用できる JDK をベンダー別に表示し、インストール済みと使用中のものに印を付けます。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "사용 가능한 JDK를 공급업체별로 보여 주고 설치된 것과 사용 중인 것을 표시합니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "按供应商列出可用的 JDK，并标出已安装和正在使用的版本。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "依供應商列出可用的 JDK，並標出已安裝和正在使用的版本。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Показывает доступные JDK по поставщикам и отмечает установленные и текущий. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk list java",
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "list", "available"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "ver", "disponibles"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "ver", "disponíveis"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "lister", "disponibles"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "anzeigen", "verfügbar"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "elencare", "disponibili"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "一覧", "利用可能"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "목록", "사용 가능"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "列表", "可用"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "清單", "可用"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "список", "доступные"]
+      },
+      "risk": "safe",
+      "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.sdk-default",
+      "title": {
+        "en": "sdkman: set the default Java version",
+        "es": "sdkman: fijar la versión de Java por defecto",
+        "pt-br": "sdkman: definir a versão padrão do Java",
+        "fr": "sdkman: définir la version de Java par défaut",
+        "de": "sdkman: Standard-Java-Version festlegen",
+        "it": "sdkman: imposta la versione di Java predefinita",
+        "ja": "sdkman: 既定の Java バージョンを設定",
+        "ko": "sdkman: 기본 Java 버전 설정",
+        "zh-cn": "sdkman: 设置默认的 Java 版本",
+        "zh-tw": "sdkman: 設定預設的 Java 版本",
+        "ru": "sdkman: задать версию Java по умолчанию"
+      },
+      "description": {
+        "en": "Changes the Java that every new terminal of your user will use. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Cambia el Java que usarán todas las terminales nuevas de tu usuario. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Muda o Java que todos os terminais novos do seu usuário vão usar. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Change le Java utilisé par tous les nouveaux terminaux de votre utilisateur. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Ändert das Java, das alle neuen Terminals deines Benutzers verwenden. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Cambia il Java che useranno tutti i nuovi terminali del tuo utente. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "自分のユーザーのすべての新しいターミナルで使う Java を変更します。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "내 사용자의 모든 새 터미널에서 쓸 Java를 바꿉니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "更改当前用户所有新终端使用的 Java。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "變更目前使用者所有新終端機使用的 Java。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Меняет Java, которую будут использовать все новые терминалы вашего пользователя. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk default java ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "21.0.5-tem",
+            "es": "21.0.5-tem",
+            "pt-br": "21.0.5-tem",
+            "fr": "21.0.5-tem",
+            "de": "21.0.5-tem",
+            "it": "21.0.5-tem",
+            "ja": "21.0.5-tem",
+            "ko": "21.0.5-tem",
+            "zh-cn": "21.0.5-tem",
+            "zh-tw": "21.0.5-tem",
+            "ru": "21.0.5-tem"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "default", "global"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "por defecto", "global"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "padrão", "global"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "par défaut", "globale"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "Standard", "global"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "predefinita", "globale"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "既定", "グローバル"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "기본", "전역"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "默认", "全局"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "預設", "全域"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "по умолчанию", "глобальная"]
+      },
+      "risk": "caution",
+      "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.sdk-env",
+      "title": {
+        "en": "sdkman: use the versions of .sdkmanrc",
+        "es": "sdkman: usar las versiones de .sdkmanrc",
+        "pt-br": "sdkman: usar as versões do .sdkmanrc",
+        "fr": "sdkman: utiliser les versions de .sdkmanrc",
+        "de": "sdkman: Versionen aus .sdkmanrc verwenden",
+        "it": "sdkman: usa le versioni di .sdkmanrc",
+        "ja": "sdkman: .sdkmanrc のバージョンを使用",
+        "ko": "sdkman: .sdkmanrc 버전 사용",
+        "zh-cn": "sdkman: 使用 .sdkmanrc 中的版本",
+        "zh-tw": "sdkman: 使用 .sdkmanrc 中的版本",
+        "ru": "sdkman: использовать версии из .sdkmanrc"
+      },
+      "description": {
+        "en": "Switches this terminal to the versions listed in the .sdkmanrc of the project. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Cambia esta terminal a las versiones que indica el .sdkmanrc del proyecto. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Troca este terminal para as versões indicadas no .sdkmanrc do projeto. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Passe ce terminal aux versions indiquées dans le .sdkmanrc du projet. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Stellt dieses Terminal auf die Versionen aus der .sdkmanrc des Projekts um. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Passa questo terminale alle versioni indicate nel .sdkmanrc del progetto. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "このターミナルをプロジェクトの .sdkmanrc に書かれたバージョンに切り替えます。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "이 터미널을 프로젝트 .sdkmanrc에 적힌 버전으로 바꿉니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "把此终端切换到项目 .sdkmanrc 中列出的版本。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "把此終端機切換到專案 .sdkmanrc 中列出的版本。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Переключает этот терминал на версии из файла .sdkmanrc проекта. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk env",
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "env", ".sdkmanrc"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "proyecto"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "projeto"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "projet"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "Projekt"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "progetto"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "プロジェクト"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "프로젝트"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "项目"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "專案"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "проект"]
+      },
+      "risk": "safe",
+      "docs": "https://sdkman.io/usage"
+    },
+    {
+      "id": "version-managers.sdk-uninstall",
+      "title": {
+        "en": "sdkman: uninstall a Java version",
+        "es": "sdkman: desinstalar una versión de Java",
+        "pt-br": "sdkman: desinstalar uma versão do Java",
+        "fr": "sdkman: désinstaller une version de Java",
+        "de": "sdkman: Java-Version deinstallieren",
+        "it": "sdkman: disinstalla una versione di Java",
+        "ja": "sdkman: Java のバージョンをアンインストール",
+        "ko": "sdkman: Java 버전 제거",
+        "zh-cn": "sdkman: 卸载某个 Java 版本",
+        "zh-tw": "sdkman: 解除安裝某個 Java 版本",
+        "ru": "sdkman: удалить версию Java"
+      },
+      "description": {
+        "en": "Deletes an installed JDK from the disk. Only in bash or zsh: SDKMAN does not work in PowerShell or cmd (use WSL).",
+        "es": "Borra del disco un JDK instalado. Solo en bash o zsh: SDKMAN no funciona en PowerShell ni en cmd (usa WSL).",
+        "pt-br": "Apaga do disco um JDK instalado. Só em bash ou zsh: o SDKMAN não funciona no PowerShell nem no cmd (use o WSL).",
+        "fr": "Supprime du disque un JDK installé. Uniquement dans bash ou zsh : SDKMAN ne fonctionne pas dans PowerShell ni cmd (utilisez WSL).",
+        "de": "Löscht ein installiertes JDK von der Festplatte. Nur in bash oder zsh: SDKMAN funktioniert nicht in PowerShell oder cmd (WSL verwenden).",
+        "it": "Elimina dal disco un JDK installato. Solo in bash o zsh: SDKMAN non funziona in PowerShell né in cmd (usa WSL).",
+        "ja": "インストール済みの JDK をディスクから削除します。 bash か zsh 専用です。SDKMAN は PowerShell や cmd では動きません（WSL を使ってください）。",
+        "ko": "설치된 JDK를 디스크에서 삭제합니다. bash나 zsh 전용입니다. SDKMAN은 PowerShell이나 cmd에서 동작하지 않습니다(WSL 사용).",
+        "zh-cn": "从磁盘删除已安装的 JDK。 仅限 bash 或 zsh：SDKMAN 不能在 PowerShell 或 cmd 中使用（请用 WSL）。",
+        "zh-tw": "從磁碟刪除已安裝的 JDK。 僅限 bash 或 zsh：SDKMAN 無法在 PowerShell 或 cmd 中使用（請用 WSL）。",
+        "ru": "Удаляет установленный JDK с диска. Только в bash или zsh: SDKMAN не работает в PowerShell и cmd (используйте WSL)."
+      },
+      "command": "sdk uninstall java ${version}",
+      "params": [
+        {
+          "name": "version",
+          "label": {
+            "en": "Version",
+            "es": "Versión",
+            "pt-br": "Versão",
+            "fr": "Version",
+            "de": "Version",
+            "it": "Versione",
+            "ja": "バージョン",
+            "ko": "버전",
+            "zh-cn": "版本",
+            "zh-tw": "版本",
+            "ru": "Версия"
+          },
+          "placeholder": {
+            "en": "21.0.5-tem",
+            "es": "21.0.5-tem",
+            "pt-br": "21.0.5-tem",
+            "fr": "21.0.5-tem",
+            "de": "21.0.5-tem",
+            "it": "21.0.5-tem",
+            "ja": "21.0.5-tem",
+            "ko": "21.0.5-tem",
+            "zh-cn": "21.0.5-tem",
+            "zh-tw": "21.0.5-tem",
+            "ru": "21.0.5-tem"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["sdk", "sdkman", "java", "jdk", "version", "uninstall", "remove"],
+        "es": ["sdk", "sdkman", "java", "jdk", "version", "desinstalar", "borrar"],
+        "pt-br": ["sdk", "sdkman", "java", "jdk", "version", "desinstalar", "apagar"],
+        "fr": ["sdk", "sdkman", "java", "jdk", "version", "désinstaller", "supprimer"],
+        "de": ["sdk", "sdkman", "java", "jdk", "version", "deinstallieren", "löschen"],
+        "it": ["sdk", "sdkman", "java", "jdk", "version", "disinstallare", "eliminare"],
+        "ja": ["sdk", "sdkman", "java", "jdk", "version", "アンインストール", "削除"],
+        "ko": ["sdk", "sdkman", "java", "jdk", "version", "제거", "삭제"],
+        "zh-cn": ["sdk", "sdkman", "java", "jdk", "version", "卸载", "删除"],
+        "zh-tw": ["sdk", "sdkman", "java", "jdk", "version", "解除安裝", "刪除"],
+        "ru": ["sdk", "sdkman", "java", "jdk", "version", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://sdkman.io/usage"
     }
   ]
 }
