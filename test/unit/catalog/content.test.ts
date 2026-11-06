@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 11 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 15 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -76,6 +76,10 @@ describe('contenido mínimo', () => {
 			'typescript',
 			'version-managers',
 			'docker',
+			'python',
+			'poetry',
+			'uv',
+			'conda',
 			'terminal',
 		]);
 	});
@@ -146,6 +150,50 @@ describe('contenido mínimo', () => {
 		const uninstalls = (managers?.commands ?? []).filter((cmd) => / uninstall /.test(` ${cmd.command} `));
 		expect(uninstalls.length).toBeGreaterThan(0);
 		expect(uninstalls.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('activar el venv usa Scripts en PowerShell y cmd, y bin en bash y zsh', () => {
+		expect(exampleFor('python.venv-activate', 'powershell')).toBe('.venv\\Scripts\\Activate.ps1');
+		expect(exampleFor('python.venv-activate', 'cmd')).toBe('.venv\\Scripts\\activate.bat');
+		expect(exampleFor('python.venv-activate', 'bash')).toBe('source .venv/bin/activate');
+		expect(exampleFor('python.venv-activate', 'zsh')).toBe('source .venv/bin/activate');
+	});
+
+	it('instalar requirements.txt usa python3 en bash y python en PowerShell y cmd', () => {
+		expect(exampleFor('python.pip-install-requirements', 'bash')).toBe('python3 -m pip install -r requirements.txt');
+		expect(exampleFor('python.pip-install-requirements', 'powershell')).toBe('python -m pip install -r requirements.txt');
+		expect(exampleFor('python.pip-install-requirements', 'cmd')).toBe('python -m pip install -r requirements.txt');
+	});
+
+	it('python nunca usa pip a secas', () => {
+		const python = bundledCatalog.find((c) => c.id === 'python');
+		const pipCommands = (python?.commands ?? []).filter((cmd) => /\bpip\b/.test(cmd.command) && !cmd.command.startsWith('pipx'));
+		expect(pipCommands.length).toBeGreaterThan(0);
+		const wrong = pipCommands.filter(
+			(cmd) =>
+				!cmd.command.startsWith('python3 -m pip ') ||
+				!cmd.shells?.powershell?.startsWith('python -m pip ') ||
+				!cmd.shells?.cmd?.startsWith('python -m pip '),
+		);
+		expect(wrong.map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('en python, poetry, uv y conda, borrar cachés, entornos o versiones es destructive', () => {
+		const ids = ['python', 'poetry', 'uv', 'conda'];
+		const deletes = bundledCatalog
+			.filter((c) => ids.includes(c.id))
+			.flatMap((c) => c.commands)
+			.filter((cmd) => /cache (purge|clear|clean)|\bclean --all|env remove|python uninstall/.test(cmd.command));
+		expect(deletes.map((cmd) => cmd.id).sort()).toEqual([
+			'conda.clean',
+			'conda.env-remove',
+			'poetry.cache-clear',
+			'poetry.env-remove',
+			'python.pip-cache-purge',
+			'uv.cache-clean',
+			'uv.python-uninstall',
+		]);
+		expect(deletes.filter((cmd) => cmd.risk !== 'destructive').map((cmd) => cmd.id)).toEqual([]);
 	});
 });
 

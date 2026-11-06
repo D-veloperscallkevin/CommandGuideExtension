@@ -1,0 +1,1388 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "python",
+  "title": {
+    "en": "Python",
+    "es": "Python",
+    "pt-br": "Python",
+    "fr": "Python",
+    "de": "Python",
+    "it": "Python",
+    "ja": "Python",
+    "ko": "Python",
+    "zh-cn": "Python",
+    "zh-tw": "Python",
+    "ru": "Python"
+  },
+  "icon": "python",
+  "order": 42,
+  "section": "languages",
+  "detect": ["pyproject.toml", "requirements*.txt", "setup.py", "setup.cfg", "Pipfile", ".python-version"],
+  "commands": [
+    {
+      "id": "python.version",
+      "title": {
+        "en": "Show the Python version",
+        "es": "Ver la versión de Python",
+        "pt-br": "Ver a versão do Python",
+        "fr": "Afficher la version de Python",
+        "de": "Python-Version anzeigen",
+        "it": "Mostra la versione di Python",
+        "ja": "Python のバージョンを表示",
+        "ko": "Python 버전 보기",
+        "zh-cn": "查看 Python 版本",
+        "zh-tw": "檢視 Python 版本",
+        "ru": "Показать версию Python"
+      },
+      "description": {
+        "en": "Prints the version of the Python interpreter found in the PATH. In Git Bash on Windows, use python instead of python3.",
+        "es": "Muestra la versión del intérprete de Python que hay en el PATH. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Mostra a versão do interpretador Python encontrado no PATH. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Affiche la version de l’interpréteur Python trouvé dans le PATH. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Zeigt die Version des Python-Interpreters im PATH. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Mostra la versione dell’interprete Python presente nel PATH. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "PATH にある Python インタープリターのバージョンを表示します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "PATH에 있는 Python 인터프리터의 버전을 보여 줍니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "显示 PATH 中 Python 解释器的版本。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "顯示 PATH 中 Python 直譯器的版本。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Показывает версию интерпретатора Python из PATH. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 --version",
+      "tags": {
+        "en": ["python", "python3", "--version", "version"],
+        "es": ["python", "python3", "--version", "versión"],
+        "pt-br": ["python", "python3", "--version", "versão"],
+        "fr": ["python", "python3", "--version", "version"],
+        "de": ["python", "python3", "--version", "Version"],
+        "it": ["python", "python3", "--version", "versione"],
+        "ja": ["python", "python3", "--version", "バージョン"],
+        "ko": ["python", "python3", "--version", "버전"],
+        "zh-cn": ["python", "python3", "--version", "版本"],
+        "zh-tw": ["python", "python3", "--version", "版本"],
+        "ru": ["python", "python3", "--version", "версия"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python --version",
+        "cmd": "python --version"
+      },
+      "docs": "https://docs.python.org/3/using/cmdline.html"
+    },
+    {
+      "id": "python.run-file",
+      "title": {
+        "en": "Run a Python file",
+        "es": "Ejecutar un archivo de Python",
+        "pt-br": "Executar um arquivo Python",
+        "fr": "Exécuter un fichier Python",
+        "de": "Python-Datei ausführen",
+        "it": "Esegui un file Python",
+        "ja": "Python ファイルを実行",
+        "ko": "Python 파일 실행",
+        "zh-cn": "运行 Python 文件",
+        "zh-tw": "執行 Python 檔案",
+        "ru": "Запустить файл Python"
+      },
+      "description": {
+        "en": "Runs a script with the Python interpreter. In Git Bash on Windows, use python instead of python3.",
+        "es": "Ejecuta un script con el intérprete de Python. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Executa um script com o interpretador Python. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Exécute un script avec l’interpréteur Python. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Führt ein Skript mit dem Python-Interpreter aus. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Esegue uno script con l’interprete Python. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "Python インタープリターでスクリプトを実行します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "Python 인터프리터로 스크립트를 실행합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "用 Python 解释器运行脚本。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "用 Python 直譯器執行指令碼。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Запускает скрипт интерпретатором Python. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.py",
+            "es": "main.py",
+            "pt-br": "main.py",
+            "fr": "main.py",
+            "de": "main.py",
+            "it": "main.py",
+            "ja": "main.py",
+            "ko": "main.py",
+            "zh-cn": "main.py",
+            "zh-tw": "main.py",
+            "ru": "main.py"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["python", "python3", "run", "script", "execute"],
+        "es": ["python", "python3", "run", "script", "ejecutar", "archivo"],
+        "pt-br": ["python", "python3", "run", "script", "executar", "arquivo"],
+        "fr": ["python", "python3", "run", "script", "exécuter", "fichier"],
+        "de": ["python", "python3", "run", "script", "ausführen", "Datei"],
+        "it": ["python", "python3", "run", "script", "eseguire", "file"],
+        "ja": ["python", "python3", "run", "script", "実行", "ファイル"],
+        "ko": ["python", "python3", "run", "script", "실행", "파일"],
+        "zh-cn": ["python", "python3", "run", "script", "运行", "文件"],
+        "zh-tw": ["python", "python3", "run", "script", "執行", "檔案"],
+        "ru": ["python", "python3", "run", "script", "запустить", "файл"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python ${file}",
+        "cmd": "python ${file}"
+      },
+      "docs": "https://docs.python.org/3/using/cmdline.html"
+    },
+    {
+      "id": "python.run-module",
+      "title": {
+        "en": "Run a module",
+        "es": "Ejecutar un módulo",
+        "pt-br": "Executar um módulo",
+        "fr": "Exécuter un module",
+        "de": "Modul ausführen",
+        "it": "Esegui un modulo",
+        "ja": "モジュールを実行",
+        "ko": "모듈 실행",
+        "zh-cn": "运行模块",
+        "zh-tw": "執行模組",
+        "ru": "Запустить модуль"
+      },
+      "description": {
+        "en": "Runs an installed module as a script with -m, for example pytest or a package of your project. In Git Bash on Windows, use python instead of python3.",
+        "es": "Ejecuta un módulo instalado como script con -m, por ejemplo pytest o un paquete de tu proyecto. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Executa um módulo instalado como script com -m, por exemplo pytest ou um pacote do seu projeto. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Exécute un module installé comme script avec -m, par exemple pytest ou un paquet de votre projet. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Führt ein installiertes Modul mit -m als Skript aus, etwa pytest oder ein Paket deines Projekts. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Esegue un modulo installato come script con -m, per esempio pytest o un pacchetto del tuo progetto. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "インストール済みのモジュールを -m でスクリプトとして実行します（pytest やプロジェクトのパッケージなど）。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "설치된 모듈을 -m으로 스크립트처럼 실행합니다(예: pytest나 프로젝트 패키지). Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "用 -m 把已安装的模块当作脚本运行，例如 pytest 或项目中的包。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "用 -m 把已安裝的模組當作指令碼執行，例如 pytest 或專案中的套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Запускает установленный модуль как скрипт через -m, например pytest или пакет вашего проекта. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m ${module}",
+      "params": [
+        {
+          "name": "module",
+          "label": {
+            "en": "Module",
+            "es": "Módulo",
+            "pt-br": "Módulo",
+            "fr": "Module",
+            "de": "Modul",
+            "it": "Modulo",
+            "ja": "モジュール",
+            "ko": "모듈",
+            "zh-cn": "模块",
+            "zh-tw": "模組",
+            "ru": "Модуль"
+          },
+          "placeholder": {
+            "en": "pytest",
+            "es": "pytest",
+            "pt-br": "pytest",
+            "fr": "pytest",
+            "de": "pytest",
+            "it": "pytest",
+            "ja": "pytest",
+            "ko": "pytest",
+            "zh-cn": "pytest",
+            "zh-tw": "pytest",
+            "ru": "pytest"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["python", "python3", "-m", "module", "run"],
+        "es": ["python", "python3", "-m", "module", "módulo", "ejecutar"],
+        "pt-br": ["python", "python3", "-m", "module", "módulo", "executar"],
+        "fr": ["python", "python3", "-m", "module", "exécuter"],
+        "de": ["python", "python3", "-m", "module", "Modul", "ausführen"],
+        "it": ["python", "python3", "-m", "module", "modulo", "eseguire"],
+        "ja": ["python", "python3", "-m", "module", "モジュール", "実行"],
+        "ko": ["python", "python3", "-m", "module", "모듈", "실행"],
+        "zh-cn": ["python", "python3", "-m", "module", "模块", "运行"],
+        "zh-tw": ["python", "python3", "-m", "module", "模組", "執行"],
+        "ru": ["python", "python3", "-m", "module", "модуль", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m ${module}",
+        "cmd": "python -m ${module}"
+      },
+      "docs": "https://docs.python.org/3/using/cmdline.html"
+    },
+    {
+      "id": "python.http-server",
+      "title": {
+        "en": "Serve this folder over HTTP",
+        "es": "Servir esta carpeta por HTTP",
+        "pt-br": "Servir esta pasta por HTTP",
+        "fr": "Servir ce dossier en HTTP",
+        "de": "Diesen Ordner per HTTP bereitstellen",
+        "it": "Servi questa cartella via HTTP",
+        "ja": "このフォルダーを HTTP で公開",
+        "ko": "이 폴더를 HTTP로 제공",
+        "zh-cn": "通过 HTTP 提供此文件夹",
+        "zh-tw": "透過 HTTP 提供此資料夾",
+        "ru": "Раздать эту папку по HTTP"
+      },
+      "description": {
+        "en": "Starts a simple local web server for the files of this folder; not meant for production. In Git Bash on Windows, use python instead of python3.",
+        "es": "Arranca un servidor web local sencillo con los archivos de esta carpeta; no es para producción. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Inicia um servidor web local simples com os arquivos desta pasta; não é para produção. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Lance un serveur web local simple pour les fichiers de ce dossier ; pas pour la production. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Startet einen einfachen lokalen Webserver für die Dateien dieses Ordners; nicht für die Produktion. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Avvia un semplice server web locale con i file di questa cartella; non adatto alla produzione. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "このフォルダーのファイルを公開する簡易ローカル Web サーバーを起動します。本番用ではありません。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이 폴더의 파일로 간단한 로컬 웹 서버를 시작합니다. 프로덕션용이 아닙니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "为此文件夹的文件启动一个简单的本地 Web 服务器，不适用于生产环境。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "為此資料夾的檔案啟動一個簡單的本機 Web 伺服器，不適用於正式環境。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Запускает простой локальный веб-сервер для файлов этой папки; не для продакшена. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m http.server ${port}",
+      "params": [
+        {
+          "name": "port",
+          "label": {
+            "en": "Port",
+            "es": "Puerto",
+            "pt-br": "Porta",
+            "fr": "Port",
+            "de": "Port",
+            "it": "Porta",
+            "ja": "ポート",
+            "ko": "포트",
+            "zh-cn": "端口",
+            "zh-tw": "連接埠",
+            "ru": "Порт"
+          },
+          "placeholder": {
+            "en": "8000",
+            "es": "8000",
+            "pt-br": "8000",
+            "fr": "8000",
+            "de": "8000",
+            "it": "8000",
+            "ja": "8000",
+            "ko": "8000",
+            "zh-cn": "8000",
+            "zh-tw": "8000",
+            "ru": "8000"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["python", "http.server", "http", "localhost", "server", "static"],
+        "es": ["python", "http.server", "http", "localhost", "servidor", "web"],
+        "pt-br": ["python", "http.server", "http", "localhost", "servidor", "web"],
+        "fr": ["python", "http.server", "http", "localhost", "serveur", "web"],
+        "de": ["python", "http.server", "http", "localhost", "Server", "Web"],
+        "it": ["python", "http.server", "http", "localhost", "server", "web"],
+        "ja": ["python", "http.server", "http", "localhost", "サーバー", "Web"],
+        "ko": ["python", "http.server", "http", "localhost", "서버", "웹"],
+        "zh-cn": ["python", "http.server", "http", "localhost", "服务器", "网页"],
+        "zh-tw": ["python", "http.server", "http", "localhost", "伺服器", "網頁"],
+        "ru": ["python", "http.server", "http", "localhost", "сервер", "веб"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m http.server ${port}",
+        "cmd": "python -m http.server ${port}"
+      },
+      "docs": "https://docs.python.org/3/library/http.server.html"
+    },
+    {
+      "id": "python.venv-create",
+      "title": {
+        "en": "Create a virtual environment",
+        "es": "Crear un entorno virtual",
+        "pt-br": "Criar um ambiente virtual",
+        "fr": "Créer un environnement virtuel",
+        "de": "Virtuelle Umgebung erstellen",
+        "it": "Crea un ambiente virtuale",
+        "ja": "仮想環境を作成",
+        "ko": "가상 환경 만들기",
+        "zh-cn": "创建虚拟环境",
+        "zh-tw": "建立虛擬環境",
+        "ru": "Создать виртуальное окружение"
+      },
+      "description": {
+        "en": "Creates the .venv folder with an isolated Python for this project. In Git Bash on Windows, use python instead of python3.",
+        "es": "Crea la carpeta .venv con un Python aislado para este proyecto. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Cria a pasta .venv com um Python isolado para este projeto. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Crée le dossier .venv avec un Python isolé pour ce projet. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Erstellt den Ordner .venv mit einem isolierten Python für dieses Projekt. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Crea la cartella .venv con un Python isolato per questo progetto. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "このプロジェクト専用の Python を入れた .venv フォルダーを作成します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이 프로젝트 전용 Python이 들어 있는 .venv 폴더를 만듭니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "创建 .venv 文件夹，为此项目提供独立的 Python。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "建立 .venv 資料夾，為此專案提供獨立的 Python。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Создаёт папку .venv с изолированным Python для этого проекта. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m venv .venv",
+      "tags": {
+        "en": ["python", "venv", ".venv", "virtualenv", "virtual environment", "create"],
+        "es": ["python", "venv", ".venv", "virtualenv", "entorno virtual", "crear"],
+        "pt-br": ["python", "venv", ".venv", "virtualenv", "ambiente virtual", "criar"],
+        "fr": ["python", "venv", ".venv", "virtualenv", "environnement virtuel", "créer"],
+        "de": ["python", "venv", ".venv", "virtualenv", "virtuelle Umgebung", "erstellen"],
+        "it": ["python", "venv", ".venv", "virtualenv", "ambiente virtuale", "creare"],
+        "ja": ["python", "venv", ".venv", "virtualenv", "仮想環境", "作成"],
+        "ko": ["python", "venv", ".venv", "virtualenv", "가상 환경", "만들기"],
+        "zh-cn": ["python", "venv", ".venv", "virtualenv", "虚拟环境", "创建"],
+        "zh-tw": ["python", "venv", ".venv", "virtualenv", "虛擬環境", "建立"],
+        "ru": ["python", "venv", ".venv", "virtualenv", "виртуальное окружение", "создать"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m venv .venv",
+        "cmd": "python -m venv .venv"
+      },
+      "docs": "https://docs.python.org/3/library/venv.html"
+    },
+    {
+      "id": "python.venv-activate",
+      "title": {
+        "en": "Activate the virtual environment",
+        "es": "Activar el entorno virtual",
+        "pt-br": "Ativar o ambiente virtual",
+        "fr": "Activer l’environnement virtuel",
+        "de": "Virtuelle Umgebung aktivieren",
+        "it": "Attiva l’ambiente virtuale",
+        "ja": "仮想環境を有効化",
+        "ko": "가상 환경 활성화",
+        "zh-cn": "激活虚拟环境",
+        "zh-tw": "啟用虛擬環境",
+        "ru": "Активировать виртуальное окружение"
+      },
+      "description": {
+        "en": "Uses the Python and packages of .venv in this terminal. In Git Bash on Windows, the path is .venv/Scripts/activate. If PowerShell blocks the script, allow local scripts in its execution policy first.",
+        "es": "Usa el Python y los paquetes de .venv en esta terminal. En Git Bash sobre Windows, la ruta es .venv/Scripts/activate. Si PowerShell bloquea el script, permite antes los scripts locales en su política de ejecución.",
+        "pt-br": "Usa o Python e os pacotes do .venv neste terminal. No Git Bash no Windows, o caminho é .venv/Scripts/activate. Se o PowerShell bloquear o script, permita antes os scripts locais na política de execução.",
+        "fr": "Utilise le Python et les paquets de .venv dans ce terminal. Dans Git Bash sous Windows, le chemin est .venv/Scripts/activate. Si PowerShell bloque le script, autorisez d’abord les scripts locaux dans sa stratégie d’exécution.",
+        "de": "Verwendet Python und Pakete aus .venv in diesem Terminal. In Git Bash unter Windows lautet der Pfad .venv/Scripts/activate. Blockiert PowerShell das Skript, erst lokale Skripte in der Ausführungsrichtlinie erlauben.",
+        "it": "Usa il Python e i pacchetti di .venv in questo terminale. In Git Bash su Windows, il percorso è .venv/Scripts/activate. Se PowerShell blocca lo script, consenti prima gli script locali nei criteri di esecuzione.",
+        "ja": "このターミナルで .venv の Python とパッケージを使います。Windows の Git Bash ではパスが .venv/Scripts/activate です。PowerShell がスクリプトをブロックする場合は、先に実行ポリシーでローカルスクリプトを許可します。",
+        "ko": "이 터미널에서 .venv의 Python과 패키지를 사용합니다. Windows의 Git Bash에서는 경로가 .venv/Scripts/activate입니다. PowerShell이 스크립트를 막으면 먼저 실행 정책에서 로컬 스크립트를 허용하세요.",
+        "zh-cn": "在此终端中使用 .venv 的 Python 和包。在 Windows 的 Git Bash 中，路径是 .venv/Scripts/activate。如果 PowerShell 阻止该脚本，请先在执行策略中允许本地脚本。",
+        "zh-tw": "在此終端機中使用 .venv 的 Python 和套件。在 Windows 的 Git Bash 中，路徑是 .venv/Scripts/activate。如果 PowerShell 封鎖該指令碼，請先在執行原則中允許本機指令碼。",
+        "ru": "Использует Python и пакеты из .venv в этом терминале. В Git Bash в Windows путь — .venv/Scripts/activate. Если PowerShell блокирует скрипт, сначала разрешите локальные скрипты в политике выполнения."
+      },
+      "command": "source .venv/bin/activate",
+      "tags": {
+        "en": ["python", "venv", ".venv", "activate", "source", "virtual environment"],
+        "es": ["python", "venv", ".venv", "activate", "source", "entorno virtual", "activar"],
+        "pt-br": ["python", "venv", ".venv", "activate", "source", "ambiente virtual", "ativar"],
+        "fr": ["python", "venv", ".venv", "activate", "source", "environnement virtuel", "activer"],
+        "de": ["python", "venv", ".venv", "activate", "source", "virtuelle Umgebung", "aktivieren"],
+        "it": ["python", "venv", ".venv", "activate", "source", "ambiente virtuale", "attivare"],
+        "ja": ["python", "venv", ".venv", "activate", "source", "仮想環境", "有効化"],
+        "ko": ["python", "venv", ".venv", "activate", "source", "가상 환경", "활성화"],
+        "zh-cn": ["python", "venv", ".venv", "activate", "source", "虚拟环境", "激活"],
+        "zh-tw": ["python", "venv", ".venv", "activate", "source", "虛擬環境", "啟用"],
+        "ru": ["python", "venv", ".venv", "activate", "source", "виртуальное окружение", "активировать"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".venv\\Scripts\\Activate.ps1",
+        "cmd": ".venv\\Scripts\\activate.bat"
+      },
+      "docs": "https://docs.python.org/3/library/venv.html"
+    },
+    {
+      "id": "python.venv-deactivate",
+      "title": {
+        "en": "Deactivate the virtual environment",
+        "es": "Desactivar el entorno virtual",
+        "pt-br": "Desativar o ambiente virtual",
+        "fr": "Désactiver l’environnement virtuel",
+        "de": "Virtuelle Umgebung deaktivieren",
+        "it": "Disattiva l’ambiente virtuale",
+        "ja": "仮想環境を無効化",
+        "ko": "가상 환경 비활성화",
+        "zh-cn": "退出虚拟环境",
+        "zh-tw": "停用虛擬環境",
+        "ru": "Деактивировать виртуальное окружение"
+      },
+      "description": {
+        "en": "Leaves the active virtual environment and goes back to the system Python",
+        "es": "Sale del entorno virtual activo y vuelve al Python del sistema",
+        "pt-br": "Sai do ambiente virtual ativo e volta ao Python do sistema",
+        "fr": "Quitte l’environnement virtuel actif et revient au Python du système",
+        "de": "Verlässt die aktive virtuelle Umgebung und kehrt zum System-Python zurück",
+        "it": "Esce dall’ambiente virtuale attivo e torna al Python di sistema",
+        "ja": "有効な仮想環境を抜けて、システムの Python に戻ります",
+        "ko": "활성 가상 환경에서 나와 시스템 Python으로 돌아갑니다",
+        "zh-cn": "退出当前虚拟环境，回到系统的 Python",
+        "zh-tw": "離開目前的虛擬環境，回到系統的 Python",
+        "ru": "Выходит из активного виртуального окружения и возвращается к системному Python"
+      },
+      "command": "deactivate",
+      "tags": {
+        "en": ["python", "venv", "deactivate", "virtual environment", "exit"],
+        "es": ["python", "venv", "deactivate", "entorno virtual", "desactivar", "salir"],
+        "pt-br": ["python", "venv", "deactivate", "ambiente virtual", "desativar", "sair"],
+        "fr": ["python", "venv", "deactivate", "environnement virtuel", "désactiver", "quitter"],
+        "de": ["python", "venv", "deactivate", "virtuelle Umgebung", "deaktivieren", "verlassen"],
+        "it": ["python", "venv", "deactivate", "ambiente virtuale", "disattivare", "uscire"],
+        "ja": ["python", "venv", "deactivate", "仮想環境", "無効化"],
+        "ko": ["python", "venv", "deactivate", "가상 환경", "비활성화"],
+        "zh-cn": ["python", "venv", "deactivate", "虚拟环境", "退出"],
+        "zh-tw": ["python", "venv", "deactivate", "虛擬環境", "停用"],
+        "ru": ["python", "venv", "deactivate", "виртуальное окружение", "выйти"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.python.org/3/library/venv.html"
+    },
+    {
+      "id": "python.pip-install",
+      "title": {
+        "en": "Install a package",
+        "es": "Instalar un paquete",
+        "pt-br": "Instalar um pacote",
+        "fr": "Installer un paquet",
+        "de": "Paket installieren",
+        "it": "Installa un pacchetto",
+        "ja": "パッケージをインストール",
+        "ko": "패키지 설치",
+        "zh-cn": "安装包",
+        "zh-tw": "安裝套件",
+        "ru": "Установить пакет"
+      },
+      "description": {
+        "en": "Installs a package from PyPI with the pip of this interpreter. In Git Bash on Windows, use python instead of python3.",
+        "es": "Instala un paquete de PyPI con el pip de este intérprete. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Instala um pacote do PyPI com o pip deste interpretador. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Installe un paquet de PyPI avec le pip de cet interpréteur. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Installiert ein Paket von PyPI mit dem pip dieses Interpreters. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Installa un pacchetto da PyPI con il pip di questo interprete. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "このインタープリターの pip で PyPI のパッケージをインストールします。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이 인터프리터의 pip로 PyPI 패키지를 설치합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "用此解释器的 pip 从 PyPI 安装包。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "用此直譯器的 pip 從 PyPI 安裝套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Устанавливает пакет из PyPI через pip этого интерпретатора. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip install ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "requests",
+            "es": "requests",
+            "pt-br": "requests",
+            "fr": "requests",
+            "de": "requests",
+            "it": "requests",
+            "ja": "requests",
+            "ko": "requests",
+            "zh-cn": "requests",
+            "zh-tw": "requests",
+            "ru": "requests"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "install", "pypi"],
+        "es": ["pip", "python", "python -m pip", "instalar", "paquete"],
+        "pt-br": ["pip", "python", "python -m pip", "instalar", "pacote"],
+        "fr": ["pip", "python", "python -m pip", "installer", "paquet"],
+        "de": ["pip", "python", "python -m pip", "installieren", "Paket"],
+        "it": ["pip", "python", "python -m pip", "installare", "pacchetto"],
+        "ja": ["pip", "python", "python -m pip", "インストール", "パッケージ"],
+        "ko": ["pip", "python", "python -m pip", "설치", "패키지"],
+        "zh-cn": ["pip", "python", "python -m pip", "安装", "包"],
+        "zh-tw": ["pip", "python", "python -m pip", "安裝", "套件"],
+        "ru": ["pip", "python", "python -m pip", "установить", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install ${package}",
+        "cmd": "python -m pip install ${package}"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_install/"
+    },
+    {
+      "id": "python.pip-install-requirements",
+      "title": {
+        "en": "Install requirements.txt",
+        "es": "Instalar requirements.txt",
+        "pt-br": "Instalar o requirements.txt",
+        "fr": "Installer requirements.txt",
+        "de": "requirements.txt installieren",
+        "it": "Installa requirements.txt",
+        "ja": "requirements.txt をインストール",
+        "ko": "requirements.txt 설치",
+        "zh-cn": "安装 requirements.txt",
+        "zh-tw": "安裝 requirements.txt",
+        "ru": "Установить requirements.txt"
+      },
+      "description": {
+        "en": "Installs every package listed in requirements.txt. In Git Bash on Windows, use python instead of python3.",
+        "es": "Instala todos los paquetes de requirements.txt. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Instala todos os pacotes do requirements.txt. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Installe tous les paquets de requirements.txt. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Installiert alle Pakete aus requirements.txt. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Installa tutti i pacchetti di requirements.txt. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "requirements.txt に書かれたパッケージをすべてインストールします。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "requirements.txt에 적힌 패키지를 모두 설치합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "安装 requirements.txt 中列出的所有包。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "安裝 requirements.txt 中列出的所有套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Устанавливает все пакеты из requirements.txt. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip install -r requirements.txt",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "install", "-r", "requirements.txt", "dependencies"],
+        "es": ["pip", "python", "python -m pip", "dependencias", "instalar"],
+        "pt-br": ["pip", "python", "python -m pip", "dependências", "instalar"],
+        "fr": ["pip", "python", "python -m pip", "dépendances", "installer"],
+        "de": ["pip", "python", "python -m pip", "Abhängigkeiten", "installieren"],
+        "it": ["pip", "python", "python -m pip", "dipendenze", "installare"],
+        "ja": ["pip", "python", "python -m pip", "依存関係", "インストール"],
+        "ko": ["pip", "python", "python -m pip", "의존성", "설치"],
+        "zh-cn": ["pip", "python", "python -m pip", "依赖", "安装"],
+        "zh-tw": ["pip", "python", "python -m pip", "相依套件", "安裝"],
+        "ru": ["pip", "python", "python -m pip", "зависимости", "установить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install -r requirements.txt",
+        "cmd": "python -m pip install -r requirements.txt"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_install/"
+    },
+    {
+      "id": "python.pip-install-editable",
+      "title": {
+        "en": "Install this project in editable mode",
+        "es": "Instalar este proyecto en modo editable",
+        "pt-br": "Instalar este projeto em modo editável",
+        "fr": "Installer ce projet en mode modifiable",
+        "de": "Dieses Projekt editierbar installieren",
+        "it": "Installa questo progetto in modalità modificabile",
+        "ja": "このプロジェクトを編集可能モードでインストール",
+        "ko": "이 프로젝트를 편집 가능 모드로 설치",
+        "zh-cn": "以可编辑模式安装此项目",
+        "zh-tw": "以可編輯模式安裝此專案",
+        "ru": "Установить этот проект в режиме редактирования"
+      },
+      "description": {
+        "en": "Installs the project of this folder so that code changes apply without reinstalling. In Git Bash on Windows, use python instead of python3.",
+        "es": "Instala el proyecto de esta carpeta para que los cambios en el código se apliquen sin reinstalar. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Instala o projeto desta pasta para que as mudanças no código valham sem reinstalar. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Installe le projet de ce dossier pour que les changements de code s’appliquent sans réinstaller. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Installiert das Projekt dieses Ordners, sodass Codeänderungen ohne Neuinstallation gelten. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Installa il progetto di questa cartella così le modifiche al codice valgono senza reinstallare. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "このフォルダーのプロジェクトをインストールし、コードの変更を再インストールなしで反映させます。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이 폴더의 프로젝트를 설치해 코드 변경이 재설치 없이 반영되게 합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "安装此文件夹中的项目，修改代码后无需重新安装即可生效。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "安裝此資料夾中的專案，修改程式碼後無需重新安裝即可生效。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Устанавливает проект из этой папки, чтобы изменения кода применялись без переустановки. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip install -e .",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "develop"],
+        "es": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "proyecto"],
+        "pt-br": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "editável", "projeto"],
+        "fr": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "modifiable", "projet"],
+        "de": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "editierbar", "Projekt"],
+        "it": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "modificabile", "progetto"],
+        "ja": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "編集可能", "プロジェクト"],
+        "ko": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "편집 가능", "프로젝트"],
+        "zh-cn": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "可编辑", "项目"],
+        "zh-tw": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "可編輯", "專案"],
+        "ru": ["pip", "python", "python -m pip", "install", "-e", "editable", "pyproject.toml", "редактируемый", "проект"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install -e .",
+        "cmd": "python -m pip install -e ."
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_install/"
+    },
+    {
+      "id": "python.pip-upgrade",
+      "title": {
+        "en": "Upgrade a package",
+        "es": "Actualizar un paquete",
+        "pt-br": "Atualizar um pacote",
+        "fr": "Mettre à jour un paquet",
+        "de": "Paket aktualisieren",
+        "it": "Aggiorna un pacchetto",
+        "ja": "パッケージを更新",
+        "ko": "패키지 업그레이드",
+        "zh-cn": "升级包",
+        "zh-tw": "升級套件",
+        "ru": "Обновить пакет"
+      },
+      "description": {
+        "en": "Installs the latest version of a package that is already installed. In Git Bash on Windows, use python instead of python3.",
+        "es": "Instala la última versión de un paquete que ya está instalado. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Instala a versão mais recente de um pacote já instalado. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Installe la dernière version d’un paquet déjà installé. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Installiert die neueste Version eines bereits installierten Pakets. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Installa l’ultima versione di un pacchetto già installato. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "インストール済みのパッケージを最新バージョンにします。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이미 설치된 패키지를 최신 버전으로 설치합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "把已安装的包升级到最新版本。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "把已安裝的套件升級到最新版本。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Устанавливает последнюю версию уже установленного пакета. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip install --upgrade ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "requests",
+            "es": "requests",
+            "pt-br": "requests",
+            "fr": "requests",
+            "de": "requests",
+            "it": "requests",
+            "ja": "requests",
+            "ko": "requests",
+            "zh-cn": "requests",
+            "zh-tw": "requests",
+            "ru": "requests"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "--upgrade", "-U", "update"],
+        "es": ["pip", "python", "python -m pip", "actualizar"],
+        "pt-br": ["pip", "python", "python -m pip", "atualizar"],
+        "fr": ["pip", "python", "python -m pip", "mettre à jour"],
+        "de": ["pip", "python", "python -m pip", "aktualisieren"],
+        "it": ["pip", "python", "python -m pip", "aggiornare"],
+        "ja": ["pip", "python", "python -m pip", "更新"],
+        "ko": ["pip", "python", "python -m pip", "업그레이드"],
+        "zh-cn": ["pip", "python", "python -m pip", "升级"],
+        "zh-tw": ["pip", "python", "python -m pip", "升級"],
+        "ru": ["pip", "python", "python -m pip", "обновить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install --upgrade ${package}",
+        "cmd": "python -m pip install --upgrade ${package}"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_install/"
+    },
+    {
+      "id": "python.pip-upgrade-pip",
+      "title": {
+        "en": "Upgrade pip",
+        "es": "Actualizar pip",
+        "pt-br": "Atualizar o pip",
+        "fr": "Mettre à jour pip",
+        "de": "pip aktualisieren",
+        "it": "Aggiorna pip",
+        "ja": "pip を更新",
+        "ko": "pip 업그레이드",
+        "zh-cn": "升级 pip",
+        "zh-tw": "升級 pip",
+        "ru": "Обновить pip"
+      },
+      "description": {
+        "en": "Updates pip itself in this interpreter or virtual environment. In Git Bash on Windows, use python instead of python3.",
+        "es": "Actualiza el propio pip en este intérprete o entorno virtual. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Atualiza o próprio pip neste interpretador ou ambiente virtual. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Met à jour pip lui-même dans cet interpréteur ou environnement virtuel. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Aktualisiert pip selbst in diesem Interpreter oder dieser virtuellen Umgebung. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Aggiorna pip stesso in questo interprete o ambiente virtuale. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "このインタープリターまたは仮想環境の pip 自体を更新します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "이 인터프리터나 가상 환경의 pip 자체를 업데이트합니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "更新此解释器或虚拟环境中的 pip 本身。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "更新此直譯器或虛擬環境中的 pip 本身。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Обновляет сам pip в этом интерпретаторе или виртуальном окружении. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip install --upgrade pip",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "--upgrade", "update"],
+        "es": ["pip", "python", "python -m pip", "actualizar"],
+        "pt-br": ["pip", "python", "python -m pip", "atualizar"],
+        "fr": ["pip", "python", "python -m pip", "mettre à jour"],
+        "de": ["pip", "python", "python -m pip", "aktualisieren"],
+        "it": ["pip", "python", "python -m pip", "aggiornare"],
+        "ja": ["pip", "python", "python -m pip", "更新"],
+        "ko": ["pip", "python", "python -m pip", "업그레이드"],
+        "zh-cn": ["pip", "python", "python -m pip", "升级"],
+        "zh-tw": ["pip", "python", "python -m pip", "升級"],
+        "ru": ["pip", "python", "python -m pip", "обновить"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "python -m pip install --upgrade pip",
+        "cmd": "python -m pip install --upgrade pip"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_install/"
+    },
+    {
+      "id": "python.pip-uninstall",
+      "title": {
+        "en": "Uninstall a package",
+        "es": "Desinstalar un paquete",
+        "pt-br": "Desinstalar um pacote",
+        "fr": "Désinstaller un paquet",
+        "de": "Paket deinstallieren",
+        "it": "Disinstalla un pacchetto",
+        "ja": "パッケージをアンインストール",
+        "ko": "패키지 제거",
+        "zh-cn": "卸载包",
+        "zh-tw": "解除安裝套件",
+        "ru": "Удалить пакет"
+      },
+      "description": {
+        "en": "Removes an installed package; its dependencies stay installed. In Git Bash on Windows, use python instead of python3.",
+        "es": "Quita un paquete instalado; sus dependencias se quedan instaladas. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Remove um pacote instalado; suas dependências continuam instaladas. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Supprime un paquet installé ; ses dépendances restent installées. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Entfernt ein installiertes Paket; seine Abhängigkeiten bleiben installiert. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Rimuove un pacchetto installato; le sue dipendenze restano installate. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "インストール済みのパッケージを削除します。依存関係は残ります。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "설치된 패키지를 제거합니다. 의존성은 그대로 남습니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "移除已安装的包，其依赖仍保留。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "移除已安裝的套件，其相依套件仍保留。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Удаляет установленный пакет; его зависимости остаются. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip uninstall ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "requests",
+            "es": "requests",
+            "pt-br": "requests",
+            "fr": "requests",
+            "de": "requests",
+            "it": "requests",
+            "ja": "requests",
+            "ko": "requests",
+            "zh-cn": "requests",
+            "zh-tw": "requests",
+            "ru": "requests"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "uninstall", "remove"],
+        "es": ["pip", "python", "python -m pip", "desinstalar", "quitar"],
+        "pt-br": ["pip", "python", "python -m pip", "desinstalar", "remover"],
+        "fr": ["pip", "python", "python -m pip", "désinstaller", "supprimer"],
+        "de": ["pip", "python", "python -m pip", "deinstallieren", "entfernen"],
+        "it": ["pip", "python", "python -m pip", "disinstallare", "rimuovere"],
+        "ja": ["pip", "python", "python -m pip", "アンインストール", "削除"],
+        "ko": ["pip", "python", "python -m pip", "제거", "삭제"],
+        "zh-cn": ["pip", "python", "python -m pip", "卸载", "移除"],
+        "zh-tw": ["pip", "python", "python -m pip", "解除安裝", "移除"],
+        "ru": ["pip", "python", "python -m pip", "удалить"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "python -m pip uninstall ${package}",
+        "cmd": "python -m pip uninstall ${package}"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_uninstall/"
+    },
+    {
+      "id": "python.pip-freeze",
+      "title": {
+        "en": "Save the packages to requirements.txt",
+        "es": "Guardar los paquetes en requirements.txt",
+        "pt-br": "Salvar os pacotes no requirements.txt",
+        "fr": "Enregistrer les paquets dans requirements.txt",
+        "de": "Pakete in requirements.txt speichern",
+        "it": "Salva i pacchetti in requirements.txt",
+        "ja": "パッケージを requirements.txt に保存",
+        "ko": "패키지를 requirements.txt에 저장",
+        "zh-cn": "把包保存到 requirements.txt",
+        "zh-tw": "把套件儲存到 requirements.txt",
+        "ru": "Сохранить пакеты в requirements.txt"
+      },
+      "description": {
+        "en": "Writes the installed packages with their exact versions to requirements.txt, replacing its content. In Git Bash on Windows, use python instead of python3.",
+        "es": "Escribe los paquetes instalados con sus versiones exactas en requirements.txt y reemplaza su contenido. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Grava os pacotes instalados com suas versões exatas no requirements.txt e substitui o conteúdo. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Écrit les paquets installés avec leurs versions exactes dans requirements.txt et remplace son contenu. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Schreibt die installierten Pakete mit exakten Versionen in requirements.txt und ersetzt dessen Inhalt. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Scrive i pacchetti installati con le versioni esatte in requirements.txt e ne sostituisce il contenuto. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "インストール済みのパッケージを正確なバージョン付きで requirements.txt に書き込み、内容を置き換えます。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "설치된 패키지를 정확한 버전과 함께 requirements.txt에 쓰고 기존 내용을 바꿉니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "将已安装的包及其确切版本写入 requirements.txt，并替换原有内容。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "將已安裝的套件及其確切版本寫入 requirements.txt，並取代原有內容。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Записывает установленные пакеты с точными версиями в requirements.txt, заменяя его содержимое. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip freeze > requirements.txt",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "save", "versions"],
+        "es": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "guardar", "versiones"],
+        "pt-br": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "salvar", "versões"],
+        "fr": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "enregistrer", "versions"],
+        "de": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "speichern", "Versionen"],
+        "it": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "salvare", "versioni"],
+        "ja": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "保存", "バージョン"],
+        "ko": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "저장", "버전"],
+        "zh-cn": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "保存", "版本"],
+        "zh-tw": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "儲存", "版本"],
+        "ru": ["pip", "python", "python -m pip", "freeze", "requirements.txt", "сохранить", "версии"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "python -m pip freeze > requirements.txt",
+        "cmd": "python -m pip freeze > requirements.txt"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_freeze/"
+    },
+    {
+      "id": "python.pip-outdated",
+      "title": {
+        "en": "List outdated packages",
+        "es": "Ver paquetes desactualizados",
+        "pt-br": "Ver pacotes desatualizados",
+        "fr": "Lister les paquets obsolètes",
+        "de": "Veraltete Pakete anzeigen",
+        "it": "Elenca i pacchetti obsoleti",
+        "ja": "古いパッケージを一覧表示",
+        "ko": "오래된 패키지 보기",
+        "zh-cn": "列出过时的包",
+        "zh-tw": "列出過時的套件",
+        "ru": "Показать устаревшие пакеты"
+      },
+      "description": {
+        "en": "Shows the installed packages that have a newer version on PyPI. In Git Bash on Windows, use python instead of python3.",
+        "es": "Muestra los paquetes instalados que tienen una versión más nueva en PyPI. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Mostra os pacotes instalados que têm uma versão mais nova no PyPI. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Affiche les paquets installés qui ont une version plus récente sur PyPI. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Zeigt die installierten Pakete, für die es auf PyPI eine neuere Version gibt. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Mostra i pacchetti installati che hanno una versione più recente su PyPI. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "PyPI に新しいバージョンがあるインストール済みパッケージを表示します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "PyPI에 새 버전이 있는 설치된 패키지를 보여 줍니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "显示在 PyPI 上有更新版本的已安装包。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "顯示在 PyPI 上有更新版本的已安裝套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Показывает установленные пакеты, для которых на PyPI есть более новая версия. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip list --outdated",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "list", "--outdated", "versions"],
+        "es": ["pip", "python", "python -m pip", "list", "--outdated", "desactualizados", "versiones"],
+        "pt-br": ["pip", "python", "python -m pip", "list", "--outdated", "desatualizados", "versões"],
+        "fr": ["pip", "python", "python -m pip", "list", "--outdated", "obsolètes", "versions"],
+        "de": ["pip", "python", "python -m pip", "list", "--outdated", "veraltet", "Versionen"],
+        "it": ["pip", "python", "python -m pip", "list", "--outdated", "obsoleti", "versioni"],
+        "ja": ["pip", "python", "python -m pip", "list", "--outdated", "古い", "バージョン"],
+        "ko": ["pip", "python", "python -m pip", "list", "--outdated", "오래된", "버전"],
+        "zh-cn": ["pip", "python", "python -m pip", "list", "--outdated", "过时", "版本"],
+        "zh-tw": ["pip", "python", "python -m pip", "list", "--outdated", "過時", "版本"],
+        "ru": ["pip", "python", "python -m pip", "list", "--outdated", "устаревшие", "версии"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip list --outdated",
+        "cmd": "python -m pip list --outdated"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_list/"
+    },
+    {
+      "id": "python.pip-show",
+      "title": {
+        "en": "Show information about a package",
+        "es": "Ver información de un paquete",
+        "pt-br": "Ver informações de um pacote",
+        "fr": "Afficher les informations d’un paquet",
+        "de": "Paketinformationen anzeigen",
+        "it": "Mostra le informazioni di un pacchetto",
+        "ja": "パッケージの情報を表示",
+        "ko": "패키지 정보 보기",
+        "zh-cn": "查看包的信息",
+        "zh-tw": "檢視套件資訊",
+        "ru": "Показать сведения о пакете"
+      },
+      "description": {
+        "en": "Shows the version, location and dependencies of an installed package. In Git Bash on Windows, use python instead of python3.",
+        "es": "Muestra la versión, la ubicación y las dependencias de un paquete instalado. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Mostra a versão, o local e as dependências de um pacote instalado. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Affiche la version, l’emplacement et les dépendances d’un paquet installé. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Zeigt Version, Speicherort und Abhängigkeiten eines installierten Pakets. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Mostra versione, posizione e dipendenze di un pacchetto installato. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "インストール済みパッケージのバージョン、場所、依存関係を表示します。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "설치된 패키지의 버전, 위치, 의존성을 보여 줍니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "显示已安装包的版本、位置和依赖。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "顯示已安裝套件的版本、位置和相依套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Показывает версию, расположение и зависимости установленного пакета. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip show ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "requests",
+            "es": "requests",
+            "pt-br": "requests",
+            "fr": "requests",
+            "de": "requests",
+            "it": "requests",
+            "ja": "requests",
+            "ko": "requests",
+            "zh-cn": "requests",
+            "zh-tw": "requests",
+            "ru": "requests"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "show", "info"],
+        "es": ["pip", "python", "python -m pip", "información", "versión"],
+        "pt-br": ["pip", "python", "python -m pip", "informações", "versão"],
+        "fr": ["pip", "python", "python -m pip", "informations", "version"],
+        "de": ["pip", "python", "python -m pip", "Informationen", "Version"],
+        "it": ["pip", "python", "python -m pip", "informazioni", "versione"],
+        "ja": ["pip", "python", "python -m pip", "情報", "バージョン"],
+        "ko": ["pip", "python", "python -m pip", "정보", "버전"],
+        "zh-cn": ["pip", "python", "python -m pip", "信息", "版本"],
+        "zh-tw": ["pip", "python", "python -m pip", "資訊", "版本"],
+        "ru": ["pip", "python", "python -m pip", "сведения", "версия"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip show ${package}",
+        "cmd": "python -m pip show ${package}"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_show/"
+    },
+    {
+      "id": "python.pip-cache-purge",
+      "title": {
+        "en": "Clear the pip cache",
+        "es": "Borrar la caché de pip",
+        "pt-br": "Limpar o cache do pip",
+        "fr": "Vider le cache de pip",
+        "de": "pip-Cache leeren",
+        "it": "Svuota la cache di pip",
+        "ja": "pip のキャッシュを削除",
+        "ko": "pip 캐시 삭제",
+        "zh-cn": "清除 pip 缓存",
+        "zh-tw": "清除 pip 快取",
+        "ru": "Очистить кэш pip"
+      },
+      "description": {
+        "en": "Deletes every file of the pip cache; packages are downloaded again when needed. In Git Bash on Windows, use python instead of python3.",
+        "es": "Borra todos los archivos de la caché de pip; los paquetes se vuelven a descargar cuando hacen falta. En Git Bash sobre Windows, usa python en lugar de python3.",
+        "pt-br": "Apaga todos os arquivos do cache do pip; os pacotes são baixados de novo quando necessário. No Git Bash no Windows, use python em vez de python3.",
+        "fr": "Supprime tous les fichiers du cache de pip ; les paquets seront retéléchargés au besoin. Dans Git Bash sous Windows, utilisez python au lieu de python3.",
+        "de": "Löscht alle Dateien des pip-Caches; Pakete werden bei Bedarf neu geladen. In Git Bash unter Windows python statt python3 verwenden.",
+        "it": "Elimina tutti i file della cache di pip; i pacchetti vengono riscaricati quando servono. In Git Bash su Windows, usa python invece di python3.",
+        "ja": "pip のキャッシュのファイルをすべて削除します。パッケージは必要なときに再ダウンロードされます。 Windows の Git Bash では python3 の代わりに python を使います。",
+        "ko": "pip 캐시의 파일을 모두 삭제합니다. 패키지는 필요할 때 다시 내려받습니다. Windows의 Git Bash에서는 python3 대신 python을 사용하세요.",
+        "zh-cn": "删除 pip 缓存中的所有文件，需要时会重新下载包。 在 Windows 的 Git Bash 中，请用 python 代替 python3。",
+        "zh-tw": "刪除 pip 快取中的所有檔案，需要時會重新下載套件。 在 Windows 的 Git Bash 中，請用 python 代替 python3。",
+        "ru": "Удаляет все файлы кэша pip; пакеты скачаются снова при необходимости. В Git Bash в Windows используйте python вместо python3."
+      },
+      "command": "python3 -m pip cache purge",
+      "tags": {
+        "en": ["pip", "python", "python -m pip", "cache", "purge", "clear", "delete"],
+        "es": ["pip", "python", "python -m pip", "cache", "purge", "caché", "borrar", "limpiar"],
+        "pt-br": ["pip", "python", "python -m pip", "cache", "purge", "limpar"],
+        "fr": ["pip", "python", "python -m pip", "cache", "purge", "vider"],
+        "de": ["pip", "python", "python -m pip", "cache", "purge", "Cache", "leeren"],
+        "it": ["pip", "python", "python -m pip", "cache", "purge", "svuotare"],
+        "ja": ["pip", "python", "python -m pip", "cache", "purge", "キャッシュ", "削除"],
+        "ko": ["pip", "python", "python -m pip", "cache", "purge", "캐시", "삭제"],
+        "zh-cn": ["pip", "python", "python -m pip", "cache", "purge", "缓存", "清除"],
+        "zh-tw": ["pip", "python", "python -m pip", "cache", "purge", "快取", "清除"],
+        "ru": ["pip", "python", "python -m pip", "cache", "purge", "кэш", "очистить"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "python -m pip cache purge",
+        "cmd": "python -m pip cache purge"
+      },
+      "docs": "https://pip.pypa.io/en/stable/cli/pip_cache/"
+    },
+    {
+      "id": "python.pipx-install",
+      "title": {
+        "en": "pipx: install a command-line tool",
+        "es": "pipx: instalar una herramienta de línea de comandos",
+        "pt-br": "pipx: instalar uma ferramenta de linha de comando",
+        "fr": "pipx: installer un outil en ligne de commande",
+        "de": "pipx: Kommandozeilenwerkzeug installieren",
+        "it": "pipx: installa uno strumento da riga di comando",
+        "ja": "pipx: コマンドラインツールをインストール",
+        "ko": "pipx: 명령줄 도구 설치",
+        "zh-cn": "pipx: 安装命令行工具",
+        "zh-tw": "pipx: 安裝命令列工具",
+        "ru": "pipx: установить консольный инструмент"
+      },
+      "description": {
+        "en": "Installs a Python CLI in its own isolated environment and makes its command available everywhere",
+        "es": "Instala una CLI de Python en su propio entorno aislado y deja su comando disponible en todas partes",
+        "pt-br": "Instala uma CLI Python em seu próprio ambiente isolado e deixa o comando disponível em todo lugar",
+        "fr": "Installe une CLI Python dans son propre environnement isolé et rend sa commande disponible partout",
+        "de": "Installiert eine Python-CLI in einer eigenen isolierten Umgebung und macht ihren Befehl überall verfügbar",
+        "it": "Installa una CLI Python nel suo ambiente isolato e rende il comando disponibile ovunque",
+        "ja": "Python の CLI を専用の隔離環境にインストールし、どこからでもコマンドを使えるようにします",
+        "ko": "Python CLI를 전용 격리 환경에 설치하고 어디서나 명령을 쓸 수 있게 합니다",
+        "zh-cn": "将 Python CLI 安装到独立的隔离环境中，并让其命令在任何地方可用",
+        "zh-tw": "將 Python CLI 安裝到獨立的隔離環境中，並讓其命令在任何地方可用",
+        "ru": "Устанавливает CLI на Python в отдельное изолированное окружение и делает её команду доступной везде"
+      },
+      "command": "pipx install ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "httpie",
+            "es": "httpie",
+            "pt-br": "httpie",
+            "fr": "httpie",
+            "de": "httpie",
+            "it": "httpie",
+            "ja": "httpie",
+            "ko": "httpie",
+            "zh-cn": "httpie",
+            "zh-tw": "httpie",
+            "ru": "httpie"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pipx", "python", "cli", "install", "tool"],
+        "es": ["pipx", "python", "cli", "instalar", "herramienta"],
+        "pt-br": ["pipx", "python", "cli", "instalar", "ferramenta"],
+        "fr": ["pipx", "python", "cli", "installer", "outil"],
+        "de": ["pipx", "python", "cli", "installieren", "Werkzeug"],
+        "it": ["pipx", "python", "cli", "installare", "strumento"],
+        "ja": ["pipx", "python", "cli", "インストール", "ツール"],
+        "ko": ["pipx", "python", "cli", "설치", "도구"],
+        "zh-cn": ["pipx", "python", "cli", "安装", "工具"],
+        "zh-tw": ["pipx", "python", "cli", "安裝", "工具"],
+        "ru": ["pipx", "python", "cli", "установить", "инструмент"]
+      },
+      "risk": "safe",
+      "docs": "https://pipx.pypa.io/stable/"
+    },
+    {
+      "id": "python.pipx-run",
+      "title": {
+        "en": "pipx: run a tool without installing it",
+        "es": "pipx: ejecutar una herramienta sin instalarla",
+        "pt-br": "pipx: executar uma ferramenta sem instalá-la",
+        "fr": "pipx: exécuter un outil sans l’installer",
+        "de": "pipx: Werkzeug ohne Installation ausführen",
+        "it": "pipx: esegui uno strumento senza installarlo",
+        "ja": "pipx: インストールせずにツールを実行",
+        "ko": "pipx: 설치하지 않고 도구 실행",
+        "zh-cn": "pipx: 不安装直接运行工具",
+        "zh-tw": "pipx: 不安裝直接執行工具",
+        "ru": "pipx: запустить инструмент без установки"
+      },
+      "description": {
+        "en": "Downloads a Python CLI to a temporary environment and runs it once",
+        "es": "Descarga una CLI de Python en un entorno temporal y la ejecuta una vez",
+        "pt-br": "Baixa uma CLI Python para um ambiente temporário e a executa uma vez",
+        "fr": "Télécharge une CLI Python dans un environnement temporaire et l’exécute une fois",
+        "de": "Lädt eine Python-CLI in eine temporäre Umgebung und führt sie einmal aus",
+        "it": "Scarica una CLI Python in un ambiente temporaneo e la esegue una volta",
+        "ja": "Python の CLI を一時的な環境にダウンロードし、1 回だけ実行します",
+        "ko": "Python CLI를 임시 환경에 내려받아 한 번 실행합니다",
+        "zh-cn": "将 Python CLI 下载到临时环境并运行一次",
+        "zh-tw": "將 Python CLI 下載到暫時環境並執行一次",
+        "ru": "Скачивает CLI на Python во временное окружение и запускает её один раз"
+      },
+      "command": "pipx run ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "cowsay",
+            "es": "cowsay",
+            "pt-br": "cowsay",
+            "fr": "cowsay",
+            "de": "cowsay",
+            "it": "cowsay",
+            "ja": "cowsay",
+            "ko": "cowsay",
+            "zh-cn": "cowsay",
+            "zh-tw": "cowsay",
+            "ru": "cowsay"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pipx", "python", "cli", "run", "temporary"],
+        "es": ["pipx", "python", "cli", "ejecutar", "temporal"],
+        "pt-br": ["pipx", "python", "cli", "executar", "temporário"],
+        "fr": ["pipx", "python", "cli", "exécuter", "temporaire"],
+        "de": ["pipx", "python", "cli", "ausführen", "temporär"],
+        "it": ["pipx", "python", "cli", "eseguire", "temporaneo"],
+        "ja": ["pipx", "python", "cli", "実行", "一時"],
+        "ko": ["pipx", "python", "cli", "실행", "임시"],
+        "zh-cn": ["pipx", "python", "cli", "运行", "临时"],
+        "zh-tw": ["pipx", "python", "cli", "執行", "暫時"],
+        "ru": ["pipx", "python", "cli", "запустить", "временно"]
+      },
+      "risk": "safe",
+      "docs": "https://pipx.pypa.io/stable/"
+    },
+    {
+      "id": "python.pipx-list",
+      "title": {
+        "en": "pipx: list installed tools",
+        "es": "pipx: ver las herramientas instaladas",
+        "pt-br": "pipx: ver as ferramentas instaladas",
+        "fr": "pipx: lister les outils installés",
+        "de": "pipx: installierte Werkzeuge anzeigen",
+        "it": "pipx: elenca gli strumenti installati",
+        "ja": "pipx: インストール済みのツールを一覧表示",
+        "ko": "pipx: 설치된 도구 보기",
+        "zh-cn": "pipx: 列出已安装的工具",
+        "zh-tw": "pipx: 列出已安裝的工具",
+        "ru": "pipx: показать установленные инструменты"
+      },
+      "description": {
+        "en": "Lists the tools installed with pipx and the commands each one provides",
+        "es": "Muestra las herramientas instaladas con pipx y los comandos que ofrece cada una",
+        "pt-br": "Mostra as ferramentas instaladas com o pipx e os comandos que cada uma oferece",
+        "fr": "Liste les outils installés avec pipx et les commandes fournies par chacun",
+        "de": "Listet die mit pipx installierten Werkzeuge und ihre Befehle auf",
+        "it": "Elenca gli strumenti installati con pipx e i comandi che offre ciascuno",
+        "ja": "pipx でインストールしたツールと、それぞれが提供するコマンドを一覧表示します",
+        "ko": "pipx로 설치한 도구와 각 도구가 제공하는 명령을 보여 줍니다",
+        "zh-cn": "列出用 pipx 安装的工具及其提供的命令",
+        "zh-tw": "列出用 pipx 安裝的工具及其提供的命令",
+        "ru": "Показывает инструменты, установленные через pipx, и их команды"
+      },
+      "command": "pipx list",
+      "tags": {
+        "en": ["pipx", "python", "cli", "list", "installed"],
+        "es": ["pipx", "python", "cli", "lista", "instaladas"],
+        "pt-br": ["pipx", "python", "cli", "lista", "instaladas"],
+        "fr": ["pipx", "python", "cli", "liste", "installés"],
+        "de": ["pipx", "python", "cli", "Liste", "installiert"],
+        "it": ["pipx", "python", "cli", "elenco", "installati"],
+        "ja": ["pipx", "python", "cli", "一覧", "インストール済み"],
+        "ko": ["pipx", "python", "cli", "목록", "설치됨"],
+        "zh-cn": ["pipx", "python", "cli", "列表", "已安装"],
+        "zh-tw": ["pipx", "python", "cli", "清單", "已安裝"],
+        "ru": ["pipx", "python", "cli", "список", "установленные"]
+      },
+      "risk": "safe",
+      "docs": "https://pipx.pypa.io/stable/"
+    },
+    {
+      "id": "python.pipx-upgrade-all",
+      "title": {
+        "en": "pipx: upgrade all tools",
+        "es": "pipx: actualizar todas las herramientas",
+        "pt-br": "pipx: atualizar todas as ferramentas",
+        "fr": "pipx: mettre à jour tous les outils",
+        "de": "pipx: alle Werkzeuge aktualisieren",
+        "it": "pipx: aggiorna tutti gli strumenti",
+        "ja": "pipx: すべてのツールを更新",
+        "ko": "pipx: 모든 도구 업그레이드",
+        "zh-cn": "pipx: 升级所有工具",
+        "zh-tw": "pipx: 升級所有工具",
+        "ru": "pipx: обновить все инструменты"
+      },
+      "description": {
+        "en": "Upgrades every tool installed with pipx to its latest version",
+        "es": "Actualiza a su última versión todas las herramientas instaladas con pipx",
+        "pt-br": "Atualiza para a versão mais recente todas as ferramentas instaladas com o pipx",
+        "fr": "Met à jour vers leur dernière version tous les outils installés avec pipx",
+        "de": "Aktualisiert alle mit pipx installierten Werkzeuge auf die neueste Version",
+        "it": "Aggiorna all’ultima versione tutti gli strumenti installati con pipx",
+        "ja": "pipx でインストールしたすべてのツールを最新バージョンに更新します",
+        "ko": "pipx로 설치한 모든 도구를 최신 버전으로 업그레이드합니다",
+        "zh-cn": "将用 pipx 安装的所有工具升级到最新版本",
+        "zh-tw": "將用 pipx 安裝的所有工具升級到最新版本",
+        "ru": "Обновляет до последней версии все инструменты, установленные через pipx"
+      },
+      "command": "pipx upgrade-all",
+      "tags": {
+        "en": ["pipx", "python", "cli", "upgrade-all", "update"],
+        "es": ["pipx", "python", "cli", "actualizar"],
+        "pt-br": ["pipx", "python", "cli", "atualizar"],
+        "fr": ["pipx", "python", "cli", "mettre à jour"],
+        "de": ["pipx", "python", "cli", "aktualisieren"],
+        "it": ["pipx", "python", "cli", "aggiornare"],
+        "ja": ["pipx", "python", "cli", "更新"],
+        "ko": ["pipx", "python", "cli", "업그레이드"],
+        "zh-cn": ["pipx", "python", "cli", "升级"],
+        "zh-tw": ["pipx", "python", "cli", "升級"],
+        "ru": ["pipx", "python", "cli", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://pipx.pypa.io/stable/"
+    },
+    {
+      "id": "python.pipx-uninstall",
+      "title": {
+        "en": "pipx: uninstall a tool",
+        "es": "pipx: desinstalar una herramienta",
+        "pt-br": "pipx: desinstalar uma ferramenta",
+        "fr": "pipx: désinstaller un outil",
+        "de": "pipx: Werkzeug deinstallieren",
+        "it": "pipx: disinstalla uno strumento",
+        "ja": "pipx: ツールをアンインストール",
+        "ko": "pipx: 도구 제거",
+        "zh-cn": "pipx: 卸载工具",
+        "zh-tw": "pipx: 解除安裝工具",
+        "ru": "pipx: удалить инструмент"
+      },
+      "description": {
+        "en": "Removes a tool installed with pipx and its isolated environment",
+        "es": "Quita una herramienta instalada con pipx y su entorno aislado",
+        "pt-br": "Remove uma ferramenta instalada com o pipx e seu ambiente isolado",
+        "fr": "Supprime un outil installé avec pipx et son environnement isolé",
+        "de": "Entfernt ein mit pipx installiertes Werkzeug samt isolierter Umgebung",
+        "it": "Rimuove uno strumento installato con pipx e il suo ambiente isolato",
+        "ja": "pipx でインストールしたツールとその隔離環境を削除します",
+        "ko": "pipx로 설치한 도구와 그 격리 환경을 제거합니다",
+        "zh-cn": "移除用 pipx 安装的工具及其隔离环境",
+        "zh-tw": "移除用 pipx 安裝的工具及其隔離環境",
+        "ru": "Удаляет инструмент, установленный через pipx, вместе с его окружением"
+      },
+      "command": "pipx uninstall ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "httpie",
+            "es": "httpie",
+            "pt-br": "httpie",
+            "fr": "httpie",
+            "de": "httpie",
+            "it": "httpie",
+            "ja": "httpie",
+            "ko": "httpie",
+            "zh-cn": "httpie",
+            "zh-tw": "httpie",
+            "ru": "httpie"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["pipx", "python", "cli", "uninstall", "remove"],
+        "es": ["pipx", "python", "cli", "desinstalar", "quitar"],
+        "pt-br": ["pipx", "python", "cli", "desinstalar", "remover"],
+        "fr": ["pipx", "python", "cli", "désinstaller", "supprimer"],
+        "de": ["pipx", "python", "cli", "deinstallieren", "entfernen"],
+        "it": ["pipx", "python", "cli", "disinstallare", "rimuovere"],
+        "ja": ["pipx", "python", "cli", "アンインストール", "削除"],
+        "ko": ["pipx", "python", "cli", "제거", "삭제"],
+        "zh-cn": ["pipx", "python", "cli", "卸载", "移除"],
+        "zh-tw": ["pipx", "python", "cli", "解除安裝", "移除"],
+        "ru": ["pipx", "python", "cli", "удалить"]
+      },
+      "risk": "caution",
+      "docs": "https://pipx.pypa.io/stable/"
+    }
+  ]
+}
