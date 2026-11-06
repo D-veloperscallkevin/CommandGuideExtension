@@ -34,7 +34,13 @@ Las señales SHALL ser:
 - `pom.xml`, `build.gradle`, `build.gradle.kts` o `.java-version` → `java`;
 - `pom.xml` o `mvnw` → `maven`;
 - `build.gradle`, `build.gradle.kts`, `settings.gradle`, `settings.gradle.kts` o `gradlew` → `gradle`;
-- cualquier `*.csproj`, `*.fsproj`, `*.sln` o `*.slnx`, o `global.json` → `dotnet`.
+- cualquier `*.csproj`, `*.fsproj`, `*.sln` o `*.slnx`, o `global.json` → `dotnet`;
+- cualquier `*.c`, `*.cpp`, `*.h` o `*.hpp` → `c-cpp`;
+- `CMakeLists.txt`, `CMakePresets.json` o `CMakeUserPresets.json` → `cmake`;
+- `go.mod`, `go.sum` o `go.work` → `go`;
+- `Cargo.toml`, `Cargo.lock`, `rust-toolchain.toml` o `rust-toolchain` → `rust`.
+
+Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes.
 
 Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, y `pom.xml` detecta `java` y `maven`.
 
@@ -139,6 +145,22 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Versión de Java fijada con sdkman
 - **WHEN** la raíz contiene solo `.sdkmanrc`
 - **THEN** la única categoría detectada es `version-managers`
+
+#### Scenario: Proyecto de C++ con CMake
+- **WHEN** la raíz contiene `CMakeLists.txt` y `main.cpp`
+- **THEN** las categorías detectadas son `c-cpp` y `cmake`
+
+#### Scenario: Makefile solo
+- **WHEN** la raíz contiene solo `Makefile`
+- **THEN** no se detecta ninguna categoría
+
+#### Scenario: Proyecto de Go con Makefile en Windows y en Linux
+- **WHEN** la raíz contiene `go.mod`, `go.sum` y `Makefile`, tanto en Windows con PowerShell como en Linux con bash
+- **THEN** la única categoría detectada es `go` en los dos casos
+
+#### Scenario: Proyecto de Rust
+- **WHEN** la raíz contiene `Cargo.toml`, `Cargo.lock` y `rust-toolchain.toml`
+- **THEN** la única categoría detectada es `rust`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

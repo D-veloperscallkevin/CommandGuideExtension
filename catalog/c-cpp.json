@@ -1,0 +1,1448 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "c-cpp",
+  "title": {
+    "en": "C/C++",
+    "es": "C/C++",
+    "pt-br": "C/C++",
+    "fr": "C/C++",
+    "de": "C/C++",
+    "it": "C/C++",
+    "ja": "C/C++",
+    "ko": "C/C++",
+    "zh-cn": "C/C++",
+    "zh-tw": "C/C++",
+    "ru": "C/C++"
+  },
+  "icon": "chip",
+  "order": 57,
+  "section": "languages",
+  "detect": ["*.c", "*.cpp", "*.h", "*.hpp"],
+  "commands": [
+    {
+      "id": "c-cpp.gcc-version",
+      "title": {
+        "en": "Show the GCC version",
+        "es": "Ver la versión de GCC",
+        "pt-br": "Ver a versão do GCC",
+        "fr": "Afficher la version de GCC",
+        "de": "GCC-Version anzeigen",
+        "it": "Mostra la versione di GCC",
+        "ja": "GCC のバージョンを表示",
+        "ko": "GCC 버전 보기",
+        "zh-cn": "查看 GCC 版本",
+        "zh-tw": "檢視 GCC 版本",
+        "ru": "Показать версию GCC"
+      },
+      "description": {
+        "en": "Prints the version of the GCC compiler in the PATH; on Windows it comes with MinGW or MSYS2",
+        "es": "Muestra la versión del compilador GCC que hay en el PATH; en Windows viene con MinGW o MSYS2",
+        "pt-br": "Mostra a versão do compilador GCC no PATH; no Windows ele vem com MinGW ou MSYS2",
+        "fr": "Affiche la version du compilateur GCC du PATH ; sous Windows, il est fourni par MinGW ou MSYS2",
+        "de": "Zeigt die Version des GCC-Compilers im PATH; unter Windows kommt er mit MinGW oder MSYS2",
+        "it": "Mostra la versione del compilatore GCC nel PATH; su Windows arriva con MinGW o MSYS2",
+        "ja": "PATH にある GCC コンパイラーのバージョンを表示します。Windows では MinGW か MSYS2 に含まれます",
+        "ko": "PATH에 있는 GCC 컴파일러 버전을 보여 줍니다. Windows에서는 MinGW나 MSYS2에 들어 있습니다",
+        "zh-cn": "显示 PATH 中 GCC 编译器的版本；在 Windows 上随 MinGW 或 MSYS2 提供",
+        "zh-tw": "顯示 PATH 中 GCC 編譯器的版本；在 Windows 上隨 MinGW 或 MSYS2 提供",
+        "ru": "Показывает версию компилятора GCC из PATH; в Windows он входит в MinGW или MSYS2"
+      },
+      "command": "gcc --version",
+      "tags": {
+        "en": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "version"],
+        "es": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "versión"],
+        "pt-br": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "versão"],
+        "fr": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "version"],
+        "de": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "Version"],
+        "it": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "versione"],
+        "ja": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "バージョン"],
+        "ko": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "버전"],
+        "zh-cn": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "版本"],
+        "zh-tw": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "版本"],
+        "ru": ["c", "c++", "cpp", "gcc", "--version", "mingw", "msys2", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html"
+    },
+    {
+      "id": "c-cpp.gcc-compile",
+      "title": {
+        "en": "Compile a C file with GCC",
+        "es": "Compilar un archivo C con GCC",
+        "pt-br": "Compilar um arquivo C com GCC",
+        "fr": "Compiler un fichier C avec GCC",
+        "de": "C-Datei mit GCC kompilieren",
+        "it": "Compila un file C con GCC",
+        "ja": "GCC で C ファイルをコンパイル",
+        "ko": "GCC로 C 파일 컴파일",
+        "zh-cn": "用 GCC 编译 C 文件",
+        "zh-tw": "用 GCC 編譯 C 檔案",
+        "ru": "Скомпилировать файл C через GCC"
+      },
+      "description": {
+        "en": "Compiles and links a C file into a program; on Windows the name gets .exe",
+        "es": "Compila y enlaza un archivo C en un programa; en Windows el nombre recibe .exe",
+        "pt-br": "Compila e vincula um arquivo C em um programa; no Windows o nome ganha .exe",
+        "fr": "Compile et lie un fichier C en un programme ; sous Windows, le nom reçoit .exe",
+        "de": "Kompiliert und linkt eine C-Datei zu einem Programm; unter Windows erhält der Name .exe",
+        "it": "Compila e collega un file C in un programma; su Windows il nome riceve .exe",
+        "ja": "C ファイルをコンパイル・リンクしてプログラムにします。Windows では名前に .exe が付きます",
+        "ko": "C 파일을 컴파일하고 링크해 프로그램을 만듭니다. Windows에서는 이름에 .exe가 붙습니다",
+        "zh-cn": "将 C 文件编译并链接为程序；在 Windows 上名称会加上 .exe",
+        "zh-tw": "將 C 檔案編譯並連結為程式；在 Windows 上名稱會加上 .exe",
+        "ru": "Компилирует и компонует файл C в программу; в Windows к имени добавляется .exe"
+      },
+      "command": "gcc ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.c",
+            "es": "main.c",
+            "pt-br": "main.c",
+            "fr": "main.c",
+            "de": "main.c",
+            "it": "main.c",
+            "ja": "main.c",
+            "ko": "main.c",
+            "zh-cn": "main.c",
+            "zh-tw": "main.c",
+            "ru": "main.c"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "gcc", "-o", "compile"],
+        "es": ["c", "c++", "cpp", "gcc", "-o", "compilar"],
+        "pt-br": ["c", "c++", "cpp", "gcc", "-o", "compilar"],
+        "fr": ["c", "c++", "cpp", "gcc", "-o", "compiler"],
+        "de": ["c", "c++", "cpp", "gcc", "-o", "kompilieren"],
+        "it": ["c", "c++", "cpp", "gcc", "-o", "compilare"],
+        "ja": ["c", "c++", "cpp", "gcc", "-o", "コンパイル"],
+        "ko": ["c", "c++", "cpp", "gcc", "-o", "컴파일"],
+        "zh-cn": ["c", "c++", "cpp", "gcc", "-o", "编译"],
+        "zh-tw": ["c", "c++", "cpp", "gcc", "-o", "編譯"],
+        "ru": ["c", "c++", "cpp", "gcc", "-o", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html"
+    },
+    {
+      "id": "c-cpp.gpp-compile",
+      "title": {
+        "en": "Compile a C++ file with g++",
+        "es": "Compilar un archivo C++ con g++",
+        "pt-br": "Compilar um arquivo C++ com g++",
+        "fr": "Compiler un fichier C++ avec g++",
+        "de": "C++-Datei mit g++ kompilieren",
+        "it": "Compila un file C++ con g++",
+        "ja": "g++ で C++ ファイルをコンパイル",
+        "ko": "g++로 C++ 파일 컴파일",
+        "zh-cn": "用 g++ 编译 C++ 文件",
+        "zh-tw": "用 g++ 編譯 C++ 檔案",
+        "ru": "Скомпилировать файл C++ через g++"
+      },
+      "description": {
+        "en": "Compiles a C++ file with the C++20 standard and the usual warnings turned on",
+        "es": "Compila un archivo C++ con el estándar C++20 y los avisos habituales activados",
+        "pt-br": "Compila um arquivo C++ com o padrão C++20 e os avisos habituais ativados",
+        "fr": "Compile un fichier C++ avec la norme C++20 et les avertissements habituels activés",
+        "de": "Kompiliert eine C++-Datei mit dem Standard C++20 und den üblichen Warnungen",
+        "it": "Compila un file C++ con lo standard C++20 e gli avvisi abituali attivi",
+        "ja": "C++20 規格と一般的な警告を有効にして C++ ファイルをコンパイルします",
+        "ko": "C++20 표준과 일반적인 경고를 켜고 C++ 파일을 컴파일합니다",
+        "zh-cn": "使用 C++20 标准并开启常用警告编译 C++ 文件",
+        "zh-tw": "使用 C++20 標準並開啟常用警告編譯 C++ 檔案",
+        "ru": "Компилирует файл C++ по стандарту C++20 с обычными предупреждениями"
+      },
+      "command": "g++ -std=c++20 -Wall -Wextra ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "compile", "warnings"],
+        "es": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "compilar", "avisos"],
+        "pt-br": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "compilar", "avisos"],
+        "fr": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "compiler", "avertissements"],
+        "de": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "kompilieren", "Warnungen"],
+        "it": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "compilare", "avvisi"],
+        "ja": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "コンパイル", "警告"],
+        "ko": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "컴파일", "경고"],
+        "zh-cn": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "编译", "警告"],
+        "zh-tw": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "編譯", "警告"],
+        "ru": ["c", "c++", "cpp", "g++", "-std=c++20", "-Wall", "компиляция", "предупреждения"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html"
+    },
+    {
+      "id": "c-cpp.clang-compile",
+      "title": {
+        "en": "Compile a C file with Clang",
+        "es": "Compilar un archivo C con Clang",
+        "pt-br": "Compilar um arquivo C com Clang",
+        "fr": "Compiler un fichier C avec Clang",
+        "de": "C-Datei mit Clang kompilieren",
+        "it": "Compila un file C con Clang",
+        "ja": "Clang で C ファイルをコンパイル",
+        "ko": "Clang으로 C 파일 컴파일",
+        "zh-cn": "用 Clang 编译 C 文件",
+        "zh-tw": "用 Clang 編譯 C 檔案",
+        "ru": "Скомпилировать файл C через Clang"
+      },
+      "description": {
+        "en": "Compiles and links a C file with Clang; on Windows it comes with LLVM",
+        "es": "Compila y enlaza un archivo C con Clang; en Windows viene con LLVM",
+        "pt-br": "Compila e vincula um arquivo C com Clang; no Windows ele vem com o LLVM",
+        "fr": "Compile et lie un fichier C avec Clang ; sous Windows, il est fourni par LLVM",
+        "de": "Kompiliert und linkt eine C-Datei mit Clang; unter Windows kommt es mit LLVM",
+        "it": "Compila e collega un file C con Clang; su Windows arriva con LLVM",
+        "ja": "Clang で C ファイルをコンパイル・リンクします。Windows では LLVM に含まれます",
+        "ko": "Clang으로 C 파일을 컴파일하고 링크합니다. Windows에서는 LLVM에 들어 있습니다",
+        "zh-cn": "用 Clang 编译并链接 C 文件；在 Windows 上随 LLVM 提供",
+        "zh-tw": "用 Clang 編譯並連結 C 檔案；在 Windows 上隨 LLVM 提供",
+        "ru": "Компилирует и компонует файл C через Clang; в Windows он входит в LLVM"
+      },
+      "command": "clang ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.c",
+            "es": "main.c",
+            "pt-br": "main.c",
+            "fr": "main.c",
+            "de": "main.c",
+            "it": "main.c",
+            "ja": "main.c",
+            "ko": "main.c",
+            "zh-cn": "main.c",
+            "zh-tw": "main.c",
+            "ru": "main.c"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "clang", "llvm", "compile"],
+        "es": ["c", "c++", "cpp", "clang", "llvm", "compilar"],
+        "pt-br": ["c", "c++", "cpp", "clang", "llvm", "compilar"],
+        "fr": ["c", "c++", "cpp", "clang", "llvm", "compiler"],
+        "de": ["c", "c++", "cpp", "clang", "llvm", "kompilieren"],
+        "it": ["c", "c++", "cpp", "clang", "llvm", "compilare"],
+        "ja": ["c", "c++", "cpp", "clang", "llvm", "コンパイル"],
+        "ko": ["c", "c++", "cpp", "clang", "llvm", "컴파일"],
+        "zh-cn": ["c", "c++", "cpp", "clang", "llvm", "编译"],
+        "zh-tw": ["c", "c++", "cpp", "clang", "llvm", "編譯"],
+        "ru": ["c", "c++", "cpp", "clang", "llvm", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://clang.llvm.org/docs/UsersManual.html"
+    },
+    {
+      "id": "c-cpp.clangpp-compile",
+      "title": {
+        "en": "Compile a C++ file with clang++",
+        "es": "Compilar un archivo C++ con clang++",
+        "pt-br": "Compilar um arquivo C++ com clang++",
+        "fr": "Compiler un fichier C++ avec clang++",
+        "de": "C++-Datei mit clang++ kompilieren",
+        "it": "Compila un file C++ con clang++",
+        "ja": "clang++ で C++ ファイルをコンパイル",
+        "ko": "clang++로 C++ 파일 컴파일",
+        "zh-cn": "用 clang++ 编译 C++ 文件",
+        "zh-tw": "用 clang++ 編譯 C++ 檔案",
+        "ru": "Скомпилировать файл C++ через clang++"
+      },
+      "description": {
+        "en": "Compiles a C++ file with Clang and the C++20 standard",
+        "es": "Compila un archivo C++ con Clang y el estándar C++20",
+        "pt-br": "Compila um arquivo C++ com Clang e o padrão C++20",
+        "fr": "Compile un fichier C++ avec Clang et la norme C++20",
+        "de": "Kompiliert eine C++-Datei mit Clang und dem Standard C++20",
+        "it": "Compila un file C++ con Clang e lo standard C++20",
+        "ja": "Clang と C++20 規格で C++ ファイルをコンパイルします",
+        "ko": "Clang과 C++20 표준으로 C++ 파일을 컴파일합니다",
+        "zh-cn": "用 Clang 和 C++20 标准编译 C++ 文件",
+        "zh-tw": "用 Clang 和 C++20 標準編譯 C++ 檔案",
+        "ru": "Компилирует файл C++ через Clang по стандарту C++20"
+      },
+      "command": "clang++ -std=c++20 ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "compile"],
+        "es": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "compilar"],
+        "pt-br": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "compilar"],
+        "fr": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "compiler"],
+        "de": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "kompilieren"],
+        "it": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "compilare"],
+        "ja": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "コンパイル"],
+        "ko": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "컴파일"],
+        "zh-cn": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "编译"],
+        "zh-tw": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "編譯"],
+        "ru": ["c", "c++", "cpp", "clang++", "llvm", "-std=c++20", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://clang.llvm.org/docs/UsersManual.html"
+    },
+    {
+      "id": "c-cpp.compile-debug",
+      "title": {
+        "en": "Compile with debug information",
+        "es": "Compilar con información de depuración",
+        "pt-br": "Compilar com informações de depuração",
+        "fr": "Compiler avec les informations de débogage",
+        "de": "Mit Debug-Informationen kompilieren",
+        "it": "Compila con le informazioni di debug",
+        "ja": "デバッグ情報付きでコンパイル",
+        "ko": "디버그 정보를 포함해 컴파일",
+        "zh-cn": "带调试信息编译",
+        "zh-tw": "帶偵錯資訊編譯",
+        "ru": "Скомпилировать с отладочной информацией"
+      },
+      "description": {
+        "en": "Compiles without optimizations and with debug symbols, ready to use with gdb",
+        "es": "Compila sin optimizaciones y con símbolos de depuración, listo para usar con gdb",
+        "pt-br": "Compila sem otimizações e com símbolos de depuração, pronto para usar com gdb",
+        "fr": "Compile sans optimisations et avec les symboles de débogage, prêt pour gdb",
+        "de": "Kompiliert ohne Optimierungen und mit Debug-Symbolen, bereit für gdb",
+        "it": "Compila senza ottimizzazioni e con i simboli di debug, pronto per gdb",
+        "ja": "最適化なし・デバッグシンボル付きでコンパイルし、gdb で使えるようにします",
+        "ko": "최적화 없이 디버그 기호를 넣어 컴파일해 gdb로 쓸 수 있게 합니다",
+        "zh-cn": "不优化并带调试符号编译，可直接用 gdb 调试",
+        "zh-tw": "不最佳化並帶偵錯符號編譯，可直接用 gdb 偵錯",
+        "ru": "Компилирует без оптимизаций и с отладочными символами для gdb"
+      },
+      "command": "g++ -g -O0 ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "-g", "-O0", "debug", "symbols"],
+        "es": ["c", "c++", "cpp", "-g", "-O0", "debug", "depuración", "símbolos"],
+        "pt-br": ["c", "c++", "cpp", "-g", "-O0", "debug", "depuração", "símbolos"],
+        "fr": ["c", "c++", "cpp", "-g", "-O0", "debug", "débogage", "symboles"],
+        "de": ["c", "c++", "cpp", "-g", "-O0", "debug", "Debug", "Symbole"],
+        "it": ["c", "c++", "cpp", "-g", "-O0", "debug", "simboli"],
+        "ja": ["c", "c++", "cpp", "-g", "-O0", "debug", "デバッグ", "シンボル"],
+        "ko": ["c", "c++", "cpp", "-g", "-O0", "debug", "디버그", "기호"],
+        "zh-cn": ["c", "c++", "cpp", "-g", "-O0", "debug", "调试", "符号"],
+        "zh-tw": ["c", "c++", "cpp", "-g", "-O0", "debug", "偵錯", "符號"],
+        "ru": ["c", "c++", "cpp", "-g", "-O0", "debug", "отладка", "символы"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html"
+    },
+    {
+      "id": "c-cpp.compile-optimized",
+      "title": {
+        "en": "Compile optimized",
+        "es": "Compilar optimizado",
+        "pt-br": "Compilar otimizado",
+        "fr": "Compiler en mode optimisé",
+        "de": "Optimiert kompilieren",
+        "it": "Compila ottimizzato",
+        "ja": "最適化してコンパイル",
+        "ko": "최적화해 컴파일",
+        "zh-cn": "优化编译",
+        "zh-tw": "最佳化編譯",
+        "ru": "Скомпилировать с оптимизацией"
+      },
+      "description": {
+        "en": "Compiles with the -O2 optimizations, the usual level for a release build",
+        "es": "Compila con las optimizaciones -O2, el nivel habitual para una versión final",
+        "pt-br": "Compila com as otimizações -O2, o nível habitual para uma versão final",
+        "fr": "Compile avec les optimisations -O2, le niveau habituel pour une version finale",
+        "de": "Kompiliert mit den Optimierungen -O2, der übliche Grad für ein Release",
+        "it": "Compila con le ottimizzazioni -O2, il livello abituale per una release",
+        "ja": "リリース用で一般的な -O2 の最適化でコンパイルします",
+        "ko": "릴리스 빌드에 흔히 쓰는 -O2 최적화로 컴파일합니다",
+        "zh-cn": "使用 -O2 优化编译，这是发布版本的常用级别",
+        "zh-tw": "使用 -O2 最佳化編譯，這是發行版本的常用等級",
+        "ru": "Компилирует с оптимизациями -O2, обычным уровнем для релиза"
+      },
+      "command": "g++ -O2 ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "-O2", "release", "optimize"],
+        "es": ["c", "c++", "cpp", "-O2", "release", "optimizar"],
+        "pt-br": ["c", "c++", "cpp", "-O2", "release", "otimizar"],
+        "fr": ["c", "c++", "cpp", "-O2", "release", "optimiser"],
+        "de": ["c", "c++", "cpp", "-O2", "release", "optimieren"],
+        "it": ["c", "c++", "cpp", "-O2", "release", "ottimizzare"],
+        "ja": ["c", "c++", "cpp", "-O2", "release", "最適化"],
+        "ko": ["c", "c++", "cpp", "-O2", "release", "최적화"],
+        "zh-cn": ["c", "c++", "cpp", "-O2", "release", "优化"],
+        "zh-tw": ["c", "c++", "cpp", "-O2", "release", "最佳化"],
+        "ru": ["c", "c++", "cpp", "-O2", "release", "оптимизация"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+    },
+    {
+      "id": "c-cpp.compile-object",
+      "title": {
+        "en": "Compile to an object file",
+        "es": "Compilar a un archivo objeto",
+        "pt-br": "Compilar para um arquivo-objeto",
+        "fr": "Compiler en fichier objet",
+        "de": "In eine Objektdatei kompilieren",
+        "it": "Compila in un file oggetto",
+        "ja": "オブジェクトファイルにコンパイル",
+        "ko": "오브젝트 파일로 컴파일",
+        "zh-cn": "编译为目标文件",
+        "zh-tw": "編譯為目的檔",
+        "ru": "Скомпилировать в объектный файл"
+      },
+      "description": {
+        "en": "Compiles without linking and writes main.o, to link it later with other files",
+        "es": "Compila sin enlazar y escribe main.o, para enlazarlo después con otros archivos",
+        "pt-br": "Compila sem vincular e grava main.o, para vinculá-lo depois com outros arquivos",
+        "fr": "Compile sans lier et écrit main.o, pour le lier ensuite avec d’autres fichiers",
+        "de": "Kompiliert ohne Linken und schreibt main.o, um es später mit anderen Dateien zu linken",
+        "it": "Compila senza collegare e scrive main.o, da collegare poi con altri file",
+        "ja": "リンクせずにコンパイルして main.o を作り、後でほかのファイルとリンクします",
+        "ko": "링크하지 않고 컴파일해 main.o를 만들어 나중에 다른 파일과 링크합니다",
+        "zh-cn": "只编译不链接，生成 main.o，稍后再与其他文件链接",
+        "zh-tw": "只編譯不連結，產生 main.o，稍後再與其他檔案連結",
+        "ru": "Компилирует без компоновки в main.o, чтобы позже скомпоновать с другими файлами"
+      },
+      "command": "g++ -c ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "-c", "object", ".o", "compile"],
+        "es": ["c", "c++", "cpp", "-c", "object", ".o", "compilar", "objeto"],
+        "pt-br": ["c", "c++", "cpp", "-c", "object", ".o", "compilar", "objeto"],
+        "fr": ["c", "c++", "cpp", "-c", "object", ".o", "compiler", "objet"],
+        "de": ["c", "c++", "cpp", "-c", "object", ".o", "kompilieren", "Objekt"],
+        "it": ["c", "c++", "cpp", "-c", "object", ".o", "compilare", "oggetto"],
+        "ja": ["c", "c++", "cpp", "-c", "object", ".o", "コンパイル", "オブジェクト"],
+        "ko": ["c", "c++", "cpp", "-c", "object", ".o", "컴파일", "오브젝트"],
+        "zh-cn": ["c", "c++", "cpp", "-c", "object", ".o", "编译", "目标文件"],
+        "zh-tw": ["c", "c++", "cpp", "-c", "object", ".o", "編譯", "目的檔"],
+        "ru": ["c", "c++", "cpp", "-c", "object", ".o", "компиляция", "объектный"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html"
+    },
+    {
+      "id": "c-cpp.compile-werror",
+      "title": {
+        "en": "Compile treating warnings as errors",
+        "es": "Compilar con los avisos como errores",
+        "pt-br": "Compilar com os avisos como erros",
+        "fr": "Compiler avec les avertissements en erreurs",
+        "de": "Mit Warnungen als Fehler kompilieren",
+        "it": "Compila con gli avvisi come errori",
+        "ja": "警告をエラーとしてコンパイル",
+        "ko": "경고를 오류로 처리해 컴파일",
+        "zh-cn": "把警告视为错误进行编译",
+        "zh-tw": "把警告視為錯誤進行編譯",
+        "ru": "Скомпилировать, считая предупреждения ошибками"
+      },
+      "description": {
+        "en": "Turns on the usual warnings and stops the build if any appears, as many CI setups do",
+        "es": "Activa los avisos habituales y detiene la compilación si aparece alguno, como en muchas CI",
+        "pt-br": "Ativa os avisos habituais e para a compilação se aparecer algum, como em muitas CI",
+        "fr": "Active les avertissements habituels et arrête la compilation s’il en apparaît, comme en CI",
+        "de": "Schaltet die üblichen Warnungen ein und bricht bei einer Warnung ab, wie viele CI-Setups",
+        "it": "Attiva gli avvisi abituali e ferma la compilazione se ne compare uno, come in molte CI",
+        "ja": "一般的な警告を有効にし、警告が出たらビルドを止めます（多くの CI と同じ）",
+        "ko": "일반적인 경고를 켜고 경고가 나오면 빌드를 멈춥니다(많은 CI와 같음)",
+        "zh-cn": "开启常用警告，一旦出现警告就停止构建，与许多 CI 相同",
+        "zh-tw": "開啟常用警告，一旦出現警告就停止建置，與許多 CI 相同",
+        "ru": "Включает обычные предупреждения и останавливает сборку при любом из них, как во многих CI"
+      },
+      "command": "g++ -Wall -Wextra -Werror ${file} -o ${output}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        },
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "warnings", "errors"],
+        "es": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "avisos", "errores"],
+        "pt-br": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "avisos", "erros"],
+        "fr": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "avertissements", "erreurs"],
+        "de": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "Warnungen", "Fehler"],
+        "it": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "avvisi", "errori"],
+        "ja": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "警告", "エラー"],
+        "ko": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "경고", "오류"],
+        "zh-cn": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "警告", "错误"],
+        "zh-tw": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "警告", "錯誤"],
+        "ru": ["c", "c++", "cpp", "-Werror", "-Wall", "ci", "предупреждения", "ошибки"]
+      },
+      "risk": "safe",
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html"
+    },
+    {
+      "id": "c-cpp.run",
+      "title": {
+        "en": "Run the compiled program",
+        "es": "Ejecutar el programa compilado",
+        "pt-br": "Executar o programa compilado",
+        "fr": "Exécuter le programme compilé",
+        "de": "Kompiliertes Programm ausführen",
+        "it": "Esegui il programma compilato",
+        "ja": "コンパイルしたプログラムを実行",
+        "ko": "컴파일한 프로그램 실행",
+        "zh-cn": "运行编译好的程序",
+        "zh-tw": "執行編譯好的程式",
+        "ru": "Запустить скомпилированную программу"
+      },
+      "description": {
+        "en": "Runs the program built in the current folder, written the way each shell needs",
+        "es": "Ejecuta el programa generado en la carpeta actual, escrito como lo pide cada shell",
+        "pt-br": "Executa o programa gerado na pasta atual, escrito como cada shell exige",
+        "fr": "Exécute le programme produit dans le dossier actuel, écrit comme chaque shell l’exige",
+        "de": "Startet das im aktuellen Ordner erzeugte Programm, so geschrieben, wie jede Shell es braucht",
+        "it": "Esegue il programma generato nella cartella attuale, scritto come richiede ogni shell",
+        "ja": "現在のフォルダーに作ったプログラムを、シェルごとの書き方で実行します",
+        "ko": "현재 폴더에 만든 프로그램을 셸마다 필요한 형식으로 실행합니다",
+        "zh-cn": "按各个 shell 的写法运行当前文件夹中生成的程序",
+        "zh-tw": "依各個 shell 的寫法執行目前資料夾中產生的程式",
+        "ru": "Запускает программу из текущей папки в форме, которую требует каждая оболочка"
+      },
+      "command": "./${output}",
+      "params": [
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "run", "exe", "binary", "execute"],
+        "es": ["c", "c++", "cpp", "run", "exe", "binary", "ejecutar", "binario"],
+        "pt-br": ["c", "c++", "cpp", "run", "exe", "binary", "executar", "binário"],
+        "fr": ["c", "c++", "cpp", "run", "exe", "binary", "exécuter", "binaire"],
+        "de": ["c", "c++", "cpp", "run", "exe", "binary", "ausführen", "Binärdatei"],
+        "it": ["c", "c++", "cpp", "run", "exe", "binary", "eseguire", "binario"],
+        "ja": ["c", "c++", "cpp", "run", "exe", "binary", "実行", "バイナリ"],
+        "ko": ["c", "c++", "cpp", "run", "exe", "binary", "실행", "바이너리"],
+        "zh-cn": ["c", "c++", "cpp", "run", "exe", "binary", "运行", "二进制"],
+        "zh-tw": ["c", "c++", "cpp", "run", "exe", "binary", "執行", "二進位"],
+        "ru": ["c", "c++", "cpp", "run", "exe", "binary", "запустить", "бинарник"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\${output}.exe",
+        "cmd": "${output}.exe"
+      },
+      "docs": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html"
+    },
+    {
+      "id": "c-cpp.gdb",
+      "title": {
+        "en": "Debug the program with gdb",
+        "es": "Depurar el programa con gdb",
+        "pt-br": "Depurar o programa com gdb",
+        "fr": "Déboguer le programme avec gdb",
+        "de": "Programm mit gdb debuggen",
+        "it": "Esegui il debug del programma con gdb",
+        "ja": "gdb でプログラムをデバッグ",
+        "ko": "gdb로 프로그램 디버그",
+        "zh-cn": "用 gdb 调试程序",
+        "zh-tw": "用 gdb 偵錯程式",
+        "ru": "Отладить программу в gdb"
+      },
+      "description": {
+        "en": "Opens the program in the GNU debugger; type run to start it and quit to leave",
+        "es": "Abre el programa en el depurador de GNU; escribe run para arrancarlo y quit para salir",
+        "pt-br": "Abre o programa no depurador do GNU; digite run para iniciá-lo e quit para sair",
+        "fr": "Ouvre le programme dans le débogueur GNU ; tapez run pour le lancer et quit pour quitter",
+        "de": "Öffnet das Programm im GNU-Debugger; run startet es, quit beendet",
+        "it": "Apre il programma nel debugger GNU; scrivi run per avviarlo e quit per uscire",
+        "ja": "GNU デバッガーでプログラムを開きます。run で開始、quit で終了",
+        "ko": "GNU 디버거에서 프로그램을 엽니다. run으로 시작하고 quit로 나갑니다",
+        "zh-cn": "在 GNU 调试器中打开程序；输入 run 开始，quit 退出",
+        "zh-tw": "在 GNU 偵錯工具中開啟程式；輸入 run 開始，quit 離開",
+        "ru": "Открывает программу в отладчике GNU; run — запуск, quit — выход"
+      },
+      "command": "gdb ./${output}",
+      "params": [
+        {
+          "name": "output",
+          "label": {
+            "en": "Output program",
+            "es": "Programa de salida",
+            "pt-br": "Programa de saída",
+            "fr": "Programme de sortie",
+            "de": "Ausgabeprogramm",
+            "it": "Programma di output",
+            "ja": "出力プログラム",
+            "ko": "출력 프로그램",
+            "zh-cn": "输出程序",
+            "zh-tw": "輸出程式",
+            "ru": "Выходная программа"
+          },
+          "placeholder": {
+            "en": "app",
+            "es": "app",
+            "pt-br": "app",
+            "fr": "app",
+            "de": "app",
+            "it": "app",
+            "ja": "app",
+            "ko": "app",
+            "zh-cn": "app",
+            "zh-tw": "app",
+            "ru": "app"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "debug"],
+        "es": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "depurar"],
+        "pt-br": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "depurar"],
+        "fr": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "déboguer"],
+        "de": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "debuggen"],
+        "it": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "debug"],
+        "ja": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "デバッグ"],
+        "ko": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "디버그"],
+        "zh-cn": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "调试"],
+        "zh-tw": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "偵錯"],
+        "ru": ["c", "c++", "cpp", "gdb", "debugger", "breakpoint", "отладка"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "gdb .\\${output}.exe",
+        "cmd": "gdb ${output}.exe"
+      },
+      "docs": "https://sourceware.org/gdb/current/onlinedocs/gdb/"
+    },
+    {
+      "id": "c-cpp.make",
+      "title": {
+        "en": "Build with make",
+        "es": "Compilar con make",
+        "pt-br": "Compilar com make",
+        "fr": "Construire avec make",
+        "de": "Mit make bauen",
+        "it": "Compila con make",
+        "ja": "make でビルド",
+        "ko": "make로 빌드",
+        "zh-cn": "用 make 构建",
+        "zh-tw": "用 make 建置",
+        "ru": "Собрать через make"
+      },
+      "description": {
+        "en": "Runs the first target of the Makefile in the current folder. On Windows, install make with MSYS2 or MinGW, where it is called mingw32-make.",
+        "es": "Ejecuta el primer objetivo del Makefile de la carpeta actual. En Windows, make se instala con MSYS2 o MinGW, donde se llama mingw32-make.",
+        "pt-br": "Executa o primeiro alvo do Makefile da pasta atual. No Windows, o make é instalado com MSYS2 ou MinGW, onde se chama mingw32-make.",
+        "fr": "Exécute la première cible du Makefile du dossier actuel. Sous Windows, make s’installe avec MSYS2 ou MinGW, où il s’appelle mingw32-make.",
+        "de": "Führt das erste Ziel des Makefiles im aktuellen Ordner aus. Unter Windows wird make mit MSYS2 oder MinGW installiert und heißt dort mingw32-make.",
+        "it": "Esegue il primo obiettivo del Makefile della cartella attuale. Su Windows, make si installa con MSYS2 o MinGW, dove si chiama mingw32-make.",
+        "ja": "現在のフォルダーにある Makefile の最初のターゲットを実行します。 Windows では make を MSYS2 か MinGW で入れます。名前は mingw32-make になります。",
+        "ko": "현재 폴더 Makefile의 첫 번째 대상을 실행합니다. Windows에서는 make를 MSYS2나 MinGW로 설치하며, 이름은 mingw32-make입니다.",
+        "zh-cn": "运行当前文件夹中 Makefile 的第一个目标。 在 Windows 上，make 通过 MSYS2 或 MinGW 安装，名称为 mingw32-make。",
+        "zh-tw": "執行目前資料夾中 Makefile 的第一個目標。 在 Windows 上，make 透過 MSYS2 或 MinGW 安裝，名稱為 mingw32-make。",
+        "ru": "Выполняет первую цель Makefile в текущей папке. В Windows make ставится через MSYS2 или MinGW и называется mingw32-make."
+      },
+      "command": "make",
+      "tags": {
+        "en": ["c", "c++", "cpp", "make", "makefile", "build"],
+        "es": ["c", "c++", "cpp", "construir"],
+        "pt-br": ["c", "c++", "cpp", "construir"],
+        "fr": ["c", "c++", "cpp", "construire"],
+        "de": ["c", "c++", "cpp", "bauen"],
+        "it": ["c", "c++", "cpp", "compilare"],
+        "ja": ["c", "c++", "cpp", "ビルド"],
+        "ko": ["c", "c++", "cpp", "빌드"],
+        "zh-cn": ["c", "c++", "cpp", "构建"],
+        "zh-tw": ["c", "c++", "cpp", "建置"],
+        "ru": ["c", "c++", "cpp", "сборка"]
+      },
+      "risk": "safe",
+      "docs": "https://www.gnu.org/software/make/manual/make.html"
+    },
+    {
+      "id": "c-cpp.make-parallel",
+      "title": {
+        "en": "Build with make in parallel",
+        "es": "Compilar con make en paralelo",
+        "pt-br": "Compilar com make em paralelo",
+        "fr": "Construire avec make en parallèle",
+        "de": "Mit make parallel bauen",
+        "it": "Compila con make in parallelo",
+        "ja": "make で並列ビルド",
+        "ko": "make로 병렬 빌드",
+        "zh-cn": "用 make 并行构建",
+        "zh-tw": "用 make 平行建置",
+        "ru": "Собрать через make параллельно"
+      },
+      "description": {
+        "en": "Runs up to 4 jobs at once; change the number to the cores of your machine. On Windows, install make with MSYS2 or MinGW, where it is called mingw32-make.",
+        "es": "Ejecuta hasta 4 tareas a la vez; cambia el número por los núcleos de tu equipo. En Windows, make se instala con MSYS2 o MinGW, donde se llama mingw32-make.",
+        "pt-br": "Executa até 4 tarefas de uma vez; troque o número pelos núcleos da sua máquina. No Windows, o make é instalado com MSYS2 ou MinGW, onde se chama mingw32-make.",
+        "fr": "Lance jusqu’à 4 tâches à la fois ; remplacez le nombre par les cœurs de votre machine. Sous Windows, make s’installe avec MSYS2 ou MinGW, où il s’appelle mingw32-make.",
+        "de": "Führt bis zu 4 Jobs gleichzeitig aus; setze die Zahl auf die Kerne deines Rechners. Unter Windows wird make mit MSYS2 oder MinGW installiert und heißt dort mingw32-make.",
+        "it": "Esegue fino a 4 attività alla volta; cambia il numero con i core della tua macchina. Su Windows, make si installa con MSYS2 o MinGW, dove si chiama mingw32-make.",
+        "ja": "最大 4 つのジョブを同時に実行します。数はマシンのコア数に合わせてください。 Windows では make を MSYS2 か MinGW で入れます。名前は mingw32-make になります。",
+        "ko": "최대 4개 작업을 동시에 실행합니다. 숫자를 컴퓨터 코어 수로 바꾸세요. Windows에서는 make를 MSYS2나 MinGW로 설치하며, 이름은 mingw32-make입니다.",
+        "zh-cn": "最多同时运行 4 个任务；请把数字改为你机器的核心数。 在 Windows 上，make 通过 MSYS2 或 MinGW 安装，名称为 mingw32-make。",
+        "zh-tw": "最多同時執行 4 個工作；請把數字改為你電腦的核心數。 在 Windows 上，make 透過 MSYS2 或 MinGW 安裝，名稱為 mingw32-make。",
+        "ru": "Запускает до 4 заданий одновременно; замените число на количество ядер. В Windows make ставится через MSYS2 или MinGW и называется mingw32-make."
+      },
+      "command": "make -j4",
+      "tags": {
+        "en": ["c", "c++", "cpp", "make", "makefile", "-j", "jobs", "parallel"],
+        "es": ["c", "c++", "cpp", "paralelo"],
+        "pt-br": ["c", "c++", "cpp", "paralelo"],
+        "fr": ["c", "c++", "cpp", "parallèle"],
+        "de": ["c", "c++", "cpp", "parallel"],
+        "it": ["c", "c++", "cpp", "parallelo"],
+        "ja": ["c", "c++", "cpp", "並列"],
+        "ko": ["c", "c++", "cpp", "병렬"],
+        "zh-cn": ["c", "c++", "cpp", "并行"],
+        "zh-tw": ["c", "c++", "cpp", "平行"],
+        "ru": ["c", "c++", "cpp", "параллельно"]
+      },
+      "risk": "safe",
+      "docs": "https://www.gnu.org/software/make/manual/html_node/Parallel.html"
+    },
+    {
+      "id": "c-cpp.make-target",
+      "title": {
+        "en": "Run a make target",
+        "es": "Ejecutar un objetivo de make",
+        "pt-br": "Executar um alvo do make",
+        "fr": "Exécuter une cible make",
+        "de": "make-Ziel ausführen",
+        "it": "Esegui un obiettivo di make",
+        "ja": "make のターゲットを実行",
+        "ko": "make 대상 실행",
+        "zh-cn": "运行 make 目标",
+        "zh-tw": "執行 make 目標",
+        "ru": "Выполнить цель make"
+      },
+      "description": {
+        "en": "Runs one target of the Makefile, for example test or install. On Windows, install make with MSYS2 or MinGW, where it is called mingw32-make.",
+        "es": "Ejecuta un objetivo del Makefile, por ejemplo test o install. En Windows, make se instala con MSYS2 o MinGW, donde se llama mingw32-make.",
+        "pt-br": "Executa um alvo do Makefile, por exemplo test ou install. No Windows, o make é instalado com MSYS2 ou MinGW, onde se chama mingw32-make.",
+        "fr": "Exécute une cible du Makefile, par exemple test ou install. Sous Windows, make s’installe avec MSYS2 ou MinGW, où il s’appelle mingw32-make.",
+        "de": "Führt ein Ziel des Makefiles aus, etwa test oder install. Unter Windows wird make mit MSYS2 oder MinGW installiert und heißt dort mingw32-make.",
+        "it": "Esegue un obiettivo del Makefile, per esempio test o install. Su Windows, make si installa con MSYS2 o MinGW, dove si chiama mingw32-make.",
+        "ja": "Makefile のターゲットを 1 つ実行します（test や install など）。 Windows では make を MSYS2 か MinGW で入れます。名前は mingw32-make になります。",
+        "ko": "Makefile의 대상 하나를 실행합니다(예: test, install). Windows에서는 make를 MSYS2나 MinGW로 설치하며, 이름은 mingw32-make입니다.",
+        "zh-cn": "运行 Makefile 中的一个目标，例如 test 或 install。 在 Windows 上，make 通过 MSYS2 或 MinGW 安装，名称为 mingw32-make。",
+        "zh-tw": "執行 Makefile 中的一個目標，例如 test 或 install。 在 Windows 上，make 透過 MSYS2 或 MinGW 安裝，名稱為 mingw32-make。",
+        "ru": "Выполняет одну цель Makefile, например test или install. В Windows make ставится через MSYS2 или MinGW и называется mingw32-make."
+      },
+      "command": "make ${target}",
+      "params": [
+        {
+          "name": "target",
+          "label": {
+            "en": "Target",
+            "es": "Objetivo",
+            "pt-br": "Alvo",
+            "fr": "Cible",
+            "de": "Ziel",
+            "it": "Obiettivo",
+            "ja": "ターゲット",
+            "ko": "대상",
+            "zh-cn": "目标",
+            "zh-tw": "目標",
+            "ru": "Цель"
+          },
+          "placeholder": {
+            "en": "test",
+            "es": "test",
+            "pt-br": "test",
+            "fr": "test",
+            "de": "test",
+            "it": "test",
+            "ja": "test",
+            "ko": "test",
+            "zh-cn": "test",
+            "zh-tw": "test",
+            "ru": "test"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "make", "makefile", "target"],
+        "es": ["c", "c++", "cpp", "objetivo"],
+        "pt-br": ["c", "c++", "cpp", "alvo"],
+        "fr": ["c", "c++", "cpp", "cible"],
+        "de": ["c", "c++", "cpp", "Ziel"],
+        "it": ["c", "c++", "cpp", "obiettivo"],
+        "ja": ["c", "c++", "cpp", "ターゲット"],
+        "ko": ["c", "c++", "cpp", "대상"],
+        "zh-cn": ["c", "c++", "cpp", "目标"],
+        "zh-tw": ["c", "c++", "cpp", "目標"],
+        "ru": ["c", "c++", "cpp", "цель"]
+      },
+      "risk": "safe",
+      "docs": "https://www.gnu.org/software/make/manual/html_node/Goals.html"
+    },
+    {
+      "id": "c-cpp.make-dry-run",
+      "title": {
+        "en": "Show what make would run",
+        "es": "Ver qué ejecutaría make",
+        "pt-br": "Ver o que o make executaria",
+        "fr": "Afficher ce que make exécuterait",
+        "de": "Anzeigen, was make ausführen würde",
+        "it": "Mostra cosa eseguirebbe make",
+        "ja": "make が実行する内容を表示",
+        "ko": "make가 실행할 내용 보기",
+        "zh-cn": "查看 make 将执行的命令",
+        "zh-tw": "檢視 make 將執行的命令",
+        "ru": "Показать, что выполнит make"
+      },
+      "description": {
+        "en": "Prints the commands that make would run, without running them. On Windows, install make with MSYS2 or MinGW, where it is called mingw32-make.",
+        "es": "Muestra los comandos que ejecutaría make, sin ejecutarlos. En Windows, make se instala con MSYS2 o MinGW, donde se llama mingw32-make.",
+        "pt-br": "Mostra os comandos que o make executaria, sem executá-los. No Windows, o make é instalado com MSYS2 ou MinGW, onde se chama mingw32-make.",
+        "fr": "Affiche les commandes que make exécuterait, sans les lancer. Sous Windows, make s’installe avec MSYS2 ou MinGW, où il s’appelle mingw32-make.",
+        "de": "Zeigt die Befehle, die make ausführen würde, ohne sie auszuführen. Unter Windows wird make mit MSYS2 oder MinGW installiert und heißt dort mingw32-make.",
+        "it": "Mostra i comandi che make eseguirebbe, senza eseguirli. Su Windows, make si installa con MSYS2 o MinGW, dove si chiama mingw32-make.",
+        "ja": "make が実行するコマンドを、実行せずに表示します。 Windows では make を MSYS2 か MinGW で入れます。名前は mingw32-make になります。",
+        "ko": "make가 실행할 명령을 실행하지 않고 보여 줍니다. Windows에서는 make를 MSYS2나 MinGW로 설치하며, 이름은 mingw32-make입니다.",
+        "zh-cn": "显示 make 将执行的命令，但不实际执行。 在 Windows 上，make 通过 MSYS2 或 MinGW 安装，名称为 mingw32-make。",
+        "zh-tw": "顯示 make 將執行的命令，但不實際執行。 在 Windows 上，make 透過 MSYS2 或 MinGW 安裝，名稱為 mingw32-make。",
+        "ru": "Показывает команды, которые выполнил бы make, не запуская их. В Windows make ставится через MSYS2 или MinGW и называется mingw32-make."
+      },
+      "command": "make -n",
+      "tags": {
+        "en": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "preview"],
+        "es": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "simular"],
+        "pt-br": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "simular"],
+        "fr": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "simuler"],
+        "de": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "simulieren"],
+        "it": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "simulare"],
+        "ja": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "ドライラン"],
+        "ko": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "미리 보기"],
+        "zh-cn": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "预演"],
+        "zh-tw": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "預演"],
+        "ru": ["c", "c++", "cpp", "make", "makefile", "-n", "--dry-run", "пробный запуск"]
+      },
+      "risk": "safe",
+      "docs": "https://www.gnu.org/software/make/manual/html_node/Instead-of-Execution.html"
+    },
+    {
+      "id": "c-cpp.make-clean",
+      "title": {
+        "en": "Delete the build output with make",
+        "es": "Borrar la salida de compilación con make",
+        "pt-br": "Apagar a saída da compilação com make",
+        "fr": "Supprimer la sortie de compilation avec make",
+        "de": "Build-Ausgabe mit make löschen",
+        "it": "Elimina l’output della build con make",
+        "ja": "make でビルド出力を削除",
+        "ko": "make로 빌드 출력 삭제",
+        "zh-cn": "用 make 删除构建输出",
+        "zh-tw": "用 make 刪除建置輸出",
+        "ru": "Удалить результаты сборки через make"
+      },
+      "description": {
+        "en": "Runs the clean target, which usually deletes the objects and programs built. On Windows, install make with MSYS2 or MinGW, where it is called mingw32-make.",
+        "es": "Ejecuta el objetivo clean, que suele borrar los objetos y programas generados. En Windows, make se instala con MSYS2 o MinGW, donde se llama mingw32-make.",
+        "pt-br": "Executa o alvo clean, que costuma apagar os objetos e programas gerados. No Windows, o make é instalado com MSYS2 ou MinGW, onde se chama mingw32-make.",
+        "fr": "Exécute la cible clean, qui supprime en général les objets et programmes produits. Sous Windows, make s’installe avec MSYS2 ou MinGW, où il s’appelle mingw32-make.",
+        "de": "Führt das Ziel clean aus, das meist erzeugte Objekte und Programme löscht. Unter Windows wird make mit MSYS2 oder MinGW installiert und heißt dort mingw32-make.",
+        "it": "Esegue l’obiettivo clean, che di solito elimina gli oggetti e i programmi generati. Su Windows, make si installa con MSYS2 o MinGW, dove si chiama mingw32-make.",
+        "ja": "clean ターゲットを実行します。通常は作成したオブジェクトとプログラムを削除します。 Windows では make を MSYS2 か MinGW で入れます。名前は mingw32-make になります。",
+        "ko": "clean 대상을 실행합니다. 보통 만든 오브젝트와 프로그램을 삭제합니다. Windows에서는 make를 MSYS2나 MinGW로 설치하며, 이름은 mingw32-make입니다.",
+        "zh-cn": "运行 clean 目标，通常会删除生成的目标文件和程序。 在 Windows 上，make 通过 MSYS2 或 MinGW 安装，名称为 mingw32-make。",
+        "zh-tw": "執行 clean 目標，通常會刪除產生的目的檔和程式。 在 Windows 上，make 透過 MSYS2 或 MinGW 安裝，名稱為 mingw32-make。",
+        "ru": "Выполняет цель clean, которая обычно удаляет собранные объекты и программы. В Windows make ставится через MSYS2 или MinGW и называется mingw32-make."
+      },
+      "command": "make clean",
+      "tags": {
+        "en": ["c", "c++", "cpp", "make", "makefile", "clean"],
+        "es": ["c", "c++", "cpp", "borrar", "limpiar"],
+        "pt-br": ["c", "c++", "cpp", "apagar", "limpar"],
+        "fr": ["c", "c++", "cpp", "supprimer", "nettoyer"],
+        "de": ["c", "c++", "cpp", "löschen", "aufräumen"],
+        "it": ["c", "c++", "cpp", "eliminare", "pulire"],
+        "ja": ["c", "c++", "cpp", "削除", "クリーン"],
+        "ko": ["c", "c++", "cpp", "삭제", "정리"],
+        "zh-cn": ["c", "c++", "cpp", "删除", "清理"],
+        "zh-tw": ["c", "c++", "cpp", "刪除", "清理"],
+        "ru": ["c", "c++", "cpp", "удалить", "очистка"]
+      },
+      "risk": "destructive",
+      "docs": "https://www.gnu.org/software/make/manual/html_node/Cleanup.html"
+    },
+    {
+      "id": "c-cpp.clang-format",
+      "title": {
+        "en": "Format a file with clang-format",
+        "es": "Formatear un archivo con clang-format",
+        "pt-br": "Formatar um arquivo com clang-format",
+        "fr": "Formater un fichier avec clang-format",
+        "de": "Datei mit clang-format formatieren",
+        "it": "Formatta un file con clang-format",
+        "ja": "clang-format でファイルを整形",
+        "ko": "clang-format로 파일 서식 지정",
+        "zh-cn": "用 clang-format 格式化文件",
+        "zh-tw": "用 clang-format 格式化檔案",
+        "ru": "Отформатировать файл через clang-format"
+      },
+      "description": {
+        "en": "Rewrites the file with the style of the nearest .clang-format",
+        "es": "Reescribe el archivo con el estilo del .clang-format más cercano",
+        "pt-br": "Reescreve o arquivo com o estilo do .clang-format mais próximo",
+        "fr": "Réécrit le fichier avec le style du .clang-format le plus proche",
+        "de": "Schreibt die Datei im Stil der nächstgelegenen .clang-format neu",
+        "it": "Riscrive il file con lo stile del .clang-format più vicino",
+        "ja": "最も近い .clang-format のスタイルでファイルを書き直します",
+        "ko": "가장 가까운 .clang-format 스타일로 파일을 다시 씁니다",
+        "zh-cn": "按最近的 .clang-format 样式重写文件",
+        "zh-tw": "依最近的 .clang-format 樣式重寫檔案",
+        "ru": "Переписывает файл в стиле ближайшего .clang-format"
+      },
+      "command": "clang-format -i ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "clang-format", ".clang-format", "format", "style"],
+        "es": ["c", "c++", "cpp", "clang-format", ".clang-format", "formatear", "estilo"],
+        "pt-br": ["c", "c++", "cpp", "clang-format", ".clang-format", "formatar", "estilo"],
+        "fr": ["c", "c++", "cpp", "clang-format", ".clang-format", "formater", "style"],
+        "de": ["c", "c++", "cpp", "clang-format", ".clang-format", "formatieren", "Stil"],
+        "it": ["c", "c++", "cpp", "clang-format", ".clang-format", "formattare", "stile"],
+        "ja": ["c", "c++", "cpp", "clang-format", ".clang-format", "整形", "スタイル"],
+        "ko": ["c", "c++", "cpp", "clang-format", ".clang-format", "서식", "스타일"],
+        "zh-cn": ["c", "c++", "cpp", "clang-format", ".clang-format", "格式化", "样式"],
+        "zh-tw": ["c", "c++", "cpp", "clang-format", ".clang-format", "格式化", "樣式"],
+        "ru": ["c", "c++", "cpp", "clang-format", ".clang-format", "форматирование", "стиль"]
+      },
+      "risk": "caution",
+      "docs": "https://clang.llvm.org/docs/ClangFormat.html"
+    },
+    {
+      "id": "c-cpp.clang-tidy",
+      "title": {
+        "en": "Analyze a file with clang-tidy",
+        "es": "Analizar un archivo con clang-tidy",
+        "pt-br": "Analisar um arquivo com clang-tidy",
+        "fr": "Analyser un fichier avec clang-tidy",
+        "de": "Datei mit clang-tidy analysieren",
+        "it": "Analizza un file con clang-tidy",
+        "ja": "clang-tidy でファイルを解析",
+        "ko": "clang-tidy로 파일 분석",
+        "zh-cn": "用 clang-tidy 分析文件",
+        "zh-tw": "用 clang-tidy 分析檔案",
+        "ru": "Проанализировать файл через clang-tidy"
+      },
+      "description": {
+        "en": "Looks for bugs and style problems in the file; the options after -- go to the compiler",
+        "es": "Busca errores y problemas de estilo en el archivo; las opciones tras -- van al compilador",
+        "pt-br": "Procura erros e problemas de estilo no arquivo; as opções após -- vão para o compilador",
+        "fr": "Cherche bogues et problèmes de style dans le fichier ; les options après -- vont au compilateur",
+        "de": "Sucht Fehler und Stilprobleme in der Datei; die Optionen nach -- gehen an den Compiler",
+        "it": "Cerca bug e problemi di stile nel file; le opzioni dopo -- vanno al compilatore",
+        "ja": "ファイルのバグやスタイルの問題を探します。-- の後のオプションはコンパイラーに渡されます",
+        "ko": "파일의 버그와 스타일 문제를 찾습니다. -- 뒤의 옵션은 컴파일러로 전달됩니다",
+        "zh-cn": "查找文件中的错误和风格问题；-- 之后的选项传给编译器",
+        "zh-tw": "尋找檔案中的錯誤和風格問題；-- 之後的選項傳給編譯器",
+        "ru": "Ищет ошибки и проблемы стиля в файле; параметры после -- передаются компилятору"
+      },
+      "command": "clang-tidy ${file} -- -std=c++20",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.cpp",
+            "es": "main.cpp",
+            "pt-br": "main.cpp",
+            "fr": "main.cpp",
+            "de": "main.cpp",
+            "it": "main.cpp",
+            "ja": "main.cpp",
+            "ko": "main.cpp",
+            "zh-cn": "main.cpp",
+            "zh-tw": "main.cpp",
+            "ru": "main.cpp"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["c", "c++", "cpp", "clang-tidy", "lint", "analyze"],
+        "es": ["c", "c++", "cpp", "clang-tidy", "lint", "analizar"],
+        "pt-br": ["c", "c++", "cpp", "clang-tidy", "lint", "analisar"],
+        "fr": ["c", "c++", "cpp", "clang-tidy", "lint", "analyser"],
+        "de": ["c", "c++", "cpp", "clang-tidy", "lint", "analysieren", "Lint"],
+        "it": ["c", "c++", "cpp", "clang-tidy", "lint", "analizzare"],
+        "ja": ["c", "c++", "cpp", "clang-tidy", "lint", "解析", "リント"],
+        "ko": ["c", "c++", "cpp", "clang-tidy", "lint", "분석", "린트"],
+        "zh-cn": ["c", "c++", "cpp", "clang-tidy", "lint", "分析", "检查"],
+        "zh-tw": ["c", "c++", "cpp", "clang-tidy", "lint", "分析", "檢查"],
+        "ru": ["c", "c++", "cpp", "clang-tidy", "lint", "анализ", "линтер"]
+      },
+      "risk": "safe",
+      "docs": "https://clang.llvm.org/extra/clang-tidy/"
+    }
+  ]
+}

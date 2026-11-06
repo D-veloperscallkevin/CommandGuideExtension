@@ -287,7 +287,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | 3.3a | `catalog-js` | Yarn, Bun, Deno y TypeScript (tsc); gestores de versiones (nvm, fnm, volta, corepack, pyenv) en una categoría común ✅ |
 | 3.3b | `catalog-python` | Python (python, pip, venv, pipx), poetry, uv y conda ✅ |
 | 3.4a | `catalog-jvm-dotnet` | Java (java, javac, jar, jshell), Maven, Gradle (con wrapper por shell), .NET (dotnet new/run/build/ef) y sdkman en Gestores de versiones ✅ |
-| 3.4b | `catalog-native` | C/C++ (gcc, g++, clang, make), CMake, Go, Rust (cargo, rustc, rustup) |
+| 3.4b | `catalog-native` | C/C++ (gcc, g++, clang, make), CMake, Go, Rust (cargo, rustc, rustup) ✅ |
 | 3.5 | `catalog-more-languages` | PHP (php, composer), Ruby (ruby, gem, bundle, rake, rbenv), Dart/Flutter, Swift (swift, xcodebuild), Elixir, Haskell, Scala, R, Lua, Zig, Julia, Perl, Clojure, Erlang, OCaml; asdf/mise |
 | 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) |
 | 3.7 | `catalog-frameworks` | Frontend (Vite, Next.js, Angular, Vue, Astro, Nuxt, SvelteKit), backend (NestJS, Laravel, Django, Rails, Spring Boot, Symfony, FastAPI), móvil y escritorio (Expo/EAS, React Native, Ionic/Capacitor, Electron, Tauri), ORM (Prisma, Drizzle, Sequelize, TypeORM, Alembic) y monorepos (turbo, nx) |
