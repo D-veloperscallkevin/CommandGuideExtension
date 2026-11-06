@@ -24,7 +24,7 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 
 ## Usage
 
-1. Open the **DevCommands** view in the Activity Bar. It includes more than 420 commands for Git, npm, pnpm, Yarn, Bun, Node.js, Deno, TypeScript, Python (pip, venv, pipx), Poetry, uv, conda, Java (java, javac, jar, jshell), Maven, Gradle, .NET (dotnet, EF Core), C/C++ (gcc, g++, clang, make, gdb), CMake, Go, Rust (cargo, rustup), version managers (nvm, fnm, Volta, Corepack, pyenv, SDKMAN), Docker and the terminal (files, folders, processes).
+1. Open the **DevCommands** view in the Activity Bar. It includes more than 520 commands for Git, npm, pnpm, Yarn, Bun, Node.js, Deno, TypeScript, Python (pip, venv, pipx), Poetry, uv, conda, Java (java, javac, jar, jshell), Maven, Gradle, .NET (dotnet, EF Core), C/C++ (gcc, g++, clang, make, gdb), CMake, Go, Rust (cargo, rustup), PHP (php, Composer), Ruby (gem, Bundler, Rake), Dart, Flutter, Swift (SwiftPM, xcodebuild), version managers (nvm, fnm, Volta, Corepack, pyenv, SDKMAN, rbenv, asdf, mise), Docker and the terminal (files, folders, processes).
 2. Categories are grouped in collapsible sections (Languages & runtimes, Version control, Containers & infrastructure, Tools & AI…): click a section, or press Right and Left on it, to expand or collapse it. The panel remembers which ones you opened. Pick a category to see its commands, with a description, an example and a warning on risky ones. Or type in the search box to find commands across all categories, in English or Spanish (accents and case don't matter); press Down to jump to the results and Escape to clear the search.
 3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
 4. To keep a command at hand, click the star next to it (or press `Ctrl+D`, `Cmd+D` on macOS, while it has focus). Your favorites appear in the **Favorites** card at the top of the categories, in the order you starred them, and sync across machines with Settings Sync.
@@ -66,7 +66,7 @@ When a folder is open, the categories that fit the project appear first, under *
 | `bun.lock`, `bun.lockb`, `bunfig.toml` | Bun |
 | `deno.json`, `deno.jsonc`, `deno.lock` | Deno |
 | `tsconfig*.json` (`tsconfig.json`, `tsconfig.build.json`…) | TypeScript |
-| `.nvmrc`, `.node-version`, `.python-version`, `.sdkmanrc` | Version managers |
+| `.nvmrc`, `.node-version`, `.python-version`, `.sdkmanrc`, `.ruby-version`, `.tool-versions`, `mise.toml`, `.mise.toml` | Version managers |
 | `pyproject.toml`, `requirements*.txt`, `setup.py`, `setup.cfg`, `Pipfile`, `.python-version` | Python |
 | `poetry.lock` | Poetry |
 | `uv.lock` | uv |
@@ -79,6 +79,11 @@ When a folder is open, the categories that fit the project appear first, under *
 | `CMakeLists.txt`, `CMakePresets.json`, `CMakeUserPresets.json` | CMake |
 | `go.mod`, `go.sum`, `go.work` | Go |
 | `Cargo.toml`, `Cargo.lock`, `rust-toolchain.toml`, `rust-toolchain` | Rust |
+| `composer.json`, `composer.lock`, `*.php` | PHP |
+| `Gemfile`, `Gemfile.lock`, `Rakefile`, `*.gemspec`, `.ruby-version` | Ruby |
+| `pubspec.yaml`, `pubspec.lock` | Dart |
+| `pubspec.yaml` | Flutter |
+| `Package.swift`, `*.xcodeproj`, `*.xcworkspace` | Swift |
 | `Dockerfile`, `Containerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml`, `.dockerignore` | Docker |
 
 Files in subfolders don't count. A `Makefile` alone doesn't select any category, because projects in many languages use one.

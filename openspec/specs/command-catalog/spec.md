@@ -172,14 +172,14 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go` y `rust`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter` y `swift`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
 - `shells.cmd` siempre que su sintaxis en cmd difiera de la variante POSIX.
 
 Los comandos de `version-managers` SHALL declarar `shells.powershell` y `shells.cmd` cuando la herramienta o su sintaxis cambie en Windows:
-- activar `fnm` en la sesión;
+- activar `fnm` o `mise` en la sesión;
 - nvm, que en Windows es nvm-windows y usa otros subcomandos u opciones.
 
 Los comandos de `python` siguen la convención POSIX en `bash` y `zsh` (Linux, macOS y WSL) y la de Windows en `powershell` y `cmd`:
@@ -196,6 +196,17 @@ Los comandos de `maven` y `gradle` que usan el wrapper del proyecto SHALL escrib
 Los comandos que crean el wrapper usan la herramienta instalada globalmente (`mvn` o `gradle`) y no llevan variantes.
 
 Los comandos de sdkman SHALL ir en `version-managers`, y su descripción SHALL avisar, en los 11 idiomas, de que sdkman no funciona en PowerShell ni en cmd (solo en bash y zsh, incluidos WSL y Git Bash).
+
+Los comandos de rbenv y asdf SHALL ir en `version-managers` con el mismo aviso que sdkman: no funcionan en PowerShell ni en cmd. Los de asdf SHALL usar la sintaxis de asdf 0.16 o superior (`asdf set`, nunca `asdf local` ni `asdf global`).
+
+Los comandos de mise SHALL ir en `version-managers`. El que activa mise en la sesión SHALL declarar la variante de cada shell:
+- `eval "$(mise activate bash)"` en `command` (bash);
+- `eval "$(mise activate zsh)"` en `shells.zsh`;
+- `(&mise activate pwsh) | Out-String | Invoke-Expression` en `shells.powershell`.
+
+Su descripción SHALL avisar, en los 11 idiomas, de que cmd no se puede activar y usa los *shims* de mise.
+
+Los comandos de `swift` que usan `xcodebuild` o `xcrun`, y el de `flutter` que compila para iOS, SHALL avisar en su descripción, en los 11 idiomas, de que solo funcionan en macOS.
 
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
 - `./app` en `command` (bash y zsh);
@@ -215,7 +226,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go` y `rust`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter` y `swift`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -244,7 +255,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 - **AND** en `powershell` y `cmd` es `nvm install lts` (nvm-windows)
 
 #### Scenario: Desinstalar una versión
-- **WHEN** un comando de `version-managers` desinstala una versión de Node.js o de Python
+- **WHEN** un comando de `version-managers` desinstala una versión de Node.js, de Python, de Java, de Ruby o de una herramienta de mise
 - **THEN** declara `risk: destructive`
 
 #### Scenario: Activar el entorno virtual en PowerShell, cmd y bash
@@ -297,6 +308,23 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 #### Scenario: Sin el compilador de Microsoft
 - **WHEN** se recorren los comandos de `c-cpp`
 - **THEN** ninguno empieza por `cl `
+
+#### Scenario: Activar mise en bash, zsh y PowerShell
+- **WHEN** se muestra el comando de `version-managers` que activa mise en la sesión
+- **THEN** en `bash` el ejemplo es `eval "$(mise activate bash)"` y en `zsh` es `eval "$(mise activate zsh)"`
+- **AND** en `powershell` es `(&mise activate pwsh) | Out-String | Invoke-Expression`
+
+#### Scenario: asdf con la sintaxis actual
+- **WHEN** se recorren los comandos de asdf en `version-managers`
+- **THEN** ninguno usa `asdf local` ni `asdf global`
+
+#### Scenario: Comandos solo de macOS
+- **WHEN** un comando de `swift` usa `xcodebuild` o `xcrun`, o el comando de `flutter` compila para iOS
+- **THEN** su descripción en español avisa de que solo funciona en macOS
+
+#### Scenario: Borrar dependencias o salida de PHP, Ruby, Flutter y Swift
+- **WHEN** se muestran `gem uninstall`, `flutter clean` o `swift package clean`
+- **THEN** declaran `risk: destructive`
 
 #### Scenario: Borrar la caché de módulos de Go
 - **WHEN** se muestra el comando de `go` que borra la caché de módulos (`go clean -modcache`)
