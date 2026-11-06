@@ -5,6 +5,8 @@ import { loadCatalogDir } from './catalog/load';
 import { CatalogService } from './catalog/CatalogService';
 import { ClipboardService } from './clipboard/ClipboardService';
 import { registerCustomCommands } from './customCommands';
+import catalogSignals from 'virtual:project-signals';
+import { signalsFromCatalog } from './project/detect';
 import { createProjectDetector } from './project/vscodeProject';
 import { searchLabels, showCommandSearch } from './quickPick/CommandSearch';
 import { searchEntries, type SearchEntry } from './quickPick/items';
@@ -93,7 +95,8 @@ export function activate(context: vscode.ExtensionContext): DevCommandsApi {
 		},
 		randomUUID,
 	);
-	const project = createProjectDetector();
+	// Las señales vienen en el bundle: detectar no lee el catálogo.
+	const project = createProjectDetector(signalsFromCatalog(catalogSignals));
 	// Misma URL que el botón Sponsor de la ficha; validada aquí, nunca viene del webview.
 	const sponsor = sponsorUrl(context.extension.packageJSON);
 	const provider = new CommandsViewProvider(

@@ -1,6 +1,7 @@
-// `ProjectDetector` sobre la API de VS Code: carpetas del workspace, `workspace.fs.stat` (vale
+// `ProjectDetector` sobre la API de VS Code: carpetas del workspace, `workspace.fs.readDirectory` (vale
 // también para sistemas de archivos remotos y virtuales), watchers por carpeta y el ajuste.
 import * as vscode from 'vscode';
+import type { ProjectSignal } from './detect';
 import { ProjectDetector, type ProjectWorkspace } from './ProjectDetector';
 
 const SECTION = 'devcommands';
@@ -9,13 +10,10 @@ const SETTING = 'detectProject';
 const workspace: ProjectWorkspace<vscode.Uri> = {
 	folders: () => (vscode.workspace.workspaceFolders ?? []).map((folder) => folder.uri),
 	onDidChangeFolders: vscode.workspace.onDidChangeWorkspaceFolders,
-	exists: async (folder, name) => {
-		try {
-			await vscode.workspace.fs.stat(vscode.Uri.joinPath(folder, name));
-			return true;
-		} catch {
-			return false;
-		}
+	// Solo los nombres; un error (carpeta inexistente, sin permisos) lo trata detectCategories.
+	list: async (folder, dir) => {
+		const entries = await vscode.workspace.fs.readDirectory(dir === undefined ? folder : vscode.Uri.joinPath(folder, dir));
+		return entries.map(([name]) => name);
 	},
 	watch: (folder, glob, onChange) => {
 		// Solo importan la creación y el borrado; el contenido no se lee.
@@ -32,6 +30,6 @@ const workspace: ProjectWorkspace<vscode.Uri> = {
 };
 
 /** Detector de las categorías del proyecto abierto, con recarga en vivo. */
-export function createProjectDetector(): ProjectDetector<vscode.Uri> {
-	return new ProjectDetector(workspace);
+export function createProjectDetector(signals: readonly ProjectSignal[]): ProjectDetector<vscode.Uri> {
+	return new ProjectDetector(workspace, signals);
 }

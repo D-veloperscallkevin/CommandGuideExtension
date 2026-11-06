@@ -64,10 +64,16 @@ Solo se admiten los idiomas de la lista: una clave como `fr-fr` hace fallar la v
      "icon": "package",
      "order": 20,
      "section": "languages",
+     "detect": ["package-lock.json", "npm-shrinkwrap.json"],
      "commands": []
    }
    ```
 
    `icon` es el nombre de un [Codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html). `order` define la posición dentro de su sección (ascendente, empates por `id`). `section` es la sección del panel: `languages`, `vcs`, `frameworks`, `databases`, `infra`, `cloud`, `servers`, `quality`, `gamedev` o `tools`.
-2. Regístrala en `src/catalog/index.ts` con un import estático y añádela al array.
-3. Añade al menos 15 comandos, con sus textos en los 11 idiomas, y ejecuta `pnpm run test:unit`. Si olvidaste el paso 2, el test lo indica nombrando el archivo. Añade la nueva categoría a la lista de `test/unit/catalog/content.test.ts`.
+2. Si la categoría se puede reconocer por un archivo del proyecto, decláralo en `detect` (opcional). Así aparece en **En este proyecto**. Cada patrón tiene una de estas formas, y ninguna distingue mayúsculas:
+   - un nombre de la raíz: `go.mod`, `.git`;
+   - un nombre de la raíz con comodines `*`: `*.csproj`;
+   - una ruta fija de un nivel, sin comodines: `prisma/schema.prisma`.
+
+   No se admiten `**`, `?`, llaves, corchetes, `..` ni rutas más profundas, y nunca se lee el contenido de los archivos. Elige patrones específicos de la herramienta: `*.json` o `README.md` detectarían la categoría en casi cualquier proyecto. Terminal no lleva `detect`.
+3. Añade al menos 15 comandos, con sus textos en los 11 idiomas, y ejecuta `pnpm run test:unit`. El build copia todos los `catalog/*.json` y las señales de `detect`; no hay que registrar el archivo en ningún sitio. Añade la nueva categoría a la lista de `test/unit/catalog/content.test.ts`.

@@ -31,6 +31,16 @@
       "description": "Sección del panel en la que aparece la categoría.",
       "enum": ["languages", "vcs", "frameworks", "databases", "infra", "cloud", "servers", "quality", "gamedev", "tools"]
     },
+    "detect": {
+      "description": "Patrones de detección del proyecto: un nombre de la raíz (go.mod), un nombre con comodines * (*.csproj) o una ruta fija de un nivel sin comodines (prisma/schema.prisma). No distinguen mayúsculas.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?!.*\\*\\*)(?:[A-Za-z0-9._+-]+/[A-Za-z0-9._+-]+|[A-Za-z0-9._+*-]+)$"
+      }
+    },
     "commands": {
       "type": "array",
       "minItems": 1,

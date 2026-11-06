@@ -54,15 +54,17 @@ It has no default shortcut. To add one, open **Keyboard Shortcuts** (`Ctrl+K Ctr
 
 ## Project detection
 
-When a folder is open, the categories that fit the project appear first, under **In this project** (expanded); the rest stay in their sections. DevCommands only checks whether these files or folders exist in the root of each workspace folder (it never reads them):
+When a folder is open, the categories that fit the project appear first, under **In this project** (expanded); the rest stay in their sections. DevCommands only looks at the names of the files and folders in the root of each workspace folder, ignoring case, and never reads them:
 
 | In the root | Category |
 | --- | --- |
 | `.git` | Git |
-| `package.json` | Node |
-| `pnpm-lock.yaml` | pnpm |
-| `package-lock.json` | npm |
-| `Dockerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml` | Docker |
+| `package.json`, `.nvmrc`, `.node-version` | Node |
+| `pnpm-lock.yaml`, `pnpm-workspace.yaml` | pnpm |
+| `package-lock.json`, `npm-shrinkwrap.json` | npm |
+| `Dockerfile`, `Containerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml`, `.dockerignore` | Docker |
+
+Files in subfolders don't count.
 
 The sections update as you create or delete those files. Turn it off with the `devcommands.detectProject` setting.
 

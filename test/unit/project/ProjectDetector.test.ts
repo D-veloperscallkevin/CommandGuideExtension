@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { SIGNAL_GLOB } from '../../../src/project/detect';
+import { bundledCatalog } from '../catalog/bundled';
+import { signalsFromCatalog } from '../../../src/project/detect';
+
+const signals = signalsFromCatalog(bundledCatalog);
 import { DETECT_DELAY_MS, ProjectDetector, type ProjectWorkspace, type Subscribe } from '../../../src/project/ProjectDetector';
 
 function fakeEvent() {
@@ -20,16 +23,16 @@ function setup(initial: Record<string, string[]>, enabled = true) {
 	const workspace: ProjectWorkspace<string> = {
 		folders: () => Object.keys(state.tree),
 		onDidChangeFolders: foldersChanged.subscribe,
-		exists: async (folder, name) => (state.tree[folder] ?? []).includes(name),
+		list: async (folder) => state.tree[folder] ?? [],
 		watch: (folder, glob, onChange) => {
-			expect(glob).toBe(SIGNAL_GLOB);
+			expect(glob).toBe('*');
 			watchers.set(folder, onChange);
 			return { dispose: () => watchers.delete(folder) };
 		},
 		enabled: () => state.enabled,
 		onDidChangeEnabled: enabledChanged.subscribe,
 	};
-	const detector = new ProjectDetector(workspace);
+	const detector = new ProjectDetector(workspace, signals);
 	const changes: string[][] = [];
 	detector.onDidChange((ids) => changes.push([...ids].sort()));
 	return { state, detector, changes, watchers, foldersChanged, enabledChanged };
@@ -120,16 +123,16 @@ describe('ProjectDetector', () => {
 		const detector = new ProjectDetector<string>({
 			folders: () => Object.keys(state.tree),
 			onDidChangeFolders: event.subscribe,
-			exists: async (folder, name) => {
+			list: async (folder) => {
 				if (state.slow) {
 					await new Promise<void>((resolve) => (release = resolve));
 				}
-				return state.tree[folder].includes(name);
+				return state.tree[folder];
 			},
 			watch: () => ({ dispose: () => undefined }),
 			enabled: () => true,
 			onDidChangeEnabled: event.subscribe,
-		});
+		}, signals);
 		// La primera detección queda colgada; la segunda ve un árbol nuevo y termina antes.
 		state.slow = false;
 		state.tree = { root: ['Dockerfile'] };

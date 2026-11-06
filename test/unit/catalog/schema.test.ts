@@ -40,6 +40,11 @@ describe('catalog/schema.json', () => {
 		['unknown-locale-key.json', '/commands/0/title'],
 		['missing-section.json', '/'],
 		['invalid-section.json', '/section'],
+		['detect-empty.json', '/detect'],
+		['detect-duplicate.json', '/detect'],
+		['detect-globstar.json', '/detect/0'],
+		['detect-wildcard-path.json', '/detect/0'],
+		['detect-leading-slash.json', '/detect/0'],
 	];
 
 	it.each(invalid)('rechaza %s señalando %s', (file, instancePath) => {

@@ -1,6 +1,6 @@
 // Categorías del proyecto abierto, actualizadas en vivo. No importa `vscode`: recibe interfaces
 // mínimas (en la extensión las rellena `vscode.workspace`), así se testea con Vitest.
-import { detectCategories, SIGNAL_GLOB } from './detect';
+import { compileSignals, detectCategories, watchGlob, type CompiledSignals, type ProjectSignal } from './detect';
 
 export interface Disposable {
 	dispose(): unknown;
@@ -14,9 +14,9 @@ export interface ProjectWorkspace<F> {
 	/** Carpetas abiertas (vacío sin carpeta). */
 	folders(): readonly F[];
 	readonly onDidChangeFolders: Subscribe<unknown>;
-	/** Si existe la entrada `name` en la raíz de `folder`. */
-	exists(folder: F, name: string): Promise<boolean>;
-	/** Vigila la creación y el borrado de entradas de `glob` en la raíz de `folder`. */
+	/** Nombres de las entradas de la raíz de `folder`, o de su subcarpeta `dir`. */
+	list(folder: F, dir?: string): Promise<readonly string[]>;
+	/** Vigila la creación y el borrado de entradas de `glob`, relativo a la raíz de `folder`. */
 	watch(folder: F, glob: string, onChange: () => void): Disposable;
 	/** Valor del ajuste `devcommands.detectProject`. */
 	enabled(): boolean;
@@ -37,8 +37,15 @@ export class ProjectDetector<F> implements Disposable {
 	/** Sube en cada detección: un resultado de una generación anterior se descarta. */
 	private generation = 0;
 	private disposed = false;
+	private readonly workspace: ProjectWorkspace<F>;
+	private readonly signals: CompiledSignals;
+	private readonly glob: string;
 
-	constructor(private readonly workspace: ProjectWorkspace<F>) {
+	/** `signals`: los patrones `detect` del catálogo (en la extensión, generados en el build). */
+	constructor(workspace: ProjectWorkspace<F>, signals: readonly ProjectSignal[]) {
+		this.workspace = workspace;
+		this.signals = compileSignals(signals);
+		this.glob = watchGlob(this.signals);
 		this.subscriptions = [
 			workspace.onDidChangeFolders(() => {
 				this.rewatch();
@@ -69,7 +76,7 @@ export class ProjectDetector<F> implements Disposable {
 		this.cancelTimer();
 		const generation = ++this.generation;
 		const next = this.workspace.enabled()
-			? await detectCategories(this.workspace.folders(), (folder, name) => this.workspace.exists(folder, name))
+			? await detectCategories(this.workspace.folders(), this.signals, (folder, dir) => this.workspace.list(folder, dir))
 			: EMPTY;
 		if (this.disposed || generation !== this.generation || sameIds(next, this.detected)) {
 			return;
@@ -106,7 +113,7 @@ export class ProjectDetector<F> implements Disposable {
 	private rewatch(): void {
 		this.disposeWatchers();
 		if (this.workspace.enabled()) {
-			this.watchers = this.workspace.folders().map((folder) => this.workspace.watch(folder, SIGNAL_GLOB, () => this.schedule()));
+			this.watchers = this.workspace.folders().map((folder) => this.workspace.watch(folder, this.glob, () => this.schedule()));
 		}
 	}
 

@@ -76,6 +76,12 @@ export function checkCatalogRules(catalog: Catalog): string[] {
 		if (category.id.startsWith(CUSTOM_PREFIX)) {
 			errors.push(`${category.id}: el prefijo "${CUSTOM_PREFIX}" está reservado para los comandos propios`);
 		}
+		// El schema deja pasar "." y ".." como segmento; aquí se rechazan (no se sale de la raíz).
+		for (const pattern of category.detect ?? []) {
+			if (pattern.split('/').some((segment) => segment === '.' || segment === '..')) {
+				errors.push(`${category.id}: patrón de detección no admitido "${pattern}"`);
+			}
+		}
 		for (const cmd of category.commands) {
 			const where = `${category.id}/${cmd.id}`;
 

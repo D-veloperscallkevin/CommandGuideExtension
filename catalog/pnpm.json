@@ -18,6 +18,7 @@
   "icon": "package",
   "order": 25,
   "section": "languages",
+  "detect": ["pnpm-lock.yaml", "pnpm-workspace.yaml"],
   "commands": [
     {
       "id": "pnpm.install",
