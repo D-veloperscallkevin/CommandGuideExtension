@@ -68,9 +68,14 @@ Las señales SHALL ser:
 - `artisan` → `laravel`;
 - `manage.py` → `django`;
 - `bin/rails` → `rails`;
-- `symfony.lock` o `bin/console` → `symfony`.
+- `symfony.lock` o `bin/console` → `symfony`;
+- `eas.json` o cualquier `app.config.*` → `expo`;
+- cualquier `metro.config.*` o `react-native.config.js` → `react-native`;
+- cualquier `capacitor.config.*` o `ionic.config.json` → `ionic`;
+- cualquier `forge.config.*` → `electron`;
+- `src-tauri/tauri.conf.json` → `tauri`.
 
-`spring-boot` y `fastapi` no declaran señales: no tienen un archivo propio en la raíz, y sus proyectos se detectan por `maven`, `gradle` o `python`.
+`spring-boot` y `fastapi` no declaran señales: no tienen un archivo propio en la raíz, y sus proyectos se detectan por `maven`, `gradle` o `python`. `app.json` MUST NOT detectar `expo`, porque también lo usan proyectos de React Native sin Expo.
 
 Un `package.json` solo MUST NOT detectar ningún framework, porque la detección no lee su contenido. Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes. `Makefile.PL`, en cambio, es exclusivo de Perl y detecta `perl`.
 
@@ -300,7 +305,23 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 
 #### Scenario: Spring Boot no se detecta
 - **WHEN** la raíz solo contiene `pom.xml`
-- **THEN** la única categoría detectada es `maven`
+- **THEN** las categorías detectadas son `java` y `maven`
+
+#### Scenario: Proyecto Expo con EAS
+- **WHEN** la raíz contiene `package.json`, `app.json` y `eas.json`
+- **THEN** las categorías detectadas son `expo` y `node`
+
+#### Scenario: Proyecto Tauri
+- **WHEN** la raíz contiene `package.json` y la carpeta `src-tauri` con el archivo `tauri.conf.json`
+- **THEN** las categorías detectadas son `node` y `tauri`
+
+#### Scenario: Proyecto Ionic con Capacitor
+- **WHEN** la raíz contiene `ionic.config.json` y `capacitor.config.ts`
+- **THEN** la categoría detectada es `ionic`
+
+#### Scenario: app.json no detecta Expo
+- **WHEN** la raíz solo contiene `app.json`
+- **THEN** no se detecta ninguna categoría
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

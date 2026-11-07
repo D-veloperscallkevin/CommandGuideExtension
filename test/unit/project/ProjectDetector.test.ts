@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { bundledCatalog } from '../catalog/bundled';
-import { signalsFromCatalog } from '../../../src/project/detect';
+import { compileSignals, signalsFromCatalog, watchGlob } from '../../../src/project/detect';
 
 const signals = signalsFromCatalog(bundledCatalog);
 import { DETECT_DELAY_MS, ProjectDetector, type ProjectWorkspace, type Subscribe } from '../../../src/project/ProjectDetector';
@@ -25,7 +25,7 @@ function setup(initial: Record<string, string[]>, enabled = true) {
 		onDidChangeFolders: foldersChanged.subscribe,
 		list: async (folder) => state.tree[folder] ?? [],
 		watch: (folder, glob, onChange) => {
-			expect(glob).toBe('{*,bin/*}');
+			expect(glob).toBe(watchGlob(compileSignals(signals)));
 			watchers.set(folder, onChange);
 			return { dispose: () => watchers.delete(folder) };
 		},

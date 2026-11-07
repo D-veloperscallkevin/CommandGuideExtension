@@ -248,9 +248,15 @@ Las categorías `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit
 Las categorías `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi` SHALL ir en la sección `frameworks`, detrás de las de frontend. Sus comandos SHALL seguir las formas de las categorías de su lenguaje:
 - `nestjs` SHALL usar `npx` con el aviso de pnpm, Yarn y Bun;
 - `django` SHALL usar `python3 manage.py …` con la variante `python manage.py …` en `powershell` y `cmd`;
-- `rails` SHALL usar `bin/rails …` con la variante `ruby binails …` en `powershell` y `cmd`;
+- `rails` SHALL usar `bin/rails …` con la variante `ruby bin\rails …` en `powershell` y `cmd`;
 - `spring-boot` SHALL ofrecer cada acción con `./mvnw` y con `./gradlew`, con las variantes de los wrappers de `maven` y `gradle`; en `powershell`, un argumento que empieza por `-` y contiene un punto SHALL ir entre comillas dobles, y `curl` SHALL escribirse `curl.exe`;
 - `laravel`, `symfony` y `fastapi` SHALL usar la misma forma en todos los shells.
+
+Las categorías `expo`, `react-native`, `ionic`, `electron` y `tauri` SHALL ir en la sección `frameworks`, detrás de las de backend. `expo` SHALL incluir los comandos de EAS, `ionic` SHALL reunir la CLI de Ionic y la de Capacitor, y `electron` SHALL cubrir Electron Forge. Sus comandos SHALL ser iguales en todos los shells:
+- las CLI del proyecto (Expo, React Native, Capacitor, Electron Forge y Tauri) SHALL usarse con `npx`, con el aviso de pnpm, Yarn y Bun, y no con `npm run …`;
+- las CLI globales `eas` e `ionic` SHALL usarse sin `npx`, y su categoría SHALL incluir el comando que las instala con `npm install -g`.
+
+Los comandos de estas categorías que compilan, abren o arrancan el proyecto de iOS SHALL avisar en su descripción, en los 11 idiomas, de que solo funcionan en macOS. Los que publican fuera del equipo (`eas submit`, `eas update`, `electron-forge publish`) o cambian las dependencias o la configuración del proyecto SHALL declarar `risk: caution`. `npx expo prebuild --clean` SHALL declarar `risk: destructive`, y su descripción SHALL avisar de que borra las carpetas `android` e `ios`.
 
 Los comandos de `frameworks` que aplican migraciones, cargan datos de prueba (`seed`), regeneran claves o añaden paquetes con recetas que modifican la configuración SHALL declarar `risk: caution`. Los que deshacen migraciones o vacían o borran la base de datos SHALL declarar `risk: destructive`, y su descripción SHALL avisar de que se pierden datos.
 
@@ -274,7 +280,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
+- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony`, `fastapi`, `expo`, `react-native`, `ionic`, `electron` y `tauri`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado que no es de la sección `frameworks` tiene menos de 15 comandos
@@ -460,7 +466,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Frameworks de frontend en su sección
 - **WHEN** se cargan las categorías de la sección `frameworks`
-- **THEN** están `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
+- **THEN** están `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony`, `fastapi`, `expo`, `react-native`, `ionic`, `electron` y `tauri`, en ese orden
 
 #### Scenario: Crear un proyecto de Vite en PowerShell y en bash
 - **WHEN** se muestra el comando de `vite` que crea un proyecto, en `powershell` o en `bash`
@@ -482,12 +488,12 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Frameworks de backend detrás de los de frontend
 - **WHEN** se cargan las categorías de la sección `frameworks`
-- **THEN** después de `sveltekit` están `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
+- **THEN** después de `sveltekit` están `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony`, `fastapi`, `expo`, `react-native`, `ionic`, `electron` y `tauri`, en ese orden
 
 #### Scenario: Rails en PowerShell y en bash
 - **WHEN** se muestra el comando de `rails` que arranca el servidor
 - **THEN** el ejemplo en `bash` es `bin/rails server`
-- **AND** el ejemplo en `powershell` es `ruby binails server`
+- **AND** el ejemplo en `powershell` es `ruby bin\rails server`
 
 #### Scenario: Django en cmd
 - **WHEN** se muestra el comando de `django` que arranca el servidor en `cmd`
@@ -495,12 +501,30 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Perfil de Spring Boot en PowerShell
 - **WHEN** se muestra el comando de `spring-boot` que arranca con Maven y un perfil, en `powershell`
-- **THEN** el argumento `-Dspring-boot.run.profiles=…` va entre comillas dobles detrás de `.mvnw spring-boot:run`
+- **THEN** el argumento `-Dspring-boot.run.profiles=…` va entre comillas dobles detrás de `.\mvnw spring-boot:run`
 
 #### Scenario: Borrar la base de datos
 - **WHEN** se muestran `php artisan migrate:fresh --seed`, `bin/rails db:reset`, `python3 manage.py flush` o `php bin/console doctrine:database:drop --force`
 - **THEN** declaran `risk: destructive`
 - **AND** `php artisan migrate` y `python3 manage.py migrate` declaran `risk: caution`
+
+#### Scenario: Frameworks de móvil y escritorio detrás de los de backend
+- **WHEN** se cargan las categorías de la sección `frameworks`
+- **THEN** después de `fastapi` están `expo`, `react-native`, `ionic`, `electron` y `tauri`, en ese orden
+
+#### Scenario: CLI de Expo y CLI global de EAS
+- **WHEN** se muestran en `powershell` o en `bash` el comando de `expo` que arranca el servidor y el que compila con EAS
+- **THEN** el primero es `npx expo start` en los dos shells
+- **AND** el segundo empieza por `eas build`, sin `npx`
+
+#### Scenario: Comandos de iOS
+- **WHEN** se muestran `npx expo run:ios`, `npx react-native run-ios`, `npx cap open ios` o `npx tauri ios dev`
+- **THEN** su descripción en español avisa de que solo funciona en macOS
+
+#### Scenario: Publicar y regenerar los proyectos nativos
+- **WHEN** se muestran `eas submit`, `eas update` o `npx electron-forge publish`
+- **THEN** declaran `risk: caution`
+- **AND** `npx expo prebuild --clean` declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.
