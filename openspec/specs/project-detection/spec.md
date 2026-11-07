@@ -18,6 +18,8 @@ La comparación con los nombres de la raíz MUST NOT distinguir entre mayúscula
 
 Las señales SHALL ser:
 - `.git` → `git`;
+- `.github` → `github-cli`;
+- `.gitlab-ci.yml` o `.gitlab` → `gitlab-cli`;
 - `package.json`, `.nvmrc` o `.node-version` → `node`;
 - `pnpm-lock.yaml` o `pnpm-workspace.yaml` → `pnpm`;
 - `package-lock.json` o `npm-shrinkwrap.json` → `npm`;
@@ -241,6 +243,18 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Proyecto Perl con cpanfile y MakeMaker
 - **WHEN** la raíz contiene `cpanfile`, `cpanfile.snapshot`, `Makefile.PL` y `Makefile`
 - **THEN** la única categoría detectada es `perl`
+
+#### Scenario: Repositorio de GitHub con workflows
+- **WHEN** la raíz contiene las carpetas `.git` y `.github`, con la terminal en PowerShell o en bash
+- **THEN** las categorías detectadas son `git` y `github-cli`
+
+#### Scenario: Repositorio de GitLab con CI
+- **WHEN** la raíz contiene la carpeta `.git` y el archivo `.gitlab-ci.yml`
+- **THEN** las categorías detectadas son `git` y `gitlab-cli`
+
+#### Scenario: Repositorio Git sin carpeta de la plataforma
+- **WHEN** la raíz solo contiene la carpeta `.git`
+- **THEN** la única categoría detectada es `git`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

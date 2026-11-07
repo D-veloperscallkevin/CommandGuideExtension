@@ -64,9 +64,11 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 39 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 41 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
+			'github-cli',
+			'gitlab-cli',
 			'npm',
 			'pnpm',
 			'yarn',
@@ -346,6 +348,28 @@ describe('contenido mínimo', () => {
 			.filter((cmd) => /^(clj|clojure)\b/.test(cmd.command));
 		expect(cli.length).toBe(8);
 		expect(cli.filter((cmd) => !cmd.description.es.includes('no en cmd')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('GitHub CLI y GitLab CLI: sin variantes, sin comillas y sin borrar repositorios', () => {
+		const vcs = bundledCatalog.filter((c) => c.id === 'github-cli' || c.id === 'gitlab-cli');
+		expect(vcs.map((c) => c.section)).toEqual(['vcs', 'vcs']);
+		const commands = vcs.flatMap((c) => c.commands);
+		expect(commands.filter((cmd) => cmd.shells).map((cmd) => cmd.id)).toEqual([]);
+		expect(commands.filter((cmd) => /["']/.test(cmd.command)).map((cmd) => cmd.id)).toEqual([]);
+		expect(commands.filter((cmd) => cmd.command.includes('repo delete')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('crear una PR es igual en bash y en PowerShell', () => {
+		expect(exampleFor('github-cli.pr-create', 'bash')).toBe('gh pr create --fill');
+		expect(exampleFor('github-cli.pr-create', 'powershell')).toBe('gh pr create --fill');
+	});
+
+	it('fusionar una PR o una MR es caution, y borrar una release es destructive', () => {
+		expect(commandById('github-cli.pr-merge').risk).toBe('caution');
+		expect(commandById('gitlab-cli.mr-merge').risk).toBe('caution');
+		expect(commandById('github-cli.release-delete').risk).toBe('destructive');
+		expect(commandById('gitlab-cli.release-delete').risk).toBe('destructive');
+		expect(commandById('gitlab-cli.mr-merge').description.es).toContain('pipeline');
 	});
 
 	it('el código en línea de R y Julia va entre comillas dobles, sin comillas dobles dentro ni variantes', () => {
