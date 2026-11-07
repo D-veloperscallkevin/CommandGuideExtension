@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -234,6 +234,15 @@ Los comandos de `lua` que usan el intérprete `lua` o `luac` SHALL avisar en su 
 
 Los comandos de `perl` que usan `make` SHALL avisar en su descripción, en los 11 idiomas, de que en Windows con Strawberry Perl se llama `gmake`.
 
+Las categorías `github-cli` y `gitlab-cli` SHALL ir en la sección `vcs`, después de `git`. Sus comandos SHALL funcionar igual en bash, zsh, PowerShell y cmd, sin variantes por shell, y MUST NOT incluir textos libres entre comillas (`--title`, `--body`, `--notes`): se usan `--fill`, `--generate-notes` o el modo interactivo.
+
+El riesgo de los comandos de `github-cli` y `gitlab-cli` SHALL ser:
+- `caution` si publican o cambian algo en GitHub o GitLab: crear un repositorio, una PR, una MR o un issue; fusionar; aprobar; cerrar un issue; lanzar un workflow o un pipeline; publicar una release;
+- `destructive` si borran una release;
+- `safe` si solo consultan, abren el navegador o cambian la copia local (`checkout`).
+
+Ningún comando SHALL borrar un repositorio (`gh repo delete`, `glab repo delete`).
+
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
 - `./app` en `command` (bash y zsh);
 - `.\app.exe` en `shells.powershell`;
@@ -252,7 +261,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`, en ese orden
+- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -407,6 +416,26 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 #### Scenario: Quitar un rock de Lua
 - **WHEN** se muestra `luarocks remove`
 - **THEN** declara `risk: destructive`
+
+#### Scenario: GitHub CLI y GitLab CLI después de Git
+- **WHEN** se cargan las categorías de la sección `vcs`
+- **THEN** están `git`, `github-cli` y `gitlab-cli`, en ese orden
+
+#### Scenario: Crear una PR en PowerShell y en bash
+- **WHEN** se muestra el comando de `github-cli` que crea una PR, en `powershell` o en `bash`
+- **THEN** el ejemplo es `gh pr create --fill` en los dos
+
+#### Scenario: Fusionar una PR o una MR
+- **WHEN** se muestran `gh pr merge --squash --delete-branch` o `glab mr merge`
+- **THEN** declaran `risk: caution`
+
+#### Scenario: Borrar una release
+- **WHEN** se muestran `gh release delete` o `glab release delete`
+- **THEN** declaran `risk: destructive`
+
+#### Scenario: Sin borrado de repositorios
+- **WHEN** se recorren los comandos de `github-cli` y `gitlab-cli`
+- **THEN** ninguno contiene `repo delete`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.

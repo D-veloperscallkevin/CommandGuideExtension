@@ -174,6 +174,18 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['dune-project', 'my_lib.opam', '.ocamlformat'] })).toEqual(['ocaml']);
 	});
 
+	it('repositorio de GitHub con workflows (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['.git', '.github'] })).toEqual(['git', 'github-cli']);
+	});
+
+	it('repositorio de GitLab con CI', async () => {
+		expect(await ids({ root: ['.git', '.gitlab-ci.yml'] })).toEqual(['git', 'gitlab-cli']);
+	});
+
+	it('un repositorio Git sin carpeta de la plataforma solo detecta git', async () => {
+		expect(await ids({ root: ['.git'] })).toEqual(['git']);
+	});
+
 	it('paquete de R con renv', async () => {
 		expect(await ids({ root: ['DESCRIPTION', 'renv.lock', 'my-pkg.Rproj'] })).toEqual(['r']);
 	});

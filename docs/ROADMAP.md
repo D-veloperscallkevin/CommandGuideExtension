@@ -291,7 +291,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | 3.5a | `catalog-app-langs` | PHP (php, composer), Ruby (ruby, gem, bundle, rake), Dart, Flutter, Swift (swift, xcodebuild); rbenv, asdf y mise en Gestores de versiones ✅ |
 | 3.5b | `catalog-functional` | Elixir (mix), Erlang (rebar3), Haskell (ghc, cabal, stack, ghcup), Scala (sbt, Scala CLI, coursier), Clojure (Clojure CLI, Leiningen) y OCaml (opam, dune) ✅ |
 | 3.5c | `catalog-scripting` | R (Rscript, renv, devtools), Lua (luarocks), Zig, Julia (Pkg, juliaup) y Perl (cpanm, carton, prove) ✅ |
-| 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) |
+| 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) ✅ |
 | 3.7 | `catalog-frameworks` | Frontend (Vite, Next.js, Angular, Vue, Astro, Nuxt, SvelteKit), backend (NestJS, Laravel, Django, Rails, Spring Boot, Symfony, FastAPI), móvil y escritorio (Expo/EAS, React Native, Ionic/Capacitor, Electron, Tauri), ORM (Prisma, Drizzle, Sequelize, TypeORM, Alembic) y monorepos (turbo, nx) |
 | 3.8 | `catalog-databases` | psql/pg_dump, mysql/mysqldump, sqlcmd, mongosh/mongodump, redis-cli, sqlite3, DuckDB; Supabase, Neon, PlanetScale, Turso |
 | 3.9 | `catalog-infra` | docker compose y podman, kubectl, helm, minikube, kind, k3d, k9s; terraform/OpenTofu, ansible, pulumi, Vagrant, Packer; wsl |
