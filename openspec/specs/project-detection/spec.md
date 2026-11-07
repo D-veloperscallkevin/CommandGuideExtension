@@ -56,9 +56,16 @@ Las señales SHALL ser:
 - cualquier `*.rockspec` o `*.lua`, `.luarc.json` o `.luacheckrc` → `lua`;
 - `build.zig`, `build.zig.zon` o cualquier `*.zig` → `zig`;
 - `Project.toml`, `JuliaProject.toml`, `Manifest.toml` o cualquier `*.jl` → `julia`;
-- `cpanfile`, `cpanfile.snapshot`, `Makefile.PL`, `Build.PL`, `dist.ini` o cualquier `*.pl` o `*.pm` → `perl`.
+- `cpanfile`, `cpanfile.snapshot`, `Makefile.PL`, `Build.PL`, `dist.ini` o cualquier `*.pl` o `*.pm` → `perl`;
+- cualquier `vite.config.*` → `vite`;
+- cualquier `next.config.*` → `nextjs`;
+- `angular.json` → `angular`;
+- `vue.config.js` o cualquier `*.vue` → `vue`;
+- cualquier `astro.config.*` → `astro`;
+- cualquier `nuxt.config.*` o `.nuxtrc` → `nuxt`;
+- cualquier `svelte.config.*` → `sveltekit`.
 
-Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes. `Makefile.PL`, en cambio, es exclusivo de Perl y detecta `perl`.
+Un `package.json` solo MUST NOT detectar ningún framework, porque la detección no lee su contenido. Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes. `Makefile.PL`, en cambio, es exclusivo de Perl y detecta `perl`.
 
 Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, `.ruby-version` detecta `ruby` y `version-managers`, `pom.xml` detecta `java` y `maven`, y `pubspec.yaml` detecta `dart` y `flutter`.
 
@@ -255,6 +262,22 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Repositorio Git sin carpeta de la plataforma
 - **WHEN** la raíz solo contiene la carpeta `.git`
 - **THEN** la única categoría detectada es `git`
+
+#### Scenario: Proyecto Next.js con TypeScript
+- **WHEN** la raíz contiene `package.json`, `next.config.ts` y `tsconfig.json`
+- **THEN** las categorías detectadas son `nextjs`, `node` y `typescript`
+
+#### Scenario: Proyecto SvelteKit en Windows y en Linux
+- **WHEN** la raíz contiene `svelte.config.js` y `vite.config.ts`, con la terminal en PowerShell o en bash
+- **THEN** las categorías detectadas son `sveltekit` y `vite`
+
+#### Scenario: Proyecto Angular
+- **WHEN** la raíz contiene `angular.json`
+- **THEN** la única categoría detectada es `angular`
+
+#### Scenario: package.json sin framework
+- **WHEN** la raíz solo contiene `package.json`
+- **THEN** la única categoría detectada es `node`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

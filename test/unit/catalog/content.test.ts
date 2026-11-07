@@ -6,11 +6,16 @@ import { SUPPORTED_LOCALES } from '../../../src/i18n/locales';
 import { branchParam, makeCategory, makeCommand } from './fixtures';
 
 /** Mínimo de comandos por categoría del catálogo empaquetado. */
+/** Mínimo de comandos por categoría: 8 en la sección de frameworks y 15 en las demás. */
 const MIN_COMMANDS = 15;
+const MIN_FRAMEWORK_COMMANDS = 8;
+const minFor = (c: Catalog[number]) => (c.section === 'frameworks' ? MIN_FRAMEWORK_COMMANDS : MIN_COMMANDS);
+const FRAMEWORKS = ['vite', 'nextjs', 'angular', 'vue', 'astro', 'nuxt', 'sveltekit'];
 
 /** Categorías con menos de `min` comandos, como "id: n". */
-function undersized(catalog: Catalog, min: number): string[] {
-	return catalog.filter((c) => c.commands.length < min).map((c) => `${c.id}: ${c.commands.length}`);
+function undersized(catalog: Catalog, min: number | ((c: Catalog[number]) => number)): string[] {
+	const minOf = typeof min === 'number' ? () => min : min;
+	return catalog.filter((c) => c.commands.length < minOf(c)).map((c) => `${c.id}: ${c.commands.length}`);
 }
 
 /**
@@ -62,9 +67,10 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 1)).toEqual([]);
 		expect(undersized([few, enough], 2)).toEqual(['ok: 1']);
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
+		expect(undersized([few, enough], (c) => (c.id === 'demo' ? 3 : 1))).toEqual(['demo: 2']);
 	});
 
-	it('el catálogo empaquetado tiene las 41 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 48 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'github-cli',
@@ -107,11 +113,18 @@ describe('contenido mínimo', () => {
 			'zig',
 			'julia',
 			'perl',
+			'vite',
+			'nextjs',
+			'angular',
+			'vue',
+			'astro',
+			'nuxt',
+			'sveltekit',
 		]);
 	});
 
-	it(`cada categoría empaquetada tiene al menos ${MIN_COMMANDS} comandos`, () => {
-		expect(undersized(bundledCatalog, MIN_COMMANDS)).toEqual([]);
+	it(`cada categoría empaquetada tiene al menos ${MIN_COMMANDS} comandos, o ${MIN_FRAMEWORK_COMMANDS} si es un framework`, () => {
+		expect(undersized(bundledCatalog, minFor)).toEqual([]);
 	});
 
 	it('cada comando empaquetado enlaza su documentación', () => {
@@ -370,6 +383,43 @@ describe('contenido mínimo', () => {
 		expect(commandById('github-cli.release-delete').risk).toBe('destructive');
 		expect(commandById('gitlab-cli.release-delete').risk).toBe('destructive');
 		expect(commandById('gitlab-cli.mr-merge').description.es).toContain('pipeline');
+	});
+
+	it('los frameworks de frontend van en su sección, en orden', () => {
+		const frameworks = new CatalogService(bundledCatalog).getCategories().filter((c) => c.section === 'frameworks');
+		expect(frameworks.map((c) => c.id)).toEqual(FRAMEWORKS);
+	});
+
+	it('crear un proyecto de Vite es igual en bash y en PowerShell, con el aviso de los otros gestores', () => {
+		expect(exampleFor('vite.create', 'bash')).toBe('npm create vite@latest');
+		expect(exampleFor('vite.create', 'powershell')).toBe('npm create vite@latest');
+		for (const pm of ['pnpm create', 'yarn create', 'bun create']) {
+			expect(commandById('vite.create').description.es).toContain(pm);
+		}
+	});
+
+	it('cada comando npx o npm create de los frameworks avisa de pnpm, Yarn y Bun', () => {
+		const commands = bundledCatalog.filter((c) => c.section === 'frameworks').flatMap((c) => c.commands);
+		const missing = commands.filter((cmd) => {
+			const es = cmd.description.es;
+			if (cmd.command.startsWith('npx ')) return !['pnpm dlx', 'yarn dlx', 'bunx'].every((pm) => es.includes(pm));
+			if (cmd.command.startsWith('npm create ')) return !['pnpm create', 'yarn create', 'bun create'].every((pm) => es.includes(pm));
+			return false;
+		});
+		expect(missing.map((cmd) => cmd.id)).toEqual([]);
+		expect(commands.some((cmd) => cmd.command.startsWith('npx '))).toBe(true);
+	});
+
+	it('Next.js no usa next lint, que Next.js 16 eliminó', () => {
+		const nextjs = bundledCatalog.find((c) => c.id === 'nextjs');
+		expect(nextjs?.commands.filter((cmd) => cmd.command.includes('next lint')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('actualizar Angular o Nuxt es caution, y limpiar Nuxt es destructive', () => {
+		expect(commandById('angular.update-core').command).toBe('ng update @angular/core @angular/cli');
+		expect(commandById('angular.update-core').risk).toBe('caution');
+		expect(commandById('nuxt.upgrade').risk).toBe('caution');
+		expect(commandById('nuxt.cleanup').risk).toBe('destructive');
 	});
 
 	it('el código en línea de R y Julia va entre comillas dobles, sin comillas dobles dentro ni variantes', () => {
