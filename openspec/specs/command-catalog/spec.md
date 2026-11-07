@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure` y `ocaml`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -217,6 +217,23 @@ Los comandos de `elixir` que abren `iex` SHALL usar `iex.bat` en `shells.powersh
 
 Los comandos de `clojure` que usan `clj` o `clojure` SHALL avisar en su descripción, en los 11 idiomas, de que en Windows funcionan en PowerShell pero no en cmd.
 
+Los comandos de `r` y `julia` que ejecutan código en línea (`Rscript -e` o `julia -e`) SHALL usar una única forma, válida en bash, zsh, PowerShell y cmd, sin variantes por shell:
+- el código SHALL ir entre comillas dobles y MUST NOT contener comillas dobles;
+- los nombres de paquete SHALL pasarse como argumentos después del código (`commandArgs(TRUE)` en R, `ARGS` en Julia), nunca dentro de él.
+
+Los comandos de `r` que empiezan por `R` (`R`, `R --version`, `R CMD …`) SHALL usar `R.exe` en `shells.powershell`, porque en PowerShell `r` es el alias de `Invoke-History`. `Rscript` no lleva variante.
+
+El comando de `zig` que borra la salida de compilación SHALL declarar la variante de cada shell:
+- `rm -rf zig-out .zig-cache` en `command` (bash y zsh);
+- `Remove-Item -Recurse -Force zig-out, .zig-cache` en `shells.powershell`;
+- `rmdir /s /q zig-out .zig-cache` en `shells.cmd`.
+
+Los comandos de `zig` que usan `zig init`, `zig fetch` u opciones `-D` de `zig build` SHALL avisar en su descripción, en los 11 idiomas, de que siguen Zig 0.17 y pueden cambiar en otras versiones.
+
+Los comandos de `lua` que usan el intérprete `lua` o `luac` SHALL avisar en su descripción, en los 11 idiomas, de que en algunas instalaciones se llama `lua5.4` o `lua54`.
+
+Los comandos de `perl` que usan `make` SHALL avisar en su descripción, en los 11 idiomas, de que en Windows con Strawberry Perl se llama `gmake`.
+
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
 - `./app` en `command` (bash y zsh);
 - `.\app.exe` en `shells.powershell`;
@@ -235,7 +252,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure` y `ocaml`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -356,6 +373,39 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Borrar la caché de módulos de Go
 - **WHEN** se muestra el comando de `go` que borra la caché de módulos (`go clean -modcache`)
+- **THEN** declara `risk: destructive`
+
+#### Scenario: Código en línea de R y Julia en todos los shells
+- **WHEN** un comando de `r` usa `Rscript -e` o un comando de `julia` usa `julia -e` o `julia --project -e`
+- **THEN** el código va entre comillas dobles y no contiene comillas dobles
+- **AND** el comando no declara variantes de `powershell` ni de `cmd`
+
+#### Scenario: Añadir un paquete de Julia en PowerShell y bash
+- **WHEN** se muestra el comando de `julia` que añade un paquete al proyecto, en `bash` o en `powershell`
+- **THEN** el ejemplo es `julia --project -e "using Pkg; Pkg.add(ARGS)" Example` en los dos
+
+#### Scenario: R en PowerShell
+- **WHEN** se muestra el comando de `r` que comprueba un paquete (`R CMD check`) y la terminal activa es PowerShell
+- **THEN** el ejemplo empieza por `R.exe CMD check`
+- **AND** en `bash` y en `cmd` empieza por `R CMD check`
+
+#### Scenario: Borrar la salida de Zig en cada shell
+- **WHEN** se muestra el comando de `zig` que borra la salida de compilación
+- **THEN** en `bash` el ejemplo es `rm -rf zig-out .zig-cache`
+- **AND** en `powershell` es `Remove-Item -Recurse -Force zig-out, .zig-cache`
+- **AND** en `cmd` es `rmdir /s /q zig-out .zig-cache`
+- **AND** declara `risk: destructive`
+
+#### Scenario: Versión de referencia de Zig
+- **WHEN** un comando de `zig` usa `zig init` o `zig fetch`
+- **THEN** su descripción en español indica que sigue Zig 0.17
+
+#### Scenario: make en Strawberry Perl
+- **WHEN** un comando de `perl` usa `make`
+- **THEN** su descripción en español avisa de que en Strawberry Perl se llama `gmake`
+
+#### Scenario: Quitar un rock de Lua
+- **WHEN** se muestra `luarocks remove`
 - **THEN** declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas

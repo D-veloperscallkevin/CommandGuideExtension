@@ -1,0 +1,992 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "lua",
+  "title": {
+    "en": "Lua",
+    "es": "Lua",
+    "pt-br": "Lua",
+    "fr": "Lua",
+    "de": "Lua",
+    "it": "Lua",
+    "ja": "Lua",
+    "ko": "Lua",
+    "zh-cn": "Lua",
+    "zh-tw": "Lua",
+    "ru": "Lua"
+  },
+  "icon": "circle-filled",
+  "order": 81,
+  "section": "languages",
+  "detect": ["*.rockspec", ".luarc.json", ".luacheckrc", "*.lua"],
+  "commands": [
+    {
+      "id": "lua.version",
+      "title": {
+        "en": "Show the Lua version",
+        "es": "Ver la versión de Lua",
+        "pt-br": "Ver a versão do Lua",
+        "fr": "Afficher la version de Lua",
+        "de": "Lua-Version anzeigen",
+        "it": "Mostra la versione di Lua",
+        "ja": "Lua のバージョンを表示",
+        "ko": "Lua 버전 보기",
+        "zh-cn": "查看 Lua 版本",
+        "zh-tw": "檢視 Lua 版本",
+        "ru": "Показать версию Lua"
+      },
+      "description": {
+        "en": "Prints the version of the Lua interpreter. In some installations the interpreter is called lua5.4 or lua54.",
+        "es": "Muestra la versión del intérprete de Lua. En algunas instalaciones el intérprete se llama lua5.4 o lua54.",
+        "pt-br": "Mostra a versão do interpretador Lua. Em algumas instalações o interpretador se chama lua5.4 ou lua54.",
+        "fr": "Affiche la version de l’interpréteur Lua. Dans certaines installations, l’interpréteur s’appelle lua5.4 ou lua54.",
+        "de": "Zeigt die Version des Lua-Interpreters. In manchen Installationen heißt der Interpreter lua5.4 oder lua54.",
+        "it": "Mostra la versione dell’interprete Lua. In alcune installazioni l’interprete si chiama lua5.4 o lua54.",
+        "ja": "Lua インタープリターのバージョンを表示します。 インストールによってはインタープリターの名前が lua5.4 や lua54 です。",
+        "ko": "Lua 인터프리터의 버전을 보여 줍니다. 설치에 따라 인터프리터 이름이 lua5.4 또는 lua54입니다.",
+        "zh-cn": "显示 Lua 解释器的版本。 在某些安装中，解释器名为 lua5.4 或 lua54。",
+        "zh-tw": "顯示 Lua 直譯器的版本。 在某些安裝中，直譯器名為 lua5.4 或 lua54。",
+        "ru": "Показывает версию интерпретатора Lua. В некоторых установках интерпретатор называется lua5.4 или lua54."
+      },
+      "command": "lua -v",
+      "tags": {
+        "en": ["lua", "-v", "version"],
+        "es": ["lua", "-v", "versión"],
+        "pt-br": ["lua", "-v", "versão"],
+        "fr": ["lua", "-v", "version"],
+        "de": ["lua", "-v", "Version"],
+        "it": ["lua", "-v", "versione"],
+        "ja": ["lua", "-v", "バージョン"],
+        "ko": ["lua", "-v", "버전"],
+        "zh-cn": ["lua", "-v", "版本"],
+        "zh-tw": ["lua", "-v", "版本"],
+        "ru": ["lua", "-v", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://www.lua.org/manual/5.4/lua.html"
+    },
+    {
+      "id": "lua.repl",
+      "title": {
+        "en": "Open the Lua REPL",
+        "es": "Abrir el REPL de Lua",
+        "pt-br": "Abrir o REPL do Lua",
+        "fr": "Ouvrir le REPL Lua",
+        "de": "Lua-REPL öffnen",
+        "it": "Apri il REPL di Lua",
+        "ja": "Lua REPL を開く",
+        "ko": "Lua REPL 열기",
+        "zh-cn": "打开 Lua REPL",
+        "zh-tw": "開啟 Lua REPL",
+        "ru": "Открыть REPL Lua"
+      },
+      "description": {
+        "en": "Opens the interactive Lua interpreter; os.exit() or Ctrl+D (Ctrl+Z and Enter on Windows) leaves. In some installations the interpreter is called lua5.4 or lua54.",
+        "es": "Abre el intérprete interactivo de Lua; os.exit() o Ctrl+D (Ctrl+Z y Enter en Windows) sale. En algunas instalaciones el intérprete se llama lua5.4 o lua54.",
+        "pt-br": "Abre o interpretador interativo do Lua; os.exit() ou Ctrl+D (Ctrl+Z e Enter no Windows) sai. Em algumas instalações o interpretador se chama lua5.4 ou lua54.",
+        "fr": "Ouvre l’interpréteur interactif Lua ; os.exit() ou Ctrl+D (Ctrl+Z puis Entrée sous Windows) pour quitter. Dans certaines installations, l’interpréteur s’appelle lua5.4 ou lua54.",
+        "de": "Öffnet den interaktiven Lua-Interpreter; os.exit() oder Strg+D (unter Windows Strg+Z und Enter) beendet. In manchen Installationen heißt der Interpreter lua5.4 oder lua54.",
+        "it": "Apre l’interprete interattivo di Lua; os.exit() o Ctrl+D (Ctrl+Z e Invio su Windows) esce. In alcune installazioni l’interprete si chiama lua5.4 o lua54.",
+        "ja": "Lua の対話型インタープリターを開きます。os.exit() か Ctrl+D（Windows は Ctrl+Z と Enter）で終了。 インストールによってはインタープリターの名前が lua5.4 や lua54 です。",
+        "ko": "Lua 대화형 인터프리터를 엽니다. os.exit()나 Ctrl+D(Windows는 Ctrl+Z 후 Enter)로 나갑니다. 설치에 따라 인터프리터 이름이 lua5.4 또는 lua54입니다.",
+        "zh-cn": "打开 Lua 交互式解释器；os.exit() 或 Ctrl+D（Windows 上按 Ctrl+Z 再回车）退出。 在某些安装中，解释器名为 lua5.4 或 lua54。",
+        "zh-tw": "開啟 Lua 互動式直譯器；os.exit() 或 Ctrl+D（Windows 上按 Ctrl+Z 再按 Enter）離開。 在某些安裝中，直譯器名為 lua5.4 或 lua54。",
+        "ru": "Открывает интерактивный интерпретатор Lua; выход — os.exit() или Ctrl+D (в Windows Ctrl+Z и Enter). В некоторых установках интерпретатор называется lua5.4 или lua54."
+      },
+      "command": "lua",
+      "tags": {
+        "en": ["lua", "repl", "interactive", "console"],
+        "es": ["lua", "interactivo", "consola"],
+        "pt-br": ["lua", "interativo", "console"],
+        "fr": ["lua", "interactif", "console"],
+        "de": ["lua", "interaktiv", "Konsole"],
+        "it": ["lua", "interattivo", "console"],
+        "ja": ["lua", "対話", "コンソール"],
+        "ko": ["lua", "대화형", "콘솔"],
+        "zh-cn": ["lua", "交互式", "控制台"],
+        "zh-tw": ["lua", "互動式", "主控台"],
+        "ru": ["lua", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "docs": "https://www.lua.org/manual/5.4/lua.html"
+    },
+    {
+      "id": "lua.run",
+      "title": {
+        "en": "Run a Lua script",
+        "es": "Ejecutar un script de Lua",
+        "pt-br": "Executar um script Lua",
+        "fr": "Exécuter un script Lua",
+        "de": "Lua-Skript ausführen",
+        "it": "Esegui uno script Lua",
+        "ja": "Lua スクリプトを実行",
+        "ko": "Lua 스크립트 실행",
+        "zh-cn": "运行 Lua 脚本",
+        "zh-tw": "執行 Lua 指令碼",
+        "ru": "Запустить скрипт Lua"
+      },
+      "description": {
+        "en": "Runs the .lua file with the interpreter. In some installations the interpreter is called lua5.4 or lua54.",
+        "es": "Ejecuta el archivo .lua con el intérprete. En algunas instalaciones el intérprete se llama lua5.4 o lua54.",
+        "pt-br": "Executa o arquivo .lua com o interpretador. Em algumas instalações o interpretador se chama lua5.4 ou lua54.",
+        "fr": "Exécute le fichier .lua avec l’interpréteur. Dans certaines installations, l’interpréteur s’appelle lua5.4 ou lua54.",
+        "de": "Führt die .lua-Datei mit dem Interpreter aus. In manchen Installationen heißt der Interpreter lua5.4 oder lua54.",
+        "it": "Esegue il file .lua con l’interprete. In alcune installazioni l’interprete si chiama lua5.4 o lua54.",
+        "ja": "インタープリターで .lua ファイルを実行します。 インストールによってはインタープリターの名前が lua5.4 や lua54 です。",
+        "ko": "인터프리터로 .lua 파일을 실행합니다. 설치에 따라 인터프리터 이름이 lua5.4 또는 lua54입니다.",
+        "zh-cn": "用解释器运行 .lua 文件。 在某些安装中，解释器名为 lua5.4 或 lua54。",
+        "zh-tw": "用直譯器執行 .lua 檔案。 在某些安裝中，直譯器名為 lua5.4 或 lua54。",
+        "ru": "Выполняет файл .lua интерпретатором. В некоторых установках интерпретатор называется lua5.4 или lua54."
+      },
+      "command": "lua ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.lua",
+            "es": "main.lua",
+            "pt-br": "main.lua",
+            "fr": "main.lua",
+            "de": "main.lua",
+            "it": "main.lua",
+            "ja": "main.lua",
+            "ko": "main.lua",
+            "zh-cn": "main.lua",
+            "zh-tw": "main.lua",
+            "ru": "main.lua"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "script", "run"],
+        "es": ["lua", "script", "ejecutar"],
+        "pt-br": ["lua", "script", "executar"],
+        "fr": ["lua", "script", "exécuter"],
+        "de": ["lua", "script", "ausführen"],
+        "it": ["lua", "script", "eseguire"],
+        "ja": ["lua", "script", "実行"],
+        "ko": ["lua", "script", "실행"],
+        "zh-cn": ["lua", "script", "运行"],
+        "zh-tw": ["lua", "script", "執行"],
+        "ru": ["lua", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://www.lua.org/manual/5.4/lua.html"
+    },
+    {
+      "id": "lua.check-syntax",
+      "title": {
+        "en": "Check the syntax of a file",
+        "es": "Comprobar la sintaxis de un archivo",
+        "pt-br": "Verificar a sintaxe de um arquivo",
+        "fr": "Vérifier la syntaxe d’un fichier",
+        "de": "Syntax einer Datei prüfen",
+        "it": "Controlla la sintassi di un file",
+        "ja": "ファイルの構文をチェック",
+        "ko": "파일 문법 검사",
+        "zh-cn": "检查文件语法",
+        "zh-tw": "檢查檔案語法",
+        "ru": "Проверить синтаксис файла"
+      },
+      "description": {
+        "en": "Compiles the file without running it or writing anything, to find syntax errors; luac is installed with Lua. In some installations the interpreter is called lua5.4 or lua54.",
+        "es": "Compila el archivo sin ejecutarlo ni escribir nada, para encontrar errores de sintaxis; luac viene con Lua. En algunas instalaciones el intérprete se llama lua5.4 o lua54.",
+        "pt-br": "Compila o arquivo sem executá-lo nem gravar nada, para achar erros de sintaxe; o luac vem com o Lua. Em algumas instalações o interpretador se chama lua5.4 ou lua54.",
+        "fr": "Compile le fichier sans l’exécuter ni rien écrire, pour trouver les erreurs de syntaxe ; luac est fourni avec Lua. Dans certaines installations, l’interpréteur s’appelle lua5.4 ou lua54.",
+        "de": "Kompiliert die Datei ohne Ausführung und ohne etwas zu schreiben, um Syntaxfehler zu finden; luac gehört zu Lua. In manchen Installationen heißt der Interpreter lua5.4 oder lua54.",
+        "it": "Compila il file senza eseguirlo né scrivere nulla, per trovare errori di sintassi; luac è incluso in Lua. In alcune installazioni l’interprete si chiama lua5.4 o lua54.",
+        "ja": "実行も書き出しもせずにファイルをコンパイルし、構文エラーを探します。luac は Lua に付属します。 インストールによってはインタープリターの名前が lua5.4 や lua54 です。",
+        "ko": "실행하거나 파일을 쓰지 않고 컴파일해 문법 오류를 찾습니다. luac는 Lua에 포함됩니다. 설치에 따라 인터프리터 이름이 lua5.4 또는 lua54입니다.",
+        "zh-cn": "只编译文件、不运行也不写出任何内容，用来查找语法错误；luac 随 Lua 一起安装。 在某些安装中，解释器名为 lua5.4 或 lua54。",
+        "zh-tw": "只編譯檔案、不執行也不寫出任何內容，用來找出語法錯誤；luac 隨 Lua 一起安裝。 在某些安裝中，直譯器名為 lua5.4 或 lua54。",
+        "ru": "Компилирует файл без запуска и без записи, чтобы найти синтаксические ошибки; luac входит в Lua. В некоторых установках интерпретатор называется lua5.4 или lua54."
+      },
+      "command": "luac -p ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "main.lua",
+            "es": "main.lua",
+            "pt-br": "main.lua",
+            "fr": "main.lua",
+            "de": "main.lua",
+            "it": "main.lua",
+            "ja": "main.lua",
+            "ko": "main.lua",
+            "zh-cn": "main.lua",
+            "zh-tw": "main.lua",
+            "ru": "main.lua"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luac", "syntax", "lint", "analyze", "types"],
+        "es": ["lua", "luac", "syntax", "lint", "analizar", "tipos"],
+        "pt-br": ["lua", "luac", "syntax", "lint", "analisar", "tipos"],
+        "fr": ["lua", "luac", "syntax", "lint", "analyser", "types"],
+        "de": ["lua", "luac", "syntax", "lint", "analysieren", "Typen"],
+        "it": ["lua", "luac", "syntax", "lint", "analizzare", "tipi"],
+        "ja": ["lua", "luac", "syntax", "lint", "解析", "型"],
+        "ko": ["lua", "luac", "syntax", "lint", "분석", "타입"],
+        "zh-cn": ["lua", "luac", "syntax", "lint", "分析", "类型"],
+        "zh-tw": ["lua", "luac", "syntax", "lint", "分析", "型別"],
+        "ru": ["lua", "luac", "syntax", "lint", "анализ", "типы"]
+      },
+      "risk": "safe",
+      "docs": "https://www.lua.org/manual/5.4/luac.html"
+    },
+    {
+      "id": "lua.rocks-init",
+      "title": {
+        "en": "LuaRocks: set up the project",
+        "es": "LuaRocks: preparar el proyecto",
+        "pt-br": "LuaRocks: preparar o projeto",
+        "fr": "LuaRocks: préparer le projet",
+        "de": "LuaRocks: Projekt einrichten",
+        "it": "LuaRocks: prepara il progetto",
+        "ja": "LuaRocks: プロジェクトを準備",
+        "ko": "LuaRocks: 프로젝트 준비",
+        "zh-cn": "LuaRocks: 初始化项目",
+        "zh-tw": "LuaRocks: 初始化專案",
+        "ru": "LuaRocks: подготовить проект"
+      },
+      "description": {
+        "en": "Creates a rockspec, a local lua_modules tree and the ./lua and ./luarocks wrappers for the current folder",
+        "es": "Crea un rockspec, un árbol local lua_modules y los envoltorios ./lua y ./luarocks para la carpeta actual",
+        "pt-br": "Cria um rockspec, uma árvore local lua_modules e os wrappers ./lua e ./luarocks para a pasta atual",
+        "fr": "Crée un rockspec, une arborescence locale lua_modules et les scripts ./lua et ./luarocks pour le dossier actuel",
+        "de": "Erstellt ein Rockspec, einen lokalen lua_modules-Baum und die Wrapper ./lua und ./luarocks für den aktuellen Ordner",
+        "it": "Crea un rockspec, un albero locale lua_modules e i wrapper ./lua e ./luarocks per la cartella attuale",
+        "ja": "現在のフォルダーに rockspec、ローカルの lua_modules ツリー、./lua と ./luarocks のラッパーを作ります",
+        "ko": "현재 폴더에 rockspec, 로컬 lua_modules 트리, ./lua와 ./luarocks 래퍼를 만듭니다",
+        "zh-cn": "为当前文件夹创建 rockspec、本地 lua_modules 目录树以及 ./lua 和 ./luarocks 包装脚本",
+        "zh-tw": "為目前資料夾建立 rockspec、本機 lua_modules 目錄樹以及 ./lua 和 ./luarocks 包裝指令碼",
+        "ru": "Создаёт rockspec, локальное дерево lua_modules и обёртки ./lua и ./luarocks для текущей папки"
+      },
+      "command": "luarocks init",
+      "tags": {
+        "en": ["lua", "luarocks", "init", "rockspec", "lua_modules", "new", "project"],
+        "es": ["lua", "luarocks", "init", "rockspec", "lua_modules", "crear", "proyecto", "nuevo"],
+        "pt-br": ["lua", "luarocks", "init", "rockspec", "lua_modules", "criar", "projeto", "novo"],
+        "fr": ["lua", "luarocks", "init", "rockspec", "lua_modules", "créer", "projet", "nouveau"],
+        "de": ["lua", "luarocks", "init", "rockspec", "lua_modules", "erstellen", "Projekt", "neu"],
+        "it": ["lua", "luarocks", "init", "rockspec", "lua_modules", "creare", "progetto", "nuovo"],
+        "ja": ["lua", "luarocks", "init", "rockspec", "lua_modules", "作成", "プロジェクト", "新規"],
+        "ko": ["lua", "luarocks", "init", "rockspec", "lua_modules", "만들기", "프로젝트", "새"],
+        "zh-cn": ["lua", "luarocks", "init", "rockspec", "lua_modules", "创建", "项目", "新建"],
+        "zh-tw": ["lua", "luarocks", "init", "rockspec", "lua_modules", "建立", "專案", "新增"],
+        "ru": ["lua", "luarocks", "init", "rockspec", "lua_modules", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_init.md"
+    },
+    {
+      "id": "lua.rocks-install",
+      "title": {
+        "en": "LuaRocks: install a rock",
+        "es": "LuaRocks: instalar un rock",
+        "pt-br": "LuaRocks: instalar um rock",
+        "fr": "LuaRocks: installer un rock",
+        "de": "LuaRocks: Rock installieren",
+        "it": "LuaRocks: installa un rock",
+        "ja": "LuaRocks: rock をインストール",
+        "ko": "LuaRocks: rock 설치",
+        "zh-cn": "LuaRocks: 安装 rock",
+        "zh-tw": "LuaRocks: 安裝 rock",
+        "ru": "LuaRocks: установить rock"
+      },
+      "description": {
+        "en": "Installs the module and its dependencies for the whole system; it may need administrator permissions",
+        "es": "Instala el módulo y sus dependencias para todo el sistema; puede necesitar permisos de administrador",
+        "pt-br": "Instala o módulo e suas dependências para todo o sistema; pode exigir permissões de administrador",
+        "fr": "Installe le module et ses dépendances pour tout le système ; peut nécessiter les droits d’administrateur",
+        "de": "Installiert das Modul samt Abhängigkeiten systemweit; kann Administratorrechte erfordern",
+        "it": "Installa il modulo e le dipendenze per tutto il sistema; può richiedere i permessi di amministratore",
+        "ja": "モジュールと依存関係をシステム全体にインストールします。管理者権限が必要な場合があります",
+        "ko": "모듈과 의존성을 시스템 전체에 설치합니다. 관리자 권한이 필요할 수 있습니다",
+        "zh-cn": "为整个系统安装模块及其依赖；可能需要管理员权限",
+        "zh-tw": "為整個系統安裝模組及其相依套件；可能需要系統管理員權限",
+        "ru": "Ставит модуль и его зависимости для всей системы; могут понадобиться права администратора"
+      },
+      "command": "luarocks install ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "rock", "install"],
+        "es": ["lua", "luarocks", "rock", "instalar"],
+        "pt-br": ["lua", "luarocks", "rock", "instalar"],
+        "fr": ["lua", "luarocks", "rock", "installer"],
+        "de": ["lua", "luarocks", "rock", "installieren"],
+        "it": ["lua", "luarocks", "rock", "installare"],
+        "ja": ["lua", "luarocks", "rock", "インストール"],
+        "ko": ["lua", "luarocks", "rock", "설치"],
+        "zh-cn": ["lua", "luarocks", "rock", "安装"],
+        "zh-tw": ["lua", "luarocks", "rock", "安裝"],
+        "ru": ["lua", "luarocks", "rock", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_install.md"
+    },
+    {
+      "id": "lua.rocks-install-local",
+      "title": {
+        "en": "LuaRocks: install a rock for your user",
+        "es": "LuaRocks: instalar un rock para tu usuario",
+        "pt-br": "LuaRocks: instalar um rock para o seu usuário",
+        "fr": "LuaRocks: installer un rock pour votre utilisateur",
+        "de": "LuaRocks: Rock für den eigenen Benutzer installieren",
+        "it": "LuaRocks: installa un rock per il tuo utente",
+        "ja": "LuaRocks: ユーザー用に rock をインストール",
+        "ko": "LuaRocks: 내 사용자용으로 rock 설치",
+        "zh-cn": "LuaRocks: 为当前用户安装 rock",
+        "zh-tw": "LuaRocks: 為目前使用者安裝 rock",
+        "ru": "LuaRocks: установить rock для своего пользователя"
+      },
+      "description": {
+        "en": "Installs the module in your user folder, without administrator permissions; luarocks path shows how to add it to the paths",
+        "es": "Instala el módulo en tu carpeta de usuario, sin permisos de administrador; luarocks path muestra cómo añadirlo a las rutas",
+        "pt-br": "Instala o módulo na sua pasta de usuário, sem permissões de administrador; luarocks path mostra como adicioná-lo aos caminhos",
+        "fr": "Installe le module dans votre dossier utilisateur, sans droits d’administrateur ; luarocks path indique comment l’ajouter aux chemins",
+        "de": "Installiert das Modul im Benutzerordner ohne Administratorrechte; luarocks path zeigt, wie man es zu den Pfaden hinzufügt",
+        "it": "Installa il modulo nella tua cartella utente, senza permessi di amministratore; luarocks path mostra come aggiungerlo ai percorsi",
+        "ja": "管理者権限なしでユーザーフォルダーにモジュールを入れます。パスへの追加方法は luarocks path で確認できます",
+        "ko": "관리자 권한 없이 사용자 폴더에 모듈을 설치합니다. 경로에 추가하는 방법은 luarocks path로 확인하세요",
+        "zh-cn": "在用户文件夹中安装模块，无需管理员权限；luarocks path 会显示如何将其加入路径",
+        "zh-tw": "在使用者資料夾中安裝模組，無需系統管理員權限；luarocks path 會顯示如何將其加入路徑",
+        "ru": "Ставит модуль в папку пользователя без прав администратора; как добавить его в пути, показывает luarocks path"
+      },
+      "command": "luarocks install --local ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "rock", "--local", "user", "install"],
+        "es": ["lua", "luarocks", "rock", "--local", "user", "instalar"],
+        "pt-br": ["lua", "luarocks", "rock", "--local", "user", "instalar"],
+        "fr": ["lua", "luarocks", "rock", "--local", "user", "installer"],
+        "de": ["lua", "luarocks", "rock", "--local", "user", "installieren"],
+        "it": ["lua", "luarocks", "rock", "--local", "user", "installare"],
+        "ja": ["lua", "luarocks", "rock", "--local", "user", "インストール"],
+        "ko": ["lua", "luarocks", "rock", "--local", "user", "설치"],
+        "zh-cn": ["lua", "luarocks", "rock", "--local", "user", "安装"],
+        "zh-tw": ["lua", "luarocks", "rock", "--local", "user", "安裝"],
+        "ru": ["lua", "luarocks", "rock", "--local", "user", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_install.md"
+    },
+    {
+      "id": "lua.rocks-remove",
+      "title": {
+        "en": "LuaRocks: uninstall a rock",
+        "es": "LuaRocks: desinstalar un rock",
+        "pt-br": "LuaRocks: desinstalar um rock",
+        "fr": "LuaRocks: désinstaller un rock",
+        "de": "LuaRocks: Rock deinstallieren",
+        "it": "LuaRocks: disinstalla un rock",
+        "ja": "LuaRocks: rock をアンインストール",
+        "ko": "LuaRocks: rock 제거",
+        "zh-cn": "LuaRocks: 卸载 rock",
+        "zh-tw": "LuaRocks: 解除安裝 rock",
+        "ru": "LuaRocks: удалить rock"
+      },
+      "description": {
+        "en": "Deletes the installed module; the code that requires it stops working",
+        "es": "Borra el módulo instalado; el código que lo usa con require deja de funcionar",
+        "pt-br": "Apaga o módulo instalado; o código que o usa com require deixa de funcionar",
+        "fr": "Supprime le module installé ; le code qui l’utilise avec require cesse de fonctionner",
+        "de": "Löscht das installierte Modul; Code, der es mit require lädt, funktioniert nicht mehr",
+        "it": "Elimina il modulo installato; il codice che lo usa con require smette di funzionare",
+        "ja": "インストール済みのモジュールを削除します。require で使うコードは動かなくなります",
+        "ko": "설치된 모듈을 삭제합니다. require로 쓰는 코드는 동작하지 않게 됩니다",
+        "zh-cn": "删除已安装的模块；用 require 引用它的代码将无法运行",
+        "zh-tw": "刪除已安裝的模組；用 require 引用它的程式碼將無法執行",
+        "ru": "Удаляет установленный модуль; код, подключающий его через require, перестанет работать"
+      },
+      "command": "luarocks remove ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "rock", "remove", "uninstall"],
+        "es": ["lua", "luarocks", "rock", "quitar", "desinstalar"],
+        "pt-br": ["lua", "luarocks", "rock", "remover", "desinstalar"],
+        "fr": ["lua", "luarocks", "rock", "retirer", "désinstaller"],
+        "de": ["lua", "luarocks", "rock", "entfernen", "deinstallieren"],
+        "it": ["lua", "luarocks", "rock", "rimuovere", "disinstallare"],
+        "ja": ["lua", "luarocks", "rock", "削除", "アンインストール"],
+        "ko": ["lua", "luarocks", "rock", "제거"],
+        "zh-cn": ["lua", "luarocks", "rock", "移除", "卸载"],
+        "zh-tw": ["lua", "luarocks", "rock", "移除", "解除安裝"],
+        "ru": ["lua", "luarocks", "rock", "удалить"]
+      },
+      "risk": "destructive",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-list",
+      "title": {
+        "en": "LuaRocks: list the installed rocks",
+        "es": "LuaRocks: ver los rocks instalados",
+        "pt-br": "LuaRocks: ver os rocks instalados",
+        "fr": "LuaRocks: lister les rocks installés",
+        "de": "LuaRocks: installierte Rocks anzeigen",
+        "it": "LuaRocks: elenca i rock installati",
+        "ja": "LuaRocks: インストール済みの rock を一覧表示",
+        "ko": "LuaRocks: 설치된 rock 보기",
+        "zh-cn": "LuaRocks: 列出已安装的 rock",
+        "zh-tw": "LuaRocks: 列出已安裝的 rock",
+        "ru": "LuaRocks: показать установленные rocks"
+      },
+      "description": {
+        "en": "Lists the installed modules with their versions and where they are",
+        "es": "Muestra los módulos instalados con su versión y su ubicación",
+        "pt-br": "Mostra os módulos instalados com sua versão e localização",
+        "fr": "Liste les modules installés avec leur version et leur emplacement",
+        "de": "Listet die installierten Module mit Version und Ort auf",
+        "it": "Elenca i moduli installati con versione e posizione",
+        "ja": "インストール済みのモジュールをバージョンと場所付きで表示します",
+        "ko": "설치된 모듈을 버전, 위치와 함께 보여 줍니다",
+        "zh-cn": "列出已安装的模块及其版本和位置",
+        "zh-tw": "列出已安裝的模組及其版本和位置",
+        "ru": "Показывает установленные модули с версиями и расположением"
+      },
+      "command": "luarocks list",
+      "tags": {
+        "en": ["lua", "luarocks", "rocks", "list", "installed"],
+        "es": ["lua", "luarocks", "rocks", "ver", "instaladas", "lista"],
+        "pt-br": ["lua", "luarocks", "rocks", "ver", "instaladas", "lista"],
+        "fr": ["lua", "luarocks", "rocks", "lister", "installées"],
+        "de": ["lua", "luarocks", "rocks", "anzeigen", "installiert"],
+        "it": ["lua", "luarocks", "rocks", "elencare", "installate"],
+        "ja": ["lua", "luarocks", "rocks", "一覧", "インストール済み"],
+        "ko": ["lua", "luarocks", "rocks", "목록", "설치됨"],
+        "zh-cn": ["lua", "luarocks", "rocks", "列出", "已安装"],
+        "zh-tw": ["lua", "luarocks", "rocks", "列出", "已安裝"],
+        "ru": ["lua", "luarocks", "rocks", "список", "установленные"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-outdated",
+      "title": {
+        "en": "LuaRocks: see the outdated rocks",
+        "es": "LuaRocks: ver los rocks desactualizados",
+        "pt-br": "LuaRocks: ver os rocks desatualizados",
+        "fr": "LuaRocks: voir les rocks obsolètes",
+        "de": "LuaRocks: veraltete Rocks anzeigen",
+        "it": "LuaRocks: vedi i rock obsoleti",
+        "ja": "LuaRocks: 古い rock を表示",
+        "ko": "LuaRocks: 오래된 rock 보기",
+        "zh-cn": "LuaRocks: 查看过时的 rock",
+        "zh-tw": "LuaRocks: 檢視過時的 rock",
+        "ru": "LuaRocks: показать устаревшие rocks"
+      },
+      "description": {
+        "en": "Lists only the installed modules that have a newer version in the repository",
+        "es": "Muestra solo los módulos instalados que tienen una versión más nueva en el repositorio",
+        "pt-br": "Mostra só os módulos instalados que têm uma versão mais nova no repositório",
+        "fr": "Liste seulement les modules installés qui ont une version plus récente dans le dépôt",
+        "de": "Listet nur installierte Module mit neuerer Version im Repository auf",
+        "it": "Elenca solo i moduli installati che hanno una versione più recente nel repository",
+        "ja": "リポジトリに新しい版があるインストール済みモジュールだけを表示します",
+        "ko": "저장소에 새 버전이 있는 설치된 모듈만 보여 줍니다",
+        "zh-cn": "只列出在仓库中有新版本的已安装模块",
+        "zh-tw": "只列出在儲存庫中有新版本的已安裝模組",
+        "ru": "Показывает только установленные модули, у которых в репозитории есть новая версия"
+      },
+      "command": "luarocks list --outdated",
+      "tags": {
+        "en": ["lua", "luarocks", "--outdated", "list", "installed", "update", "upgrade"],
+        "es": ["lua", "luarocks", "--outdated", "ver", "instaladas", "lista", "actualizar"],
+        "pt-br": ["lua", "luarocks", "--outdated", "ver", "instaladas", "lista", "atualizar"],
+        "fr": ["lua", "luarocks", "--outdated", "lister", "installées", "mettre à jour"],
+        "de": ["lua", "luarocks", "--outdated", "anzeigen", "installiert", "aktualisieren"],
+        "it": ["lua", "luarocks", "--outdated", "elencare", "installate", "aggiornare"],
+        "ja": ["lua", "luarocks", "--outdated", "一覧", "インストール済み", "更新"],
+        "ko": ["lua", "luarocks", "--outdated", "목록", "설치됨", "업데이트"],
+        "zh-cn": ["lua", "luarocks", "--outdated", "列出", "已安装", "更新", "升级"],
+        "zh-tw": ["lua", "luarocks", "--outdated", "列出", "已安裝", "更新", "升級"],
+        "ru": ["lua", "luarocks", "--outdated", "список", "установленные", "обновить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-search",
+      "title": {
+        "en": "LuaRocks: search for a rock",
+        "es": "LuaRocks: buscar un rock",
+        "pt-br": "LuaRocks: buscar um rock",
+        "fr": "LuaRocks: rechercher un rock",
+        "de": "LuaRocks: Rock suchen",
+        "it": "LuaRocks: cerca un rock",
+        "ja": "LuaRocks: rock を検索",
+        "ko": "LuaRocks: rock 검색",
+        "zh-cn": "LuaRocks: 搜索 rock",
+        "zh-tw": "LuaRocks: 搜尋 rock",
+        "ru": "LuaRocks: найти rock"
+      },
+      "description": {
+        "en": "Searches the LuaRocks repository and lists the matching modules and versions",
+        "es": "Busca en el repositorio de LuaRocks y muestra los módulos y versiones que coinciden",
+        "pt-br": "Busca no repositório do LuaRocks e mostra os módulos e versões que correspondem",
+        "fr": "Cherche dans le dépôt LuaRocks et liste les modules et versions correspondants",
+        "de": "Durchsucht das LuaRocks-Repository und listet passende Module und Versionen auf",
+        "it": "Cerca nel repository di LuaRocks ed elenca i moduli e le versioni corrispondenti",
+        "ja": "LuaRocks のリポジトリを検索し、一致するモジュールとバージョンを表示します",
+        "ko": "LuaRocks 저장소를 검색해 일치하는 모듈과 버전을 보여 줍니다",
+        "zh-cn": "在 LuaRocks 仓库中搜索并列出匹配的模块和版本",
+        "zh-tw": "在 LuaRocks 儲存庫中搜尋並列出相符的模組和版本",
+        "ru": "Ищет в репозитории LuaRocks и показывает подходящие модули и версии"
+      },
+      "command": "luarocks search ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "search", "buscar", "list", "installed"],
+        "es": ["lua", "luarocks", "search", "buscar", "ver", "instaladas", "lista"],
+        "pt-br": ["lua", "luarocks", "search", "buscar", "ver", "instaladas", "lista"],
+        "fr": ["lua", "luarocks", "search", "buscar", "lister", "installées"],
+        "de": ["lua", "luarocks", "search", "buscar", "anzeigen", "installiert"],
+        "it": ["lua", "luarocks", "search", "buscar", "elencare", "installate"],
+        "ja": ["lua", "luarocks", "search", "buscar", "一覧", "インストール済み"],
+        "ko": ["lua", "luarocks", "search", "buscar", "목록", "설치됨"],
+        "zh-cn": ["lua", "luarocks", "search", "buscar", "列出", "已安装"],
+        "zh-tw": ["lua", "luarocks", "search", "buscar", "列出", "已安裝"],
+        "ru": ["lua", "luarocks", "search", "buscar", "список", "установленные"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-show",
+      "title": {
+        "en": "LuaRocks: show the details of a rock",
+        "es": "LuaRocks: ver los detalles de un rock",
+        "pt-br": "LuaRocks: ver os detalhes de um rock",
+        "fr": "LuaRocks: afficher les détails d’un rock",
+        "de": "LuaRocks: Details eines Rocks anzeigen",
+        "it": "LuaRocks: mostra i dettagli di un rock",
+        "ja": "LuaRocks: rock の詳細を表示",
+        "ko": "LuaRocks: rock 상세 정보 보기",
+        "zh-cn": "LuaRocks: 查看 rock 的详情",
+        "zh-tw": "LuaRocks: 檢視 rock 的詳細資訊",
+        "ru": "LuaRocks: показать сведения о rock"
+      },
+      "description": {
+        "en": "Shows the description, license, dependencies and files of an installed module",
+        "es": "Muestra la descripción, la licencia, las dependencias y los archivos de un módulo instalado",
+        "pt-br": "Mostra a descrição, a licença, as dependências e os arquivos de um módulo instalado",
+        "fr": "Affiche la description, la licence, les dépendances et les fichiers d’un module installé",
+        "de": "Zeigt Beschreibung, Lizenz, Abhängigkeiten und Dateien eines installierten Moduls",
+        "it": "Mostra descrizione, licenza, dipendenze e file di un modulo installato",
+        "ja": "インストール済みモジュールの説明、ライセンス、依存関係、ファイルを表示します",
+        "ko": "설치된 모듈의 설명, 라이선스, 의존성, 파일을 보여 줍니다",
+        "zh-cn": "显示已安装模块的说明、许可证、依赖和文件",
+        "zh-tw": "顯示已安裝模組的說明、授權、相依套件和檔案",
+        "ru": "Показывает описание, лицензию, зависимости и файлы установленного модуля"
+      },
+      "command": "luarocks show ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "show", "info", "dependencies"],
+        "es": ["lua", "luarocks", "show", "info", "dependencias"],
+        "pt-br": ["lua", "luarocks", "show", "info", "dependências"],
+        "fr": ["lua", "luarocks", "show", "info", "dépendances"],
+        "de": ["lua", "luarocks", "show", "info", "Abhängigkeiten"],
+        "it": ["lua", "luarocks", "show", "info", "dipendenze"],
+        "ja": ["lua", "luarocks", "show", "info", "依存関係"],
+        "ko": ["lua", "luarocks", "show", "info", "의존성"],
+        "zh-cn": ["lua", "luarocks", "show", "info", "依赖"],
+        "zh-tw": ["lua", "luarocks", "show", "info", "相依套件"],
+        "ru": ["lua", "luarocks", "show", "info", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-make",
+      "title": {
+        "en": "LuaRocks: build the rock of this folder",
+        "es": "LuaRocks: compilar el rock de esta carpeta",
+        "pt-br": "LuaRocks: compilar o rock desta pasta",
+        "fr": "LuaRocks: compiler le rock de ce dossier",
+        "de": "LuaRocks: Rock dieses Ordners bauen",
+        "it": "LuaRocks: compila il rock di questa cartella",
+        "ja": "LuaRocks: このフォルダーの rock をビルド",
+        "ko": "LuaRocks: 이 폴더의 rock 빌드",
+        "zh-cn": "LuaRocks: 构建此文件夹的 rock",
+        "zh-tw": "LuaRocks: 建置此資料夾的 rock",
+        "ru": "LuaRocks: собрать rock из этой папки"
+      },
+      "description": {
+        "en": "Builds and installs the module of the current folder using its rockspec",
+        "es": "Compila e instala el módulo de la carpeta actual a partir de su rockspec",
+        "pt-br": "Compila e instala o módulo da pasta atual a partir do seu rockspec",
+        "fr": "Compile et installe le module du dossier actuel à partir de son rockspec",
+        "de": "Baut und installiert das Modul des aktuellen Ordners anhand seines Rockspecs",
+        "it": "Compila e installa il modulo della cartella attuale a partire dal suo rockspec",
+        "ja": "rockspec を使って、現在のフォルダーのモジュールをビルドしてインストールします",
+        "ko": "rockspec으로 현재 폴더의 모듈을 빌드하고 설치합니다",
+        "zh-cn": "根据 rockspec 构建并安装当前文件夹的模块",
+        "zh-tw": "根據 rockspec 建置並安裝目前資料夾的模組",
+        "ru": "Собирает и ставит модуль текущей папки по его rockspec"
+      },
+      "command": "luarocks make",
+      "tags": {
+        "en": ["lua", "luarocks", "make", "rockspec", "build", "compile", "install"],
+        "es": ["lua", "luarocks", "make", "rockspec", "compilar", "instalar"],
+        "pt-br": ["lua", "luarocks", "make", "rockspec", "compilar", "instalar"],
+        "fr": ["lua", "luarocks", "make", "rockspec", "compiler", "installer"],
+        "de": ["lua", "luarocks", "make", "rockspec", "bauen", "kompilieren", "installieren"],
+        "it": ["lua", "luarocks", "make", "rockspec", "compilare", "installare"],
+        "ja": ["lua", "luarocks", "make", "rockspec", "ビルド", "コンパイル", "インストール"],
+        "ko": ["lua", "luarocks", "make", "rockspec", "빌드", "컴파일", "설치"],
+        "zh-cn": ["lua", "luarocks", "make", "rockspec", "构建", "编译", "安装"],
+        "zh-tw": ["lua", "luarocks", "make", "rockspec", "建置", "編譯", "安裝"],
+        "ru": ["lua", "luarocks", "make", "rockspec", "сборка", "компиляция", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_make.md"
+    },
+    {
+      "id": "lua.rocks-test",
+      "title": {
+        "en": "LuaRocks: run the tests",
+        "es": "LuaRocks: ejecutar los tests",
+        "pt-br": "LuaRocks: executar os testes",
+        "fr": "LuaRocks: lancer les tests",
+        "de": "LuaRocks: Tests ausführen",
+        "it": "LuaRocks: esegui i test",
+        "ja": "LuaRocks: テストを実行",
+        "ko": "LuaRocks: 테스트 실행",
+        "zh-cn": "LuaRocks: 运行测试",
+        "zh-tw": "LuaRocks: 執行測試",
+        "ru": "LuaRocks: запустить тесты"
+      },
+      "description": {
+        "en": "Runs the tests declared in the rockspec, by default with busted",
+        "es": "Ejecuta los tests declarados en el rockspec, por defecto con busted",
+        "pt-br": "Executa os testes declarados no rockspec, por padrão com o busted",
+        "fr": "Lance les tests déclarés dans le rockspec, par défaut avec busted",
+        "de": "Führt die im Rockspec deklarierten Tests aus, standardmäßig mit busted",
+        "it": "Esegue i test dichiarati nel rockspec, per impostazione predefinita con busted",
+        "ja": "rockspec に宣言されたテストを実行します。既定では busted を使います",
+        "ko": "rockspec에 선언된 테스트를 실행합니다. 기본은 busted입니다",
+        "zh-cn": "运行 rockspec 中声明的测试，默认使用 busted",
+        "zh-tw": "執行 rockspec 中宣告的測試，預設使用 busted",
+        "ru": "Запускает тесты из rockspec, по умолчанию через busted"
+      },
+      "command": "luarocks test",
+      "tags": {
+        "en": ["lua", "luarocks", "busted", "test", "tests"],
+        "es": ["lua", "luarocks", "busted", "tests", "pruebas"],
+        "pt-br": ["lua", "luarocks", "busted", "testes"],
+        "fr": ["lua", "luarocks", "busted", "tests"],
+        "de": ["lua", "luarocks", "busted", "Tests"],
+        "it": ["lua", "luarocks", "busted", "test"],
+        "ja": ["lua", "luarocks", "busted", "テスト"],
+        "ko": ["lua", "luarocks", "busted", "테스트"],
+        "zh-cn": ["lua", "luarocks", "busted", "测试"],
+        "zh-tw": ["lua", "luarocks", "busted", "測試"],
+        "ru": ["lua", "luarocks", "busted", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_test.md"
+    },
+    {
+      "id": "lua.rocks-pack",
+      "title": {
+        "en": "LuaRocks: pack a rock",
+        "es": "LuaRocks: empaquetar un rock",
+        "pt-br": "LuaRocks: empacotar um rock",
+        "fr": "LuaRocks: empaqueter un rock",
+        "de": "LuaRocks: Rock paketieren",
+        "it": "LuaRocks: impacchetta un rock",
+        "ja": "LuaRocks: rock をパッケージ化",
+        "ko": "LuaRocks: rock 패키징",
+        "zh-cn": "LuaRocks: 打包 rock",
+        "zh-tw": "LuaRocks: 封裝 rock",
+        "ru": "LuaRocks: упаковать rock"
+      },
+      "description": {
+        "en": "Creates a .rock file from an installed module or from a rockspec, to share or publish it",
+        "es": "Crea un archivo .rock a partir de un módulo instalado o de un rockspec, para compartirlo o publicarlo",
+        "pt-br": "Cria um arquivo .rock a partir de um módulo instalado ou de um rockspec, para compartilhar ou publicar",
+        "fr": "Crée un fichier .rock à partir d’un module installé ou d’un rockspec, pour le partager ou le publier",
+        "de": "Erstellt eine .rock-Datei aus einem installierten Modul oder einem Rockspec, zum Teilen oder Veröffentlichen",
+        "it": "Crea un file .rock da un modulo installato o da un rockspec, per condividerlo o pubblicarlo",
+        "ja": "インストール済みのモジュールか rockspec から .rock ファイルを作り、共有や公開に使います",
+        "ko": "설치된 모듈이나 rockspec으로 .rock 파일을 만들어 공유하거나 게시합니다",
+        "zh-cn": "根据已安装的模块或 rockspec 创建 .rock 文件，用于分享或发布",
+        "zh-tw": "根據已安裝的模組或 rockspec 建立 .rock 檔案，用於分享或發佈",
+        "ru": "Создаёт файл .rock из установленного модуля или rockspec, чтобы поделиться им или опубликовать"
+      },
+      "command": "luarocks pack ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "luasocket",
+            "es": "luasocket",
+            "pt-br": "luasocket",
+            "fr": "luasocket",
+            "de": "luasocket",
+            "it": "luasocket",
+            "ja": "luasocket",
+            "ko": "luasocket",
+            "zh-cn": "luasocket",
+            "zh-tw": "luasocket",
+            "ru": "luasocket"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["lua", "luarocks", "pack", ".rock", "package", "jar", "release", "deploy"],
+        "es": ["lua", "luarocks", "pack", ".rock", "empaquetar", "paquete", "release", "desplegar", "producción"],
+        "pt-br": ["lua", "luarocks", "pack", ".rock", "empacotar", "pacote", "release", "implantar", "produção"],
+        "fr": ["lua", "luarocks", "pack", ".rock", "empaqueter", "paquet", "release", "déployer", "production"],
+        "de": ["lua", "luarocks", "pack", ".rock", "paketieren", "Paket", "Release", "Deployment", "Produktion"],
+        "it": ["lua", "luarocks", "pack", ".rock", "impacchettare", "pacchetto", "release", "distribuire", "produzione"],
+        "ja": ["lua", "luarocks", "pack", ".rock", "パッケージ化", "リリース", "本番"],
+        "ko": ["lua", "luarocks", "pack", ".rock", "패키징", "릴리스", "배포"],
+        "zh-cn": ["lua", "luarocks", "pack", ".rock", "打包", "发布", "生产"],
+        "zh-tw": ["lua", "luarocks", "pack", ".rock", "封裝", "發布", "正式環境"],
+        "ru": ["lua", "luarocks", "pack", ".rock", "упаковать", "пакет", "релиз", "продакшен"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks.md"
+    },
+    {
+      "id": "lua.rocks-config",
+      "title": {
+        "en": "LuaRocks: show the configuration",
+        "es": "LuaRocks: ver la configuración",
+        "pt-br": "LuaRocks: ver a configuração",
+        "fr": "LuaRocks: afficher la configuration",
+        "de": "LuaRocks: Konfiguration anzeigen",
+        "it": "LuaRocks: mostra la configurazione",
+        "ja": "LuaRocks: 設定を表示",
+        "ko": "LuaRocks: 구성 보기",
+        "zh-cn": "LuaRocks: 查看配置",
+        "zh-tw": "LuaRocks: 檢視設定",
+        "ru": "LuaRocks: показать конфигурацию"
+      },
+      "description": {
+        "en": "Shows the Lua version, the install trees and the files LuaRocks is using",
+        "es": "Muestra la versión de Lua, los árboles de instalación y los archivos que usa LuaRocks",
+        "pt-br": "Mostra a versão do Lua, as árvores de instalação e os arquivos que o LuaRocks usa",
+        "fr": "Affiche la version de Lua, les arborescences d’installation et les fichiers utilisés par LuaRocks",
+        "de": "Zeigt Lua-Version, Installationsbäume und die Dateien, die LuaRocks verwendet",
+        "it": "Mostra la versione di Lua, gli alberi di installazione e i file usati da LuaRocks",
+        "ja": "LuaRocks が使う Lua のバージョン、インストールツリー、ファイルを表示します",
+        "ko": "LuaRocks가 쓰는 Lua 버전, 설치 트리, 파일을 보여 줍니다",
+        "zh-cn": "显示 LuaRocks 使用的 Lua 版本、安装目录树和文件",
+        "zh-tw": "顯示 LuaRocks 使用的 Lua 版本、安裝目錄樹和檔案",
+        "ru": "Показывает версию Lua, деревья установки и файлы, которые использует LuaRocks"
+      },
+      "command": "luarocks config",
+      "tags": {
+        "en": ["lua", "luarocks", "config", "tree", "environment", "shell", "activate"],
+        "es": ["lua", "luarocks", "config", "tree", "entorno", "activar"],
+        "pt-br": ["lua", "luarocks", "config", "tree", "ambiente", "ativar"],
+        "fr": ["lua", "luarocks", "config", "tree", "environnement", "activer"],
+        "de": ["lua", "luarocks", "config", "tree", "Umgebung", "aktivieren"],
+        "it": ["lua", "luarocks", "config", "tree", "ambiente", "attivare"],
+        "ja": ["lua", "luarocks", "config", "tree", "環境", "有効化"],
+        "ko": ["lua", "luarocks", "config", "tree", "환경", "활성화"],
+        "zh-cn": ["lua", "luarocks", "config", "tree", "环境", "激活"],
+        "zh-tw": ["lua", "luarocks", "config", "tree", "環境", "啟用"],
+        "ru": ["lua", "luarocks", "config", "tree", "окружение", "активировать"]
+      },
+      "risk": "safe",
+      "docs": "https://github.com/luarocks/luarocks/blob/main/docs/luarocks_config.md"
+    }
+  ]
+}

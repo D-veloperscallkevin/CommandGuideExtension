@@ -49,9 +49,14 @@ Las señales SHALL ser:
 - cualquier `*.cabal` o `*.hs`, `cabal.project`, `stack.yaml` o `stack.yaml.lock` → `haskell`;
 - `build.sbt`, `project.scala` o cualquier `*.scala` → `scala`;
 - `deps.edn` o `project.clj` → `clojure`;
-- `dune-project`, cualquier `*.opam` o `.ocamlformat` → `ocaml`.
+- `dune-project`, cualquier `*.opam` o `.ocamlformat` → `ocaml`;
+- `DESCRIPTION`, cualquier `*.Rproj` o `*.R`, `renv.lock` o `.Rprofile` → `r`;
+- cualquier `*.rockspec` o `*.lua`, `.luarc.json` o `.luacheckrc` → `lua`;
+- `build.zig`, `build.zig.zon` o cualquier `*.zig` → `zig`;
+- `Project.toml`, `JuliaProject.toml`, `Manifest.toml` o cualquier `*.jl` → `julia`;
+- `cpanfile`, `cpanfile.snapshot`, `Makefile.PL`, `Build.PL`, `dist.ini` o cualquier `*.pl` o `*.pm` → `perl`.
 
-Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes.
+Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes. `Makefile.PL`, en cambio, es exclusivo de Perl y detecta `perl`.
 
 Una misma entrada MAY detectar varias categorías: `.nvmrc` y `.node-version` detectan `node` y `version-managers`, `.python-version` detecta `python` y `version-managers`, `.ruby-version` detecta `ruby` y `version-managers`, `pom.xml` detecta `java` y `maven`, y `pubspec.yaml` detecta `dart` y `flutter`.
 
@@ -216,6 +221,26 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Proyecto Dune
 - **WHEN** la raíz contiene `dune-project`, `my_lib.opam` y `.ocamlformat`, tanto en Windows con PowerShell como en Linux con bash
 - **THEN** la única categoría detectada es `ocaml` en los dos casos
+
+#### Scenario: Paquete de R con renv
+- **WHEN** la raíz contiene `DESCRIPTION`, `renv.lock` y `my-pkg.Rproj`
+- **THEN** la única categoría detectada es `r`
+
+#### Scenario: Rock de Lua
+- **WHEN** la raíz contiene `my-lib-1.0-1.rockspec` y `.luacheckrc`
+- **THEN** la única categoría detectada es `lua`
+
+#### Scenario: Proyecto Zig en Windows y en Linux
+- **WHEN** la raíz contiene `build.zig`, `build.zig.zon` y la carpeta `zig-out`, con la terminal en PowerShell o en bash
+- **THEN** la única categoría detectada es `zig`
+
+#### Scenario: Proyecto Julia
+- **WHEN** la raíz contiene `Project.toml` y `Manifest.toml`
+- **THEN** la única categoría detectada es `julia`
+
+#### Scenario: Proyecto Perl con cpanfile y MakeMaker
+- **WHEN** la raíz contiene `cpanfile`, `cpanfile.snapshot`, `Makefile.PL` y `Makefile`
+- **THEN** la única categoría detectada es `perl`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

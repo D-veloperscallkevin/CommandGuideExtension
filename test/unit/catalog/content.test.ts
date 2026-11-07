@@ -64,7 +64,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], 3)).toEqual(['demo: 2', 'ok: 1']);
 	});
 
-	it('el catálogo empaquetado tiene las 34 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 39 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'npm',
@@ -100,6 +100,11 @@ describe('contenido mínimo', () => {
 			'scala',
 			'clojure',
 			'ocaml',
+			'r',
+			'lua',
+			'zig',
+			'julia',
+			'perl',
 		]);
 	});
 
@@ -146,6 +151,15 @@ describe('contenido mínimo', () => {
 		buildCategorySummaries(new CatalogService(bundledCatalog).getCategories(), 'en', shell)
 			.flatMap((c) => c.commands)
 			.find((c) => c.id === id)?.example;
+
+	/** Comando del catálogo empaquetado por id. */
+	const commandById = (id: string) => {
+		const found = bundledCatalog.flatMap((c) => c.commands).find((cmd) => cmd.id === id);
+		if (!found) {
+			throw new Error(`No existe el comando ${id}`);
+		}
+		return found;
+	};
 
 	it('activar fnm en bash usa eval con --shell bash', () => {
 		expect(exampleFor('version-managers.fnm-env', 'bash')).toBe('eval "$(fnm env --use-on-cd --shell bash)"');
@@ -332,6 +346,50 @@ describe('contenido mínimo', () => {
 			.filter((cmd) => /^(clj|clojure)\b/.test(cmd.command));
 		expect(cli.length).toBe(8);
 		expect(cli.filter((cmd) => !cmd.description.es.includes('no en cmd')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('el código en línea de R y Julia va entre comillas dobles, sin comillas dobles dentro ni variantes', () => {
+		const inline = bundledCatalog
+			.filter((c) => c.id === 'r' || c.id === 'julia')
+			.flatMap((c) => c.commands)
+			.filter((cmd) => / -e "/.test(cmd.command));
+		expect(inline.length).toBe(18);
+		for (const cmd of inline) {
+			const code = /-e "([^"]*)"/.exec(cmd.command);
+			expect(code, cmd.id).not.toBeNull();
+			expect(cmd.command.split('"').length, cmd.id).toBe(3);
+			expect(cmd.shells?.powershell, cmd.id).toBeUndefined();
+			expect(cmd.shells?.cmd, cmd.id).toBeUndefined();
+		}
+	});
+
+	it('añadir un paquete de Julia es igual en bash y en PowerShell', () => {
+		const expected = 'julia --project -e "using Pkg; Pkg.add(ARGS)" Example';
+		expect(exampleFor('julia.pkg-add', 'bash')).toBe(expected);
+		expect(exampleFor('julia.pkg-add', 'powershell')).toBe(expected);
+	});
+
+	it('R usa R.exe en PowerShell, porque r es el alias de Invoke-History', () => {
+		expect(exampleFor('r.cmd-check', 'powershell')).toBe('R.exe CMD check mypkg_0.1.0.tar.gz');
+		expect(exampleFor('r.cmd-check', 'bash')).toBe('R CMD check mypkg_0.1.0.tar.gz');
+		expect(exampleFor('r.cmd-check', 'cmd')).toBe('R CMD check mypkg_0.1.0.tar.gz');
+		const r = bundledCatalog.find((c) => c.id === 'r')!.commands.filter((cmd) => /^R\b/.test(cmd.command));
+		expect(r.filter((cmd) => !cmd.shells?.powershell?.startsWith('R.exe')).map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('borrar la salida de Zig usa la sintaxis de cada shell y es destructive', () => {
+		expect(exampleFor('zig.clean', 'bash')).toBe('rm -rf zig-out .zig-cache');
+		expect(exampleFor('zig.clean', 'powershell')).toBe('Remove-Item -Recurse -Force zig-out, .zig-cache');
+		expect(exampleFor('zig.clean', 'cmd')).toBe('rmdir /s /q zig-out .zig-cache');
+		expect(commandById('zig.clean').risk).toBe('destructive');
+		expect(commandById('lua.rocks-remove').risk).toBe('destructive');
+	});
+
+	it('zig init y zig fetch indican que siguen Zig 0.17, y make test avisa de gmake', () => {
+		for (const id of ['zig.init', 'zig.fetch-save']) {
+			expect(commandById(id).description.es, id).toContain('Zig 0.17');
+		}
+		expect(commandById('perl.make-test').description.es).toContain('gmake');
 	});
 
 	it('los clean de Mix, rebar3, Cabal, Stack, sbt, Leiningen y Dune son destructive', () => {
