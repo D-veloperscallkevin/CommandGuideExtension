@@ -43,7 +43,13 @@ Las señales SHALL ser:
 - `Gemfile`, `Gemfile.lock`, `Rakefile`, cualquier `*.gemspec` o `.ruby-version` → `ruby`;
 - `pubspec.yaml` o `pubspec.lock` → `dart`;
 - `pubspec.yaml` → `flutter`;
-- `Package.swift`, o cualquier `*.xcodeproj` o `*.xcworkspace` → `swift`.
+- `Package.swift`, o cualquier `*.xcodeproj` o `*.xcworkspace` → `swift`;
+- `mix.exs`, `mix.lock` o `.formatter.exs` → `elixir`;
+- `rebar.config`, `rebar.lock` o cualquier `*.erl` → `erlang`;
+- cualquier `*.cabal` o `*.hs`, `cabal.project`, `stack.yaml` o `stack.yaml.lock` → `haskell`;
+- `build.sbt`, `project.scala` o cualquier `*.scala` → `scala`;
+- `deps.edn` o `project.clj` → `clojure`;
+- `dune-project`, cualquier `*.opam` o `.ocamlformat` → `ocaml`.
 
 Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes.
 
@@ -186,6 +192,30 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: Versiones fijadas con asdf o mise
 - **WHEN** una carpeta del workspace contiene solo `.tool-versions` y otra contiene solo `mise.toml`
 - **THEN** la única categoría detectada es `version-managers`
+
+#### Scenario: Proyecto Phoenix
+- **WHEN** la raíz contiene `mix.exs`, `mix.lock` y `.formatter.exs`
+- **THEN** la única categoría detectada es `elixir`
+
+#### Scenario: Proyecto rebar3
+- **WHEN** la raíz contiene `rebar.config` y `rebar.lock`
+- **THEN** la única categoría detectada es `erlang`
+
+#### Scenario: Proyecto Haskell con Stack
+- **WHEN** la raíz contiene `stack.yaml`, `stack.yaml.lock`, `package.yaml` y `my-app.cabal`
+- **THEN** la única categoría detectada es `haskell`
+
+#### Scenario: Proyecto sbt
+- **WHEN** la raíz contiene `build.sbt` y la carpeta `project`
+- **THEN** la única categoría detectada es `scala`
+
+#### Scenario: Proyecto Clojure con deps.edn y Leiningen
+- **WHEN** la raíz contiene `deps.edn` y `project.clj`
+- **THEN** la única categoría detectada es `clojure`
+
+#### Scenario: Proyecto Dune
+- **WHEN** la raíz contiene `dune-project`, `my_lib.opam` y `.ocamlformat`, tanto en Windows con PowerShell como en Linux con bash
+- **THEN** la única categoría detectada es `ocaml` en los dos casos
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.

@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter` y `swift`.
+El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure` y `ocaml`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -208,6 +208,15 @@ Su descripción SHALL avisar, en los 11 idiomas, de que cmd no se puede activar 
 
 Los comandos de `swift` que usan `xcodebuild` o `xcrun`, y el de `flutter` que compila para iOS, SHALL avisar en su descripción, en los 11 idiomas, de que solo funcionan en macOS.
 
+El comando de `ocaml` que carga el entorno de opam en la sesión SHALL declarar la variante de cada shell:
+- `eval $(opam env)` en `command` (bash y zsh);
+- `(& opam env) -split '\r?\n' | ForEach-Object { Invoke-Expression $_ }` en `shells.powershell`;
+- `for /f "tokens=*" %i in ('opam env') do @%i` en `shells.cmd`.
+
+Los comandos de `elixir` que abren `iex` SHALL usar `iex.bat` en `shells.powershell`, porque en PowerShell `iex` es el alias de `Invoke-Expression`.
+
+Los comandos de `clojure` que usan `clj` o `clojure` SHALL avisar en su descripción, en los 11 idiomas, de que en Windows funcionan en PowerShell pero no en cmd.
+
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
 - `./app` en `command` (bash y zsh);
 - `.\app.exe` en `shells.powershell`;
@@ -226,7 +235,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter` y `swift`, en ese orden
+- **THEN** están `git`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure` y `ocaml`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
@@ -324,6 +333,25 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Borrar dependencias o salida de PHP, Ruby, Flutter y Swift
 - **WHEN** se muestran `gem uninstall`, `flutter clean` o `swift package clean`
+- **THEN** declaran `risk: destructive`
+
+#### Scenario: Cargar el entorno de opam en cada shell
+- **WHEN** se muestra el comando de `ocaml` que carga el entorno de opam
+- **THEN** en `bash` el ejemplo es `eval $(opam env)`
+- **AND** en `powershell` es `(& opam env) -split '\r?\n' | ForEach-Object { Invoke-Expression $_ }`
+- **AND** en `cmd` es `for /f "tokens=*" %i in ('opam env') do @%i`
+
+#### Scenario: iex en PowerShell
+- **WHEN** se muestra el comando de `elixir` que abre `iex` con el proyecto (`iex -S mix`) y la terminal activa es PowerShell
+- **THEN** el ejemplo es `iex.bat -S mix`
+- **AND** en `bash` y en `cmd` es `iex -S mix`
+
+#### Scenario: Clojure CLI en Windows
+- **WHEN** un comando de `clojure` usa `clj` o `clojure`
+- **THEN** su descripción en español avisa de que en Windows no funciona en cmd
+
+#### Scenario: Borrar la salida de compilación de los lenguajes funcionales
+- **WHEN** se muestran `mix clean`, `rebar3 clean`, `cabal clean`, `stack clean`, `sbt clean`, `lein clean` o `dune clean`
 - **THEN** declaran `risk: destructive`
 
 #### Scenario: Borrar la caché de módulos de Go
