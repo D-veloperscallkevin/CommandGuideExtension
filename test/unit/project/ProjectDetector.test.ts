@@ -25,7 +25,7 @@ function setup(initial: Record<string, string[]>, enabled = true) {
 		onDidChangeFolders: foldersChanged.subscribe,
 		list: async (folder) => state.tree[folder] ?? [],
 		watch: (folder, glob, onChange) => {
-			expect(glob).toBe('*');
+			expect(glob).toBe('{*,bin/*}');
 			watchers.set(folder, onChange);
 			return { dispose: () => watchers.delete(folder) };
 		},

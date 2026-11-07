@@ -11,6 +11,7 @@ const MIN_COMMANDS = 15;
 const MIN_FRAMEWORK_COMMANDS = 8;
 const minFor = (c: Catalog[number]) => (c.section === 'frameworks' ? MIN_FRAMEWORK_COMMANDS : MIN_COMMANDS);
 const FRAMEWORKS = ['vite', 'nextjs', 'angular', 'vue', 'astro', 'nuxt', 'sveltekit'];
+const BACKEND_FRAMEWORKS = ['nestjs', 'laravel', 'django', 'rails', 'spring-boot', 'symfony', 'fastapi'];
 
 /** Categorías con menos de `min` comandos, como "id: n". */
 function undersized(catalog: Catalog, min: number | ((c: Catalog[number]) => number)): string[] {
@@ -70,7 +71,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], (c) => (c.id === 'demo' ? 3 : 1))).toEqual(['demo: 2']);
 	});
 
-	it('el catálogo empaquetado tiene las 48 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 55 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'github-cli',
@@ -120,6 +121,13 @@ describe('contenido mínimo', () => {
 			'astro',
 			'nuxt',
 			'sveltekit',
+			'nestjs',
+			'laravel',
+			'django',
+			'rails',
+			'spring-boot',
+			'symfony',
+			'fastapi',
 		]);
 	});
 
@@ -385,9 +393,9 @@ describe('contenido mínimo', () => {
 		expect(commandById('gitlab-cli.mr-merge').description.es).toContain('pipeline');
 	});
 
-	it('los frameworks de frontend van en su sección, en orden', () => {
+	it('los frameworks de frontend y de backend van en su sección, en orden', () => {
 		const frameworks = new CatalogService(bundledCatalog).getCategories().filter((c) => c.section === 'frameworks');
-		expect(frameworks.map((c) => c.id)).toEqual(FRAMEWORKS);
+		expect(frameworks.map((c) => c.id)).toEqual([...FRAMEWORKS, ...BACKEND_FRAMEWORKS]);
 	});
 
 	it('crear un proyecto de Vite es igual en bash y en PowerShell, con el aviso de los otros gestores', () => {
@@ -420,6 +428,41 @@ describe('contenido mínimo', () => {
 		expect(commandById('angular.update-core').risk).toBe('caution');
 		expect(commandById('nuxt.upgrade').risk).toBe('caution');
 		expect(commandById('nuxt.cleanup').risk).toBe('destructive');
+	});
+
+	it('Rails usa bin/rails en bash y ruby bin\\rails en PowerShell y cmd', () => {
+		expect(exampleFor('rails.server', 'bash')).toBe('bin/rails server');
+		expect(exampleFor('rails.server', 'zsh')).toBe('bin/rails server');
+		expect(exampleFor('rails.server', 'powershell')).toBe('ruby bin\\rails server');
+		expect(exampleFor('rails.server', 'cmd')).toBe('ruby bin\\rails server');
+	});
+
+	it('Django usa python3 manage.py en bash y python manage.py en PowerShell y cmd', () => {
+		expect(exampleFor('django.runserver', 'bash')).toBe('python3 manage.py runserver');
+		expect(exampleFor('django.runserver', 'powershell')).toBe('python manage.py runserver');
+		expect(exampleFor('django.runserver', 'cmd')).toBe('python manage.py runserver');
+	});
+
+	it('Spring Boot entrecomilla en PowerShell los argumentos con punto y usa curl.exe', () => {
+		expect(commandById('spring-boot.run-profile-maven').command).toBe('./mvnw spring-boot:run -Dspring-boot.run.profiles=${profile}');
+		expect(commandById('spring-boot.run-profile-maven').shells?.powershell).toBe('.\\mvnw spring-boot:run "-Dspring-boot.run.profiles=${profile}"');
+		expect(commandById('spring-boot.run-profile-gradle').shells?.powershell).toBe('.\\gradlew bootRun "--args=--spring.profiles.active=${profile}"');
+		expect(exampleFor('spring-boot.actuator-health', 'powershell')).toBe('curl.exe http://localhost:8080/actuator/health');
+		expect(exampleFor('spring-boot.actuator-health', 'bash')).toBe('curl http://localhost:8080/actuator/health');
+	});
+
+	it('Spring Boot y FastAPI no declaran patrones de detección', () => {
+		expect(bundledCatalog.find((c) => c.id === 'spring-boot')?.detect).toBeUndefined();
+		expect(bundledCatalog.find((c) => c.id === 'fastapi')?.detect).toBeUndefined();
+	});
+
+	it('borrar la base de datos es destructive y aplicar migraciones es caution', () => {
+		for (const id of ['laravel.migrate-fresh', 'laravel.migrate-rollback', 'django.flush', 'rails.db-rollback', 'rails.db-reset', 'rails.db-drop', 'symfony.db-drop']) {
+			expect(commandById(id).risk, id).toBe('destructive');
+		}
+		for (const id of ['laravel.migrate', 'django.migrate', 'rails.db-migrate', 'symfony.migrate']) {
+			expect(commandById(id).risk, id).toBe('caution');
+		}
 	});
 
 	it('el código en línea de R y Julia va entre comillas dobles, sin comillas dobles dentro ni variantes', () => {

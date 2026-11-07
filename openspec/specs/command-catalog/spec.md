@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías. Cada categoría de la sección `frameworks` SHALL contener al menos 8 comandos, y cada categoría de las demás secciones SHALL contener al menos 15. Incluirá como mínimo las categorías `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`.
+El catálogo empaquetado SHALL contener al menos 5 categorías. Cada categoría de la sección `frameworks` SHALL contener al menos 8 comandos, y cada categoría de las demás secciones SHALL contener al menos 15. Incluirá como mínimo las categorías `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -245,6 +245,15 @@ Ningún comando SHALL borrar un repositorio (`gh repo delete`, `glab repo delete
 
 Las categorías `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit` SHALL ir en la sección `frameworks`. Sus comandos de JavaScript SHALL usar npm: `npm create …` para crear proyectos y `npx …` para las CLI del proyecto, sin variantes por gestor de paquetes. La descripción de cada comando que empieza por `npx` o `npm create` SHALL indicar, en los 11 idiomas, el equivalente con pnpm, Yarn y Bun (`pnpm dlx`, `yarn dlx` y `bunx`, o `pnpm create`, `yarn create` y `bun create`).
 
+Las categorías `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi` SHALL ir en la sección `frameworks`, detrás de las de frontend. Sus comandos SHALL seguir las formas de las categorías de su lenguaje:
+- `nestjs` SHALL usar `npx` con el aviso de pnpm, Yarn y Bun;
+- `django` SHALL usar `python3 manage.py …` con la variante `python manage.py …` en `powershell` y `cmd`;
+- `rails` SHALL usar `bin/rails …` con la variante `ruby binails …` en `powershell` y `cmd`;
+- `spring-boot` SHALL ofrecer cada acción con `./mvnw` y con `./gradlew`, con las variantes de los wrappers de `maven` y `gradle`; en `powershell`, un argumento que empieza por `-` y contiene un punto SHALL ir entre comillas dobles, y `curl` SHALL escribirse `curl.exe`;
+- `laravel`, `symfony` y `fastapi` SHALL usar la misma forma en todos los shells.
+
+Los comandos de `frameworks` que aplican migraciones, cargan datos de prueba (`seed`), regeneran claves o añaden paquetes con recetas que modifican la configuración SHALL declarar `risk: caution`. Los que deshacen migraciones o vacían o borran la base de datos SHALL declarar `risk: destructive`, y su descripción SHALL avisar de que se pierden datos.
+
 Los comandos de `frameworks` que actualizan o migran el proyecto, o que añaden integraciones modificando su configuración, SHALL declarar `risk: caution`. Los que borran cachés o salidas generadas SHALL declarar `risk: destructive`.
 
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
@@ -265,7 +274,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`, en ese orden
+- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
 - **WHEN** una categoría del catálogo empaquetado que no es de la sección `frameworks` tiene menos de 15 comandos
@@ -451,7 +460,7 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Frameworks de frontend en su sección
 - **WHEN** se cargan las categorías de la sección `frameworks`
-- **THEN** están `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`, en ese orden
+- **THEN** están `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt`, `sveltekit`, `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
 
 #### Scenario: Crear un proyecto de Vite en PowerShell y en bash
 - **WHEN** se muestra el comando de `vite` que crea un proyecto, en `powershell` o en `bash`
@@ -470,6 +479,28 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 - **WHEN** se muestran `ng update @angular/core @angular/cli` o `npx nuxt upgrade`
 - **THEN** declaran `risk: caution`
 - **AND** `npx nuxt cleanup` declara `risk: destructive`
+
+#### Scenario: Frameworks de backend detrás de los de frontend
+- **WHEN** se cargan las categorías de la sección `frameworks`
+- **THEN** después de `sveltekit` están `nestjs`, `laravel`, `django`, `rails`, `spring-boot`, `symfony` y `fastapi`, en ese orden
+
+#### Scenario: Rails en PowerShell y en bash
+- **WHEN** se muestra el comando de `rails` que arranca el servidor
+- **THEN** el ejemplo en `bash` es `bin/rails server`
+- **AND** el ejemplo en `powershell` es `ruby binails server`
+
+#### Scenario: Django en cmd
+- **WHEN** se muestra el comando de `django` que arranca el servidor en `cmd`
+- **THEN** el ejemplo es `python manage.py runserver`
+
+#### Scenario: Perfil de Spring Boot en PowerShell
+- **WHEN** se muestra el comando de `spring-boot` que arranca con Maven y un perfil, en `powershell`
+- **THEN** el argumento `-Dspring-boot.run.profiles=…` va entre comillas dobles detrás de `.mvnw spring-boot:run`
+
+#### Scenario: Borrar la base de datos
+- **WHEN** se muestran `php artisan migrate:fresh --seed`, `bin/rails db:reset`, `python3 manage.py flush` o `php bin/console doctrine:database:drop --force`
+- **THEN** declaran `risk: destructive`
+- **AND** `php artisan migrate` y `python3 manage.py migrate` declaran `risk: caution`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.
