@@ -186,6 +186,22 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['.git'] })).toEqual(['git']);
 	});
 
+	it('Next.js con TypeScript', async () => {
+		expect(await ids({ root: ['package.json', 'next.config.ts', 'tsconfig.json'] })).toEqual(['nextjs', 'node', 'typescript']);
+	});
+
+	it('SvelteKit también detecta Vite (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['svelte.config.js', 'vite.config.ts'] })).toEqual(['sveltekit', 'vite']);
+	});
+
+	it('Angular', async () => {
+		expect(await ids({ root: ['angular.json'] })).toEqual(['angular']);
+	});
+
+	it('un package.json solo no detecta ningún framework', async () => {
+		expect(await ids({ root: ['package.json'] })).toEqual(['node']);
+	});
+
 	it('paquete de R con renv', async () => {
 		expect(await ids({ root: ['DESCRIPTION', 'renv.lock', 'my-pkg.Rproj'] })).toEqual(['r']);
 	});

@@ -172,7 +172,7 @@ Las categorías SHALL ordenarse por `order` ascendente y, si empatan, por `id`. 
 - **THEN** `bash` aparece antes que `docker`
 
 ### Requirement: Contenido mínimo del catálogo empaquetado
-El catálogo empaquetado SHALL contener al menos 5 categorías, y cada una SHALL contener al menos 15 comandos. Incluirá como mínimo las categorías `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`.
+El catálogo empaquetado SHALL contener al menos 5 categorías. Cada categoría de la sección `frameworks` SHALL contener al menos 8 comandos, y cada categoría de las demás secciones SHALL contener al menos 15. Incluirá como mínimo las categorías `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`.
 
 Los comandos de `terminal` SHALL declarar:
 - `shells.powershell` siempre que su sintaxis en PowerShell difiera de la variante POSIX;
@@ -243,6 +243,10 @@ El riesgo de los comandos de `github-cli` y `gitlab-cli` SHALL ser:
 
 Ningún comando SHALL borrar un repositorio (`gh repo delete`, `glab repo delete`).
 
+Las categorías `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit` SHALL ir en la sección `frameworks`. Sus comandos de JavaScript SHALL usar npm: `npm create …` para crear proyectos y `npx …` para las CLI del proyecto, sin variantes por gestor de paquetes. La descripción de cada comando que empieza por `npx` o `npm create` SHALL indicar, en los 11 idiomas, el equivalente con pnpm, Yarn y Bun (`pnpm dlx`, `yarn dlx` y `bunx`, o `pnpm create`, `yarn create` y `bun create`).
+
+Los comandos de `frameworks` que actualizan o migran el proyecto, o que añaden integraciones modificando su configuración, SHALL declarar `risk: caution`. Los que borran cachés o salidas generadas SHALL declarar `risk: destructive`.
+
 Los comandos de `c-cpp` que ejecutan el programa compilado SHALL escribirlo según el shell:
 - `./app` en `command` (bash y zsh);
 - `.\app.exe` en `shells.powershell`;
@@ -261,11 +265,19 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 
 #### Scenario: Categorías del catálogo empaquetado
 - **WHEN** se cargan las categorías del catálogo empaquetado
-- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia` y `perl`, en ese orden
+- **THEN** están `git`, `github-cli`, `gitlab-cli`, `npm`, `pnpm`, `yarn`, `bun`, `node`, `deno`, `typescript`, `version-managers`, `docker`, `python`, `poetry`, `uv`, `conda`, `terminal`, `java`, `maven`, `gradle`, `dotnet`, `c-cpp`, `cmake`, `go`, `rust`, `php`, `ruby`, `dart`, `flutter`, `swift`, `elixir`, `erlang`, `haskell`, `scala`, `clojure`, `ocaml`, `r`, `lua`, `zig`, `julia`, `perl`, `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`, en ese orden
 
 #### Scenario: Categoría con pocos comandos
-- **WHEN** una categoría del catálogo empaquetado tiene menos de 15 comandos
+- **WHEN** una categoría del catálogo empaquetado que no es de la sección `frameworks` tiene menos de 15 comandos
 - **THEN** los tests del catálogo fallan nombrando la categoría y su número de comandos
+
+#### Scenario: Framework con pocos comandos
+- **WHEN** una categoría de la sección `frameworks` tiene menos de 8 comandos
+- **THEN** los tests del catálogo fallan nombrando la categoría y su número de comandos
+
+#### Scenario: Framework con entre 8 y 14 comandos
+- **WHEN** una categoría de la sección `frameworks` tiene 8 comandos
+- **THEN** los tests del catálogo la aceptan
 
 #### Scenario: Ejemplo de Terminal en Windows
 - **WHEN** el shell es `powershell` y se muestra el comando de Terminal que borra una carpeta
@@ -436,6 +448,28 @@ Todo comando del catálogo empaquetado SHALL corresponder a la sintaxis document
 #### Scenario: Sin borrado de repositorios
 - **WHEN** se recorren los comandos de `github-cli` y `gitlab-cli`
 - **THEN** ninguno contiene `repo delete`
+
+#### Scenario: Frameworks de frontend en su sección
+- **WHEN** se cargan las categorías de la sección `frameworks`
+- **THEN** están `vite`, `nextjs`, `angular`, `vue`, `astro`, `nuxt` y `sveltekit`, en ese orden
+
+#### Scenario: Crear un proyecto de Vite en PowerShell y en bash
+- **WHEN** se muestra el comando de `vite` que crea un proyecto, en `powershell` o en `bash`
+- **THEN** el ejemplo es `npm create vite@latest` en los dos
+- **AND** su descripción en español nombra `pnpm create`, `yarn create` y `bun create`
+
+#### Scenario: CLI local con npx
+- **WHEN** un comando de `frameworks` empieza por `npx`
+- **THEN** su descripción en español nombra `pnpm dlx`, `yarn dlx` y `bunx`
+
+#### Scenario: Next.js sin next lint
+- **WHEN** se recorren los comandos de `nextjs`
+- **THEN** ninguno usa `next lint`, que Next.js 16 eliminó
+
+#### Scenario: Actualizar o limpiar un framework
+- **WHEN** se muestran `ng update @angular/core @angular/cli` o `npx nuxt upgrade`
+- **THEN** declaran `risk: caution`
+- **AND** `npx nuxt cleanup` declara `risk: destructive`
 
 ### Requirement: Catálogo empaquetado traducido a los 11 idiomas
 Todo texto del catálogo empaquetado (`title` de la categoría, `title` y `description` de cada comando, `label` y `placeholder` de cada parámetro) SHALL tener valor no vacío en los 11 idiomas de la interfaz: `en`, `es`, `pt-br`, `fr`, `de`, `it`, `ja`, `ko`, `zh-cn`, `zh-tw` y `ru`. Los `tags` SHALL tener una lista no vacía en esos 11 idiomas. Esta obligación MUST comprobarse en los tests del catálogo empaquetado y MUST NOT añadirse al schema, que sigue aceptando los 9 idiomas adicionales como opcionales.
