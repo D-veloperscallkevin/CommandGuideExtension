@@ -218,6 +218,26 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['pom.xml'] })).toEqual(['java', 'maven']);
 	});
 
+	it('Expo con EAS también detecta Node', async () => {
+		expect(await ids({ root: ['package.json', 'app.json', 'eas.json'] })).toEqual(['expo', 'node']);
+	});
+
+	it('Tauri por src-tauri/tauri.conf.json', async () => {
+		expect(await ids({ root: ['package.json', 'src-tauri/tauri.conf.json'] })).toEqual(['node', 'tauri']);
+	});
+
+	it('Ionic con Capacitor', async () => {
+		expect(await ids({ root: ['ionic.config.json', 'capacitor.config.ts'] })).toEqual(['ionic']);
+	});
+
+	it('Electron Forge', async () => {
+		expect(await ids({ root: ['package.json', 'forge.config.js'] })).toEqual(['electron', 'node']);
+	});
+
+	it('un app.json solo no detecta Expo', async () => {
+		expect(await ids({ root: ['app.json'] })).toEqual([]);
+	});
+
 	it('paquete de R con renv', async () => {
 		expect(await ids({ root: ['DESCRIPTION', 'renv.lock', 'my-pkg.Rproj'] })).toEqual(['r']);
 	});
@@ -320,8 +340,8 @@ describe('watchGlob', () => {
 		expect(watchGlob(custom({ categoryId: 'go', pattern: 'go.mod' }))).toBe('*');
 	});
 
-	it('el catálogo empaquetado vigila la raíz y bin (bin/rails y bin/console)', () => {
-		expect(watchGlob(real)).toBe('{*,bin/*}');
+	it('el catálogo empaquetado vigila la raíz, bin y src-tauri', () => {
+		expect(watchGlob(real)).toBe('{*,bin/*,src-tauri/*}');
 	});
 
 	it('con rutas añade cada carpeta una vez', () => {

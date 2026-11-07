@@ -11,6 +11,7 @@ const MIN_COMMANDS = 15;
 const MIN_FRAMEWORK_COMMANDS = 8;
 const minFor = (c: Catalog[number]) => (c.section === 'frameworks' ? MIN_FRAMEWORK_COMMANDS : MIN_COMMANDS);
 const FRAMEWORKS = ['vite', 'nextjs', 'angular', 'vue', 'astro', 'nuxt', 'sveltekit'];
+const MOBILE_DESKTOP_FRAMEWORKS = ['expo', 'react-native', 'ionic', 'electron', 'tauri'];
 const BACKEND_FRAMEWORKS = ['nestjs', 'laravel', 'django', 'rails', 'spring-boot', 'symfony', 'fastapi'];
 
 /** Categorías con menos de `min` comandos, como "id: n". */
@@ -71,7 +72,7 @@ describe('contenido mínimo', () => {
 		expect(undersized([few, enough], (c) => (c.id === 'demo' ? 3 : 1))).toEqual(['demo: 2']);
 	});
 
-	it('el catálogo empaquetado tiene las 55 categorías en orden', () => {
+	it('el catálogo empaquetado tiene las 60 categorías en orden', () => {
 		expect(new CatalogService(bundledCatalog).getCategories().map((c) => c.id)).toEqual([
 			'git',
 			'github-cli',
@@ -128,6 +129,11 @@ describe('contenido mínimo', () => {
 			'spring-boot',
 			'symfony',
 			'fastapi',
+			'expo',
+			'react-native',
+			'ionic',
+			'electron',
+			'tauri',
 		]);
 	});
 
@@ -393,9 +399,9 @@ describe('contenido mínimo', () => {
 		expect(commandById('gitlab-cli.mr-merge').description.es).toContain('pipeline');
 	});
 
-	it('los frameworks de frontend y de backend van en su sección, en orden', () => {
+	it('los frameworks de frontend, de backend y de móvil y escritorio van en su sección, en orden', () => {
 		const frameworks = new CatalogService(bundledCatalog).getCategories().filter((c) => c.section === 'frameworks');
-		expect(frameworks.map((c) => c.id)).toEqual([...FRAMEWORKS, ...BACKEND_FRAMEWORKS]);
+		expect(frameworks.map((c) => c.id)).toEqual([...FRAMEWORKS, ...BACKEND_FRAMEWORKS, ...MOBILE_DESKTOP_FRAMEWORKS]);
 	});
 
 	it('crear un proyecto de Vite es igual en bash y en PowerShell, con el aviso de los otros gestores', () => {
@@ -449,6 +455,36 @@ describe('contenido mínimo', () => {
 		expect(commandById('spring-boot.run-profile-gradle').shells?.powershell).toBe('.\\gradlew bootRun "--args=--spring.profiles.active=${profile}"');
 		expect(exampleFor('spring-boot.actuator-health', 'powershell')).toBe('curl.exe http://localhost:8080/actuator/health');
 		expect(exampleFor('spring-boot.actuator-health', 'bash')).toBe('curl http://localhost:8080/actuator/health');
+	});
+
+	it('Expo usa npx para su CLI y eas sin npx', () => {
+		expect(exampleFor('expo.start', 'bash')).toBe('npx expo start');
+		expect(exampleFor('expo.start', 'powershell')).toBe('npx expo start');
+		expect(exampleFor('expo.eas-build', 'powershell')).toMatch(/^eas build /);
+		expect(commandById('expo.eas-install').command).toBe('npm install -g eas-cli');
+		expect(commandById('ionic.install').command).toBe('npm install -g @ionic/cli');
+	});
+
+	it('los comandos de móvil y escritorio son iguales en todos los shells', () => {
+		const withShells = bundledCatalog
+			.filter((c) => ["expo","react-native","ionic","electron","tauri"].includes(c.id))
+			.flatMap((c) => c.commands)
+			.filter((cmd) => cmd.shells);
+		expect(withShells.map((cmd) => cmd.id)).toEqual([]);
+	});
+
+	it('los comandos de iOS avisan de que solo funcionan en macOS', () => {
+		for (const id of ['expo.run-ios', 'react-native.run-ios', 'ionic.cap-open-ios', 'tauri.ios-init', 'tauri.ios-dev', 'tauri.ios-build']) {
+			expect(commandById(id).description.es, id).toContain('Solo en macOS');
+		}
+	});
+
+	it('publicar es caution y regenerar los proyectos nativos de Expo es destructive', () => {
+		for (const id of ['expo.eas-submit', 'expo.eas-update', 'electron.publish']) {
+			expect(commandById(id).risk, id).toBe('caution');
+		}
+		expect(commandById('expo.prebuild-clean').command).toBe('npx expo prebuild --clean');
+		expect(commandById('expo.prebuild-clean').risk).toBe('destructive');
 	});
 
 	it('Spring Boot y FastAPI no declaran patrones de detección', () => {

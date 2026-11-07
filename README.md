@@ -24,7 +24,7 @@ Quick guide to development commands for VS Code. Browse commands by category (Gi
 
 ## Usage
 
-1. Open the **DevCommands** view in the Activity Bar. It includes more than 900 commands for Git, GitHub CLI (gh), GitLab CLI (glab), npm, pnpm, Yarn, Bun, Node.js, Deno, TypeScript, Python (pip, venv, pipx), Poetry, uv, conda, Java (java, javac, jar, jshell), Maven, Gradle, .NET (dotnet, EF Core), C/C++ (gcc, g++, clang, make, gdb), CMake, Go, Rust (cargo, rustup), PHP (php, Composer), Ruby (gem, Bundler, Rake), Dart, Flutter, Swift (SwiftPM, xcodebuild), Elixir (Mix), Erlang (rebar3), Haskell (GHC, Cabal, Stack, ghcup), Scala (sbt, Scala CLI, coursier), Clojure (Clojure CLI, Leiningen), OCaml (opam, Dune), R (Rscript, renv, devtools), Lua (LuaRocks), Zig, Julia (Pkg, juliaup), Perl (cpanm, Carton, prove), the frontend frameworks Vite, Next.js, Angular, Vue, Astro, Nuxt and SvelteKit, the backend frameworks NestJS, Laravel, Django, Rails, Spring Boot, Symfony and FastAPI, version managers (nvm, fnm, Volta, Corepack, pyenv, SDKMAN, rbenv, asdf, mise), Docker and the terminal (files, folders, processes).
+1. Open the **DevCommands** view in the Activity Bar. It includes more than 900 commands for Git, GitHub CLI (gh), GitLab CLI (glab), npm, pnpm, Yarn, Bun, Node.js, Deno, TypeScript, Python (pip, venv, pipx), Poetry, uv, conda, Java (java, javac, jar, jshell), Maven, Gradle, .NET (dotnet, EF Core), C/C++ (gcc, g++, clang, make, gdb), CMake, Go, Rust (cargo, rustup), PHP (php, Composer), Ruby (gem, Bundler, Rake), Dart, Flutter, Swift (SwiftPM, xcodebuild), Elixir (Mix), Erlang (rebar3), Haskell (GHC, Cabal, Stack, ghcup), Scala (sbt, Scala CLI, coursier), Clojure (Clojure CLI, Leiningen), OCaml (opam, Dune), R (Rscript, renv, devtools), Lua (LuaRocks), Zig, Julia (Pkg, juliaup), Perl (cpanm, Carton, prove), the frontend frameworks Vite, Next.js, Angular, Vue, Astro, Nuxt and SvelteKit, the backend frameworks NestJS, Laravel, Django, Rails, Spring Boot, Symfony and FastAPI, the mobile and desktop frameworks Expo (with EAS), React Native, Ionic/Capacitor, Electron (Forge) and Tauri, version managers (nvm, fnm, Volta, Corepack, pyenv, SDKMAN, rbenv, asdf, mise), Docker and the terminal (files, folders, processes).
 2. Categories are grouped in collapsible sections (Languages & runtimes, Version control, Containers & infrastructure, Tools & AI…): click a section, or press Right and Left on it, to expand or collapse it. The panel remembers which ones you opened. Pick a category to see its commands, with a description, an example and a warning on risky ones. Or type in the search box to find commands across all categories, in English or Spanish (accents and case don't matter); press Down to jump to the results and Escape to clear the search.
 3. Click a command (or press Enter or Space on it). It is **written** in the terminal but **never run**: review it, edit it if needed and press Enter yourself.
 4. To keep a command at hand, click the star next to it (or press `Ctrl+D`, `Cmd+D` on macOS, while it has focus). Your favorites appear in the **Favorites** card at the top of the categories, in the order you starred them, and sync across machines with Settings Sync.
@@ -109,9 +109,14 @@ When a folder is open, the categories that fit the project appear first, under *
 | `manage.py` | Django |
 | `bin/rails` | Rails |
 | `symfony.lock`, `bin/console` | Symfony |
+| `eas.json`, `app.config.*` | Expo |
+| `metro.config.*`, `react-native.config.js` | React Native |
+| `capacitor.config.*`, `ionic.config.json` | Ionic / Capacitor |
+| `forge.config.*` | Electron |
+| `src-tauri/tauri.conf.json` | Tauri |
 | `Dockerfile`, `Containerfile`, `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml`, `.dockerignore` | Docker |
 
-Files in subfolders don't count, except `bin/rails` and `bin/console`. Spring Boot and FastAPI have no signal: a `pom.xml` or a `requirements.txt` doesn't say which framework the project uses. A `Makefile` alone doesn't select any category, because projects in many languages use one.
+Files in subfolders don't count, except `bin/rails`, `bin/console` and `src-tauri/tauri.conf.json`. An `app.json` alone doesn't select Expo, because React Native projects without Expo use it too. Spring Boot and FastAPI have no signal: a `pom.xml` or a `requirements.txt` doesn't say which framework the project uses. A `Makefile` alone doesn't select any category, because projects in many languages use one.
 
 The sections update as you create or delete those files. Turn it off with the `devcommands.detectProject` setting.
 
