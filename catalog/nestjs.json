@@ -1,0 +1,795 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "nestjs",
+  "title": {
+    "en": "NestJS",
+    "es": "NestJS",
+    "pt-br": "NestJS",
+    "fr": "NestJS",
+    "de": "NestJS",
+    "it": "NestJS",
+    "ja": "NestJS",
+    "ko": "NestJS",
+    "zh-cn": "NestJS",
+    "zh-tw": "NestJS",
+    "ru": "NestJS"
+  },
+  "icon": "symbol-interface",
+  "order": 114,
+  "section": "frameworks",
+  "detect": ["nest-cli.json"],
+  "commands": [
+    {
+      "id": "nestjs.new",
+      "title": {
+        "en": "Create a NestJS project",
+        "es": "Crear un proyecto de NestJS",
+        "pt-br": "Criar um projeto NestJS",
+        "fr": "Créer un projet NestJS",
+        "de": "NestJS-Projekt erstellen",
+        "it": "Crea un progetto NestJS",
+        "ja": "NestJS プロジェクトを作成",
+        "ko": "NestJS 프로젝트 만들기",
+        "zh-cn": "创建 NestJS 项目",
+        "zh-tw": "建立 NestJS 專案",
+        "ru": "Создать проект NestJS"
+      },
+      "description": {
+        "en": "Creates the folder with the starter app, asks for the package manager and installs the dependencies. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Crea la carpeta con la app inicial, pregunta el gestor de paquetes e instala las dependencias. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Cria a pasta com o app inicial, pergunta o gerenciador de pacotes e instala as dependências. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Crée le dossier avec l’app de départ, demande le gestionnaire de paquets et installe les dépendances. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Erstellt den Ordner mit der Start-App, fragt nach dem Paketmanager und installiert die Abhängigkeiten. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Crea la cartella con l’app iniziale, chiede il gestore di pacchetti e installa le dipendenze. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "スターターアプリのフォルダーを作り、パッケージマネージャーを尋ねて依存関係をインストールします。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "시작 앱 폴더를 만들고 패키지 관리자를 물은 뒤 의존성을 설치합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "创建包含初始应用的文件夹，询问包管理器并安装依赖。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "建立包含初始應用程式的資料夾，詢問套件管理員並安裝相依性。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Создаёт папку со стартовым приложением, спрашивает менеджер пакетов и устанавливает зависимости. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx @nestjs/cli new ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "my-api",
+            "es": "my-api",
+            "pt-br": "my-api",
+            "fr": "my-api",
+            "de": "my-api",
+            "it": "my-api",
+            "ja": "my-api",
+            "ko": "my-api",
+            "zh-cn": "my-api",
+            "zh-tw": "my-api",
+            "ru": "my-api"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx"],
+        "es": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "crear", "proyecto", "nuevo"],
+        "pt-br": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "criar", "projeto", "novo"],
+        "fr": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "créer", "projet", "nouveau"],
+        "de": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "erstellen", "Projekt", "neu"],
+        "it": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "creare", "progetto", "nuovo"],
+        "ja": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "作成", "プロジェクト", "新規"],
+        "ko": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "만들기", "프로젝트", "새"],
+        "zh-cn": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "创建", "项目", "新建"],
+        "zh-tw": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "建立", "專案", "新增"],
+        "ru": ["nest", "nestjs", "new", "@nestjs/cli", "project", "npx", "pnpm dlx", "yarn dlx", "bunx", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/first-steps"
+    },
+    {
+      "id": "nestjs.start-watch",
+      "title": {
+        "en": "Start in development mode",
+        "es": "Arrancar en modo desarrollo",
+        "pt-br": "Iniciar em modo de desenvolvimento",
+        "fr": "Démarrer en mode développement",
+        "de": "Im Entwicklungsmodus starten",
+        "it": "Avvia in modalità sviluppo",
+        "ja": "開発モードで起動",
+        "ko": "개발 모드로 시작",
+        "zh-cn": "以开发模式启动",
+        "zh-tw": "以開發模式啟動",
+        "ru": "Запустить в режиме разработки"
+      },
+      "description": {
+        "en": "Compiles and starts the app at http://localhost:3000, restarting it whenever a file changes. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Compila y arranca la app en http://localhost:3000, y la reinicia cada vez que cambia un archivo. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Compila e inicia o app em http://localhost:3000, reiniciando-o sempre que um arquivo muda. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Compile et démarre l’app sur http://localhost:3000, et la redémarre à chaque modification de fichier. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Kompiliert und startet die App unter http://localhost:3000 und startet sie bei jeder Dateiänderung neu. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Compila e avvia l’app su http://localhost:3000, riavviandola a ogni modifica di un file. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "アプリをコンパイルして http://localhost:3000 で起動し、ファイルが変わるたびに再起動します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "앱을 컴파일해 http://localhost:3000에서 시작하고 파일이 바뀔 때마다 다시 시작합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "编译并在 http://localhost:3000 启动应用，文件更改时自动重启。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "編譯並在 http://localhost:3000 啟動應用程式，檔案變更時自動重新啟動。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Компилирует и запускает приложение на http://localhost:3000, перезапуская при каждом изменении файла. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest start --watch",
+      "tags": {
+        "en": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "run"],
+        "es": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "ejecutar", "vigilar", "automático"],
+        "pt-br": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "executar", "observar", "automático"],
+        "fr": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "exécuter", "surveiller", "automatique"],
+        "de": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "ausführen", "beobachten", "automatisch"],
+        "it": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "eseguire", "osservare", "automatico"],
+        "ja": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "実行", "監視", "自動"],
+        "ko": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "실행", "감시", "자동"],
+        "zh-cn": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "运行", "监视", "自动"],
+        "zh-tw": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "執行", "監看", "自動"],
+        "ru": ["nest", "nestjs", "start", "dev", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "запустить", "наблюдение", "автоматически"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-start"
+    },
+    {
+      "id": "nestjs.start-debug",
+      "title": {
+        "en": "Start with the debugger",
+        "es": "Arrancar con el depurador",
+        "pt-br": "Iniciar com o depurador",
+        "fr": "Démarrer avec le débogueur",
+        "de": "Mit Debugger starten",
+        "it": "Avvia con il debugger",
+        "ja": "デバッガー付きで起動",
+        "ko": "디버거와 함께 시작",
+        "zh-cn": "带调试器启动",
+        "zh-tw": "帶偵錯工具啟動",
+        "ru": "Запустить с отладчиком"
+      },
+      "description": {
+        "en": "Same as development mode, with the Node inspector open on port 9229 so VS Code can attach to it. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Igual que el modo desarrollo, con el inspector de Node abierto en el puerto 9229 para que VS Code se conecte. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Igual ao modo de desenvolvimento, com o inspetor do Node aberto na porta 9229 para o VS Code se conectar. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Comme le mode développement, avec l’inspecteur Node ouvert sur le port 9229 pour que VS Code s’y attache. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Wie der Entwicklungsmodus, mit offenem Node-Inspector auf Port 9229, an den sich VS Code anhängen kann. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Come la modalità sviluppo, con l’inspector di Node aperto sulla porta 9229 perché VS Code si colleghi. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "開発モードと同じで、VS Code が接続できるよう Node のインスペクターをポート 9229 で開きます。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "개발 모드와 같으며, VS Code가 연결할 수 있도록 Node 인스펙터를 9229 포트에 엽니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "与开发模式相同，并在 9229 端口打开 Node 调试器，供 VS Code 附加。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "與開發模式相同，並在 9229 連接埠開啟 Node 偵錯器，供 VS Code 附加。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "То же, что режим разработки, с инспектором Node на порту 9229, к которому может подключиться VS Code. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest start --debug --watch",
+      "tags": {
+        "en": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "run"],
+        "es": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "ejecutar"],
+        "pt-br": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "executar"],
+        "fr": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "exécuter"],
+        "de": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "ausführen"],
+        "it": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "eseguire"],
+        "ja": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "実行"],
+        "ko": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "실행"],
+        "zh-cn": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "运行"],
+        "zh-tw": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "執行"],
+        "ru": ["nest", "nestjs", "start", "debug", "inspect", "npx", "pnpm dlx", "yarn dlx", "bunx", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-start"
+    },
+    {
+      "id": "nestjs.start",
+      "title": {
+        "en": "Start the app",
+        "es": "Arrancar la app",
+        "pt-br": "Iniciar o app",
+        "fr": "Démarrer l’app",
+        "de": "App starten",
+        "it": "Avvia l’app",
+        "ja": "アプリを起動",
+        "ko": "앱 시작",
+        "zh-cn": "启动应用",
+        "zh-tw": "啟動應用程式",
+        "ru": "Запустить приложение"
+      },
+      "description": {
+        "en": "Compiles and starts the app once, without watching for changes. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Compila y arranca la app una vez, sin vigilar los cambios. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Compila e inicia o app uma vez, sem observar as mudanças. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Compile et démarre l’app une fois, sans surveiller les changements. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Kompiliert und startet die App einmal, ohne auf Änderungen zu achten. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Compila e avvia l’app una volta, senza osservare le modifiche. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "変更を監視せず、アプリを 1 回コンパイルして起動します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "변경을 감시하지 않고 앱을 한 번 컴파일해 시작합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "编译并启动应用一次，不监视更改。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "編譯並啟動應用程式一次，不監看變更。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Компилирует и запускает приложение один раз, без отслеживания изменений. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest start",
+      "tags": {
+        "en": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "run"],
+        "es": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "ejecutar"],
+        "pt-br": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "executar"],
+        "fr": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "exécuter"],
+        "de": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "ausführen"],
+        "it": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "eseguire"],
+        "ja": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "実行"],
+        "ko": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "실행"],
+        "zh-cn": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "运行"],
+        "zh-tw": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "執行"],
+        "ru": ["nest", "nestjs", "start", "npx", "pnpm dlx", "yarn dlx", "bunx", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-start"
+    },
+    {
+      "id": "nestjs.build",
+      "title": {
+        "en": "Build the app",
+        "es": "Compilar la app",
+        "pt-br": "Compilar o app",
+        "fr": "Compiler l’app",
+        "de": "App bauen",
+        "it": "Compila l’app",
+        "ja": "アプリをビルド",
+        "ko": "앱 빌드",
+        "zh-cn": "构建应用",
+        "zh-tw": "建置應用程式",
+        "ru": "Собрать приложение"
+      },
+      "description": {
+        "en": "Compiles the TypeScript into the dist folder; start it in production with node dist/main. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Compila el TypeScript en la carpeta dist; en producción se arranca con node dist/main. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Compila o TypeScript na pasta dist; em produção inicie com node dist/main. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Compile le TypeScript dans le dossier dist ; en production, lancez-la avec node dist/main. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Kompiliert das TypeScript in den Ordner dist; in Produktion mit node dist/main starten. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Compila il TypeScript nella cartella dist; in produzione si avvia con node dist/main. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "TypeScript を dist フォルダーにコンパイルします。本番では node dist/main で起動します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "TypeScript를 dist 폴더에 컴파일합니다. 프로덕션에서는 node dist/main으로 시작합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "将 TypeScript 编译到 dist 文件夹；生产环境用 node dist/main 启动。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "將 TypeScript 編譯到 dist 資料夾；正式環境用 node dist/main 啟動。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Компилирует TypeScript в папку dist; в продакшене запускается через node dist/main. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest build",
+      "tags": {
+        "en": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "compile"],
+        "es": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "compilar"],
+        "pt-br": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "compilar"],
+        "fr": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "compiler"],
+        "de": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "bauen", "kompilieren"],
+        "it": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "compilare"],
+        "ja": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "ビルド", "コンパイル"],
+        "ko": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "빌드", "컴파일"],
+        "zh-cn": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "构建", "编译"],
+        "zh-tw": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "建置", "編譯"],
+        "ru": ["nest", "nestjs", "build", "dist", "production", "npx", "pnpm dlx", "yarn dlx", "bunx", "сборка", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-build"
+    },
+    {
+      "id": "nestjs.generate-resource",
+      "title": {
+        "en": "Generate a complete resource",
+        "es": "Generar un recurso completo",
+        "pt-br": "Gerar um recurso completo",
+        "fr": "Générer une ressource complète",
+        "de": "Vollständige Ressource erzeugen",
+        "it": "Genera una risorsa completa",
+        "ja": "リソース一式を生成",
+        "ko": "전체 리소스 생성",
+        "zh-cn": "生成完整资源",
+        "zh-tw": "產生完整資源",
+        "ru": "Создать полный ресурс"
+      },
+      "description": {
+        "en": "Asks for the transport (REST, GraphQL, microservice…) and creates the module, controller, service, DTOs and entity with the CRUD endpoints. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Pregunta el transporte (REST, GraphQL, microservicio…) y crea el módulo, el controlador, el servicio, los DTO y la entidad con los endpoints CRUD. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Pergunta o transporte (REST, GraphQL, microsserviço…) e cria o módulo, o controller, o serviço, os DTOs e a entidade com os endpoints CRUD. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Demande le transport (REST, GraphQL, microservice…) et crée le module, le contrôleur, le service, les DTO et l’entité avec les endpoints CRUD. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Fragt nach dem Transport (REST, GraphQL, Microservice…) und erstellt Modul, Controller, Service, DTOs und Entität mit den CRUD-Endpunkten. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Chiede il trasporto (REST, GraphQL, microservizio…) e crea modulo, controller, servizio, DTO ed entità con gli endpoint CRUD. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "トランスポート（REST、GraphQL、マイクロサービスなど）を尋ね、CRUD エンドポイント付きのモジュール、コントローラー、サービス、DTO、エンティティを作ります。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "전송 방식(REST, GraphQL, 마이크로서비스 등)을 묻고 CRUD 엔드포인트가 있는 모듈, 컨트롤러, 서비스, DTO, 엔티티를 만듭니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "询问传输方式（REST、GraphQL、微服务…），并创建带 CRUD 端点的模块、控制器、服务、DTO 和实体。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "詢問傳輸方式（REST、GraphQL、微服務…），並建立帶 CRUD 端點的模組、控制器、服務、DTO 和實體。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Спрашивает транспорт (REST, GraphQL, микросервис…) и создаёт модуль, контроллер, сервис, DTO и сущность с CRUD-эндпоинтами. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest generate resource ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "users",
+            "es": "users",
+            "pt-br": "users",
+            "fr": "users",
+            "de": "users",
+            "it": "users",
+            "ja": "users",
+            "ko": "users",
+            "zh-cn": "users",
+            "zh-tw": "users",
+            "ru": "users"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "new", "project"],
+        "es": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "crear", "proyecto", "nuevo"],
+        "pt-br": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "criar", "projeto", "novo"],
+        "fr": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "créer", "projet", "nouveau"],
+        "de": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "erstellen", "Projekt", "neu"],
+        "it": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "creare", "progetto", "nuovo"],
+        "ja": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "作成", "プロジェクト", "新規"],
+        "ko": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "만들기", "프로젝트", "새"],
+        "zh-cn": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "创建", "项目", "新建"],
+        "zh-tw": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "建立", "專案", "新增"],
+        "ru": ["nest", "nestjs", "generate", "g", "resource", "crud", "scaffold", "npx", "pnpm dlx", "yarn dlx", "bunx", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/recipes/crud-generator"
+    },
+    {
+      "id": "nestjs.generate-module",
+      "title": {
+        "en": "Generate a module",
+        "es": "Generar un módulo",
+        "pt-br": "Gerar um módulo",
+        "fr": "Générer un module",
+        "de": "Modul erzeugen",
+        "it": "Genera un modulo",
+        "ja": "モジュールを生成",
+        "ko": "모듈 생성",
+        "zh-cn": "生成模块",
+        "zh-tw": "產生模組",
+        "ru": "Создать модуль"
+      },
+      "description": {
+        "en": "Creates the module file and registers it in the imports of the parent module. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Crea el archivo del módulo y lo registra en los imports del módulo padre. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Cria o arquivo do módulo e o registra nos imports do módulo pai. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Crée le fichier du module et l’enregistre dans les imports du module parent. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Erstellt die Moduldatei und trägt sie in die imports des übergeordneten Moduls ein. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Crea il file del modulo e lo registra negli imports del modulo padre. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "モジュールファイルを作り、親モジュールの imports に登録します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "모듈 파일을 만들고 상위 모듈의 imports에 등록합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "创建模块文件并注册到父模块的 imports 中。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "建立模組檔案並註冊到父模組的 imports 中。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Создаёт файл модуля и регистрирует его в imports родительского модуля. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest generate module ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "users",
+            "es": "users",
+            "pt-br": "users",
+            "fr": "users",
+            "de": "users",
+            "it": "users",
+            "ja": "users",
+            "ko": "users",
+            "zh-cn": "users",
+            "zh-tw": "users",
+            "ru": "users"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "new", "project"],
+        "es": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "crear", "proyecto", "nuevo"],
+        "pt-br": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "criar", "projeto", "novo"],
+        "fr": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "créer", "projet", "nouveau"],
+        "de": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "erstellen", "Projekt", "neu"],
+        "it": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "creare", "progetto", "nuovo"],
+        "ja": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "作成", "プロジェクト", "新規"],
+        "ko": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "만들기", "프로젝트", "새"],
+        "zh-cn": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "创建", "项目", "新建"],
+        "zh-tw": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "建立", "專案", "新增"],
+        "ru": ["nest", "nestjs", "generate", "g", "module", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-generate"
+    },
+    {
+      "id": "nestjs.generate-controller",
+      "title": {
+        "en": "Generate a controller",
+        "es": "Generar un controlador",
+        "pt-br": "Gerar um controller",
+        "fr": "Générer un contrôleur",
+        "de": "Controller erzeugen",
+        "it": "Genera un controller",
+        "ja": "コントローラーを生成",
+        "ko": "컨트롤러 생성",
+        "zh-cn": "生成控制器",
+        "zh-tw": "產生控制器",
+        "ru": "Создать контроллер"
+      },
+      "description": {
+        "en": "Creates the controller and its test, and adds it to the module with the same name if it exists. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Crea el controlador y su test, y lo añade al módulo del mismo nombre si existe. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Cria o controller e seu teste, e o adiciona ao módulo de mesmo nome se existir. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Crée le contrôleur et son test, et l’ajoute au module du même nom s’il existe. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Erstellt den Controller samt Test und fügt ihn dem gleichnamigen Modul hinzu, falls vorhanden. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Crea il controller e il suo test, e lo aggiunge al modulo con lo stesso nome se esiste. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "コントローラーとテストを作り、同名のモジュールがあれば追加します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "컨트롤러와 테스트를 만들고, 같은 이름의 모듈이 있으면 추가합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "创建控制器及其测试，如果存在同名模块则将其加入。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "建立控制器及其測試，如果存在同名模組則將其加入。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Создаёт контроллер и его тест и добавляет его в одноимённый модуль, если он есть. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest generate controller ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "users",
+            "es": "users",
+            "pt-br": "users",
+            "fr": "users",
+            "de": "users",
+            "it": "users",
+            "ja": "users",
+            "ko": "users",
+            "zh-cn": "users",
+            "zh-tw": "users",
+            "ru": "users"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "new", "project"],
+        "es": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "crear", "proyecto", "nuevo"],
+        "pt-br": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "criar", "projeto", "novo"],
+        "fr": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "créer", "projet", "nouveau"],
+        "de": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "erstellen", "Projekt", "neu"],
+        "it": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "creare", "progetto", "nuovo"],
+        "ja": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "作成", "プロジェクト", "新規"],
+        "ko": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "만들기", "프로젝트", "새"],
+        "zh-cn": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "创建", "项目", "新建"],
+        "zh-tw": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "建立", "專案", "新增"],
+        "ru": ["nest", "nestjs", "generate", "g", "controller", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-generate"
+    },
+    {
+      "id": "nestjs.generate-service",
+      "title": {
+        "en": "Generate a service",
+        "es": "Generar un servicio",
+        "pt-br": "Gerar um serviço",
+        "fr": "Générer un service",
+        "de": "Service erzeugen",
+        "it": "Genera un servizio",
+        "ja": "サービスを生成",
+        "ko": "서비스 생성",
+        "zh-cn": "生成服务",
+        "zh-tw": "產生服務",
+        "ru": "Создать сервис"
+      },
+      "description": {
+        "en": "Creates the injectable service and its test, and adds it to the providers of the module with the same name. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Crea el servicio inyectable y su test, y lo añade a los providers del módulo del mismo nombre. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Cria o serviço injetável e seu teste, e o adiciona aos providers do módulo de mesmo nome. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Crée le service injectable et son test, et l’ajoute aux providers du module du même nom. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Erstellt den injizierbaren Service samt Test und fügt ihn den providers des gleichnamigen Moduls hinzu. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Crea il servizio iniettabile e il suo test, e lo aggiunge ai providers del modulo con lo stesso nome. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "注入可能なサービスとテストを作り、同名モジュールの providers に追加します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "주입 가능한 서비스와 테스트를 만들고 같은 이름 모듈의 providers에 추가합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "创建可注入服务及其测试，并加入同名模块的 providers。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "建立可注入服務及其測試，並加入同名模組的 providers。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Создаёт внедряемый сервис и его тест и добавляет его в providers одноимённого модуля. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest generate service ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "users",
+            "es": "users",
+            "pt-br": "users",
+            "fr": "users",
+            "de": "users",
+            "it": "users",
+            "ja": "users",
+            "ko": "users",
+            "zh-cn": "users",
+            "zh-tw": "users",
+            "ru": "users"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "new", "project"],
+        "es": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "crear", "proyecto", "nuevo"],
+        "pt-br": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "criar", "projeto", "novo"],
+        "fr": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "créer", "projet", "nouveau"],
+        "de": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "erstellen", "Projekt", "neu"],
+        "it": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "creare", "progetto", "nuovo"],
+        "ja": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "作成", "プロジェクト", "新規"],
+        "ko": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "만들기", "프로젝트", "새"],
+        "zh-cn": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "创建", "项目", "新建"],
+        "zh-tw": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "建立", "專案", "新增"],
+        "ru": ["nest", "nestjs", "generate", "g", "service", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-generate"
+    },
+    {
+      "id": "nestjs.add",
+      "title": {
+        "en": "Add a library with its setup",
+        "es": "Añadir una librería con su configuración",
+        "pt-br": "Adicionar uma biblioteca com sua configuração",
+        "fr": "Ajouter une bibliothèque avec sa configuration",
+        "de": "Bibliothek mit Einrichtung hinzufügen",
+        "it": "Aggiungi una libreria con la sua configurazione",
+        "ja": "ライブラリを設定込みで追加",
+        "ko": "라이브러리를 설정과 함께 추가",
+        "zh-cn": "添加库并完成配置",
+        "zh-tw": "新增程式庫並完成設定",
+        "ru": "Добавить библиотеку с настройкой"
+      },
+      "description": {
+        "en": "Installs a library prepared for Nest and runs its schematic, which can change the modules of the app. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Instala una librería preparada para Nest y ejecuta su schematic, que puede cambiar los módulos de la app. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Instala uma biblioteca preparada para o Nest e executa seu schematic, que pode alterar os módulos do app. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Installe une bibliothèque prévue pour Nest et lance son schematic, qui peut modifier les modules de l’app. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Installiert eine für Nest vorbereitete Bibliothek und führt ihr Schematic aus, das die Module der App ändern kann. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Installa una libreria pensata per Nest ed esegue il suo schematic, che può cambiare i moduli dell’app. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "Nest 向けのライブラリをインストールし、その schematic を実行します。アプリのモジュールが変更されることがあります。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "Nest용 라이브러리를 설치하고 schematic을 실행해 앱의 모듈을 바꿀 수 있습니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "安装为 Nest 准备的库并运行其 schematic，可能会修改应用的模块。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "安裝為 Nest 準備的程式庫並執行其 schematic，可能會修改應用程式的模組。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Устанавливает библиотеку для Nest и запускает её schematic, который может менять модули приложения. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest add ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "@nestjs/swagger",
+            "es": "@nestjs/swagger",
+            "pt-br": "@nestjs/swagger",
+            "fr": "@nestjs/swagger",
+            "de": "@nestjs/swagger",
+            "it": "@nestjs/swagger",
+            "ja": "@nestjs/swagger",
+            "ko": "@nestjs/swagger",
+            "zh-cn": "@nestjs/swagger",
+            "zh-tw": "@nestjs/swagger",
+            "ru": "@nestjs/swagger"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "install"],
+        "es": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "instalar"],
+        "pt-br": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "instalar"],
+        "fr": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "installer"],
+        "de": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "installieren"],
+        "it": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "installare"],
+        "ja": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "インストール"],
+        "ko": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "설치"],
+        "zh-cn": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "安装"],
+        "zh-tw": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "安裝"],
+        "ru": ["nest", "nestjs", "add", "schematic", "npx", "pnpm dlx", "yarn dlx", "bunx", "установить"]
+      },
+      "risk": "caution",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-add"
+    },
+    {
+      "id": "nestjs.info",
+      "title": {
+        "en": "Show the environment information",
+        "es": "Ver la información del entorno",
+        "pt-br": "Ver as informações do ambiente",
+        "fr": "Afficher les informations de l’environnement",
+        "de": "Umgebungsinfos anzeigen",
+        "it": "Mostra le informazioni dell’ambiente",
+        "ja": "環境情報を表示",
+        "ko": "환경 정보 보기",
+        "zh-cn": "显示环境信息",
+        "zh-tw": "顯示環境資訊",
+        "ru": "Показать сведения об окружении"
+      },
+      "description": {
+        "en": "Prints the versions of Node, the operating system and every @nestjs package of the project. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Muestra las versiones de Node, el sistema operativo y cada paquete @nestjs del proyecto. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Mostra as versões do Node, do sistema operacional e de cada pacote @nestjs do projeto. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Affiche les versions de Node, du système et de chaque paquet @nestjs du projet. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Zeigt die Versionen von Node, dem Betriebssystem und jedem @nestjs-Paket des Projekts. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Mostra le versioni di Node, del sistema operativo e di ogni pacchetto @nestjs del progetto. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "Node、OS、プロジェクトの各 @nestjs パッケージのバージョンを表示します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "Node, 운영 체제, 프로젝트의 각 @nestjs 패키지 버전을 보여 줍니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "显示 Node、操作系统以及项目中每个 @nestjs 包的版本。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "顯示 Node、作業系統以及專案中每個 @nestjs 套件的版本。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Показывает версии Node, ОС и всех пакетов @nestjs проекта. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx nest info",
+      "tags": {
+        "en": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "version"],
+        "es": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "versión"],
+        "pt-br": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "versão"],
+        "fr": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "version"],
+        "de": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "Version"],
+        "it": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "versione"],
+        "ja": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "バージョン"],
+        "ko": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "버전"],
+        "zh-cn": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "版本"],
+        "zh-tw": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "版本"],
+        "ru": ["nest", "nestjs", "info", "bug", "npx", "pnpm dlx", "yarn dlx", "bunx", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/cli/usages#nest-info"
+    },
+    {
+      "id": "nestjs.test-watch",
+      "title": {
+        "en": "Run the unit tests in watch mode",
+        "es": "Ejecutar los tests unitarios en modo vigilancia",
+        "pt-br": "Executar os testes unitários em modo de observação",
+        "fr": "Lancer les tests unitaires en mode surveillance",
+        "de": "Unit-Tests im Watch-Modus ausführen",
+        "it": "Esegui i test unitari in modalità watch",
+        "ja": "単体テストを監視モードで実行",
+        "ko": "단위 테스트를 감시 모드로 실행",
+        "zh-cn": "以监视模式运行单元测试",
+        "zh-tw": "以監看模式執行單元測試",
+        "ru": "Запустить модульные тесты в режиме наблюдения"
+      },
+      "description": {
+        "en": "Runs the *.spec.ts files with Jest and reruns the ones affected by each change; press a to run them all. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Ejecuta los archivos *.spec.ts con Jest y repite los afectados por cada cambio; pulsa a para ejecutarlos todos. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Executa os arquivos *.spec.ts com o Jest e repete os afetados a cada mudança; pressione a para executar todos. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Exécute les fichiers *.spec.ts avec Jest et relance ceux touchés par chaque changement ; appuyez sur a pour tout lancer. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Führt die *.spec.ts-Dateien mit Jest aus und wiederholt die von jeder Änderung betroffenen; a startet alle. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Esegue i file *.spec.ts con Jest e ripete quelli interessati da ogni modifica; premi a per eseguirli tutti. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "Jest で *.spec.ts を実行し、変更の影響を受けたものを再実行します。a キーですべて実行します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "Jest로 *.spec.ts 파일을 실행하고 변경에 영향을 받은 것을 다시 실행합니다. a를 누르면 모두 실행합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "用 Jest 运行 *.spec.ts 文件，并在每次更改后重新运行受影响的测试；按 a 运行全部。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "用 Jest 執行 *.spec.ts 檔案，並在每次變更後重新執行受影響的測試；按 a 執行全部。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Запускает файлы *.spec.ts в Jest и перезапускает затронутые изменениями; клавиша a запускает все. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx jest --watch",
+      "tags": {
+        "en": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "test", "tests"],
+        "es": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "tests", "pruebas", "vigilar", "automático"],
+        "pt-br": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "testes", "observar", "automático"],
+        "fr": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "tests", "surveiller", "automatique"],
+        "de": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "Tests", "beobachten", "automatisch"],
+        "it": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "test", "osservare", "automatico"],
+        "ja": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "テスト", "監視", "自動"],
+        "ko": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "테스트", "감시", "자동"],
+        "zh-cn": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "测试", "监视", "自动"],
+        "zh-tw": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "測試", "監看", "自動"],
+        "ru": ["nest", "nestjs", "jest", "unit", "watch", "npx", "pnpm dlx", "yarn dlx", "bunx", "тесты", "наблюдение", "автоматически"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/fundamentals/testing"
+    },
+    {
+      "id": "nestjs.test-e2e",
+      "title": {
+        "en": "Run the end-to-end tests",
+        "es": "Ejecutar los tests end-to-end",
+        "pt-br": "Executar os testes end-to-end",
+        "fr": "Lancer les tests de bout en bout",
+        "de": "End-to-End-Tests ausführen",
+        "it": "Esegui i test end-to-end",
+        "ja": "E2E テストを実行",
+        "ko": "E2E 테스트 실행",
+        "zh-cn": "运行端到端测试",
+        "zh-tw": "執行端對端測試",
+        "ru": "Запустить сквозные тесты"
+      },
+      "description": {
+        "en": "Runs the tests of the test folder, which start the whole app and call it over HTTP with Supertest. With pnpm, Yarn or Bun: pnpm dlx, yarn dlx or bunx.",
+        "es": "Ejecuta los tests de la carpeta test, que arrancan la app entera y la llaman por HTTP con Supertest. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "pt-br": "Executa os testes da pasta test, que iniciam o app inteiro e o chamam por HTTP com o Supertest. Com pnpm, Yarn ou Bun: pnpm dlx, yarn dlx ou bunx.",
+        "fr": "Exécute les tests du dossier test, qui démarrent toute l’app et l’appellent en HTTP avec Supertest. Avec pnpm, Yarn ou Bun : pnpm dlx, yarn dlx ou bunx.",
+        "de": "Führt die Tests im Ordner test aus, die die ganze App starten und per HTTP mit Supertest aufrufen. Mit pnpm, Yarn oder Bun: pnpm dlx, yarn dlx oder bunx.",
+        "it": "Esegue i test della cartella test, che avviano l’intera app e la chiamano via HTTP con Supertest. Con pnpm, Yarn o Bun: pnpm dlx, yarn dlx o bunx.",
+        "ja": "test フォルダーのテストを実行します。アプリ全体を起動し、Supertest で HTTP 経由で呼び出します。 pnpm、Yarn、Bun では pnpm dlx、yarn dlx、bunx を使います。",
+        "ko": "test 폴더의 테스트를 실행합니다. 앱 전체를 시작하고 Supertest로 HTTP를 통해 호출합니다. pnpm, Yarn, Bun에서는 pnpm dlx, yarn dlx, bunx를 씁니다.",
+        "zh-cn": "运行 test 文件夹中的测试，它们会启动整个应用并用 Supertest 通过 HTTP 调用。 使用 pnpm、Yarn 或 Bun 时：pnpm dlx、yarn dlx 或 bunx。",
+        "zh-tw": "執行 test 資料夾中的測試，它們會啟動整個應用程式並用 Supertest 透過 HTTP 呼叫。 使用 pnpm、Yarn 或 Bun 時：pnpm dlx、yarn dlx 或 bunx。",
+        "ru": "Запускает тесты папки test, которые поднимают всё приложение и обращаются к нему по HTTP через Supertest. С pnpm, Yarn или Bun: pnpm dlx, yarn dlx или bunx."
+      },
+      "command": "npx jest --config ./test/jest-e2e.json",
+      "tags": {
+        "en": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "test", "tests"],
+        "es": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "tests", "pruebas"],
+        "pt-br": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "testes"],
+        "fr": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "tests"],
+        "de": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "Tests"],
+        "it": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "test"],
+        "ja": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "テスト"],
+        "ko": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "테스트"],
+        "zh-cn": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "测试"],
+        "zh-tw": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "測試"],
+        "ru": ["nest", "nestjs", "jest", "e2e", "supertest", "npx", "pnpm dlx", "yarn dlx", "bunx", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.nestjs.com/fundamentals/testing#end-to-end-testing"
+    }
+  ]
+}

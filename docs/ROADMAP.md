@@ -293,7 +293,7 @@ Pasa de 6 a unas 70 categorías. Primero se reorganiza la interfaz y la carga; d
 | 3.5c | `catalog-scripting` | R (Rscript, renv, devtools), Lua (luarocks), Zig, Julia (Pkg, juliaup) y Perl (cpanm, carton, prove) ✅ |
 | 3.6 | `catalog-vcs` | gh (GitHub CLI) y glab (GitLab) ✅ |
 | 3.7a | `catalog-frontend` | Frontend: Vite, Next.js, Angular, Vue, Astro, Nuxt y SvelteKit ✅ |
-| 3.7b | `catalog-backend` | Backend: NestJS, Laravel, Django, Rails, Spring Boot, Symfony y FastAPI |
+| 3.7b | `catalog-backend` | Backend: NestJS, Laravel, Django, Rails, Spring Boot, Symfony y FastAPI ✅ |
 | 3.7c | `catalog-mobile-desktop` | Móvil y escritorio: Expo/EAS, React Native, Ionic/Capacitor, Electron y Tauri |
 | 3.7d | `catalog-orm-monorepo` | ORM (Prisma, Drizzle, Sequelize, TypeORM, Alembic) y monorepos (turbo, nx) |
 | 3.8 | `catalog-databases` | psql/pg_dump, mysql/mysqldump, sqlcmd, mongosh/mongodump, redis-cli, sqlite3, DuckDB; Supabase, Neon, PlanetScale, Turso |

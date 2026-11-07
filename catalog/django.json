@@ -1,0 +1,848 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "django",
+  "title": {
+    "en": "Django",
+    "es": "Django",
+    "pt-br": "Django",
+    "fr": "Django",
+    "de": "Django",
+    "it": "Django",
+    "ja": "Django",
+    "ko": "Django",
+    "zh-cn": "Django",
+    "zh-tw": "Django",
+    "ru": "Django"
+  },
+  "icon": "music",
+  "order": 118,
+  "section": "frameworks",
+  "detect": ["manage.py"],
+  "commands": [
+    {
+      "id": "django.install",
+      "title": {
+        "en": "Install Django",
+        "es": "Instalar Django",
+        "pt-br": "Instalar o Django",
+        "fr": "Installer Django",
+        "de": "Django installieren",
+        "it": "Installa Django",
+        "ja": "Django をインストール",
+        "ko": "Django 설치",
+        "zh-cn": "安装 Django",
+        "zh-tw": "安裝 Django",
+        "ru": "Установить Django"
+      },
+      "description": {
+        "en": "Installs Django in the active environment; activate the virtual environment of the project first.",
+        "es": "Instala Django en el entorno activo; antes activa el entorno virtual del proyecto.",
+        "pt-br": "Instala o Django no ambiente ativo; ative antes o ambiente virtual do projeto.",
+        "fr": "Installe Django dans l’environnement actif ; activez d’abord l’environnement virtuel du projet.",
+        "de": "Installiert Django in der aktiven Umgebung; vorher die virtuelle Umgebung des Projekts aktivieren.",
+        "it": "Installa Django nell’ambiente attivo; prima attiva l’ambiente virtuale del progetto.",
+        "ja": "アクティブな環境に Django をインストールします。先にプロジェクトの仮想環境を有効にしてください。",
+        "ko": "활성 환경에 Django를 설치합니다. 먼저 프로젝트의 가상 환경을 활성화하세요.",
+        "zh-cn": "在当前环境中安装 Django；请先激活项目的虚拟环境。",
+        "zh-tw": "在目前環境中安裝 Django；請先啟用專案的虛擬環境。",
+        "ru": "Устанавливает Django в активное окружение; сначала активируйте виртуальное окружение проекта."
+      },
+      "command": "python3 -m pip install django",
+      "tags": {
+        "en": ["django", "manage.py", "python", "pip", "install"],
+        "es": ["django", "manage.py", "python", "pip", "install", "instalar"],
+        "pt-br": ["django", "manage.py", "python", "pip", "install", "instalar"],
+        "fr": ["django", "manage.py", "python", "pip", "install", "installer"],
+        "de": ["django", "manage.py", "python", "pip", "install", "installieren"],
+        "it": ["django", "manage.py", "python", "pip", "install", "installare"],
+        "ja": ["django", "manage.py", "python", "pip", "install", "インストール"],
+        "ko": ["django", "manage.py", "python", "pip", "install", "설치"],
+        "zh-cn": ["django", "manage.py", "python", "pip", "install", "安装"],
+        "zh-tw": ["django", "manage.py", "python", "pip", "install", "安裝"],
+        "ru": ["django", "manage.py", "python", "pip", "install", "установить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install django",
+        "cmd": "python -m pip install django"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/topics/install/"
+    },
+    {
+      "id": "django.startproject",
+      "title": {
+        "en": "Create a Django project",
+        "es": "Crear un proyecto de Django",
+        "pt-br": "Criar um projeto Django",
+        "fr": "Créer un projet Django",
+        "de": "Django-Projekt erstellen",
+        "it": "Crea un progetto Django",
+        "ja": "Django プロジェクトを作成",
+        "ko": "Django 프로젝트 만들기",
+        "zh-cn": "创建 Django 项目",
+        "zh-tw": "建立 Django 專案",
+        "ru": "Создать проект Django"
+      },
+      "description": {
+        "en": "Creates manage.py and the configuration package with that name in the current folder (the final dot avoids an extra nested folder).",
+        "es": "Crea manage.py y el paquete de configuración con ese nombre en la carpeta actual (el punto final evita una carpeta anidada de más).",
+        "pt-br": "Cria o manage.py e o pacote de configuração com esse nome na pasta atual (o ponto final evita uma pasta aninhada a mais).",
+        "fr": "Crée manage.py et le paquet de configuration de ce nom dans le dossier actuel (le point final évite un dossier imbriqué en trop).",
+        "de": "Erstellt manage.py und das Konfigurationspaket mit diesem Namen im aktuellen Ordner (der Punkt am Ende vermeidet einen zusätzlichen Unterordner).",
+        "it": "Crea manage.py e il pacchetto di configurazione con quel nome nella cartella attuale (il punto finale evita una cartella annidata in più).",
+        "ja": "現在のフォルダーに manage.py とその名前の設定パッケージを作ります（末尾の点で余分な入れ子フォルダーを防ぎます）。",
+        "ko": "현재 폴더에 manage.py와 그 이름의 설정 패키지를 만듭니다(끝의 점은 불필요한 중첩 폴더를 막습니다).",
+        "zh-cn": "在当前文件夹中创建 manage.py 和同名的配置包（末尾的点可避免多一层嵌套文件夹）。",
+        "zh-tw": "在目前資料夾中建立 manage.py 和同名的設定套件（結尾的點可避免多一層巢狀資料夾）。",
+        "ru": "Создаёт manage.py и пакет настроек с этим именем в текущей папке (точка в конце избавляет от лишней вложенной папки)."
+      },
+      "command": "django-admin startproject ${name} .",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "config",
+            "es": "config",
+            "pt-br": "config",
+            "fr": "config",
+            "de": "config",
+            "it": "config",
+            "ja": "config",
+            "ko": "config",
+            "zh-cn": "config",
+            "zh-tw": "config",
+            "ru": "config"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["django", "manage.py", "python", "django-admin", "startproject", "new", "project"],
+        "es": ["django", "manage.py", "python", "django-admin", "startproject", "new", "crear", "proyecto", "nuevo"],
+        "pt-br": ["django", "manage.py", "python", "django-admin", "startproject", "new", "criar", "projeto", "novo"],
+        "fr": ["django", "manage.py", "python", "django-admin", "startproject", "new", "créer", "projet", "nouveau"],
+        "de": ["django", "manage.py", "python", "django-admin", "startproject", "new", "erstellen", "Projekt", "neu"],
+        "it": ["django", "manage.py", "python", "django-admin", "startproject", "new", "creare", "progetto", "nuovo"],
+        "ja": ["django", "manage.py", "python", "django-admin", "startproject", "new", "作成", "プロジェクト", "新規"],
+        "ko": ["django", "manage.py", "python", "django-admin", "startproject", "new", "만들기", "프로젝트", "새"],
+        "zh-cn": ["django", "manage.py", "python", "django-admin", "startproject", "new", "创建", "项目", "新建"],
+        "zh-tw": ["django", "manage.py", "python", "django-admin", "startproject", "new", "建立", "專案", "新增"],
+        "ru": ["django", "manage.py", "python", "django-admin", "startproject", "new", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#startproject"
+    },
+    {
+      "id": "django.startapp",
+      "title": {
+        "en": "Create an app",
+        "es": "Crear una app",
+        "pt-br": "Criar um app",
+        "fr": "Créer une app",
+        "de": "App erstellen",
+        "it": "Crea un’app",
+        "ja": "アプリを作成",
+        "ko": "앱 만들기",
+        "zh-cn": "创建应用",
+        "zh-tw": "建立應用程式",
+        "ru": "Создать приложение"
+      },
+      "description": {
+        "en": "Creates the app folder with models.py, views.py, admin.py and migrations; then add it to INSTALLED_APPS.",
+        "es": "Crea la carpeta de la app con models.py, views.py, admin.py y migrations; después añádela a INSTALLED_APPS.",
+        "pt-br": "Cria a pasta do app com models.py, views.py, admin.py e migrations; depois adicione-o ao INSTALLED_APPS.",
+        "fr": "Crée le dossier de l’app avec models.py, views.py, admin.py et migrations ; ajoutez-la ensuite à INSTALLED_APPS.",
+        "de": "Erstellt den App-Ordner mit models.py, views.py, admin.py und migrations; danach in INSTALLED_APPS eintragen.",
+        "it": "Crea la cartella dell’app con models.py, views.py, admin.py e migrations; poi aggiungila a INSTALLED_APPS.",
+        "ja": "models.py、views.py、admin.py、migrations を含むアプリのフォルダーを作ります。その後 INSTALLED_APPS に追加します。",
+        "ko": "models.py, views.py, admin.py, migrations가 있는 앱 폴더를 만듭니다. 그다음 INSTALLED_APPS에 추가하세요.",
+        "zh-cn": "创建包含 models.py、views.py、admin.py 和 migrations 的应用文件夹；然后将其加入 INSTALLED_APPS。",
+        "zh-tw": "建立包含 models.py、views.py、admin.py 和 migrations 的應用程式資料夾；然後將其加入 INSTALLED_APPS。",
+        "ru": "Создаёт папку приложения с models.py, views.py, admin.py и migrations; затем добавьте его в INSTALLED_APPS."
+      },
+      "command": "python3 manage.py startapp ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "blog",
+            "es": "blog",
+            "pt-br": "blog",
+            "fr": "blog",
+            "de": "blog",
+            "it": "blog",
+            "ja": "blog",
+            "ko": "blog",
+            "zh-cn": "blog",
+            "zh-tw": "blog",
+            "ru": "blog"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["django", "manage.py", "python", "startapp", "app", "new", "project"],
+        "es": ["django", "manage.py", "python", "startapp", "app", "crear", "proyecto", "nuevo"],
+        "pt-br": ["django", "manage.py", "python", "startapp", "app", "criar", "projeto", "novo"],
+        "fr": ["django", "manage.py", "python", "startapp", "app", "créer", "projet", "nouveau"],
+        "de": ["django", "manage.py", "python", "startapp", "app", "erstellen", "Projekt", "neu"],
+        "it": ["django", "manage.py", "python", "startapp", "app", "creare", "progetto", "nuovo"],
+        "ja": ["django", "manage.py", "python", "startapp", "app", "作成", "プロジェクト", "新規"],
+        "ko": ["django", "manage.py", "python", "startapp", "app", "만들기", "프로젝트", "새"],
+        "zh-cn": ["django", "manage.py", "python", "startapp", "app", "创建", "项目", "新建"],
+        "zh-tw": ["django", "manage.py", "python", "startapp", "app", "建立", "專案", "新增"],
+        "ru": ["django", "manage.py", "python", "startapp", "app", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py startapp ${name}",
+        "cmd": "python manage.py startapp ${name}"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#startapp"
+    },
+    {
+      "id": "django.runserver",
+      "title": {
+        "en": "Start the dev server",
+        "es": "Arrancar el servidor de desarrollo",
+        "pt-br": "Iniciar o servidor de desenvolvimento",
+        "fr": "Démarrer le serveur de développement",
+        "de": "Entwicklungsserver starten",
+        "it": "Avvia il server di sviluppo",
+        "ja": "開発サーバーを起動",
+        "ko": "개발 서버 시작",
+        "zh-cn": "启动开发服务器",
+        "zh-tw": "啟動開發伺服器",
+        "ru": "Запустить сервер разработки"
+      },
+      "description": {
+        "en": "Serves the project at http://127.0.0.1:8000 and reloads it when the code changes; not for production.",
+        "es": "Sirve el proyecto en http://127.0.0.1:8000 y lo recarga cuando cambia el código; no es para producción.",
+        "pt-br": "Serve o projeto em http://127.0.0.1:8000 e o recarrega quando o código muda; não é para produção.",
+        "fr": "Sert le projet sur http://127.0.0.1:8000 et le recharge quand le code change ; pas pour la production.",
+        "de": "Stellt das Projekt unter http://127.0.0.1:8000 bereit und lädt es bei Codeänderungen neu; nicht für Produktion.",
+        "it": "Serve il progetto su http://127.0.0.1:8000 e lo ricarica quando cambia il codice; non per la produzione.",
+        "ja": "プロジェクトを http://127.0.0.1:8000 で配信し、コードが変わると再読み込みします。本番用ではありません。",
+        "ko": "프로젝트를 http://127.0.0.1:8000에서 제공하고 코드가 바뀌면 다시 불러옵니다. 프로덕션용이 아닙니다.",
+        "zh-cn": "在 http://127.0.0.1:8000 提供项目，代码更改时自动重新加载；不适用于生产环境。",
+        "zh-tw": "在 http://127.0.0.1:8000 提供專案，程式碼變更時自動重新載入；不適用於正式環境。",
+        "ru": "Раздаёт проект на http://127.0.0.1:8000 и перезагружает при изменении кода; не для продакшена."
+      },
+      "command": "python3 manage.py runserver",
+      "tags": {
+        "en": ["django", "manage.py", "python", "runserver", "dev", "server", "run"],
+        "es": ["django", "manage.py", "python", "runserver", "dev", "server", "ejecutar"],
+        "pt-br": ["django", "manage.py", "python", "runserver", "dev", "server", "executar"],
+        "fr": ["django", "manage.py", "python", "runserver", "dev", "server", "exécuter"],
+        "de": ["django", "manage.py", "python", "runserver", "dev", "server", "ausführen"],
+        "it": ["django", "manage.py", "python", "runserver", "dev", "server", "eseguire"],
+        "ja": ["django", "manage.py", "python", "runserver", "dev", "server", "実行"],
+        "ko": ["django", "manage.py", "python", "runserver", "dev", "server", "실행"],
+        "zh-cn": ["django", "manage.py", "python", "runserver", "dev", "server", "运行"],
+        "zh-tw": ["django", "manage.py", "python", "runserver", "dev", "server", "執行"],
+        "ru": ["django", "manage.py", "python", "runserver", "dev", "server", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py runserver",
+        "cmd": "python manage.py runserver"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#runserver"
+    },
+    {
+      "id": "django.runserver-port",
+      "title": {
+        "en": "Start the dev server on another port",
+        "es": "Arrancar el servidor en otro puerto",
+        "pt-br": "Iniciar o servidor em outra porta",
+        "fr": "Démarrer le serveur sur un autre port",
+        "de": "Server auf anderem Port starten",
+        "it": "Avvia il server su un’altra porta",
+        "ja": "別のポートで開発サーバーを起動",
+        "ko": "다른 포트로 개발 서버 시작",
+        "zh-cn": "在其他端口启动开发服务器",
+        "zh-tw": "在其他連接埠啟動開發伺服器",
+        "ru": "Запустить сервер на другом порту"
+      },
+      "description": {
+        "en": "Uses that port instead of 8000; with 0.0.0.0:8000 it also listens on the network.",
+        "es": "Usa ese puerto en vez del 8000; con 0.0.0.0:8000 escucha también en la red.",
+        "pt-br": "Usa essa porta em vez da 8000; com 0.0.0.0:8000 escuta também na rede.",
+        "fr": "Utilise ce port au lieu de 8000 ; avec 0.0.0.0:8000, écoute aussi sur le réseau.",
+        "de": "Verwendet diesen Port statt 8000; mit 0.0.0.0:8000 lauscht es auch im Netzwerk.",
+        "it": "Usa quella porta invece della 8000; con 0.0.0.0:8000 ascolta anche in rete.",
+        "ja": "8000 の代わりにそのポートを使います。0.0.0.0:8000 ならネットワークでも待ち受けます。",
+        "ko": "8000 대신 그 포트를 씁니다. 0.0.0.0:8000이면 네트워크에서도 수신합니다.",
+        "zh-cn": "使用该端口代替 8000；用 0.0.0.0:8000 时也会在网络上监听。",
+        "zh-tw": "使用該連接埠代替 8000；用 0.0.0.0:8000 時也會在網路上監聽。",
+        "ru": "Использует этот порт вместо 8000; с 0.0.0.0:8000 слушает и в сети."
+      },
+      "command": "python3 manage.py runserver ${port}",
+      "params": [
+        {
+          "name": "port",
+          "label": {
+            "en": "Port",
+            "es": "Puerto",
+            "pt-br": "Porta",
+            "fr": "Port",
+            "de": "Port",
+            "it": "Porta",
+            "ja": "ポート",
+            "ko": "포트",
+            "zh-cn": "端口",
+            "zh-tw": "連接埠",
+            "ru": "Порт"
+          },
+          "placeholder": {
+            "en": "8080",
+            "es": "8080",
+            "pt-br": "8080",
+            "fr": "8080",
+            "de": "8080",
+            "it": "8080",
+            "ja": "8080",
+            "ko": "8080",
+            "zh-cn": "8080",
+            "zh-tw": "8080",
+            "ru": "8080"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["django", "manage.py", "python", "runserver", "port", "run"],
+        "es": ["django", "manage.py", "python", "runserver", "port", "ejecutar"],
+        "pt-br": ["django", "manage.py", "python", "runserver", "port", "executar"],
+        "fr": ["django", "manage.py", "python", "runserver", "port", "exécuter"],
+        "de": ["django", "manage.py", "python", "runserver", "port", "ausführen"],
+        "it": ["django", "manage.py", "python", "runserver", "port", "eseguire"],
+        "ja": ["django", "manage.py", "python", "runserver", "port", "実行"],
+        "ko": ["django", "manage.py", "python", "runserver", "port", "실행"],
+        "zh-cn": ["django", "manage.py", "python", "runserver", "port", "运行"],
+        "zh-tw": ["django", "manage.py", "python", "runserver", "port", "執行"],
+        "ru": ["django", "manage.py", "python", "runserver", "port", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py runserver ${port}",
+        "cmd": "python manage.py runserver ${port}"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#runserver"
+    },
+    {
+      "id": "django.makemigrations",
+      "title": {
+        "en": "Create the migrations",
+        "es": "Crear las migraciones",
+        "pt-br": "Criar as migrações",
+        "fr": "Créer les migrations",
+        "de": "Migrationen erstellen",
+        "it": "Crea le migrazioni",
+        "ja": "マイグレーションを作成",
+        "ko": "마이그레이션 만들기",
+        "zh-cn": "创建迁移",
+        "zh-tw": "建立遷移",
+        "ru": "Создать миграции"
+      },
+      "description": {
+        "en": "Compares the models with the existing migrations and writes new migration files; it does not touch the database.",
+        "es": "Compara los modelos con las migraciones existentes y escribe archivos de migración nuevos; no toca la base de datos.",
+        "pt-br": "Compara os models com as migrações existentes e escreve arquivos de migração novos; não toca no banco de dados.",
+        "fr": "Compare les modèles aux migrations existantes et écrit de nouveaux fichiers de migration ; ne touche pas à la base de données.",
+        "de": "Vergleicht die Models mit den vorhandenen Migrationen und schreibt neue Migrationsdateien; die Datenbank bleibt unberührt.",
+        "it": "Confronta i modelli con le migrazioni esistenti e scrive nuovi file di migrazione; non tocca il database.",
+        "ja": "モデルと既存のマイグレーションを比べ、新しいマイグレーションファイルを書きます。データベースには触れません。",
+        "ko": "모델을 기존 마이그레이션과 비교해 새 마이그레이션 파일을 씁니다. 데이터베이스는 건드리지 않습니다.",
+        "zh-cn": "比较模型与现有迁移并写出新的迁移文件；不会改动数据库。",
+        "zh-tw": "比較模型與現有遷移並寫出新的遷移檔；不會改動資料庫。",
+        "ru": "Сравнивает модели с существующими миграциями и записывает новые файлы миграций; базу данных не трогает."
+      },
+      "command": "python3 manage.py makemigrations",
+      "tags": {
+        "en": ["django", "manage.py", "python", "makemigrations", "migration", "models", "new", "project"],
+        "es": ["django", "manage.py", "python", "makemigrations", "migration", "models", "crear", "proyecto", "nuevo"],
+        "pt-br": ["django", "manage.py", "python", "makemigrations", "migration", "models", "criar", "projeto", "novo"],
+        "fr": ["django", "manage.py", "python", "makemigrations", "migration", "models", "créer", "projet", "nouveau"],
+        "de": ["django", "manage.py", "python", "makemigrations", "migration", "models", "erstellen", "Projekt", "neu"],
+        "it": ["django", "manage.py", "python", "makemigrations", "migration", "models", "creare", "progetto", "nuovo"],
+        "ja": ["django", "manage.py", "python", "makemigrations", "migration", "models", "作成", "プロジェクト", "新規"],
+        "ko": ["django", "manage.py", "python", "makemigrations", "migration", "models", "만들기", "프로젝트", "새"],
+        "zh-cn": ["django", "manage.py", "python", "makemigrations", "migration", "models", "创建", "项目", "新建"],
+        "zh-tw": ["django", "manage.py", "python", "makemigrations", "migration", "models", "建立", "專案", "新增"],
+        "ru": ["django", "manage.py", "python", "makemigrations", "migration", "models", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py makemigrations",
+        "cmd": "python manage.py makemigrations"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#makemigrations"
+    },
+    {
+      "id": "django.migrate",
+      "title": {
+        "en": "Apply the migrations",
+        "es": "Aplicar las migraciones",
+        "pt-br": "Aplicar as migrações",
+        "fr": "Appliquer les migrations",
+        "de": "Migrationen ausführen",
+        "it": "Applica le migrazioni",
+        "ja": "マイグレーションを適用",
+        "ko": "마이그레이션 적용",
+        "zh-cn": "应用迁移",
+        "zh-tw": "套用遷移",
+        "ru": "Применить миграции"
+      },
+      "description": {
+        "en": "Applies the pending migrations to the database of settings.py.",
+        "es": "Aplica las migraciones pendientes a la base de datos de settings.py.",
+        "pt-br": "Aplica as migrações pendentes ao banco de dados do settings.py.",
+        "fr": "Applique les migrations en attente à la base de données de settings.py.",
+        "de": "Wendet die ausstehenden Migrationen auf die Datenbank aus settings.py an.",
+        "it": "Applica le migrazioni in sospeso al database di settings.py.",
+        "ja": "settings.py のデータベースに未適用のマイグレーションを適用します。",
+        "ko": "settings.py의 데이터베이스에 대기 중인 마이그레이션을 적용합니다.",
+        "zh-cn": "将待处理的迁移应用到 settings.py 中的数据库。",
+        "zh-tw": "將待處理的遷移套用到 settings.py 中的資料庫。",
+        "ru": "Применяет ожидающие миграции к базе данных из settings.py."
+      },
+      "command": "python3 manage.py migrate",
+      "tags": {
+        "en": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "update", "upgrade"],
+        "es": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "actualizar"],
+        "pt-br": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "atualizar"],
+        "fr": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "mettre à jour"],
+        "de": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "aktualisieren"],
+        "it": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "aggiornare"],
+        "ja": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "更新"],
+        "ko": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "업데이트"],
+        "zh-cn": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "更新", "升级"],
+        "zh-tw": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "更新", "升級"],
+        "ru": ["django", "manage.py", "python", "migrate", "migration", "database", "db", "обновить"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "python manage.py migrate",
+        "cmd": "python manage.py migrate"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#migrate"
+    },
+    {
+      "id": "django.showmigrations",
+      "title": {
+        "en": "See the state of the migrations",
+        "es": "Ver el estado de las migraciones",
+        "pt-br": "Ver o estado das migrações",
+        "fr": "Voir l’état des migrations",
+        "de": "Status der Migrationen anzeigen",
+        "it": "Vedi lo stato delle migrazioni",
+        "ja": "マイグレーションの状態を表示",
+        "ko": "마이그레이션 상태 보기",
+        "zh-cn": "查看迁移状态",
+        "zh-tw": "檢視遷移狀態",
+        "ru": "Посмотреть состояние миграций"
+      },
+      "description": {
+        "en": "Lists the migrations of each app and marks with [X] the ones already applied.",
+        "es": "Muestra las migraciones de cada app y marca con [X] las ya aplicadas.",
+        "pt-br": "Mostra as migrações de cada app e marca com [X] as já aplicadas.",
+        "fr": "Liste les migrations de chaque app et marque d’un [X] celles déjà appliquées.",
+        "de": "Listet die Migrationen jeder App und markiert bereits angewendete mit [X].",
+        "it": "Elenca le migrazioni di ogni app e segna con [X] quelle già applicate.",
+        "ja": "各アプリのマイグレーションを表示し、適用済みのものに [X] を付けます。",
+        "ko": "각 앱의 마이그레이션을 보여 주고 적용된 것에 [X]를 표시합니다.",
+        "zh-cn": "列出每个应用的迁移，并用 [X] 标记已应用的迁移。",
+        "zh-tw": "列出每個應用程式的遷移，並用 [X] 標記已套用的遷移。",
+        "ru": "Показывает миграции каждого приложения и отмечает [X] уже применённые."
+      },
+      "command": "python3 manage.py showmigrations",
+      "tags": {
+        "en": ["django", "manage.py", "python", "showmigrations", "migration", "list", "installed"],
+        "es": ["django", "manage.py", "python", "showmigrations", "migration", "ver", "instaladas", "lista"],
+        "pt-br": ["django", "manage.py", "python", "showmigrations", "migration", "ver", "instaladas", "lista"],
+        "fr": ["django", "manage.py", "python", "showmigrations", "migration", "lister", "installées"],
+        "de": ["django", "manage.py", "python", "showmigrations", "migration", "anzeigen", "installiert"],
+        "it": ["django", "manage.py", "python", "showmigrations", "migration", "elencare", "installate"],
+        "ja": ["django", "manage.py", "python", "showmigrations", "migration", "一覧", "インストール済み"],
+        "ko": ["django", "manage.py", "python", "showmigrations", "migration", "목록", "설치됨"],
+        "zh-cn": ["django", "manage.py", "python", "showmigrations", "migration", "列出", "已安装"],
+        "zh-tw": ["django", "manage.py", "python", "showmigrations", "migration", "列出", "已安裝"],
+        "ru": ["django", "manage.py", "python", "showmigrations", "migration", "список", "установленные"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py showmigrations",
+        "cmd": "python manage.py showmigrations"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#showmigrations"
+    },
+    {
+      "id": "django.createsuperuser",
+      "title": {
+        "en": "Create an admin user",
+        "es": "Crear un usuario administrador",
+        "pt-br": "Criar um usuário administrador",
+        "fr": "Créer un utilisateur administrateur",
+        "de": "Admin-Benutzer erstellen",
+        "it": "Crea un utente amministratore",
+        "ja": "管理者ユーザーを作成",
+        "ko": "관리자 사용자 만들기",
+        "zh-cn": "创建管理员用户",
+        "zh-tw": "建立管理員使用者",
+        "ru": "Создать администратора"
+      },
+      "description": {
+        "en": "Asks for the username, email and password of a superuser to sign in to /admin; you type the password in the terminal.",
+        "es": "Pide el usuario, el correo y la contraseña de un superusuario para entrar en /admin; la contraseña la escribes tú en la terminal.",
+        "pt-br": "Pede o usuário, o e-mail e a senha de um superusuário para entrar em /admin; a senha você digita no terminal.",
+        "fr": "Demande le nom, l’e-mail et le mot de passe d’un superutilisateur pour se connecter à /admin ; vous saisissez le mot de passe dans le terminal.",
+        "de": "Fragt nach Benutzername, E-Mail und Passwort eines Superusers für /admin; das Passwort geben Sie im Terminal ein.",
+        "it": "Chiede utente, email e password di un superutente per accedere a /admin; la password la scrivi tu nel terminale.",
+        "ja": "/admin にログインするスーパーユーザーのユーザー名、メール、パスワードを尋ねます。パスワードはターミナルで入力します。",
+        "ko": "/admin에 로그인할 슈퍼유저의 사용자 이름, 이메일, 비밀번호를 묻습니다. 비밀번호는 터미널에서 입력합니다.",
+        "zh-cn": "询问用于登录 /admin 的超级用户的用户名、邮箱和密码；密码由你在终端中输入。",
+        "zh-tw": "詢問用於登入 /admin 的超級使用者的使用者名稱、電子郵件和密碼；密碼由你在終端機中輸入。",
+        "ru": "Спрашивает имя, почту и пароль суперпользователя для входа в /admin; пароль вводится в терминале."
+      },
+      "command": "python3 manage.py createsuperuser",
+      "tags": {
+        "en": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "new", "project"],
+        "es": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "crear", "proyecto", "nuevo"],
+        "pt-br": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "criar", "projeto", "novo"],
+        "fr": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "créer", "projet", "nouveau"],
+        "de": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "erstellen", "Projekt", "neu"],
+        "it": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "creare", "progetto", "nuovo"],
+        "ja": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "作成", "プロジェクト", "新規"],
+        "ko": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "만들기", "프로젝트", "새"],
+        "zh-cn": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "创建", "项目", "新建"],
+        "zh-tw": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "建立", "專案", "新增"],
+        "ru": ["django", "manage.py", "python", "createsuperuser", "admin", "user", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py createsuperuser",
+        "cmd": "python manage.py createsuperuser"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#createsuperuser"
+    },
+    {
+      "id": "django.shell",
+      "title": {
+        "en": "Open the Django shell",
+        "es": "Abrir la consola de Django",
+        "pt-br": "Abrir o shell do Django",
+        "fr": "Ouvrir le shell Django",
+        "de": "Django-Shell öffnen",
+        "it": "Apri la shell di Django",
+        "ja": "Django シェルを開く",
+        "ko": "Django 셸 열기",
+        "zh-cn": "打开 Django shell",
+        "zh-tw": "開啟 Django shell",
+        "ru": "Открыть оболочку Django"
+      },
+      "description": {
+        "en": "Opens Python with the project settings loaded and the models imported; what you run there changes the real database.",
+        "es": "Abre Python con la configuración del proyecto cargada y los modelos importados; lo que ejecutes cambia la base de datos real.",
+        "pt-br": "Abre o Python com as configurações do projeto carregadas e os models importados; o que você executar altera o banco de dados real.",
+        "fr": "Ouvre Python avec les réglages du projet chargés et les modèles importés ; ce que vous exécutez modifie la vraie base de données.",
+        "de": "Öffnet Python mit geladenen Projekteinstellungen und importierten Models; was Sie dort ausführen, ändert die echte Datenbank.",
+        "it": "Apre Python con le impostazioni del progetto caricate e i modelli importati; ciò che esegui cambia il database reale.",
+        "ja": "プロジェクト設定を読み込み、モデルをインポートした Python を開きます。実行した内容は実際のデータベースを変更します。",
+        "ko": "프로젝트 설정을 불러오고 모델을 가져온 Python을 엽니다. 실행한 내용은 실제 데이터베이스를 바꿉니다.",
+        "zh-cn": "打开已加载项目设置并导入模型的 Python；在其中执行的操作会修改真实数据库。",
+        "zh-tw": "開啟已載入專案設定並匯入模型的 Python；在其中執行的操作會修改真實資料庫。",
+        "ru": "Открывает Python с загруженными настройками проекта и импортированными моделями; выполненное там меняет настоящую базу данных."
+      },
+      "command": "python3 manage.py shell",
+      "tags": {
+        "en": ["django", "manage.py", "python", "shell", "repl", "console", "interactive"],
+        "es": ["django", "manage.py", "python", "shell", "repl", "console", "interactivo", "consola"],
+        "pt-br": ["django", "manage.py", "python", "shell", "repl", "console", "interativo"],
+        "fr": ["django", "manage.py", "python", "shell", "repl", "console", "interactif"],
+        "de": ["django", "manage.py", "python", "shell", "repl", "console", "interaktiv", "Konsole"],
+        "it": ["django", "manage.py", "python", "shell", "repl", "console", "interattivo"],
+        "ja": ["django", "manage.py", "python", "shell", "repl", "console", "対話", "コンソール"],
+        "ko": ["django", "manage.py", "python", "shell", "repl", "console", "대화형", "콘솔"],
+        "zh-cn": ["django", "manage.py", "python", "shell", "repl", "console", "交互式", "控制台"],
+        "zh-tw": ["django", "manage.py", "python", "shell", "repl", "console", "互動式", "主控台"],
+        "ru": ["django", "manage.py", "python", "shell", "repl", "console", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py shell",
+        "cmd": "python manage.py shell"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#shell"
+    },
+    {
+      "id": "django.dbshell",
+      "title": {
+        "en": "Open the database client",
+        "es": "Abrir el cliente de la base de datos",
+        "pt-br": "Abrir o cliente do banco de dados",
+        "fr": "Ouvrir le client de la base de données",
+        "de": "Datenbank-Client öffnen",
+        "it": "Apri il client del database",
+        "ja": "データベースクライアントを開く",
+        "ko": "데이터베이스 클라이언트 열기",
+        "zh-cn": "打开数据库客户端",
+        "zh-tw": "開啟資料庫用戶端",
+        "ru": "Открыть клиент базы данных"
+      },
+      "description": {
+        "en": "Opens psql, mysql or sqlite3 connected with the settings of the project; that client must be installed.",
+        "es": "Abre psql, mysql o sqlite3 conectado con la configuración del proyecto; ese cliente tiene que estar instalado.",
+        "pt-br": "Abre o psql, mysql ou sqlite3 conectado com as configurações do projeto; esse cliente precisa estar instalado.",
+        "fr": "Ouvre psql, mysql ou sqlite3 connecté avec les réglages du projet ; ce client doit être installé.",
+        "de": "Öffnet psql, mysql oder sqlite3 mit den Einstellungen des Projekts; der Client muss installiert sein.",
+        "it": "Apre psql, mysql o sqlite3 collegato con le impostazioni del progetto; quel client deve essere installato.",
+        "ja": "プロジェクトの設定で接続した psql、mysql、sqlite3 を開きます。そのクライアントがインストールされている必要があります。",
+        "ko": "프로젝트 설정으로 연결된 psql, mysql, sqlite3를 엽니다. 해당 클라이언트가 설치되어 있어야 합니다.",
+        "zh-cn": "用项目设置连接并打开 psql、mysql 或 sqlite3；需要已安装该客户端。",
+        "zh-tw": "用專案設定連線並開啟 psql、mysql 或 sqlite3；需要已安裝該用戶端。",
+        "ru": "Открывает psql, mysql или sqlite3 с настройками проекта; клиент должен быть установлен."
+      },
+      "command": "python3 manage.py dbshell",
+      "tags": {
+        "en": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "repl", "interactive", "console"],
+        "es": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "interactivo", "consola"],
+        "pt-br": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "interativo", "console"],
+        "fr": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "interactif", "console"],
+        "de": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "interaktiv", "Konsole"],
+        "it": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "interattivo", "console"],
+        "ja": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "対話", "コンソール"],
+        "ko": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "대화형", "콘솔"],
+        "zh-cn": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "交互式", "控制台"],
+        "zh-tw": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "互動式", "主控台"],
+        "ru": ["django", "manage.py", "python", "dbshell", "database", "sql", "psql", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py dbshell",
+        "cmd": "python manage.py dbshell"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#dbshell"
+    },
+    {
+      "id": "django.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Lancer les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Runs the tests of every app against a temporary test database that is deleted at the end.",
+        "es": "Ejecuta los tests de todas las apps contra una base de datos de prueba temporal que se borra al final.",
+        "pt-br": "Executa os testes de todos os apps num banco de dados de teste temporário que é apagado no final.",
+        "fr": "Exécute les tests de toutes les apps sur une base de test temporaire supprimée à la fin.",
+        "de": "Führt die Tests aller Apps gegen eine temporäre Testdatenbank aus, die am Ende gelöscht wird.",
+        "it": "Esegue i test di tutte le app su un database di prova temporaneo che viene eliminato alla fine.",
+        "ja": "すべてのアプリのテストを、最後に削除される一時的なテスト用データベースで実行します。",
+        "ko": "모든 앱의 테스트를 끝나면 삭제되는 임시 테스트 데이터베이스로 실행합니다.",
+        "zh-cn": "针对临时测试数据库运行所有应用的测试，结束后该数据库会被删除。",
+        "zh-tw": "針對臨時測試資料庫執行所有應用程式的測試，結束後該資料庫會被刪除。",
+        "ru": "Запускает тесты всех приложений на временной тестовой базе, которая удаляется в конце."
+      },
+      "command": "python3 manage.py test",
+      "tags": {
+        "en": ["django", "manage.py", "python", "test", "unittest", "tests"],
+        "es": ["django", "manage.py", "python", "test", "unittest", "tests", "pruebas"],
+        "pt-br": ["django", "manage.py", "python", "test", "unittest", "testes"],
+        "fr": ["django", "manage.py", "python", "test", "unittest", "tests"],
+        "de": ["django", "manage.py", "python", "test", "unittest", "Tests"],
+        "it": ["django", "manage.py", "python", "test", "unittest"],
+        "ja": ["django", "manage.py", "python", "test", "unittest", "テスト"],
+        "ko": ["django", "manage.py", "python", "test", "unittest", "테스트"],
+        "zh-cn": ["django", "manage.py", "python", "test", "unittest", "测试"],
+        "zh-tw": ["django", "manage.py", "python", "test", "unittest", "測試"],
+        "ru": ["django", "manage.py", "python", "test", "unittest", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py test",
+        "cmd": "python manage.py test"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#test"
+    },
+    {
+      "id": "django.collectstatic",
+      "title": {
+        "en": "Collect the static files",
+        "es": "Reunir los archivos estáticos",
+        "pt-br": "Reunir os arquivos estáticos",
+        "fr": "Rassembler les fichiers statiques",
+        "de": "Statische Dateien sammeln",
+        "it": "Raccogli i file statici",
+        "ja": "静的ファイルを集める",
+        "ko": "정적 파일 모으기",
+        "zh-cn": "收集静态文件",
+        "zh-tw": "收集靜態檔案",
+        "ru": "Собрать статические файлы"
+      },
+      "description": {
+        "en": "Copies the static files of every app into STATIC_ROOT for production, overwriting the ones already there after asking.",
+        "es": "Copia los archivos estáticos de todas las apps en STATIC_ROOT para producción y, tras preguntar, sobrescribe los que ya hay.",
+        "pt-br": "Copia os arquivos estáticos de todos os apps para STATIC_ROOT para produção e, após perguntar, sobrescreve os que já existem.",
+        "fr": "Copie les fichiers statiques de toutes les apps dans STATIC_ROOT pour la production et, après confirmation, écrase ceux déjà présents.",
+        "de": "Kopiert die statischen Dateien aller Apps für die Produktion nach STATIC_ROOT und überschreibt nach Rückfrage vorhandene.",
+        "it": "Copia i file statici di tutte le app in STATIC_ROOT per la produzione e, dopo aver chiesto, sovrascrive quelli già presenti.",
+        "ja": "本番用にすべてのアプリの静的ファイルを STATIC_ROOT にコピーし、確認後に既存のファイルを上書きします。",
+        "ko": "프로덕션용으로 모든 앱의 정적 파일을 STATIC_ROOT에 복사하고, 확인 후 기존 파일을 덮어씁니다.",
+        "zh-cn": "将所有应用的静态文件复制到 STATIC_ROOT 以供生产使用，确认后会覆盖已有文件。",
+        "zh-tw": "將所有應用程式的靜態檔案複製到 STATIC_ROOT 以供正式環境使用，確認後會覆寫已有檔案。",
+        "ru": "Копирует статические файлы всех приложений в STATIC_ROOT для продакшена и после вопроса перезаписывает уже имеющиеся."
+      },
+      "command": "python3 manage.py collectstatic",
+      "tags": {
+        "en": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "build", "compile"],
+        "es": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "compilar"],
+        "pt-br": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "compilar"],
+        "fr": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "compiler"],
+        "de": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "bauen", "kompilieren"],
+        "it": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "compilare"],
+        "ja": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "ビルド", "コンパイル"],
+        "ko": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "빌드", "컴파일"],
+        "zh-cn": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "构建", "编译"],
+        "zh-tw": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "建置", "編譯"],
+        "ru": ["django", "manage.py", "python", "collectstatic", "static", "STATIC_ROOT", "сборка", "компиляция"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "python manage.py collectstatic",
+        "cmd": "python manage.py collectstatic"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/contrib/staticfiles/#collectstatic"
+    },
+    {
+      "id": "django.check-deploy",
+      "title": {
+        "en": "Check the production settings",
+        "es": "Revisar la configuración de producción",
+        "pt-br": "Verificar a configuração de produção",
+        "fr": "Vérifier la configuration de production",
+        "de": "Produktionseinstellungen prüfen",
+        "it": "Controlla la configurazione di produzione",
+        "ja": "本番用の設定をチェック",
+        "ko": "프로덕션 설정 검사",
+        "zh-cn": "检查生产环境设置",
+        "zh-tw": "檢查正式環境設定",
+        "ru": "Проверить настройки продакшена"
+      },
+      "description": {
+        "en": "Runs the system checks plus the security ones for deployment (DEBUG, SECRET_KEY, HTTPS, cookies…).",
+        "es": "Ejecuta las comprobaciones del sistema y las de seguridad para el despliegue (DEBUG, SECRET_KEY, HTTPS, cookies…).",
+        "pt-br": "Executa as verificações do sistema e as de segurança para o deploy (DEBUG, SECRET_KEY, HTTPS, cookies…).",
+        "fr": "Lance les vérifications système et celles de sécurité pour le déploiement (DEBUG, SECRET_KEY, HTTPS, cookies…).",
+        "de": "Führt die Systemprüfungen und die Sicherheitsprüfungen für das Deployment aus (DEBUG, SECRET_KEY, HTTPS, Cookies…).",
+        "it": "Esegue i controlli di sistema e quelli di sicurezza per il deploy (DEBUG, SECRET_KEY, HTTPS, cookie…).",
+        "ja": "システムチェックに加え、デプロイ向けのセキュリティチェック（DEBUG、SECRET_KEY、HTTPS、Cookie など）を実行します。",
+        "ko": "시스템 검사와 배포용 보안 검사(DEBUG, SECRET_KEY, HTTPS, 쿠키 등)를 실행합니다.",
+        "zh-cn": "运行系统检查以及部署相关的安全检查（DEBUG、SECRET_KEY、HTTPS、cookie…）。",
+        "zh-tw": "執行系統檢查以及部署相關的安全檢查（DEBUG、SECRET_KEY、HTTPS、cookie…）。",
+        "ru": "Выполняет системные проверки и проверки безопасности для развёртывания (DEBUG, SECRET_KEY, HTTPS, cookies…)."
+      },
+      "command": "python3 manage.py check --deploy",
+      "tags": {
+        "en": ["django", "manage.py", "python", "check", "deploy", "security", "analyze", "types", "lint"],
+        "es": ["django", "manage.py", "python", "check", "deploy", "security", "analizar", "tipos"],
+        "pt-br": ["django", "manage.py", "python", "check", "deploy", "security", "analisar", "tipos"],
+        "fr": ["django", "manage.py", "python", "check", "deploy", "security", "analyser", "types"],
+        "de": ["django", "manage.py", "python", "check", "deploy", "security", "analysieren", "Typen"],
+        "it": ["django", "manage.py", "python", "check", "deploy", "security", "analizzare", "tipi"],
+        "ja": ["django", "manage.py", "python", "check", "deploy", "security", "解析", "型"],
+        "ko": ["django", "manage.py", "python", "check", "deploy", "security", "분석", "타입"],
+        "zh-cn": ["django", "manage.py", "python", "check", "deploy", "security", "分析", "类型"],
+        "zh-tw": ["django", "manage.py", "python", "check", "deploy", "security", "分析", "型別"],
+        "ru": ["django", "manage.py", "python", "check", "deploy", "security", "анализ", "типы"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python manage.py check --deploy",
+        "cmd": "python manage.py check --deploy"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#check"
+    },
+    {
+      "id": "django.flush",
+      "title": {
+        "en": "Empty the database",
+        "es": "Vaciar la base de datos",
+        "pt-br": "Esvaziar o banco de dados",
+        "fr": "Vider la base de données",
+        "de": "Datenbank leeren",
+        "it": "Svuota il database",
+        "ja": "データベースを空にする",
+        "ko": "데이터베이스 비우기",
+        "zh-cn": "清空数据库",
+        "zh-tw": "清空資料庫",
+        "ru": "Очистить базу данных"
+      },
+      "description": {
+        "en": "Deletes all the rows of every table after asking for confirmation, keeping the tables and the applied migrations. The data is lost.",
+        "es": "Borra todas las filas de todas las tablas tras pedir confirmación, y conserva las tablas y las migraciones aplicadas. Se pierden los datos.",
+        "pt-br": "Apaga todas as linhas de todas as tabelas após pedir confirmação, mantendo as tabelas e as migrações aplicadas. Os dados são perdidos.",
+        "fr": "Supprime toutes les lignes de toutes les tables après confirmation, en gardant les tables et les migrations appliquées. Les données sont perdues.",
+        "de": "Löscht nach Bestätigung alle Zeilen aller Tabellen; Tabellen und angewendete Migrationen bleiben erhalten. Die Daten gehen verloren.",
+        "it": "Elimina tutte le righe di tutte le tabelle dopo aver chiesto conferma, mantenendo le tabelle e le migrazioni applicate. I dati vanno persi.",
+        "ja": "確認後にすべてのテーブルの全行を削除します。テーブルと適用済みのマイグレーションは残ります。 データは失われます。",
+        "ko": "확인 후 모든 테이블의 모든 행을 삭제하며, 테이블과 적용된 마이그레이션은 유지합니다. 데이터는 사라집니다.",
+        "zh-cn": "确认后删除所有表中的全部行，保留表结构和已应用的迁移。 数据会丢失。",
+        "zh-tw": "確認後刪除所有資料表中的全部資料列，保留資料表結構和已套用的遷移。 資料會遺失。",
+        "ru": "После подтверждения удаляет все строки всех таблиц, сохраняя таблицы и применённые миграции. Данные теряются."
+      },
+      "command": "python3 manage.py flush",
+      "tags": {
+        "en": ["django", "manage.py", "python", "flush", "database", "reset", "clean", "delete"],
+        "es": ["django", "manage.py", "python", "flush", "database", "reset", "borrar", "limpiar"],
+        "pt-br": ["django", "manage.py", "python", "flush", "database", "reset", "apagar", "limpar"],
+        "fr": ["django", "manage.py", "python", "flush", "database", "reset", "supprimer", "nettoyer"],
+        "de": ["django", "manage.py", "python", "flush", "database", "reset", "löschen", "aufräumen"],
+        "it": ["django", "manage.py", "python", "flush", "database", "reset", "eliminare", "pulire"],
+        "ja": ["django", "manage.py", "python", "flush", "database", "reset", "削除", "クリーン"],
+        "ko": ["django", "manage.py", "python", "flush", "database", "reset", "삭제", "정리"],
+        "zh-cn": ["django", "manage.py", "python", "flush", "database", "reset", "删除", "清理"],
+        "zh-tw": ["django", "manage.py", "python", "flush", "database", "reset", "刪除", "清理"],
+        "ru": ["django", "manage.py", "python", "flush", "database", "reset", "удалить", "очистить"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "python manage.py flush",
+        "cmd": "python manage.py flush"
+      },
+      "docs": "https://docs.djangoproject.com/en/stable/ref/django-admin/#flush"
+    }
+  ]
+}

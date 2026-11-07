@@ -1,0 +1,1004 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "rails",
+  "title": {
+    "en": "Rails",
+    "es": "Rails",
+    "pt-br": "Rails",
+    "fr": "Rails",
+    "de": "Rails",
+    "it": "Rails",
+    "ja": "Rails",
+    "ko": "Rails",
+    "zh-cn": "Rails",
+    "zh-tw": "Rails",
+    "ru": "Rails"
+  },
+  "icon": "telescope",
+  "order": 120,
+  "section": "frameworks",
+  "detect": ["bin/rails"],
+  "commands": [
+    {
+      "id": "rails.install",
+      "title": {
+        "en": "Install Rails",
+        "es": "Instalar Rails",
+        "pt-br": "Instalar o Rails",
+        "fr": "Installer Rails",
+        "de": "Rails installieren",
+        "it": "Installa Rails",
+        "ja": "Rails をインストール",
+        "ko": "Rails 설치",
+        "zh-cn": "安装 Rails",
+        "zh-tw": "安裝 Rails",
+        "ru": "Установить Rails"
+      },
+      "description": {
+        "en": "Installs the rails gem globally; it is only needed to create new projects with rails new.",
+        "es": "Instala la gema rails de forma global; solo hace falta para crear proyectos nuevos con rails new.",
+        "pt-br": "Instala a gem rails globalmente; só é necessária para criar projetos novos com rails new.",
+        "fr": "Installe la gem rails globalement ; elle ne sert qu’à créer de nouveaux projets avec rails new.",
+        "de": "Installiert das Gem rails global; es wird nur zum Erstellen neuer Projekte mit rails new gebraucht.",
+        "it": "Installa la gem rails a livello globale; serve solo per creare nuovi progetti con rails new.",
+        "ja": "rails gem をグローバルにインストールします。rails new で新しいプロジェクトを作るときだけ必要です。",
+        "ko": "rails gem을 전역으로 설치합니다. rails new로 새 프로젝트를 만들 때만 필요합니다.",
+        "zh-cn": "全局安装 rails gem；只有用 rails new 创建新项目时才需要。",
+        "zh-tw": "全域安裝 rails gem；只有用 rails new 建立新專案時才需要。",
+        "ru": "Устанавливает гем rails глобально; он нужен только для создания проектов через rails new."
+      },
+      "command": "gem install rails",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "gem", "install"],
+        "es": ["rails", "ruby on rails", "bin/rails", "gem", "install", "instalar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "gem", "install", "instalar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "gem", "install", "installer"],
+        "de": ["rails", "ruby on rails", "bin/rails", "gem", "install", "installieren"],
+        "it": ["rails", "ruby on rails", "bin/rails", "gem", "install", "installare"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "gem", "install", "インストール"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "gem", "install", "설치"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "gem", "install", "安装"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "gem", "install", "安裝"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "gem", "install", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://guides.rubyonrails.org/getting_started.html#installing-rails"
+    },
+    {
+      "id": "rails.new",
+      "title": {
+        "en": "Create a Rails project",
+        "es": "Crear un proyecto de Rails",
+        "pt-br": "Criar um projeto Rails",
+        "fr": "Créer un projet Rails",
+        "de": "Rails-Projekt erstellen",
+        "it": "Crea un progetto Rails",
+        "ja": "Rails プロジェクトを作成",
+        "ko": "Rails 프로젝트 만들기",
+        "zh-cn": "创建 Rails 项目",
+        "zh-tw": "建立 Rails 專案",
+        "ru": "Создать проект Rails"
+      },
+      "description": {
+        "en": "Creates the app in that folder with SQLite and runs bundle install; add -d postgresql to use PostgreSQL.",
+        "es": "Crea la app en esa carpeta con SQLite y ejecuta bundle install; añade -d postgresql para usar PostgreSQL.",
+        "pt-br": "Cria o app nessa pasta com SQLite e executa bundle install; adicione -d postgresql para usar PostgreSQL.",
+        "fr": "Crée l’app dans ce dossier avec SQLite et lance bundle install ; ajoutez -d postgresql pour utiliser PostgreSQL.",
+        "de": "Erstellt die App in diesem Ordner mit SQLite und führt bundle install aus; mit -d postgresql für PostgreSQL.",
+        "it": "Crea l’app in quella cartella con SQLite ed esegue bundle install; aggiungi -d postgresql per usare PostgreSQL.",
+        "ja": "そのフォルダーに SQLite でアプリを作り、bundle install を実行します。PostgreSQL なら -d postgresql を付けます。",
+        "ko": "그 폴더에 SQLite로 앱을 만들고 bundle install을 실행합니다. PostgreSQL을 쓰려면 -d postgresql을 붙입니다.",
+        "zh-cn": "在该文件夹中用 SQLite 创建应用并运行 bundle install；加 -d postgresql 可使用 PostgreSQL。",
+        "zh-tw": "在該資料夾中用 SQLite 建立應用程式並執行 bundle install；加 -d postgresql 可使用 PostgreSQL。",
+        "ru": "Создаёт приложение в этой папке с SQLite и выполняет bundle install; для PostgreSQL добавьте -d postgresql."
+      },
+      "command": "rails new ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "blog",
+            "es": "blog",
+            "pt-br": "blog",
+            "fr": "blog",
+            "de": "blog",
+            "it": "blog",
+            "ja": "blog",
+            "ko": "blog",
+            "zh-cn": "blog",
+            "zh-tw": "blog",
+            "ru": "blog"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "new", "project", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "new", "project", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "new", "project", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "new", "project", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "new", "project", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "new", "project", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "new", "project", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "new", "project", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "new", "project", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "new", "project", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://guides.rubyonrails.org/command_line.html#rails-new"
+    },
+    {
+      "id": "rails.server",
+      "title": {
+        "en": "Start the server",
+        "es": "Arrancar el servidor",
+        "pt-br": "Iniciar o servidor",
+        "fr": "Démarrer le serveur",
+        "de": "Server starten",
+        "it": "Avvia il server",
+        "ja": "サーバーを起動",
+        "ko": "서버 시작",
+        "zh-cn": "启动服务器",
+        "zh-tw": "啟動伺服器",
+        "ru": "Запустить сервер"
+      },
+      "description": {
+        "en": "Serves the app with Puma at http://localhost:3000 and reloads the code on every request in development.",
+        "es": "Sirve la app con Puma en http://localhost:3000 y recarga el código en cada petición en desarrollo.",
+        "pt-br": "Serve o app com o Puma em http://localhost:3000 e recarrega o código a cada requisição em desenvolvimento.",
+        "fr": "Sert l’app avec Puma sur http://localhost:3000 et recharge le code à chaque requête en développement.",
+        "de": "Stellt die App mit Puma unter http://localhost:3000 bereit und lädt den Code in der Entwicklung bei jeder Anfrage neu.",
+        "it": "Serve l’app con Puma su http://localhost:3000 e ricarica il codice a ogni richiesta in sviluppo.",
+        "ja": "Puma でアプリを http://localhost:3000 で配信し、開発中はリクエストごとにコードを再読み込みします。",
+        "ko": "Puma로 앱을 http://localhost:3000에서 제공하고, 개발 중에는 요청마다 코드를 다시 불러옵니다.",
+        "zh-cn": "用 Puma 在 http://localhost:3000 提供应用，开发时每次请求都会重新加载代码。",
+        "zh-tw": "用 Puma 在 http://localhost:3000 提供應用程式，開發時每次請求都會重新載入程式碼。",
+        "ru": "Раздаёт приложение через Puma на http://localhost:3000 и в разработке перезагружает код при каждом запросе."
+      },
+      "command": "bin/rails server",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "run"],
+        "es": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "ejecutar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "executar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "exécuter"],
+        "de": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "ausführen"],
+        "it": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "eseguire"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "実行"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "실행"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "运行"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "執行"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "server", "s", "puma", "dev", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails server",
+        "cmd": "ruby bin\\rails server"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-server"
+    },
+    {
+      "id": "rails.dev",
+      "title": {
+        "en": "Start the server with the asset watchers",
+        "es": "Arrancar el servidor con los vigilantes de assets",
+        "pt-br": "Iniciar o servidor com os observadores de assets",
+        "fr": "Démarrer le serveur avec la surveillance des assets",
+        "de": "Server mit Asset-Watchern starten",
+        "it": "Avvia il server con i watcher degli asset",
+        "ja": "アセット監視付きでサーバーを起動",
+        "ko": "에셋 감시와 함께 서버 시작",
+        "zh-cn": "启动服务器及资源监视进程",
+        "zh-tw": "啟動伺服器及資源監看程序",
+        "ru": "Запустить сервер с наблюдением за ресурсами"
+      },
+      "description": {
+        "en": "Starts the server together with the CSS and JavaScript watchers of Procfile.dev, if the app uses them.",
+        "es": "Arranca el servidor junto con los vigilantes de CSS y JavaScript de Procfile.dev, si la app los usa.",
+        "pt-br": "Inicia o servidor junto com os observadores de CSS e JavaScript do Procfile.dev, se o app os usar.",
+        "fr": "Démarre le serveur avec la surveillance CSS et JavaScript de Procfile.dev, si l’app les utilise.",
+        "de": "Startet den Server zusammen mit den CSS- und JavaScript-Watchern aus Procfile.dev, falls die App sie nutzt.",
+        "it": "Avvia il server insieme ai watcher di CSS e JavaScript di Procfile.dev, se l’app li usa.",
+        "ja": "アプリが使っていれば、Procfile.dev の CSS と JavaScript の監視とともにサーバーを起動します。",
+        "ko": "앱이 쓰는 경우 Procfile.dev의 CSS와 JavaScript 감시 프로세스와 함께 서버를 시작합니다.",
+        "zh-cn": "如果应用使用了 Procfile.dev 中的 CSS 和 JavaScript 监视进程，则与服务器一起启动。",
+        "zh-tw": "如果應用程式使用了 Procfile.dev 中的 CSS 和 JavaScript 監看程序，則與伺服器一起啟動。",
+        "ru": "Запускает сервер вместе с наблюдателями CSS и JavaScript из Procfile.dev, если приложение их использует."
+      },
+      "command": "bin/dev",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "run", "watch"],
+        "es": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "ejecutar", "vigilar", "automático"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "executar", "observar", "automático"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "exécuter", "surveiller", "automatique"],
+        "de": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "ausführen", "beobachten", "automatisch"],
+        "it": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "eseguire", "osservare", "automatico"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "実行", "監視", "自動"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "실행", "감시", "자동"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "运行", "监视", "自动"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "執行", "監看", "自動"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "bin/dev", "dev", "procfile", "tailwind", "запустить", "наблюдение", "автоматически"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\dev",
+        "cmd": "ruby bin\\dev"
+      },
+      "docs": "https://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server"
+    },
+    {
+      "id": "rails.console",
+      "title": {
+        "en": "Open the Rails console",
+        "es": "Abrir la consola de Rails",
+        "pt-br": "Abrir o console do Rails",
+        "fr": "Ouvrir la console Rails",
+        "de": "Rails-Konsole öffnen",
+        "it": "Apri la console di Rails",
+        "ja": "Rails コンソールを開く",
+        "ko": "Rails 콘솔 열기",
+        "zh-cn": "打开 Rails 控制台",
+        "zh-tw": "開啟 Rails 主控台",
+        "ru": "Открыть консоль Rails"
+      },
+      "description": {
+        "en": "Opens IRB with the app loaded to try models and queries; what you run there changes the real database (add --sandbox to undo it on exit).",
+        "es": "Abre IRB con la app cargada para probar modelos y consultas; lo que ejecutes cambia la base de datos real (añade --sandbox para deshacerlo al salir).",
+        "pt-br": "Abre o IRB com o app carregado para testar models e consultas; o que você executar altera o banco de dados real (adicione --sandbox para desfazer ao sair).",
+        "fr": "Ouvre IRB avec l’app chargée pour essayer modèles et requêtes ; ce que vous exécutez modifie la vraie base (ajoutez --sandbox pour tout annuler en sortant).",
+        "de": "Öffnet IRB mit geladener App, um Models und Abfragen zu testen; Änderungen betreffen die echte Datenbank (mit --sandbox beim Beenden zurückgenommen).",
+        "it": "Apre IRB con l’app caricata per provare modelli e query; ciò che esegui cambia il database reale (aggiungi --sandbox per annullare all’uscita).",
+        "ja": "アプリを読み込んだ IRB を開き、モデルやクエリを試せます。実行内容は実際のデータベースを変更します（--sandbox なら終了時に元に戻します）。",
+        "ko": "앱이 로드된 IRB를 열어 모델과 쿼리를 시험합니다. 실행한 내용은 실제 데이터베이스를 바꿉니다(--sandbox면 종료 시 되돌립니다).",
+        "zh-cn": "打开已加载应用的 IRB，用于试用模型和查询；执行的操作会修改真实数据库（加 --sandbox 可在退出时撤销）。",
+        "zh-tw": "開啟已載入應用程式的 IRB，用於試用模型和查詢；執行的操作會修改真實資料庫（加 --sandbox 可在離開時復原）。",
+        "ru": "Открывает IRB с загруженным приложением для проверки моделей и запросов; изменения затрагивают настоящую базу (с --sandbox откатываются при выходе)."
+      },
+      "command": "bin/rails console",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interactive"],
+        "es": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interactivo", "consola"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interativo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interactif"],
+        "de": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interaktiv", "Konsole"],
+        "it": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "interattivo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "対話", "コンソール"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "대화형", "콘솔"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "交互式", "控制台"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "互動式", "主控台"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "console", "c", "irb", "repl", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails console",
+        "cmd": "ruby bin\\rails console"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-console"
+    },
+    {
+      "id": "rails.generate-scaffold",
+      "title": {
+        "en": "Generate a complete scaffold",
+        "es": "Generar un scaffold completo",
+        "pt-br": "Gerar um scaffold completo",
+        "fr": "Générer un scaffold complet",
+        "de": "Vollständiges Scaffold erzeugen",
+        "it": "Genera uno scaffold completo",
+        "ja": "スキャフォールド一式を生成",
+        "ko": "전체 스캐폴드 생성",
+        "zh-cn": "生成完整脚手架",
+        "zh-tw": "產生完整鷹架",
+        "ru": "Создать полный scaffold"
+      },
+      "description": {
+        "en": "Creates the model, migration, controller, views, routes and tests of a resource; pass the fields as name:type. Type them at the end of the command before pressing Enter.",
+        "es": "Crea el modelo, la migración, el controlador, las vistas, las rutas y los tests de un recurso; pasa los campos como nombre:tipo. Escríbelos al final del comando antes de pulsar Enter.",
+        "pt-br": "Cria o model, a migração, o controller, as views, as rotas e os testes de um recurso; passe os campos como nome:tipo. Digite-os no final do comando antes de pressionar Enter.",
+        "fr": "Crée le modèle, la migration, le contrôleur, les vues, les routes et les tests d’une ressource ; passez les champs en nom:type. Tapez-les à la fin de la commande avant d’appuyer sur Entrée.",
+        "de": "Erstellt Model, Migration, Controller, Views, Routen und Tests einer Ressource; Felder als name:typ angeben. Geben Sie sie am Ende des Befehls ein, bevor Sie Enter drücken.",
+        "it": "Crea modello, migrazione, controller, viste, route e test di una risorsa; passa i campi come nome:tipo. Scrivili alla fine del comando prima di premere Invio.",
+        "ja": "リソースのモデル、マイグレーション、コントローラー、ビュー、ルート、テストを作ります。フィールドは 名前:型 で渡します。 Enter を押す前に、コマンドの末尾に入力してください。",
+        "ko": "리소스의 모델, 마이그레이션, 컨트롤러, 뷰, 라우트, 테스트를 만듭니다. 필드는 이름:타입으로 넘깁니다. Enter를 누르기 전에 명령 끝에 입력하세요.",
+        "zh-cn": "创建资源的模型、迁移、控制器、视图、路由和测试；字段以 名称:类型 传入。 在按 Enter 之前把它们输入到命令末尾。",
+        "zh-tw": "建立資源的模型、遷移、控制器、檢視、路由和測試；欄位以 名稱:型別 傳入。 在按 Enter 之前把它們輸入到指令結尾。",
+        "ru": "Создаёт модель, миграцию, контроллер, представления, маршруты и тесты ресурса; поля передаются как имя:тип. Допишите их в конец команды перед нажатием Enter."
+      },
+      "command": "bin/rails generate scaffold ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "Post",
+            "es": "Post",
+            "pt-br": "Post",
+            "fr": "Post",
+            "de": "Post",
+            "it": "Post",
+            "ja": "Post",
+            "ko": "Post",
+            "zh-cn": "Post",
+            "zh-tw": "Post",
+            "ru": "Post"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "generate", "g", "scaffold", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails generate scaffold ${name}",
+        "cmd": "ruby bin\\rails generate scaffold ${name}"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-generate"
+    },
+    {
+      "id": "rails.generate-model",
+      "title": {
+        "en": "Generate a model",
+        "es": "Generar un modelo",
+        "pt-br": "Gerar um model",
+        "fr": "Générer un modèle",
+        "de": "Model erzeugen",
+        "it": "Genera un modello",
+        "ja": "モデルを生成",
+        "ko": "모델 생성",
+        "zh-cn": "生成模型",
+        "zh-tw": "產生模型",
+        "ru": "Создать модель"
+      },
+      "description": {
+        "en": "Creates the Active Record model, its migration and its test; pass the fields as name:type. Type them at the end of the command before pressing Enter.",
+        "es": "Crea el modelo de Active Record, su migración y su test; pasa los campos como nombre:tipo. Escríbelos al final del comando antes de pulsar Enter.",
+        "pt-br": "Cria o model do Active Record, sua migração e seu teste; passe os campos como nome:tipo. Digite-os no final do comando antes de pressionar Enter.",
+        "fr": "Crée le modèle Active Record, sa migration et son test ; passez les champs en nom:type. Tapez-les à la fin de la commande avant d’appuyer sur Entrée.",
+        "de": "Erstellt das Active-Record-Model, seine Migration und seinen Test; Felder als name:typ angeben. Geben Sie sie am Ende des Befehls ein, bevor Sie Enter drücken.",
+        "it": "Crea il modello Active Record, la sua migrazione e il suo test; passa i campi come nome:tipo. Scrivili alla fine del comando prima di premere Invio.",
+        "ja": "Active Record モデル、そのマイグレーションとテストを作ります。フィールドは 名前:型 で渡します。 Enter を押す前に、コマンドの末尾に入力してください。",
+        "ko": "Active Record 모델과 마이그레이션, 테스트를 만듭니다. 필드는 이름:타입으로 넘깁니다. Enter를 누르기 전에 명령 끝에 입력하세요.",
+        "zh-cn": "创建 Active Record 模型及其迁移和测试；字段以 名称:类型 传入。 在按 Enter 之前把它们输入到命令末尾。",
+        "zh-tw": "建立 Active Record 模型及其遷移和測試；欄位以 名稱:型別 傳入。 在按 Enter 之前把它們輸入到指令結尾。",
+        "ru": "Создаёт модель Active Record, её миграцию и тест; поля передаются как имя:тип. Допишите их в конец команды перед нажатием Enter."
+      },
+      "command": "bin/rails generate model ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "Comment",
+            "es": "Comment",
+            "pt-br": "Comment",
+            "fr": "Comment",
+            "de": "Comment",
+            "it": "Comment",
+            "ja": "Comment",
+            "ko": "Comment",
+            "zh-cn": "Comment",
+            "zh-tw": "Comment",
+            "ru": "Comment"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "generate", "g", "model", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails generate model ${name}",
+        "cmd": "ruby bin\\rails generate model ${name}"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-generate"
+    },
+    {
+      "id": "rails.generate-controller",
+      "title": {
+        "en": "Generate a controller",
+        "es": "Generar un controlador",
+        "pt-br": "Gerar um controller",
+        "fr": "Générer un contrôleur",
+        "de": "Controller erzeugen",
+        "it": "Genera un controller",
+        "ja": "コントローラーを生成",
+        "ko": "컨트롤러 생성",
+        "zh-cn": "生成控制器",
+        "zh-tw": "產生控制器",
+        "ru": "Создать контроллер"
+      },
+      "description": {
+        "en": "Creates the controller with the actions you list after its name, plus their views, routes and tests. Type them at the end of the command before pressing Enter.",
+        "es": "Crea el controlador con las acciones que indiques tras el nombre, además de sus vistas, rutas y tests. Escríbelos al final del comando antes de pulsar Enter.",
+        "pt-br": "Cria o controller com as ações que você indicar após o nome, além das views, rotas e testes. Digite-os no final do comando antes de pressionar Enter.",
+        "fr": "Crée le contrôleur avec les actions indiquées après son nom, ainsi que leurs vues, routes et tests. Tapez-les à la fin de la commande avant d’appuyer sur Entrée.",
+        "de": "Erstellt den Controller mit den nach dem Namen angegebenen Aktionen samt Views, Routen und Tests. Geben Sie sie am Ende des Befehls ein, bevor Sie Enter drücken.",
+        "it": "Crea il controller con le azioni indicate dopo il nome, più viste, route e test. Scrivili alla fine del comando prima di premere Invio.",
+        "ja": "名前の後に並べたアクションを持つコントローラーと、そのビュー、ルート、テストを作ります。 Enter を押す前に、コマンドの末尾に入力してください。",
+        "ko": "이름 뒤에 적은 액션을 가진 컨트롤러와 뷰, 라우트, 테스트를 만듭니다. Enter를 누르기 전에 명령 끝에 입력하세요.",
+        "zh-cn": "创建带有名称后所列动作的控制器，以及对应的视图、路由和测试。 在按 Enter 之前把它们输入到命令末尾。",
+        "zh-tw": "建立帶有名稱後所列動作的控制器，以及對應的檢視、路由和測試。 在按 Enter 之前把它們輸入到指令結尾。",
+        "ru": "Создаёт контроллер с указанными после имени действиями, а также их представления, маршруты и тесты. Допишите их в конец команды перед нажатием Enter."
+      },
+      "command": "bin/rails generate controller ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "Pages",
+            "es": "Pages",
+            "pt-br": "Pages",
+            "fr": "Pages",
+            "de": "Pages",
+            "it": "Pages",
+            "ja": "Pages",
+            "ko": "Pages",
+            "zh-cn": "Pages",
+            "zh-tw": "Pages",
+            "ru": "Pages"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "generate", "g", "controller", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails generate controller ${name}",
+        "cmd": "ruby bin\\rails generate controller ${name}"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-generate"
+    },
+    {
+      "id": "rails.generate-migration",
+      "title": {
+        "en": "Generate a migration",
+        "es": "Generar una migración",
+        "pt-br": "Gerar uma migração",
+        "fr": "Générer une migration",
+        "de": "Migration erzeugen",
+        "it": "Genera una migrazione",
+        "ja": "マイグレーションを生成",
+        "ko": "마이그레이션 생성",
+        "zh-cn": "生成迁移",
+        "zh-tw": "產生遷移",
+        "ru": "Создать миграцию"
+      },
+      "description": {
+        "en": "Creates a migration in db/migrate; names like AddXToY or RemoveXFromY with fields fill in the change. Type them at the end of the command before pressing Enter.",
+        "es": "Crea una migración en db/migrate; nombres como AddXToY o RemoveXFromY con campos rellenan el cambio. Escríbelos al final del comando antes de pulsar Enter.",
+        "pt-br": "Cria uma migração em db/migrate; nomes como AddXToY ou RemoveXFromY com campos preenchem a mudança. Digite-os no final do comando antes de pressionar Enter.",
+        "fr": "Crée une migration dans db/migrate ; des noms comme AddXToY ou RemoveXFromY avec des champs remplissent le changement. Tapez-les à la fin de la commande avant d’appuyer sur Entrée.",
+        "de": "Erstellt eine Migration in db/migrate; Namen wie AddXToY oder RemoveXFromY mit Feldern füllen die Änderung aus. Geben Sie sie am Ende des Befehls ein, bevor Sie Enter drücken.",
+        "it": "Crea una migrazione in db/migrate; nomi come AddXToY o RemoveXFromY con campi compilano la modifica. Scrivili alla fine del comando prima di premere Invio.",
+        "ja": "db/migrate にマイグレーションを作ります。AddXToY や RemoveXFromY のような名前とフィールドで変更内容が埋まります。 Enter を押す前に、コマンドの末尾に入力してください。",
+        "ko": "db/migrate에 마이그레이션을 만듭니다. AddXToY나 RemoveXFromY 같은 이름과 필드를 주면 변경 내용이 채워집니다. Enter를 누르기 전에 명령 끝에 입력하세요.",
+        "zh-cn": "在 db/migrate 中创建迁移；使用 AddXToY 或 RemoveXFromY 之类的名称并带上字段会自动填好变更。 在按 Enter 之前把它们输入到命令末尾。",
+        "zh-tw": "在 db/migrate 中建立遷移；使用 AddXToY 或 RemoveXFromY 之類的名稱並帶上欄位會自動填好變更。 在按 Enter 之前把它們輸入到指令結尾。",
+        "ru": "Создаёт миграцию в db/migrate; имена вида AddXToY или RemoveXFromY с полями заполняют изменение. Допишите их в конец команды перед нажатием Enter."
+      },
+      "command": "bin/rails generate migration ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "AddPublishedToPosts",
+            "es": "AddPublishedToPosts",
+            "pt-br": "AddPublishedToPosts",
+            "fr": "AddPublishedToPosts",
+            "de": "AddPublishedToPosts",
+            "it": "AddPublishedToPosts",
+            "ja": "AddPublishedToPosts",
+            "ko": "AddPublishedToPosts",
+            "zh-cn": "AddPublishedToPosts",
+            "zh-tw": "AddPublishedToPosts",
+            "ru": "AddPublishedToPosts"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "generate", "g", "migration", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails generate migration ${name}",
+        "cmd": "ruby bin\\rails generate migration ${name}"
+      },
+      "docs": "https://guides.rubyonrails.org/command_line.html#bin-rails-generate"
+    },
+    {
+      "id": "rails.db-create",
+      "title": {
+        "en": "Create the database",
+        "es": "Crear la base de datos",
+        "pt-br": "Criar o banco de dados",
+        "fr": "Créer la base de données",
+        "de": "Datenbank anlegen",
+        "it": "Crea il database",
+        "ja": "データベースを作成",
+        "ko": "데이터베이스 만들기",
+        "zh-cn": "创建数据库",
+        "zh-tw": "建立資料庫",
+        "ru": "Создать базу данных"
+      },
+      "description": {
+        "en": "Creates the development and test databases of config/database.yml.",
+        "es": "Crea las bases de datos de desarrollo y de test de config/database.yml.",
+        "pt-br": "Cria os bancos de dados de desenvolvimento e de teste do config/database.yml.",
+        "fr": "Crée les bases de développement et de test de config/database.yml.",
+        "de": "Legt die Entwicklungs- und Testdatenbank aus config/database.yml an.",
+        "it": "Crea i database di sviluppo e di test di config/database.yml.",
+        "ja": "config/database.yml の開発用とテスト用のデータベースを作ります。",
+        "ko": "config/database.yml의 개발용과 테스트용 데이터베이스를 만듭니다.",
+        "zh-cn": "创建 config/database.yml 中的开发和测试数据库。",
+        "zh-tw": "建立 config/database.yml 中的開發和測試資料庫。",
+        "ru": "Создаёт базы данных разработки и тестов из config/database.yml."
+      },
+      "command": "bin/rails db:create",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "new", "project"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "crear", "proyecto", "nuevo"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "criar", "projeto", "novo"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "créer", "projet", "nouveau"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "erstellen", "Projekt", "neu"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "creare", "progetto", "nuovo"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "作成", "プロジェクト", "新規"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "만들기", "프로젝트", "새"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "创建", "项目", "新建"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "建立", "專案", "新增"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:create", "database", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails db:create",
+        "cmd": "ruby bin\\rails db:create"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#setup-the-database"
+    },
+    {
+      "id": "rails.db-migrate",
+      "title": {
+        "en": "Apply the migrations",
+        "es": "Aplicar las migraciones",
+        "pt-br": "Aplicar as migrações",
+        "fr": "Appliquer les migrations",
+        "de": "Migrationen ausführen",
+        "it": "Applica le migrazioni",
+        "ja": "マイグレーションを適用",
+        "ko": "마이그레이션 적용",
+        "zh-cn": "应用迁移",
+        "zh-tw": "套用遷移",
+        "ru": "Применить миграции"
+      },
+      "description": {
+        "en": "Runs the pending migrations and updates db/schema.rb.",
+        "es": "Ejecuta las migraciones pendientes y actualiza db/schema.rb.",
+        "pt-br": "Executa as migrações pendentes e atualiza o db/schema.rb.",
+        "fr": "Exécute les migrations en attente et met à jour db/schema.rb.",
+        "de": "Führt ausstehende Migrationen aus und aktualisiert db/schema.rb.",
+        "it": "Esegue le migrazioni in sospeso e aggiorna db/schema.rb.",
+        "ja": "未適用のマイグレーションを実行し、db/schema.rb を更新します。",
+        "ko": "대기 중인 마이그레이션을 실행하고 db/schema.rb를 갱신합니다.",
+        "zh-cn": "运行待处理的迁移并更新 db/schema.rb。",
+        "zh-tw": "執行待處理的遷移並更新 db/schema.rb。",
+        "ru": "Выполняет ожидающие миграции и обновляет db/schema.rb."
+      },
+      "command": "bin/rails db:migrate",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "update", "upgrade"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "actualizar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "atualizar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "mettre à jour"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "aktualisieren"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "aggiornare"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "更新"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "업데이트"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "更新", "升级"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "更新", "升級"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:migrate", "migration", "database", "обновить"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "ruby bin\\rails db:migrate",
+        "cmd": "ruby bin\\rails db:migrate"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#running-migrations"
+    },
+    {
+      "id": "rails.db-rollback",
+      "title": {
+        "en": "Undo the last migration",
+        "es": "Deshacer la última migración",
+        "pt-br": "Desfazer a última migração",
+        "fr": "Annuler la dernière migration",
+        "de": "Letzte Migration zurücknehmen",
+        "it": "Annulla l’ultima migrazione",
+        "ja": "直前のマイグレーションを取り消す",
+        "ko": "마지막 마이그레이션 되돌리기",
+        "zh-cn": "回滚最近的迁移",
+        "zh-tw": "回復最近的遷移",
+        "ru": "Откатить последнюю миграцию"
+      },
+      "description": {
+        "en": "Reverts the last migration, which usually drops the tables or columns it created. The data is lost.",
+        "es": "Revierte la última migración, que suele borrar las tablas o columnas que creó. Se pierden los datos.",
+        "pt-br": "Reverte a última migração, que costuma apagar as tabelas ou colunas que criou. Os dados são perdidos.",
+        "fr": "Annule la dernière migration, qui supprime en général les tables ou colonnes créées. Les données sont perdues.",
+        "de": "Nimmt die letzte Migration zurück, was meist die von ihr erstellten Tabellen oder Spalten löscht. Die Daten gehen verloren.",
+        "it": "Annulla l’ultima migrazione, che di solito elimina le tabelle o colonne create. I dati vanno persi.",
+        "ja": "最後のマイグレーションを取り消します。通常は作成したテーブルや列を削除します。 データは失われます。",
+        "ko": "마지막 마이그레이션을 되돌립니다. 보통 만든 테이블이나 열을 삭제합니다. 데이터는 사라집니다.",
+        "zh-cn": "撤销最近一次迁移，通常会删除它创建的表或列。 数据会丢失。",
+        "zh-tw": "復原最近一次遷移，通常會刪除它建立的資料表或欄位。 資料會遺失。",
+        "ru": "Откатывает последнюю миграцию, что обычно удаляет созданные ею таблицы или столбцы. Данные теряются."
+      },
+      "command": "bin/rails db:rollback",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "remove", "uninstall"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "quitar", "desinstalar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "remover", "desinstalar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "retirer", "désinstaller"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "entfernen", "deinstallieren"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "rimuovere", "disinstallare"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "削除", "アンインストール"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "제거"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "移除", "卸载"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "移除", "解除安裝"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:rollback", "rollback", "migration", "удалить"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "ruby bin\\rails db:rollback",
+        "cmd": "ruby bin\\rails db:rollback"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#rolling-back"
+    },
+    {
+      "id": "rails.db-seed",
+      "title": {
+        "en": "Load the test data",
+        "es": "Cargar los datos de prueba",
+        "pt-br": "Carregar os dados de teste",
+        "fr": "Charger les données de test",
+        "de": "Testdaten laden",
+        "it": "Carica i dati di prova",
+        "ja": "テストデータを読み込む",
+        "ko": "테스트 데이터 불러오기",
+        "zh-cn": "加载测试数据",
+        "zh-tw": "載入測試資料",
+        "ru": "Загрузить тестовые данные"
+      },
+      "description": {
+        "en": "Runs db/seeds.rb, which inserts the initial or test data.",
+        "es": "Ejecuta db/seeds.rb, que inserta los datos iniciales o de prueba.",
+        "pt-br": "Executa o db/seeds.rb, que insere os dados iniciais ou de teste.",
+        "fr": "Exécute db/seeds.rb, qui insère les données initiales ou de test.",
+        "de": "Führt db/seeds.rb aus, das die Start- oder Testdaten einfügt.",
+        "it": "Esegue db/seeds.rb, che inserisce i dati iniziali o di prova.",
+        "ja": "db/seeds.rb を実行し、初期データやテストデータを挿入します。",
+        "ko": "db/seeds.rb를 실행해 초기 또는 테스트 데이터를 넣습니다.",
+        "zh-cn": "运行 db/seeds.rb，插入初始或测试数据。",
+        "zh-tw": "執行 db/seeds.rb，插入初始或測試資料。",
+        "ru": "Выполняет db/seeds.rb, который вставляет начальные или тестовые данные."
+      },
+      "command": "bin/rails db:seed",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:seed", "seed", "database"]
+      },
+      "risk": "caution",
+      "shells": {
+        "powershell": "ruby bin\\rails db:seed",
+        "cmd": "ruby bin\\rails db:seed"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#migrations-and-seed-data"
+    },
+    {
+      "id": "rails.db-reset",
+      "title": {
+        "en": "Rebuild the database from the schema",
+        "es": "Rehacer la base de datos desde el esquema",
+        "pt-br": "Refazer o banco de dados a partir do esquema",
+        "fr": "Reconstruire la base de données depuis le schéma",
+        "de": "Datenbank aus dem Schema neu aufbauen",
+        "it": "Ricostruisci il database dallo schema",
+        "ja": "スキーマからデータベースを作り直す",
+        "ko": "스키마로 데이터베이스 다시 만들기",
+        "zh-cn": "根据架构重建数据库",
+        "zh-tw": "根據結構描述重建資料庫",
+        "ru": "Пересоздать базу данных по схеме"
+      },
+      "description": {
+        "en": "Drops the database, creates it again from db/schema.rb and loads the seeds. The data is lost.",
+        "es": "Borra la base de datos, la vuelve a crear desde db/schema.rb y carga los seeds. Se pierden los datos.",
+        "pt-br": "Apaga o banco de dados, cria-o de novo a partir do db/schema.rb e carrega os seeds. Os dados são perdidos.",
+        "fr": "Supprime la base, la recrée depuis db/schema.rb et charge les seeds. Les données sont perdues.",
+        "de": "Löscht die Datenbank, legt sie aus db/schema.rb neu an und lädt die Seeds. Die Daten gehen verloren.",
+        "it": "Elimina il database, lo ricrea da db/schema.rb e carica i seed. I dati vanno persi.",
+        "ja": "データベースを削除し、db/schema.rb から作り直して seeds を読み込みます。 データは失われます。",
+        "ko": "데이터베이스를 삭제하고 db/schema.rb로 다시 만든 뒤 seeds를 불러옵니다. 데이터는 사라집니다.",
+        "zh-cn": "删除数据库，根据 db/schema.rb 重新创建并加载 seeds。 数据会丢失。",
+        "zh-tw": "刪除資料庫，根據 db/schema.rb 重新建立並載入 seeds。 資料會遺失。",
+        "ru": "Удаляет базу данных, заново создаёт её по db/schema.rb и загружает seeds. Данные теряются."
+      },
+      "command": "bin/rails db:reset",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "clean", "delete"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "borrar", "limpiar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "apagar", "limpar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "supprimer", "nettoyer"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "löschen", "aufräumen"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "eliminare", "pulire"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "削除", "クリーン"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "삭제", "정리"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "删除", "清理"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "刪除", "清理"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:reset", "reset", "database", "удалить", "очистить"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "ruby bin\\rails db:reset",
+        "cmd": "ruby bin\\rails db:reset"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#resetting-the-database"
+    },
+    {
+      "id": "rails.db-drop",
+      "title": {
+        "en": "Delete the database",
+        "es": "Borrar la base de datos",
+        "pt-br": "Apagar o banco de dados",
+        "fr": "Supprimer la base de données",
+        "de": "Datenbank löschen",
+        "it": "Elimina il database",
+        "ja": "データベースを削除",
+        "ko": "데이터베이스 삭제",
+        "zh-cn": "删除数据库",
+        "zh-tw": "刪除資料庫",
+        "ru": "Удалить базу данных"
+      },
+      "description": {
+        "en": "Drops the development and test databases of config/database.yml. The data is lost.",
+        "es": "Borra las bases de datos de desarrollo y de test de config/database.yml. Se pierden los datos.",
+        "pt-br": "Apaga os bancos de dados de desenvolvimento e de teste do config/database.yml. Os dados são perdidos.",
+        "fr": "Supprime les bases de développement et de test de config/database.yml. Les données sont perdues.",
+        "de": "Löscht die Entwicklungs- und Testdatenbank aus config/database.yml. Die Daten gehen verloren.",
+        "it": "Elimina i database di sviluppo e di test di config/database.yml. I dati vanno persi.",
+        "ja": "config/database.yml の開発用とテスト用のデータベースを削除します。 データは失われます。",
+        "ko": "config/database.yml의 개발용과 테스트용 데이터베이스를 삭제합니다. 데이터는 사라집니다.",
+        "zh-cn": "删除 config/database.yml 中的开发和测试数据库。 数据会丢失。",
+        "zh-tw": "刪除 config/database.yml 中的開發和測試資料庫。 資料會遺失。",
+        "ru": "Удаляет базы данных разработки и тестов из config/database.yml. Данные теряются."
+      },
+      "command": "bin/rails db:drop",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "remove", "uninstall"],
+        "es": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "quitar", "desinstalar"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "remover", "desinstalar"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "retirer", "désinstaller"],
+        "de": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "entfernen", "deinstallieren"],
+        "it": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "rimuovere", "disinstallare"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "削除", "アンインストール"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "제거"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "移除", "卸载"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "移除", "解除安裝"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "db:drop", "drop", "database", "удалить"]
+      },
+      "risk": "destructive",
+      "shells": {
+        "powershell": "ruby bin\\rails db:drop",
+        "cmd": "ruby bin\\rails db:drop"
+      },
+      "docs": "https://guides.rubyonrails.org/active_record_migrations.html#setup-the-database"
+    },
+    {
+      "id": "rails.routes",
+      "title": {
+        "en": "List the routes",
+        "es": "Ver las rutas",
+        "pt-br": "Ver as rotas",
+        "fr": "Lister les routes",
+        "de": "Routen anzeigen",
+        "it": "Elenca le route",
+        "ja": "ルートを一覧表示",
+        "ko": "라우트 보기",
+        "zh-cn": "列出路由",
+        "zh-tw": "列出路由",
+        "ru": "Показать маршруты"
+      },
+      "description": {
+        "en": "Lists every route with its helper name, HTTP method, path and controller#action; add -g to filter.",
+        "es": "Muestra cada ruta con su helper, método HTTP, ruta y controlador#acción; añade -g para filtrar.",
+        "pt-br": "Mostra cada rota com helper, método HTTP, caminho e controller#ação; adicione -g para filtrar.",
+        "fr": "Liste chaque route avec son helper, sa méthode HTTP, son chemin et contrôleur#action ; ajoutez -g pour filtrer.",
+        "de": "Listet jede Route mit Helper, HTTP-Methode, Pfad und Controller#Aktion; mit -g filtern.",
+        "it": "Elenca ogni route con helper, metodo HTTP, percorso e controller#azione; aggiungi -g per filtrare.",
+        "ja": "各ルートをヘルパー名、HTTP メソッド、パス、コントローラー#アクション付きで表示します。-g で絞り込めます。",
+        "ko": "각 라우트를 헬퍼 이름, HTTP 메서드, 경로, 컨트롤러#액션과 함께 보여 줍니다. -g로 필터링합니다.",
+        "zh-cn": "列出每条路由的辅助方法名、HTTP 方法、路径和 控制器#动作；加 -g 可过滤。",
+        "zh-tw": "列出每條路由的輔助方法名稱、HTTP 方法、路徑和 控制器#動作；加 -g 可篩選。",
+        "ru": "Показывает каждый маршрут с хелпером, HTTP-методом, путём и controller#action; -g фильтрует."
+      },
+      "command": "bin/rails routes",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "routes", "list", "installed"],
+        "es": ["rails", "ruby on rails", "bin/rails", "routes", "ver", "instaladas", "lista"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "routes", "ver", "instaladas", "lista"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "routes", "lister", "installées"],
+        "de": ["rails", "ruby on rails", "bin/rails", "routes", "anzeigen", "installiert"],
+        "it": ["rails", "ruby on rails", "bin/rails", "routes", "elencare", "installate"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "routes", "一覧", "インストール済み"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "routes", "목록", "설치됨"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "routes", "列出", "已安装"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "routes", "列出", "已安裝"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "routes", "список", "установленные"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails routes",
+        "cmd": "ruby bin\\rails routes"
+      },
+      "docs": "https://guides.rubyonrails.org/routing.html#listing-existing-routes"
+    },
+    {
+      "id": "rails.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Lancer les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Runs the Minitest tests of the test folder, except the system tests (bin/rails test:system).",
+        "es": "Ejecuta los tests de Minitest de la carpeta test, salvo los de sistema (bin/rails test:system).",
+        "pt-br": "Executa os testes Minitest da pasta test, exceto os de sistema (bin/rails test:system).",
+        "fr": "Exécute les tests Minitest du dossier test, sauf les tests système (bin/rails test:system).",
+        "de": "Führt die Minitest-Tests im Ordner test aus, außer den Systemtests (bin/rails test:system).",
+        "it": "Esegue i test Minitest della cartella test, tranne quelli di sistema (bin/rails test:system).",
+        "ja": "test フォルダーの Minitest のテストを実行します。システムテスト（bin/rails test:system）は除きます。",
+        "ko": "test 폴더의 Minitest 테스트를 실행합니다. 시스템 테스트(bin/rails test:system)는 제외합니다.",
+        "zh-cn": "运行 test 文件夹中的 Minitest 测试，系统测试（bin/rails test:system）除外。",
+        "zh-tw": "執行 test 資料夾中的 Minitest 測試，系統測試（bin/rails test:system）除外。",
+        "ru": "Запускает тесты Minitest из папки test, кроме системных (bin/rails test:system)."
+      },
+      "command": "bin/rails test",
+      "tags": {
+        "en": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "tests"],
+        "es": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "tests", "pruebas"],
+        "pt-br": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "testes"],
+        "fr": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "tests"],
+        "de": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "Tests"],
+        "it": ["rails", "ruby on rails", "bin/rails", "test", "minitest"],
+        "ja": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "テスト"],
+        "ko": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "테스트"],
+        "zh-cn": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "测试"],
+        "zh-tw": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "測試"],
+        "ru": ["rails", "ruby on rails", "bin/rails", "test", "minitest", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "ruby bin\\rails test",
+        "cmd": "ruby bin\\rails test"
+      },
+      "docs": "https://guides.rubyonrails.org/testing.html#running-tests"
+    }
+  ]
+}

@@ -1,0 +1,498 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "fastapi",
+  "title": {
+    "en": "FastAPI",
+    "es": "FastAPI",
+    "pt-br": "FastAPI",
+    "fr": "FastAPI",
+    "de": "FastAPI",
+    "it": "FastAPI",
+    "ja": "FastAPI",
+    "ko": "FastAPI",
+    "zh-cn": "FastAPI",
+    "zh-tw": "FastAPI",
+    "ru": "FastAPI"
+  },
+  "icon": "pulse",
+  "order": 126,
+  "section": "frameworks",
+  "commands": [
+    {
+      "id": "fastapi.install",
+      "title": {
+        "en": "Install FastAPI",
+        "es": "Instalar FastAPI",
+        "pt-br": "Instalar o FastAPI",
+        "fr": "Installer FastAPI",
+        "de": "FastAPI installieren",
+        "it": "Installa FastAPI",
+        "ja": "FastAPI をインストール",
+        "ko": "FastAPI 설치",
+        "zh-cn": "安装 FastAPI",
+        "zh-tw": "安裝 FastAPI",
+        "ru": "Установить FastAPI"
+      },
+      "description": {
+        "en": "Installs FastAPI with the fastapi CLI, Uvicorn and the usual extras in the active environment; activate the virtual environment first.",
+        "es": "Instala FastAPI con la CLI fastapi, Uvicorn y los extras habituales en el entorno activo; antes activa el entorno virtual.",
+        "pt-br": "Instala o FastAPI com a CLI fastapi, o Uvicorn e os extras habituais no ambiente ativo; ative antes o ambiente virtual.",
+        "fr": "Installe FastAPI avec la CLI fastapi, Uvicorn et les extras habituels dans l’environnement actif ; activez d’abord l’environnement virtuel.",
+        "de": "Installiert FastAPI mit der fastapi-CLI, Uvicorn und den üblichen Extras in der aktiven Umgebung; vorher die virtuelle Umgebung aktivieren.",
+        "it": "Installa FastAPI con la CLI fastapi, Uvicorn e gli extra abituali nell’ambiente attivo; prima attiva l’ambiente virtuale.",
+        "ja": "アクティブな環境に fastapi CLI、Uvicorn、標準の追加機能付きで FastAPI をインストールします。先に仮想環境を有効にしてください。",
+        "ko": "활성 환경에 fastapi CLI, Uvicorn, 일반 추가 기능과 함께 FastAPI를 설치합니다. 먼저 가상 환경을 활성화하세요.",
+        "zh-cn": "在当前环境中安装带 fastapi CLI、Uvicorn 和常用扩展的 FastAPI；请先激活虚拟环境。",
+        "zh-tw": "在目前環境中安裝帶 fastapi CLI、Uvicorn 和常用擴充的 FastAPI；請先啟用虛擬環境。",
+        "ru": "Устанавливает FastAPI с CLI fastapi, Uvicorn и обычными дополнениями в активное окружение; сначала активируйте виртуальное окружение."
+      },
+      "command": "python3 -m pip install \"fastapi[standard]\"",
+      "tags": {
+        "en": ["fastapi", "python", "api", "pip", "install", "uvicorn"],
+        "es": ["fastapi", "python", "api", "pip", "install", "uvicorn", "instalar"],
+        "pt-br": ["fastapi", "python", "api", "pip", "install", "uvicorn", "instalar"],
+        "fr": ["fastapi", "python", "api", "pip", "install", "uvicorn", "installer"],
+        "de": ["fastapi", "python", "api", "pip", "install", "uvicorn", "installieren"],
+        "it": ["fastapi", "python", "api", "pip", "install", "uvicorn", "installare"],
+        "ja": ["fastapi", "python", "api", "pip", "install", "uvicorn", "インストール"],
+        "ko": ["fastapi", "python", "api", "pip", "install", "uvicorn", "설치"],
+        "zh-cn": ["fastapi", "python", "api", "pip", "install", "uvicorn", "安装"],
+        "zh-tw": ["fastapi", "python", "api", "pip", "install", "uvicorn", "安裝"],
+        "ru": ["fastapi", "python", "api", "pip", "install", "uvicorn", "установить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pip install \"fastapi[standard]\"",
+        "cmd": "python -m pip install \"fastapi[standard]\""
+      },
+      "docs": "https://fastapi.tiangolo.com/#installation"
+    },
+    {
+      "id": "fastapi.dev",
+      "title": {
+        "en": "Start the dev server",
+        "es": "Arrancar el servidor de desarrollo",
+        "pt-br": "Iniciar o servidor de desenvolvimento",
+        "fr": "Démarrer le serveur de développement",
+        "de": "Entwicklungsserver starten",
+        "it": "Avvia il server di sviluppo",
+        "ja": "開発サーバーを起動",
+        "ko": "개발 서버 시작",
+        "zh-cn": "启动开发服务器",
+        "zh-tw": "啟動開發伺服器",
+        "ru": "Запустить сервер разработки"
+      },
+      "description": {
+        "en": "Finds the app in main.py or app/main.py and serves it at http://127.0.0.1:8000 with auto-reload; the docs are at /docs.",
+        "es": "Busca la app en main.py o app/main.py y la sirve en http://127.0.0.1:8000 con recarga automática; la documentación está en /docs.",
+        "pt-br": "Procura o app em main.py ou app/main.py e o serve em http://127.0.0.1:8000 com recarga automática; a documentação fica em /docs.",
+        "fr": "Cherche l’app dans main.py ou app/main.py et la sert sur http://127.0.0.1:8000 avec rechargement automatique ; la doc est sur /docs.",
+        "de": "Sucht die App in main.py oder app/main.py und stellt sie mit Auto-Reload unter http://127.0.0.1:8000 bereit; die Doku liegt unter /docs.",
+        "it": "Cerca l’app in main.py o app/main.py e la serve su http://127.0.0.1:8000 con ricarica automatica; la documentazione è su /docs.",
+        "ja": "main.py か app/main.py からアプリを探し、自動再読み込み付きで http://127.0.0.1:8000 で配信します。ドキュメントは /docs です。",
+        "ko": "main.py나 app/main.py에서 앱을 찾아 자동 다시 불러오기와 함께 http://127.0.0.1:8000에서 제공합니다. 문서는 /docs에 있습니다.",
+        "zh-cn": "在 main.py 或 app/main.py 中查找应用，并在 http://127.0.0.1:8000 提供服务、自动重新加载；文档在 /docs。",
+        "zh-tw": "在 main.py 或 app/main.py 中尋找應用程式，並在 http://127.0.0.1:8000 提供服務、自動重新載入；文件在 /docs。",
+        "ru": "Ищет приложение в main.py или app/main.py и раздаёт его на http://127.0.0.1:8000 с автоперезагрузкой; документация — на /docs."
+      },
+      "command": "fastapi dev",
+      "tags": {
+        "en": ["fastapi", "python", "api", "dev", "server", "reload", "run", "watch"],
+        "es": ["fastapi", "python", "api", "dev", "server", "reload", "ejecutar", "vigilar", "automático"],
+        "pt-br": ["fastapi", "python", "api", "dev", "server", "reload", "executar", "observar", "automático"],
+        "fr": ["fastapi", "python", "api", "dev", "server", "reload", "exécuter", "surveiller", "automatique"],
+        "de": ["fastapi", "python", "api", "dev", "server", "reload", "ausführen", "beobachten", "automatisch"],
+        "it": ["fastapi", "python", "api", "dev", "server", "reload", "eseguire", "osservare", "automatico"],
+        "ja": ["fastapi", "python", "api", "dev", "server", "reload", "実行", "監視", "自動"],
+        "ko": ["fastapi", "python", "api", "dev", "server", "reload", "실행", "감시", "자동"],
+        "zh-cn": ["fastapi", "python", "api", "dev", "server", "reload", "运行", "监视", "自动"],
+        "zh-tw": ["fastapi", "python", "api", "dev", "server", "reload", "執行", "監看", "自動"],
+        "ru": ["fastapi", "python", "api", "dev", "server", "reload", "запустить", "наблюдение", "автоматически"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    },
+    {
+      "id": "fastapi.dev-file",
+      "title": {
+        "en": "Start the dev server from a file",
+        "es": "Arrancar el servidor desde un archivo",
+        "pt-br": "Iniciar o servidor a partir de um arquivo",
+        "fr": "Démarrer le serveur depuis un fichier",
+        "de": "Server aus einer Datei starten",
+        "it": "Avvia il server da un file",
+        "ja": "ファイルを指定して開発サーバーを起動",
+        "ko": "파일을 지정해 개발 서버 시작",
+        "zh-cn": "从指定文件启动开发服务器",
+        "zh-tw": "從指定檔案啟動開發伺服器",
+        "ru": "Запустить сервер из файла"
+      },
+      "description": {
+        "en": "Like fastapi dev, but with the app in that file when it is not main.py.",
+        "es": "Como fastapi dev, pero con la app de ese archivo cuando no es main.py.",
+        "pt-br": "Como fastapi dev, mas com o app desse arquivo quando não é main.py.",
+        "fr": "Comme fastapi dev, mais avec l’app de ce fichier quand ce n’est pas main.py.",
+        "de": "Wie fastapi dev, aber mit der App aus dieser Datei, wenn sie nicht main.py ist.",
+        "it": "Come fastapi dev, ma con l’app di quel file quando non è main.py.",
+        "ja": "fastapi dev と同じですが、main.py 以外のファイルにあるアプリを使います。",
+        "ko": "fastapi dev와 같지만 main.py가 아닌 그 파일의 앱을 씁니다.",
+        "zh-cn": "与 fastapi dev 相同，但应用不在 main.py 中时使用该文件里的应用。",
+        "zh-tw": "與 fastapi dev 相同，但應用程式不在 main.py 中時使用該檔案裡的應用程式。",
+        "ru": "Как fastapi dev, но с приложением из этого файла, если это не main.py."
+      },
+      "command": "fastapi dev ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "app/api.py",
+            "es": "app/api.py",
+            "pt-br": "app/api.py",
+            "fr": "app/api.py",
+            "de": "app/api.py",
+            "it": "app/api.py",
+            "ja": "app/api.py",
+            "ko": "app/api.py",
+            "zh-cn": "app/api.py",
+            "zh-tw": "app/api.py",
+            "ru": "app/api.py"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["fastapi", "python", "api", "dev", "server", "file", "run"],
+        "es": ["fastapi", "python", "api", "dev", "server", "file", "ejecutar"],
+        "pt-br": ["fastapi", "python", "api", "dev", "server", "file", "executar"],
+        "fr": ["fastapi", "python", "api", "dev", "server", "file", "exécuter"],
+        "de": ["fastapi", "python", "api", "dev", "server", "file", "ausführen"],
+        "it": ["fastapi", "python", "api", "dev", "server", "file", "eseguire"],
+        "ja": ["fastapi", "python", "api", "dev", "server", "file", "実行"],
+        "ko": ["fastapi", "python", "api", "dev", "server", "file", "실행"],
+        "zh-cn": ["fastapi", "python", "api", "dev", "server", "file", "运行"],
+        "zh-tw": ["fastapi", "python", "api", "dev", "server", "file", "執行"],
+        "ru": ["fastapi", "python", "api", "dev", "server", "file", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    },
+    {
+      "id": "fastapi.run",
+      "title": {
+        "en": "Start in production mode",
+        "es": "Arrancar en modo producción",
+        "pt-br": "Iniciar em modo produção",
+        "fr": "Démarrer en mode production",
+        "de": "Im Produktionsmodus starten",
+        "it": "Avvia in modalità produzione",
+        "ja": "本番モードで起動",
+        "ko": "프로덕션 모드로 시작",
+        "zh-cn": "以生产模式启动",
+        "zh-tw": "以正式環境模式啟動",
+        "ru": "Запустить в режиме продакшена"
+      },
+      "description": {
+        "en": "Serves the app without auto-reload, listening on 0.0.0.0:8000 so other machines can reach it.",
+        "es": "Sirve la app sin recarga automática, escuchando en 0.0.0.0:8000 para que otras máquinas la alcancen.",
+        "pt-br": "Serve o app sem recarga automática, escutando em 0.0.0.0:8000 para que outras máquinas o alcancem.",
+        "fr": "Sert l’app sans rechargement automatique, à l’écoute sur 0.0.0.0:8000 pour que d’autres machines y accèdent.",
+        "de": "Stellt die App ohne Auto-Reload bereit und lauscht auf 0.0.0.0:8000, damit andere Rechner sie erreichen.",
+        "it": "Serve l’app senza ricarica automatica, in ascolto su 0.0.0.0:8000 perché altre macchine la raggiungano.",
+        "ja": "自動再読み込みなしでアプリを配信し、他のマシンから届くよう 0.0.0.0:8000 で待ち受けます。",
+        "ko": "자동 다시 불러오기 없이 앱을 제공하며, 다른 컴퓨터에서 접근하도록 0.0.0.0:8000에서 수신합니다.",
+        "zh-cn": "不带自动重新加载地提供应用，监听 0.0.0.0:8000 以便其他机器访问。",
+        "zh-tw": "不帶自動重新載入地提供應用程式，監聽 0.0.0.0:8000 以便其他機器存取。",
+        "ru": "Раздаёт приложение без автоперезагрузки и слушает 0.0.0.0:8000, чтобы его видели другие машины."
+      },
+      "command": "fastapi run",
+      "tags": {
+        "en": ["fastapi", "python", "api", "run", "production", "server"],
+        "es": ["fastapi", "python", "api", "run", "production", "server", "ejecutar"],
+        "pt-br": ["fastapi", "python", "api", "run", "production", "server", "executar"],
+        "fr": ["fastapi", "python", "api", "run", "production", "server", "exécuter"],
+        "de": ["fastapi", "python", "api", "run", "production", "server", "ausführen"],
+        "it": ["fastapi", "python", "api", "run", "production", "server", "eseguire"],
+        "ja": ["fastapi", "python", "api", "run", "production", "server", "実行"],
+        "ko": ["fastapi", "python", "api", "run", "production", "server", "실행"],
+        "zh-cn": ["fastapi", "python", "api", "run", "production", "server", "运行"],
+        "zh-tw": ["fastapi", "python", "api", "run", "production", "server", "執行"],
+        "ru": ["fastapi", "python", "api", "run", "production", "server", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    },
+    {
+      "id": "fastapi.run-port",
+      "title": {
+        "en": "Start in production mode on a port",
+        "es": "Arrancar en producción en un puerto",
+        "pt-br": "Iniciar em produção numa porta",
+        "fr": "Démarrer en production sur un port",
+        "de": "Produktiv auf einem Port starten",
+        "it": "Avvia in produzione su una porta",
+        "ja": "ポートを指定して本番モードで起動",
+        "ko": "포트를 지정해 프로덕션 모드로 시작",
+        "zh-cn": "在指定端口以生产模式启动",
+        "zh-tw": "在指定連接埠以正式環境模式啟動",
+        "ru": "Запустить в продакшене на порту"
+      },
+      "description": {
+        "en": "Like fastapi run, but listening on that port instead of 8000.",
+        "es": "Como fastapi run, pero escuchando en ese puerto en vez del 8000.",
+        "pt-br": "Como fastapi run, mas escutando nessa porta em vez da 8000.",
+        "fr": "Comme fastapi run, mais à l’écoute sur ce port au lieu de 8000.",
+        "de": "Wie fastapi run, aber auf diesem Port statt 8000.",
+        "it": "Come fastapi run, ma in ascolto su quella porta invece della 8000.",
+        "ja": "fastapi run と同じですが、8000 の代わりにそのポートで待ち受けます。",
+        "ko": "fastapi run과 같지만 8000 대신 그 포트에서 수신합니다.",
+        "zh-cn": "与 fastapi run 相同，但监听该端口而不是 8000。",
+        "zh-tw": "與 fastapi run 相同，但監聽該連接埠而不是 8000。",
+        "ru": "Как fastapi run, но слушает этот порт вместо 8000."
+      },
+      "command": "fastapi run --port ${port}",
+      "params": [
+        {
+          "name": "port",
+          "label": {
+            "en": "Port",
+            "es": "Puerto",
+            "pt-br": "Porta",
+            "fr": "Port",
+            "de": "Port",
+            "it": "Porta",
+            "ja": "ポート",
+            "ko": "포트",
+            "zh-cn": "端口",
+            "zh-tw": "連接埠",
+            "ru": "Порт"
+          },
+          "placeholder": {
+            "en": "80",
+            "es": "80",
+            "pt-br": "80",
+            "fr": "80",
+            "de": "80",
+            "it": "80",
+            "ja": "80",
+            "ko": "80",
+            "zh-cn": "80",
+            "zh-tw": "80",
+            "ru": "80"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["fastapi", "python", "api", "run", "port"],
+        "es": ["fastapi", "python", "api", "run", "port", "ejecutar"],
+        "pt-br": ["fastapi", "python", "api", "run", "port", "executar"],
+        "fr": ["fastapi", "python", "api", "run", "port", "exécuter"],
+        "de": ["fastapi", "python", "api", "run", "port", "ausführen"],
+        "it": ["fastapi", "python", "api", "run", "port", "eseguire"],
+        "ja": ["fastapi", "python", "api", "run", "port", "実行"],
+        "ko": ["fastapi", "python", "api", "run", "port", "실행"],
+        "zh-cn": ["fastapi", "python", "api", "run", "port", "运行"],
+        "zh-tw": ["fastapi", "python", "api", "run", "port", "執行"],
+        "ru": ["fastapi", "python", "api", "run", "port", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    },
+    {
+      "id": "fastapi.dev-host",
+      "title": {
+        "en": "Start the dev server on the network",
+        "es": "Arrancar el servidor de desarrollo en la red",
+        "pt-br": "Iniciar o servidor de desenvolvimento na rede",
+        "fr": "Démarrer le serveur de développement sur le réseau",
+        "de": "Entwicklungsserver im Netzwerk starten",
+        "it": "Avvia il server di sviluppo in rete",
+        "ja": "ネットワーク上で開発サーバーを起動",
+        "ko": "네트워크에서 개발 서버 시작",
+        "zh-cn": "在网络上启动开发服务器",
+        "zh-tw": "在網路上啟動開發伺服器",
+        "ru": "Запустить сервер разработки в сети"
+      },
+      "description": {
+        "en": "Like fastapi dev, but also reachable from other devices of your network, such as a phone.",
+        "es": "Como fastapi dev, pero accesible también desde otros dispositivos de tu red, como un móvil.",
+        "pt-br": "Como fastapi dev, mas acessível também de outros dispositivos da sua rede, como um celular.",
+        "fr": "Comme fastapi dev, mais accessible aussi depuis d’autres appareils du réseau, comme un téléphone.",
+        "de": "Wie fastapi dev, aber auch von anderen Geräten im Netzwerk erreichbar, etwa einem Handy.",
+        "it": "Come fastapi dev, ma raggiungibile anche da altri dispositivi della rete, come un telefono.",
+        "ja": "fastapi dev と同じですが、スマートフォンなどネットワーク上の他の機器からもアクセスできます。",
+        "ko": "fastapi dev와 같지만 휴대폰 같은 네트워크의 다른 기기에서도 접근할 수 있습니다.",
+        "zh-cn": "与 fastapi dev 相同，但网络中的其他设备（如手机）也能访问。",
+        "zh-tw": "與 fastapi dev 相同，但網路中的其他裝置（如手機）也能存取。",
+        "ru": "Как fastapi dev, но доступен и с других устройств сети, например с телефона."
+      },
+      "command": "fastapi dev --host 0.0.0.0",
+      "tags": {
+        "en": ["fastapi", "python", "api", "dev", "host", "network", "lan", "run"],
+        "es": ["fastapi", "python", "api", "dev", "host", "network", "lan", "ejecutar"],
+        "pt-br": ["fastapi", "python", "api", "dev", "host", "network", "lan", "executar"],
+        "fr": ["fastapi", "python", "api", "dev", "host", "network", "lan", "exécuter"],
+        "de": ["fastapi", "python", "api", "dev", "host", "network", "lan", "ausführen"],
+        "it": ["fastapi", "python", "api", "dev", "host", "network", "lan", "eseguire"],
+        "ja": ["fastapi", "python", "api", "dev", "host", "network", "lan", "実行"],
+        "ko": ["fastapi", "python", "api", "dev", "host", "network", "lan", "실행"],
+        "zh-cn": ["fastapi", "python", "api", "dev", "host", "network", "lan", "运行"],
+        "zh-tw": ["fastapi", "python", "api", "dev", "host", "network", "lan", "執行"],
+        "ru": ["fastapi", "python", "api", "dev", "host", "network", "lan", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    },
+    {
+      "id": "fastapi.uvicorn",
+      "title": {
+        "en": "Start with Uvicorn directly",
+        "es": "Arrancar directamente con Uvicorn",
+        "pt-br": "Iniciar diretamente com o Uvicorn",
+        "fr": "Démarrer directement avec Uvicorn",
+        "de": "Direkt mit Uvicorn starten",
+        "it": "Avvia direttamente con Uvicorn",
+        "ja": "Uvicorn で直接起動",
+        "ko": "Uvicorn으로 직접 시작",
+        "zh-cn": "直接用 Uvicorn 启动",
+        "zh-tw": "直接用 Uvicorn 啟動",
+        "ru": "Запустить напрямую через Uvicorn"
+      },
+      "description": {
+        "en": "Serves the app object of main.py with auto-reload; useful in older projects or to pass Uvicorn options.",
+        "es": "Sirve el objeto app de main.py con recarga automática; útil en proyectos antiguos o para pasar opciones de Uvicorn.",
+        "pt-br": "Serve o objeto app de main.py com recarga automática; útil em projetos antigos ou para passar opções do Uvicorn.",
+        "fr": "Sert l’objet app de main.py avec rechargement automatique ; utile dans d’anciens projets ou pour passer des options Uvicorn.",
+        "de": "Stellt das Objekt app aus main.py mit Auto-Reload bereit; nützlich in älteren Projekten oder für Uvicorn-Optionen.",
+        "it": "Serve l’oggetto app di main.py con ricarica automatica; utile nei progetti più vecchi o per passare opzioni di Uvicorn.",
+        "ja": "main.py の app オブジェクトを自動再読み込み付きで配信します。古いプロジェクトや Uvicorn のオプションを渡すときに便利です。",
+        "ko": "main.py의 app 객체를 자동 다시 불러오기와 함께 제공합니다. 오래된 프로젝트나 Uvicorn 옵션을 넘길 때 유용합니다.",
+        "zh-cn": "带自动重新加载地提供 main.py 中的 app 对象；适用于旧项目或需要传递 Uvicorn 选项时。",
+        "zh-tw": "帶自動重新載入地提供 main.py 中的 app 物件；適用於舊專案或需要傳遞 Uvicorn 選項時。",
+        "ru": "Раздаёт объект app из main.py с автоперезагрузкой; удобно в старых проектах или для опций Uvicorn."
+      },
+      "command": "uvicorn main:app --reload",
+      "tags": {
+        "en": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "run", "watch"],
+        "es": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "ejecutar", "vigilar", "automático"],
+        "pt-br": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "executar", "observar", "automático"],
+        "fr": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "exécuter", "surveiller", "automatique"],
+        "de": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "ausführen", "beobachten", "automatisch"],
+        "it": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "eseguire", "osservare", "automatico"],
+        "ja": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "実行", "監視", "自動"],
+        "ko": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "실행", "감시", "자동"],
+        "zh-cn": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "运行", "监视", "自动"],
+        "zh-tw": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "執行", "監看", "自動"],
+        "ru": ["fastapi", "python", "api", "uvicorn", "reload", "asgi", "запустить", "наблюдение", "автоматически"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/deployment/manually/"
+    },
+    {
+      "id": "fastapi.test",
+      "title": {
+        "en": "Run the tests",
+        "es": "Ejecutar los tests",
+        "pt-br": "Executar os testes",
+        "fr": "Lancer les tests",
+        "de": "Tests ausführen",
+        "it": "Esegui i test",
+        "ja": "テストを実行",
+        "ko": "테스트 실행",
+        "zh-cn": "运行测试",
+        "zh-tw": "執行測試",
+        "ru": "Запустить тесты"
+      },
+      "description": {
+        "en": "Runs the pytest tests, which usually call the API with TestClient; pytest and httpx must be installed.",
+        "es": "Ejecuta los tests de pytest, que suelen llamar a la API con TestClient; pytest y httpx tienen que estar instalados.",
+        "pt-br": "Executa os testes do pytest, que costumam chamar a API com TestClient; pytest e httpx precisam estar instalados.",
+        "fr": "Exécute les tests pytest, qui appellent souvent l’API avec TestClient ; pytest et httpx doivent être installés.",
+        "de": "Führt die pytest-Tests aus, die die API meist mit TestClient aufrufen; pytest und httpx müssen installiert sein.",
+        "it": "Esegue i test pytest, che di solito chiamano l’API con TestClient; pytest e httpx devono essere installati.",
+        "ja": "pytest のテストを実行します。通常 TestClient で API を呼びます。pytest と httpx がインストールされている必要があります。",
+        "ko": "pytest 테스트를 실행합니다. 보통 TestClient로 API를 호출합니다. pytest와 httpx가 설치되어 있어야 합니다.",
+        "zh-cn": "运行 pytest 测试，这些测试通常用 TestClient 调用 API；需要已安装 pytest 和 httpx。",
+        "zh-tw": "執行 pytest 測試，這些測試通常用 TestClient 呼叫 API；需要已安裝 pytest 和 httpx。",
+        "ru": "Запускает тесты pytest, которые обычно вызывают API через TestClient; нужны pytest и httpx."
+      },
+      "command": "python3 -m pytest",
+      "tags": {
+        "en": ["fastapi", "python", "api", "pytest", "test", "TestClient", "tests"],
+        "es": ["fastapi", "python", "api", "pytest", "test", "TestClient", "tests", "pruebas"],
+        "pt-br": ["fastapi", "python", "api", "pytest", "test", "TestClient", "testes"],
+        "fr": ["fastapi", "python", "api", "pytest", "test", "TestClient", "tests"],
+        "de": ["fastapi", "python", "api", "pytest", "test", "TestClient", "Tests"],
+        "it": ["fastapi", "python", "api", "pytest", "test", "TestClient"],
+        "ja": ["fastapi", "python", "api", "pytest", "test", "TestClient", "テスト"],
+        "ko": ["fastapi", "python", "api", "pytest", "test", "TestClient", "테스트"],
+        "zh-cn": ["fastapi", "python", "api", "pytest", "test", "TestClient", "测试"],
+        "zh-tw": ["fastapi", "python", "api", "pytest", "test", "TestClient", "測試"],
+        "ru": ["fastapi", "python", "api", "pytest", "test", "TestClient", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "python -m pytest",
+        "cmd": "python -m pytest"
+      },
+      "docs": "https://fastapi.tiangolo.com/tutorial/testing/"
+    },
+    {
+      "id": "fastapi.version",
+      "title": {
+        "en": "See the version of the CLI",
+        "es": "Ver la versión de la CLI",
+        "pt-br": "Ver a versão da CLI",
+        "fr": "Voir la version de la CLI",
+        "de": "Version der CLI anzeigen",
+        "it": "Vedi la versione della CLI",
+        "ja": "CLI のバージョンを表示",
+        "ko": "CLI 버전 보기",
+        "zh-cn": "查看 CLI 版本",
+        "zh-tw": "檢視 CLI 版本",
+        "ru": "Показать версию CLI"
+      },
+      "description": {
+        "en": "Shows the version of the fastapi CLI; if the command does not exist, install fastapi[standard] in the active environment.",
+        "es": "Muestra la versión de la CLI fastapi; si el comando no existe, instala fastapi[standard] en el entorno activo.",
+        "pt-br": "Mostra a versão da CLI fastapi; se o comando não existir, instale fastapi[standard] no ambiente ativo.",
+        "fr": "Affiche la version de la CLI fastapi ; si la commande n’existe pas, installez fastapi[standard] dans l’environnement actif.",
+        "de": "Zeigt die Version der fastapi-CLI; fehlt der Befehl, fastapi[standard] in der aktiven Umgebung installieren.",
+        "it": "Mostra la versione della CLI fastapi; se il comando non esiste, installa fastapi[standard] nell’ambiente attivo.",
+        "ja": "fastapi CLI のバージョンを表示します。コマンドがなければ、アクティブな環境に fastapi[standard] をインストールします。",
+        "ko": "fastapi CLI 버전을 보여 줍니다. 명령이 없으면 활성 환경에 fastapi[standard]를 설치하세요.",
+        "zh-cn": "显示 fastapi CLI 的版本；如果命令不存在，请在当前环境中安装 fastapi[standard]。",
+        "zh-tw": "顯示 fastapi CLI 的版本；如果指令不存在，請在目前環境中安裝 fastapi[standard]。",
+        "ru": "Показывает версию CLI fastapi; если команды нет, установите fastapi[standard] в активное окружение."
+      },
+      "command": "fastapi --version",
+      "tags": {
+        "en": ["fastapi", "python", "api", "version"],
+        "es": ["fastapi", "python", "api", "version", "versión"],
+        "pt-br": ["fastapi", "python", "api", "version", "versão"],
+        "fr": ["fastapi", "python", "api", "version"],
+        "de": ["fastapi", "python", "api", "version", "Version"],
+        "it": ["fastapi", "python", "api", "version", "versione"],
+        "ja": ["fastapi", "python", "api", "version", "バージョン"],
+        "ko": ["fastapi", "python", "api", "version", "버전"],
+        "zh-cn": ["fastapi", "python", "api", "version", "版本"],
+        "zh-tw": ["fastapi", "python", "api", "version", "版本"],
+        "ru": ["fastapi", "python", "api", "version", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://fastapi.tiangolo.com/fastapi-cli/"
+    }
+  ]
+}

@@ -123,7 +123,7 @@ describe('detectCategories', () => {
 	});
 
 	it('proyecto Laravel', async () => {
-		expect(await ids({ root: ['composer.json', 'composer.lock', 'artisan'] })).toEqual(['php']);
+		expect(await ids({ root: ['composer.json', 'composer.lock', 'artisan'] })).toEqual(['laravel', 'php']);
 	});
 
 	it('proyecto Rails con versión de Ruby fijada', async () => {
@@ -200,6 +200,22 @@ describe('detectCategories', () => {
 
 	it('un package.json solo no detecta ningún framework', async () => {
 		expect(await ids({ root: ['package.json'] })).toEqual(['node']);
+	});
+
+	it('Laravel también detecta PHP', async () => {
+		expect(await ids({ root: ['artisan', 'composer.json'] })).toEqual(['laravel', 'php']);
+	});
+
+	it('Django también detecta Python', async () => {
+		expect(await ids({ root: ['manage.py', 'requirements.txt'] })).toEqual(['django', 'python']);
+	});
+
+	it('Rails también detecta Ruby', async () => {
+		expect(await ids({ root: ['Gemfile', 'bin/rails'] })).toEqual(['rails', 'ruby']);
+	});
+
+	it('un pom.xml detecta Java y Maven, no Spring Boot', async () => {
+		expect(await ids({ root: ['pom.xml'] })).toEqual(['java', 'maven']);
 	});
 
 	it('paquete de R con renv', async () => {
@@ -301,7 +317,11 @@ describe('señales del catálogo', () => {
 
 describe('watchGlob', () => {
 	it('sin rutas de un nivel vigila toda la raíz', () => {
-		expect(watchGlob(real)).toBe('*');
+		expect(watchGlob(custom({ categoryId: 'go', pattern: 'go.mod' }))).toBe('*');
+	});
+
+	it('el catálogo empaquetado vigila la raíz y bin (bin/rails y bin/console)', () => {
+		expect(watchGlob(real)).toBe('{*,bin/*}');
 	});
 
 	it('con rutas añade cada carpeta una vez', () => {

@@ -1,0 +1,778 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "spring-boot",
+  "title": {
+    "en": "Spring Boot",
+    "es": "Spring Boot",
+    "pt-br": "Spring Boot",
+    "fr": "Spring Boot",
+    "de": "Spring Boot",
+    "it": "Spring Boot",
+    "ja": "Spring Boot",
+    "ko": "Spring Boot",
+    "zh-cn": "Spring Boot",
+    "zh-tw": "Spring Boot",
+    "ru": "Spring Boot"
+  },
+  "icon": "server",
+  "order": 122,
+  "section": "frameworks",
+  "commands": [
+    {
+      "id": "spring-boot.initializr",
+      "title": {
+        "en": "Create a project with Spring Initializr",
+        "es": "Crear un proyecto con Spring Initializr",
+        "pt-br": "Criar um projeto com o Spring Initializr",
+        "fr": "Créer un projet avec Spring Initializr",
+        "de": "Projekt mit Spring Initializr erstellen",
+        "it": "Crea un progetto con Spring Initializr",
+        "ja": "Spring Initializr でプロジェクトを作成",
+        "ko": "Spring Initializr로 프로젝트 만들기",
+        "zh-cn": "用 Spring Initializr 创建项目",
+        "zh-tw": "用 Spring Initializr 建立專案",
+        "ru": "Создать проект через Spring Initializr"
+      },
+      "description": {
+        "en": "Downloads demo.zip with a Maven project and those dependencies (web, data-jpa, security…); unzip it and open the folder. Add -d type=gradle-project for Gradle.",
+        "es": "Descarga demo.zip con un proyecto Maven y esas dependencias (web, data-jpa, security…); descomprímelo y abre la carpeta. Añade -d type=gradle-project para Gradle.",
+        "pt-br": "Baixa o demo.zip com um projeto Maven e essas dependências (web, data-jpa, security…); descompacte e abra a pasta. Adicione -d type=gradle-project para Gradle.",
+        "fr": "Télécharge demo.zip avec un projet Maven et ces dépendances (web, data-jpa, security…) ; décompressez-le et ouvrez le dossier. Ajoutez -d type=gradle-project pour Gradle.",
+        "de": "Lädt demo.zip mit einem Maven-Projekt und diesen Abhängigkeiten (web, data-jpa, security…); entpacken und Ordner öffnen. Für Gradle -d type=gradle-project ergänzen.",
+        "it": "Scarica demo.zip con un progetto Maven e quelle dipendenze (web, data-jpa, security…); decomprimilo e apri la cartella. Aggiungi -d type=gradle-project per Gradle.",
+        "ja": "それらの依存関係（web、data-jpa、security など）を含む Maven プロジェクトの demo.zip をダウンロードします。展開してフォルダーを開いてください。Gradle なら -d type=gradle-project を付けます。",
+        "ko": "그 의존성(web, data-jpa, security 등)이 들어간 Maven 프로젝트 demo.zip을 내려받습니다. 압축을 풀고 폴더를 여세요. Gradle은 -d type=gradle-project를 붙입니다.",
+        "zh-cn": "下载包含这些依赖（web、data-jpa、security…）的 Maven 项目 demo.zip；解压后打开文件夹。使用 Gradle 时加 -d type=gradle-project。",
+        "zh-tw": "下載包含這些相依性（web、data-jpa、security…）的 Maven 專案 demo.zip；解壓縮後開啟資料夾。使用 Gradle 時加 -d type=gradle-project。",
+        "ru": "Скачивает demo.zip с проектом Maven и этими зависимостями (web, data-jpa, security…); распакуйте его и откройте папку. Для Gradle добавьте -d type=gradle-project."
+      },
+      "command": "curl https://start.spring.io/starter.zip -d dependencies=${dependencies} -o demo.zip",
+      "params": [
+        {
+          "name": "dependencies",
+          "label": {
+            "en": "Dependencies (comma-separated)",
+            "es": "Dependencias (separadas por comas)",
+            "pt-br": "Dependências (separadas por vírgulas)",
+            "fr": "Dépendances (séparées par des virgules)",
+            "de": "Abhängigkeiten (durch Kommas getrennt)",
+            "it": "Dipendenze (separate da virgole)",
+            "ja": "依存関係（カンマ区切り）",
+            "ko": "의존성(쉼표로 구분)",
+            "zh-cn": "依赖（逗号分隔）",
+            "zh-tw": "相依性（逗號分隔）",
+            "ru": "Зависимости (через запятую)"
+          },
+          "placeholder": {
+            "en": "web,data-jpa",
+            "es": "web,data-jpa",
+            "pt-br": "web,data-jpa",
+            "fr": "web,data-jpa",
+            "de": "web,data-jpa",
+            "it": "web,data-jpa",
+            "ja": "web,data-jpa",
+            "ko": "web,data-jpa",
+            "zh-cn": "web,data-jpa",
+            "zh-tw": "web,data-jpa",
+            "ru": "web,data-jpa"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "project"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "crear", "proyecto", "nuevo"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "criar", "projeto", "novo"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "créer", "projet", "nouveau"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "erstellen", "Projekt", "neu"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "creare", "progetto", "nuovo"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "作成", "プロジェクト", "新規"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "만들기", "프로젝트", "새"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "创建", "项目", "新建"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "建立", "專案", "新增"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "initializr", "start.spring.io", "curl", "new", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "curl.exe https://start.spring.io/starter.zip -d dependencies=${dependencies} -o demo.zip"
+      },
+      "docs": "https://docs.spring.io/spring-boot/reference/using/build-systems.html"
+    },
+    {
+      "id": "spring-boot.run-maven",
+      "title": {
+        "en": "Start the app (Maven)",
+        "es": "Arrancar la app (Maven)",
+        "pt-br": "Iniciar o app (Maven)",
+        "fr": "Démarrer l’app (Maven)",
+        "de": "App starten (Maven)",
+        "it": "Avvia l’app (Maven)",
+        "ja": "アプリを起動 (Maven)",
+        "ko": "앱 시작 (Maven)",
+        "zh-cn": "启动应用 (Maven)",
+        "zh-tw": "啟動應用程式 (Maven)",
+        "ru": "Запустить приложение (Maven)"
+      },
+      "description": {
+        "en": "Compiles and starts the app, by default at http://localhost:8080; with DevTools it restarts when the classes change.",
+        "es": "Compila y arranca la app, por defecto en http://localhost:8080; con DevTools se reinicia cuando cambian las clases.",
+        "pt-br": "Compila e inicia o app, por padrão em http://localhost:8080; com o DevTools reinicia quando as classes mudam.",
+        "fr": "Compile et démarre l’app, par défaut sur http://localhost:8080 ; avec DevTools, elle redémarre quand les classes changent.",
+        "de": "Kompiliert und startet die App, standardmäßig unter http://localhost:8080; mit DevTools startet sie bei geänderten Klassen neu.",
+        "it": "Compila e avvia l’app, di default su http://localhost:8080; con DevTools si riavvia quando cambiano le classi.",
+        "ja": "アプリをコンパイルして起動します。既定は http://localhost:8080 で、DevTools があればクラス変更時に再起動します。",
+        "ko": "앱을 컴파일해 시작합니다. 기본 주소는 http://localhost:8080이며, DevTools가 있으면 클래스가 바뀔 때 다시 시작합니다.",
+        "zh-cn": "编译并启动应用，默认地址为 http://localhost:8080；使用 DevTools 时类更改后会自动重启。",
+        "zh-tw": "編譯並啟動應用程式，預設位址為 http://localhost:8080；使用 DevTools 時類別變更後會自動重新啟動。",
+        "ru": "Компилирует и запускает приложение, по умолчанию на http://localhost:8080; с DevTools перезапускается при изменении классов."
+      },
+      "command": "./mvnw spring-boot:run",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "ejecutar"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "executar"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "exécuter"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "ausführen"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "eseguire"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "実行"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "실행"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "运行"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "執行"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "maven", "mvnw", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw spring-boot:run",
+        "cmd": "mvnw spring-boot:run"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/run.html"
+    },
+    {
+      "id": "spring-boot.run-gradle",
+      "title": {
+        "en": "Start the app (Gradle)",
+        "es": "Arrancar la app (Gradle)",
+        "pt-br": "Iniciar o app (Gradle)",
+        "fr": "Démarrer l’app (Gradle)",
+        "de": "App starten (Gradle)",
+        "it": "Avvia l’app (Gradle)",
+        "ja": "アプリを起動 (Gradle)",
+        "ko": "앱 시작 (Gradle)",
+        "zh-cn": "启动应用 (Gradle)",
+        "zh-tw": "啟動應用程式 (Gradle)",
+        "ru": "Запустить приложение (Gradle)"
+      },
+      "description": {
+        "en": "Compiles and starts the app, by default at http://localhost:8080; with DevTools it restarts when the classes change.",
+        "es": "Compila y arranca la app, por defecto en http://localhost:8080; con DevTools se reinicia cuando cambian las clases.",
+        "pt-br": "Compila e inicia o app, por padrão em http://localhost:8080; com o DevTools reinicia quando as classes mudam.",
+        "fr": "Compile et démarre l’app, par défaut sur http://localhost:8080 ; avec DevTools, elle redémarre quand les classes changent.",
+        "de": "Kompiliert und startet die App, standardmäßig unter http://localhost:8080; mit DevTools startet sie bei geänderten Klassen neu.",
+        "it": "Compila e avvia l’app, di default su http://localhost:8080; con DevTools si riavvia quando cambiano le classi.",
+        "ja": "アプリをコンパイルして起動します。既定は http://localhost:8080 で、DevTools があればクラス変更時に再起動します。",
+        "ko": "앱을 컴파일해 시작합니다. 기본 주소는 http://localhost:8080이며, DevTools가 있으면 클래스가 바뀔 때 다시 시작합니다.",
+        "zh-cn": "编译并启动应用，默认地址为 http://localhost:8080；使用 DevTools 时类更改后会自动重启。",
+        "zh-tw": "編譯並啟動應用程式，預設位址為 http://localhost:8080；使用 DevTools 時類別變更後會自動重新啟動。",
+        "ru": "Компилирует и запускает приложение, по умолчанию на http://localhost:8080; с DevTools перезапускается при изменении классов."
+      },
+      "command": "./gradlew bootRun",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "ejecutar"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "executar"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "exécuter"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "ausführen"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "eseguire"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "実行"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "실행"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "运行"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "執行"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "run", "bootRun", "spring-boot:run", "gradle", "gradlew", "запустить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootRun",
+        "cmd": "gradlew bootRun"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/running.html"
+    },
+    {
+      "id": "spring-boot.run-profile-maven",
+      "title": {
+        "en": "Start the app with a profile (Maven)",
+        "es": "Arrancar la app con un perfil (Maven)",
+        "pt-br": "Iniciar o app com um perfil (Maven)",
+        "fr": "Démarrer l’app avec un profil (Maven)",
+        "de": "App mit Profil starten (Maven)",
+        "it": "Avvia l’app con un profilo (Maven)",
+        "ja": "プロファイルを指定してアプリを起動 (Maven)",
+        "ko": "프로필을 지정해 앱 시작 (Maven)",
+        "zh-cn": "使用配置文件启动应用 (Maven)",
+        "zh-tw": "使用設定檔啟動應用程式 (Maven)",
+        "ru": "Запустить приложение с профилем (Maven)"
+      },
+      "description": {
+        "en": "Activates that profile, which loads application-<profile>.properties or .yml on top of the default settings; several profiles go separated by commas.",
+        "es": "Activa ese perfil, que carga application-<perfil>.properties o .yml encima de la configuración por defecto; varios perfiles van separados por comas.",
+        "pt-br": "Ativa esse perfil, que carrega o application-<perfil>.properties ou .yml por cima da configuração padrão; vários perfis vão separados por vírgulas.",
+        "fr": "Active ce profil, qui charge application-<profil>.properties ou .yml par-dessus la configuration par défaut ; plusieurs profils se séparent par des virgules.",
+        "de": "Aktiviert dieses Profil, das application-<Profil>.properties oder .yml über die Standardeinstellungen lädt; mehrere Profile durch Kommas trennen.",
+        "it": "Attiva quel profilo, che carica application-<profilo>.properties o .yml sopra la configurazione predefinita; più profili si separano con virgole.",
+        "ja": "そのプロファイルを有効にし、既定の設定の上に application-<プロファイル>.properties または .yml を読み込みます。複数ならカンマで区切ります。",
+        "ko": "그 프로필을 활성화해 기본 설정 위에 application-<프로필>.properties 또는 .yml을 불러옵니다. 여러 개는 쉼표로 구분합니다.",
+        "zh-cn": "激活该配置文件，在默认设置之上加载 application-<配置文件>.properties 或 .yml；多个配置文件用逗号分隔。",
+        "zh-tw": "啟用該設定檔，在預設設定之上載入 application-<設定檔>.properties 或 .yml；多個設定檔用逗號分隔。",
+        "ru": "Активирует этот профиль, который загружает application-<профиль>.properties или .yml поверх настроек по умолчанию; несколько профилей — через запятую."
+      },
+      "command": "./mvnw spring-boot:run -Dspring-boot.run.profiles=${profile}",
+      "params": [
+        {
+          "name": "profile",
+          "label": {
+            "en": "Profile",
+            "es": "Perfil",
+            "pt-br": "Perfil",
+            "fr": "Profil",
+            "de": "Profil",
+            "it": "Profilo",
+            "ja": "プロファイル",
+            "ko": "프로필",
+            "zh-cn": "配置文件",
+            "zh-tw": "設定檔",
+            "ru": "Профиль"
+          },
+          "placeholder": {
+            "en": "dev",
+            "es": "dev",
+            "pt-br": "dev",
+            "fr": "dev",
+            "de": "dev",
+            "it": "dev",
+            "ja": "dev",
+            "ko": "dev",
+            "zh-cn": "dev",
+            "zh-tw": "dev",
+            "ru": "dev"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "environment", "shell", "activate"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "ejecutar", "entorno", "activar"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "executar", "ambiente", "ativar"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "exécuter", "environnement", "activer"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "ausführen", "Umgebung", "aktivieren"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "eseguire", "ambiente", "attivare"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "実行", "環境", "有効化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "실행", "환경", "활성화"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "运行", "环境", "激活"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "執行", "環境", "啟用"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "maven", "mvnw", "запустить", "окружение", "активировать"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw spring-boot:run \"-Dspring-boot.run.profiles=${profile}\"",
+        "cmd": "mvnw spring-boot:run -Dspring-boot.run.profiles=${profile}"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/run.html"
+    },
+    {
+      "id": "spring-boot.run-profile-gradle",
+      "title": {
+        "en": "Start the app with a profile (Gradle)",
+        "es": "Arrancar la app con un perfil (Gradle)",
+        "pt-br": "Iniciar o app com um perfil (Gradle)",
+        "fr": "Démarrer l’app avec un profil (Gradle)",
+        "de": "App mit Profil starten (Gradle)",
+        "it": "Avvia l’app con un profilo (Gradle)",
+        "ja": "プロファイルを指定してアプリを起動 (Gradle)",
+        "ko": "프로필을 지정해 앱 시작 (Gradle)",
+        "zh-cn": "使用配置文件启动应用 (Gradle)",
+        "zh-tw": "使用設定檔啟動應用程式 (Gradle)",
+        "ru": "Запустить приложение с профилем (Gradle)"
+      },
+      "description": {
+        "en": "Activates that profile, which loads application-<profile>.properties or .yml on top of the default settings; several profiles go separated by commas.",
+        "es": "Activa ese perfil, que carga application-<perfil>.properties o .yml encima de la configuración por defecto; varios perfiles van separados por comas.",
+        "pt-br": "Ativa esse perfil, que carrega o application-<perfil>.properties ou .yml por cima da configuração padrão; vários perfis vão separados por vírgulas.",
+        "fr": "Active ce profil, qui charge application-<profil>.properties ou .yml par-dessus la configuration par défaut ; plusieurs profils se séparent par des virgules.",
+        "de": "Aktiviert dieses Profil, das application-<Profil>.properties oder .yml über die Standardeinstellungen lädt; mehrere Profile durch Kommas trennen.",
+        "it": "Attiva quel profilo, che carica application-<profilo>.properties o .yml sopra la configurazione predefinita; più profili si separano con virgole.",
+        "ja": "そのプロファイルを有効にし、既定の設定の上に application-<プロファイル>.properties または .yml を読み込みます。複数ならカンマで区切ります。",
+        "ko": "그 프로필을 활성화해 기본 설정 위에 application-<프로필>.properties 또는 .yml을 불러옵니다. 여러 개는 쉼표로 구분합니다.",
+        "zh-cn": "激活该配置文件，在默认设置之上加载 application-<配置文件>.properties 或 .yml；多个配置文件用逗号分隔。",
+        "zh-tw": "啟用該設定檔，在預設設定之上載入 application-<設定檔>.properties 或 .yml；多個設定檔用逗號分隔。",
+        "ru": "Активирует этот профиль, который загружает application-<профиль>.properties или .yml поверх настроек по умолчанию; несколько профилей — через запятую."
+      },
+      "command": "./gradlew bootRun --args=--spring.profiles.active=${profile}",
+      "params": [
+        {
+          "name": "profile",
+          "label": {
+            "en": "Profile",
+            "es": "Perfil",
+            "pt-br": "Perfil",
+            "fr": "Profil",
+            "de": "Profil",
+            "it": "Profilo",
+            "ja": "プロファイル",
+            "ko": "프로필",
+            "zh-cn": "配置文件",
+            "zh-tw": "設定檔",
+            "ru": "Профиль"
+          },
+          "placeholder": {
+            "en": "dev",
+            "es": "dev",
+            "pt-br": "dev",
+            "fr": "dev",
+            "de": "dev",
+            "it": "dev",
+            "ja": "dev",
+            "ko": "dev",
+            "zh-cn": "dev",
+            "zh-tw": "dev",
+            "ru": "dev"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "environment", "shell", "activate"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "ejecutar", "entorno", "activar"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "executar", "ambiente", "ativar"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "exécuter", "environnement", "activer"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "ausführen", "Umgebung", "aktivieren"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "eseguire", "ambiente", "attivare"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "実行", "環境", "有効化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "실행", "환경", "활성화"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "运行", "环境", "激活"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "執行", "環境", "啟用"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "run", "profile", "profiles", "gradle", "gradlew", "запустить", "окружение", "активировать"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootRun \"--args=--spring.profiles.active=${profile}\"",
+        "cmd": "gradlew bootRun --args=--spring.profiles.active=${profile}"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/running.html"
+    },
+    {
+      "id": "spring-boot.test-run-maven",
+      "title": {
+        "en": "Start the app with the test configuration (Maven)",
+        "es": "Arrancar la app con la configuración de test (Maven)",
+        "pt-br": "Iniciar o app com a configuração de teste (Maven)",
+        "fr": "Démarrer l’app avec la configuration de test (Maven)",
+        "de": "App mit Testkonfiguration starten (Maven)",
+        "it": "Avvia l’app con la configurazione di test (Maven)",
+        "ja": "テスト用の構成でアプリを起動 (Maven)",
+        "ko": "테스트 구성으로 앱 시작 (Maven)",
+        "zh-cn": "使用测试配置启动应用 (Maven)",
+        "zh-tw": "使用測試設定啟動應用程式 (Maven)",
+        "ru": "Запустить приложение с тестовой конфигурацией (Maven)"
+      },
+      "description": {
+        "en": "Starts the main class of src/test, usually a TestApplication that brings up the databases with Testcontainers; Docker must be running.",
+        "es": "Arranca la clase principal de src/test, normalmente un TestApplication que levanta las bases de datos con Testcontainers; Docker tiene que estar en marcha.",
+        "pt-br": "Inicia a classe principal de src/test, normalmente um TestApplication que sobe os bancos de dados com o Testcontainers; o Docker precisa estar rodando.",
+        "fr": "Démarre la classe principale de src/test, souvent un TestApplication qui lance les bases avec Testcontainers ; Docker doit tourner.",
+        "de": "Startet die Hauptklasse aus src/test, meist eine TestApplication, die Datenbanken mit Testcontainers hochfährt; Docker muss laufen.",
+        "it": "Avvia la classe principale di src/test, di solito un TestApplication che avvia i database con Testcontainers; Docker deve essere in esecuzione.",
+        "ja": "src/test のメインクラス（通常は Testcontainers でデータベースを起動する TestApplication）を起動します。Docker が動いている必要があります。",
+        "ko": "src/test의 메인 클래스(보통 Testcontainers로 데이터베이스를 띄우는 TestApplication)를 시작합니다. Docker가 실행 중이어야 합니다.",
+        "zh-cn": "启动 src/test 中的主类（通常是用 Testcontainers 启动数据库的 TestApplication）；需要 Docker 正在运行。",
+        "zh-tw": "啟動 src/test 中的主類別（通常是用 Testcontainers 啟動資料庫的 TestApplication）；需要 Docker 正在執行。",
+        "ru": "Запускает главный класс из src/test, обычно TestApplication, который поднимает базы через Testcontainers; Docker должен быть запущен."
+      },
+      "command": "./mvnw spring-boot:test-run",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "run", "test", "tests"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "ejecutar", "tests", "pruebas"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "executar", "testes"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "exécuter", "tests"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "ausführen", "Tests"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "eseguire", "test"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "実行", "テスト"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "실행", "테스트"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "运行", "测试"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "執行", "測試"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "maven", "mvnw", "запустить", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw spring-boot:test-run",
+        "cmd": "mvnw spring-boot:test-run"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/run.html#run.examples.using-test-classpath"
+    },
+    {
+      "id": "spring-boot.test-run-gradle",
+      "title": {
+        "en": "Start the app with the test configuration (Gradle)",
+        "es": "Arrancar la app con la configuración de test (Gradle)",
+        "pt-br": "Iniciar o app com a configuração de teste (Gradle)",
+        "fr": "Démarrer l’app avec la configuration de test (Gradle)",
+        "de": "App mit Testkonfiguration starten (Gradle)",
+        "it": "Avvia l’app con la configurazione di test (Gradle)",
+        "ja": "テスト用の構成でアプリを起動 (Gradle)",
+        "ko": "테스트 구성으로 앱 시작 (Gradle)",
+        "zh-cn": "使用测试配置启动应用 (Gradle)",
+        "zh-tw": "使用測試設定啟動應用程式 (Gradle)",
+        "ru": "Запустить приложение с тестовой конфигурацией (Gradle)"
+      },
+      "description": {
+        "en": "Starts the main class of src/test, usually a TestApplication that brings up the databases with Testcontainers; Docker must be running.",
+        "es": "Arranca la clase principal de src/test, normalmente un TestApplication que levanta las bases de datos con Testcontainers; Docker tiene que estar en marcha.",
+        "pt-br": "Inicia a classe principal de src/test, normalmente um TestApplication que sobe os bancos de dados com o Testcontainers; o Docker precisa estar rodando.",
+        "fr": "Démarre la classe principale de src/test, souvent un TestApplication qui lance les bases avec Testcontainers ; Docker doit tourner.",
+        "de": "Startet die Hauptklasse aus src/test, meist eine TestApplication, die Datenbanken mit Testcontainers hochfährt; Docker muss laufen.",
+        "it": "Avvia la classe principale di src/test, di solito un TestApplication che avvia i database con Testcontainers; Docker deve essere in esecuzione.",
+        "ja": "src/test のメインクラス（通常は Testcontainers でデータベースを起動する TestApplication）を起動します。Docker が動いている必要があります。",
+        "ko": "src/test의 메인 클래스(보통 Testcontainers로 데이터베이스를 띄우는 TestApplication)를 시작합니다. Docker가 실행 중이어야 합니다.",
+        "zh-cn": "启动 src/test 中的主类（通常是用 Testcontainers 启动数据库的 TestApplication）；需要 Docker 正在运行。",
+        "zh-tw": "啟動 src/test 中的主類別（通常是用 Testcontainers 啟動資料庫的 TestApplication）；需要 Docker 正在執行。",
+        "ru": "Запускает главный класс из src/test, обычно TestApplication, который поднимает базы через Testcontainers; Docker должен быть запущен."
+      },
+      "command": "./gradlew bootTestRun",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "run", "test", "tests"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "ejecutar", "tests", "pruebas"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "executar", "testes"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "exécuter", "tests"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "ausführen", "Tests"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "eseguire", "test"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "実行", "テスト"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "실행", "테스트"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "运行", "测试"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "執行", "測試"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "test-run", "bootTestRun", "testcontainers", "docker", "gradle", "gradlew", "запустить", "тесты"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootTestRun",
+        "cmd": "gradlew bootTestRun"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/running.html#running-your-application.using-a-test-main-class"
+    },
+    {
+      "id": "spring-boot.jar-maven",
+      "title": {
+        "en": "Build the executable jar (Maven)",
+        "es": "Crear el jar ejecutable (Maven)",
+        "pt-br": "Criar o jar executável (Maven)",
+        "fr": "Créer le jar exécutable (Maven)",
+        "de": "Ausführbares JAR bauen (Maven)",
+        "it": "Crea il jar eseguibile (Maven)",
+        "ja": "実行可能 jar をビルド (Maven)",
+        "ko": "실행 가능한 jar 만들기 (Maven)",
+        "zh-cn": "构建可执行 jar (Maven)",
+        "zh-tw": "建置可執行 jar (Maven)",
+        "ru": "Собрать исполняемый jar (Maven)"
+      },
+      "description": {
+        "en": "Builds a jar with every dependency and the embedded server, in target (Maven) or build/libs (Gradle); start it with java -jar.",
+        "es": "Crea un jar con todas las dependencias y el servidor embebido, en target (Maven) o build/libs (Gradle); se arranca con java -jar.",
+        "pt-br": "Cria um jar com todas as dependências e o servidor embutido, em target (Maven) ou build/libs (Gradle); inicie com java -jar.",
+        "fr": "Crée un jar avec toutes les dépendances et le serveur embarqué, dans target (Maven) ou build/libs (Gradle) ; lancez-le avec java -jar.",
+        "de": "Baut ein JAR mit allen Abhängigkeiten und eingebettetem Server in target (Maven) oder build/libs (Gradle); Start mit java -jar.",
+        "it": "Crea un jar con tutte le dipendenze e il server incorporato, in target (Maven) o build/libs (Gradle); si avvia con java -jar.",
+        "ja": "すべての依存関係と組み込みサーバーを含む jar を target（Maven）または build/libs（Gradle）に作ります。java -jar で起動します。",
+        "ko": "모든 의존성과 내장 서버가 들어간 jar를 target(Maven) 또는 build/libs(Gradle)에 만듭니다. java -jar로 시작합니다.",
+        "zh-cn": "在 target（Maven）或 build/libs（Gradle）中构建包含全部依赖和内嵌服务器的 jar；用 java -jar 启动。",
+        "zh-tw": "在 target（Maven）或 build/libs（Gradle）中建置包含全部相依性和內嵌伺服器的 jar；用 java -jar 啟動。",
+        "ru": "Собирает jar со всеми зависимостями и встроенным сервером в target (Maven) или build/libs (Gradle); запуск — java -jar."
+      },
+      "command": "./mvnw package",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "build", "compile"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "compilar", "empaquetar", "paquete"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "compilar", "empacotar", "pacote"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "compiler", "empaqueter", "paquet"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "bauen", "kompilieren", "paketieren", "Paket"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "compilare", "impacchettare", "pacchetto"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "ビルド", "コンパイル", "パッケージ化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "빌드", "컴파일", "패키징"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "构建", "编译", "打包"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "建置", "編譯", "封裝"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "maven", "mvnw", "сборка", "компиляция", "упаковать", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw package",
+        "cmd": "mvnw package"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/packaging.html"
+    },
+    {
+      "id": "spring-boot.jar-gradle",
+      "title": {
+        "en": "Build the executable jar (Gradle)",
+        "es": "Crear el jar ejecutable (Gradle)",
+        "pt-br": "Criar o jar executável (Gradle)",
+        "fr": "Créer le jar exécutable (Gradle)",
+        "de": "Ausführbares JAR bauen (Gradle)",
+        "it": "Crea il jar eseguibile (Gradle)",
+        "ja": "実行可能 jar をビルド (Gradle)",
+        "ko": "실행 가능한 jar 만들기 (Gradle)",
+        "zh-cn": "构建可执行 jar (Gradle)",
+        "zh-tw": "建置可執行 jar (Gradle)",
+        "ru": "Собрать исполняемый jar (Gradle)"
+      },
+      "description": {
+        "en": "Builds a jar with every dependency and the embedded server, in target (Maven) or build/libs (Gradle); start it with java -jar.",
+        "es": "Crea un jar con todas las dependencias y el servidor embebido, en target (Maven) o build/libs (Gradle); se arranca con java -jar.",
+        "pt-br": "Cria um jar com todas as dependências e o servidor embutido, em target (Maven) ou build/libs (Gradle); inicie com java -jar.",
+        "fr": "Crée un jar avec toutes les dépendances et le serveur embarqué, dans target (Maven) ou build/libs (Gradle) ; lancez-le avec java -jar.",
+        "de": "Baut ein JAR mit allen Abhängigkeiten und eingebettetem Server in target (Maven) oder build/libs (Gradle); Start mit java -jar.",
+        "it": "Crea un jar con tutte le dipendenze e il server incorporato, in target (Maven) o build/libs (Gradle); si avvia con java -jar.",
+        "ja": "すべての依存関係と組み込みサーバーを含む jar を target（Maven）または build/libs（Gradle）に作ります。java -jar で起動します。",
+        "ko": "모든 의존성과 내장 서버가 들어간 jar를 target(Maven) 또는 build/libs(Gradle)에 만듭니다. java -jar로 시작합니다.",
+        "zh-cn": "在 target（Maven）或 build/libs（Gradle）中构建包含全部依赖和内嵌服务器的 jar；用 java -jar 启动。",
+        "zh-tw": "在 target（Maven）或 build/libs（Gradle）中建置包含全部相依性和內嵌伺服器的 jar；用 java -jar 啟動。",
+        "ru": "Собирает jar со всеми зависимостями и встроенным сервером в target (Maven) или build/libs (Gradle); запуск — java -jar."
+      },
+      "command": "./gradlew bootJar",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "build", "compile"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "compilar", "empaquetar", "paquete"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "compilar", "empacotar", "pacote"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "compiler", "empaqueter", "paquet"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "bauen", "kompilieren", "paketieren", "Paket"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "compilare", "impacchettare", "pacchetto"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "ビルド", "コンパイル", "パッケージ化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "빌드", "컴파일", "패키징"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "构建", "编译", "打包"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "建置", "編譯", "封裝"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "jar", "bootJar", "package", "fat jar", "gradle", "gradlew", "сборка", "компиляция", "упаковать", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootJar",
+        "cmd": "gradlew bootJar"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/packaging.html"
+    },
+    {
+      "id": "spring-boot.build-image-maven",
+      "title": {
+        "en": "Build a container image (Maven)",
+        "es": "Crear una imagen de contenedor (Maven)",
+        "pt-br": "Criar uma imagem de contêiner (Maven)",
+        "fr": "Créer une image de conteneur (Maven)",
+        "de": "Container-Image bauen (Maven)",
+        "it": "Crea un’immagine container (Maven)",
+        "ja": "コンテナーイメージをビルド (Maven)",
+        "ko": "컨테이너 이미지 만들기 (Maven)",
+        "zh-cn": "构建容器镜像 (Maven)",
+        "zh-tw": "建置容器映像 (Maven)",
+        "ru": "Собрать образ контейнера (Maven)"
+      },
+      "description": {
+        "en": "Builds an OCI image of the app with Cloud Native Buildpacks, without a Dockerfile; Docker must be running.",
+        "es": "Crea una imagen OCI de la app con Cloud Native Buildpacks, sin Dockerfile; Docker tiene que estar en marcha.",
+        "pt-br": "Cria uma imagem OCI do app com Cloud Native Buildpacks, sem Dockerfile; o Docker precisa estar rodando.",
+        "fr": "Crée une image OCI de l’app avec Cloud Native Buildpacks, sans Dockerfile ; Docker doit tourner.",
+        "de": "Baut ein OCI-Image der App mit Cloud Native Buildpacks, ohne Dockerfile; Docker muss laufen.",
+        "it": "Crea un’immagine OCI dell’app con Cloud Native Buildpacks, senza Dockerfile; Docker deve essere in esecuzione.",
+        "ja": "Dockerfile なしで、Cloud Native Buildpacks によりアプリの OCI イメージを作ります。Docker が動いている必要があります。",
+        "ko": "Dockerfile 없이 Cloud Native Buildpacks로 앱의 OCI 이미지를 만듭니다. Docker가 실행 중이어야 합니다.",
+        "zh-cn": "用 Cloud Native Buildpacks 构建应用的 OCI 镜像，无需 Dockerfile；需要 Docker 正在运行。",
+        "zh-tw": "用 Cloud Native Buildpacks 建置應用程式的 OCI 映像，無需 Dockerfile；需要 Docker 正在執行。",
+        "ru": "Собирает OCI-образ приложения через Cloud Native Buildpacks, без Dockerfile; Docker должен быть запущен."
+      },
+      "command": "./mvnw spring-boot:build-image",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "build", "compile", "package", "jar"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "compilar", "empaquetar", "paquete"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "compilar", "empacotar", "pacote"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "compiler", "empaqueter", "paquet"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "bauen", "kompilieren", "paketieren", "Paket"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "compilare", "impacchettare", "pacchetto"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "ビルド", "コンパイル", "パッケージ化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "빌드", "컴파일", "패키징"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "构建", "编译", "打包"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "建置", "編譯", "封裝"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "maven", "mvnw", "сборка", "компиляция", "упаковать", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\mvnw spring-boot:build-image",
+        "cmd": "mvnw spring-boot:build-image"
+      },
+      "docs": "https://docs.spring.io/spring-boot/maven-plugin/build-image.html"
+    },
+    {
+      "id": "spring-boot.build-image-gradle",
+      "title": {
+        "en": "Build a container image (Gradle)",
+        "es": "Crear una imagen de contenedor (Gradle)",
+        "pt-br": "Criar uma imagem de contêiner (Gradle)",
+        "fr": "Créer une image de conteneur (Gradle)",
+        "de": "Container-Image bauen (Gradle)",
+        "it": "Crea un’immagine container (Gradle)",
+        "ja": "コンテナーイメージをビルド (Gradle)",
+        "ko": "컨테이너 이미지 만들기 (Gradle)",
+        "zh-cn": "构建容器镜像 (Gradle)",
+        "zh-tw": "建置容器映像 (Gradle)",
+        "ru": "Собрать образ контейнера (Gradle)"
+      },
+      "description": {
+        "en": "Builds an OCI image of the app with Cloud Native Buildpacks, without a Dockerfile; Docker must be running.",
+        "es": "Crea una imagen OCI de la app con Cloud Native Buildpacks, sin Dockerfile; Docker tiene que estar en marcha.",
+        "pt-br": "Cria uma imagem OCI do app com Cloud Native Buildpacks, sem Dockerfile; o Docker precisa estar rodando.",
+        "fr": "Crée une image OCI de l’app avec Cloud Native Buildpacks, sans Dockerfile ; Docker doit tourner.",
+        "de": "Baut ein OCI-Image der App mit Cloud Native Buildpacks, ohne Dockerfile; Docker muss laufen.",
+        "it": "Crea un’immagine OCI dell’app con Cloud Native Buildpacks, senza Dockerfile; Docker deve essere in esecuzione.",
+        "ja": "Dockerfile なしで、Cloud Native Buildpacks によりアプリの OCI イメージを作ります。Docker が動いている必要があります。",
+        "ko": "Dockerfile 없이 Cloud Native Buildpacks로 앱의 OCI 이미지를 만듭니다. Docker가 실행 중이어야 합니다.",
+        "zh-cn": "用 Cloud Native Buildpacks 构建应用的 OCI 镜像，无需 Dockerfile；需要 Docker 正在运行。",
+        "zh-tw": "用 Cloud Native Buildpacks 建置應用程式的 OCI 映像，無需 Dockerfile；需要 Docker 正在執行。",
+        "ru": "Собирает OCI-образ приложения через Cloud Native Buildpacks, без Dockerfile; Docker должен быть запущен."
+      },
+      "command": "./gradlew bootBuildImage",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "build", "compile", "package", "jar"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "compilar", "empaquetar", "paquete"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "compilar", "empacotar", "pacote"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "compiler", "empaqueter", "paquet"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "bauen", "kompilieren", "paketieren", "Paket"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "compilare", "impacchettare", "pacchetto"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "ビルド", "コンパイル", "パッケージ化"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "빌드", "컴파일", "패키징"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "构建", "编译", "打包"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "建置", "編譯", "封裝"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "build-image", "bootBuildImage", "docker", "oci", "buildpacks", "gradle", "gradlew", "сборка", "компиляция", "упаковать", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": ".\\gradlew bootBuildImage",
+        "cmd": "gradlew bootBuildImage"
+      },
+      "docs": "https://docs.spring.io/spring-boot/gradle-plugin/packaging-oci-image.html"
+    },
+    {
+      "id": "spring-boot.java-jar",
+      "title": {
+        "en": "Start the built jar",
+        "es": "Arrancar el jar compilado",
+        "pt-br": "Iniciar o jar compilado",
+        "fr": "Démarrer le jar compilé",
+        "de": "Gebautes JAR starten",
+        "it": "Avvia il jar compilato",
+        "ja": "ビルドした jar を起動",
+        "ko": "빌드한 jar 시작",
+        "zh-cn": "启动构建好的 jar",
+        "zh-tw": "啟動建置好的 jar",
+        "ru": "Запустить собранный jar"
+      },
+      "description": {
+        "en": "Starts the app from the executable jar, as in production; add --spring.profiles.active=prod at the end to choose a profile.",
+        "es": "Arranca la app desde el jar ejecutable, como en producción; añade --spring.profiles.active=prod al final para elegir un perfil.",
+        "pt-br": "Inicia o app a partir do jar executável, como em produção; adicione --spring.profiles.active=prod no final para escolher um perfil.",
+        "fr": "Démarre l’app depuis le jar exécutable, comme en production ; ajoutez --spring.profiles.active=prod à la fin pour choisir un profil.",
+        "de": "Startet die App aus dem ausführbaren JAR wie in Produktion; am Ende --spring.profiles.active=prod für ein Profil anhängen.",
+        "it": "Avvia l’app dal jar eseguibile, come in produzione; aggiungi --spring.profiles.active=prod alla fine per scegliere un profilo.",
+        "ja": "本番と同じく実行可能 jar からアプリを起動します。プロファイルを選ぶには末尾に --spring.profiles.active=prod を付けます。",
+        "ko": "프로덕션처럼 실행 가능한 jar로 앱을 시작합니다. 프로필을 고르려면 끝에 --spring.profiles.active=prod를 붙입니다.",
+        "zh-cn": "像生产环境一样从可执行 jar 启动应用；要选择配置文件，在末尾加 --spring.profiles.active=prod。",
+        "zh-tw": "像正式環境一樣從可執行 jar 啟動應用程式；要選擇設定檔，在結尾加 --spring.profiles.active=prod。",
+        "ru": "Запускает приложение из исполняемого jar, как в продакшене; чтобы выбрать профиль, добавьте в конец --spring.profiles.active=prod."
+      },
+      "command": "java -jar ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "target/demo-0.0.1-SNAPSHOT.jar",
+            "es": "target/demo-0.0.1-SNAPSHOT.jar",
+            "pt-br": "target/demo-0.0.1-SNAPSHOT.jar",
+            "fr": "target/demo-0.0.1-SNAPSHOT.jar",
+            "de": "target/demo-0.0.1-SNAPSHOT.jar",
+            "it": "target/demo-0.0.1-SNAPSHOT.jar",
+            "ja": "target/demo-0.0.1-SNAPSHOT.jar",
+            "ko": "target/demo-0.0.1-SNAPSHOT.jar",
+            "zh-cn": "target/demo-0.0.1-SNAPSHOT.jar",
+            "zh-tw": "target/demo-0.0.1-SNAPSHOT.jar",
+            "ru": "target/demo-0.0.1-SNAPSHOT.jar"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "run"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "ejecutar"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "executar"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "exécuter"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "ausführen"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "eseguire"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "実行"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "실행"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "运行"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "執行"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "java -jar", "jar", "production", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://docs.spring.io/spring-boot/reference/using/running-your-application.html#using.running-your-application.as-a-packaged-application"
+    },
+    {
+      "id": "spring-boot.actuator-health",
+      "title": {
+        "en": "Check the health of the app",
+        "es": "Ver la salud de la app",
+        "pt-br": "Ver a saúde do app",
+        "fr": "Vérifier la santé de l’app",
+        "de": "Zustand der App prüfen",
+        "it": "Controlla lo stato dell’app",
+        "ja": "アプリのヘルスを確認",
+        "ko": "앱 상태 확인",
+        "zh-cn": "检查应用健康状态",
+        "zh-tw": "檢查應用程式健康狀態",
+        "ru": "Проверить состояние приложения"
+      },
+      "description": {
+        "en": "Calls the Actuator health endpoint of the running app and prints {\"status\":\"UP\"} if everything is fine; it needs spring-boot-starter-actuator.",
+        "es": "Llama al endpoint de salud de Actuator de la app en marcha y muestra {\"status\":\"UP\"} si todo va bien; necesita spring-boot-starter-actuator.",
+        "pt-br": "Chama o endpoint de saúde do Actuator do app em execução e mostra {\"status\":\"UP\"} se estiver tudo bem; precisa do spring-boot-starter-actuator.",
+        "fr": "Appelle l’endpoint de santé d’Actuator de l’app en cours et affiche {\"status\":\"UP\"} si tout va bien ; nécessite spring-boot-starter-actuator.",
+        "de": "Ruft den Actuator-Health-Endpunkt der laufenden App auf und zeigt {\"status\":\"UP\"}, wenn alles stimmt; benötigt spring-boot-starter-actuator.",
+        "it": "Chiama l’endpoint di salute di Actuator dell’app in esecuzione e mostra {\"status\":\"UP\"} se va tutto bene; serve spring-boot-starter-actuator.",
+        "ja": "実行中のアプリの Actuator ヘルスエンドポイントを呼び、問題なければ {\"status\":\"UP\"} を表示します。spring-boot-starter-actuator が必要です。",
+        "ko": "실행 중인 앱의 Actuator 헬스 엔드포인트를 호출해 정상이면 {\"status\":\"UP\"}를 보여 줍니다. spring-boot-starter-actuator가 필요합니다.",
+        "zh-cn": "调用运行中应用的 Actuator 健康端点，一切正常时显示 {\"status\":\"UP\"}；需要 spring-boot-starter-actuator。",
+        "zh-tw": "呼叫執行中應用程式的 Actuator 健康端點，一切正常時顯示 {\"status\":\"UP\"}；需要 spring-boot-starter-actuator。",
+        "ru": "Вызывает эндпоинт здоровья Actuator у запущенного приложения и выводит {\"status\":\"UP\"}, если всё в порядке; нужен spring-boot-starter-actuator."
+      },
+      "command": "curl http://localhost:8080/actuator/health",
+      "tags": {
+        "en": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "es": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "pt-br": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "fr": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "de": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "it": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "ja": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "ko": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "zh-cn": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "zh-tw": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"],
+        "ru": ["spring", "spring boot", "spring-boot", "java", "actuator", "health", "curl"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "curl.exe http://localhost:8080/actuator/health"
+      },
+      "docs": "https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints.health"
+    }
+  ]
+}

@@ -63,7 +63,14 @@ Las señales SHALL ser:
 - `vue.config.js` o cualquier `*.vue` → `vue`;
 - cualquier `astro.config.*` → `astro`;
 - cualquier `nuxt.config.*` o `.nuxtrc` → `nuxt`;
-- cualquier `svelte.config.*` → `sveltekit`.
+- cualquier `svelte.config.*` → `sveltekit`;
+- `nest-cli.json` → `nestjs`;
+- `artisan` → `laravel`;
+- `manage.py` → `django`;
+- `bin/rails` → `rails`;
+- `symfony.lock` o `bin/console` → `symfony`.
+
+`spring-boot` y `fastapi` no declaran señales: no tienen un archivo propio en la raíz, y sus proyectos se detectan por `maven`, `gradle` o `python`.
 
 Un `package.json` solo MUST NOT detectar ningún framework, porque la detección no lee su contenido. Un `Makefile` MUST NOT detectar ninguna categoría, porque lo usan proyectos de muchos lenguajes. `Makefile.PL`, en cambio, es exclusivo de Perl y detecta `perl`.
 
@@ -278,6 +285,22 @@ Con varias carpetas en el workspace, las categorías detectadas SHALL ser la uni
 #### Scenario: package.json sin framework
 - **WHEN** la raíz solo contiene `package.json`
 - **THEN** la única categoría detectada es `node`
+
+#### Scenario: Proyecto Laravel
+- **WHEN** la raíz contiene `artisan` y `composer.json`
+- **THEN** las categorías detectadas son `laravel` y `php`
+
+#### Scenario: Proyecto Django en Windows y en Linux
+- **WHEN** la raíz contiene `manage.py` y `requirements.txt`, con la terminal en PowerShell o en bash
+- **THEN** las categorías detectadas son `django` y `python`
+
+#### Scenario: Proyecto Rails
+- **WHEN** la raíz contiene `Gemfile` y `bin/rails`
+- **THEN** las categorías detectadas son `rails` y `ruby`
+
+#### Scenario: Spring Boot no se detecta
+- **WHEN** la raíz solo contiene `pom.xml`
+- **THEN** la única categoría detectada es `maven`
 
 ### Requirement: Actualización en vivo
 La extensión SHALL volver a detectar las categorías cuando se cree o se borre, en la raíz de una carpeta del workspace, una entrada que coincida con algún patrón de detección: un nombre exacto, un nombre con comodín o el archivo de una ruta de un nivel. También SHALL volver a detectarlas cuando se añadan o se quiten carpetas del workspace. Si el resultado cambia, SHALL notificarlo para que la vista se actualice. Varios cambios seguidos SHALL agruparse en una sola detección.
