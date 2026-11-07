@@ -1,0 +1,1068 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "perl",
+  "title": {
+    "en": "Perl",
+    "es": "Perl",
+    "pt-br": "Perl",
+    "fr": "Perl",
+    "de": "Perl",
+    "it": "Perl",
+    "ja": "Perl",
+    "ko": "Perl",
+    "zh-cn": "Perl",
+    "zh-tw": "Perl",
+    "ru": "Perl"
+  },
+  "icon": "regex",
+  "order": 84,
+  "section": "languages",
+  "detect": ["cpanfile", "cpanfile.snapshot", "Makefile.PL", "Build.PL", "dist.ini", "*.pl", "*.pm"],
+  "commands": [
+    {
+      "id": "perl.version",
+      "title": {
+        "en": "Show the Perl version",
+        "es": "Ver la versión de Perl",
+        "pt-br": "Ver a versão do Perl",
+        "fr": "Afficher la version de Perl",
+        "de": "Perl-Version anzeigen",
+        "it": "Mostra la versione di Perl",
+        "ja": "Perl のバージョンを表示",
+        "ko": "Perl 버전 보기",
+        "zh-cn": "查看 Perl 版本",
+        "zh-tw": "檢視 Perl 版本",
+        "ru": "Показать версию Perl"
+      },
+      "description": {
+        "en": "Prints the version of the Perl interpreter",
+        "es": "Muestra la versión del intérprete de Perl",
+        "pt-br": "Mostra a versão do interpretador Perl",
+        "fr": "Affiche la version de l’interpréteur Perl",
+        "de": "Zeigt die Version des Perl-Interpreters",
+        "it": "Mostra la versione dell’interprete Perl",
+        "ja": "Perl インタープリターのバージョンを表示します",
+        "ko": "Perl 인터프리터의 버전을 보여 줍니다",
+        "zh-cn": "显示 Perl 解释器的版本",
+        "zh-tw": "顯示 Perl 直譯器的版本",
+        "ru": "Показывает версию интерпретатора Perl"
+      },
+      "command": "perl -v",
+      "tags": {
+        "en": ["perl", "-v", "version"],
+        "es": ["perl", "-v", "versión"],
+        "pt-br": ["perl", "-v", "versão"],
+        "fr": ["perl", "-v", "version"],
+        "de": ["perl", "-v", "Version"],
+        "it": ["perl", "-v", "versione"],
+        "ja": ["perl", "-v", "バージョン"],
+        "ko": ["perl", "-v", "버전"],
+        "zh-cn": ["perl", "-v", "版本"],
+        "zh-tw": ["perl", "-v", "版本"],
+        "ru": ["perl", "-v", "версия"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perlrun"
+    },
+    {
+      "id": "perl.run",
+      "title": {
+        "en": "Run a Perl script",
+        "es": "Ejecutar un script de Perl",
+        "pt-br": "Executar um script Perl",
+        "fr": "Exécuter un script Perl",
+        "de": "Perl-Skript ausführen",
+        "it": "Esegui uno script Perl",
+        "ja": "Perl スクリプトを実行",
+        "ko": "Perl 스크립트 실행",
+        "zh-cn": "运行 Perl 脚本",
+        "zh-tw": "執行 Perl 指令碼",
+        "ru": "Запустить скрипт Perl"
+      },
+      "description": {
+        "en": "Runs the .pl file with the interpreter",
+        "es": "Ejecuta el archivo .pl con el intérprete",
+        "pt-br": "Executa o arquivo .pl com o interpretador",
+        "fr": "Exécute le fichier .pl avec l’interpréteur",
+        "de": "Führt die .pl-Datei mit dem Interpreter aus",
+        "it": "Esegue il file .pl con l’interprete",
+        "ja": "インタープリターで .pl ファイルを実行します",
+        "ko": "인터프리터로 .pl 파일을 실행합니다",
+        "zh-cn": "用解释器运行 .pl 文件",
+        "zh-tw": "用直譯器執行 .pl 檔案",
+        "ru": "Выполняет файл .pl интерпретатором"
+      },
+      "command": "perl ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "script.pl",
+            "es": "script.pl",
+            "pt-br": "script.pl",
+            "fr": "script.pl",
+            "de": "script.pl",
+            "it": "script.pl",
+            "ja": "script.pl",
+            "ko": "script.pl",
+            "zh-cn": "script.pl",
+            "zh-tw": "script.pl",
+            "ru": "script.pl"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "script", "run"],
+        "es": ["perl", "script", "ejecutar"],
+        "pt-br": ["perl", "script", "executar"],
+        "fr": ["perl", "script", "exécuter"],
+        "de": ["perl", "script", "ausführen"],
+        "it": ["perl", "script", "eseguire"],
+        "ja": ["perl", "script", "実行"],
+        "ko": ["perl", "script", "실행"],
+        "zh-cn": ["perl", "script", "运行"],
+        "zh-tw": ["perl", "script", "執行"],
+        "ru": ["perl", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perlrun"
+    },
+    {
+      "id": "perl.check-syntax",
+      "title": {
+        "en": "Check the syntax of a script",
+        "es": "Comprobar la sintaxis de un script",
+        "pt-br": "Verificar a sintaxe de um script",
+        "fr": "Vérifier la syntaxe d’un script",
+        "de": "Syntax eines Skripts prüfen",
+        "it": "Controlla la sintassi di uno script",
+        "ja": "スクリプトの構文をチェック",
+        "ko": "스크립트 문법 검사",
+        "zh-cn": "检查脚本语法",
+        "zh-tw": "檢查指令碼語法",
+        "ru": "Проверить синтаксис скрипта"
+      },
+      "description": {
+        "en": "Compiles the script without running it and prints \"syntax OK\" or the errors; BEGIN blocks and use statements do run",
+        "es": "Compila el script sin ejecutarlo y muestra \"syntax OK\" o los errores; los bloques BEGIN y los use sí se ejecutan",
+        "pt-br": "Compila o script sem executá-lo e mostra \"syntax OK\" ou os erros; os blocos BEGIN e os use são executados",
+        "fr": "Compile le script sans l’exécuter et affiche \"syntax OK\" ou les erreurs ; les blocs BEGIN et les use s’exécutent quand même",
+        "de": "Kompiliert das Skript ohne Ausführung und zeigt \"syntax OK\" oder die Fehler; BEGIN-Blöcke und use werden dennoch ausgeführt",
+        "it": "Compila lo script senza eseguirlo e mostra \"syntax OK\" o gli errori; i blocchi BEGIN e gli use vengono comunque eseguiti",
+        "ja": "スクリプトを実行せずにコンパイルし、\"syntax OK\" かエラーを表示します。BEGIN ブロックと use は実行されます",
+        "ko": "스크립트를 실행하지 않고 컴파일해 \"syntax OK\"나 오류를 보여 줍니다. BEGIN 블록과 use는 실행됩니다",
+        "zh-cn": "只编译脚本不运行，显示 \"syntax OK\" 或错误；BEGIN 块和 use 语句仍会执行",
+        "zh-tw": "只編譯指令碼不執行，顯示 \"syntax OK\" 或錯誤；BEGIN 區塊和 use 陳述式仍會執行",
+        "ru": "Компилирует скрипт без запуска и выводит \"syntax OK\" или ошибки; блоки BEGIN и use всё же выполняются"
+      },
+      "command": "perl -c ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "script.pl",
+            "es": "script.pl",
+            "pt-br": "script.pl",
+            "fr": "script.pl",
+            "de": "script.pl",
+            "it": "script.pl",
+            "ja": "script.pl",
+            "ko": "script.pl",
+            "zh-cn": "script.pl",
+            "zh-tw": "script.pl",
+            "ru": "script.pl"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "-c", "syntax", "lint", "analyze", "types"],
+        "es": ["perl", "-c", "syntax", "lint", "analizar", "tipos"],
+        "pt-br": ["perl", "-c", "syntax", "lint", "analisar", "tipos"],
+        "fr": ["perl", "-c", "syntax", "lint", "analyser", "types"],
+        "de": ["perl", "-c", "syntax", "lint", "analysieren", "Typen"],
+        "it": ["perl", "-c", "syntax", "lint", "analizzare", "tipi"],
+        "ja": ["perl", "-c", "syntax", "lint", "解析", "型"],
+        "ko": ["perl", "-c", "syntax", "lint", "분석", "타입"],
+        "zh-cn": ["perl", "-c", "syntax", "lint", "分析", "类型"],
+        "zh-tw": ["perl", "-c", "syntax", "lint", "分析", "型別"],
+        "ru": ["perl", "-c", "syntax", "lint", "анализ", "типы"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perlrun"
+    },
+    {
+      "id": "perl.perldoc-module",
+      "title": {
+        "en": "Read the documentation of a module",
+        "es": "Leer la documentación de un módulo",
+        "pt-br": "Ler a documentação de um módulo",
+        "fr": "Lire la documentation d’un module",
+        "de": "Dokumentation eines Moduls lesen",
+        "it": "Leggi la documentazione di un modulo",
+        "ja": "モジュールのドキュメントを読む",
+        "ko": "모듈 문서 읽기",
+        "zh-cn": "阅读模块文档",
+        "zh-tw": "閱讀模組文件",
+        "ru": "Прочитать документацию модуля"
+      },
+      "description": {
+        "en": "Shows the POD documentation of an installed module in the terminal; q leaves",
+        "es": "Muestra en la terminal la documentación POD de un módulo instalado; q sale",
+        "pt-br": "Mostra no terminal a documentação POD de um módulo instalado; q sai",
+        "fr": "Affiche dans le terminal la documentation POD d’un module installé ; q pour quitter",
+        "de": "Zeigt die POD-Dokumentation eines installierten Moduls im Terminal; q beendet",
+        "it": "Mostra nel terminale la documentazione POD di un modulo installato; q esce",
+        "ja": "インストール済みモジュールの POD ドキュメントをターミナルに表示します。q で終了",
+        "ko": "설치된 모듈의 POD 문서를 터미널에 보여 줍니다. q로 나갑니다",
+        "zh-cn": "在终端中显示已安装模块的 POD 文档；按 q 退出",
+        "zh-tw": "在終端機中顯示已安裝模組的 POD 文件；按 q 離開",
+        "ru": "Показывает в терминале документацию POD установленного модуля; q — выход"
+      },
+      "command": "perldoc ${module}",
+      "params": [
+        {
+          "name": "module",
+          "label": {
+            "en": "Module",
+            "es": "Módulo",
+            "pt-br": "Módulo",
+            "fr": "Module",
+            "de": "Modul",
+            "it": "Modulo",
+            "ja": "モジュール",
+            "ko": "모듈",
+            "zh-cn": "模块",
+            "zh-tw": "模組",
+            "ru": "Модуль"
+          },
+          "placeholder": {
+            "en": "Mojolicious",
+            "es": "Mojolicious",
+            "pt-br": "Mojolicious",
+            "fr": "Mojolicious",
+            "de": "Mojolicious",
+            "it": "Mojolicious",
+            "ja": "Mojolicious",
+            "ko": "Mojolicious",
+            "zh-cn": "Mojolicious",
+            "zh-tw": "Mojolicious",
+            "ru": "Mojolicious"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "perldoc", "pod", "docs", "help"],
+        "es": ["perl", "perldoc", "pod", "docs", "help"],
+        "pt-br": ["perl", "perldoc", "pod", "docs", "help"],
+        "fr": ["perl", "perldoc", "pod", "docs", "help"],
+        "de": ["perl", "perldoc", "pod", "docs", "help"],
+        "it": ["perl", "perldoc", "pod", "docs", "help"],
+        "ja": ["perl", "perldoc", "pod", "docs", "help"],
+        "ko": ["perl", "perldoc", "pod", "docs", "help"],
+        "zh-cn": ["perl", "perldoc", "pod", "docs", "help"],
+        "zh-tw": ["perl", "perldoc", "pod", "docs", "help"],
+        "ru": ["perl", "perldoc", "pod", "docs", "help"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perldoc"
+    },
+    {
+      "id": "perl.perldoc-function",
+      "title": {
+        "en": "Read the documentation of a function",
+        "es": "Leer la documentación de una función",
+        "pt-br": "Ler a documentação de uma função",
+        "fr": "Lire la documentation d’une fonction",
+        "de": "Dokumentation einer Funktion lesen",
+        "it": "Leggi la documentazione di una funzione",
+        "ja": "関数のドキュメントを読む",
+        "ko": "함수 문서 읽기",
+        "zh-cn": "阅读函数文档",
+        "zh-tw": "閱讀函式文件",
+        "ru": "Прочитать документацию функции"
+      },
+      "description": {
+        "en": "Shows the documentation of a built-in Perl function, such as split or sprintf",
+        "es": "Muestra la documentación de una función integrada de Perl, como split o sprintf",
+        "pt-br": "Mostra a documentação de uma função nativa do Perl, como split ou sprintf",
+        "fr": "Affiche la documentation d’une fonction intégrée de Perl, comme split ou sprintf",
+        "de": "Zeigt die Dokumentation einer eingebauten Perl-Funktion wie split oder sprintf",
+        "it": "Mostra la documentazione di una funzione integrata di Perl, come split o sprintf",
+        "ja": "split や sprintf など、Perl の組み込み関数のドキュメントを表示します",
+        "ko": "split, sprintf 같은 Perl 내장 함수의 문서를 보여 줍니다",
+        "zh-cn": "显示 Perl 内置函数（如 split 或 sprintf）的文档",
+        "zh-tw": "顯示 Perl 內建函式（如 split 或 sprintf）的文件",
+        "ru": "Показывает документацию встроенной функции Perl, например split или sprintf"
+      },
+      "command": "perldoc -f ${name}",
+      "params": [
+        {
+          "name": "name",
+          "label": {
+            "en": "Name",
+            "es": "Nombre",
+            "pt-br": "Nome",
+            "fr": "Nom",
+            "de": "Name",
+            "it": "Nome",
+            "ja": "名前",
+            "ko": "이름",
+            "zh-cn": "名称",
+            "zh-tw": "名稱",
+            "ru": "Имя"
+          },
+          "placeholder": {
+            "en": "split",
+            "es": "split",
+            "pt-br": "split",
+            "fr": "split",
+            "de": "split",
+            "it": "split",
+            "ja": "split",
+            "ko": "split",
+            "zh-cn": "split",
+            "zh-tw": "split",
+            "ru": "split"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "es": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "pt-br": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "fr": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "de": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "it": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "ja": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "ko": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "zh-cn": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "zh-tw": ["perl", "perldoc", "-f", "function", "función", "help"],
+        "ru": ["perl", "perldoc", "-f", "function", "función", "help"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perldoc"
+    },
+    {
+      "id": "perl.cpan-install",
+      "title": {
+        "en": "cpan: install a module",
+        "es": "cpan: instalar un módulo",
+        "pt-br": "cpan: instalar um módulo",
+        "fr": "cpan: installer un module",
+        "de": "cpan: Modul installieren",
+        "it": "cpan: installa un modulo",
+        "ja": "cpan: モジュールをインストール",
+        "ko": "cpan: 모듈 설치",
+        "zh-cn": "cpan: 安装模块",
+        "zh-tw": "cpan: 安裝模組",
+        "ru": "cpan: установить модуль"
+      },
+      "description": {
+        "en": "Installs the module from CPAN with the client that comes with Perl; the first time it asks some configuration questions",
+        "es": "Instala el módulo desde CPAN con el cliente que viene con Perl; la primera vez hace algunas preguntas de configuración",
+        "pt-br": "Instala o módulo do CPAN com o cliente que vem com o Perl; na primeira vez faz algumas perguntas de configuração",
+        "fr": "Installe le module depuis CPAN avec le client fourni avec Perl ; la première fois, il pose quelques questions de configuration",
+        "de": "Installiert das Modul von CPAN mit dem Client, der Perl beiliegt; beim ersten Mal stellt er einige Konfigurationsfragen",
+        "it": "Installa il modulo da CPAN con il client incluso in Perl; la prima volta fa alcune domande di configurazione",
+        "ja": "Perl 付属のクライアントで CPAN からモジュールを入れます。初回は設定についていくつか質問されます",
+        "ko": "Perl에 포함된 클라이언트로 CPAN에서 모듈을 설치합니다. 처음에는 설정 질문을 몇 가지 합니다",
+        "zh-cn": "用 Perl 自带的客户端从 CPAN 安装模块；首次运行会询问一些配置问题",
+        "zh-tw": "用 Perl 內建的用戶端從 CPAN 安裝模組；首次執行會詢問一些設定問題",
+        "ru": "Ставит модуль из CPAN клиентом, входящим в Perl; при первом запуске задаёт несколько вопросов о настройке"
+      },
+      "command": "cpan ${module}",
+      "params": [
+        {
+          "name": "module",
+          "label": {
+            "en": "Module",
+            "es": "Módulo",
+            "pt-br": "Módulo",
+            "fr": "Module",
+            "de": "Modul",
+            "it": "Modulo",
+            "ja": "モジュール",
+            "ko": "모듈",
+            "zh-cn": "模块",
+            "zh-tw": "模組",
+            "ru": "Модуль"
+          },
+          "placeholder": {
+            "en": "Mojolicious",
+            "es": "Mojolicious",
+            "pt-br": "Mojolicious",
+            "fr": "Mojolicious",
+            "de": "Mojolicious",
+            "it": "Mojolicious",
+            "ja": "Mojolicious",
+            "ko": "Mojolicious",
+            "zh-cn": "Mojolicious",
+            "zh-tw": "Mojolicious",
+            "ru": "Mojolicious"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "cpan", "module", "install"],
+        "es": ["perl", "cpan", "module", "instalar"],
+        "pt-br": ["perl", "cpan", "module", "instalar"],
+        "fr": ["perl", "cpan", "module", "installer"],
+        "de": ["perl", "cpan", "module", "installieren"],
+        "it": ["perl", "cpan", "module", "installare"],
+        "ja": ["perl", "cpan", "module", "インストール"],
+        "ko": ["perl", "cpan", "module", "설치"],
+        "zh-cn": ["perl", "cpan", "module", "安装"],
+        "zh-tw": ["perl", "cpan", "module", "安裝"],
+        "ru": ["perl", "cpan", "module", "установить"]
+      },
+      "risk": "caution",
+      "docs": "https://perldoc.perl.org/cpan"
+    },
+    {
+      "id": "perl.cpanm-install",
+      "title": {
+        "en": "cpanm: install a module",
+        "es": "cpanm: instalar un módulo",
+        "pt-br": "cpanm: instalar um módulo",
+        "fr": "cpanm: installer un module",
+        "de": "cpanm: Modul installieren",
+        "it": "cpanm: installa un modulo",
+        "ja": "cpanm: モジュールをインストール",
+        "ko": "cpanm: 모듈 설치",
+        "zh-cn": "cpanm: 安装模块",
+        "zh-tw": "cpanm: 安裝模組",
+        "ru": "cpanm: установить модуль"
+      },
+      "description": {
+        "en": "Installs the module and its dependencies from CPAN without questions, showing only the essentials",
+        "es": "Instala el módulo y sus dependencias desde CPAN sin preguntas, mostrando solo lo esencial",
+        "pt-br": "Instala o módulo e suas dependências do CPAN sem perguntas, mostrando só o essencial",
+        "fr": "Installe le module et ses dépendances depuis CPAN sans questions, en n’affichant que l’essentiel",
+        "de": "Installiert das Modul samt Abhängigkeiten von CPAN ohne Rückfragen und zeigt nur das Wesentliche",
+        "it": "Installa il modulo e le dipendenze da CPAN senza domande, mostrando solo l’essenziale",
+        "ja": "質問なしで CPAN からモジュールと依存関係を入れ、要点だけを表示します",
+        "ko": "질문 없이 CPAN에서 모듈과 의존성을 설치하고 핵심만 보여 줍니다",
+        "zh-cn": "从 CPAN 安装模块及其依赖，不提问，只显示关键信息",
+        "zh-tw": "從 CPAN 安裝模組及其相依套件，不提問，只顯示關鍵資訊",
+        "ru": "Ставит модуль и зависимости из CPAN без вопросов, показывая только главное"
+      },
+      "command": "cpanm ${module}",
+      "params": [
+        {
+          "name": "module",
+          "label": {
+            "en": "Module",
+            "es": "Módulo",
+            "pt-br": "Módulo",
+            "fr": "Module",
+            "de": "Modul",
+            "it": "Modulo",
+            "ja": "モジュール",
+            "ko": "모듈",
+            "zh-cn": "模块",
+            "zh-tw": "模組",
+            "ru": "Модуль"
+          },
+          "placeholder": {
+            "en": "Mojolicious",
+            "es": "Mojolicious",
+            "pt-br": "Mojolicious",
+            "fr": "Mojolicious",
+            "de": "Mojolicious",
+            "it": "Mojolicious",
+            "ja": "Mojolicious",
+            "ko": "Mojolicious",
+            "zh-cn": "Mojolicious",
+            "zh-tw": "Mojolicious",
+            "ru": "Mojolicious"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "cpanm", "cpanminus", "module", "install"],
+        "es": ["perl", "cpanm", "cpanminus", "module", "instalar"],
+        "pt-br": ["perl", "cpanm", "cpanminus", "module", "instalar"],
+        "fr": ["perl", "cpanm", "cpanminus", "module", "installer"],
+        "de": ["perl", "cpanm", "cpanminus", "module", "installieren"],
+        "it": ["perl", "cpanm", "cpanminus", "module", "installare"],
+        "ja": ["perl", "cpanm", "cpanminus", "module", "インストール"],
+        "ko": ["perl", "cpanm", "cpanminus", "module", "설치"],
+        "zh-cn": ["perl", "cpanm", "cpanminus", "module", "安装"],
+        "zh-tw": ["perl", "cpanm", "cpanminus", "module", "安裝"],
+        "ru": ["perl", "cpanm", "cpanminus", "module", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/App::cpanminus"
+    },
+    {
+      "id": "perl.cpanm-installdeps",
+      "title": {
+        "en": "cpanm: install the project dependencies",
+        "es": "cpanm: instalar las dependencias del proyecto",
+        "pt-br": "cpanm: instalar as dependências do projeto",
+        "fr": "cpanm: installer les dépendances du projet",
+        "de": "cpanm: Projektabhängigkeiten installieren",
+        "it": "cpanm: installa le dipendenze del progetto",
+        "ja": "cpanm: プロジェクトの依存関係をインストール",
+        "ko": "cpanm: 프로젝트 의존성 설치",
+        "zh-cn": "cpanm: 安装项目依赖",
+        "zh-tw": "cpanm: 安裝專案相依套件",
+        "ru": "cpanm: установить зависимости проекта"
+      },
+      "description": {
+        "en": "Installs the dependencies declared in the cpanfile or Makefile.PL of the current folder",
+        "es": "Instala las dependencias declaradas en el cpanfile o el Makefile.PL de la carpeta actual",
+        "pt-br": "Instala as dependências declaradas no cpanfile ou no Makefile.PL da pasta atual",
+        "fr": "Installe les dépendances déclarées dans le cpanfile ou le Makefile.PL du dossier actuel",
+        "de": "Installiert die in cpanfile oder Makefile.PL des aktuellen Ordners deklarierten Abhängigkeiten",
+        "it": "Installa le dipendenze dichiarate nel cpanfile o nel Makefile.PL della cartella attuale",
+        "ja": "現在のフォルダーの cpanfile か Makefile.PL に書かれた依存関係をインストールします",
+        "ko": "현재 폴더의 cpanfile이나 Makefile.PL에 선언된 의존성을 설치합니다",
+        "zh-cn": "安装当前文件夹 cpanfile 或 Makefile.PL 中声明的依赖",
+        "zh-tw": "安裝目前資料夾 cpanfile 或 Makefile.PL 中宣告的相依套件",
+        "ru": "Ставит зависимости из cpanfile или Makefile.PL текущей папки"
+      },
+      "command": "cpanm --installdeps .",
+      "tags": {
+        "en": ["perl", "cpanm", "--installdeps", "cpanfile", "install", "dependencies"],
+        "es": ["perl", "cpanm", "--installdeps", "cpanfile", "instalar", "dependencias"],
+        "pt-br": ["perl", "cpanm", "--installdeps", "cpanfile", "instalar", "dependências"],
+        "fr": ["perl", "cpanm", "--installdeps", "cpanfile", "installer", "dépendances"],
+        "de": ["perl", "cpanm", "--installdeps", "cpanfile", "installieren", "Abhängigkeiten"],
+        "it": ["perl", "cpanm", "--installdeps", "cpanfile", "installare", "dipendenze"],
+        "ja": ["perl", "cpanm", "--installdeps", "cpanfile", "インストール", "依存関係"],
+        "ko": ["perl", "cpanm", "--installdeps", "cpanfile", "설치", "의존성"],
+        "zh-cn": ["perl", "cpanm", "--installdeps", "cpanfile", "安装", "依赖"],
+        "zh-tw": ["perl", "cpanm", "--installdeps", "cpanfile", "安裝", "相依套件"],
+        "ru": ["perl", "cpanm", "--installdeps", "cpanfile", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/App::cpanminus"
+    },
+    {
+      "id": "perl.carton-install",
+      "title": {
+        "en": "Carton: install the dependencies in local",
+        "es": "Carton: instalar las dependencias en local",
+        "pt-br": "Carton: instalar as dependências em local",
+        "fr": "Carton: installer les dépendances dans local",
+        "de": "Carton: Abhängigkeiten in local installieren",
+        "it": "Carton: installa le dipendenze in local",
+        "ja": "Carton: 依存関係を local にインストール",
+        "ko": "Carton: 의존성을 local에 설치",
+        "zh-cn": "Carton: 把依赖安装到 local",
+        "zh-tw": "Carton: 把相依套件安裝到 local",
+        "ru": "Carton: установить зависимости в local"
+      },
+      "description": {
+        "en": "Installs the modules of the cpanfile in the local folder and records the exact versions in cpanfile.snapshot",
+        "es": "Instala los módulos del cpanfile en la carpeta local y anota las versiones exactas en cpanfile.snapshot",
+        "pt-br": "Instala os módulos do cpanfile na pasta local e registra as versões exatas no cpanfile.snapshot",
+        "fr": "Installe les modules du cpanfile dans le dossier local et inscrit les versions exactes dans cpanfile.snapshot",
+        "de": "Installiert die Module aus cpanfile im Ordner local und hält die genauen Versionen in cpanfile.snapshot fest",
+        "it": "Installa i moduli del cpanfile nella cartella local e registra le versioni esatte in cpanfile.snapshot",
+        "ja": "cpanfile のモジュールを local フォルダーに入れ、正確なバージョンを cpanfile.snapshot に記録します",
+        "ko": "cpanfile의 모듈을 local 폴더에 설치하고 정확한 버전을 cpanfile.snapshot에 기록합니다",
+        "zh-cn": "将 cpanfile 中的模块安装到 local 文件夹，并在 cpanfile.snapshot 中记录确切版本",
+        "zh-tw": "將 cpanfile 中的模組安裝到 local 資料夾，並在 cpanfile.snapshot 中記錄確切版本",
+        "ru": "Ставит модули из cpanfile в папку local и записывает точные версии в cpanfile.snapshot"
+      },
+      "command": "carton install",
+      "tags": {
+        "en": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "install", "dependencies"],
+        "es": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "instalar", "dependencias"],
+        "pt-br": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "instalar", "dependências"],
+        "fr": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "installer", "dépendances"],
+        "de": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "installieren", "Abhängigkeiten"],
+        "it": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "installare", "dipendenze"],
+        "ja": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "インストール", "依存関係"],
+        "ko": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "설치", "의존성"],
+        "zh-cn": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "安装", "依赖"],
+        "zh-tw": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "安裝", "相依套件"],
+        "ru": ["perl", "carton", "cpanfile", "cpanfile.snapshot", "local", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/Carton"
+    },
+    {
+      "id": "perl.carton-exec",
+      "title": {
+        "en": "Carton: run with the project modules",
+        "es": "Carton: ejecutar con los módulos del proyecto",
+        "pt-br": "Carton: executar com os módulos do projeto",
+        "fr": "Carton: exécuter avec les modules du projet",
+        "de": "Carton: mit den Projektmodulen ausführen",
+        "it": "Carton: esegui con i moduli del progetto",
+        "ja": "Carton: プロジェクトのモジュールで実行",
+        "ko": "Carton: 프로젝트 모듈로 실행",
+        "zh-cn": "Carton: 使用项目模块运行",
+        "zh-tw": "Carton: 使用專案模組執行",
+        "ru": "Carton: запустить с модулями проекта"
+      },
+      "description": {
+        "en": "Runs the command with the modules of the local folder in the path, for example perl script.pl or plackup",
+        "es": "Ejecuta el comando con los módulos de la carpeta local en la ruta, por ejemplo perl script.pl o plackup",
+        "pt-br": "Executa o comando com os módulos da pasta local no caminho, por exemplo perl script.pl ou plackup",
+        "fr": "Exécute la commande avec les modules du dossier local dans le chemin, par exemple perl script.pl ou plackup",
+        "de": "Führt den Befehl mit den Modulen aus dem Ordner local im Pfad aus, etwa perl script.pl oder plackup",
+        "it": "Esegue il comando con i moduli della cartella local nel percorso, per esempio perl script.pl o plackup",
+        "ja": "local フォルダーのモジュールをパスに入れてコマンドを実行します。例: perl script.pl、plackup",
+        "ko": "local 폴더의 모듈을 경로에 넣고 명령을 실행합니다. 예: perl script.pl, plackup",
+        "zh-cn": "把 local 文件夹的模块加入路径后运行命令，例如 perl script.pl 或 plackup",
+        "zh-tw": "把 local 資料夾的模組加入路徑後執行命令，例如 perl script.pl 或 plackup",
+        "ru": "Запускает команду с модулями из папки local в пути, например perl script.pl или plackup"
+      },
+      "command": "carton exec ${command}",
+      "params": [
+        {
+          "name": "command",
+          "label": {
+            "en": "Command",
+            "es": "Comando",
+            "pt-br": "Comando",
+            "fr": "Commande",
+            "de": "Befehl",
+            "it": "Comando",
+            "ja": "コマンド",
+            "ko": "명령",
+            "zh-cn": "命令",
+            "zh-tw": "命令",
+            "ru": "Команда"
+          },
+          "placeholder": {
+            "en": "perl script.pl",
+            "es": "perl script.pl",
+            "pt-br": "perl script.pl",
+            "fr": "perl script.pl",
+            "de": "perl script.pl",
+            "it": "perl script.pl",
+            "ja": "perl script.pl",
+            "ko": "perl script.pl",
+            "zh-cn": "perl script.pl",
+            "zh-tw": "perl script.pl",
+            "ru": "perl script.pl"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "carton", "exec", "local", "run"],
+        "es": ["perl", "carton", "exec", "local", "ejecutar"],
+        "pt-br": ["perl", "carton", "exec", "local", "executar"],
+        "fr": ["perl", "carton", "exec", "local", "exécuter"],
+        "de": ["perl", "carton", "exec", "local", "ausführen"],
+        "it": ["perl", "carton", "exec", "local", "eseguire"],
+        "ja": ["perl", "carton", "exec", "local", "実行"],
+        "ko": ["perl", "carton", "exec", "local", "실행"],
+        "zh-cn": ["perl", "carton", "exec", "local", "运行"],
+        "zh-tw": ["perl", "carton", "exec", "local", "執行"],
+        "ru": ["perl", "carton", "exec", "local", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/Carton"
+    },
+    {
+      "id": "perl.carton-bundle",
+      "title": {
+        "en": "Carton: bundle the modules for deployment",
+        "es": "Carton: empaquetar los módulos para desplegar",
+        "pt-br": "Carton: empacotar os módulos para implantar",
+        "fr": "Carton: empaqueter les modules pour le déploiement",
+        "de": "Carton: Module für das Deployment bündeln",
+        "it": "Carton: impacchetta i moduli per il deploy",
+        "ja": "Carton: デプロイ用にモジュールをまとめる",
+        "ko": "Carton: 배포용으로 모듈 묶기",
+        "zh-cn": "Carton: 打包模块以便部署",
+        "zh-tw": "Carton: 封裝模組以便部署",
+        "ru": "Carton: упаковать модули для развёртывания"
+      },
+      "description": {
+        "en": "Copies the archives of every dependency to vendor/cache, to install them later without internet",
+        "es": "Copia los archivos de todas las dependencias a vendor/cache, para instalarlas después sin internet",
+        "pt-br": "Copia os arquivos de todas as dependências para vendor/cache, para instalá-las depois sem internet",
+        "fr": "Copie les archives de toutes les dépendances dans vendor/cache, pour les installer ensuite sans internet",
+        "de": "Kopiert die Archive aller Abhängigkeiten nach vendor/cache, um sie später ohne Internet zu installieren",
+        "it": "Copia gli archivi di tutte le dipendenze in vendor/cache, per installarle poi senza internet",
+        "ja": "すべての依存関係のアーカイブを vendor/cache にコピーし、後でオフラインでもインストールできるようにします",
+        "ko": "모든 의존성의 아카이브를 vendor/cache에 복사해 나중에 인터넷 없이 설치할 수 있게 합니다",
+        "zh-cn": "把所有依赖的压缩包复制到 vendor/cache，以便之后离线安装",
+        "zh-tw": "把所有相依套件的壓縮檔複製到 vendor/cache，以便之後離線安裝",
+        "ru": "Копирует архивы всех зависимостей в vendor/cache, чтобы потом ставить их без интернета"
+      },
+      "command": "carton bundle",
+      "tags": {
+        "en": ["perl", "carton", "bundle", "vendor", "offline", "package", "jar", "release", "deploy"],
+        "es": ["perl", "carton", "bundle", "vendor", "offline", "empaquetar", "paquete", "release", "desplegar", "producción"],
+        "pt-br": ["perl", "carton", "bundle", "vendor", "offline", "empacotar", "pacote", "release", "implantar", "produção"],
+        "fr": ["perl", "carton", "bundle", "vendor", "offline", "empaqueter", "paquet", "release", "déployer", "production"],
+        "de": ["perl", "carton", "bundle", "vendor", "offline", "paketieren", "Paket", "Release", "Deployment", "Produktion"],
+        "it": ["perl", "carton", "bundle", "vendor", "offline", "impacchettare", "pacchetto", "release", "distribuire", "produzione"],
+        "ja": ["perl", "carton", "bundle", "vendor", "offline", "パッケージ化", "リリース", "本番"],
+        "ko": ["perl", "carton", "bundle", "vendor", "offline", "패키징", "릴리스", "배포"],
+        "zh-cn": ["perl", "carton", "bundle", "vendor", "offline", "打包", "发布", "生产"],
+        "zh-tw": ["perl", "carton", "bundle", "vendor", "offline", "封裝", "發布", "正式環境"],
+        "ru": ["perl", "carton", "bundle", "vendor", "offline", "упаковать", "пакет", "релиз", "продакшен"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/Carton"
+    },
+    {
+      "id": "perl.prove",
+      "title": {
+        "en": "Run the tests with prove",
+        "es": "Ejecutar los tests con prove",
+        "pt-br": "Executar os testes com prove",
+        "fr": "Lancer les tests avec prove",
+        "de": "Tests mit prove ausführen",
+        "it": "Esegui i test con prove",
+        "ja": "prove でテストを実行",
+        "ko": "prove로 테스트 실행",
+        "zh-cn": "用 prove 运行测试",
+        "zh-tw": "用 prove 執行測試",
+        "ru": "Запустить тесты через prove"
+      },
+      "description": {
+        "en": "Runs every .t file of the t folder and its subfolders, with the modules of lib in the path",
+        "es": "Ejecuta todos los .t de la carpeta t y sus subcarpetas, con los módulos de lib en la ruta",
+        "pt-br": "Executa todos os .t da pasta t e subpastas, com os módulos de lib no caminho",
+        "fr": "Lance tous les .t du dossier t et de ses sous-dossiers, avec les modules de lib dans le chemin",
+        "de": "Führt alle .t-Dateien im Ordner t und seinen Unterordnern aus, mit den Modulen aus lib im Pfad",
+        "it": "Esegue tutti i .t della cartella t e sottocartelle, con i moduli di lib nel percorso",
+        "ja": "lib のモジュールをパスに入れて、t フォルダーとサブフォルダーのすべての .t を実行します",
+        "ko": "lib의 모듈을 경로에 넣고 t 폴더와 하위 폴더의 모든 .t를 실행합니다",
+        "zh-cn": "将 lib 中的模块加入路径，运行 t 文件夹及其子文件夹中的所有 .t 文件",
+        "zh-tw": "將 lib 中的模組加入路徑，執行 t 資料夾及其子資料夾中的所有 .t 檔案",
+        "ru": "Запускает все .t из папки t и подпапок, с модулями из lib в пути"
+      },
+      "command": "prove -lr t",
+      "tags": {
+        "en": ["perl", "prove", ".t", "Test::More", "lib", "test", "tests"],
+        "es": ["perl", "prove", ".t", "Test::More", "lib", "tests", "pruebas"],
+        "pt-br": ["perl", "prove", ".t", "Test::More", "lib", "testes"],
+        "fr": ["perl", "prove", ".t", "Test::More", "lib", "tests"],
+        "de": ["perl", "prove", ".t", "Test::More", "lib", "Tests"],
+        "it": ["perl", "prove", ".t", "Test::More", "lib", "test"],
+        "ja": ["perl", "prove", ".t", "Test::More", "lib", "テスト"],
+        "ko": ["perl", "prove", ".t", "Test::More", "lib", "테스트"],
+        "zh-cn": ["perl", "prove", ".t", "Test::More", "lib", "测试"],
+        "zh-tw": ["perl", "prove", ".t", "Test::More", "lib", "測試"],
+        "ru": ["perl", "prove", ".t", "Test::More", "lib", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/prove"
+    },
+    {
+      "id": "perl.makefile-pl",
+      "title": {
+        "en": "Generate the Makefile of a module",
+        "es": "Generar el Makefile de un módulo",
+        "pt-br": "Gerar o Makefile de um módulo",
+        "fr": "Générer le Makefile d’un module",
+        "de": "Makefile eines Moduls erzeugen",
+        "it": "Genera il Makefile di un modulo",
+        "ja": "モジュールの Makefile を生成",
+        "ko": "모듈의 Makefile 생성",
+        "zh-cn": "生成模块的 Makefile",
+        "zh-tw": "產生模組的 Makefile",
+        "ru": "Создать Makefile модуля"
+      },
+      "description": {
+        "en": "Runs Makefile.PL (ExtUtils::MakeMaker), which checks the dependencies and writes the Makefile to build, test and install the module",
+        "es": "Ejecuta Makefile.PL (ExtUtils::MakeMaker), que comprueba las dependencias y escribe el Makefile para compilar, probar e instalar el módulo",
+        "pt-br": "Executa o Makefile.PL (ExtUtils::MakeMaker), que verifica as dependências e grava o Makefile para compilar, testar e instalar o módulo",
+        "fr": "Exécute Makefile.PL (ExtUtils::MakeMaker), qui vérifie les dépendances et écrit le Makefile pour construire, tester et installer le module",
+        "de": "Führt Makefile.PL (ExtUtils::MakeMaker) aus, das die Abhängigkeiten prüft und das Makefile zum Bauen, Testen und Installieren schreibt",
+        "it": "Esegue Makefile.PL (ExtUtils::MakeMaker), che controlla le dipendenze e scrive il Makefile per compilare, testare e installare il modulo",
+        "ja": "Makefile.PL（ExtUtils::MakeMaker）を実行します。依存関係を確認し、ビルド・テスト・インストール用の Makefile を書きます",
+        "ko": "Makefile.PL(ExtUtils::MakeMaker)을 실행해 의존성을 확인하고 빌드, 테스트, 설치용 Makefile을 씁니다",
+        "zh-cn": "运行 Makefile.PL（ExtUtils::MakeMaker），检查依赖并生成用于构建、测试和安装模块的 Makefile",
+        "zh-tw": "執行 Makefile.PL（ExtUtils::MakeMaker），檢查相依套件並產生用於建置、測試和安裝模組的 Makefile",
+        "ru": "Запускает Makefile.PL (ExtUtils::MakeMaker), который проверяет зависимости и пишет Makefile для сборки, тестов и установки модуля"
+      },
+      "command": "perl Makefile.PL",
+      "tags": {
+        "en": ["perl", "Makefile.PL", "MakeMaker", "build", "compile"],
+        "es": ["perl", "Makefile.PL", "MakeMaker", "compilar"],
+        "pt-br": ["perl", "Makefile.PL", "MakeMaker", "compilar"],
+        "fr": ["perl", "Makefile.PL", "MakeMaker", "compiler"],
+        "de": ["perl", "Makefile.PL", "MakeMaker", "bauen", "kompilieren"],
+        "it": ["perl", "Makefile.PL", "MakeMaker", "compilare"],
+        "ja": ["perl", "Makefile.PL", "MakeMaker", "ビルド", "コンパイル"],
+        "ko": ["perl", "Makefile.PL", "MakeMaker", "빌드", "컴파일"],
+        "zh-cn": ["perl", "Makefile.PL", "MakeMaker", "构建", "编译"],
+        "zh-tw": ["perl", "Makefile.PL", "MakeMaker", "建置", "編譯"],
+        "ru": ["perl", "Makefile.PL", "MakeMaker", "сборка", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/ExtUtils::MakeMaker"
+    },
+    {
+      "id": "perl.make-test",
+      "title": {
+        "en": "Build and test the module",
+        "es": "Compilar y probar el módulo",
+        "pt-br": "Compilar e testar o módulo",
+        "fr": "Construire et tester le module",
+        "de": "Modul bauen und testen",
+        "it": "Compila e testa il modulo",
+        "ja": "モジュールをビルドしてテスト",
+        "ko": "모듈 빌드 후 테스트",
+        "zh-cn": "构建并测试模块",
+        "zh-tw": "建置並測試模組",
+        "ru": "Собрать и протестировать модуль"
+      },
+      "description": {
+        "en": "Builds the module with the Makefile generated by perl Makefile.PL and runs the tests of the t folder. On Windows with Strawberry Perl, make is called gmake.",
+        "es": "Compila el módulo con el Makefile que genera perl Makefile.PL y ejecuta los tests de la carpeta t. En Windows con Strawberry Perl, make se llama gmake.",
+        "pt-br": "Compila o módulo com o Makefile gerado pelo perl Makefile.PL e executa os testes da pasta t. No Windows com Strawberry Perl, o make se chama gmake.",
+        "fr": "Construit le module avec le Makefile généré par perl Makefile.PL et lance les tests du dossier t. Sous Windows avec Strawberry Perl, make s’appelle gmake.",
+        "de": "Baut das Modul mit dem von perl Makefile.PL erzeugten Makefile und führt die Tests im Ordner t aus. Unter Windows mit Strawberry Perl heißt make gmake.",
+        "it": "Compila il modulo con il Makefile generato da perl Makefile.PL ed esegue i test della cartella t. Su Windows con Strawberry Perl, make si chiama gmake.",
+        "ja": "perl Makefile.PL が生成した Makefile でモジュールをビルドし、t フォルダーのテストを実行します。 Windows の Strawberry Perl では make の名前は gmake です。",
+        "ko": "perl Makefile.PL이 만든 Makefile로 모듈을 빌드하고 t 폴더의 테스트를 실행합니다. Windows의 Strawberry Perl에서는 make 이름이 gmake입니다.",
+        "zh-cn": "用 perl Makefile.PL 生成的 Makefile 构建模块，并运行 t 文件夹中的测试。 在 Windows 上使用 Strawberry Perl 时，make 名为 gmake。",
+        "zh-tw": "用 perl Makefile.PL 產生的 Makefile 建置模組，並執行 t 資料夾中的測試。 在 Windows 上使用 Strawberry Perl 時，make 名為 gmake。",
+        "ru": "Собирает модуль по Makefile из perl Makefile.PL и запускает тесты из папки t. В Windows со Strawberry Perl make называется gmake."
+      },
+      "command": "make test",
+      "tags": {
+        "en": ["perl", "make", "gmake", "Makefile", "test", "tests", "build", "compile"],
+        "es": ["perl", "make", "gmake", "Makefile", "tests", "pruebas", "compilar"],
+        "pt-br": ["perl", "make", "gmake", "Makefile", "testes", "compilar"],
+        "fr": ["perl", "make", "gmake", "Makefile", "tests", "compiler"],
+        "de": ["perl", "make", "gmake", "Makefile", "Tests", "bauen", "kompilieren"],
+        "it": ["perl", "make", "gmake", "Makefile", "test", "compilare"],
+        "ja": ["perl", "make", "gmake", "Makefile", "テスト", "ビルド", "コンパイル"],
+        "ko": ["perl", "make", "gmake", "Makefile", "테스트", "빌드", "컴파일"],
+        "zh-cn": ["perl", "make", "gmake", "Makefile", "测试", "构建", "编译"],
+        "zh-tw": ["perl", "make", "gmake", "Makefile", "測試", "建置", "編譯"],
+        "ru": ["perl", "make", "gmake", "Makefile", "тесты", "сборка", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/ExtUtils::MakeMaker"
+    },
+    {
+      "id": "perl.which-make",
+      "title": {
+        "en": "Show which make Perl uses",
+        "es": "Ver qué make usa Perl",
+        "pt-br": "Ver qual make o Perl usa",
+        "fr": "Voir quel make utilise Perl",
+        "de": "Anzeigen, welches make Perl nutzt",
+        "it": "Mostra quale make usa Perl",
+        "ja": "Perl が使う make を表示",
+        "ko": "Perl이 쓰는 make 보기",
+        "zh-cn": "查看 Perl 使用哪个 make",
+        "zh-tw": "檢視 Perl 使用哪個 make",
+        "ru": "Показать, какой make использует Perl"
+      },
+      "description": {
+        "en": "Prints the make program this Perl was configured with (make, gmake, nmake…), the one to use for modules",
+        "es": "Muestra el programa make con el que se configuró este Perl (make, gmake, nmake…), el que hay que usar con los módulos",
+        "pt-br": "Mostra o programa make com que este Perl foi configurado (make, gmake, nmake…), o que se deve usar com os módulos",
+        "fr": "Affiche le programme make avec lequel ce Perl a été configuré (make, gmake, nmake…), celui à utiliser pour les modules",
+        "de": "Zeigt das make-Programm, mit dem dieses Perl konfiguriert wurde (make, gmake, nmake…), das für Module zu verwenden ist",
+        "it": "Mostra il programma make con cui è stato configurato questo Perl (make, gmake, nmake…), quello da usare con i moduli",
+        "ja": "この Perl が設定された make（make、gmake、nmake など）を表示します。モジュールにはこれを使います",
+        "ko": "이 Perl이 설정된 make 프로그램(make, gmake, nmake 등)을 보여 줍니다. 모듈에는 이것을 쓰세요",
+        "zh-cn": "显示此 Perl 配置时使用的 make 程序（make、gmake、nmake 等），模块应使用它",
+        "zh-tw": "顯示此 Perl 設定時使用的 make 程式（make、gmake、nmake 等），模組應使用它",
+        "ru": "Показывает make, с которым настроен этот Perl (make, gmake, nmake…), — его и нужно использовать для модулей"
+      },
+      "command": "perl -V:make",
+      "tags": {
+        "en": ["perl", "-V", "make", "gmake", "config"],
+        "es": ["perl", "-V", "make", "gmake", "config"],
+        "pt-br": ["perl", "-V", "make", "gmake", "config"],
+        "fr": ["perl", "-V", "make", "gmake", "config"],
+        "de": ["perl", "-V", "make", "gmake", "config"],
+        "it": ["perl", "-V", "make", "gmake", "config"],
+        "ja": ["perl", "-V", "make", "gmake", "config"],
+        "ko": ["perl", "-V", "make", "gmake", "config"],
+        "zh-cn": ["perl", "-V", "make", "gmake", "config"],
+        "zh-tw": ["perl", "-V", "make", "gmake", "config"],
+        "ru": ["perl", "-V", "make", "gmake", "config"]
+      },
+      "risk": "safe",
+      "docs": "https://perldoc.perl.org/perlrun"
+    },
+    {
+      "id": "perl.perltidy",
+      "title": {
+        "en": "Format a file with perltidy",
+        "es": "Formatear un archivo con perltidy",
+        "pt-br": "Formatar um arquivo com perltidy",
+        "fr": "Formater un fichier avec perltidy",
+        "de": "Datei mit perltidy formatieren",
+        "it": "Formatta un file con perltidy",
+        "ja": "perltidy でファイルを整形",
+        "ko": "perltidy로 파일 서식 지정",
+        "zh-cn": "用 perltidy 格式化文件",
+        "zh-tw": "用 perltidy 格式化檔案",
+        "ru": "Отформатировать файл через perltidy"
+      },
+      "description": {
+        "en": "Reformats the file in place and keeps a copy of the original as .bak; perltidy is installed with cpanm Perl::Tidy",
+        "es": "Reformatea el archivo en su sitio y guarda una copia del original como .bak; perltidy se instala con cpanm Perl::Tidy",
+        "pt-br": "Reformata o arquivo no lugar e guarda uma cópia do original como .bak; o perltidy se instala com cpanm Perl::Tidy",
+        "fr": "Reformate le fichier sur place et garde une copie de l’original en .bak ; perltidy s’installe avec cpanm Perl::Tidy",
+        "de": "Formatiert die Datei an Ort und Stelle und behält das Original als .bak; perltidy installiert man mit cpanm Perl::Tidy",
+        "it": "Riformatta il file sul posto e conserva una copia dell’originale come .bak; perltidy si installa con cpanm Perl::Tidy",
+        "ja": "ファイルをその場で整形し、元のコピーを .bak として残します。perltidy は cpanm Perl::Tidy で入れます",
+        "ko": "파일을 그 자리에서 서식 지정하고 원본을 .bak으로 남깁니다. perltidy는 cpanm Perl::Tidy로 설치합니다",
+        "zh-cn": "就地重新格式化文件，并将原文件备份为 .bak；perltidy 可用 cpanm Perl::Tidy 安装",
+        "zh-tw": "就地重新格式化檔案，並將原檔案備份為 .bak；perltidy 可用 cpanm Perl::Tidy 安裝",
+        "ru": "Переформатирует файл на месте и сохраняет оригинал как .bak; perltidy ставится через cpanm Perl::Tidy"
+      },
+      "command": "perltidy -b ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "script.pl",
+            "es": "script.pl",
+            "pt-br": "script.pl",
+            "fr": "script.pl",
+            "de": "script.pl",
+            "it": "script.pl",
+            "ja": "script.pl",
+            "ko": "script.pl",
+            "zh-cn": "script.pl",
+            "zh-tw": "script.pl",
+            "ru": "script.pl"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "perltidy", "Perl::Tidy", "format", "style"],
+        "es": ["perl", "perltidy", "Perl::Tidy", "formatear", "estilo"],
+        "pt-br": ["perl", "perltidy", "Perl::Tidy", "formatar", "estilo"],
+        "fr": ["perl", "perltidy", "Perl::Tidy", "formater", "style"],
+        "de": ["perl", "perltidy", "Perl::Tidy", "formatieren", "Stil"],
+        "it": ["perl", "perltidy", "Perl::Tidy", "formattare", "stile"],
+        "ja": ["perl", "perltidy", "Perl::Tidy", "整形", "スタイル"],
+        "ko": ["perl", "perltidy", "Perl::Tidy", "서식", "스타일"],
+        "zh-cn": ["perl", "perltidy", "Perl::Tidy", "格式化"],
+        "zh-tw": ["perl", "perltidy", "Perl::Tidy", "格式化"],
+        "ru": ["perl", "perltidy", "Perl::Tidy", "форматировать"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/Perl::Tidy"
+    },
+    {
+      "id": "perl.perlcritic",
+      "title": {
+        "en": "Review the code with perlcritic",
+        "es": "Revisar el código con perlcritic",
+        "pt-br": "Revisar o código com perlcritic",
+        "fr": "Analyser le code avec perlcritic",
+        "de": "Code mit perlcritic prüfen",
+        "it": "Analizza il codice con perlcritic",
+        "ja": "perlcritic でコードをレビュー",
+        "ko": "perlcritic로 코드 검토",
+        "zh-cn": "用 perlcritic 审查代码",
+        "zh-tw": "用 perlcritic 審查程式碼",
+        "ru": "Проверить код через perlcritic"
+      },
+      "description": {
+        "en": "Checks the file against the Perl Best Practices rules and lists the problems by severity; it is installed with cpanm Perl::Critic",
+        "es": "Revisa el archivo con las reglas de Perl Best Practices y lista los problemas por gravedad; se instala con cpanm Perl::Critic",
+        "pt-br": "Revisa o arquivo com as regras do Perl Best Practices e lista os problemas por gravidade; instala-se com cpanm Perl::Critic",
+        "fr": "Analyse le fichier selon les règles de Perl Best Practices et liste les problèmes par gravité ; s’installe avec cpanm Perl::Critic",
+        "de": "Prüft die Datei nach den Regeln von Perl Best Practices und listet Probleme nach Schweregrad; Installation mit cpanm Perl::Critic",
+        "it": "Controlla il file con le regole di Perl Best Practices ed elenca i problemi per gravità; si installa con cpanm Perl::Critic",
+        "ja": "Perl Best Practices のルールでファイルを確認し、問題を重大度別に表示します。cpanm Perl::Critic で入れます",
+        "ko": "Perl Best Practices 규칙으로 파일을 검사해 문제를 심각도별로 보여 줍니다. cpanm Perl::Critic으로 설치합니다",
+        "zh-cn": "按 Perl Best Practices 规则检查文件，并按严重程度列出问题；可用 cpanm Perl::Critic 安装",
+        "zh-tw": "依 Perl Best Practices 規則檢查檔案，並按嚴重程度列出問題；可用 cpanm Perl::Critic 安裝",
+        "ru": "Проверяет файл по правилам Perl Best Practices и выводит проблемы по степени серьёзности; ставится через cpanm Perl::Critic"
+      },
+      "command": "perlcritic ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "script.pl",
+            "es": "script.pl",
+            "pt-br": "script.pl",
+            "fr": "script.pl",
+            "de": "script.pl",
+            "it": "script.pl",
+            "ja": "script.pl",
+            "ko": "script.pl",
+            "zh-cn": "script.pl",
+            "zh-tw": "script.pl",
+            "ru": "script.pl"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["perl", "perlcritic", "Perl::Critic", "lint", "analyze", "types"],
+        "es": ["perl", "perlcritic", "Perl::Critic", "lint", "analizar", "tipos"],
+        "pt-br": ["perl", "perlcritic", "Perl::Critic", "lint", "analisar", "tipos"],
+        "fr": ["perl", "perlcritic", "Perl::Critic", "lint", "analyser", "types"],
+        "de": ["perl", "perlcritic", "Perl::Critic", "lint", "analysieren", "Typen"],
+        "it": ["perl", "perlcritic", "Perl::Critic", "lint", "analizzare", "tipi"],
+        "ja": ["perl", "perlcritic", "Perl::Critic", "lint", "解析", "型"],
+        "ko": ["perl", "perlcritic", "Perl::Critic", "lint", "분석", "타입"],
+        "zh-cn": ["perl", "perlcritic", "Perl::Critic", "lint", "分析", "类型"],
+        "zh-tw": ["perl", "perlcritic", "Perl::Critic", "lint", "分析", "型別"],
+        "ru": ["perl", "perlcritic", "Perl::Critic", "lint", "анализ", "типы"]
+      },
+      "risk": "safe",
+      "docs": "https://metacpan.org/pod/Perl::Critic"
+    }
+  ]
+}

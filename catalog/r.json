@@ -1,0 +1,883 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "id": "r",
+  "title": {
+    "en": "R",
+    "es": "R",
+    "pt-br": "R",
+    "fr": "R",
+    "de": "R",
+    "it": "R",
+    "ja": "R",
+    "ko": "R",
+    "zh-cn": "R",
+    "zh-tw": "R",
+    "ru": "R"
+  },
+  "icon": "graph",
+  "order": 80,
+  "section": "languages",
+  "detect": ["DESCRIPTION", "*.Rproj", "renv.lock", ".Rprofile", "*.R"],
+  "commands": [
+    {
+      "id": "r.version",
+      "title": {
+        "en": "Show the R version",
+        "es": "Ver la versión de R",
+        "pt-br": "Ver a versão do R",
+        "fr": "Afficher la version de R",
+        "de": "R-Version anzeigen",
+        "it": "Mostra la versione di R",
+        "ja": "R のバージョンを表示",
+        "ko": "R 버전 보기",
+        "zh-cn": "查看 R 版本",
+        "zh-tw": "檢視 R 版本",
+        "ru": "Показать версию R"
+      },
+      "description": {
+        "en": "Prints the installed R version; in PowerShell it is written R.exe, because r is the alias of Invoke-History",
+        "es": "Muestra la versión de R instalada; en PowerShell se escribe R.exe, porque r es el alias de Invoke-History",
+        "pt-br": "Mostra a versão do R instalada; no PowerShell se escreve R.exe, porque r é o alias de Invoke-History",
+        "fr": "Affiche la version de R installée ; dans PowerShell on écrit R.exe, car r est l’alias d’Invoke-History",
+        "de": "Zeigt die installierte R-Version; in PowerShell schreibt man R.exe, weil r der Alias von Invoke-History ist",
+        "it": "Mostra la versione di R installata; in PowerShell si scrive R.exe, perché r è l’alias di Invoke-History",
+        "ja": "インストール済みの R のバージョンを表示します。PowerShell では r が Invoke-History の別名なので R.exe と書きます",
+        "ko": "설치된 R 버전을 보여 줍니다. PowerShell에서는 r이 Invoke-History의 별칭이라 R.exe로 씁니다",
+        "zh-cn": "显示已安装的 R 版本；在 PowerShell 中写作 R.exe，因为 r 是 Invoke-History 的别名",
+        "zh-tw": "顯示已安裝的 R 版本；在 PowerShell 中寫作 R.exe，因為 r 是 Invoke-History 的別名",
+        "ru": "Показывает установленную версию R; в PowerShell пишется R.exe, потому что r — псевдоним Invoke-History"
+      },
+      "command": "R --version",
+      "tags": {
+        "en": ["r", "rlang", "R", "--version", "version"],
+        "es": ["r", "rlang", "R", "--version", "versión"],
+        "pt-br": ["r", "rlang", "R", "--version", "versão"],
+        "fr": ["r", "rlang", "R", "--version", "version"],
+        "de": ["r", "rlang", "R", "--version", "Version"],
+        "it": ["r", "rlang", "R", "--version", "versione"],
+        "ja": ["r", "rlang", "R", "--version", "バージョン"],
+        "ko": ["r", "rlang", "R", "--version", "버전"],
+        "zh-cn": ["r", "rlang", "R", "--version", "版本"],
+        "zh-tw": ["r", "rlang", "R", "--version", "版本"],
+        "ru": ["r", "rlang", "R", "--version", "версия"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "R.exe --version"
+      },
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-intro.html"
+    },
+    {
+      "id": "r.console",
+      "title": {
+        "en": "Open the R console",
+        "es": "Abrir la consola de R",
+        "pt-br": "Abrir o console do R",
+        "fr": "Ouvrir la console R",
+        "de": "R-Konsole öffnen",
+        "it": "Apri la console di R",
+        "ja": "R コンソールを開く",
+        "ko": "R 콘솔 열기",
+        "zh-cn": "打开 R 控制台",
+        "zh-tw": "開啟 R 主控台",
+        "ru": "Открыть консоль R"
+      },
+      "description": {
+        "en": "Starts the interactive R session in the current folder; q() leaves",
+        "es": "Abre la sesión interactiva de R en la carpeta actual; q() sale",
+        "pt-br": "Abre a sessão interativa do R na pasta atual; q() sai",
+        "fr": "Ouvre la session interactive R dans le dossier actuel ; q() pour quitter",
+        "de": "Startet die interaktive R-Sitzung im aktuellen Ordner; q() beendet",
+        "it": "Apre la sessione interattiva di R nella cartella attuale; q() esce",
+        "ja": "現在のフォルダーで R の対話セッションを開始します。q() で終了",
+        "ko": "현재 폴더에서 R 대화형 세션을 엽니다. q()로 나갑니다",
+        "zh-cn": "在当前文件夹中启动 R 交互会话；q() 退出",
+        "zh-tw": "在目前資料夾中啟動 R 互動工作階段；q() 離開",
+        "ru": "Запускает интерактивный сеанс R в текущей папке; q() — выход"
+      },
+      "command": "R",
+      "tags": {
+        "en": ["r", "rlang", "R", "console", "repl", "interactive"],
+        "es": ["r", "rlang", "R", "console", "interactivo", "consola"],
+        "pt-br": ["r", "rlang", "R", "console", "interativo"],
+        "fr": ["r", "rlang", "R", "console", "interactif"],
+        "de": ["r", "rlang", "R", "console", "interaktiv", "Konsole"],
+        "it": ["r", "rlang", "R", "console", "interattivo"],
+        "ja": ["r", "rlang", "R", "console", "対話", "コンソール"],
+        "ko": ["r", "rlang", "R", "console", "대화형", "콘솔"],
+        "zh-cn": ["r", "rlang", "R", "console", "交互式", "控制台"],
+        "zh-tw": ["r", "rlang", "R", "console", "互動式", "主控台"],
+        "ru": ["r", "rlang", "R", "console", "интерактивный", "консоль"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "R.exe"
+      },
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-intro.html"
+    },
+    {
+      "id": "r.rscript",
+      "title": {
+        "en": "Run an R script",
+        "es": "Ejecutar un script de R",
+        "pt-br": "Executar um script R",
+        "fr": "Exécuter un script R",
+        "de": "R-Skript ausführen",
+        "it": "Esegui uno script R",
+        "ja": "R スクリプトを実行",
+        "ko": "R 스크립트 실행",
+        "zh-cn": "运行 R 脚本",
+        "zh-tw": "執行 R 指令碼",
+        "ru": "Запустить скрипт R"
+      },
+      "description": {
+        "en": "Runs the .R file without opening the console and prints its output",
+        "es": "Ejecuta el archivo .R sin abrir la consola y muestra su salida",
+        "pt-br": "Executa o arquivo .R sem abrir o console e mostra a saída",
+        "fr": "Exécute le fichier .R sans ouvrir la console et affiche sa sortie",
+        "de": "Führt die .R-Datei ohne Konsole aus und zeigt die Ausgabe",
+        "it": "Esegue il file .R senza aprire la console e mostra l’output",
+        "ja": "コンソールを開かずに .R ファイルを実行し、出力を表示します",
+        "ko": "콘솔을 열지 않고 .R 파일을 실행해 출력을 보여 줍니다",
+        "zh-cn": "不打开控制台直接运行 .R 文件并显示输出",
+        "zh-tw": "不開啟主控台直接執行 .R 檔案並顯示輸出",
+        "ru": "Выполняет файл .R без открытия консоли и показывает вывод"
+      },
+      "command": "Rscript ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "analysis.R",
+            "es": "analysis.R",
+            "pt-br": "analysis.R",
+            "fr": "analysis.R",
+            "de": "analysis.R",
+            "it": "analysis.R",
+            "ja": "analysis.R",
+            "ko": "analysis.R",
+            "zh-cn": "analysis.R",
+            "zh-tw": "analysis.R",
+            "ru": "analysis.R"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["r", "rlang", "Rscript", "script", "run"],
+        "es": ["r", "rlang", "Rscript", "script", "ejecutar"],
+        "pt-br": ["r", "rlang", "Rscript", "script", "executar"],
+        "fr": ["r", "rlang", "Rscript", "script", "exécuter"],
+        "de": ["r", "rlang", "Rscript", "script", "ausführen"],
+        "it": ["r", "rlang", "Rscript", "script", "eseguire"],
+        "ja": ["r", "rlang", "Rscript", "script", "実行"],
+        "ko": ["r", "rlang", "Rscript", "script", "실행"],
+        "zh-cn": ["r", "rlang", "Rscript", "script", "运行"],
+        "zh-tw": ["r", "rlang", "Rscript", "script", "執行"],
+        "ru": ["r", "rlang", "Rscript", "script", "запустить"]
+      },
+      "risk": "safe",
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Invoking-R-from-the-command-line"
+    },
+    {
+      "id": "r.install-package",
+      "title": {
+        "en": "Install a package from CRAN",
+        "es": "Instalar un paquete de CRAN",
+        "pt-br": "Instalar um pacote do CRAN",
+        "fr": "Installer un paquet depuis CRAN",
+        "de": "Paket von CRAN installieren",
+        "it": "Installa un pacchetto da CRAN",
+        "ja": "CRAN からパッケージをインストール",
+        "ko": "CRAN에서 패키지 설치",
+        "zh-cn": "从 CRAN 安装包",
+        "zh-tw": "從 CRAN 安裝套件",
+        "ru": "Установить пакет из CRAN"
+      },
+      "description": {
+        "en": "Installs the package and its dependencies from the main CRAN mirror, without asking which mirror to use",
+        "es": "Instala el paquete y sus dependencias desde el mirror principal de CRAN, sin preguntar qué mirror usar",
+        "pt-br": "Instala o pacote e suas dependências pelo mirror principal do CRAN, sem perguntar qual mirror usar",
+        "fr": "Installe le paquet et ses dépendances depuis le miroir principal de CRAN, sans demander quel miroir utiliser",
+        "de": "Installiert das Paket samt Abhängigkeiten vom CRAN-Hauptmirror, ohne nach dem Mirror zu fragen",
+        "it": "Installa il pacchetto e le dipendenze dal mirror principale di CRAN, senza chiedere quale mirror usare",
+        "ja": "どのミラーを使うか尋ねずに、CRAN のメインミラーからパッケージと依存関係をインストールします",
+        "ko": "미러를 묻지 않고 CRAN 기본 미러에서 패키지와 의존성을 설치합니다",
+        "zh-cn": "从 CRAN 主镜像安装包及其依赖，不询问使用哪个镜像",
+        "zh-tw": "從 CRAN 主鏡像安裝套件及其相依套件，不詢問使用哪個鏡像",
+        "ru": "Ставит пакет и его зависимости с основного зеркала CRAN, не спрашивая, какое зеркало использовать"
+      },
+      "command": "Rscript -e \"install.packages(commandArgs(TRUE), repos='https://cloud.r-project.org')\" ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "dplyr",
+            "es": "dplyr",
+            "pt-br": "dplyr",
+            "fr": "dplyr",
+            "de": "dplyr",
+            "it": "dplyr",
+            "ja": "dplyr",
+            "ko": "dplyr",
+            "zh-cn": "dplyr",
+            "zh-tw": "dplyr",
+            "ru": "dplyr"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["r", "rlang", "Rscript", "cran", "install.packages", "install"],
+        "es": ["r", "rlang", "Rscript", "cran", "install.packages", "instalar"],
+        "pt-br": ["r", "rlang", "Rscript", "cran", "install.packages", "instalar"],
+        "fr": ["r", "rlang", "Rscript", "cran", "install.packages", "installer"],
+        "de": ["r", "rlang", "Rscript", "cran", "install.packages", "installieren"],
+        "it": ["r", "rlang", "Rscript", "cran", "install.packages", "installare"],
+        "ja": ["r", "rlang", "Rscript", "cran", "install.packages", "インストール"],
+        "ko": ["r", "rlang", "Rscript", "cran", "install.packages", "설치"],
+        "zh-cn": ["r", "rlang", "Rscript", "cran", "install.packages", "安装"],
+        "zh-tw": ["r", "rlang", "Rscript", "cran", "install.packages", "安裝"],
+        "ru": ["r", "rlang", "Rscript", "cran", "install.packages", "установить"]
+      },
+      "risk": "safe",
+      "docs": "https://stat.ethz.ch/R-manual/R-devel/library/utils/html/install.packages.html"
+    },
+    {
+      "id": "r.update-packages",
+      "title": {
+        "en": "Update all the packages",
+        "es": "Actualizar todos los paquetes",
+        "pt-br": "Atualizar todos os pacotes",
+        "fr": "Mettre à jour tous les paquets",
+        "de": "Alle Pakete aktualisieren",
+        "it": "Aggiorna tutti i pacchetti",
+        "ja": "すべてのパッケージを更新",
+        "ko": "모든 패키지 업데이트",
+        "zh-cn": "更新所有包",
+        "zh-tw": "更新所有套件",
+        "ru": "Обновить все пакеты"
+      },
+      "description": {
+        "en": "Updates every installed package that has a newer version on CRAN, without asking one by one",
+        "es": "Actualiza todos los paquetes instalados que tengan una versión más nueva en CRAN, sin preguntar uno a uno",
+        "pt-br": "Atualiza todos os pacotes instalados que têm versão mais nova no CRAN, sem perguntar um por um",
+        "fr": "Met à jour tous les paquets installés qui ont une version plus récente sur CRAN, sans demander un par un",
+        "de": "Aktualisiert alle installierten Pakete mit neuerer Version auf CRAN, ohne einzeln nachzufragen",
+        "it": "Aggiorna tutti i pacchetti installati che hanno una versione più recente su CRAN, senza chiedere uno per uno",
+        "ja": "CRAN に新しい版があるインストール済みパッケージを、1 つずつ確認せずにすべて更新します",
+        "ko": "CRAN에 새 버전이 있는 설치된 패키지를 하나씩 묻지 않고 모두 업데이트합니다",
+        "zh-cn": "更新所有在 CRAN 上有新版本的已安装包，不逐个询问",
+        "zh-tw": "更新所有在 CRAN 上有新版本的已安裝套件，不逐一詢問",
+        "ru": "Обновляет все установленные пакеты, у которых есть новая версия в CRAN, не спрашивая по одному"
+      },
+      "command": "Rscript -e \"update.packages(ask=FALSE, repos='https://cloud.r-project.org')\"",
+      "tags": {
+        "en": ["r", "rlang", "Rscript", "cran", "update.packages", "update", "upgrade"],
+        "es": ["r", "rlang", "Rscript", "cran", "update.packages", "actualizar"],
+        "pt-br": ["r", "rlang", "Rscript", "cran", "update.packages", "atualizar"],
+        "fr": ["r", "rlang", "Rscript", "cran", "update.packages", "mettre à jour"],
+        "de": ["r", "rlang", "Rscript", "cran", "update.packages", "aktualisieren"],
+        "it": ["r", "rlang", "Rscript", "cran", "update.packages", "aggiornare"],
+        "ja": ["r", "rlang", "Rscript", "cran", "update.packages", "更新"],
+        "ko": ["r", "rlang", "Rscript", "cran", "update.packages", "업데이트"],
+        "zh-cn": ["r", "rlang", "Rscript", "cran", "update.packages", "更新", "升级"],
+        "zh-tw": ["r", "rlang", "Rscript", "cran", "update.packages", "更新", "升級"],
+        "ru": ["r", "rlang", "Rscript", "cran", "update.packages", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://stat.ethz.ch/R-manual/R-devel/library/utils/html/update.packages.html"
+    },
+    {
+      "id": "r.cmd-build",
+      "title": {
+        "en": "Build the package source",
+        "es": "Generar el paquete fuente",
+        "pt-br": "Gerar o pacote-fonte",
+        "fr": "Construire le paquet source",
+        "de": "Quellpaket bauen",
+        "it": "Genera il pacchetto sorgente",
+        "ja": "ソースパッケージをビルド",
+        "ko": "소스 패키지 빌드",
+        "zh-cn": "构建源码包",
+        "zh-tw": "建置原始碼套件",
+        "ru": "Собрать пакет исходников"
+      },
+      "description": {
+        "en": "Builds the .tar.gz of the package in the current folder, the file that R CMD check and CRAN expect",
+        "es": "Genera el .tar.gz del paquete de la carpeta actual, el archivo que esperan R CMD check y CRAN",
+        "pt-br": "Gera o .tar.gz do pacote da pasta atual, o arquivo que o R CMD check e o CRAN esperam",
+        "fr": "Construit le .tar.gz du paquet du dossier actuel, le fichier attendu par R CMD check et CRAN",
+        "de": "Baut das .tar.gz des Pakets im aktuellen Ordner, die Datei, die R CMD check und CRAN erwarten",
+        "it": "Genera il .tar.gz del pacchetto della cartella attuale, il file che si aspettano R CMD check e CRAN",
+        "ja": "現在のフォルダーのパッケージから、R CMD check と CRAN が求める .tar.gz を作ります",
+        "ko": "현재 폴더의 패키지로 R CMD check와 CRAN이 요구하는 .tar.gz를 만듭니다",
+        "zh-cn": "将当前文件夹的包构建为 .tar.gz，即 R CMD check 和 CRAN 需要的文件",
+        "zh-tw": "將目前資料夾的套件建置為 .tar.gz，即 R CMD check 和 CRAN 需要的檔案",
+        "ru": "Собирает .tar.gz пакета из текущей папки — файл, который ждут R CMD check и CRAN"
+      },
+      "command": "R CMD build .",
+      "tags": {
+        "en": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "compile", "package", "jar"],
+        "es": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "compilar", "empaquetar", "paquete"],
+        "pt-br": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "compilar", "empacotar", "pacote"],
+        "fr": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "compiler", "empaqueter", "paquet"],
+        "de": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "bauen", "kompilieren", "paketieren", "Paket"],
+        "it": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "compilare", "impacchettare", "pacchetto"],
+        "ja": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "ビルド", "コンパイル", "パッケージ化"],
+        "ko": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "빌드", "컴파일", "패키징"],
+        "zh-cn": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "构建", "编译", "打包"],
+        "zh-tw": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "建置", "編譯", "封裝"],
+        "ru": ["r", "rlang", "R CMD", "build", "tar.gz", "DESCRIPTION", "сборка", "компиляция", "упаковать", "пакет"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "R.exe CMD build ."
+      },
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-exts.html"
+    },
+    {
+      "id": "r.cmd-check",
+      "title": {
+        "en": "Check a package",
+        "es": "Comprobar un paquete",
+        "pt-br": "Verificar um pacote",
+        "fr": "Vérifier un paquet",
+        "de": "Paket prüfen",
+        "it": "Controlla un pacchetto",
+        "ja": "パッケージをチェック",
+        "ko": "패키지 검사",
+        "zh-cn": "检查包",
+        "zh-tw": "檢查套件",
+        "ru": "Проверить пакет"
+      },
+      "description": {
+        "en": "Runs the CRAN checks on the .tar.gz made by R CMD build: documentation, examples and tests",
+        "es": "Ejecuta las comprobaciones de CRAN sobre el .tar.gz de R CMD build: documentación, ejemplos y tests",
+        "pt-br": "Executa as verificações do CRAN sobre o .tar.gz do R CMD build: documentação, exemplos e testes",
+        "fr": "Lance les vérifications de CRAN sur le .tar.gz de R CMD build : documentation, exemples et tests",
+        "de": "Führt die CRAN-Prüfungen am .tar.gz von R CMD build aus: Dokumentation, Beispiele und Tests",
+        "it": "Esegue i controlli di CRAN sul .tar.gz di R CMD build: documentazione, esempi e test",
+        "ja": "R CMD build で作った .tar.gz に CRAN のチェック（ドキュメント、例、テスト）を実行します",
+        "ko": "R CMD build로 만든 .tar.gz에 CRAN 검사(문서, 예제, 테스트)를 실행합니다",
+        "zh-cn": "对 R CMD build 生成的 .tar.gz 运行 CRAN 检查：文档、示例和测试",
+        "zh-tw": "對 R CMD build 產生的 .tar.gz 執行 CRAN 檢查：文件、範例和測試",
+        "ru": "Запускает проверки CRAN для .tar.gz из R CMD build: документация, примеры и тесты"
+      },
+      "command": "R CMD check ${file}",
+      "params": [
+        {
+          "name": "file",
+          "label": {
+            "en": "File",
+            "es": "Archivo",
+            "pt-br": "Arquivo",
+            "fr": "Fichier",
+            "de": "Datei",
+            "it": "File",
+            "ja": "ファイル",
+            "ko": "파일",
+            "zh-cn": "文件",
+            "zh-tw": "檔案",
+            "ru": "Файл"
+          },
+          "placeholder": {
+            "en": "mypkg_0.1.0.tar.gz",
+            "es": "mypkg_0.1.0.tar.gz",
+            "pt-br": "mypkg_0.1.0.tar.gz",
+            "fr": "mypkg_0.1.0.tar.gz",
+            "de": "mypkg_0.1.0.tar.gz",
+            "it": "mypkg_0.1.0.tar.gz",
+            "ja": "mypkg_0.1.0.tar.gz",
+            "ko": "mypkg_0.1.0.tar.gz",
+            "zh-cn": "mypkg_0.1.0.tar.gz",
+            "zh-tw": "mypkg_0.1.0.tar.gz",
+            "ru": "mypkg_0.1.0.tar.gz"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["r", "rlang", "R CMD", "check", "cran", "test", "tests", "analyze", "types", "lint"],
+        "es": ["r", "rlang", "R CMD", "check", "cran", "tests", "pruebas", "analizar", "tipos"],
+        "pt-br": ["r", "rlang", "R CMD", "check", "cran", "testes", "analisar", "tipos"],
+        "fr": ["r", "rlang", "R CMD", "check", "cran", "tests", "analyser", "types"],
+        "de": ["r", "rlang", "R CMD", "check", "cran", "Tests", "analysieren", "Typen"],
+        "it": ["r", "rlang", "R CMD", "check", "cran", "test", "analizzare", "tipi"],
+        "ja": ["r", "rlang", "R CMD", "check", "cran", "テスト", "解析", "型"],
+        "ko": ["r", "rlang", "R CMD", "check", "cran", "테스트", "분석", "타입"],
+        "zh-cn": ["r", "rlang", "R CMD", "check", "cran", "测试", "分析", "类型"],
+        "zh-tw": ["r", "rlang", "R CMD", "check", "cran", "測試", "分析", "型別"],
+        "ru": ["r", "rlang", "R CMD", "check", "cran", "тесты", "анализ", "типы"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "R.exe CMD check ${file}"
+      },
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-exts.html"
+    },
+    {
+      "id": "r.cmd-install",
+      "title": {
+        "en": "Install the package of this folder",
+        "es": "Instalar el paquete de esta carpeta",
+        "pt-br": "Instalar o pacote desta pasta",
+        "fr": "Installer le paquet de ce dossier",
+        "de": "Paket dieses Ordners installieren",
+        "it": "Installa il pacchetto di questa cartella",
+        "ja": "このフォルダーのパッケージをインストール",
+        "ko": "이 폴더의 패키지 설치",
+        "zh-cn": "安装此文件夹中的包",
+        "zh-tw": "安裝此資料夾中的套件",
+        "ru": "Установить пакет из этой папки"
+      },
+      "description": {
+        "en": "Installs the package of the current folder in the R library, to load it with library()",
+        "es": "Instala el paquete de la carpeta actual en la biblioteca de R, para cargarlo con library()",
+        "pt-br": "Instala o pacote da pasta atual na biblioteca do R, para carregá-lo com library()",
+        "fr": "Installe le paquet du dossier actuel dans la bibliothèque R, pour le charger avec library()",
+        "de": "Installiert das Paket des aktuellen Ordners in der R-Bibliothek, ladbar mit library()",
+        "it": "Installa il pacchetto della cartella attuale nella libreria di R, da caricare con library()",
+        "ja": "現在のフォルダーのパッケージを R のライブラリーに入れ、library() で読み込めるようにします",
+        "ko": "현재 폴더의 패키지를 R 라이브러리에 설치해 library()로 불러올 수 있게 합니다",
+        "zh-cn": "将当前文件夹的包安装到 R 库中，可用 library() 加载",
+        "zh-tw": "將目前資料夾的套件安裝到 R 函式庫中，可用 library() 載入",
+        "ru": "Ставит пакет из текущей папки в библиотеку R, чтобы загрузить его через library()"
+      },
+      "command": "R CMD INSTALL .",
+      "tags": {
+        "en": ["r", "rlang", "R CMD", "INSTALL", "library", "install"],
+        "es": ["r", "rlang", "R CMD", "INSTALL", "library", "instalar"],
+        "pt-br": ["r", "rlang", "R CMD", "INSTALL", "library", "instalar"],
+        "fr": ["r", "rlang", "R CMD", "INSTALL", "library", "installer"],
+        "de": ["r", "rlang", "R CMD", "INSTALL", "library", "installieren"],
+        "it": ["r", "rlang", "R CMD", "INSTALL", "library", "installare"],
+        "ja": ["r", "rlang", "R CMD", "INSTALL", "library", "インストール"],
+        "ko": ["r", "rlang", "R CMD", "INSTALL", "library", "설치"],
+        "zh-cn": ["r", "rlang", "R CMD", "INSTALL", "library", "安装"],
+        "zh-tw": ["r", "rlang", "R CMD", "INSTALL", "library", "安裝"],
+        "ru": ["r", "rlang", "R CMD", "INSTALL", "library", "установить"]
+      },
+      "risk": "safe",
+      "shells": {
+        "powershell": "R.exe CMD INSTALL ."
+      },
+      "docs": "https://cran.r-project.org/doc/manuals/r-release/R-exts.html"
+    },
+    {
+      "id": "r.devtools-test",
+      "title": {
+        "en": "devtools: run the tests",
+        "es": "devtools: ejecutar los tests",
+        "pt-br": "devtools: executar os testes",
+        "fr": "devtools: lancer les tests",
+        "de": "devtools: Tests ausführen",
+        "it": "devtools: esegui i test",
+        "ja": "devtools: テストを実行",
+        "ko": "devtools: 테스트 실행",
+        "zh-cn": "devtools: 运行测试",
+        "zh-tw": "devtools: 執行測試",
+        "ru": "devtools: запустить тесты"
+      },
+      "description": {
+        "en": "Runs the testthat tests of the package in tests/testthat; devtools must be installed",
+        "es": "Ejecuta los tests de testthat del paquete en tests/testthat; necesita devtools instalado",
+        "pt-br": "Executa os testes testthat do pacote em tests/testthat; precisa do devtools instalado",
+        "fr": "Lance les tests testthat du paquet dans tests/testthat ; nécessite devtools installé",
+        "de": "Führt die testthat-Tests des Pakets in tests/testthat aus; devtools muss installiert sein",
+        "it": "Esegue i test testthat del pacchetto in tests/testthat; serve devtools installato",
+        "ja": "tests/testthat にあるパッケージの testthat テストを実行します。devtools が必要です",
+        "ko": "tests/testthat에 있는 패키지의 testthat 테스트를 실행합니다. devtools가 필요합니다",
+        "zh-cn": "运行 tests/testthat 中包的 testthat 测试；需要已安装 devtools",
+        "zh-tw": "執行 tests/testthat 中套件的 testthat 測試；需要已安裝 devtools",
+        "ru": "Запускает тесты testthat пакета из tests/testthat; нужен установленный devtools"
+      },
+      "command": "Rscript -e \"devtools::test()\"",
+      "tags": {
+        "en": ["r", "rlang", "devtools", "testthat", "test", "tests"],
+        "es": ["r", "rlang", "devtools", "testthat", "tests", "pruebas"],
+        "pt-br": ["r", "rlang", "devtools", "testthat", "testes"],
+        "fr": ["r", "rlang", "devtools", "testthat", "tests"],
+        "de": ["r", "rlang", "devtools", "testthat", "Tests"],
+        "it": ["r", "rlang", "devtools", "testthat", "test"],
+        "ja": ["r", "rlang", "devtools", "testthat", "テスト"],
+        "ko": ["r", "rlang", "devtools", "testthat", "테스트"],
+        "zh-cn": ["r", "rlang", "devtools", "testthat", "测试"],
+        "zh-tw": ["r", "rlang", "devtools", "testthat", "測試"],
+        "ru": ["r", "rlang", "devtools", "testthat", "тесты"]
+      },
+      "risk": "safe",
+      "docs": "https://devtools.r-lib.org/reference/test.html"
+    },
+    {
+      "id": "r.devtools-document",
+      "title": {
+        "en": "devtools: generate the documentation",
+        "es": "devtools: generar la documentación",
+        "pt-br": "devtools: gerar a documentação",
+        "fr": "devtools: générer la documentation",
+        "de": "devtools: Dokumentation erzeugen",
+        "it": "devtools: genera la documentazione",
+        "ja": "devtools: ドキュメントを生成",
+        "ko": "devtools: 문서 생성",
+        "zh-cn": "devtools: 生成文档",
+        "zh-tw": "devtools: 產生文件",
+        "ru": "devtools: сгенерировать документацию"
+      },
+      "description": {
+        "en": "Generates the man pages and the NAMESPACE from the roxygen2 comments; devtools must be installed",
+        "es": "Genera las páginas de man y el NAMESPACE a partir de los comentarios de roxygen2; necesita devtools instalado",
+        "pt-br": "Gera as páginas man e o NAMESPACE a partir dos comentários roxygen2; precisa do devtools instalado",
+        "fr": "Génère les pages man et le NAMESPACE à partir des commentaires roxygen2 ; nécessite devtools installé",
+        "de": "Erzeugt die man-Seiten und den NAMESPACE aus den roxygen2-Kommentaren; devtools muss installiert sein",
+        "it": "Genera le pagine man e il NAMESPACE dai commenti roxygen2; serve devtools installato",
+        "ja": "roxygen2 のコメントから man ページと NAMESPACE を生成します。devtools が必要です",
+        "ko": "roxygen2 주석으로 man 페이지와 NAMESPACE를 생성합니다. devtools가 필요합니다",
+        "zh-cn": "根据 roxygen2 注释生成 man 页面和 NAMESPACE；需要已安装 devtools",
+        "zh-tw": "根據 roxygen2 註解產生 man 頁面和 NAMESPACE；需要已安裝 devtools",
+        "ru": "Создаёт страницы man и NAMESPACE из комментариев roxygen2; нужен установленный devtools"
+      },
+      "command": "Rscript -e \"devtools::document()\"",
+      "tags": {
+        "en": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "build", "compile"],
+        "es": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "compilar"],
+        "pt-br": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "compilar"],
+        "fr": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "compiler"],
+        "de": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "bauen", "kompilieren"],
+        "it": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "compilare"],
+        "ja": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "ビルド", "コンパイル"],
+        "ko": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "빌드", "컴파일"],
+        "zh-cn": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "构建", "编译"],
+        "zh-tw": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "建置", "編譯"],
+        "ru": ["r", "rlang", "devtools", "roxygen2", "NAMESPACE", "man", "docs", "сборка", "компиляция"]
+      },
+      "risk": "safe",
+      "docs": "https://devtools.r-lib.org/reference/document.html"
+    },
+    {
+      "id": "r.renv-init",
+      "title": {
+        "en": "renv: create the project environment",
+        "es": "renv: crear el entorno del proyecto",
+        "pt-br": "renv: criar o ambiente do projeto",
+        "fr": "renv: créer l’environnement du projet",
+        "de": "renv: Projektumgebung erstellen",
+        "it": "renv: crea l’ambiente del progetto",
+        "ja": "renv: プロジェクト環境を作成",
+        "ko": "renv: 프로젝트 환경 만들기",
+        "zh-cn": "renv: 创建项目环境",
+        "zh-tw": "renv: 建立專案環境",
+        "ru": "renv: создать окружение проекта"
+      },
+      "description": {
+        "en": "Creates a private library for the project and the renv.lock file with the packages in use; renv must be installed",
+        "es": "Crea una biblioteca propia del proyecto y el archivo renv.lock con los paquetes usados; necesita renv instalado",
+        "pt-br": "Cria uma biblioteca própria do projeto e o arquivo renv.lock com os pacotes usados; precisa do renv instalado",
+        "fr": "Crée une bibliothèque propre au projet et le fichier renv.lock avec les paquets utilisés ; nécessite renv installé",
+        "de": "Erstellt eine projekteigene Bibliothek und die Datei renv.lock mit den genutzten Paketen; renv muss installiert sein",
+        "it": "Crea una libreria propria del progetto e il file renv.lock con i pacchetti usati; serve renv installato",
+        "ja": "プロジェクト専用のライブラリーと、使用中のパッケージを記した renv.lock を作ります。renv が必要です",
+        "ko": "프로젝트 전용 라이브러리와 사용 중인 패키지를 담은 renv.lock을 만듭니다. renv가 필요합니다",
+        "zh-cn": "为项目创建专用库及记录所用包的 renv.lock；需要已安装 renv",
+        "zh-tw": "為專案建立專用函式庫及記錄所用套件的 renv.lock；需要已安裝 renv",
+        "ru": "Создаёт собственную библиотеку проекта и файл renv.lock с используемыми пакетами; нужен установленный renv"
+      },
+      "command": "Rscript -e \"renv::init()\"",
+      "tags": {
+        "en": ["r", "rlang", "renv", "renv.lock", "init", "environment", "shell", "activate", "new", "project"],
+        "es": ["r", "rlang", "renv", "renv.lock", "init", "entorno", "activar", "crear", "proyecto", "nuevo"],
+        "pt-br": ["r", "rlang", "renv", "renv.lock", "init", "ambiente", "ativar", "criar", "projeto", "novo"],
+        "fr": ["r", "rlang", "renv", "renv.lock", "init", "environnement", "activer", "créer", "projet", "nouveau"],
+        "de": ["r", "rlang", "renv", "renv.lock", "init", "Umgebung", "aktivieren", "erstellen", "Projekt", "neu"],
+        "it": ["r", "rlang", "renv", "renv.lock", "init", "ambiente", "attivare", "creare", "progetto", "nuovo"],
+        "ja": ["r", "rlang", "renv", "renv.lock", "init", "環境", "有効化", "作成", "プロジェクト", "新規"],
+        "ko": ["r", "rlang", "renv", "renv.lock", "init", "환경", "활성화", "만들기", "프로젝트", "새"],
+        "zh-cn": ["r", "rlang", "renv", "renv.lock", "init", "环境", "激活", "创建", "项目", "新建"],
+        "zh-tw": ["r", "rlang", "renv", "renv.lock", "init", "環境", "啟用", "建立", "專案", "新增"],
+        "ru": ["r", "rlang", "renv", "renv.lock", "init", "окружение", "активировать", "создать", "проект", "новый"]
+      },
+      "risk": "safe",
+      "docs": "https://rstudio.github.io/renv/reference/init.html"
+    },
+    {
+      "id": "r.renv-install",
+      "title": {
+        "en": "renv: install a package in the project",
+        "es": "renv: instalar un paquete en el proyecto",
+        "pt-br": "renv: instalar um pacote no projeto",
+        "fr": "renv: installer un paquet dans le projet",
+        "de": "renv: Paket im Projekt installieren",
+        "it": "renv: installa un pacchetto nel progetto",
+        "ja": "renv: プロジェクトにパッケージをインストール",
+        "ko": "renv: 프로젝트에 패키지 설치",
+        "zh-cn": "renv: 在项目中安装包",
+        "zh-tw": "renv: 在專案中安裝套件",
+        "ru": "renv: установить пакет в проект"
+      },
+      "description": {
+        "en": "Installs the package in the project library; then run renv::snapshot() to record it in renv.lock",
+        "es": "Instala el paquete en la biblioteca del proyecto; después ejecuta renv::snapshot() para anotarlo en renv.lock",
+        "pt-br": "Instala o pacote na biblioteca do projeto; depois execute renv::snapshot() para registrá-lo no renv.lock",
+        "fr": "Installe le paquet dans la bibliothèque du projet ; lancez ensuite renv::snapshot() pour l’inscrire dans renv.lock",
+        "de": "Installiert das Paket in der Projektbibliothek; danach renv::snapshot() ausführen, um es in renv.lock einzutragen",
+        "it": "Installa il pacchetto nella libreria del progetto; poi esegui renv::snapshot() per registrarlo in renv.lock",
+        "ja": "プロジェクトのライブラリーにパッケージを入れます。その後 renv::snapshot() で renv.lock に記録します",
+        "ko": "프로젝트 라이브러리에 패키지를 설치합니다. 그다음 renv::snapshot()으로 renv.lock에 기록하세요",
+        "zh-cn": "将包安装到项目库中；之后运行 renv::snapshot() 记录到 renv.lock",
+        "zh-tw": "將套件安裝到專案函式庫中；之後執行 renv::snapshot() 記錄到 renv.lock",
+        "ru": "Ставит пакет в библиотеку проекта; затем выполните renv::snapshot(), чтобы записать его в renv.lock"
+      },
+      "command": "Rscript -e \"renv::install(commandArgs(TRUE))\" ${package}",
+      "params": [
+        {
+          "name": "package",
+          "label": {
+            "en": "Package",
+            "es": "Paquete",
+            "pt-br": "Pacote",
+            "fr": "Paquet",
+            "de": "Paket",
+            "it": "Pacchetto",
+            "ja": "パッケージ",
+            "ko": "패키지",
+            "zh-cn": "包",
+            "zh-tw": "套件",
+            "ru": "Пакет"
+          },
+          "placeholder": {
+            "en": "dplyr",
+            "es": "dplyr",
+            "pt-br": "dplyr",
+            "fr": "dplyr",
+            "de": "dplyr",
+            "it": "dplyr",
+            "ja": "dplyr",
+            "ko": "dplyr",
+            "zh-cn": "dplyr",
+            "zh-tw": "dplyr",
+            "ru": "dplyr"
+          }
+        }
+      ],
+      "tags": {
+        "en": ["r", "rlang", "renv", "install", "dependencies"],
+        "es": ["r", "rlang", "renv", "instalar", "dependencias"],
+        "pt-br": ["r", "rlang", "renv", "instalar", "dependências"],
+        "fr": ["r", "rlang", "renv", "installer", "dépendances"],
+        "de": ["r", "rlang", "renv", "installieren", "Abhängigkeiten"],
+        "it": ["r", "rlang", "renv", "installare", "dipendenze"],
+        "ja": ["r", "rlang", "renv", "インストール", "依存関係"],
+        "ko": ["r", "rlang", "renv", "설치", "의존성"],
+        "zh-cn": ["r", "rlang", "renv", "安装", "依赖"],
+        "zh-tw": ["r", "rlang", "renv", "安裝", "相依套件"],
+        "ru": ["r", "rlang", "renv", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://rstudio.github.io/renv/reference/install.html"
+    },
+    {
+      "id": "r.renv-snapshot",
+      "title": {
+        "en": "renv: record the packages in renv.lock",
+        "es": "renv: anotar los paquetes en renv.lock",
+        "pt-br": "renv: registrar os pacotes no renv.lock",
+        "fr": "renv: inscrire les paquets dans renv.lock",
+        "de": "renv: Pakete in renv.lock festhalten",
+        "it": "renv: registra i pacchetti in renv.lock",
+        "ja": "renv: パッケージを renv.lock に記録",
+        "ko": "renv: 패키지를 renv.lock에 기록",
+        "zh-cn": "renv: 将包记录到 renv.lock",
+        "zh-tw": "renv: 將套件記錄到 renv.lock",
+        "ru": "renv: записать пакеты в renv.lock"
+      },
+      "description": {
+        "en": "Saves in renv.lock the exact versions of the packages the project uses",
+        "es": "Guarda en renv.lock las versiones exactas de los paquetes que usa el proyecto",
+        "pt-br": "Salva no renv.lock as versões exatas dos pacotes que o projeto usa",
+        "fr": "Enregistre dans renv.lock les versions exactes des paquets utilisés par le projet",
+        "de": "Speichert in renv.lock die genauen Versionen der Pakete, die das Projekt nutzt",
+        "it": "Salva in renv.lock le versioni esatte dei pacchetti usati dal progetto",
+        "ja": "プロジェクトが使うパッケージの正確なバージョンを renv.lock に保存します",
+        "ko": "프로젝트가 쓰는 패키지의 정확한 버전을 renv.lock에 저장합니다",
+        "zh-cn": "把项目所用包的确切版本保存到 renv.lock",
+        "zh-tw": "把專案所用套件的確切版本儲存到 renv.lock",
+        "ru": "Сохраняет в renv.lock точные версии пакетов, которые использует проект"
+      },
+      "command": "Rscript -e \"renv::snapshot()\"",
+      "tags": {
+        "en": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "dependencies"],
+        "es": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "dependencias"],
+        "pt-br": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "dependências"],
+        "fr": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "dépendances"],
+        "de": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "Abhängigkeiten"],
+        "it": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "dipendenze"],
+        "ja": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "依存関係"],
+        "ko": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "의존성"],
+        "zh-cn": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "依赖"],
+        "zh-tw": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "相依套件"],
+        "ru": ["r", "rlang", "renv", "renv.lock", "snapshot", "lockfile", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://rstudio.github.io/renv/reference/snapshot.html"
+    },
+    {
+      "id": "r.renv-restore",
+      "title": {
+        "en": "renv: install the packages of renv.lock",
+        "es": "renv: instalar los paquetes de renv.lock",
+        "pt-br": "renv: instalar os pacotes do renv.lock",
+        "fr": "renv: installer les paquets de renv.lock",
+        "de": "renv: Pakete aus renv.lock installieren",
+        "it": "renv: installa i pacchetti di renv.lock",
+        "ja": "renv: renv.lock のパッケージをインストール",
+        "ko": "renv: renv.lock의 패키지 설치",
+        "zh-cn": "renv: 安装 renv.lock 中的包",
+        "zh-tw": "renv: 安裝 renv.lock 中的套件",
+        "ru": "renv: установить пакеты из renv.lock"
+      },
+      "description": {
+        "en": "Installs the exact versions recorded in renv.lock, for example after cloning the project",
+        "es": "Instala las versiones exactas anotadas en renv.lock, por ejemplo tras clonar el proyecto",
+        "pt-br": "Instala as versões exatas registradas no renv.lock, por exemplo após clonar o projeto",
+        "fr": "Installe les versions exactes inscrites dans renv.lock, par exemple après avoir cloné le projet",
+        "de": "Installiert die in renv.lock festgehaltenen Versionen, etwa nach dem Klonen des Projekts",
+        "it": "Installa le versioni esatte registrate in renv.lock, per esempio dopo aver clonato il progetto",
+        "ja": "renv.lock に記録された正確なバージョンをインストールします。クローン直後などに使います",
+        "ko": "renv.lock에 기록된 정확한 버전을 설치합니다. 프로젝트를 클론한 뒤 등에 씁니다",
+        "zh-cn": "安装 renv.lock 中记录的确切版本，例如克隆项目之后",
+        "zh-tw": "安裝 renv.lock 中記錄的確切版本，例如複製專案之後",
+        "ru": "Ставит точные версии из renv.lock, например после клонирования проекта"
+      },
+      "command": "Rscript -e \"renv::restore()\"",
+      "tags": {
+        "en": ["r", "rlang", "renv", "renv.lock", "restore", "install", "dependencies"],
+        "es": ["r", "rlang", "renv", "renv.lock", "restore", "instalar", "dependencias"],
+        "pt-br": ["r", "rlang", "renv", "renv.lock", "restore", "instalar", "dependências"],
+        "fr": ["r", "rlang", "renv", "renv.lock", "restore", "installer", "dépendances"],
+        "de": ["r", "rlang", "renv", "renv.lock", "restore", "installieren", "Abhängigkeiten"],
+        "it": ["r", "rlang", "renv", "renv.lock", "restore", "installare", "dipendenze"],
+        "ja": ["r", "rlang", "renv", "renv.lock", "restore", "インストール", "依存関係"],
+        "ko": ["r", "rlang", "renv", "renv.lock", "restore", "설치", "의존성"],
+        "zh-cn": ["r", "rlang", "renv", "renv.lock", "restore", "安装", "依赖"],
+        "zh-tw": ["r", "rlang", "renv", "renv.lock", "restore", "安裝", "相依套件"],
+        "ru": ["r", "rlang", "renv", "renv.lock", "restore", "установить", "зависимости"]
+      },
+      "risk": "safe",
+      "docs": "https://rstudio.github.io/renv/reference/restore.html"
+    },
+    {
+      "id": "r.renv-status",
+      "title": {
+        "en": "renv: compare the library with renv.lock",
+        "es": "renv: comparar la biblioteca con renv.lock",
+        "pt-br": "renv: comparar a biblioteca com o renv.lock",
+        "fr": "renv: comparer la bibliothèque avec renv.lock",
+        "de": "renv: Bibliothek mit renv.lock vergleichen",
+        "it": "renv: confronta la libreria con renv.lock",
+        "ja": "renv: ライブラリーと renv.lock を比較",
+        "ko": "renv: 라이브러리와 renv.lock 비교",
+        "zh-cn": "renv: 比较库与 renv.lock",
+        "zh-tw": "renv: 比較函式庫與 renv.lock",
+        "ru": "renv: сравнить библиотеку с renv.lock"
+      },
+      "description": {
+        "en": "Shows the packages that are used, installed or recorded in renv.lock but do not match",
+        "es": "Muestra los paquetes que se usan, están instalados o están en renv.lock pero no coinciden",
+        "pt-br": "Mostra os pacotes usados, instalados ou registrados no renv.lock que não coincidem",
+        "fr": "Affiche les paquets utilisés, installés ou inscrits dans renv.lock qui ne correspondent pas",
+        "de": "Zeigt Pakete, die genutzt, installiert oder in renv.lock stehen, aber nicht übereinstimmen",
+        "it": "Mostra i pacchetti usati, installati o registrati in renv.lock che non coincidono",
+        "ja": "使用中・インストール済み・renv.lock 記載のパッケージのうち、食い違うものを表示します",
+        "ko": "사용 중이거나 설치됐거나 renv.lock에 있지만 서로 맞지 않는 패키지를 보여 줍니다",
+        "zh-cn": "显示已使用、已安装或记录在 renv.lock 中但不一致的包",
+        "zh-tw": "顯示已使用、已安裝或記錄在 renv.lock 中但不一致的套件",
+        "ru": "Показывает пакеты, которые используются, установлены или записаны в renv.lock, но не совпадают"
+      },
+      "command": "Rscript -e \"renv::status()\"",
+      "tags": {
+        "en": ["r", "rlang", "renv", "status", "renv.lock", "list", "installed"],
+        "es": ["r", "rlang", "renv", "status", "renv.lock", "ver", "instaladas", "lista"],
+        "pt-br": ["r", "rlang", "renv", "status", "renv.lock", "ver", "instaladas", "lista"],
+        "fr": ["r", "rlang", "renv", "status", "renv.lock", "lister", "installées"],
+        "de": ["r", "rlang", "renv", "status", "renv.lock", "anzeigen", "installiert"],
+        "it": ["r", "rlang", "renv", "status", "renv.lock", "elencare", "installate"],
+        "ja": ["r", "rlang", "renv", "status", "renv.lock", "一覧", "インストール済み"],
+        "ko": ["r", "rlang", "renv", "status", "renv.lock", "목록", "설치됨"],
+        "zh-cn": ["r", "rlang", "renv", "status", "renv.lock", "列出", "已安装"],
+        "zh-tw": ["r", "rlang", "renv", "status", "renv.lock", "列出", "已安裝"],
+        "ru": ["r", "rlang", "renv", "status", "renv.lock", "список", "установленные"]
+      },
+      "risk": "safe",
+      "docs": "https://rstudio.github.io/renv/reference/status.html"
+    },
+    {
+      "id": "r.renv-update",
+      "title": {
+        "en": "renv: update the project packages",
+        "es": "renv: actualizar los paquetes del proyecto",
+        "pt-br": "renv: atualizar os pacotes do projeto",
+        "fr": "renv: mettre à jour les paquets du projet",
+        "de": "renv: Projektpakete aktualisieren",
+        "it": "renv: aggiorna i pacchetti del progetto",
+        "ja": "renv: プロジェクトのパッケージを更新",
+        "ko": "renv: 프로젝트 패키지 업데이트",
+        "zh-cn": "renv: 更新项目的包",
+        "zh-tw": "renv: 更新專案的套件",
+        "ru": "renv: обновить пакеты проекта"
+      },
+      "description": {
+        "en": "Updates the packages of the project library to their latest versions; check the project and run renv::snapshot() afterwards",
+        "es": "Actualiza los paquetes de la biblioteca del proyecto a sus últimas versiones; comprueba el proyecto y ejecuta renv::snapshot() después",
+        "pt-br": "Atualiza os pacotes da biblioteca do projeto para as últimas versões; verifique o projeto e execute renv::snapshot() depois",
+        "fr": "Met à jour les paquets de la bibliothèque du projet vers leurs dernières versions ; vérifiez le projet puis lancez renv::snapshot()",
+        "de": "Aktualisiert die Pakete der Projektbibliothek auf die neuesten Versionen; danach das Projekt prüfen und renv::snapshot() ausführen",
+        "it": "Aggiorna i pacchetti della libreria del progetto alle ultime versioni; poi verifica il progetto ed esegui renv::snapshot()",
+        "ja": "プロジェクトのライブラリーのパッケージを最新版に更新します。その後プロジェクトを確認し renv::snapshot() を実行します",
+        "ko": "프로젝트 라이브러리의 패키지를 최신 버전으로 올립니다. 이후 프로젝트를 확인하고 renv::snapshot()을 실행하세요",
+        "zh-cn": "将项目库中的包更新到最新版本；之后检查项目并运行 renv::snapshot()",
+        "zh-tw": "將專案函式庫中的套件更新到最新版本；之後檢查專案並執行 renv::snapshot()",
+        "ru": "Обновляет пакеты библиотеки проекта до последних версий; затем проверьте проект и выполните renv::snapshot()"
+      },
+      "command": "Rscript -e \"renv::update()\"",
+      "tags": {
+        "en": ["r", "rlang", "renv", "update", "upgrade"],
+        "es": ["r", "rlang", "renv", "actualizar"],
+        "pt-br": ["r", "rlang", "renv", "atualizar"],
+        "fr": ["r", "rlang", "renv", "mettre à jour"],
+        "de": ["r", "rlang", "renv", "aktualisieren"],
+        "it": ["r", "rlang", "renv", "aggiornare"],
+        "ja": ["r", "rlang", "renv", "更新"],
+        "ko": ["r", "rlang", "renv", "업데이트"],
+        "zh-cn": ["r", "rlang", "renv", "更新", "升级"],
+        "zh-tw": ["r", "rlang", "renv", "更新", "升級"],
+        "ru": ["r", "rlang", "renv", "обновить"]
+      },
+      "risk": "caution",
+      "docs": "https://rstudio.github.io/renv/reference/update.html"
+    }
+  ]
+}

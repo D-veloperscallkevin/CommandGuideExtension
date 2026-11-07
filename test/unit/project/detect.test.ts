@@ -174,6 +174,26 @@ describe('detectCategories', () => {
 		expect(await ids({ root: ['dune-project', 'my_lib.opam', '.ocamlformat'] })).toEqual(['ocaml']);
 	});
 
+	it('paquete de R con renv', async () => {
+		expect(await ids({ root: ['DESCRIPTION', 'renv.lock', 'my-pkg.Rproj'] })).toEqual(['r']);
+	});
+
+	it('rock de Lua', async () => {
+		expect(await ids({ root: ['my-lib-1.0-1.rockspec', '.luacheckrc'] })).toEqual(['lua']);
+	});
+
+	it('proyecto Zig (la detección no depende del shell)', async () => {
+		expect(await ids({ root: ['build.zig', 'build.zig.zon', 'zig-out'] })).toEqual(['zig']);
+	});
+
+	it('proyecto Julia', async () => {
+		expect(await ids({ root: ['Project.toml', 'Manifest.toml'] })).toEqual(['julia']);
+	});
+
+	it('proyecto Perl con cpanfile y MakeMaker (el Makefile no añade nada)', async () => {
+		expect(await ids({ root: ['cpanfile', 'cpanfile.snapshot', 'Makefile.PL', 'Makefile'] })).toEqual(['perl']);
+	});
+
 	it('no distingue mayúsculas (dockerfile, PACKAGE.JSON)', async () => {
 		expect(await ids({ root: ['dockerfile', 'PACKAGE.JSON'] })).toEqual(['docker', 'node']);
 	});
